@@ -13,16 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::resource('members','MembersController');
+Route::resource('users','UsersController');
 Route::resource('droids', 'DroidsController');
 
 Route::get('/', function () {
     return view('home');
 });
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::routes();
 

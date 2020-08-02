@@ -41,4 +41,15 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+        public function droids()
+    {
+        return $this->belongsToMany(Droid::class);
+    }
+
+    public function hasDroid( Droid $droid )
+    {
+        return $this->droids->contains( $droid );
+    }
+
 }

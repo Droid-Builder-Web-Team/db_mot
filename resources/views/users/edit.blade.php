@@ -1,5 +1,5 @@
-@extends('members.layout')
-   
+@extends('layouts.app')
+
 @section('content')
     <div class="row">
         <div class="col-lg-12 margin-tb">
@@ -7,11 +7,11 @@
                 <h2>Edit Member</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('members.index') }}"> Back</a>
+                <a class="btn btn-primary" href="{{ route('users.index') }}"> Back</a>
             </div>
         </div>
     </div>
-   
+
     @if ($errors->any())
         <div class="alert alert-danger">
             <strong>Whoops!</strong> There were some problems with your input.<br><br>
@@ -22,28 +22,28 @@
             </ul>
         </div>
     @endif
-  
-    <form action="{{ route('members.update',$member->id) }}" method="POST">
+
+    <form action="{{ route('users.update',$user->member_uid) }}" method="POST">
         @csrf
         @method('PUT')
-   
+
          <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Forename:</strong>
-                    <input type="text" name="forename" value="{{ $member->forename }}" class="form-control" placeholder="Forename">
+                    <input type="text" name="forename" value="{{ $user->forename }}" class="form-control" placeholder="Forename">
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Surname:</strong>
-                    <textarea class="form-control" style="height:150px" name="surname" placeholder="Surname">{{ $member->surname }}</textarea>
+                    <textarea class="form-control" style="height:150px" name="surname" placeholder="Surname">{{ $user->surname }}</textarea>
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
               <button type="submit" class="btn btn-primary">Submit</button>
             </div>
         </div>
-   
+
     </form>
 @endsection

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Member;
+use App\User;
 use Illuminate\Http\Request;
 
-class MembersController extends Controller
+class UsersController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,10 +15,10 @@ class MembersController extends Controller
     public function index()
     {
         //
-        $members = Member::latest()->paginate(20);
-        
-        return view('members.index', compact('members'))
-          ->with('i', (request()->input('page', 1) -1) *20);
+        $users = User::latest()->paginate(15);
+
+        return view('users.index', compact('users'))
+          ->with('i', (request()->input('page', 1) -1) *15);
     }
 
     /**
@@ -29,7 +29,7 @@ class MembersController extends Controller
     public function create()
     {
         //
-        return view('members.create');
+        return view('users.create');
     }
 
     /**
@@ -45,70 +45,70 @@ class MembersController extends Controller
             'forename' => 'required',
             'surname' => 'required',
         ]);
-  
-        Member::create($request->all());
-   
-        return redirect()->route('members.index')
+
+        User::create($request->all());
+
+        return redirect()->route('users.index')
                         ->with('success','Member created successfully.');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Member  $member
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(Member $member)
+    public function show(User $user)
     {
         //
-        return view('members.show', compact('member'));
+        return view('users.show', compact('user'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Member  $member
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(Member $member)
+    public function edit(User $user)
     {
         //
-        return view('members.edit',compact('member'));
+        return view('users.edit',compact('user'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Member  $member
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Member $member)
+    public function update(Request $request, User $user)
     {
         //
         $request->validate([
             'forename' => 'required',
             'surname' => 'required',
         ]);
-  
-        $member->update($request->all());
-  
-        return redirect()->route('members.index')
+
+        $user->update($request->all());
+
+        return redirect()->route('users.index')
                         ->with('success','Member updated successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Member  $member
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Member $member)
+    public function destroy(User $user)
     {
         //
-        $member->delete();
-  
-        return redirect()->route('members.index')
+        $user->delete();
+
+        return redirect()->route('users.index')
                         ->with('success','Member deleted successfully');
     }
 }
