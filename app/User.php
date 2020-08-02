@@ -10,6 +10,11 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+
+    protected $table = 'members';
+    protected $primaryKey = 'member_uid';
+    const CREATED_AT = 'created_on';
+    const UPDATED_AT = 'last_updated';
     /**
      * The attributes that are mass assignable.
      *
