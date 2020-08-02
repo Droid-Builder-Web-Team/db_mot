@@ -17,7 +17,7 @@ Route::resource('members','MembersController');
 Route::resource('droids', 'DroidsController');
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 Auth::routes();

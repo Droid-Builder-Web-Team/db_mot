@@ -4,8 +4,13 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
+          @guest
+            <div>
+              Please log in.
+            </div>
+          @else
             <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+                <div class="card-header">{{ __('Droids') }}</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -14,9 +19,10 @@
                         </div>
                     @endif
 
-                    {{ __('You are logged in!') }}
+                    {{ __('Your Droids') }}
                 </div>
             </div>
+          @endguest
         </div>
     </div>
 </div>

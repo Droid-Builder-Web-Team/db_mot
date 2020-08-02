@@ -15,20 +15,24 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600&display=swap" rel="stylesheet">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
+
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+      <nav class="navbar navbar-expand-md shadow-sm">
+          <div class="container-fluid" id="contain">
+              <div id="overlay"></div>
+              <a class="navbar-brand" href="{{ url('/') }}">
+                  {{ config('app.name') }}
+              </a>
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                  <span class="navbar-toggler-icon"></span>
+              </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
@@ -37,7 +41,7 @@
                     </ul>
 
                     <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
+                    <ul class="navbar-nav ml-auto justify-content-between">
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
@@ -55,6 +59,12 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                  @if (Auth::user()->permissions & 1)
+                                    <a class="dropdown-item" href="google.com">Google</a>
+                                  @endif
+                                  @if (Auth::user()->permissions & 2)
+                                    <a class="dropdown-item" href="google.com">shouldn't see this</a>
+                                  @endif
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -76,5 +86,10 @@
             @yield('content')
         </main>
     </div>
+    <footer class="row">
+    @include('layouts.footer')
+    </footer>
+    <script src="{{ asset('assets/js/util.js') }}"></script>
+    <script src="{{ asset('assets/js/main.js') }}"></script>
 </body>
 </html>
