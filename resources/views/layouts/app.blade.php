@@ -59,12 +59,10 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                  @if (Auth::user()->permissions & 1)
-                                    <a class="dropdown-item" href="google.com">Google</a>
-                                  @endif
-                                  @if (Auth::user()->permissions & 2)
-                                    <a class="dropdown-item" href="google.com">shouldn't see this</a>
-                                  @endif
+                                    <a class="dropdown-item" href={{ route('admin.users.index') }}>Members</a>
+                                    <a class="dropdown-item" href={{ route('admin.droids.index') }}>Droids</a>
+                                    <a class="dropdown-item" href={{ route('admin.events.index') }}>Events</a>
+                                    <a class="dropdown-item" href={{ route('admin.achievements.index') }}>Achievements</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

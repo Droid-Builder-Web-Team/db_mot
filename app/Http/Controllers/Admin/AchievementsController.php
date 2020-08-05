@@ -1,25 +1,31 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Droid;
+use App\Achievement;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class DroidsController extends Controller
+class AchievementsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-        $droids = Droid::latest()->paginate(20);
-        
-        return view('droids.index', compact('droids'))
-          ->with('i', (request()->input('page', 1) -1) *20);
-    }
+  public function __construct()
+  {
+      $this->middleware('auth');
+
+  }
+  /**
+   * Display a listing of the resource.
+   *
+   * @return \Illuminate\Http\Response
+   */
+  public function index()
+  {
+      //
+      $achievements = Achievement::latest()->paginate(15);
+
+      return view('admin.achievements.index', compact('achievements'))
+        ->with('i', (request()->input('page', 1) -1) *15);
+  }
 
     /**
      * Show the form for creating a new resource.
@@ -45,22 +51,21 @@ class DroidsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Droid  $droid
+     * @param  \App\Achievement  $achievement
      * @return \Illuminate\Http\Response
      */
-    public function show(Droid $droid)
+    public function show(Achievement $achievement)
     {
         //
-        return view('droids.show', compact('droid'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Droid  $droid
+     * @param  \App\Achievement  $achievement
      * @return \Illuminate\Http\Response
      */
-    public function edit(Droid $droid)
+    public function edit(Achievement $achievement)
     {
         //
     }
@@ -69,10 +74,10 @@ class DroidsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Droid  $droid
+     * @param  \App\Achievement  $achievement
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Droid $droid)
+    public function update(Request $request, Achievement $achievement)
     {
         //
     }
@@ -80,10 +85,10 @@ class DroidsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Droid  $droid
+     * @param  \App\Achievement  $achievement
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Droid $droid)
+    public function destroy(Achievement $achievement)
     {
         //
     }

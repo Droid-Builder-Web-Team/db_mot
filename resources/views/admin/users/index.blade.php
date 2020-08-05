@@ -1,13 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="row">
-        <div class="col-lg-12 margin-tb">
-            <div class="pull-right">
-                <a class="btn btn-success" href="{{ route('users.create') }}"> Create New Member</a>
-            </div>
-        </div>
-    </div>
+
 
     @if ($message = Session::get('success'))
         <div class="alert alert-success">
@@ -32,11 +26,9 @@
             <td></td>
             <td></td>
             <td>
-                <form action="{{ route('users.destroy',$user->member_uid) }}" method="POST">
+                <form action="{{ route('admin.users.destroy',$user->member_uid) }}" method="POST">
 
-                    <a class="btn btn-info" href="{{ route('users.show',$user->member_uid) }}">Show</a>
-
-                    <a class="btn btn-primary" href="{{ route('users.edit',$user->member_uid) }}">Edit</a>
+                    <a class="btn btn-primary" href="{{ route('admin.users.edit',$user->member_uid) }}">Edit</a>
 
                     @csrf
                     @method('DELETE')
@@ -47,7 +39,6 @@
         </tr>
         @endforeach
     </table>
-
     {!! $users->links() !!}
 
 @endsection

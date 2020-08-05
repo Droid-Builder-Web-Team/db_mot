@@ -3,11 +3,8 @@
 @section('content')
     <div class="row">
         <div class="col-lg-12 margin-tb">
-            <div class="pull-left">
-                <h2>Laravel 7 CRUD Example from scratch - ItSolutionStuff.com</h2>
-            </div>
             <div class="pull-right">
-                <a class="btn btn-success" href="{{ route('droids.create') }}"> Create New Droid</a>
+                <a class="btn btn-success" href="{{ route('admin.achievements.create') }}"> Create New Achievement</a>
             </div>
         </div>
     </div>
@@ -22,20 +19,18 @@
         <tr>
             <th>No</th>
             <th>Name</th>
-            <th>Style</th>
+            <th>Description</th>
             <th width="280px">Action</th>
         </tr>
-        @foreach ($droids as $droid)
+        @foreach ($achievements as $achievement)
         <tr>
-            <td>{{ $droid->droid_uid }}</td>
-            <td>{{ $droid->name }}</td>
-            <td>{{ $droid->style }}</td>
+            <td>{{ $achievement->achievement_uid }}</td>
+            <td>{{ $achievement->name }}</td>
+            <td>{{ $achievement->description }}</td>
             <td>
-                <form action="{{ route('droids.destroy',$droid->droid_uid) }}" method="POST">
+                <form action="{{ route('admin.achievements.destroy',$achievement->achievement_uid) }}" method="POST">
 
-                    <a class="btn btn-info" href="{{ route('droids.show',$droid->droid_uid) }}">Show</a>
-
-                    <a class="btn btn-primary" href="{{ route('droids.edit',$droid->droid_uid) }}">Edit</a>
+                    <a class="btn btn-primary" href="{{ route('admin.achievements.edit',$achievement->achievement_uid) }}">Edit</a>
 
                     @csrf
                     @method('DELETE')
@@ -47,6 +42,5 @@
         @endforeach
     </table>
 
-    {!! $droids->links() !!}
-
+    {!! $achievements->links() !!}
 @endsection

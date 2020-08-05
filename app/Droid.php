@@ -19,6 +19,7 @@ class Droid extends Model
     {
       return $this->belongsToMany(User::class);
     }
+
     public function getImageAttribute()
     {
       return $this->path;

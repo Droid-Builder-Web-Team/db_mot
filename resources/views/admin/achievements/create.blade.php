@@ -4,10 +4,10 @@
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h2>Add New Member</h2>
+            <h2>Add New Achievement</h2>
         </div>
         <div class="pull-right">
-            <a class="btn btn-primary" href="{{ route('members.index') }}"> Back</a>
+            <a class="btn btn-primary" href="{{ route('admin.achievements.index') }}"> Back</a>
         </div>
     </div>
 </div>
@@ -23,7 +23,7 @@
     </div>
 @endif
 
-<form action="{{ route('users.store') }}" method="POST">
+<form action="{{ route('members.store') }}" method="POST">
     @csrf
 
      <div class="row">
