@@ -16,8 +16,8 @@ use Illuminate\Support\Facades\Route;
 Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
   Route::resource('/users', 'UsersController', ['except' => ['show', 'create', 'store']]);
   Route::resource('/droids', 'DroidsController', ['except' => ['show', 'store']]);
-  Route::resource('/events', 'EventsController', ['except' => ['show', 'store']]);
-  Route::resource('/achievements', 'AchievementsController', ['except' => ['show', 'store']]);
+  Route::resource('/events', 'EventsController', ['except' => ['show']]);
+  Route::resource('/achievements', 'AchievementsController', ['except' => ['show']]);
 });
 
 Route::get('/', function () {

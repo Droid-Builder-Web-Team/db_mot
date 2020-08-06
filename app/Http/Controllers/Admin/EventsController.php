@@ -37,7 +37,9 @@ class EventsController extends Controller
     public function create()
     {
         //
+        return view('admin.events.create');
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -48,18 +50,18 @@ class EventsController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'date' => 'required'
+        ]);
+
+        Event::create($request->all());
+
+        return redirect()->route('admin.events.index')
+                        ->with('success','Event created successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Event  $event
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Event $event)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -82,19 +84,16 @@ class EventsController extends Controller
      */
     public function update(Request $request, Event $event)
     {
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+        ]);
 
+        $event->update($request->all());
 
-        Event::where('event_uid', $event->event_uid)
-            ->update([
-              'name'=>$event->name,
-              'description'=>$event->description,
-              'forum_link'=>$event->forum_link,
-              'report_link'=>$event->report_link,
-              'date'=>$event->date,
-              'charity_raised'=>$event->charity_raised
-            ]);
+        return redirect()->route('admin.events.index')
+                        ->with('success','Event updated successfully.');
 
-        //return redirect()->route('admin.events.index');
     }
 
     /**
@@ -105,6 +104,9 @@ class EventsController extends Controller
      */
     public function destroy(Event $event)
     {
-        //
+        $event->delete();
+
+        return redirect()->route('admin.events.index')
+                        ->with('success','Event deleted successfully');
     }
 }

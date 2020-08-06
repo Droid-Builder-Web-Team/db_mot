@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Achievement;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 
 class AchievementsController extends Controller
 {
@@ -35,7 +37,9 @@ class AchievementsController extends Controller
     public function create()
     {
         //
+        return view('admin.achievements.create');
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -46,18 +50,17 @@ class AchievementsController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+        ]);
+
+        Achievement::create($request->all());
+
+        return redirect()->route('admin.achievements.index')
+                        ->with('success','Achievement created successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Achievement  $achievement
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Achievement $achievement)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -68,6 +71,7 @@ class AchievementsController extends Controller
     public function edit(Achievement $achievement)
     {
         //
+        return view('admin.achievements.edit')->with('achievement', $achievement);
     }
 
     /**
@@ -79,7 +83,16 @@ class AchievementsController extends Controller
      */
     public function update(Request $request, Achievement $achievement)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+        ]);
+
+        $achievement->update($request->all());
+
+        return redirect()->route('admin.achievements.index')
+                        ->with('success','Achievement updated successfully.');
+
     }
 
     /**
@@ -90,6 +103,9 @@ class AchievementsController extends Controller
      */
     public function destroy(Achievement $achievement)
     {
-        //
+        $achievement->delete();
+
+        return redirect()->route('admin.achievements.index')
+                        ->with('success','Achievement deleted successfully');
     }
 }
