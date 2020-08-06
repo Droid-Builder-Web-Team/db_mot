@@ -14,13 +14,26 @@
             <th>No</th>
             <th>Name</th>
             <th>Description</th>
-            <th width="280px">Action</th>
+            <th width="120px">Date</th>
+            <th>Charity</th>
+            <th width="160px">Links</th>
+            <th width="160px">Action</th>
         </tr>
         @foreach ($events as $event)
         <tr>
             <td>{{ $event->event_uid }}</td>
             <td>{{ $event->name }}</td>
             <td>{{ $event->description }}</td>
+            <td>{{ $event->date }}</td>
+            <td>£{{ $event->charity_raised }}</td>
+            <td>
+              @if(!empty($event->forum_link))
+                <a class="btn btn-primary" href="{{ $event->forum_link }}">Forum</a>
+              @endif
+              @if(!empty($event->report_link))
+                <a class="btn btn-primary" href="{{ $event->report_link }}">Report</a>
+              @endif
+            </td>
             <td>
                 <form action="{{ route('admin.events.destroy',$event->event_uid) }}" method="POST">
 

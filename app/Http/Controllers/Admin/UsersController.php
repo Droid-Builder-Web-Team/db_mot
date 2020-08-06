@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\User;
+use App\Droid;
 use Illuminate\Http\Request;
 
 class UsersController extends Controller
