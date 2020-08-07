@@ -93,7 +93,5 @@
     <footer class="row">
     @include('layouts.footer')
     </footer>
-    <script src="{{ asset('assets/js/util.js') }}"></script>
-    <script src="{{ asset('assets/js/main.js') }}"></script>
 </body>
 </html>

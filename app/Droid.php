@@ -17,7 +17,7 @@ class Droid extends Model
 
     public function users()
     {
-      return $this->belongsToMany(User::class);
+      return $this->belongsToMany(User::class, 'droid_members', 'droid_uid', 'member_uid');
     }
 
     public function getImageAttribute()

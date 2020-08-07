@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
   Route::get('/', function() {
     return view('admin.dashboard');
-  });
+  })->middleware('auth');
   Route::resource('/users', 'UsersController', ['except' => ['show', 'create', 'store']]);
   Route::resource('/droids', 'DroidsController', ['except' => ['show', 'store']]);
   Route::resource('/events', 'EventsController', ['except' => ['show']]);
@@ -27,6 +27,8 @@ Route::get('/', function () {
     return view('home');
 });
 
+Route::resource('/user', 'UserController');
+Route::resource('/droid', 'DroidController');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
