@@ -10,7 +10,7 @@
     <tr><th>Latitude</th><td>{{ $user->latitiude }}</td></tr>
     <tr><th>Longitude</th><td>{{ $user->longitude }}</td></tr>
     <tr><th>Forum Username</th><td>{{ $user->username }}</td></tr>
-    <tr><th>Created On</th><td>{{ $user->create_on }}</td></tr>
+    <tr><th>Created On</th><td>{{ $user->created_on }}</td></tr>
   </table>
   <div class="col-md-6">
     <div class="droid-card-content">

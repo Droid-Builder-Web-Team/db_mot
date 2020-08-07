@@ -21,6 +21,8 @@ class User extends Authenticatable
     protected $primaryKey = 'member_uid';
     const CREATED_AT = 'created_on';
     const UPDATED_AT = 'last_updated';
+
+    protected $guard_name = "web";
     /**
      * The attributes that are mass assignable.
      *

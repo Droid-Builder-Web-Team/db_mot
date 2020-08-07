@@ -21,6 +21,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
   Route::resource('/droids', 'DroidsController', ['except' => ['show', 'store']]);
   Route::resource('/events', 'EventsController', ['except' => ['show']]);
   Route::resource('/achievements', 'AchievementsController', ['except' => ['show']]);
+  Route::resource('/dashboard', 'DashboardController', ['only' => ['index']]);
 });
 
 Route::get('/', function () {

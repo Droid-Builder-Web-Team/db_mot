@@ -26,6 +26,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+      /*
         $perms['edit_config']   = Permission::create(['name' => 'Edit Config']);
         $perms['edit_pli']      = Permission::create(['name' => 'Edit PLI']);
         $perms['edit_droids']   = Permission::create(['name' => 'Edit Droids']);
@@ -58,6 +59,8 @@ class HomeController extends Controller
         $role->givePermissionTo($perms['edit_droids']);
         $role->givePermissionTo($perms['view_members']);
         $role->givePermissionTo($perms['view_droids']);
+*/
+
 
         return view('home');
     }

@@ -82,16 +82,14 @@
 
         <main class="py-4">
             <div class="container">
-                <div class="row">
                     @include('partials.alerts')
                     @yield('content')
-                </div>
             </div>
 
         </main>
     </div>
-    <footer class="row">
+
     @include('layouts.footer')
-    </footer>
+
 </body>
 </html>

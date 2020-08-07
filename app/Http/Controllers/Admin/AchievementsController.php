@@ -13,8 +13,7 @@ class AchievementsController extends Controller
   public function __construct()
   {
       $this->middleware('auth');
-      $this->middleware('permission:edit_achievements');
-
+      $this->middleware('permission:Edit Achievements');
   }
   /**
    * Display a listing of the resource.
