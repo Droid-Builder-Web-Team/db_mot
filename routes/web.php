@@ -30,6 +30,8 @@ Route::get('/', function () {
 
 Route::resource('/user', 'UserController');
 Route::resource('/droid', 'DroidController');
+Route::get('mug_shot/{uid}', 'UserController@displayMugShot')->name('image.displayMugShot');
+Route::get('droid_image/{uid}/{view}', 'DroidController@displayDroidImage')->name('image.displayDroidImage');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

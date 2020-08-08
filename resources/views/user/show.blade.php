@@ -7,7 +7,7 @@
     <tr><th>email</th><td>{{ $user->email }}</td></tr>
     <tr><th>County</th><td>{{ $user->county }}</td></tr>
     <tr><th>Postcode</th><td>{{ $user->postcode }}</td></tr>
-    <tr><th>Latitude</th><td>{{ $user->latitiude }}</td></tr>
+    <tr><th>Latitude</th><td>{{ $user->latitude }}</td></tr>
     <tr><th>Longitude</th><td>{{ $user->longitude }}</td></tr>
     <tr><th>Forum Username</th><td>{{ $user->username }}</td></tr>
     <tr><th>Created On</th><td>{{ $user->created_on }}</td></tr>
@@ -15,7 +15,7 @@
   <div class="col-md-6">
     <div class="droid-card-content">
       <div style="text-align:center">
-				<img src="{{ asset(.'/members/'.$user->member_uid.'/mug_shot.jpg') }}" alt="mug_shot" class="img-fluid mb-2" style="height:300px;">
+				<img src="{{ route('image.displayMugShot',$user->member_uid) }}" alt="mug_shot" class="img-fluid mb-1 rounded" style="height:300px;">
 			</div>
 			<div class="droid-card-table" style="z-index:2">
 				<div class="droid-card-row">
@@ -36,7 +36,7 @@
   <div class="col-md-3 mb-5 droid-card" onclick="document.location='{{ route('droid.show', $droid->droid_uid) }}'">
     <div class="droid-card-content">
       <div style="text-align:center">
-				<img src="{{ $droid->image }}" alt="{{ $droid->name }}" class="img-fluid mb-2" style="height:300px;">
+				<img src="{{ route('image.displayDroidImage', [$droid->droid_uid, 'photo_front']) }}" alt="{{ $droid->name }}" class="img-fluid mb-1 rounded" style="height:300px;">
 			</div>
 
 			<div class="droid-card-table" style="z-index:2">

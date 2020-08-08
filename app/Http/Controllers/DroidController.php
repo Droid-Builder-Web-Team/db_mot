@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Droid;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Response;
 
 class DroidController extends Controller
 {
@@ -86,5 +88,16 @@ class DroidController extends Controller
     public function destroy(Droid $droid)
     {
         //
+    }
+
+    public function displayDroidImage($uid, $view)
+    {
+        $path = 'droids/'.$uid.'/'.$view.'.jpg';
+        $file = Storage::get($path);
+        $type = Storage::mimeType($path);
+        $response = Response::make($file, 200);
+        $response->header("Content-Type", $type);
+
+        return $response;
     }
 }

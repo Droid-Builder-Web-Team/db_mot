@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Response;
+
 
 class UserController extends Controller
 {
@@ -87,5 +90,16 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         //
+    }
+
+    public function displayMugShot($uid)
+    {
+        $path = 'members/'.$uid.'/mug_shot.jpg';
+        $file = Storage::get($path);
+        $type = Storage::mimeType($path);
+        $response = Response::make($file, 200);
+        $response->header("Content-Type", $type);
+
+        return $response;
     }
 }
