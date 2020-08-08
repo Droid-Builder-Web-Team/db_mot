@@ -22,7 +22,14 @@
         <tr>
             <td>{{ $user->member_uid }}</td>
             <td>{{ $user->forename }} {{ $user->surname }}</td>
-            <td>{{ $user->pli_date }}</td>
+            <td>
+                @if ($user->validPLI())
+                  Valid ( {{ $user->pli_date }} )
+                @else
+                  Invalid PLI
+                @endif
+
+            </td>
             <td></td>
             <td></td>
             <td>

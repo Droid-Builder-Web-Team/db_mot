@@ -86,13 +86,21 @@ class User extends Authenticatable
         return $this->droids->contains( $droid );
     }
 
-public function show_my_roles()
+    public function validPLI()
     {
+        if ( strtotime($this->pli_date) > strtotime('-1 year') ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
-        $this->givePermissionTo('edit_achievements');
-        //$roles = $this->getAllPermissions();
-//dd($roles);
-        return var_export($roles, true);
-
+    public function expiringPLI()
+    {
+        if ((strtotime($this->pli_date) < strtotime('-11 months')) && (strtotime($this->pli_date) > strtotime('-1 year'))) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

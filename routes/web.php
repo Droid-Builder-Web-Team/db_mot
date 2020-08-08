@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
   Route::get('/', function() {
-    return view('admin.dashboard');
+    return redirect('/admin/dashboard');
   })->middleware('auth');
   Route::resource('/users', 'UsersController', ['except' => ['show', 'create', 'store']]);
   Route::resource('/droids', 'DroidsController', ['except' => ['show', 'store']]);

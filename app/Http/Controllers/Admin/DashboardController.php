@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\User;
+use App\Droid;
+use App\Event;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class DashboardController extends Controller
 {
@@ -16,7 +19,10 @@ class DashboardController extends Controller
     public function index()
     {
         //
-        return view('admin.dashboard');
+        $users = User::all();
+        $droids = Droid::all();
+        $events = Event::all()->where('date', '>=', Carbon::now());
+        return view('admin.dashboard', compact('users', 'droids', 'events'));
     }
 
 
