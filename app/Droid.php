@@ -49,7 +49,7 @@ class Droid extends Model
         $valid = false;
         foreach($this->mot as $mot)
         {
-            if((strtotime($mot->date) > strtotime('-1 year')) && ($mot->approved = "Yes"))
+            if((strtotime($mot->date) > strtotime('-1 year')) && ($mot->approved == "Yes"))
                 $valid = true;
         }
         return $valid;
@@ -60,7 +60,7 @@ class Droid extends Model
         $valid = false;
         foreach($this->mot as $mot)
         {
-            if((strtotime($mot->date) > strtotime('-1 year')) && ($mot->approved = "Advisory"))
+            if((strtotime($mot->date) > strtotime('-1 year')) && ($mot->approved == "Advisory"))
                 $valid = true;
         }
         return $valid;
@@ -71,7 +71,7 @@ class Droid extends Model
         $valid = false;
         foreach($this->mot as $mot)
         {
-            if((strtotime($mot->date) > strtotime('-1 year')) && ($mot->approved = "WIP"))
+            if((strtotime($mot->date) > strtotime('-1 year')) && ($mot->approved == "WIP"))
                 $valid = true;
         }
         return $valid;
@@ -82,14 +82,34 @@ class Droid extends Model
         $expiring = false;
         foreach($this->mot as $mot)
         {
-            if((strtotime($mot->date) < strtotime('-11 months')) && (strtotime($mot->date) > strtotime('-1 year')) && ($mot->approved = "WIP"))
+            if((strtotime($mot->date) < strtotime('-11 months')) && (strtotime($mot->date) > strtotime('-1 year')))
                 $expiring = true;
         }
         return $expiring;
     }
 
-    public function getImageAttribute()
+    public function displayMOT()
     {
-        return $this->path;
+        $motstatus = "No Valid MOT";
+        $motstate = "alert-danger";
+        if ($this->hasFullMOT()) {
+            $motstatus = "Valid ".$this->motDate();
+            $motstate = "alert-success";
+        }
+        if ($this->hasAdvisoryMOT()) {
+            $motstatus = "Advisory ".$this->motDate();
+            $motstate = "alert-warning";
+        }
+        if ($this->hasWIPMOT()) {
+            $motstatus = "WIP ".$this->motDate();
+            $motstate = "alert-warning";
+        }
+        if ($this->hasExpiringMOT()) {
+            $motstate = "alert-primary";
+        }
+
+        $displayMOT = array("status" => $motstatus, "state" => $motstate);
+
+        return $displayMOT;
     }
 }

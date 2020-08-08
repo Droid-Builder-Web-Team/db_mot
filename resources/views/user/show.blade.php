@@ -11,6 +11,9 @@
     <tr><th>Longitude</th><td>{{ $user->longitude }}</td></tr>
     <tr><th>Forum Username</th><td>{{ $user->username }}</td></tr>
     <tr><th>Created On</th><td>{{ $user->created_on }}</td></tr>
+    <tr><th>PLI Last Payed</th><td>{{ $user->pli_date }}</td></tr>
+    <tr><th>ID Link:</th><td></td></tr>
+    <tr><th>Active?</th><td>{{ $user->active }}</td></tr>
   </table>
   <div class="col-md-6">
     <div class="droid-card-content">
@@ -26,6 +29,9 @@
 			</div>
     </div>
   </div>
+  @can('Edit Members')
+    <a class="btn btn-primary" href="{{ route('admin.users.edit',$user->member_uid) }}">Edit</a>
+  @endcan
 </div>
 <div class="row">
   <div class="heading mb-4">
@@ -59,7 +65,7 @@
 				</div>
 			</div>
     	<div class="pli-container noclick">
-				<h5 class="pli-text">MOT_STATUS{{$droid->mot_status}}</h5>
+				<h5 class="pli-text">@include('partials.motstatus', $droid->displayMOT())</h5>
 			</div>
 
     </div>
@@ -68,8 +74,9 @@
 
   <div class="col-md-3 mb-5 droid-card" onclick="document.location='{{ route('droid.create') }}'">
     <div class="droid-card-content">
+
       <div style="text-align:center">
-				<img src="/img/add.png" alt="Add Droid" class="img-fluid mb-2" style="height:300px;">
+				<img src="/img/add.png" alt="Add Droid" class="img-fluid mb-1 rounded" style="height:300px, width:300px;">
 			</div>
 			<div class="droid-card-table" style="z-index:2">
 				<div class="droid-card-row">

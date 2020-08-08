@@ -19,14 +19,22 @@
         <tr>
             <th>No</th>
             <th>Name</th>
+            <th>Owner</th>
             <th>Style</th>
+            <th>MOT Status</th>
             <th width="280px">Action</th>
         </tr>
         @foreach ($droids as $droid)
         <tr>
             <td>{{ $droid->droid_uid }}</td>
             <td>{{ $droid->name }}</td>
+            <td>
+              @foreach ( $droid->users as $users )
+                {{ $users->forename }} {{ $users->surname }}<br>
+              @endforeach
+            </td>
             <td>{{ $droid->description }}</td>
+            <td><div class="pli-text">@include('partials.motstatus', $droid->displayMOT())</div></td>
             <td>
                 <form action="{{ route('admin.droids.destroy',$droid->droid_uid) }}" method="POST">
 

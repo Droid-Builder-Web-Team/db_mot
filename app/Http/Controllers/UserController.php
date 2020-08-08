@@ -14,6 +14,7 @@ class UserController extends Controller
     public function __construct()
     {
       $this->middleware('auth');
+      //$this->middleware('permission:View members');
 
     }
     /**
@@ -24,6 +25,7 @@ class UserController extends Controller
     public function index()
     {
         //
+        return redirect('user/'.auth()->user()->member_uid);
     }
 
     /**
@@ -55,6 +57,10 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
+        if ($user->member_uid !== auth()->user()->member_uid && auth()->user()->cannot('View Members'))
+        {
+            abort(403);
+        }
         return view('user.show', compact('user'));
     }
 
@@ -66,7 +72,10 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        if ($user->member_uid !== auth()->user()->member_uid && auth()->user()->cannot('Edit Members'))
+        {
+            abort(403);
+        }
     }
 
     /**
@@ -78,7 +87,10 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        if ($user->member_uid !== auth()->user()->member_uid && auth()->user()->cannot('Edit Members'))
+        {
+            abort(403);
+        }
     }
 
     /**
@@ -89,7 +101,10 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        if ($user->member_uid !== auth()->user()->member_uid && auth()->user()->cannot('Edit Members'))
+        {
+            abort(403);
+        }
     }
 
     public function displayMugShot($uid)
