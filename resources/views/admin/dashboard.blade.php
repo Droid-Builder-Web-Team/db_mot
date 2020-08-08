@@ -79,7 +79,12 @@
       <td>{{ $event->name }}</td>
       <td>{{ $event->date }}</td>
       <td>{{ $event->location }}</td>
-      <td><a class="btn btn-primary" href="{{ route('admin.events.edit',$event->event_uid) }}">Edit</a></td>
+      <td>
+        @can('Edit Events')
+        <a class="btn btn-primary" href="{{ route('admin.events.edit',$event->event_uid) }}">Edit</a>
+        @endcan
+      </td>
+
     </tr>
   @endforeach
 </table>

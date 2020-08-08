@@ -70,7 +70,7 @@ class DroidsController extends Controller
      */
     public function edit(Droid $droid)
     {
-        //
+        return view('admin.droids.edit')->with('droid', $droid);
     }
 
     /**

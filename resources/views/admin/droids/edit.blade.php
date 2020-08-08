@@ -7,7 +7,7 @@
                 <h2>Edit Member</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('members.index') }}"> Back</a>
+                <a class="btn btn-primary" href="{{ route('admin.droids.index') }}"> Back</a>
             </div>
         </div>
     </div>
@@ -23,21 +23,21 @@
         </div>
     @endif
 
-    <form action="{{ route('members.update',$member->id) }}" method="POST">
+    <form action="{{ route('admin.droids.update',$droid->droid_uid) }}" method="POST">
         @csrf
         @method('PUT')
 
          <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>Forename:</strong>
-                    <input type="text" name="forename" value="{{ $member->forename }}" class="form-control" placeholder="Forename">
+                    <strong>Name:</strong>
+                    <input type="text" name="forename" value="{{ $droid->name }}" class="form-control" placeholder="Name">
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>Surname:</strong>
-                    <textarea class="form-control" style="height:150px" name="surname" placeholder="Surname">{{ $member->surname }}</textarea>
+                    <strong>Notes:</strong>
+                    <textarea class="form-control" style="height:150px" name="notes" placeholder="Notes">{{ $droid->notes }}</textarea>
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">

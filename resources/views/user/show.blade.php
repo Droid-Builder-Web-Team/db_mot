@@ -15,7 +15,7 @@
   <div class="col-md-6">
     <div class="droid-card-content">
       <div style="text-align:center">
-				<img src="/img/add.png" alt="mug_shot" class="img-fluid mb-2" style="height:300px;">
+				<img src="{{ asset(.'/members/'.$user->member_uid.'/mug_shot.jpg') }}" alt="mug_shot" class="img-fluid mb-2" style="height:300px;">
 			</div>
 			<div class="droid-card-table" style="z-index:2">
 				<div class="droid-card-row">
