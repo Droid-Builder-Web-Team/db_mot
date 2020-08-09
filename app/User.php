@@ -23,7 +23,15 @@ class User extends Authenticatable implements MustVerifyEmail
     const UPDATED_AT = 'last_updated';
 
     protected $fillable = [
-        'last_login', 'last_login_from', 'email', 'forename', 'surname', 'password',
+        'last_login',
+        'last_login_from',
+        'email',
+        'forename',
+        'surname',
+        'password',
+        'county',
+        'postcode',
+        'username',
     ];
     /**
      * The attributes that should be hidden for arrays.

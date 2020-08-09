@@ -24,7 +24,6 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
         return redirect('user/'.auth()->user()->member_uid);
     }
 
@@ -92,6 +91,16 @@ class UserController extends Controller
         {
             abort(403);
         }
+        $request->validate([
+            'forename' => 'required',
+            'surname' => 'required',
+            'email' => 'required',
+        ]);
+
+        $user->update($request->all());
+
+        return redirect()->route('user.show', auth()->user()->member_uid)
+                        ->with('success','Details updated successfully.');
     }
 
     /**

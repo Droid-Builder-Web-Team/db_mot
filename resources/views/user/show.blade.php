@@ -29,6 +29,8 @@
   </div>
   @can('Edit Members')
     <a class="btn btn-primary" href="{{ route('admin.users.edit',$user->member_uid) }}">Edit</a>
+  @else
+    <a class="btn btn-primary" href="{{ route('user.edit',$user->member_uid) }}">Edit</a>
   @endcan
 </div>
 <div class="row">
