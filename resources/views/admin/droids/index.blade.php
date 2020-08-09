@@ -9,12 +9,6 @@
         </div>
     </div>
 
-    @if ($message = Session::get('success'))
-        <div class="alert alert-success">
-            <p>{{ $message }}</p>
-        </div>
-    @endif
-
     <table class="table table-bordered">
         <tr>
             <th>No</th>
@@ -34,7 +28,11 @@
               @endforeach
             </td>
             <td>{{ $droid->description }}</td>
-            <td><div class="pli-text">@include('partials.motstatus', $droid->displayMOT())</div></td>
+            <td>
+              @if ( $droid->club->hasOption('mot') )
+                <div class="pli-text">@include('partials.motstatus', $droid->displayMOT())</div>
+              @endif
+            </td>
             <td>
                 <form action="{{ route('admin.droids.destroy',$droid->droid_uid) }}" method="POST">
 

@@ -22,16 +22,6 @@ class User extends Authenticatable
     const CREATED_AT = 'created_on';
     const UPDATED_AT = 'last_updated';
 
-    protected $guard_name = "web";
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'name', 'email', 'password',
-    ];
-
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -77,7 +67,7 @@ class User extends Authenticatable
      */
     public function events()
     {
-        return $this->belongsToMany(Event::class, 'members_events', 'member_uid', 'event_uid')->withPivot('details', 'spotter', 'date_added');
+        return $this->belongsToMany(Event::class, 'members_events', 'member_uid', 'event_uid')->withPivot('spotter', 'date_added');
     }
 
 

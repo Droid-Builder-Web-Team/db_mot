@@ -64,10 +64,11 @@
 					</div>
 				</div>
 			</div>
+      @if ($droid->club->hasOption('mot'))
     	<div class="pli-container noclick">
 				<h5 class="pli-text">@include('partials.motstatus', $droid->displayMOT())</h5>
 			</div>
-
+      @endif
     </div>
   </div>
 @endforeach
@@ -103,8 +104,8 @@
         @foreach($user->achievements as $achievement)
           <tr>
             <td>{{ $achievement->name }}</td>
-            <td>{{ $achievement->notes }}</td>
-            <td>{{ $achievement->date_added }}</td>
+            <td>{!! $achievement->pivot->notes !!}</td>
+            <td>{{ $achievement->pivot->date_added }}</td>
             <td></td>
           </tr>
         @endforeach
@@ -125,7 +126,7 @@
         </tr>
         @foreach($user->events as $event)
           <tr>
-            <td>{{ $event->date_added }}</td>
+            <td>{{ $event->date }}</td>
             <td>{{ $event->name }}</td>
             <td>{{ $event->spotter }}</td>
             <td>{{ $event->charity_raised }}</td>

@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\MOT;
 use App\User;
+use App\Club;
 
 class Droid extends Model
 {
@@ -19,7 +20,12 @@ class Droid extends Model
 
     public function users()
     {
-      return $this->belongsToMany(User::class, 'droid_members', 'droid_uid', 'member_uid');
+        return $this->belongsToMany(User::class, 'droid_members', 'droid_uid', 'member_uid');
+    }
+
+    public function club()
+    {
+        return $this->belongsTo(Club::class, 'club_uid');
     }
 
     public function mot()

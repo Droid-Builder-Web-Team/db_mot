@@ -4,15 +4,15 @@
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h2>Add New Event</h2>
+            <h2>Add New Club</h2>
         </div>
         <div class="pull-right">
-            <a class="btn btn-primary" href="{{ route('admin.events.index') }}"> Back</a>
+            <a class="btn btn-primary" href="{{ route('admin.clubs.index') }}"> Back</a>
         </div>
     </div>
 </div>
 
-<form action="{{ route('admin.events.store') }}" method="POST">
+<form action="{{ route('admin.clubs.store') }}" method="POST">
     @csrf
 
      <div class="row">
@@ -25,15 +25,22 @@
 
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Description:</strong>
-                <textarea class="form-control" style="height:150px" name="description" placeholder="Description"></textarea>
+                <strong>Website:</strong>
+                <input type="text" name="website" class="form-control" placeholder="Website">
             </div>
         </div>
 
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Date:</strong>
-                <input type="date" name="date" class="form-control" placeholder="Date">
+                <strong>Facebook:</strong>
+                <input type="text" name="facebook" class="form-control" placeholder="Facebook">
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Forum:</strong>
+                <input type="text" name="forum" class="form-control" placeholder="Forum">
             </div>
         </div>
 
