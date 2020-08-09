@@ -7,8 +7,6 @@
     <tr><th>email</th><td>{{ $user->email }}</td></tr>
     <tr><th>County</th><td>{{ $user->county }}</td></tr>
     <tr><th>Postcode</th><td>{{ $user->postcode }}</td></tr>
-    <tr><th>Latitude</th><td>{{ $user->latitude }}</td></tr>
-    <tr><th>Longitude</th><td>{{ $user->longitude }}</td></tr>
     <tr><th>Forum Username</th><td>{{ $user->username }}</td></tr>
     <tr><th>Created On</th><td>{{ $user->created_on }}</td></tr>
     <tr><th>PLI Last Payed</th><td>{{ $user->pli_date }}</td></tr>

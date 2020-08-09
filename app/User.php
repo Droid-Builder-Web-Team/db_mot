@@ -12,7 +12,7 @@ use App\Event;
 use App\Achievement;
 
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
     use HasRoles;
@@ -23,7 +23,7 @@ class User extends Authenticatable
     const UPDATED_AT = 'last_updated';
 
     protected $fillable = [
-        'last_login', 'last_login_from', 'email', 'forename', 'password',
+        'last_login', 'last_login_from', 'email', 'forename', 'surname', 'password',
     ];
     /**
      * The attributes that should be hidden for arrays.
