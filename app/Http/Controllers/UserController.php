@@ -76,6 +76,7 @@ class UserController extends Controller
         {
             abort(403);
         }
+        return view('user.edit')->with('user', $user);
     }
 
     /**

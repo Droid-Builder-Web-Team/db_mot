@@ -22,6 +22,9 @@ class User extends Authenticatable
     const CREATED_AT = 'created_on';
     const UPDATED_AT = 'last_updated';
 
+    protected $fillable = [
+        'last_login', 'last_login_from', 'email', 'forename', 'password',
+    ];
     /**
      * The attributes that should be hidden for arrays.
      *

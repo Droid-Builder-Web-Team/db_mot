@@ -4,15 +4,15 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
           <div class="pull-right mb-4">
-            <a class="btn btn-primary" href="{{ route('admin.users.index') }}">Back</a>
+            <a class="btn btn-primary" href="{{ route('user.show', Auth::user()->member_uid) }}">Back</a>
           </div>
           <div class="pull-left mb-4">
-            <h2>Edit Member</h2>
+            <h2>Edit Details</h2>
           </div>
         </div>
     </div>
 
-    <form action="{{ route('admin.users.update',$user->member_uid) }}" method="POST">
+    <form action="{{ route('user.update',$user->member_uid) }}" method="POST">
         @csrf
         @method('PUT')
 
@@ -47,40 +47,10 @@
           </div>
       </div>
 
-      <div class="form-row">
-          <div class="col-md-4 mb-3">
-            <label>PLI Date</label>
-            <input type="date" name="pli_date" value="{{ $user->pli_date }}" class="form-control" placeholder="">
-          </div>
-          <div class="col-md-1 mb-3">
-            <label>Active</label>
-            <input type="checkbox" name="active" {{ $user->active ? 'checked="1"' : 'checked="0"' }} class="form-control">
-          </div>
-          <div class="col-md-1 mb-3">
-            <label>GDPR</label>
-            <input type="checkbox" name="gdpr_accepted" {{ $user->gdpr_accepted ? 'checked="1"' : 'checked="0"' }} class="form-control">
-          </div>
-      </div>
-
-      <div class="form-row">
-        <div class="col-md-4 mb-3">
-          <label>Created On: </label>
-          {{ $user->created_on }}
-        </div>
-        <div class="col-md-4 mb-3">
-          <label>Updated On: </label>
-          {{ $user->last_updated }}
-        </div>
-        <div class="col-md-4 mb-3">
-          <label>Last Login: </label>
-          {{ $user->last_login }}
+            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
         </div>
 
-      <div class="form-row">
-        <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-          <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
-      </div>
-
-  </form>
+    </form>
 @endsection
