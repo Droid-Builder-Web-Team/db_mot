@@ -75,6 +75,19 @@
           <label>Last Login: </label>
           {{ $user->last_login }}
         </div>
+      </div>
+      <div class="form-row">
+          <label>Roles</label>
+          <div class="col-md-4">
+            @foreach($roles as $role)
+              <div class="form-check">
+                <input type="checkbox" name="roles[]" value="{{  $role->name }}"
+                @if($user->roles->pluck('id')->contains($role->id)) checked @endif >
+                <label>{{ $role->name }}</label>
+              </div>
+            @endforeach
+          </div>
+      </div>
 
       <div class="form-row">
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">

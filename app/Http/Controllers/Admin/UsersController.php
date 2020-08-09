@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\User;
 use App\Droid;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class UsersController extends Controller
 {
@@ -37,8 +38,11 @@ class UsersController extends Controller
      */
     public function edit(User $user)
     {
-        //
-        return view('admin.users.edit')->with('user', $user);
+        $roles = Role::all();
+        return view('admin.users.edit')->with([
+          'user' => $user,
+          'roles' => $roles,
+        ]);
     }
 
     /**
@@ -50,7 +54,17 @@ class UsersController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+
+      $user->syncRoles($request->roles);
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+        ]);
+
+        $user->update($request->all());
+
+        return redirect()->route('admin.users.index')
+                        ->with('success','User updated successfully.');
     }
 
     /**
