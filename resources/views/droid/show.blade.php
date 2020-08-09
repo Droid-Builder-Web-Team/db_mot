@@ -68,6 +68,7 @@
   </div>
 </div>
 <div class="row">
+  @if ($droid->club->hasOption('mot'))
   <div class="col-md-6">
     MOT Details
     <table class="table">
@@ -93,5 +94,6 @@
 
     </table>
   </div>
+  @endif
 </div>
 @endsection
