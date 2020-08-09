@@ -58,12 +58,24 @@
                                     {{ Auth::user()->forename }}  {{ Auth::user()->surname }}<span class="caret"></span>
                                 </a>
 
+
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href={{ route('admin.users.index') }}>Members</a>
-                                    <a class="dropdown-item" href={{ route('admin.droids.index') }}>Droids</a>
-                                    <a class="dropdown-item" href={{ route('admin.events.index') }}>Events</a>
-                                    <a class="dropdown-item" href={{ route('admin.achievements.index') }}>Achievements</a>
-                                    <a class="dropdown-item" href={{ route('admin.clubs.index') }}>Clubs</a>
+                                    <a class="dropdown-item" href="{{ route('user.show', Auth::user()->member_uid) }}">Your Profile</a>
+                                  @can('View Members')
+                                    <a class="dropdown-item" href="{{ route('admin.users.index') }}">Members</a>
+                                  @endcan
+                                  @can('View Droids')
+                                    <a class="dropdown-item" href="{{ route('admin.droids.index') }}">Droids</a>
+                                  @endcan
+                                  @can('Edit Events')
+                                    <a class="dropdown-item" href="{{ route('admin.events.index') }}">Events</a>
+                                  @endcan
+                                  @can('Edit Achievements')
+                                    <a class="dropdown-item" href="{{ route('admin.achievements.index') }}">Achievements</a>
+                                  @endcan
+                                  @can('Edit Clubs')
+                                    <a class="dropdown-item" href="{{ route('admin.clubs.index') }}">Clubs</a>
+                                  @endcan
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
