@@ -10935,6 +10935,12 @@ body {
   background-attachment: fixed;
 }
 
+#app {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
 #droid_designation,
 #builder_name,
 #droid_version,
@@ -11515,8 +11521,14 @@ body,
 .py-4 {
   height: auto;
   background: #191f4b;
+  flex-grow: 1;
   background: linear-gradient(180deg, #191f4b 0%, black 100%);
 }
+
+html,
+￼body {
+￼  height: 100%;
+￼}
 
 #contain {
   margin-right: 5rem;
