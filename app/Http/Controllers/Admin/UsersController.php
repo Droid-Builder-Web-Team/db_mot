@@ -23,7 +23,10 @@ class UsersController extends Controller
      */
     public function index()
     {
-        //
+
+        if (auth()->user()->cannot('View Members')) {
+            abort(403);
+        }
         $users = User::latest()->paginate(15);
 
         return view('admin.users.index', compact('users'))
@@ -38,6 +41,10 @@ class UsersController extends Controller
      */
     public function edit(User $user)
     {
+
+        if (auth()->user()->cannot('Edit Members')) {
+            abort(403);
+        }
         $roles = Role::all();
         return view('admin.users.edit')->with([
           'user' => $user,
@@ -54,8 +61,15 @@ class UsersController extends Controller
      */
     public function update(Request $request, User $user)
     {
+        if (auth()->user()->can('Edit Permissions')) {
+            $user->syncRoles($request->roles);
+        } else {
+            abort(403);
+        }
 
-      $user->syncRoles($request->roles);
+        if (auth()->user()->cannot('Edit Members')) {
+            abort(403);
+        }
         $request->validate([
             'name' => 'required',
             'description' => 'required',
