@@ -96,6 +96,16 @@ class UserController extends Controller
         }
     }
 
+    public function id(Request $id)
+    {
+        $user = User::where('badge_id', $id->id)->first();
+        $path = 'members/'.$user->member_uid.'/mug_shot.jpg';
+        $badge_data['name'] = $user->forename." ".$user->surname;
+        $badge_data['mot'] = $user->validPLI();
+        $badge_data['imageData'] = Storage::get($path);
+        return view('user.id', compact('badge_data'));
+    }
+
     public function displayMugShot($uid)
     {
         $path = 'members/'.$uid.'/mug_shot.jpg';

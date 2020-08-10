@@ -30,8 +30,9 @@ Route::get('/', function () {
 });
 
 //Route::get('/', function() {
-  Route::resource('/user', 'UserController');
-  Route::resource('/droid', 'DroidController');
+  Route::get('user/id/{id}', 'UserController@id');
+  Route::resource('user', 'UserController');
+  Route::resource('droid', 'DroidController');
   Route::get('mug_shot/{uid}', 'UserController@displayMugShot')->name('image.displayMugShot');
   Route::get('qr_code/{uid}', 'UserController@displayQRCode')->name('image.displayQRCode');
   Route::get('droid_image/{uid}/{view}', 'DroidController@displayDroidImage')->name('image.displayDroidImage');
