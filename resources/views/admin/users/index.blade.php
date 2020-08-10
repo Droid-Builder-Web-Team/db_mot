@@ -33,7 +33,7 @@
         @endif
         </td>
         <td></td>
-        <td></td>
+        <td>{{ $user->droidsCount() }}</td>
         <td>
           <form action="{{ route('admin.users.destroy',$user->member_uid) }}" method="POST">
             <a class="btn btn-primary" href="{{ route('admin.users.edit',$user->member_uid) }}">Edit</a>
