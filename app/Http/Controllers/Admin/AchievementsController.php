@@ -23,7 +23,7 @@ class AchievementsController extends Controller
   public function index()
   {
       //
-      $achievements = Achievement::latest()->paginate(15);
+      $achievements = Achievement::orderBy('achievement_uid', 'asc')->paginate(15);
 
       return view('admin.achievements.index', compact('achievements'))
         ->with('i', (request()->input('page', 1) -1) *15);
