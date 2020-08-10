@@ -16,6 +16,7 @@ class DroidsController extends Controller
         $this->middleware('permission:View Droids');
 
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -24,7 +25,7 @@ class DroidsController extends Controller
     public function index()
     {
         //
-        $droids = Droid::latest()->paginate(15);
+        $droids = Droid::orderBy('droids_uid', 'asc')->paginate(15);
 
         return view('admin.droids.index', compact('droids'))
           ->with('i', (request()->input('page', 1) -1) *15);

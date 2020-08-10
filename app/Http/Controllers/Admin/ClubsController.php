@@ -22,7 +22,7 @@ class ClubsController extends Controller
      */
     public function index()
     {
-      $clubs = Club::latest()->paginate(15);
+      $clubs = Club::orderBy('club_uid', 'asc')->paginate(15);
 
       return view('admin.clubs.index', compact('clubs'))
         ->with('i', (request()->input('page', 1) -1) *15);

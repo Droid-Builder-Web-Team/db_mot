@@ -10,23 +10,25 @@ use Illuminate\Support\Facades\DB;
 
 class EventsController extends Controller
 {
-  public function __construct()
-  {
-      $this->middleware('auth');
-      $this->middleware('permission:Edit Events');
-  }
-  /**
-   * Display a listing of the resource.
-   *
-   * @return \Illuminate\Http\Response
-   */
-  public function index()
-  {
-      $events = Event::orderBy('date', 'desc')->paginate(15);
 
-      return view('admin.events.index', compact('events'))
-        ->with('i', (request()->input('page', 1) -1) *15);
-  }
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('permission:Edit Events');
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $events = Event::orderBy('date', 'desc')->paginate(15);
+
+        return view('admin.events.index', compact('events'))
+          ->with('i', (request()->input('page', 1) -1) *15);
+    }
 
     /**
      * Show the form for creating a new resource.

@@ -16,6 +16,7 @@ class UsersController extends Controller
         $this->middleware('auth');
         $this->middleware('permission:View Members');
     }
+
     /**
      * Display a listing of the resource.
      *
