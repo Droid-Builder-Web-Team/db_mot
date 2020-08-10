@@ -61,12 +61,6 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsToMany(Droid::class, 'droid_members', 'member_uid', 'droid_uid');
     }
 
-    public function droidsCount()
-    {
-        $count = $this->droids()->count();
-        return $count;
-    }
-
     /**
      * Get all the user's Achievements
      *

@@ -17,7 +17,6 @@
       <th>ID</th>
       <th>Name</th>
       <th>PLI</th>
-      <th>Primary MOT</th>
       <th>Droids</th>
       <th width="280px">Action</th>
     </tr>
@@ -32,8 +31,7 @@
           Invalid PLI
         @endif
         </td>
-        <td></td>
-        <td>{{ $user->droidsCount() }}</td>
+        <td>{{ $user->droids()->count() }}</td>
         <td>
           <form action="{{ route('admin.users.destroy',$user->member_uid) }}" method="POST">
             <a class="btn btn-primary" href="{{ route('admin.users.edit',$user->member_uid) }}">Edit</a>

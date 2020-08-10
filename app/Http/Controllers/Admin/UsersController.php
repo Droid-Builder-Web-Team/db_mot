@@ -29,6 +29,15 @@ class UsersController extends Controller
         }
 
         $search =  $request->input('q');
+        $order = $request->input('o');
+        $direction = $request->input('d');
+
+        if($order == null) {
+            $order = 'member_uid';
+        }
+        if($direction == null) {
+            $direction = 'asc';
+        }
         if($search!=""){
             $users = User::where(function ($query) use ($search){
                 $query->where('forename', 'like', '%'.$search.'%')
@@ -38,7 +47,8 @@ class UsersController extends Controller
             ->paginate(15);
             $users->appends(['q' => $search]);
         } else {
-            $users = User::latest()->paginate(15);
+            $users = User::where('active', 'on')
+                    ->orderBy($order, $direction)->paginate(15);
         }
 
         return view('admin.users.index', compact('users'))
