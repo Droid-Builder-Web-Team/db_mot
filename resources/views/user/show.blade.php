@@ -11,7 +11,7 @@
     <tr><th>Created On</th><td>{{ $user->created_on }}</td></tr>
     <tr><th>PLI Last Payed</th><td>{{ $user->pli_date }}</td></tr>
     <tr><th>ID Link</th>
-      <td><a href="{{ url('/')."id.php?id=".$user->badge_id }}">{{ url('/')."id.php?id=".$user->badge_id }}</a></td>
+      <td><a href="{{ url('/')."/id.php?id=".$user->badge_id }}">{{ url('/')."/id.php?id=".$user->badge_id }}</a></td>
     </tr>
     <tr><th>QR Code:</th>
       <td><img src="{{ route('image.displayQRCode',$user->member_uid) }}" alt="qr_code" class="img-fluid mb-1 rounded" style="height:150px;"></td>
