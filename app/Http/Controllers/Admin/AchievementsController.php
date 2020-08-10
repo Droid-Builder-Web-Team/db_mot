@@ -10,24 +10,25 @@ use Illuminate\Support\Facades\DB;
 
 class AchievementsController extends Controller
 {
-  public function __construct()
-  {
-      $this->middleware('auth');
-      $this->middleware('permission:Edit Achievements');
-  }
-  /**
-   * Display a listing of the resource.
-   *
-   * @return \Illuminate\Http\Response
-   */
-  public function index()
-  {
-      //
-      $achievements = Achievement::orderBy('achievement_uid', 'asc')->paginate(15);
 
-      return view('admin.achievements.index', compact('achievements'))
-        ->with('i', (request()->input('page', 1) -1) *15);
-  }
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('permission:Edit Achievements');
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $achievements = Achievement::orderBy('achievement_uid', 'asc')->paginate(15);
+
+        return view('admin.achievements.index', compact('achievements'))
+                      ->with('i', (request()->input('page', 1) -1) *15);
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -36,10 +37,8 @@ class AchievementsController extends Controller
      */
     public function create()
     {
-        //
         return view('admin.achievements.create');
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -49,7 +48,6 @@ class AchievementsController extends Controller
      */
     public function store(Request $request)
     {
-        //
         $request->validate([
             'name' => 'required',
             'description' => 'required',
@@ -61,7 +59,6 @@ class AchievementsController extends Controller
                         ->with('success','Achievement created successfully.');
     }
 
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -70,7 +67,6 @@ class AchievementsController extends Controller
      */
     public function edit(Achievement $achievement)
     {
-        //
         return view('admin.achievements.edit')->with('achievement', $achievement);
     }
 
@@ -108,4 +104,5 @@ class AchievementsController extends Controller
         return redirect()->route('admin.achievements.index')
                         ->with('success','Achievement deleted successfully');
     }
+
 }

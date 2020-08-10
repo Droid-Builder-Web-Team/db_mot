@@ -14,6 +14,7 @@ class ClubsController extends Controller
       $this->middleware('auth');
       $this->middleware('permission:Edit Clubs');
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -100,4 +101,5 @@ class ClubsController extends Controller
         return redirect()->route('admin.clubs.index')
                         ->with('success','Club deleted successfully');
     }
+
 }
