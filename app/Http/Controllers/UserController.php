@@ -127,4 +127,15 @@ class UserController extends Controller
 
         return $response;
     }
+
+    public function displayQRCode($uid)
+    {
+        $path = 'members/'.$uid.'/qr_code.jpg';
+        $file = Storage::get($path);
+        $type = Storage::mimeType($path);
+        $response = Response::make($file, 200);
+        $response->header("Content-Type", $type);
+
+        return $response;
+    }
 }

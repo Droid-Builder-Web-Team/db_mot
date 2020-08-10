@@ -11525,8 +11525,7 @@ body,
   background: linear-gradient(180deg, #191f4b 0%, black 100%);
 }
 
-html,
-￼body {
+html, body {
 ￼  height: 100%;
 ￼}
 
@@ -11955,4 +11954,9 @@ label {
 .progress-text {
   margin: 3px 3px;
   text-shadow: 0 0 5px black;
+}
+
+#search {
+width:100%;
+display:flex;
 }

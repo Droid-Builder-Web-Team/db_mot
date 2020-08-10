@@ -105,4 +105,21 @@ class User extends Authenticatable implements MustVerifyEmail
         }
     }
 
+    public function generateQR($id) {
+        $link = url('/')."/id.php?id=".$id;
+        $url = "https://chart.googleapis.com/chart?cht=qr&chld=L|1&chs=100x100&chl=".urlencode($link);
+        $image = imagecreatefrompng($url);
+        imagejpeg($image, $path, 75);
+        return "Ok";
+    }
+
+    public function generateID($length) {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
+    }
 }

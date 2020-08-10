@@ -21,13 +21,25 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
 
         if (auth()->user()->cannot('View Members')) {
             abort(403);
         }
-        $users = User::latest()->paginate(15);
+
+        $search =  $request->input('q');
+        if($search!=""){
+            $users = User::where(function ($query) use ($search){
+                $query->where('forename', 'like', '%'.$search.'%')
+                    ->orwhere('surname', 'like', '%'.$search.'%')
+                    ->orWhere('email', 'like', '%'.$search.'%');
+            })
+            ->paginate(15);
+            $users->appends(['q' => $search]);
+        } else {
+            $users = User::latest()->paginate(15);
+        }
 
         return view('admin.users.index', compact('users'))
           ->with('i', (request()->input('page', 1) -1) *15);
