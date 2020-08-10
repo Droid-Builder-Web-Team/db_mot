@@ -49,6 +49,7 @@
     <table class="table">
       <tr>
         <th>Name</th>
+        <th>Owner</th>
         <th>MOT Date</th>
         <th></th>
       </tr>
@@ -56,6 +57,11 @@
         @if ($droid->hasExpiringMOT())
             <tr>
               <td>{{$droid->name}}</td>
+              <td>
+                @foreach ( $droid->users as $users )
+                  {{ $users->forename }} {{ $users->surname }}<br>
+                @endforeach
+              </td>
               <td>{{$droid->motDate()}}</td>
               <td><a class="btn btn-primary" href="{{ route('admin.droids.edit',$droid->droid_uid) }}">Edit</a></td>
             </tr>

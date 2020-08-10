@@ -12,7 +12,7 @@ use Illuminate\Support\Carbon;
 class DashboardController extends Controller
 {
 
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -20,7 +20,6 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        //
         $users = User::all();
         $droids = Droid::all();
         $events = Event::all()->where('date', '>=', Carbon::now());
