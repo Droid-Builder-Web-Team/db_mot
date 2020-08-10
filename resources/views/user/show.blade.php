@@ -16,7 +16,6 @@
     <tr><th>QR Code:</th>
       <td><img src="{{ route('image.displayQRCode',$user->member_uid) }}" alt="qr_code" class="img-fluid mb-1 rounded" style="height:150px;"></td>
     </tr>
-    <tr><th>Active?</th><td>{{ $user->active }}</td></tr>
   </table>
   <div class="col-md-6">
     <div class="droid-card-content">
