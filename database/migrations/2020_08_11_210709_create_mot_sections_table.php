@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateClubOptionsTable extends Migration
+class CreateMotSectionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class CreateClubOptionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('club_options', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::create('mot_sections', function (Blueprint $table) {
+            $table->integer('club_uid');
+            $table->integer('section_uid', true);
+            $table->string('section_name', 16);
+            $table->text('section_description');
         });
     }
 
@@ -26,6 +28,6 @@ class CreateClubOptionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('club_options');
+        Schema::dropIfExists('mot_sections');
     }
 }

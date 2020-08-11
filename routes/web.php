@@ -22,6 +22,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
   Route::resource('/events', 'EventsController', ['except' => ['show']]);
   Route::resource('/achievements', 'AchievementsController', ['except' => ['show']]);
   Route::resource('/clubs', 'ClubsController', ['except' => ['show']]);
+  Route::resource('/locations', 'LocationController', ['except' => ['show']]);
   Route::resource('/dashboard', 'DashboardController', ['only' => ['index']]);
 });
 
@@ -36,6 +37,7 @@ Route::get('/', function () {
   Route::get('mug_shot/{uid}', 'UserController@displayMugShot')->name('image.displayMugShot');
   Route::get('qr_code/{uid}', 'UserController@displayQRCode')->name('image.displayQRCode');
   Route::get('droid_image/{uid}/{view}', 'DroidController@displayDroidImage')->name('image.displayDroidImage');
+  Route::resource('/events', 'EventController', ['only' => ['index', 'show']]);
 //})->middleware('verified');
 
 Auth::routes();

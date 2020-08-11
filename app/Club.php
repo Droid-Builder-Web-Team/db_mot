@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\ClubOptions;
+use App\Droid;
 
 class Club extends Model
 {
@@ -11,10 +12,15 @@ class Club extends Model
     protected $fillable = [
         'name', 'website', 'facebook', 'forum'
     ];
+
     public function options()
     {
-        $collection = $this->hasMany(ClubOptions::class, 'club_uid');
-        return $collection;
+        return $this->hasMany(ClubOptions::class, 'club_uid');
+    }
+
+    public function droids()
+    {
+        return $this->hasMany(Droid::class, 'club_uid');
     }
 
     public function hasOption($hasoption)

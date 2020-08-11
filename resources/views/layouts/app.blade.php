@@ -69,6 +69,7 @@
                                   @endcan
                                   @can('Edit Events')
                                     <a class="dropdown-item" href="{{ route('admin.events.index') }}">Events</a>
+                                    <a class="dropdown-item" href="{{ route('admin.locations.index') }}">Locations</a>
                                   @endcan
                                   @can('Edit Achievements')
                                     <a class="dropdown-item" href="{{ route('admin.achievements.index') }}">Achievements</a>

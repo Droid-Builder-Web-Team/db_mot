@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDroidsTable extends Migration
+class CreateDroidMembersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class CreateDroidsTable extends Migration
      */
     public function up()
     {
-        Schema::create('droids', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::create('droid_members', function (Blueprint $table) {
+            $table->integer('id', true);
+            $table->integer('member_uid');
+            $table->integer('droid_uid');
+            $table->timestamp('timestamp')->useCurrent();
         });
     }
 
@@ -26,6 +28,6 @@ class CreateDroidsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('droids');
+        Schema::dropIfExists('droid_members');
     }
 }

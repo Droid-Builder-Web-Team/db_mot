@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDroidMembersTable extends Migration
+class CreatePermissionsOldTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateDroidMembersTable extends Migration
      */
     public function up()
     {
-        Schema::create('droid_members', function (Blueprint $table) {
-            $table->id();
-            $table->integer('member_uid')->unsigned();
-            $table->integer('droid_uid')->unsigned();
-            $table->timestamps();
+        Schema::create('permissions.old', function (Blueprint $table) {
+            $table->integer('permission_uid', true);
+            $table->string('name', 20);
+            $table->integer('value');
         });
     }
 
@@ -28,6 +27,6 @@ class CreateDroidMembersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('droid_members');
+        Schema::dropIfExists('permissions.old');
     }
 }
