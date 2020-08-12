@@ -23,6 +23,11 @@ class Club extends Model
         return $this->hasMany(Droid::class, 'club_uid');
     }
 
+    public function listClubs()
+    {
+        return $this->pluck('name', 'id');
+    }
+
     public function hasOption($hasoption)
     {
         $result = false;

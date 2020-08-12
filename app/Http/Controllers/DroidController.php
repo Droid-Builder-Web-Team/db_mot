@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Droid;
+use App\MOT;
+use App\Club;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Response;
@@ -22,7 +24,8 @@ class DroidController extends Controller
      */
     public function create()
     {
-        //
+        $clubs = Club::all();
+        return view('droid.create', compact('clubs'));
     }
 
     /**

@@ -61,6 +61,7 @@
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('user.show', Auth::user()->member_uid) }}">Your Profile</a>
+                                    <a class="dropdown-item" href="{{ route('events.index') }}">Upcoming Events</a>
                                   @can('View Members')
                                     <a class="dropdown-item" href="{{ route('admin.users.index') }}">Members</a>
                                   @endcan
