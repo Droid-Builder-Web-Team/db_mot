@@ -14,8 +14,7 @@ class Droid extends Model
     const CREATED_AT = 'date_added';
     const UPDATED_AT = 'last_updated';
 
-    protected $fillable = [
-      'name', 'style'
+    protected $guarded = [
     ];
 
     public function users()

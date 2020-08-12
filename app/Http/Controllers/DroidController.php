@@ -36,7 +36,15 @@ class DroidController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required'
+        ]);
+
+        $droid = Droid::create($request->all());
+        $droid->users()->attach($request['member_uid']);
+        return redirect()->route('user.show', auth()->user()->member_uid )
+                        ->with('success','Droid created successfully.');
+
     }
 
     /**
@@ -81,14 +89,33 @@ class DroidController extends Controller
      */
     public function destroy(Droid $droid)
     {
-        //
+        $users = $droid->users;
+        foreach($users as $user)
+        {
+            $droid->users()->detach($user->member_uid);
+        }
+        $mots = $droid->mot;
+        foreach($mots as $mot)
+        {
+            $droid->mot()-detach($droid->droid_uid);
+        }
+        $droid->delete();
+
+        return redirect()->route('user.show', auth()->user()->member_uid)
+                        ->with('success','Droid deleted successfully');
     }
 
     public function displayDroidImage($uid, $view)
     {
         $path = 'droids/'.$uid.'/'.$view.'.jpg';
-        $file = Storage::get($path);
-        $type = Storage::mimeType($path);
+        if (!Storage::exists($path)) {
+            $path = getcwd().'/img/blank_'.$view.'.jpg';
+            $file = file_get_contents($path);
+            $type = "image/jpeg";
+        } else {
+            $file = Storage::get($path);
+            $type = Storage::mimeType($path);
+        }
         $response = Response::make($file, 200);
         $response->header("Content-Type", $type);
 
