@@ -23,6 +23,17 @@
             </div>
         </div>
 
+        <div class="col-xs-3 col-sm-3 col-md-3">
+            <div class="form-group">
+              <strong>Location</strong><br>
+              <select name=location_uid>
+                @foreach($locations as $location)
+                  <option value="{{ $location->location_uid }}">{{ $location->name }}</option>
+                @endforeach
+              </select>
+            </div>
+        </div>
+
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Description:</strong>

@@ -109,8 +109,14 @@ class UserController extends Controller
     public function displayMugShot($uid)
     {
         $path = 'members/'.$uid.'/mug_shot.jpg';
-        $file = Storage::get($path);
-        $type = Storage::mimeType($path);
+        if (!Storage::exists($path)) {
+            $path = getcwd().'/img/blank_mug_shot.jpg';
+            $file = file_get_contents($path);
+            $type = "image/jpeg";
+        } else {
+            $file = Storage::get($path);
+            $type = Storage::mimeType($path);
+        }
         $response = Response::make($file, 200);
         $response->header("Content-Type", $type);
 

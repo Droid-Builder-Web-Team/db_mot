@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Event;
+use App\Location;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -37,7 +38,8 @@ class EventsController extends Controller
      */
     public function create()
     {
-        return view('admin.events.create');
+        $locations = Location::all();
+        return view('admin.events.create', compact('locations'));
     }
 
 
@@ -70,7 +72,8 @@ class EventsController extends Controller
      */
     public function edit(Event $event)
     {
-        return view('admin.events.edit')->with('event', $event);
+        $locations = Location::all();
+        return view('admin.events.edit', compact('locations'))->with('event', $event);
     }
 
     /**
