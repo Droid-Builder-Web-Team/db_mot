@@ -97,7 +97,7 @@
 
 <div class="row mb-5">
   <h4 class="sub-title">Achievements</h4>
-  <div class="mb-2">
+  <div class="col-md-12 mb-2">
       <table class="table">
         <tr>
           <th>Name</th>
@@ -119,7 +119,7 @@
 
 <div class="row mb-5">
   <h4 class="sub-title">Events</h4>
-  <div class="mb-2">
+  <div class="col-md-12 mb-2">
       <table class="table">
         <tr>
           <th>Date</th>
