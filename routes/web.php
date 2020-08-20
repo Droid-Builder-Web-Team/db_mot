@@ -37,7 +37,7 @@ Route::get('/', function () {
   Route::get('mug_shot/{uid}', 'UserController@displayMugShot')->name('image.displayMugShot');
   Route::get('qr_code/{uid}', 'UserController@displayQRCode')->name('image.displayQRCode');
   Route::get('droid_image/{uid}/{view}', 'DroidController@displayDroidImage')->name('image.displayDroidImage');
-  Route::resource('/events', 'EventController', ['only' => ['index', 'show']]);
+  Route::resource('/events', 'EventController', ['only' => ['index', 'show', 'update']]);
 //})->middleware('verified');
 
 Auth::routes();

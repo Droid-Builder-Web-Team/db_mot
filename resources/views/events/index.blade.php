@@ -28,8 +28,10 @@
               @if(!empty($event->forum_link))
                 <a class="btn btn-primary" href="{{ $event->forum_link }}">Forum</a>
               @endif
+
             </td>
             <td>
+              <a class="btn btn-primary" href="{{ route('events.show',$event->event_uid) }}">View</a>
             </td>
         </tr>
         @endforeach
