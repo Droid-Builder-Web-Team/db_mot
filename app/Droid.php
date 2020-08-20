@@ -29,7 +29,7 @@ class Droid extends Model
 
     public function mot()
     {
-        return $this->hasMany(MOT::class, 'droid_uid');
+        return $this->hasMany(MOT::class, 'droid_uid')->orderBy('date', 'desc');
     }
 
     public function motDate()

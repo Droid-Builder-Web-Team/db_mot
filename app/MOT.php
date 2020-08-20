@@ -61,4 +61,10 @@ class MOT extends Model
 
         return $detail;
     }
+
+    public function officer()
+    {
+        $name = "test";
+        return $name;
+    }
 }

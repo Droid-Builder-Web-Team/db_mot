@@ -83,7 +83,7 @@
         <tr>
           <td>{{ $mot->date }}</td>
           <td>{{ $mot->location }}</td>
-          <td></td>
+          <td>{{ $mot->officer() }}</td>
           <td>{{ $mot->approved }}</td>
           <td><a class="btn btn-primary" href="{{ route('mot.show', $mot->mot_uid) }}">View</a></td>
         </tr>
