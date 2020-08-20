@@ -30,15 +30,4 @@ class MOTController extends Controller
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\MOT  $mOT
-     * @return \Illuminate\Http\Response
-     */
-    public function show(MOT $mOT)
-    {
-        //
-    }
-
 }

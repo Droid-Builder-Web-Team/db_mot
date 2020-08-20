@@ -24,6 +24,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
   Route::resource('/clubs', 'ClubsController', ['except' => ['show']]);
   Route::resource('/locations', 'LocationController', ['except' => ['show']]);
   Route::resource('/dashboard', 'DashboardController', ['only' => ['index']]);
+  Route::resource('/mots', 'MOTController', ['only' => ['create', 'store']]);
 });
 
 Route::get('/', function () {
@@ -31,9 +32,10 @@ Route::get('/', function () {
 });
 
 //Route::get('/', function() {
-  Route::get('user/id/{id}', 'UserController@id');
+  //Route::get('user/id/{id}', 'UserController@id');
   Route::resource('user', 'UserController');
   Route::resource('droid', 'DroidController');
+  Route::resource('mot', 'MOTController', ['only' => ['index', 'show']]);
   Route::get('mug_shot/{uid}', 'UserController@displayMugShot')->name('image.displayMugShot');
   Route::get('qr_code/{uid}', 'UserController@displayQRCode')->name('image.displayQRCode');
   Route::get('droid_image/{uid}/{view}', 'DroidController@displayDroidImage')->name('image.displayDroidImage');

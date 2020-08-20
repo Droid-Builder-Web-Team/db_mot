@@ -77,6 +77,7 @@
         <th>Location</th>
         <th>Officer</th>
         <th>Approved</th>
+        <th>Action</th>
       </tr>
       @foreach($droid->mot as $mot)
         <tr>
@@ -84,6 +85,7 @@
           <td>{{ $mot->location }}</td>
           <td></td>
           <td>{{ $mot->approved }}</td>
+          <td><a class="btn btn-primary" href="{{ route('mot.show', $mot->mot_uid) }}">View</a></td>
         </tr>
       @endforeach
     </table>
