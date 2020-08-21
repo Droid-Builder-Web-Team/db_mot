@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\MOT;
+use App\Droid;
 use Illuminate\Http\Request;
 
 class MOTController extends Controller
@@ -14,9 +15,10 @@ class MOTController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Droid $droid)
     {
-        //
+        dd($droid); //->club->club_uid);
+        return view('admin.mot.create');
     }
 
     /**

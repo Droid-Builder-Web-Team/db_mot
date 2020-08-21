@@ -37,6 +37,7 @@
                 <form action="{{ route('admin.droids.destroy',$droid->droid_uid) }}" method="POST">
 
                     <a class="btn btn-primary" href="{{ route('admin.droids.edit',$droid->droid_uid) }}">Edit</a>
+                    <a class="btn btn-primary" href="{{ route('admin.mot.create',$droid->club_uid, $droid->droid_uid) }}">New MOT</a>
 
                     @csrf
                     @method('DELETE')

@@ -24,7 +24,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
   Route::resource('/clubs', 'ClubsController', ['except' => ['show']]);
   Route::resource('/locations', 'LocationController', ['except' => ['show']]);
   Route::resource('/dashboard', 'DashboardController', ['only' => ['index']]);
-  Route::resource('/mots', 'MOTController', ['only' => ['create', 'store']]);
+  Route::resource('/mot', 'MOTController', ['only' => ['create', 'store']]);
 });
 
 Route::get('/', function () {

@@ -25,7 +25,7 @@ class DroidsController extends Controller
     public function index()
     {
         //
-        $droids = Droid::orderBy('droids_uid', 'asc')->paginate(15);
+        $droids = Droid::orderBy('droid_uid', 'asc')->paginate(15);
 
         return view('admin.droids.index', compact('droids'))
           ->with('i', (request()->input('page', 1) -1) *15);
