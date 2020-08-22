@@ -15,7 +15,7 @@ class MOTController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Droid $droid)
+    public function create($club, $droid)
     {
         dd($droid); //->club->club_uid);
         return view('admin.mot.create');

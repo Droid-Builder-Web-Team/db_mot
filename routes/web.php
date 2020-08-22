@@ -18,6 +18,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
     return redirect('/admin/dashboard');
   })->middleware('verified');
   Route::resource('/users', 'UsersController', ['except' => ['show', 'create', 'store']]);
+  Route::get('/users/getUsers/','UsersController@getUsers')->name('users.getUsers');
   Route::resource('/droids', 'DroidsController', ['except' => ['show', 'store']]);
   Route::resource('/events', 'EventsController', ['except' => ['show']]);
   Route::resource('/achievements', 'AchievementsController', ['except' => ['show']]);
