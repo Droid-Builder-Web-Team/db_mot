@@ -33,7 +33,7 @@
              order: [[ 2, "asc"]],
              ajax: "{{route('admin.users.getUsers')}}",
              columnDefs: [
-                { "orderable": false, "targets": 5 }
+                { "orderable": false, "targets": [3,4,5] }
              ],
              columns: [
                 { data: 'member_uid' },

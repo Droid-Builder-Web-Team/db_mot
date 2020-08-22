@@ -54,11 +54,15 @@ class UsersController extends Controller
 
       // Total records
       $totalRecords = User::select('count(*) as allcount')->count();
-      $totalRecordswithFilter = User::select('count(*) as allcount')->where('forename', 'like', '%' .$searchValue . '%')->count();
+      $totalRecordswithFilter = User::select('count(*) as allcount')
+                  ->where('forename', 'like', '%' .$searchValue . '%')
+                  ->orWhere('surname', 'like', '%' .$searchValue . '%')
+                  ->count();
 
       // Fetch records
       $records = User::orderBy($columnName,$columnSortOrder)
         ->where('forename', 'like', '%' .$searchValue . '%')
+        ->orWhere('surname', 'like', '%' .$searchValue . '%')
         ->select('*')
         ->skip($start)
         ->take($rowperpage)
