@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+@partial('cropper')
+
 <div class="row">
   <div class="heading mb-4">
     <h1 class="title text-center">{{ $droid->name }}</h1>
