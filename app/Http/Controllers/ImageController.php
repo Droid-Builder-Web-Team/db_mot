@@ -14,7 +14,6 @@ class ImageController extends Controller
 
     public function upload(Request $request)
     {
-        //dd($request);
         $folderPath = $request->photo_name;
         switch($request->photo_name) {
             case 'mug_shot':
@@ -38,8 +37,21 @@ class ImageController extends Controller
 
         Storage::disk('local')->put($file, $image_base64);
 
+        $img = \Image::make(Storage::get($file))->resize(480, null, function($constraint) {
+            $constraint->aspectRatio();
+        });
+        $file = $folderPath . '480-' . $request->photo_name . '.png';
+        Storage::disk('local')->put($file, $img->encode());
+
+        $img = \Image::make(Storage::get($file))->resize(240, null, function($constraint) {
+            $constraint->aspectRatio();
+        });
+        $file = $folderPath . '240-' . $request->photo_name . '.png';
+        Storage::disk('local')->put($file, $img->encode());
+
         return response()->json(['success'=>'success',
                         'sentsize'=>$request->image_size,
-                        'receivedsize'=>strlen($request->image)]);
+                        'receivedsize'=>strlen($image_base64),
+                      ]);
     }
 }

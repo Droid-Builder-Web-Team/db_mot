@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Laravel Crop Image Before Upload using Cropper JS</title>
+    <title>@yield('page_title', config('app.name', 'Laravel'))</title>
     <meta name="_token" content="{{ csrf_token() }}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" crossorigin="anonymous" />
@@ -44,10 +44,10 @@ img {
       <div class="modal-body">
         <div class="img-container">
             <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-5">
                     <img id="image" src="https://avatars0.githubusercontent.com/u/3456749">
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-2">
                     <div class="preview"></div>
                 </div>
             </div>
@@ -107,8 +107,8 @@ $modal.on('shown.bs.modal', function () {
 
 $("#crop").click(function(){
     canvas = cropper.getCroppedCanvas({
-        width: 480,
-        height: 640,
+        width: 960,
+        height: 1280,
       });
 
     canvas.toBlob(function(blob) {
@@ -118,11 +118,11 @@ $("#crop").click(function(){
          reader.onloadend = function() {
             var base64data = reader.result;
 
-            $.ajax({
+            var xhr = $.ajax({
                 type: "POST",
                 dataType: "json",
                 url: "image/upload",
-                timeout: 0,
+                gzip: true,
                 data: {'_token': $('meta[name="_token"]').attr('content'),
                       'user': '{{ $request->user }}',
                       'droid': '{{ $request->droid }}',
@@ -131,14 +131,15 @@ $("#crop").click(function(){
                       'image': base64data
                       },
                 success: function(data){
-                    //$modal.modal('hide');
+                    $modal.modal('hide');
                     @if($request->photo_name == "mug_shot")
-                        //window.location.href = "{{route('user.show', $request->user)}}"
+                        window.location.href = "{{route('user.show', $request->user)}}"
                     @else
-                        //window.location.href = "{{route('droid.show', $request->droid)}}"
+                        window.location.href = "{{route('droid.show', $request->droid)}}"
                     @endif
                 }
               });
+              console.log(xhr);
          }
     });
 })

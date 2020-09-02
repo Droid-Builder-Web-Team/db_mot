@@ -116,7 +116,7 @@
     Officer Comments
     <table class="table">
       <pre>
-{{ phpinfo() }}
+
 </pre>
     </table>
   </div>
