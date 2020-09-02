@@ -38,10 +38,11 @@ Route::get('/', function () {
   Route::resource('droid', 'DroidController');
   Route::resource('mot', 'MOTController', ['only' => ['index', 'show']]);
   Route::get('mug_shot/{uid}', 'UserController@displayMugShot')->name('image.displayMugShot');
-  Route::post('user/upload', 'UserController@upload');
   Route::get('qr_code/{uid}', 'UserController@displayQRCode')->name('image.displayQRCode');
   Route::get('droid_image/{uid}/{view}', 'DroidController@displayDroidImage')->name('image.displayDroidImage');
   Route::resource('/events', 'EventController', ['only' => ['index', 'show', 'update']]);
+  Route::get('image', 'ImageController@index')->name('image');
+  Route::post('image/upload', 'ImageController@upload');
 //})->middleware('verified');
 
 Auth::routes();

@@ -3,9 +3,6 @@
 @section('content')
 
 <div class="row">
-  @include('partials.cropper')
-</div>
-<div class="row">
   <table class="table col-md-6 table-striped">
     <tr><th>email</th><td>{{ $user->email }}</td></tr>
     <tr><th>County</th><td>{{ $user->county }}</td></tr>
@@ -24,12 +21,18 @@
     <div class="droid-card-content">
       <div style="text-align:center">
 				<img src="{{ route('image.displayMugShot',$user->member_uid) }}" alt="mug_shot" class="img-fluid mb-1 rounded" style="height:300px;">
-        <input type="file" name="image" class="image">
 			</div>
 			<div class="droid-card-table" style="z-index:2">
 				<div class="droid-card-row">
 					<div class="droid-card-center noclick">
 						<h2 style="margin-bottom:0px">Mug Shot</h2>
+            <form action="{{ route('image') }}" method="GET">
+              @csrf
+              <input type="hidden" name="user" value="{{ $user->member_uid }}">
+              <input type="hidden" name="droid" value=0>
+              <input type="hidden" name="photo_name" value="mug_shot">
+              <button type="submit" class="btn btn-primary">Change</button>
+            </form>
 					</div>
 				</div>
 			</div>

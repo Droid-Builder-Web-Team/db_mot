@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-@partial('cropper')
 
 <div class="row">
   <div class="heading mb-4">
@@ -43,6 +42,13 @@
 				<div class="droid-card-row">
 					<div class="droid-card-center noclick">
 						<h2 style="margin-bottom:0px">Front</h2>
+            <form action="{{ route('image') }}" method="GET">
+              @csrf
+              <input type="hidden" name="user" value="{{ $droid->users->first()->member_uid }}">
+              <input type="hidden" name="droid" value="{{ $droid->droid_uid }}">
+              <input type="hidden" name="photo_name" value="photo_front">
+              <button type="submit" class="btn btn-primary">Change</button>
+            </form>
 					</div>
 				</div>
 			</div>
@@ -52,7 +58,14 @@
 			<div class="droid-card-table" style="z-index:2">
 				<div class="droid-card-row">
 					<div class="droid-card-center noclick">
-						<h2 style="margin-bottom:0px">Front</h2>
+						<h2 style="margin-bottom:0px">Side</h2>
+            <form action="{{ route('image') }}" method="GET">
+              @csrf
+              <input type="hidden" name="user" value="{{ $droid->users->first()->member_uid }}">
+              <input type="hidden" name="droid" value="{{ $droid->droid_uid }}">
+              <input type="hidden" name="photo_name" value="photo_side">
+              <button type="submit" class="btn btn-primary">Change</button>
+            </form>
 					</div>
 				</div>
 			</div>
@@ -62,7 +75,14 @@
 			<div class="droid-card-table" style="z-index:2">
 				<div class="droid-card-row">
 					<div class="droid-card-center noclick">
-						<h2 style="margin-bottom:0px">Front</h2>
+						<h2 style="margin-bottom:0px">Rear</h2>
+            <form action="{{ route('image') }}" method="GET">
+              @csrf
+              <input type="hidden" name="user" value="{{ $droid->users->first()->member_uid }}">
+              <input type="hidden" name="droid" value="{{ $droid->droid_uid }}">
+              <input type="hidden" name="photo_name" value="photo_rear">
+              <button type="submit" class="btn btn-primary">Change</button>
+            </form>
 					</div>
 				</div>
 			</div>
@@ -95,7 +115,9 @@
   <div class="col-md-6">
     Officer Comments
     <table class="table">
-
+      <pre>
+{{ phpinfo() }}
+</pre>
     </table>
   </div>
   @endif

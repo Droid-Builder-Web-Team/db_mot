@@ -108,7 +108,10 @@ class UserController extends Controller
 
     public function displayMugShot($uid)
     {
-        $path = 'members/'.$uid.'/mug_shot.jpg';
+        $path = 'members/'.$uid.'/mug_shot.png';
+        if (!Storage::exists($path)) {
+            $path = 'members/'.$uid.'/mug_shot.jpg';
+        }
         if (!Storage::exists($path)) {
             $path = getcwd().'/img/blank_mug_shot.jpg';
             $file = file_get_contents($path);
@@ -133,4 +136,5 @@ class UserController extends Controller
 
         return $response;
     }
+
 }
