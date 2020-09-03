@@ -18,7 +18,6 @@ class User extends Authenticatable implements MustVerifyEmail
     use HasRoles;
 
     protected $table = 'members';
-    protected $primaryKey = 'member_uid';
     const CREATED_AT = 'created_on';
     const UPDATED_AT = 'last_updated';
 
@@ -58,7 +57,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function droids()
     {
-        return $this->belongsToMany(Droid::class, 'droid_members', 'member_uid', 'droid_uid');
+        return $this->belongsToMany(Droid::class, 'droid_members');
     }
 
     /**
@@ -68,7 +67,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function achievements()
     {
-        return $this->belongsToMany(Achievement::class, 'members_achievements', 'member_uid', 'achievement_uid')->withPivot('notes', 'date_added');
+        return $this->belongsToMany(Achievement::class, 'members_achievements')->withPivot('notes', 'date_added');
     }
 
     /**
@@ -78,7 +77,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function events()
     {
-        return $this->belongsToMany(Event::class, 'members_events', 'member_uid', 'event_uid')->withPivot('spotter', 'date_added');
+        return $this->belongsToMany(Event::class, 'members_events')->withPivot('spotter', 'date_added');
     }
 
 

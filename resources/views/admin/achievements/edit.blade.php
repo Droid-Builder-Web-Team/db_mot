@@ -12,7 +12,7 @@
         </div>
     </div>
 
-    <form action="{{ route('admin.achievements.update',$achievement->achievement_uid) }}" method="POST">
+    <form action="{{ route('admin.achievements.update',$achievement->id) }}" method="POST">
         @csrf
         @method('PUT')
 

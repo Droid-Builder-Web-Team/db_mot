@@ -20,7 +20,7 @@
         </tr>
         @foreach ($events as $event)
         <tr>
-            <td>{{ $event->event_uid }}</td>
+            <td>{{ $event->id }}</td>
             <td>{{ $event->name }}</td>
             <td>{{ $event->description }}</td>
             <td>{{ $event->date }}</td>
@@ -31,7 +31,7 @@
 
             </td>
             <td>
-              <a class="btn btn-primary" href="{{ route('events.show',$event->event_uid) }}">View</a>
+              <a class="btn btn-primary" href="{{ route('events.show',$event->id) }}">View</a>
             </td>
         </tr>
         @endforeach

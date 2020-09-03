@@ -22,7 +22,7 @@
         </tr>
         @foreach ($locations as $location)
         <tr>
-            <td>{{ $location->location_uid }}</td>
+            <td>{{ $location->id }}</td>
             <td>{{ $location->name }}</td>
             <td>{{ $location->street }}</td>
             <td>{{ $location->town }}</td>
@@ -30,9 +30,9 @@
             <td>{{ $location->postcode }}</td>
             <td><a class="btn btn-primary" target="_blank" href="https://www.google.com/maps/search/?api=1&query={{ $location->postcode }}">Map</a></td>
             <td>
-                <form action="{{ route('admin.locations.destroy',$location->location_uid) }}" method="POST">
+                <form action="{{ route('admin.locations.destroy',$location->id) }}" method="POST">
 
-                    <a class="btn btn-primary" href="{{ route('admin.locations.edit',$location->location_uid) }}">Edit</a>
+                    <a class="btn btn-primary" href="{{ route('admin.locations.edit',$location->id) }}">Edit</a>
 
                     @csrf
                     @method('DELETE')

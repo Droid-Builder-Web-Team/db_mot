@@ -21,7 +21,7 @@
              { "orderable": false, "targets": [3,4,5] }
           ],
           columns: [
-             { data: 'member_uid' },
+             { data: 'id' },
              { data: 'forename' },
              { data: 'surname' },
              { data: 'pli' },

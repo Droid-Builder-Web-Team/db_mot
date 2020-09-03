@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
           <div class="pull-right mb-4">
-            <a class="btn btn-primary" href="{{ route('user.show', Auth::user()->member_uid) }}">Back</a>
+            <a class="btn btn-primary" href="{{ route('user.show', Auth::user()->id) }}">Back</a>
           </div>
           <div class="pull-left mb-4">
             <h2>Edit Details</h2>
@@ -12,7 +12,7 @@
         </div>
     </div>
 
-    <form action="{{ route('user.update',$user->member_uid) }}" method="POST">
+    <form action="{{ route('user.update',$user->id) }}" method="POST">
         @csrf
         @method('PUT')
 

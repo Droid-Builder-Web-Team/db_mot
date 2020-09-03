@@ -41,8 +41,8 @@ class DroidController extends Controller
         ]);
 
         $droid = Droid::create($request->all());
-        $droid->users()->attach($request['member_uid']);
-        return redirect()->route('user.show', auth()->user()->member_uid )
+        $droid->users()->attach($request['id']);
+        return redirect()->route('user.show', auth()->user()->id )
                         ->with('success','Droid created successfully.');
 
     }
@@ -92,16 +92,16 @@ class DroidController extends Controller
         $users = $droid->users;
         foreach($users as $user)
         {
-            $droid->users()->detach($user->member_uid);
+            $droid->users()->detach($user->id);
         }
         $mots = $droid->mot;
         foreach($mots as $mot)
         {
-            $droid->mot()-detach($droid->droid_uid);
+            $droid->mot()-detach($droid->id);
         }
         $droid->delete();
 
-        return redirect()->route('user.show', auth()->user()->member_uid)
+        return redirect()->route('user.show', auth()->user()->id)
                         ->with('success','Droid deleted successfully');
     }
 

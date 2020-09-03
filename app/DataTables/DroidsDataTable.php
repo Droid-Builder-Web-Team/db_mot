@@ -28,10 +28,12 @@ class DroidsDataTable extends DataTable
                 else
                   return "";
             })
-            ->addColumn('Actions', function($droid) {
-                return "<a class=\"btn btn-primary\" href=\"{{ route('admin.droids.edit',$droid->droid_uid) }}\">Edit</a>";
+            ->addColumn('actions', '')
+            ->editColumn('actions', function($row) {
+              $crudRoutePart = "droid";
+              return view('partials.datatablesActions', compact('row', 'crudRoutePart'));
             })
-            ->rawColumns(['PLI', 'Actions']);
+            ->rawColumns(['PLI', 'actions']);
     }
 
     /**
@@ -42,7 +44,7 @@ class DroidsDataTable extends DataTable
      */
     public function query(DroidsDataTable $model)
     {
-        $droids = Droid::orderBy('droid_uid', 'asc');
+        $droids = Droid::orderBy('id', 'asc');
         return $droids;
     }
 
@@ -55,10 +57,10 @@ class DroidsDataTable extends DataTable
     {
         return $this->builder()
                     ->columns([
-                      'droid_uid' => [ 'title' => 'ID'],
+                      'id' => [ 'title' => 'ID'],
                       'name' => [ 'title' => 'Name'],
                       'PLI' => [ 'title' => 'PLI'],
-                      'Actions' => [ 'title' => 'Actions']
+                      'actions' => [ 'title' => 'Actions']
                     ]);
 
     }
@@ -71,7 +73,7 @@ class DroidsDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('droid_uid'),
+            Column::make('id'),
             Column::make('name'),
 
         ];

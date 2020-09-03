@@ -12,7 +12,7 @@
         </div>
     </div>
 
-    <form action="{{ route('admin.events.update',$event->event_uid) }}" method="POST">
+    <form action="{{ route('admin.events.update',$event->id) }}" method="POST">
         @csrf
         @method('PUT')
 
@@ -29,7 +29,7 @@
                   <strong>Location</strong><br>
                   <select name=location_uid>
                     @foreach($locations as $location)
-                      <option value="{{ $location->location_uid }}"
+                      <option value="{{ $location->id }}"
                       @if($event->location_uid == $location->location_uid)
                          selected
                       @endif

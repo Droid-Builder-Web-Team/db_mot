@@ -18,7 +18,7 @@
         </tr>
         @foreach ($clubs as $club)
         <tr>
-            <td>{{ $club->club_uid }}</td>
+            <td>{{ $club->id }}</td>
             <td>{{ $club->name }}</td>
             <td>
               @if(isset($club->facebook))
@@ -32,9 +32,9 @@
               @endif
             </td>
             <td>
-                <form action="{{ route('admin.clubs.destroy',$club->club_uid) }}" method="POST">
+                <form action="{{ route('admin.clubs.destroy',$club->id) }}" method="POST">
 
-                    <a class="btn btn-primary" href="{{ route('admin.clubs.edit',$club->club_uid) }}">Edit</a>
+                    <a class="btn btn-primary" href="{{ route('admin.clubs.edit',$club->id) }}">Edit</a>
 
                     @csrf
                     @method('DELETE')

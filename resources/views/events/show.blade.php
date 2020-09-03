@@ -20,7 +20,7 @@
       <div class="col-xs-6 col-sm-6 col-md-6">
         <strong>Location</strong>
         @foreach($locations as $location)
-          @if($event->location_uid == $location->location_uid)
+          @if($event->location_id == $location->location_id)
            {{ $location->name }}
           @endif
         @endforeach

@@ -73,7 +73,7 @@ class UsersController extends Controller
       $data_arr = array();
       $sno = $start+1;
       foreach($records as $record){
-         $member_uid = $record->member_uid;
+         $id = $record->id;
          $forename = $record->forename;
          $surname = $record->surname;
          if ($record->validPLI()) {
@@ -82,12 +82,12 @@ class UsersController extends Controller
             $pli = "Invalid PLI";
          }
          $droid_count = $record->droids()->count();
-         $actions = "<form action=\"/admin/users/".$record->member_uid."\" method=\"POST\">
+         $actions = "<form action=\"/admin/users/".$record->id."\" method=\"POST\">
             <button type=\"submit\" class=\"btn btn-danger\">Delete</button>
           </form>";
 
          $data_arr[] = array(
-           "member_uid" => $member_uid,
+           "id" => $id,
            "forename" => $forename,
            "surname" => $surname,
            "pli" => $pli,

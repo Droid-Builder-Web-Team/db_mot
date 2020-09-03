@@ -39,7 +39,7 @@
             <tr>
               <td>{{$user->forename}} {{ $user->surname}}</td>
               <td>{{$user->pli_date}}</td>
-              <td><a class="btn btn-primary" href="{{ route('admin.users.edit',$user->member_uid) }}">Edit</a></td>
+              <td><a class="btn btn-primary" href="{{ route('admin.users.edit',$user->id) }}">Edit</a></td>
             </tr>
         @endif
     @endforeach
@@ -63,7 +63,7 @@
                 @endforeach
               </td>
               <td>{{$droid->motDate()}}</td>
-              <td><a class="btn btn-primary" href="{{ route('admin.droids.edit',$droid->droid_uid) }}">Edit</a></td>
+              <td><a class="btn btn-primary" href="{{ route('admin.droids.edit',$droid->id) }}">Edit</a></td>
             </tr>
         @endif
     @endforeach
@@ -87,7 +87,7 @@
       <td>{{ $event->location }}</td>
       <td>
         @can('Edit Events')
-        <a class="btn btn-primary" href="{{ route('admin.events.edit',$event->event_uid) }}">Edit</a>
+        <a class="btn btn-primary" href="{{ route('admin.events.edit',$event->id) }}">Edit</a>
         @endcan
       </td>
 

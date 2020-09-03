@@ -3,7 +3,7 @@
 @section('content')
 <div class="row">
   <div class="col-md-4 mb-1">
-    <a class="btn btn-primary" href="{{ route('droid.show', $mot->droid_uid ) }}">Back</a>
+    <a class="btn btn-primary" href="{{ route('droid.show', $mot->droid_id ) }}">Back</a>
   </div>
 </div>
 <div class="row">

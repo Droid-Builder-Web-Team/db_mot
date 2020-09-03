@@ -38,7 +38,7 @@ class EventController extends Controller
     public function show($id)
     {
         $locations = Location::all();
-        $event = Event::where('event_uid', $id)->first();
+        $event = Event::where('id', $id)->first();
         return view('events.show', compact('locations'))->with('event', $event);
     }
 

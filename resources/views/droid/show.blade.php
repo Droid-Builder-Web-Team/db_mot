@@ -12,7 +12,7 @@
     <tr>
       <th>Owner</th><td>
         @foreach ( $droid->users as $users )
-          <a href="{{ route('user.show',$users->member_uid) }}">{{ $users->forename }} {{ $users->surname }}</a><br>
+          <a href="{{ route('user.show',$users->id) }}">{{ $users->forename }} {{ $users->surname }}</a><br>
         @endforeach
       </td></tr>
       <th>Club</th><td>{{ $droid->club->name }}</td></tr>
@@ -38,7 +38,7 @@
       <div class="col-md-3 droid-card">       <!-- droid front -->
         <div class="droid-card-content">
           <div style="text-align:center">
-				        <img src="{{ route('image.displayDroidImage', [$droid->droid_uid, 'photo_front']) }}" alt="droid_front" class="img-fluid mb-1 rounded" style="height:300px;">
+				        <img src="{{ route('image.displayDroidImage', [$droid->id, 'photo_front']) }}" alt="droid_front" class="img-fluid mb-1 rounded" style="height:300px;">
 			    </div>
 			    <div class="droid-card-table" style="z-index:2">
 				    <div class="droid-card-row">
@@ -46,8 +46,8 @@
 						    <h2 style="margin-bottom:0px">Front</h2>
                 <form action="{{ route('image') }}" method="GET">
                   @csrf
-                  <input type="hidden" name="user" value="{{ $droid->users->first()->member_uid }}">
-                  <input type="hidden" name="droid" value="{{ $droid->droid_uid }}">
+                  <input type="hidden" name="user" value="{{ $droid->users->first()->id }}">
+                  <input type="hidden" name="droid" value="{{ $droid->id }}">
                   <input type="hidden" name="photo_name" value="photo_front">
                   <button type="submit" class="btn btn-primary">Change</button>
                 </form>
@@ -59,7 +59,7 @@
       <div class="col-md-3 droid-card">       <!-- droid side -->
         <div class="droid-card-content">
           <div style="text-align:center">
-			     	<img src="{{ route('image.displayDroidImage', [$droid->droid_uid, 'photo_side']) }}" alt="droid_side" class="img-fluid mb-1 rounded" style="height:300px;">
+			     	<img src="{{ route('image.displayDroidImage', [$droid->id, 'photo_side']) }}" alt="droid_side" class="img-fluid mb-1 rounded" style="height:300px;">
 			    </div>
 			    <div class="droid-card-table" style="z-index:2">
 				    <div class="droid-card-row">
@@ -67,8 +67,8 @@
 						    <h2 style="margin-bottom:0px">Side</h2>
                 <form action="{{ route('image') }}" method="GET">
                   @csrf
-                  <input type="hidden" name="user" value="{{ $droid->users->first()->member_uid }}">
-                  <input type="hidden" name="droid" value="{{ $droid->droid_uid }}">
+                  <input type="hidden" name="user" value="{{ $droid->users->first()->id }}">
+                  <input type="hidden" name="droid" value="{{ $droid->id }}">
                   <input type="hidden" name="photo_name" value="photo_side">
                   <button type="submit" class="btn btn-primary">Change</button>
                 </form>
@@ -80,7 +80,7 @@
       <div class="col-md-3 droid-card">       <!-- droid rear -->
         <div class="droid-card-content">
           <div style="text-align:center">
-				    <img src="{{ route('image.displayDroidImage', [$droid->droid_uid, 'photo_rear']) }}" alt="droid_rear" class="img-fluid mb-1 rounded" style="height:300px;">
+				    <img src="{{ route('image.displayDroidImage', [$droid->id, 'photo_rear']) }}" alt="droid_rear" class="img-fluid mb-1 rounded" style="height:300px;">
     			</div>
 		    	<div class="droid-card-table" style="z-index:2">
 				    <div class="droid-card-row">
@@ -88,8 +88,8 @@
 						    <h2 style="margin-bottom:0px">Rear</h2>
                 <form action="{{ route('image') }}" method="GET">
                   @csrf
-                  <input type="hidden" name="user" value="{{ $droid->users->first()->member_uid }}">
-                  <input type="hidden" name="droid" value="{{ $droid->droid_uid }}">
+                  <input type="hidden" name="user" value="{{ $droid->users->first()->id }}">
+                  <input type="hidden" name="droid" value="{{ $droid->id }}">
                   <input type="hidden" name="photo_name" value="photo_rear">
                  <button type="submit" class="btn btn-primary">Change</button>
                </form>
@@ -105,7 +105,7 @@
   <div class="col-md-3 droid-card">       <!-- topps front -->
     <div class="droid-card-content">
       <div style="text-align:center">
-            <img src="{{ route('image.displayDroidImage', [$droid->droid_uid, 'topps_front']) }}" alt="topps_front" class="img-fluid mb-1 rounded" style="height:300px;">
+            <img src="{{ route('image.displayDroidImage', [$droid->id, 'topps_front']) }}" alt="topps_front" class="img-fluid mb-1 rounded" style="height:300px;">
       </div>
       <div class="droid-card-table" style="z-index:2">
         <div class="droid-card-row">
@@ -113,8 +113,8 @@
             <h2 style="margin-bottom:0px">Front</h2>
             <form action="{{ route('image') }}" method="GET">
               @csrf
-              <input type="hidden" name="user" value="{{ $droid->users->first()->member_uid }}">
-              <input type="hidden" name="droid" value="{{ $droid->droid_uid }}">
+              <input type="hidden" name="user" value="{{ $droid->users->first()->id }}">
+              <input type="hidden" name="droid" value="{{ $droid->id }}">
               <input type="hidden" name="photo_name" value="topps_front">
               <button type="submit" class="btn btn-primary">Change</button>
             </form>
@@ -127,7 +127,7 @@
 <div class="col-md-3 droid-card">           <!-- topps rear -->
 <div class="droid-card-content">
   <div style="text-align:center">
-    <img src="{{ route('image.displayDroidImage', [$droid->droid_uid, 'topps_rear']) }}" alt="topps_rear" class="img-fluid mb-1 rounded" style="height:300px;">
+    <img src="{{ route('image.displayDroidImage', [$droid->id, 'topps_rear']) }}" alt="topps_rear" class="img-fluid mb-1 rounded" style="height:300px;">
   </div>
   <div class="droid-card-table" style="z-index:2">
     <div class="droid-card-row">
@@ -135,8 +135,8 @@
         <h2 style="margin-bottom:0px">Rear</h2>
         <form action="{{ route('image') }}" method="GET">
           @csrf
-          <input type="hidden" name="user" value="{{ $droid->users->first()->member_uid }}">
-          <input type="hidden" name="droid" value="{{ $droid->droid_uid }}">
+          <input type="hidden" name="user" value="{{ $droid->users->first()->id }}">
+          <input type="hidden" name="droid" value="{{ $droid->id }}">
           <input type="hidden" name="photo_name" value="topps_rear">
           <button type="submit" class="btn btn-primary">Change</button>
         </form>
@@ -167,7 +167,7 @@
           <td>{{ $mot->location }}</td>
           <td>{{ $mot->officer() }}</td>
           <td>{{ $mot->approved }}</td>
-          <td><a class="btn btn-primary" href="{{ route('mot.show', $mot->mot_uid) }}">View</a></td>
+          <td><a class="btn btn-primary" href="{{ route('mot.show', $mot->id) }}">View</a></td>
         </tr>
       @endforeach
     </table>

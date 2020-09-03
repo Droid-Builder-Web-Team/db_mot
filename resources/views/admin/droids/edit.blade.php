@@ -12,7 +12,7 @@
         </div>
     </div>
 
-    <form action="{{ route('admin.droids.update',$droid->droid_uid) }}" method="POST">
+    <form action="{{ route('admin.droids.update',$droid->id) }}" method="POST">
         @csrf
         @method('PUT')
 

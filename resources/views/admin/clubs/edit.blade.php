@@ -12,7 +12,7 @@
         </div>
     </div>
 
-    <form action="{{ route('admin.clubs.update',$club->club_uid) }}" method="POST">
+    <form action="{{ route('admin.clubs.update',$club->id) }}" method="POST">
         @csrf
         @method('PUT')
 

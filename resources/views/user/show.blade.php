@@ -14,21 +14,20 @@
       <td><a href="{{ url('/')."/id.php?id=".$user->badge_id }}">{{ url('/')."/id.php?id=".$user->badge_id }}</a></td>
     </tr>
     <tr><th>QR Code:</th>
-      <td><img src="{{ route('image.displayQRCode',$user->member_uid) }}" alt="qr_code" class="img-fluid mb-1 rounded" style="height:150px;"></td>
+      <td><img src="{{ route('image.displayQRCode',$user->id) }}" alt="qr_code" class="img-fluid mb-1 rounded" style="height:150px;"></td>
     </tr>
   </table>
   <div class="col-md-3">
     <div class="droid-card-content">
       <div style="text-align:center">
-				<img src="{{ route('image.displayMugShot',$user->member_uid) }}" alt="mug_shot" class="img-fluid mb-1 rounded" style="height:300px;">
+				<img src="{{ route('image.displayMugShot',$user->id) }}" alt="mug_shot" class="img-fluid mb-1 rounded" style="height:300px;">
 			</div>
 			<div class="droid-card-table" style="z-index:2">
 				<div class="droid-card-row">
 					<div class="droid-card-center noclick">
-						<h2 style="margin-bottom:0px">Mug Shot</h2>
             <form action="{{ route('image') }}" method="GET">
               @csrf
-              <input type="hidden" name="user" value="{{ $user->member_uid }}">
+              <input type="hidden" name="user" value="{{ $user->id }}">
               <input type="hidden" name="droid" value=0>
               <input type="hidden" name="photo_name" value="mug_shot">
               <button type="submit" class="btn btn-primary">Change</button>
@@ -41,9 +40,9 @@
 </div>
 <div class="row">
   @can('Edit Members')
-    <a class="btn btn-primary" href="{{ route('admin.users.edit',$user->member_uid) }}">Edit</a>
+    <a class="btn btn-primary" href="{{ route('admin.users.edit',$user->id) }}">Edit</a>
   @else
-    <a class="btn btn-primary" href="{{ route('user.edit',$user->member_uid) }}">Edit</a>
+    <a class="btn btn-primary" href="{{ route('user.edit',$user->id) }}">Edit</a>
   @endcan
 </div>
 <div class="row">
@@ -53,10 +52,10 @@
 </div>
 <div class="row">
 @foreach($user->droids as $droid)
-  <div class="col-md-3 mb-5 droid-card" onclick="document.location='{{ route('droid.show', $droid->droid_uid) }}'">
+  <div class="col-md-3 mb-5 droid-card" onclick="document.location='{{ route('droid.show', $droid->id) }}'">
     <div class="droid-card-content">
       <div style="text-align:center">
-				<img src="{{ route('image.displayDroidImage', [$droid->droid_uid, 'photo_front']) }}" alt="{{ $droid->name }}" class="img-fluid mb-1 rounded" style="height:300px;">
+				<img src="{{ route('image.displayDroidImage', [$droid->id, 'photo_front']) }}" alt="{{ $droid->name }}" class="img-fluid mb-1 rounded" style="height:300px;">
 			</div>
 
 			<div class="droid-card-table" style="z-index:2">
@@ -70,7 +69,7 @@
 						<h2 style="margin-bottom:0px">{{ $droid->name }}</h2>
 					</div>
 					<div class="droid-card-right">
-						<form action="{{ route('droid.destroy', $droid->droid_uid) }}" method="POST">
+						<form action="{{ route('droid.destroy', $droid->id) }}" method="POST">
 							@csrf
 							{{ method_field('DELETE') }}
 							<input type="image" src="/img/trash.png">

@@ -21,7 +21,7 @@
         </tr>
         @foreach ($events as $event)
         <tr>
-            <td>{{ $event->event_uid }}</td>
+            <td>{{ $event->id }}</td>
             <td>{{ $event->name }}</td>
             <td>{{ $event->description }}</td>
             <td>{{ $event->date }}</td>
@@ -35,9 +35,9 @@
               @endif
             </td>
             <td>
-                <form action="{{ route('admin.events.destroy',$event->event_uid) }}" method="POST">
+                <form action="{{ route('admin.events.destroy',$event->id) }}" method="POST">
 
-                    <a class="btn btn-primary" href="{{ route('admin.events.edit',$event->event_uid) }}">Edit</a>
+                    <a class="btn btn-primary" href="{{ route('admin.events.edit',$event->id) }}">Edit</a>
 
                     @csrf
                     @method('DELETE')

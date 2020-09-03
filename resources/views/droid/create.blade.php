@@ -7,13 +7,12 @@
             <h2>Add New Droid</h2>
         </div>
         <div class="pull-right">
-            <a class="btn btn-primary" href="{{ route('user.show', auth()->user()->member_uid) }}">Back</a>
+            <a class="btn btn-primary" href="{{ route('user.show', auth()->user()->id) }}">Back</a>
         </div>
     </div>
 </div>
 
 <form action="{{ route('droid.store') }}" method="POST">
-  <input type="hidden" name="member_uid" value="{{ auth()->user()->member_uid }}">
     @csrf
 
      <div class="row">
@@ -26,9 +25,9 @@
         <div class="col-xs-3 col-sm-3 col-md-3">
             <div class="form-group">
               <strong>Club</strong><br>
-              <select name=club_uid>
+              <select name=club_id>
                 @foreach($clubs as $club)
-                  <option value="{{ $club->club_uid }}">{{ $club->name }}</option>
+                  <option value="{{ $club->id }}">{{ $club->name }}</option>
                 @endforeach
               </select>
             </div>

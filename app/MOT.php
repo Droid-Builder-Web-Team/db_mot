@@ -12,7 +12,6 @@ class MOT extends Model
     //
 
     protected $table = 'mot';
-    protected $primaryKey = 'mot_uid';
 
     protected $guarded = [
     ];
@@ -24,7 +23,7 @@ class MOT extends Model
 
     public function droid()
     {
-        return $this->belongsTo(Droid::class, 'droid_uid');
+        return $this->belongsTo(Droid::class);
     }
 
     public function users()
@@ -34,9 +33,9 @@ class MOT extends Model
 
     public function sections()
     {
-        $club_uid = $this->club->club_uid;
+        $club_id = $this->club->club_id;
         $sections = DB::table('mot_sections')
-            ->where('club_uid', $club_uid)
+            ->where('club_id', $club_id)
             ->get();
 
         return $sections;
@@ -44,9 +43,9 @@ class MOT extends Model
 
     public function lines($section)
     {
-        $club_uid = $this->club->club_uid;
+        $club_id = $this->club->club_id;
         $lines = DB::table('mot_lines')
-            ->where('club_uid', $club_uid)
+            ->where('club_id', $club_id)
             ->where('test_section', $section)
             ->get();
 

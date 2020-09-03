@@ -22,7 +22,7 @@ class ClubsController extends Controller
      */
     public function index()
     {
-      $clubs = Club::orderBy('club_uid', 'asc')->paginate(15);
+      $clubs = Club::orderBy('id', 'asc')->paginate(15);
 
       return view('admin.clubs.index', compact('clubs'))
         ->with('i', (request()->input('page', 1) -1) *15);
@@ -51,7 +51,7 @@ class ClubsController extends Controller
         ]);
 
         $club = Club::create($request->all());
-        Storage::makeDirectory('clubs/'.$club->club_uid);
+        Storage::makeDirectory('clubs/'.$club->id);
 
         return redirect()->route('admin.clubs.index')
                         ->with('success','Club created successfully.');
@@ -97,7 +97,7 @@ class ClubsController extends Controller
     {
         $club->delete();
 
-        Storage::deleteDirectory('clubs/'.$club->club_uid);
+        Storage::deleteDirectory('clubs/'.$club->id);
         return redirect()->route('admin.clubs.index')
                         ->with('success','Club deleted successfully');
     }

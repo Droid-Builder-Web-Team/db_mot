@@ -9,8 +9,6 @@ use App\Club;
 
 class Droid extends Model
 {
-    //
-    protected $primaryKey = 'droid_uid';
     const CREATED_AT = 'date_added';
     const UPDATED_AT = 'last_updated';
 
@@ -19,17 +17,17 @@ class Droid extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class, 'droid_members', 'droid_uid', 'member_uid');
+        return $this->belongsToMany(User::class, 'droid_members');
     }
 
     public function club()
     {
-        return $this->belongsTo(Club::class, 'club_uid');
+        return $this->belongsTo(Club::class);
     }
 
     public function mot()
     {
-        return $this->hasMany(MOT::class, 'droid_uid')->orderBy('date', 'desc');
+        return $this->hasMany(MOT::class)->orderBy('date', 'desc');
     }
 
     public function motDate()

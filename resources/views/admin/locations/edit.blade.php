@@ -12,7 +12,7 @@
     </div>
 </div>
 
-<form action="{{ route('admin.locations.update', $location->location_uid) }}" method="POST">
+<form action="{{ route('admin.locations.update', $location->id) }}" method="POST">
     @csrf
     @method('PUT')
 

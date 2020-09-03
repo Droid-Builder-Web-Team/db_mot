@@ -8,19 +8,20 @@ use App\Droid;
 
 class Club extends Model
 {
-    protected $primaryKey = 'club_uid';
+
+
     protected $fillable = [
         'name', 'website', 'facebook', 'forum'
     ];
 
     public function options()
     {
-        return $this->hasMany(ClubOptions::class, 'club_uid');
+        return $this->hasMany(ClubOptions::class, 'club_id');
     }
 
     public function droids()
     {
-        return $this->hasMany(Droid::class, 'club_uid');
+        return $this->hasMany(Droid::class);
     }
 
     public function listClubs()

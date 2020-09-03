@@ -18,13 +18,13 @@
         </tr>
         @foreach ($achievements as $achievement)
         <tr>
-            <td>{{ $achievement->achievement_uid }}</td>
+            <td>{{ $achievement->id }}</td>
             <td>{{ $achievement->name }}</td>
             <td>{{ $achievement->description }}</td>
             <td>
-                <form action="{{ route('admin.achievements.destroy',$achievement->achievement_uid) }}" method="POST">
+                <form action="{{ route('admin.achievements.destroy',$achievement->id) }}" method="POST">
 
-                    <a class="btn btn-primary" href="{{ route('admin.achievements.edit',$achievement->achievement_uid) }}">Edit</a>
+                    <a class="btn btn-primary" href="{{ route('admin.achievements.edit',$achievement->id) }}">Edit</a>
 
                     @csrf
                     @method('DELETE')

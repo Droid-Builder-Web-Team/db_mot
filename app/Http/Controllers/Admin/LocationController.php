@@ -21,7 +21,7 @@ class LocationController extends Controller
      */
     public function index()
     {
-        $locations = Location::orderBy('location_uid', 'asc')->paginate(15);
+        $locations = Location::orderBy('id', 'asc')->paginate(15);
 
         return view('admin.locations.index', compact('locations'))
           ->with('i', (request()->input('page', 1) -1) *15);
