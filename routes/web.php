@@ -40,7 +40,8 @@ Route::get('/', function () {
   Route::get('mug_shot/{uid}', 'UserController@displayMugShot')->name('image.displayMugShot');
   Route::get('qr_code/{uid}', 'UserController@displayQRCode')->name('image.displayQRCode');
   Route::get('droid_image/{uid}/{view}', 'DroidController@displayDroidImage')->name('image.displayDroidImage');
-  Route::resource('/event', 'EventController', ['only' => ['index', 'show', 'update']]);
+  Route::resource('event', 'EventController', ['only' => ['index', 'show', 'update']]);
+  Route::resource('location', 'LocationController');
   Route::get('image', 'ImageController@index')->name('image');
   Route::post('image/upload', 'ImageController@upload');
 //})->middleware('verified');

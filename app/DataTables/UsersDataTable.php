@@ -2,14 +2,14 @@
 
 namespace App\DataTables;
 
-use App\Location;
+use App\User;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class LocationsDataTable extends DataTable
+class UsersDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -21,24 +21,28 @@ class LocationsDataTable extends DataTable
     {
       return datatables()
           ->eloquent($query)
-          ->addColumn('map', function(Location $location) {
-                return "<a class=\"btn btn-primary\" target=\"_blank\" href=\"https://www.google.com/maps/search/?api=1&query=".$location->postcode.">Map</a></td>";
+          ->addColumn('pli', function(User $user) {
+                $pli = $user->validPLI() ? "Valid" : "Expired";
+                return $pli;
+            })
+          ->addColumn('droid_count', function(User $user) {
+                return $user->droids()->count();
             })
           ->addColumn('action', '')
           ->editColumn('action', function($row) {
-            $crudRoutePart = "location";
+            $crudRoutePart = "user";
             return view('partials.datatablesActions', compact('row', 'crudRoutePart'));
           })
-          ->rawColumns(['action', 'map']);
+          ->rawColumns(['action']);
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Location $model
+     * @param \App\User $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Location $model)
+    public function query(User $model)
     {
         return $model->newQuery();
     }
@@ -51,11 +55,11 @@ class LocationsDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->setTableId('locations-table')
+                    ->setTableId('users-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('Bfrtip')
-                    ->orderBy(1)
+                    ->orderBy(0)
                     ->buttons(
                         Button::make('create'),
                         Button::make('export'),
@@ -73,11 +77,11 @@ class LocationsDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('name'),
-            Column::make('town'),
-            Column::make('county'),
-            Column::make('postcode'),
-            Column::computed('map'),
+            Column::make('id'),
+            Column::make('forename'),
+            Column::make('surname'),
+            Column::make('pli'),
+            Column::make('droid_count'),
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)
@@ -93,6 +97,6 @@ class LocationsDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Locations_' . date('YmdHis');
+        return 'Users_' . date('YmdHis');
     }
 }

@@ -22,18 +22,18 @@ class DroidsDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('PLI', function(Droid $droid) {
+            ->addColumn('mot', function(Droid $droid) {
                 if ($droid->club->hasOption('mot'))
                   return "<button class=\"btn-sm alert ".$droid->displayMOT()['state']."\">".$droid->displayMOT()['status']."</button>";
                 else
                   return "";
             })
-            ->addColumn('actions', '')
-            ->editColumn('actions', function($row) {
+            ->addColumn('action', '')
+            ->editColumn('action', function($row) {
               $crudRoutePart = "droid";
               return view('partials.datatablesActions', compact('row', 'crudRoutePart'));
             })
-            ->rawColumns(['PLI', 'actions']);
+            ->rawColumns(['mot', 'action']);
     }
 
     /**
@@ -54,22 +54,19 @@ class DroidsDataTable extends DataTable
      */
     public function html()
     {
-        return $this->builder()
-                    ->columns([
-                      'id' => [ 'title' => 'ID'],
-                      'name' => [ 'title' => 'Name'],
-                      'PLI' => [ 'title' => 'PLI'],
-                      'actions' => [ 'title' => 'Actions']
-                    ])
-                    ->parameters([
-                        'dom'          => 'Bfrtip',
-                    ])
-                    ->buttons(
-                        Button::make('create'),
-                        Button::make('export'),
-                        Button::make('print'),
-                        Button::make('reload')
-                    );
+      return $this->builder()
+                  ->setTableId('droids-table')
+                  ->columns($this->getColumns())
+                  ->minifiedAjax()
+                  ->dom('Bfrtip')
+                  ->orderBy(0)
+                  ->buttons(
+                      Button::make('create'),
+                      Button::make('export'),
+                      Button::make('print'),
+                      Button::make('reset'),
+                      Button::make('reload')
+                  );
 
     }
 
@@ -80,11 +77,16 @@ class DroidsDataTable extends DataTable
      */
     protected function getColumns()
     {
-        return [
-            Column::make('id'),
-            Column::make('name'),
-
-        ];
+      return [
+          Column::make('id'),
+          Column::make('name'),
+          Column::computed('mot'),
+          Column::computed('action')
+                ->exportable(false)
+                ->printable(false)
+                ->width(200)
+                ->addClass('text-center'),
+      ];
     }
 
     /**

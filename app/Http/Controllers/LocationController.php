@@ -1,28 +1,20 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Location;
 use Illuminate\Http\Request;
-use App\DataTables\LocationsDataTable;
 
 class LocationController extends Controller
 {
-
-    public function __construct()
-    {
-        $this->middleware('auth');
-        $this->middleware('permission:Edit Events');
-    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(LocationsDataTable $dataTable)
+    public function index()
     {
-        return $dataTable->render('admin.events.index');
+        //
     }
 
     /**
@@ -32,7 +24,7 @@ class LocationController extends Controller
      */
     public function create()
     {
-        return view('admin.locations.create');
+        //
     }
 
     /**
@@ -43,17 +35,19 @@ class LocationController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'postcode' => 'required'
-        ]);
-
-        Location::create($request->all());
-
-        return redirect()->route('admin.locations.index')
-                        ->with('success','Location created successfully.');
+        //
     }
 
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Location  $location
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Location $location)
+    {
+        //
+    }
 
     /**
      * Show the form for editing the specified resource.
@@ -63,7 +57,7 @@ class LocationController extends Controller
      */
     public function edit(Location $location)
     {
-        return view('admin.locations.edit')->with('location', $location);
+        //
     }
 
     /**
@@ -75,15 +69,7 @@ class LocationController extends Controller
      */
     public function update(Request $request, Location $location)
     {
-      $request->validate([
-          'name' => 'required',
-          'town' => 'required',
-      ]);
-
-      $location->update($request->all());
-
-      return redirect()->route('admin.locations.index')
-                      ->with('success','Location updated successfully.');
+        //
     }
 
     /**
@@ -94,9 +80,6 @@ class LocationController extends Controller
      */
     public function destroy(Location $location)
     {
-      $location->delete();
-
-      return redirect()->route('admin.locations.index')
-                      ->with('success','Location deleted successfully');
+        //
     }
 }

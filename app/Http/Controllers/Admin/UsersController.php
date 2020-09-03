@@ -8,6 +8,7 @@ use App\Droid;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Yajra\Datatables\Facades\Datatables;
+use App\DataTables\UsersDataTable;
 
 class UsersController extends Controller
 {
@@ -23,89 +24,10 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
-    {
-
-        if (auth()->user()->cannot('View Members')) {
-            abort(403);
-        }
-
-        return view('admin.users.index');
-    }
-
-    /*
-    AJAX request
-    */
-    public function getUsers(Request $request){
-
-      ## Read value
-      $draw = $request->get('draw');
-      $start = $request->get("start");
-      $rowperpage = $request->get("length"); // Rows display per page
-
-      $columnIndex_arr = $request->get('order');
-      $columnName_arr = $request->get('columns');
-      $order_arr = $request->get('order');
-      $search_arr = $request->get('search');
-
-      $columnIndex = $columnIndex_arr[0]['column']; // Column index
-      $columnName = $columnName_arr[$columnIndex]['data']; // Column name
-      $columnSortOrder = $order_arr[0]['dir']; // asc or desc
-      $searchValue = $search_arr['value']; // Search value
-
-      // Total records
-      $totalRecords = User::select('count(*) as allcount')->count();
-      $totalRecordswithFilter = User::select('count(*) as allcount')
-                  ->where('forename', 'like', '%' .$searchValue . '%')
-                  ->orWhere('surname', 'like', '%' .$searchValue . '%')
-                  ->count();
-
-      // Fetch records
-      $records = User::orderBy($columnName,$columnSortOrder)
-        ->where('forename', 'like', '%' .$searchValue . '%')
-        ->orWhere('surname', 'like', '%' .$searchValue . '%')
-        ->select('*')
-        ->skip($start)
-        ->take($rowperpage)
-        ->get();
-
-
-      $data_arr = array();
-      $sno = $start+1;
-      foreach($records as $record){
-         $id = $record->id;
-         $forename = $record->forename;
-         $surname = $record->surname;
-         if ($record->validPLI()) {
-            $pli = "Valid";
-         } else {
-            $pli = "Invalid PLI";
-         }
-         $droid_count = $record->droids()->count();
-         $actions = "<form action=\"/admin/users/".$record->id."\" method=\"POST\">
-            <button type=\"submit\" class=\"btn btn-danger\">Delete</button>
-          </form>";
-
-         $data_arr[] = array(
-           "id" => $id,
-           "forename" => $forename,
-           "surname" => $surname,
-           "pli" => $pli,
-           "droid_count" => $droid_count,
-           "actions" => $actions
-         );
-      }
-
-      $response = array(
-         "draw" => intval($draw),
-         "iTotalRecords" => $totalRecords,
-         "iTotalDisplayRecords" => $totalRecordswithFilter,
-         "aaData" => $data_arr
-      );
-
-      echo json_encode($response);
-      exit;
-    }
+     public function index(UsersDataTable $dataTable)
+     {
+         return $dataTable->render('admin.users.index');
+     }
 
     /**
      * Show the form for editing the specified resource.
