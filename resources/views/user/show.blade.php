@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="row">
-  <table class="table col-md-6 table-striped">
+  <table class="table col-md-9 table-striped">
     <tr><th>email</th><td>{{ $user->email }}</td></tr>
     <tr><th>County</th><td>{{ $user->county }}</td></tr>
     <tr><th>Postcode</th><td>{{ $user->postcode }}</td></tr>
@@ -17,7 +17,7 @@
       <td><img src="{{ route('image.displayQRCode',$user->member_uid) }}" alt="qr_code" class="img-fluid mb-1 rounded" style="height:150px;"></td>
     </tr>
   </table>
-  <div class="col-md-6">
+  <div class="col-md-3">
     <div class="droid-card-content">
       <div style="text-align:center">
 				<img src="{{ route('image.displayMugShot',$user->member_uid) }}" alt="mug_shot" class="img-fluid mb-1 rounded" style="height:300px;">
@@ -38,6 +38,8 @@
 			</div>
     </div>
   </div>
+</div>
+<div class="row">
   @can('Edit Members')
     <a class="btn btn-primary" href="{{ route('admin.users.edit',$user->member_uid) }}">Edit</a>
   @else
@@ -48,7 +50,8 @@
   <div class="heading mb-4">
     <h5 class="title text-center">Your Droids</h5>
   </div>
-
+</div>
+<div class="row">
 @foreach($user->droids as $droid)
   <div class="col-md-3 mb-5 droid-card" onclick="document.location='{{ route('droid.show', $droid->droid_uid) }}'">
     <div class="droid-card-content">
