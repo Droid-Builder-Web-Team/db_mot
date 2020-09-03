@@ -15,7 +15,7 @@
 @else
 
     <li class="c-sidebar-nav-item">
-      <a class="c-sidebar-nav-link" href="/">
+      <a class="c-sidebar-nav-link" href="{{ route('user.show', Auth::user()->id ) }}">
         <svg class="c-sidebar-nav-icon">
           <i class="fas fa-user-circle fa-fw"></i>
         </svg><span class="ml-1">Your Profile</span>

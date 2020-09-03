@@ -4,6 +4,7 @@
 
 <div class="row">
   <table class="table col-md-9 table-striped">
+    <tr><th>Name</th><td>{{ $user->forename }} {{ $user->surname }}</td></tr>
     <tr><th>email</th><td>{{ $user->email }}</td></tr>
     <tr><th>County</th><td>{{ $user->county }}</td></tr>
     <tr><th>Postcode</th><td>{{ $user->postcode }}</td></tr>

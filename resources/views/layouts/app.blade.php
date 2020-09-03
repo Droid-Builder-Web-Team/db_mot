@@ -33,9 +33,21 @@
     </a>
     <button class="c-header-toggler c-class-toggler mfs-3 d-md-down-none" type="button" data-target="#sidebar" data-class="c-sidebar-lg-show" responsive="true">
       <svg class="c-icon c-icon-lg">
-        <i class="fas fa-bars"></i>
+        <i class="fas fa-bars">
+        </i>
       </svg>
     </button>
+
+    <ul class="navbar-nav ml-md-auto list-group flex-sm-row">
+      <li class="nav-item pr-3 list-group-item list-group-flush">
+        <i class="far fa-bell fa-2x"></i><span class="badge badge-primary badge-pill">14</span>
+      </li>
+      <li class="nav-item pr-2 list-group-item list-group-flush">
+        {{ Auth::user()->forename }} {{Auth::user()->surname }}
+      </li>
+    </ul>
+
+
   </header>
   <div class="c-body">
     <main class="c-main">
