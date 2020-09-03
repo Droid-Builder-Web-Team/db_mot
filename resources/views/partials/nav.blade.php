@@ -22,7 +22,7 @@
       </a>
     </li>
     <li class="c-sidebar-nav-item">
-      <a class="c-sidebar-nav-link" href="{{ route('events.index') }}">
+      <a class="c-sidebar-nav-link" href="{{ route('event.index') }}">
         <svg class="c-sidebar-nav-icon">
           <i class="fas fa-calendar fa-fw"></i>
         </svg> Upcoming Events

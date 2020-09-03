@@ -7,7 +7,7 @@ use App\Location;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use App\DataTables\EventsDataTable;
 
 class EventsController extends Controller
 {
@@ -23,12 +23,9 @@ class EventsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(EventsDataTable $dataTable)
     {
-        $events = Event::orderBy('date', 'desc')->paginate(15);
-
-        return view('admin.events.index', compact('events'))
-          ->with('i', (request()->input('page', 1) -1) *15);
+        return $dataTable->render('admin.events.index');
     }
 
     /**

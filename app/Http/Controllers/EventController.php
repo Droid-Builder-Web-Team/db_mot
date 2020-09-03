@@ -25,7 +25,7 @@ class EventController extends Controller
         $events = Event::whereDate('date', '>=', Carbon::now())
                   ->orderBy('date', 'desc')->paginate(15);
 
-        return view('events.index', compact('events'))
+        return view('event.index', compact('events'))
           ->with('i', (request()->input('page', 1) -1) *15);
     }
 
@@ -37,9 +37,8 @@ class EventController extends Controller
      */
     public function show($id)
     {
-        $locations = Location::all();
         $event = Event::where('id', $id)->first();
-        return view('events.show', compact('locations'))->with('event', $event);
+        return view('event.show', compact('event'));
     }
 
     /**

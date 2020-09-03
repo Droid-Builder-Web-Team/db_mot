@@ -15,4 +15,9 @@ class Event extends Model
     {
         return $this->belongsToMany(User::class, 'members_events')->withPivot('spotter', 'date_added');
     }
+
+    public function location()
+    {
+        return $this->belongsTo(Location::class);
+    }
 }

@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('events.index') }}"> Back</a>
+                <a class="btn btn-primary" href="{{ route('event.index') }}"> Back</a>
             </div>
         </div>
     </div>
@@ -19,11 +19,7 @@
     <div class="row">
       <div class="col-xs-6 col-sm-6 col-md-6">
         <strong>Location</strong>
-        @foreach($locations as $location)
-          @if($event->location_id == $location->location_id)
-           {{ $location->name }}
-          @endif
-        @endforeach
+        {{ $event->location->name}}
       </div>
 
       <div class="col-xs-6 col-sm-6 col-md-6">
@@ -68,7 +64,7 @@
       </div>
     </div>
 
-    <form action="{{ route('events.update',$event->event_uid) }}" method="POST">
+    <form action="{{ route('event.update',$event->id) }}" method="POST">
     <div row="row">
       <h4>Register Interest</h4>
     </div>

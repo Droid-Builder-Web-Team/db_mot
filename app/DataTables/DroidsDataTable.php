@@ -8,7 +8,7 @@ use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
-use DataTables;
+
 
 class DroidsDataTable extends DataTable
 {
@@ -24,7 +24,7 @@ class DroidsDataTable extends DataTable
             ->eloquent($query)
             ->addColumn('PLI', function(Droid $droid) {
                 if ($droid->club->hasOption('mot'))
-                  return "<div class=\"alert ".$droid->displayMOT()['state']."\">".$droid->displayMOT()['status']."</div>";
+                  return "<button class=\"btn-sm alert ".$droid->displayMOT()['state']."\">".$droid->displayMOT()['status']."</button>";
                 else
                   return "";
             })
@@ -42,10 +42,9 @@ class DroidsDataTable extends DataTable
      * @param \App\DroidsDataTable $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(DroidsDataTable $model)
+    public function query(Droid $model)
     {
-        $droids = Droid::orderBy('id', 'asc');
-        return $droids;
+      return $model->newQuery();
     }
 
     /**
@@ -61,7 +60,16 @@ class DroidsDataTable extends DataTable
                       'name' => [ 'title' => 'Name'],
                       'PLI' => [ 'title' => 'PLI'],
                       'actions' => [ 'title' => 'Actions']
-                    ]);
+                    ])
+                    ->parameters([
+                        'dom'          => 'Bfrtip',
+                    ])
+                    ->buttons(
+                        Button::make('create'),
+                        Button::make('export'),
+                        Button::make('print'),
+                        Button::make('reload')
+                    );
 
     }
 

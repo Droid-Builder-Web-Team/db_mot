@@ -31,7 +31,7 @@
 
             </td>
             <td>
-              <a class="btn btn-primary" href="{{ route('events.show',$event->id) }}">View</a>
+              <a class="btn btn-primary" href="{{ route('event.show',$event->id) }}">View</a>
             </td>
         </tr>
         @endforeach
