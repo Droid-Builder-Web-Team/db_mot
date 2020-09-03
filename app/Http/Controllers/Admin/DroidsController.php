@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\DataTables\DroidsDataTable;
 use App\Droid;
 use App\User;
 use Illuminate\Http\Request;
@@ -22,13 +23,14 @@ class DroidsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(DroidsDataTable $dataTable)
     {
         //
-        $droids = Droid::orderBy('droid_uid', 'asc')->paginate(15);
+        //$droids = Droid::orderBy('droid_uid', 'asc')->paginate(15);
 
-        return view('admin.droids.index', compact('droids'))
-          ->with('i', (request()->input('page', 1) -1) *15);
+        //return view('admin.droids.index', compact('droids'))
+        //  ->with('i', (request()->input('page', 1) -1) *15);
+        return $dataTable->render('admin.droids.index');
     }
 
     /**

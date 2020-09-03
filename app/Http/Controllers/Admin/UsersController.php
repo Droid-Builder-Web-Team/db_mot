@@ -7,6 +7,7 @@ use App\User;
 use App\Droid;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
+use Yajra\Datatables\Facades\Datatables;
 
 class UsersController extends Controller
 {

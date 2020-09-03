@@ -16,6 +16,7 @@
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
  <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.21/datatables.min.js"></script>
 
+
  <title>@yield('page_title', config('app.name', 'Laravel'))</title>
  </head>
  <body class="c-app c-dark-theme">
@@ -51,6 +52,8 @@
  <!-- Popper.js first, then CoreUI JS -->
  <script src="https://unpkg.com/@popperjs/core@2"></script>
  <script src="https://unpkg.com/@coreui/coreui/dist/js/coreui.min.js"></script>
+ <script src="{{ asset('vendor/datatables/buttons.server-side.js') }}"></script>
+ @stack('scripts')
  </body>
 </html>
 
