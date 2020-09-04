@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 use Spatie\Permission\Models\Permission;
+use Illuminate\Support\Facades\Storage;
 use App\Droid;
 use App\Event;
 use App\Achievement;
@@ -31,6 +32,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'county',
         'postcode',
         'username',
+        'badge_id',
     ];
     /**
      * The attributes that should be hidden for arrays.
@@ -104,15 +106,18 @@ class User extends Authenticatable implements MustVerifyEmail
         }
     }
 
-    public function generateQR($id) {
+    public static function generateQR($id, $user_id) {
         $link = url('/')."/id.php?id=".$id;
-        $url = "https://chart.googleapis.com/chart?cht=qr&chld=L|1&chs=100x100&chl=".urlencode($link);
+        $url = "https://chart.googleapis.com/chart?cht=qr&chld=L|1&chs=500x500&chl=".urlencode($link);
         $image = imagecreatefrompng($url);
-        imagejpeg($image, $path, 75);
+        $file = '/members/'. $user_id . '/qr_code.png';
+
+        Storage::disk('local')->put($file, file_get_contents($url));
+
         return "Ok";
     }
 
-    public function generateID($length) {
+    public static function generateID($length) {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $charactersLength = strlen($characters);
         $randomString = '';

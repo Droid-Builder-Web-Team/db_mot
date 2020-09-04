@@ -127,7 +127,10 @@ class UserController extends Controller
 
     public function displayQRCode($uid)
     {
-        $path = 'members/'.$uid.'/qr_code.jpg';
+        $path = 'members/'.$uid.'/qr_code.png';
+        if (!Storage::exists($path)) {
+            $path = 'members/'.$uid.'/qr_code.jpg';
+        }
         $file = Storage::get($path);
         $type = Storage::mimeType($path);
         $response = Response::make($file, 200);

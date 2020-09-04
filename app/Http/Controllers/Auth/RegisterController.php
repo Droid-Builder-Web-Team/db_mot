@@ -65,11 +65,17 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+
+        $id = User::generateID(60);
+        $qr = User::generateQR($id, 90);
+        $user = User::create([
             'forename' => $data['forename'],
             'surname' => $data['surname'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'badge_id' => $id,
         ]);
+        $qr = User::generateQR($id, $user->id);
+        return $user;
     }
 }
