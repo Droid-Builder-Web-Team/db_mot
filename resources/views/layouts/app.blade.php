@@ -37,17 +37,27 @@
         </i>
       </svg>
     </button>
-
     <ul class="navbar-nav ml-md-auto list-group flex-sm-row">
+@guest
+    <li class="nav-item pr-3 list-group-item list-group-flush">
+      <a class="c-sidebar-nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+    </li>
+  @if (Route::has('register'))
+    <li class="nav-item pr-2 list-group-item list-group-flush">
+      <a class="c-sidebar-nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+    </li>
+  @endif
+@else
+
       <li class="nav-item pr-3 list-group-item list-group-flush">
         <i class="far fa-bell fa-2x"></i><span class="badge badge-primary badge-pill">14</span>
       </li>
       <li class="nav-item pr-2 list-group-item list-group-flush">
         {{ Auth::user()->forename }} {{Auth::user()->surname }}
       </li>
-    </ul>
 
-
+@endguest
+</ul>
   </header>
   <div class="c-body">
     <main class="c-main">

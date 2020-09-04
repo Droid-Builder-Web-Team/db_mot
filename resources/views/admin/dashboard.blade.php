@@ -39,7 +39,10 @@
             <tr>
               <td>{{$user->forename}} {{ $user->surname}}</td>
               <td>{{$user->pli_date}}</td>
-              <td><a class="btn btn-primary" href="{{ route('admin.users.edit',$user->id) }}">Edit</a></td>
+              <td>
+                <a class="btn btn-primary" href="{{ route('user.show',$user->id) }}">View</a>
+                <a class="btn btn-info" href="{{ route('admin.users.edit',$user->id) }}">Edit</a>
+              </td>
             </tr>
         @endif
     @endforeach
@@ -63,7 +66,10 @@
                 @endforeach
               </td>
               <td>{{$droid->motDate()}}</td>
-              <td><a class="btn btn-primary" href="{{ route('admin.droids.edit',$droid->id) }}">Edit</a></td>
+              <td>
+                <a class="btn btn-primary" href="{{ route('droid.show',$droid->id) }}">View</a>
+                <a class="btn btn-info" href="{{ route('admin.droids.edit',$droid->id) }}">Edit</a>
+              </td>
             </tr>
         @endif
     @endforeach
@@ -84,7 +90,12 @@
     <tr>
       <td>{{ $event->name }}</td>
       <td>{{ $event->date }}</td>
-      <td>{{ $event->location }}</td>
+      <td>{{ $event->location->name }}</td>
+      <td>
+        @if($event->forum_link != "")
+        <a class="btn btn-primary" target="_blank" href="{{ $event->forum_link }}">Forum Link</a>
+        @endif
+      </td>
       <td>
         @can('Edit Events')
         <a class="btn btn-primary" href="{{ route('admin.events.edit',$event->id) }}">Edit</a>

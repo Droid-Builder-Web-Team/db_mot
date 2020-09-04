@@ -27,10 +27,10 @@
             <div class="col-xs-3 col-sm-3 col-md-3">
                 <div class="form-group">
                   <strong>Location</strong><br>
-                  <select name=location_uid>
+                  <select name=location_id>
                     @foreach($locations as $location)
                       <option value="{{ $location->id }}"
-                      @if($event->location_uid == $location->location_uid)
+                      @if($event->location_id == $location->id)
                          selected
                       @endif
                       >{{ $location->name }}</option>

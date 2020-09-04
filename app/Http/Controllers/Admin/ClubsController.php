@@ -81,6 +81,9 @@ class ClubsController extends Controller
             'name' => 'required'
         ]);
 
+
+        $club->options()->saveMany($request->options);
+
         $club->update($request->all());
 
         return redirect()->route('admin.clubs.index')

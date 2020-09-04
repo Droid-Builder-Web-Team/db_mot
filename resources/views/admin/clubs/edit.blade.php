@@ -45,6 +45,19 @@
                 </div>
             </div>
 
+                  <div class="form-row">
+          <label>Options</label>
+          <div class="col-md-4">
+            @foreach(['topps', 'mot'] as $option)
+              <div class="form-check">
+                <input type="checkbox" name="options[]" value="{{  $option }}"
+                @if($club->hasOption($option)) checked @endif >
+                <label>{{ $option }}</label>
+              </div>
+            @endforeach
+          </div>
+      </div>
+
 
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
               <button type="submit" class="btn btn-primary">Submit</button>

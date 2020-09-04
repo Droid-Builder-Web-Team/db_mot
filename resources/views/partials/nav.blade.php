@@ -25,10 +25,12 @@
       <a class="c-sidebar-nav-link" href="{{ route('event.index') }}">
         <svg class="c-sidebar-nav-icon">
           <i class="fas fa-calendar fa-fw"></i>
-        </svg> Upcoming Events
+        </svg><span class="ml-1">Upcoming Events</span>
       </a>
     </li>
+  @hasanyrole('Super Admin|Org Admin|Events Officer|MOT Officer')
     <li class="c-sidebar-nav-title">Admin</li>
+
 
     <li class="c-sidebar-nav-item">
       <a class="c-sidebar-nav-link" href="{{ route('admin.dashboard.index') }}">
@@ -37,6 +39,7 @@
         </svg><span class="ml-1">Dashboard</span>
       </a>
     </li>
+    @endhasanyrole
 
     @can('View Members')
     <li class="c-sidebar-nav-item">
@@ -89,6 +92,7 @@
         </svg><span class="ml-1">Clubs</span>
       </a>
     </li>
+    <li class="c-sidebar-nav-item"></li>
     @endcan
     <li class="c-sidebar-nav-item">
       <a class="c-sidebar-nav-link" href="{{ route('logout') }}"

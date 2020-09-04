@@ -13,10 +13,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//Auth::routes();
+Auth::routes(['verify' => true]);
+Auth::routes();
+
+Route::redirect('/id.php', '/user');
 Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
   Route::get('/', function() {
     return redirect('/admin/dashboard');
-  })->middleware('verified');
+  });
   Route::resource('/users', 'UsersController', ['except' => ['show', 'create', 'store']]);
   Route::get('/users/getUsers/','UsersController@getUsers')->name('users.getUsers');
   Route::resource('/droids', 'DroidsController', ['except' => ['show', 'store']]);
@@ -29,8 +34,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
   Route::resource('/mot', 'MOTController', ['only' => ['store']]);
 });
 
-Route::get('/', function () {
-    return view('home');
+Route::get('/', function () {    return view('home');
 });
 
 //Route::get('/', function() {
@@ -47,8 +51,6 @@ Route::get('/', function () {
   Route::post('image/upload', 'ImageController@upload');
 //})->middleware('verified');
 
-Auth::routes();
+
 
 Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes(['verify' => true]);

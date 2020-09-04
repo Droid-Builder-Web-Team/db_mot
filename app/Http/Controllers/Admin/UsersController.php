@@ -15,8 +15,7 @@ class UsersController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth');
-        $this->middleware('permission:View Members');
+        $this->middleware(['auth', 'permission:View Members', 'verified']);
     }
 
     /**
