@@ -29,15 +29,17 @@
       <div class="col-md-3 offset-md-1">
         {{ $line->test_description}}
       </div>
+
       <div class="col-md-1 mb-1">
-        @if ($mot->line($line->id)->mot_test_result == "Pass")
+        @if ($mot->detail($line->test_name)->mot_test_result == "Pass")
           <button type="button" class="btn btn-success">Pass</button>
-        @elseif ($mot->line($line->id)->mot_test_result == "Fail")
+        @elseif ($mot->detail($line->test_name)->mot_test_result == "Fail")
           <button type="button" class="btn btn-danger">Fail</button>
-        @elseif ($mot->line($line->id)->mot_test_result == "NA")
+        @elseif ($mot->detail($line->test_name)->mot_test_result == "NA")
           <button type="button" class="btn btn-secondary">NA</button>
         @endif
       </div>
+
     </div>
     @endforeach
   @endforeach

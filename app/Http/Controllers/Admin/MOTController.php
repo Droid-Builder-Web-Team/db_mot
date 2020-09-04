@@ -53,6 +53,15 @@ class MOTController extends Controller
         $mot->mot_type = $request->mot_type;
         $mot->save();
 
+        if ($request->new_comment != "") {
+            $comment = DB::table('mot_comments')
+                          ->insert([
+                              'mot_uid' => $mot->id,
+                              'comment' => $request->new_comment,
+                              'added_by' => $request->user
+                          ]);
+        }
+
         $lines = DB::table('mot_lines')
                     ->where('club_id', $request->club_id)
                     ->get();

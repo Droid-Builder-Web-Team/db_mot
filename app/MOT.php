@@ -51,10 +51,12 @@ class MOT extends Model
         return $lines;
     }
 
-    public function line($line)
+    public function detail($line)
     {
+
         $detail = DB::table('mot_details')
-          ->where('mot_detail_uid', $line)
+          ->where('mot_test', $line)
+          ->where('mot_uid', $this->id)
           ->first();
 
         return $detail;
