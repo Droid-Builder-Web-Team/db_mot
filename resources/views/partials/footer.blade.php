@@ -4,7 +4,10 @@
      <div class="row">
        <div class="col-md-8 col-sm-6 col-xs-12">
          <p class="copyright-text">{{ config('app.name', 'Laravel') }} <?php echo date("Y");?> Created and Maintained by Droid Builder Web Team
-         </p>
+           <br />
+         <a href="https://coreui.io">CoreUI</a> © 2020 creativeLabs.
+         Powered by&nbsp;<a href="https://coreui.io/pro/">CoreUI Pro</a>
+       </p>
        </div>
 
        <div class="col-md-4 col-sm-6 col-xs-12">
@@ -17,7 +20,6 @@
          </ul>
        </div>
      </div>
-     <div><a href="https://coreui.io">CoreUI</a> © 2020 creativeLabs.</div>
-     <div class="mfs-auto">Powered by&nbsp;<a href="https://coreui.io/pro/">CoreUI Pro</a></div>
+
    </div>
 </footer>

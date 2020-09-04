@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\Club;
 use App\Droid;
+use App\User;
 use Illuminate\Support\Facades\DB;
 
 class MOT extends Model
@@ -33,7 +34,7 @@ class MOT extends Model
 
     public function sections()
     {
-        $club_id = $this->club->club_id;
+        $club_id = $this->club->id;
         $sections = DB::table('mot_sections')
             ->where('club_id', $club_id)
             ->get();
@@ -41,12 +42,10 @@ class MOT extends Model
         return $sections;
     }
 
-    public function lines($section)
+    public static function lines($section_id)
     {
-        $club_id = $this->club->club_id;
         $lines = DB::table('mot_lines')
-            ->where('club_id', $club_id)
-            ->where('test_section', $section)
+            ->where('section_id', $section_id)
             ->get();
 
         return $lines;
@@ -63,7 +62,7 @@ class MOT extends Model
 
     public function officer()
     {
-        $name = "test";
-        return $name;
+        $officer = User::where('id', $this->user)->first();
+        return $officer->forename." ".$officer->surname;
     }
 }

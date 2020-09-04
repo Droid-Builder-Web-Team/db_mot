@@ -17,27 +17,29 @@
     </table>
   </div>
 </div>
-<div class="row">
+
   @foreach($mot->sections() as $section)
     <div class="row">
+      <div class="col-md-12">
       <h4>{{$section->section_description }}</h2>
+      </div>
     </div>
-    @foreach($mot->lines($section->section_name) as $line)
+    @foreach($mot->lines($section->id) as $line)
     <div class="row">
       <div class="col-md-3 offset-md-1">
         {{ $line->test_description}}
       </div>
       <div class="col-md-1 mb-1">
-        @if ($mot->line($line->line_uid)->mot_test_result == "Pass")
+        @if ($mot->line($line->id)->mot_test_result == "Pass")
           <button type="button" class="btn btn-success">Pass</button>
-        @elseif ($mot->line($line->line_uid)->mot_test_result == "Fail")
+        @elseif ($mot->line($line->id)->mot_test_result == "Fail")
           <button type="button" class="btn btn-danger">Fail</button>
-        @elseif ($mot->line($line->line_uid)->mot_test_result == "NA")
+        @elseif ($mot->line($line->id)->mot_test_result == "NA")
           <button type="button" class="btn btn-secondary">NA</button>
         @endif
       </div>
     </div>
     @endforeach
   @endforeach
-</div>
+
 @endsection

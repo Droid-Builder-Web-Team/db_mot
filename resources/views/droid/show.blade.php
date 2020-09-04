@@ -30,7 +30,6 @@
       <th>Approx Value</th><td>{{ $droid->value }}</td></tr>
       <th>Tier 2</th><td>{{ $droid->tier_two }}</td></tr>
       <th>Topps Number</th><td>{{ $droid->topps_id }}</td></tr>
-      <th>Active</th><td>{{ $droid->active }}</td></tr>
     </tr>
   </table>
   <div class="col-md-8">                      <!-- image column -->
@@ -50,6 +49,13 @@
   </div> <!-- end of images column -->
 </div>
 
+<div class="row">
+  @can('Edit Droids')
+    <a class="btn btn-primary" href="{{ route('admin.droids.edit',$droid->id) }}">Edit</a>
+  @else
+    <a class="btn btn-primary" href="{{ route('droid.edit',$droid->id) }}">Edit</a>
+  @endcan
+</div>
 <div class="row">
   @if ($droid->club->hasOption('mot'))
   <div class="col-md-6">
@@ -72,6 +78,9 @@
         </tr>
       @endforeach
     </table>
+    @can('Add MOT')
+      <a class="btn btn-primary" href="{{ route('admin.mot.create', $droid->id) }}">Add MOT</a>
+    @endcan
   </div>
   <div class="col-md-6">
     Officer Comments
