@@ -56,6 +56,7 @@ class UsersController extends Controller
      */
     public function update(Request $request, User $user)
     {
+
         if (auth()->user()->can('Edit Permissions')) {
             $user->syncRoles($request->roles);
         } else {
@@ -66,8 +67,8 @@ class UsersController extends Controller
             abort(403);
         }
         $request->validate([
-            'name' => 'required',
-            'description' => 'required',
+            'forename' => 'required',
+            'surname' => 'required'
         ]);
 
         $user->update($request->all());

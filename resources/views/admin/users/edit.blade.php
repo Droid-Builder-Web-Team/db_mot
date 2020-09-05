@@ -53,12 +53,14 @@
             <input type="date" name="pli_date" value="{{ $user->pli_date }}" class="form-control" placeholder="">
           </div>
           <div class="col-md-1 mb-3">
+            {{Form::hidden('active','off')}}
             <label>Active</label>
-            <input type="checkbox" name="active" {{ $user->active ? 'checked="1"' : 'checked="0"' }} class="form-control">
+            <input type="checkbox" name="active" {{ $user->active == 'on' ? 'checked' : '' }} class="form-control">
           </div>
           <div class="col-md-1 mb-3">
+            {{Form::hidden('gdpr_accepted','0')}}
             <label>GDPR</label>
-            <input type="checkbox" name="gdpr_accepted" {{ $user->gdpr_accepted ? 'checked="1"' : 'checked="0"' }} class="form-control">
+            <input type="checkbox" name="gdpr_accepted" {{ $user->gdpr_accepted ? 'checked=1 value=1' : 'value=1' }} class="form-control">
           </div>
       </div>
 

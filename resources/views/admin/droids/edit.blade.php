@@ -16,7 +16,7 @@
         @csrf
         @method('PUT')
 
-        <div class="row">
+        <div class="form-row">
            <div class="col-xs-9 col-sm-9 col-md-9">
                <div class="form-group">
                    <strong>Droid Name:</strong>
@@ -38,7 +38,7 @@
                </div>
            </div>
          </div>
-         <div class="row">
+         <div class="form-row">
            <div class="col-xs-9 col-sm-9 col-md-9">
                <div class="form-group">
                    <strong>Style:</strong> (eg, ANH, custom, etc.)
@@ -46,7 +46,7 @@
                </div>
            </div>
          </div>
-         <div class="row">
+         <div class="form-row">
            <div class="col-xs-9 col-sm-9 col-md-9">
                <div class="form-group">
                    <strong>Control System:</strong> (eg, Padawan, shadow, custom.)
@@ -60,7 +60,7 @@
                </div>
            </div>
          </div>
-         <div class="row">
+         <div class="form-row">
            <div class="col-xs-12 col-sm-12 col-md-12">
                <div class="form-group">
                    <strong>Sound System:</strong>
@@ -68,7 +68,7 @@
                </div>
            </div>
          </div>
-         <div class="row">
+         <div class="form-row">
            <div class="col-xs-12 col-sm-12 col-md-12">
                <div class="form-group">
                    <strong>Build Material:</strong>
@@ -76,7 +76,7 @@
                </div>
            </div>
          </div>
-         <div class="row">
+         <div class="form-row">
            <div class="col-xs-4 col-sm-4 col-md-4">
                <div class="form-group">
                    <strong>Battery Type:</strong> (eg, LiPo, LiFePo, SLA.)
@@ -96,7 +96,7 @@
                </div>
            </div>
          </div>
-         <div class="row">
+         <div class="form-row">
            <div class="col-xs-4 col-sm-4 col-md-4">
                <div class="form-group">
                    <strong>Approx Value:</strong>
@@ -110,6 +110,38 @@
                </div>
            </div>
          </div>
+      <div class="form-row">
+          <div class="col-md-1 mb-3">
+            {{Form::hidden('active','off')}}
+            <label>Active</label>
+            <input type="checkbox" name="active" {{ $droid->active == 'on' ? 'checked' : '' }} class="form-control">
+          </div>
+          @if ($droid->club->hasOption('topps'))
+          <div class="col-md-1 mb-3">
+            <label>Topps ID</label>
+            <input type="text" name="topps_id" class="form-control" value="{{ $droid->topps_id }}">
+          </div>
+          @endif
+          @if ($droid->club->hasOption('tier_two'))
+          {{Form::hidden('tier_two','No')}}
+          <div class="col-md-1 mb-3">
+            <label>Tier 2?</label>
+            <input type="checkbox" name="tier_two" {{ $droid->tier_two == 'Yes' ? 'checked="Yes"' : 'value=Yes' }} class="form-control">
+          </div>
+          @endif
+      </div>
+
+      <div class="form-row">
+        <div class="col-md-4 mb-3">
+          <label>Created On: </label>
+          {{ $droid->date_added }}
+        </div>
+        <div class="col-md-4 mb-3">
+          <label>Updated On: </label>
+          {{ $droid->last_updated }}
+        </div>
+      </div>
+
          <div class="row">
            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                    <button type="submit" class="btn btn-primary">Submit</button>

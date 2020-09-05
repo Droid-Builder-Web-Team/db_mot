@@ -46,7 +46,7 @@
             <input type="text" name="postcode" value="{{ $user->postcode }}" class="form-control" placeholder="Postcode">
           </div>
       </div>
-
+      <div class="form-row">
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
               <button type="submit" class="btn btn-primary">Submit</button>
             </div>
