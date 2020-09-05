@@ -10,7 +10,34 @@
     <tr><th>Postcode</th><td>{{ $user->postcode }}</td></tr>
     <tr><th>Forum Username</th><td>{{ $user->username }}</td></tr>
     <tr><th>Created On</th><td>{{ $user->created_on }}</td></tr>
-    <tr><th>PLI Last Payed</th><td>{{ $user->pli_date }}</td></tr>
+    @php
+      $uses_pli = 0;
+      $has_mot = 0;
+    @endphp
+    @foreach($user->droids as $droid)
+      @if($droid->club->hasOption('mot'))
+        @php
+          $uses_pli = 1
+        @endphp
+        @if($droid->hasMOT() && !$droid->hasExpiringMOT())
+          @php
+            $has_mot = 1
+          @endphp
+        @endif
+      @endif
+    @endforeach
+    @if ($uses_pli)
+    <tr><th>PLI Last Payed</th>
+      <td>{{ $user->pli_date }}
+        @if($user->validPLI())
+            <a class="btn-sm btn-info" href="{{ action('UserController@downloadPDF', $user->id )}}" target="_blank">Cover Note</a>
+        @endif
+        @if($has_mot && !$user->validPLI() || $user->expiringPLI())
+            <a class="btn-sm btn-danger" href="" target="_blank">Pay PLI</a>
+        @endif
+      </td>
+    </tr>
+    @endif
     <tr><th>ID Link</th>
       <td><a href="{{ url('/')."/id.php?id=".$user->badge_id }}">{{ url('/')."/id.php?id=".$user->badge_id }}</a></td>
     </tr>

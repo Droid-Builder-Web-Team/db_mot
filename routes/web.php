@@ -49,6 +49,7 @@ Route::get('/', function () {    return view('home');
   Route::resource('location', 'LocationController');
   Route::get('image', 'ImageController@index')->name('image');
   Route::post('image/upload', 'ImageController@upload');
+  Route::get('/cover_note/{id}', 'UserController@downloadPDF');
 //})->middleware('verified');
 
 

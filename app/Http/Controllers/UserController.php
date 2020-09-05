@@ -6,6 +6,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Response;
+use PDF;
 
 
 class UserController extends Controller
@@ -138,5 +139,13 @@ class UserController extends Controller
 
         return $response;
     }
+
+    public function downloadPDF($id) {
+        $user = User::find($id);
+        $pdf = PDF::loadView('user.cover', compact('user'));
+        //$pdf->defaultFont = 'Arial';
+
+        return $pdf->download('cover_note.pdf');
+      }
 
 }
