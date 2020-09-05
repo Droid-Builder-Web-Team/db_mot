@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\DataTables\DroidsDataTable;
 use App\Droid;
 use App\User;
+use App\Club;
 use Illuminate\Http\Request;
 
 class DroidsController extends Controller
@@ -74,7 +75,8 @@ class DroidsController extends Controller
      */
     public function edit(Droid $droid)
     {
-        return view('admin.droids.edit')->with('droid', $droid);
+        $clubs = Club::all();
+        return view('admin.droids.edit', compact('clubs'))->with('droid', $droid);
     }
 
     /**
@@ -86,7 +88,18 @@ class DroidsController extends Controller
      */
     public function update(Request $request, Droid $droid)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+        ]);
+
+        $droid->update($request->all());
+
+        $notification = array(
+            'message' => 'Droid updated successfully.',
+            'alert-type' => 'success'
+        );
+        return redirect()->route('droid.show', $droid->id)
+                        ->with($notification);
     }
 
     /**

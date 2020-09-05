@@ -92,8 +92,12 @@ class DroidController extends Controller
 
         $droid->update($request->all());
 
+        $notification = array(
+            'message' => 'Droid updated successfully.',
+            'alert-type' => 'success'
+        );
         return redirect()->route('droid.show', $droid->id)
-                        ->with('success','Droid updated successfully.');
+                        ->with($notification);
     }
 
     /**
