@@ -41,7 +41,7 @@ class DroidController extends Controller
         ]);
 
         $droid = Droid::create($request->all());
-        $droid->users()->attach($request['id']);
+        $droid->users()->attach(auth()->user()->id);
         return redirect()->route('user.show', auth()->user()->id )
                         ->with('success','Droid created successfully.');
 
@@ -55,7 +55,14 @@ class DroidController extends Controller
      */
     public function show(Droid $droid)
     {
-        return view('droid.show', compact('droid'));
+        if ($droid->users->contains(auth()->user()) || auth()->user()->can('View Droids'))
+        {
+            return view('droid.show', compact('droid'));
+        } else
+        {
+            abort(403);
+        }
+
     }
 
     /**
@@ -66,7 +73,8 @@ class DroidController extends Controller
      */
     public function edit(Droid $droid)
     {
-        //
+        $clubs = Club::all();
+        return view('droid.edit', compact('clubs'))->with('droid', $droid);;
     }
 
     /**
@@ -78,7 +86,14 @@ class DroidController extends Controller
      */
     public function update(Request $request, Droid $droid)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+        ]);
+
+        $droid->update($request->all());
+
+        return redirect()->route('droid.show', $droid->id)
+                        ->with('success','Droid updated successfully.');
     }
 
     /**

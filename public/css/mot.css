@@ -7,8 +7,8 @@
   display: block;
   cursor: pointer;
   opacity: 1;
-  max-width: 260px;
-  min-width: 260px;
+  max-width: 220px;
+  min-width: 220px;
 }
 
 .droid-card :hover {
@@ -17,12 +17,12 @@
 
 .droid-card-content {
   background-color: transparent;
-  padding: 5%;
+  padding: 2%;
 }
 
 .droid-card-content :hover {
   background-color: transparent;
-  max-width: 260px;
+  max-width: 220px;
 }
 
 .droid-card-table {

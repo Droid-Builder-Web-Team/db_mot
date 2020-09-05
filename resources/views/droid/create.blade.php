@@ -51,7 +51,7 @@
         <div class="col-xs-3 col-sm-3 col-md-3">
             <div class="form-group">
                 <strong>RC?</strong>
-                <input type="text" name="radio_controlled" class="form-control" placeholder="Controller">
+                <input type="text" name="radio_controlled" class="form-control" placeholder="Yes/No">
             </div>
         </div>
       </div>
