@@ -50,6 +50,7 @@ Route::get('/', function () {    return view('home');
   Route::get('image', 'ImageController@index')->name('image');
   Route::post('image/upload', 'ImageController@upload');
   Route::get('/cover_note/{id}', 'UserController@downloadPDF');
+  Route::get('/id/{id}', 'ID');
 //})->middleware('verified');
 
 
