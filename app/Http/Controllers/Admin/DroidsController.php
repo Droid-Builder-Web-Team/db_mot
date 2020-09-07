@@ -58,10 +58,21 @@ class DroidsController extends Controller
             'name' => 'required'
         ]);
 
-        $droid = Droid::create($request->except('user_id'));
-        $droid->users()->attach($request->user_id);
-        return redirect()->route('user.show', $request->user_id )
-                        ->with('success','Droid created successfully.');
+        try {
+          $droid = Droid::create($request->except('user_id'));
+          toastr()->success('Droid created successfully');
+        } catch (\Illuminate\Database\QueryException $exception) {
+          toastr()->error('Failed to create Droid');
+        }
+
+        try {
+          $droid->users()->attach($request->user_id);
+          toastr()->success('Droid attached to user ID '.$request->user_id.' successfully');
+        } catch (\Illuminate\Database\QueryException $exception) {
+          toastr()->error('Failed to attach Droid');
+        }
+
+        return redirect()->route('user.show', $request->user_id );
     }
 
     /**
@@ -106,12 +117,14 @@ class DroidsController extends Controller
 
         $droid->update($request->all());
 
-        $notification = array(
-            'message' => 'Droid updated successfully.',
-            'alert-type' => 'success'
-        );
-        return redirect()->route('droid.show', $droid->id)
-                        ->with($notification);
+        try {
+          $droid->update($request->all());
+          toastr()->success('Droid updated successfully');
+        } catch (\Illuminate\Database\QueryException $exception) {
+          toastr()->error('Failed to update Droid');
+        }
+
+        return redirect()->route('droid.show', $droid->id);
     }
 
     /**

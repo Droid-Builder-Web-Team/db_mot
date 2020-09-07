@@ -52,6 +52,7 @@ Route::get('/', function () {    return view('home');
   Route::get('/cover_note/{id}', 'UserController@downloadPDF');
   Route::get('/id/{id}', 'ID');
   Route::get('/topps', 'ToppsController');
+  Route::get('notifications', 'UserNotificationsController@show')->middleware('auth');
 //})->middleware('verified');
 
 

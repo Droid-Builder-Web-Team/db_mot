@@ -8,7 +8,7 @@ use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use App\Droid;
 
-class MOTDue extends Notification
+class MOTExpired extends Notification
 {
     use Queueable;
     protected $droid;

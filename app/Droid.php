@@ -32,8 +32,12 @@ class Droid extends Model
 
     public function motDate()
     {
-        $mot_date = $this->mot()->latest('date')->first()->date;
-        return $mot_date;
+        $latest_mot = $this->mot()->latest('date')->first();
+        if ($latest_mot != NULL)
+        {
+            return $latest_mot->date;
+        }
+        return 0;
     }
 
     public function hasMOT()

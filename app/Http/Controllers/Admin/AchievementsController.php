@@ -53,10 +53,14 @@ class AchievementsController extends Controller
             'description' => 'required',
         ]);
 
-        Achievement::create($request->all());
+        try {
+          Achievement::create($request->all());
+          toastr()->success('Achievement created successfully');
+        } catch (\Illuminate\Database\QueryException $exception) {
+          toastr()->error('Failed to create Achievement');
+        }
 
-        return redirect()->route('admin.achievements.index')
-                        ->with('success','Achievement created successfully.');
+        return redirect()->route('admin.achievements.index');
     }
 
     /**

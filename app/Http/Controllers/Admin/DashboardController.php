@@ -8,6 +8,7 @@ use App\Droid;
 use App\Event;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Toastr;
 
 class DashboardController extends Controller
 {

@@ -16,7 +16,7 @@
  <script type="text/javascript" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js" defer></script>
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
  <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.21/datatables.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
  <title>@yield('page_title', config('app.name', 'Laravel'))</title>
  </head>
@@ -52,7 +52,7 @@
 
       <li class="nav-item pr-3 list-group-item list-group-flush">
         <i class="far fa-bell fa-2x"></i><span class="badge badge-primary badge-pill">
-          {{ Auth::user()->notifications->count() }}
+          {{ Auth::user()->unreadNotifications->count() }}
         </span>
       </li>
       <li class="nav-item pr-2 list-group-item list-group-flush">
@@ -78,28 +78,7 @@
  <script src="https://unpkg.com/@popperjs/core@2"></script>
  <script src="https://unpkg.com/@coreui/coreui/dist/js/coreui.min.js"></script>
  <script src="{{ asset('vendor/datatables/buttons.server-side.js') }}"></script>
- <script>
-  @if(Session::has('message'))
-    var type = "{{ Session::get('alert-type', 'info') }}";
-    switch(type){
-        case 'info':
-            toastr.info("{{ Session::get('message') }}");
-            break;
-
-        case 'warning':
-            toastr.warning("{{ Session::get('message') }}");
-            break;
-
-        case 'success':
-            toastr.success("{{ Session::get('message') }}");
-            break;
-
-        case 'error':
-            toastr.error("{{ Session::get('message') }}");
-            break;
-    }
-  @endif
-</script>
  @stack('scripts')
+ @toastr_render
  </body>
 </html>
