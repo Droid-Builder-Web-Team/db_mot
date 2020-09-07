@@ -167,6 +167,7 @@
           <th>Spotter?</th>
           <th>Charity Raised</th>
           <th>Links</th>
+          <th>Actions</th>
         </tr>
         @foreach($user->events as $event)
           <tr>
@@ -176,12 +177,13 @@
             <td>{{ $event->charity_raised }}</td>
             <td>
               @if(!empty($event->forum_link))
-                <a class="btn btn-primary" href="{{ $event->forum_link }}">Forum</a>
+                <a class="btn-sm btn-info" href="{{ $event->forum_link }}">Forum</a>
               @endif
               @if(!empty($event->report_link))
-                <a class="btn btn-primary" href="{{ $event->report_link }}">Report</a>
+                <a class="btn-sm btn-info" href="{{ $event->report_link }}">Report</a>
               @endif
             </td>
+            <td><a class="btn-sm btn-primary" href="{{ route('event.show', $event->id) }}">View</a></td>
           </tr>
         @endforeach
       </table>

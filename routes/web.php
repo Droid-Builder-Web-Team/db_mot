@@ -23,7 +23,6 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
     return redirect('/admin/dashboard');
   });
   Route::resource('/users', 'UsersController', ['except' => ['show', 'create', 'store']]);
-  Route::get('/users/getUsers/','UsersController@getUsers')->name('users.getUsers');
   Route::get('/droids/{id}', 'DroidsController@create')->name('droids.create');
   Route::resource('/droids', 'DroidsController', ['except' => ['show', 'create']]);
   Route::resource('/events', 'EventsController', ['except' => ['show']]);
