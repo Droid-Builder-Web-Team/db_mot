@@ -113,8 +113,11 @@
     </div>
   </div>
 @endforeach
-
-  <div class="col-md-3 mb-5 droid-card" onclick="document.location='{{ route('droid.create') }}'">
+  @can('Edit Droids')
+    <div class="col-md-3 mb-5 droid-card" onclick="document.location='{{ route('admin.droids.create', [$user->id]) }}'">
+  @else
+    <div class="col-md-3 mb-5 droid-card" onclick="document.location='{{ route('droid.create') }}'">
+  @endcan
     <div class="droid-card-content">
 
       <div style="text-align:center">

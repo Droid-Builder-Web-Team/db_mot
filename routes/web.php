@@ -24,7 +24,8 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
   });
   Route::resource('/users', 'UsersController', ['except' => ['show', 'create', 'store']]);
   Route::get('/users/getUsers/','UsersController@getUsers')->name('users.getUsers');
-  Route::resource('/droids', 'DroidsController', ['except' => ['show', 'store']]);
+  Route::get('/droids/{id}', 'DroidsController@create')->name('droids.create');
+  Route::resource('/droids', 'DroidsController', ['except' => ['show', 'create']]);
   Route::resource('/events', 'EventsController', ['except' => ['show']]);
   Route::resource('/achievements', 'AchievementsController', ['except' => ['show']]);
   Route::resource('/clubs', 'ClubsController', ['except' => ['show']]);
@@ -51,6 +52,7 @@ Route::get('/', function () {    return view('home');
   Route::post('image/upload', 'ImageController@upload');
   Route::get('/cover_note/{id}', 'UserController@downloadPDF');
   Route::get('/id/{id}', 'ID');
+  Route::get('/topps', 'ToppsController');
 //})->middleware('verified');
 
 

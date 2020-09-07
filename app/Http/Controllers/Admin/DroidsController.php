@@ -15,7 +15,7 @@ class DroidsController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('permission:View Droids');
+        $this->middleware('permission:View Droids|Edit Droids');
 
     }
 
@@ -26,11 +26,6 @@ class DroidsController extends Controller
      */
     public function index(DroidsDataTable $dataTable)
     {
-        //
-        //$droids = Droid::orderBy('droid_uid', 'asc')->paginate(15);
-
-        //return view('admin.droids.index', compact('droids'))
-        //  ->with('i', (request()->input('page', 1) -1) *15);
         return $dataTable->render('admin.droids.index');
     }
 
@@ -39,9 +34,13 @@ class DroidsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        //
+        if (!auth()->user()->can('Edit Droids'))
+              abort(403);
+        $clubs = Club::all();
+        $user = User::find($id);
+        return view('admin.droids.create', compact('clubs', 'user'));
     }
 
     /**
@@ -52,7 +51,17 @@ class DroidsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        if (!auth()->user()->can('Edit Droids'))
+              abort(403);
+        $request->validate([
+            'name' => 'required'
+        ]);
+
+        $droid = Droid::create($request->except('user_id'));
+        $droid->users()->attach($request->user_id);
+        return redirect()->route('user.show', $request->user_id )
+                        ->with('success','Droid created successfully.');
     }
 
     /**
@@ -63,7 +72,6 @@ class DroidsController extends Controller
      */
     public function show(Droid $droid)
     {
-        //
         return view('droids.show', compact('droid'));
     }
 
@@ -75,6 +83,8 @@ class DroidsController extends Controller
      */
     public function edit(Droid $droid)
     {
+        if (!auth()->user()->can('Edit Droids'))
+              abort(403);
         $clubs = Club::all();
         return view('admin.droids.edit', compact('clubs'))->with('droid', $droid);
     }
@@ -88,6 +98,8 @@ class DroidsController extends Controller
      */
     public function update(Request $request, Droid $droid)
     {
+        if (!auth()->user()->can('Edit Droids'))
+              abort(403);
         $request->validate([
             'name' => 'required',
         ]);

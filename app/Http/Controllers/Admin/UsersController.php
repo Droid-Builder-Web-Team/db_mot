@@ -71,7 +71,7 @@ class UsersController extends Controller
             'surname' => 'required'
         ]);
 
-        $user->update($request->all());
+        $user->update($request->except('roles'));
 
         return redirect()->route('admin.users.index')
                         ->with('success','User updated successfully.');

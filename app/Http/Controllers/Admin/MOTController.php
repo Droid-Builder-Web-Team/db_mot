@@ -11,6 +11,12 @@ use Illuminate\Support\Facades\DB;
 class MOTController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('permission:Add MOT');
+
+    }
     /**
      * Show the form for creating a new resource.
      *
