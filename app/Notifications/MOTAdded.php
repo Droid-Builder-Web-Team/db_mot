@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class EventCreated extends Notification
+class MOTAdded extends Notification
 {
     use Queueable;
 
@@ -54,12 +54,8 @@ class EventCreated extends Notification
      */
     public function toArray($notifiable)
     {
-
         return [
-  //          'event_id' => $this->event->id,
-  //          'name' => $this->event->name,
-  //          'date' => $this->event->date,
-  //          'location_id' => $this->event->location_id
+
         ];
     }
 }

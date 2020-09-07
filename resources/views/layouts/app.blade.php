@@ -51,7 +51,9 @@
 @else
 
       <li class="nav-item pr-3 list-group-item list-group-flush">
-        <i class="far fa-bell fa-2x"></i><span class="badge badge-primary badge-pill">14</span>
+        <i class="far fa-bell fa-2x"></i><span class="badge badge-primary badge-pill">
+          {{ Auth::user()->notifications->count() }}
+        </span>
       </li>
       <li class="nav-item pr-2 list-group-item list-group-flush">
         {{ Auth::user()->forename }} {{Auth::user()->surname }}

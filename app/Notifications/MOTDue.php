@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class EventCreated extends Notification
+class MOTDue extends Notification
 {
     use Queueable;
 
@@ -29,7 +29,7 @@ class EventCreated extends Notification
      */
     public function via($notifiable)
     {
-        return ['database'];
+        return ['mail'];
     }
 
     /**
@@ -54,12 +54,8 @@ class EventCreated extends Notification
      */
     public function toArray($notifiable)
     {
-
         return [
-  //          'event_id' => $this->event->id,
-  //          'name' => $this->event->name,
-  //          'date' => $this->event->date,
-  //          'location_id' => $this->event->location_id
+            //
         ];
     }
 }

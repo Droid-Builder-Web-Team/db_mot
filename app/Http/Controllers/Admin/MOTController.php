@@ -7,6 +7,7 @@ use App\MOT;
 use App\Droid;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Notifications\MOTAdded;
 
 class MOTController extends Controller
 {
@@ -81,6 +82,11 @@ class MOTController extends Controller
                           ]);
         }
 
+        // Notify owners
+        foreach(Droid::find($request->droid_id)->users as $user)
+        {
+              $user->notify(new MOTAdded);
+        }
 
         return redirect()->route('droid.show', $request->droid_id)
                         ->with('success','MOT created successfully.');

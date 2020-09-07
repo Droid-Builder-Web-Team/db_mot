@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Event;
 use App\Location;
+use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\DataTables\EventsDataTable;
+use App\Notifications\EventCreated;
 
 class EventsController extends Controller
 {
@@ -54,7 +56,7 @@ class EventsController extends Controller
             'date' => 'required'
         ]);
 
-        Event::create($request->all());
+        $event = Event::create($request->all());
 
         return redirect()->route('admin.events.index')
                         ->with('success','Event created successfully.');
