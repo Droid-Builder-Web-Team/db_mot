@@ -56,6 +56,8 @@ class ImageController extends Controller
         $file = $folderPath . '240-' . $request->photo_name . '.png';
         Storage::disk('local')->put($file, $img->encode());
 
+        toastr()->success('Image uploaded successfully');
+
         return response()->json(['success'=>'success',
                         'sentsize'=>$request->image_size,
                         'receivedsize'=>strlen($image_base64),

@@ -76,10 +76,14 @@ class UserController extends Controller
             'email' => 'required',
         ]);
 
-        $user->update($request->all());
+        try {
+          $user->update($request->all());
+          toastr()->success('User updated successfully');
+        } catch (\Illuminate\Database\QueryException $exception) {
+          toastr()->error('Failed to update User');
+        }
 
-        return redirect()->route('user.show', auth()->user()->id)
-                        ->with('success','Details updated successfully.');
+        return redirect()->route('user.show', auth()->user()->id);
     }
 
     /**

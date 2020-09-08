@@ -63,6 +63,7 @@ class EventController extends Controller
             $result = $event->users()->updateExistingPivot($user, $attributes);
         else
             $result = $event->users()->save($user, $attributes);
+        toastr()->success('Interest registered for Event');
         return view('event.show', compact('event'));
     }
 
