@@ -6,19 +6,21 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use App\MOT;
 
 class MOTAdded extends Notification
 {
     use Queueable;
+    protected $mot;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(MOT $mot)
     {
-        //
+        $this->mot = $mot;
     }
 
     /**
@@ -55,7 +57,7 @@ class MOTAdded extends Notification
     public function toArray($notifiable)
     {
         return [
-
+            'id' => $this->mot->id,
         ];
     }
 }

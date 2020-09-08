@@ -10,6 +10,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\DataTables\EventsDataTable;
 use App\Notifications\EventCreated;
+use App\Notifications\EventChanged;
+use App\Notifications\EventCancelled;
+
 
 class EventsController extends Controller
 {
@@ -92,6 +95,11 @@ class EventsController extends Controller
             'name' => 'required',
             'description' => 'required',
         ]);
+
+        foreach($event->users as $user)
+        {
+            $user->notify(new EventChanged($event));
+        }
 
         try {
           $event->update($request->all());

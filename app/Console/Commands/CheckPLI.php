@@ -14,7 +14,7 @@ class CheckPLI extends Command
      *
      * @var string
      */
-    protected $signature = 'checkpli:cron';
+    protected $signature = 'cron:checkpli';
 
     /**
      * The console command description.
@@ -49,12 +49,12 @@ class CheckPLI extends Command
             if ($user->pli_date == $expired->format('Y-m-d'))
             {
                 $this->info('PLI: User PLI expires today: '.$user->forename);
-                $user->notify(new PLIDue);
+                $user->notify(new PLIDue($user));
             }
             if ($user->pli_date == $expiring->format('Y-m-d'))
             {
                 $this->info('PLI: User PLI expires in a month: '.$user->forename);
-                $user->notify(new PLIDue);
+                $user->notify(new PLIDue($user));
             }
         }
         return 0;

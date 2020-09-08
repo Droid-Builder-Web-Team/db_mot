@@ -6,21 +6,21 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-use App\User;
+use App\Event;
 
-class PLIDue extends Notification
+class EventChanged extends Notification
 {
     use Queueable;
-    protected $user;
+    protected $event;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct(User $user)
+    public function __construct(Event $event)
     {
-        $this->user = $user;
+        $this->event = $event;
     }
 
     /**
@@ -57,7 +57,7 @@ class PLIDue extends Notification
     public function toArray($notifiable)
     {
         return [
-            'id' => $this->user->id,
+            'id' => $this->event->id,
         ];
     }
 }

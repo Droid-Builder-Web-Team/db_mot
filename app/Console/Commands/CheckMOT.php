@@ -16,7 +16,7 @@ class CheckMOT extends Command
      *
      * @var string
      */
-    protected $signature = 'checkmot:cron';
+    protected $signature = 'cron:checkmot';
 
     /**
      * The console command description.

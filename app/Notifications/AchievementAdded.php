@@ -6,21 +6,21 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-use App\User;
+use App\Achievement;
 
-class PLIDue extends Notification
+class AchievementAdded extends Notification
 {
     use Queueable;
-    protected $user;
+    protected $achievement;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct(User $user)
+    public function __construct(Achievement $achievement)
     {
-        $this->user = $user;
+        $this->achievement = $achievement;
     }
 
     /**
@@ -57,7 +57,7 @@ class PLIDue extends Notification
     public function toArray($notifiable)
     {
         return [
-            'id' => $this->user->id,
+            'id' => $this->achievement->id,
         ];
     }
 }

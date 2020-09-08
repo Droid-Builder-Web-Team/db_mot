@@ -83,9 +83,10 @@ class MOTController extends Controller
         }
 
         // Notify owners
-        foreach(Droid::find($request->droid_id)->users as $user)
+        $droid = Droid::find($request->droid_id);
+        foreach($droid->users as $user)
         {
-              $user->notify(new MOTAdded);
+              $user->notify(new MOTAdded($droid));
         }
         toastr()->success('MOT added successfully');
         return redirect()->route('droid.show', $request->droid_id);
