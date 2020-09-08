@@ -56,10 +56,14 @@ class EventsController extends Controller
             'date' => 'required'
         ]);
 
-        $event = Event::create($request->all());
+        try {
+          $event = Event::create($request->all());
+          toastr()->success('Event created successfully');
+        } catch (\Illuminate\Database\QueryException $exception) {
+          toastr()->error('Failed to create Event');
+        }
 
-        return redirect()->route('admin.events.index')
-                        ->with('success','Event created successfully.');
+        return redirect()->route('admin.events.index');
     }
 
 
@@ -89,10 +93,14 @@ class EventsController extends Controller
             'description' => 'required',
         ]);
 
-        $event->update($request->all());
+        try {
+          $event->update($request->all());
+          toastr()->success('Event updated successfully');
+        } catch (\Illuminate\Database\QueryException $exception) {
+          toastr()->error('Failed to update Event');
+        }
 
-        return redirect()->route('admin.events.index')
-                        ->with('success','Event updated successfully.');
+        return redirect()->route('admin.events.index');
 
     }
 
@@ -106,7 +114,13 @@ class EventsController extends Controller
     {
         $event->delete();
 
-        return redirect()->route('admin.events.index')
-                        ->with('success','Event deleted successfully');
+        try {
+          $event->delete();
+          toastr()->success('Event deleted successfully');
+        } catch (\Illuminate\Database\QueryException $exception) {
+          toastr()->error('Failed to delete Event');
+        }
+
+        return redirect()->route('admin.events.index');
     }
 }

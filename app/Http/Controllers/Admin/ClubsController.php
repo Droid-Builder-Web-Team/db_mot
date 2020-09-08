@@ -6,6 +6,7 @@ use App\Club;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\DataTables\ClubsDataTable;
 
 class ClubsController extends Controller
 {
@@ -20,12 +21,9 @@ class ClubsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(ClubsDataTable $dataTable)
     {
-      $clubs = Club::orderBy('id', 'asc')->paginate(15);
-
-      return view('admin.clubs.index', compact('clubs'))
-        ->with('i', (request()->input('page', 1) -1) *15);
+      return $dataTable->render('admin.clubs.index');
     }
 
     /**

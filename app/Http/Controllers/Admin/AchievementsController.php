@@ -6,7 +6,7 @@ use App\Achievement;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use App\DataTables\AchievementsDataTable;
 
 class AchievementsController extends Controller
 {
@@ -22,12 +22,9 @@ class AchievementsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(AchievementsDataTable $dataTable)
     {
-        $achievements = Achievement::orderBy('id', 'asc')->paginate(15);
-
-        return view('admin.achievements.index', compact('achievements'))
-                      ->with('i', (request()->input('page', 1) -1) *15);
+        return $dataTable->render('admin.achievements.index');
     }
 
     /**

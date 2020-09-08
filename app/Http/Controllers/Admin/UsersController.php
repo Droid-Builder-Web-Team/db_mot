@@ -71,10 +71,14 @@ class UsersController extends Controller
             'surname' => 'required'
         ]);
 
-        $user->update($request->except('roles'));
+      try {
+          $user->update($request->except('roles'));
+          toastr()->success('User updated successfully');
+      } catch (\Illuminate\Database\QueryException $exception) {
+          toastr()->error('Failed to update User');
+      }
 
-        return redirect()->route('admin.users.index')
-                        ->with('success','User updated successfully.');
+        return redirect()->route('admin.users.index');
     }
 
     /**

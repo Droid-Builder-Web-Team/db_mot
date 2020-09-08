@@ -28,7 +28,8 @@ class EventsDataTable extends DataTable
           ->addColumn('action', '')
           ->editColumn('action', function($row) {
             $crudRoutePart = "event";
-            return view('partials.datatablesActions', compact('row', 'crudRoutePart'));
+            $parts = array('view', 'edit', 'delete');
+            return view('partials.datatablesActions', compact('row', 'crudRoutePart', 'parts'));
           })
           ->rawColumns(['action']);
     }
@@ -56,12 +57,12 @@ class EventsDataTable extends DataTable
                   ->columns($this->getColumns())
                   ->minifiedAjax()
                   ->dom('Bfrtip')
+                  ->lengthMenu([15,25,50])
                   ->orderBy(0)
                   ->buttons(
                       Button::make('create'),
                       Button::make('export'),
                       Button::make('print'),
-                      Button::make('reset'),
                       Button::make('reload')
                   );
     }

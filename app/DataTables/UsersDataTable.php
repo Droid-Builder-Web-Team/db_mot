@@ -31,7 +31,8 @@ class UsersDataTable extends DataTable
           ->addColumn('action', '')
           ->editColumn('action', function($row) {
             $crudRoutePart = "user";
-            return view('partials.datatablesActions', compact('row', 'crudRoutePart'));
+            $parts = array('view', 'edit', 'delete');
+            return view('partials.datatablesActions', compact('row', 'crudRoutePart', 'parts'));
           })
           ->rawColumns(['action']);
     }
@@ -59,6 +60,7 @@ class UsersDataTable extends DataTable
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('Bfrtip')
+                    ->lengthMenu([15,25,50])
                     ->orderBy(0)
                     ->buttons(
                         Button::make('create'),

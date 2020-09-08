@@ -48,10 +48,14 @@ class LocationController extends Controller
             'postcode' => 'required'
         ]);
 
-        Location::create($request->all());
+        try {
+          Location::create($request->all());
+          toastr()->success('Location created successfully');
+        } catch (\Illuminate\Database\QueryException $exception) {
+          toastr()->error('Failed to create Location');
+        }
 
-        return redirect()->route('admin.locations.index')
-                        ->with('success','Location created successfully.');
+        return redirect()->route('admin.locations.index');
     }
 
 
@@ -80,10 +84,14 @@ class LocationController extends Controller
           'town' => 'required',
       ]);
 
-      $location->update($request->all());
+      try {
+          $location->update($request->all());
+          toastr()->success('Location updated successfully');
+      } catch (\Illuminate\Database\QueryException $exception) {
+          toastr()->error('Failed to update Location');
+      }
 
-      return redirect()->route('admin.locations.index')
-                      ->with('success','Location updated successfully.');
+      return redirect()->route('admin.locations.index');
     }
 
     /**

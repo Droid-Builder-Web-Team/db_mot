@@ -19,9 +19,25 @@ class ClubsDataTable extends DataTable
      */
     public function dataTable($query)
     {
-        return datatables()
-            ->eloquent($query)
-            ->addColumn('action', 'clubs.action');
+      return datatables()
+          ->eloquent($query)
+          ->addColumn('links', function(Club $club) {
+              $output = "";
+              if(isset($club->facebook))
+                  $output .="<a class=\"btn-sm btn-primary\" href=\"".$club->facebook."\">Facebook</a>";
+              if(isset($club->website))
+                  $output .="<a class=\"btn-sm btn-primary\" href=\"".$club->website."\">Website</a>";
+              if(isset($club->forum))
+                  $output .="<a class=\"btn-sm btn-primary\" href=\"".$club->forum."\">Forum</a>";
+              return $output;
+            })
+          ->addColumn('action', '')
+          ->editColumn('action', function($row) {
+            $crudRoutePart = "club";
+            $parts = array( 'edit', 'delete');
+            return view('partials.datatablesActions', compact('row', 'crudRoutePart', 'parts'));
+          })
+          ->rawColumns(['action', 'links']);
     }
 
     /**
@@ -47,12 +63,11 @@ class ClubsDataTable extends DataTable
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('Bfrtip')
-                    ->orderBy(1)
+                    ->orderBy(0, 'asc')
                     ->buttons(
                         Button::make('create'),
                         Button::make('export'),
                         Button::make('print'),
-                        Button::make('reset'),
                         Button::make('reload')
                     );
     }
@@ -64,17 +79,16 @@ class ClubsDataTable extends DataTable
      */
     protected function getColumns()
     {
-        return [
-            Column::computed('action')
-                  ->exportable(false)
-                  ->printable(false)
-                  ->width(60)
-                  ->addClass('text-center'),
-            Column::make('id'),
-            Column::make('add your columns'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
-        ];
+      return [
+          Column::make('id'),
+          Column::make('name'),
+          Column::computed('links'),
+          Column::computed('action')
+                ->exportable(false)
+                ->printable(false)
+                ->width(200)
+                ->addClass('text-center'),
+      ];
     }
 
     /**

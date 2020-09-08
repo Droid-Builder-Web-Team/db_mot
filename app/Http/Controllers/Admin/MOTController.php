@@ -87,9 +87,8 @@ class MOTController extends Controller
         {
               $user->notify(new MOTAdded);
         }
-
-        return redirect()->route('droid.show', $request->droid_id)
-                        ->with('success','MOT created successfully.');
+        toastr()->success('MOT added successfully');
+        return redirect()->route('droid.show', $request->droid_id);
     }
 
 }

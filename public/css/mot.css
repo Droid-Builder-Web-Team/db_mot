@@ -68,3 +68,9 @@
 .droid-card-row input[type=image]:hover {
   opacity: 1;
 }
+
+.actions-buttons {
+  border-width: 0px;
+  padding: 2px 2px;
+  margin-bottom: 0px;
+}

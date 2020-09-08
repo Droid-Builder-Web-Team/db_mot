@@ -24,14 +24,15 @@ class DroidsDataTable extends DataTable
             ->eloquent($query)
             ->addColumn('mot', function(Droid $droid) {
                 if ($droid->club->hasOption('mot'))
-                  return "<button class=\"btn-sm alert ".$droid->displayMOT()['state']."\">".$droid->displayMOT()['status']."</button>";
+                  return "<button class=\"btn-sm alert ".$droid->displayMOT()['state']." actions-buttons\">".$droid->displayMOT()['status']."</button>";
                 else
                   return "";
             })
             ->addColumn('action', '')
             ->editColumn('action', function($row) {
               $crudRoutePart = "droid";
-              return view('partials.datatablesActions', compact('row', 'crudRoutePart'));
+              $parts = array('view', 'edit', 'delete');
+              return view('partials.datatablesActions', compact('row', 'crudRoutePart', 'parts'));
             })
             ->rawColumns(['mot', 'action']);
     }
@@ -58,13 +59,13 @@ class DroidsDataTable extends DataTable
                   ->setTableId('droids-table')
                   ->columns($this->getColumns())
                   ->minifiedAjax()
-                  ->dom('Bfrtip')
+                  ->dom('lBfrtip')
+                  ->lengthMenu([15,25,50])
                   ->orderBy(0)
                   ->buttons(
                       Button::make('create'),
                       Button::make('export'),
                       Button::make('print'),
-                      Button::make('reset'),
                       Button::make('reload')
                   );
 

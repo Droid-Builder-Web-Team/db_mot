@@ -19,9 +19,15 @@ class AchievementsDataTable extends DataTable
      */
     public function dataTable($query)
     {
-        return datatables()
-            ->eloquent($query)
-            ->addColumn('action', 'achievements.action');
+      return datatables()
+          ->eloquent($query)
+          ->addColumn('action', '')
+          ->editColumn('action', function($row) {
+            $crudRoutePart = "achievement";
+            $parts = array( 'edit', 'delete');
+            return view('partials.datatablesActions', compact('row', 'crudRoutePart', 'parts'));
+          })
+          ->rawColumns(['action']);
     }
 
     /**
@@ -46,13 +52,12 @@ class AchievementsDataTable extends DataTable
                     ->setTableId('achievements-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
-                    ->dom('Bfrtip')
-                    ->orderBy(1)
+                    ->dom('Bfrtipl')
+                    ->orderBy(0, 'asc')
                     ->buttons(
                         Button::make('create'),
                         Button::make('export'),
                         Button::make('print'),
-                        Button::make('reset'),
                         Button::make('reload')
                     );
     }
@@ -64,17 +69,16 @@ class AchievementsDataTable extends DataTable
      */
     protected function getColumns()
     {
-        return [
-            Column::computed('action')
-                  ->exportable(false)
-                  ->printable(false)
-                  ->width(60)
-                  ->addClass('text-center'),
-            Column::make('id'),
-            Column::make('add your columns'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
-        ];
+      return [
+          Column::make('id'),
+          Column::make('name'),
+          Column::make('description'),
+          Column::computed('action')
+                ->exportable(false)
+                ->printable(false)
+                ->width(200)
+                ->addClass('text-center'),
+      ];
     }
 
     /**

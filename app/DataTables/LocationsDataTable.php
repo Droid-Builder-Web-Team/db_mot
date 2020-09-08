@@ -27,7 +27,8 @@ class LocationsDataTable extends DataTable
           ->addColumn('action', '')
           ->editColumn('action', function($row) {
             $crudRoutePart = "location";
-            return view('partials.datatablesActions', compact('row', 'crudRoutePart'));
+            $parts = array( 'view', 'edit', 'delete');
+            return view('partials.datatablesActions', compact('row', 'crudRoutePart', 'parts'));
           })
           ->rawColumns(['action', 'map']);
     }
@@ -55,12 +56,12 @@ class LocationsDataTable extends DataTable
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('Bfrtip')
+                    ->lengthMenu([15,25,50])
                     ->orderBy(1)
                     ->buttons(
                         Button::make('create'),
                         Button::make('export'),
                         Button::make('print'),
-                        Button::make('reset'),
                         Button::make('reload')
                     );
     }
