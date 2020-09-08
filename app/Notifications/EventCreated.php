@@ -58,10 +58,10 @@ class EventCreated extends Notification
     {
 
         return [
-  //          'event_id' => $this->event->id,
-  //          'name' => $this->event->name,
-  //          'date' => $this->event->date,
-  //          'location_id' => $this->event->location_id
+          'id' => $this->event->id,
+          'title' => "An event has been created",
+          'link' => "testlink?".$this->event->id,
+          'text' => "An event you may be interested in has been created"
         ];
     }
 }

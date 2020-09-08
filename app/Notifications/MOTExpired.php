@@ -57,7 +57,10 @@ class MOTExpired extends Notification
     public function toArray($notifiable)
     {
         return [
-            'id' => $this->droid->id,
+          'id' => $this->droid->id,
+          'title' => "A droid's MOT has expired",
+          'link' => "testlink?".$this->droid->id,
+          'text' => "An MOT for one of your droids has expired."
         ];
     }
 }

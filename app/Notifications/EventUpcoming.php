@@ -58,6 +58,9 @@ class EventUpcoming extends Notification
     {
         return [
             'id' => $this->event->id,
+            'title' => "An event is just a week away",
+            'link' => "testlink?".$this->event->id,
+            'text' => "One of the events you are interested in is happening in a week."
         ];
     }
 }

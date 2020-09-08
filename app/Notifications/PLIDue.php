@@ -57,7 +57,10 @@ class PLIDue extends Notification
     public function toArray($notifiable)
     {
         return [
-            'id' => $this->user->id,
+          'id' => $this->user->id,
+          'title' => "Your PLI is due in a month",
+          'link' => "testlink?".$this->droid->id,
+          'text' => "You need to pay your PLI in a month."
         ];
     }
 }

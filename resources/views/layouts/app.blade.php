@@ -51,11 +51,30 @@
   @endif
 @else
 
-      <li class="nav-item pr-3 list-group-item list-group-flush">
-        <i class="far fa-bell fa-2x"></i><span class="badge badge-primary badge-pill">
+      <li class="nav-item pr-3 list-group-item list-group-flush dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+          <i class="far fa-bell fa-2x"></i>
+        <span class="badge badge-primary badge-pill">
           {{ Auth::user()->unreadNotifications->count() }}
-        </span>
+        </span></a>
+        <div class="dropdown-menu">
+           @foreach(auth()->user()->unreadNotifications as $notification)
+        <a class="dropdown-item preview-item">
+            <div class="preview-thumbnail">
+                <div class="preview-icon bg-dark rounded-circle">
+                    <i class="mdi mdi-xbox-controller text-success"></i>
+                </div>
+            </div>
+            <div class="preview-item-content">
+                <p class="preview-subject mb-1">{{ $notification->data['title'] }}</p>
+                <p class="text-muted ellipsis mb-0">{{ $notification->data['text'] }}</p>
+            </div>
+        </a>
+    @endforeach
+  </div>
       </li>
+
+
       <li class="nav-item pr-2 list-group-item list-group-flush">
         {{ Auth::user()->forename }} {{Auth::user()->surname }}
       </li>

@@ -8,7 +8,6 @@ class UserNotificationsController extends Controller
 {
     public function show()
     {
-
         $notifications = auth()->user()->notifications;
 
         $notifications->markAsRead();

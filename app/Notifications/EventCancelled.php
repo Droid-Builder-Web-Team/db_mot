@@ -57,7 +57,10 @@ class EventCancelled extends Notification
     public function toArray($notifiable)
     {
         return [
-            'id' => $this->event->id,
+          'id' => $this->event->id,
+          'title' => "An event is canelled",
+          'link' => "testlink?".$this->event->id,
+          'text' => "One of the events you are interested has been cancelled."
         ];
     }
 }

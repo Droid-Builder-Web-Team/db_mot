@@ -57,7 +57,10 @@ class MOTAdded extends Notification
     public function toArray($notifiable)
     {
         return [
-            'id' => $this->mot->id,
+          'id' => $this->mot->id,
+          'title' => "An MOT has been added",
+          'link' => "testlink?".$this->mot->id,
+          'text' => "An MOT for one of your droids has been added."
         ];
     }
 }

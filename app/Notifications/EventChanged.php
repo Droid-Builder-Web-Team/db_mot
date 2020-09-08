@@ -57,7 +57,10 @@ class EventChanged extends Notification
     public function toArray($notifiable)
     {
         return [
-            'id' => $this->event->id,
+          'id' => $this->event->id,
+          'title' => "An event has been changed",
+          'link' => "testlink?".$this->event->id,
+          'text' => "One of the events you are interested in has been changed."
         ];
     }
 }

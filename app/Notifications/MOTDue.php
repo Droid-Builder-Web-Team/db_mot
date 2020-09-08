@@ -57,7 +57,10 @@ class MOTDue extends Notification
     public function toArray($notifiable)
     {
         return [
-            'id' => $this->droid->id,
+          'id' => $this->droid->id,
+          'title' => "A droid has an MOT due",
+          'link' => "testlink?".$this->droid->id,
+          'text' => "An MOT for one of your droids is due in a month."
         ];
     }
 }
