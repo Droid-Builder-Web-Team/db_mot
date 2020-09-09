@@ -33,7 +33,16 @@
             <a class="btn-sm btn-info" href="{{ action('UserController@downloadPDF', $user->id )}}" target="_blank">Cover Note</a>
         @endif
         @if($has_mot && !$user->validPLI() || $user->expiringPLI())
-            <a class="btn-sm btn-danger" href="" target="_blank">Pay PLI</a>
+          <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+            <input type="hidden" name="cmd" value="_s-xclick">
+            <input type="hidden" name="hosted_button_id" value="2NC9NZLY3CK58">
+            <input type="hidden" name="custom" value="{{ $user->id }}">
+            <input type="hidden" name="on0" value="MOT Type">
+            <input type="hidden" name="os0" value="Initial/Renewal">
+            <input type="hidden" name="currency_code" value="GBP">
+            <input type="image" src="https://www.paypalobjects.com/en_GB/i/btn/btn_paynow_SM.gif" border="0" name="submit" alt="PayPal – The safer, easier way to pay online!">
+            <img alt="" border="0" src="https://www.paypalobjects.com/en_GB/i/scr/pixel.gif" width="1" height="1">
+          </form>
         @endif
       </td>
     </tr>

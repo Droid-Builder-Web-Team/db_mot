@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use Carbon\Carbon;
 use App\User;
 use App\Notifications\PLIDue;
+use App\Notifications\PLIExpired;
 
 class CheckPLI extends Command
 {
@@ -49,7 +50,7 @@ class CheckPLI extends Command
             if ($user->pli_date == $expired->format('Y-m-d'))
             {
                 $this->info('PLI: User PLI expires today: '.$user->forename);
-                $user->notify(new PLIDue($user));
+                $user->notify(new PLIExpired($user));
             }
             if ($user->pli_date == $expiring->format('Y-m-d'))
             {

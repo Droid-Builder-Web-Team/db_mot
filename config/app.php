@@ -163,6 +163,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
+        Srmklive\PayPal\Providers\PayPalServiceProvider::class,
         /*
          * Package Service Providers...
          */
@@ -228,6 +229,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
+        'PayPal' => Srmklive\PayPal\Facades\PayPal::class,
     ],
 
 ];

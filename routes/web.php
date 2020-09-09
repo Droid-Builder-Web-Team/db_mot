@@ -52,9 +52,10 @@ Route::get('/', function () {    return view('home');
   Route::get('/cover_note/{id}', 'UserController@downloadPDF');
   Route::get('/id/{id}', 'ID');
   Route::get('/topps', 'ToppsController');
-  Route::get('notifications', 'UserNotificationsController@show')->middleware('auth');
+  Route::get('notifications', 'UserNotificationsController@show')->middleware('auth')->name('notifications');
 //})->middleware('verified');
 
 
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::post('ipn/notify','PaypalController@postNotify');

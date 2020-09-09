@@ -57,7 +57,10 @@ class PLIPaid extends Notification
     public function toArray($notifiable)
     {
         return [
-            'id' => $this->user->id,
+          'id' => $this->user->id,
+          'title' => "Your PLI has been paid",
+          'link' => "testlink?".$this->user->id,
+          'text' => "Your payment for PLI has been received. You are covered for another year."
         ];
     }
 }

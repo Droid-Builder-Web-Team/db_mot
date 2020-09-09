@@ -11,6 +11,7 @@
  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.21/datatables.min.css"/>
  <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css">
+ <!-- <link href="{{ asset('css/dark.css') }}" rel="stylesheet"> -->
  <link href="{{ asset('css/mot.css') }}" rel="stylesheet">
 
  <script type="text/javascript" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js" defer></script>
@@ -39,7 +40,11 @@
         </i>
       </svg>
     </button>
-    <ul class="navbar-nav ml-md-auto list-group flex-sm-row">
+
+
+
+
+    <ul class="c-header-nav mfs-auto">
 @guest
     <li class="nav-item pr-3 list-group-item list-group-flush">
       <a class="c-sidebar-nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -51,36 +56,44 @@
   @endif
 @else
 
-      <li class="nav-item pr-3 list-group-item list-group-flush dropdown">
-        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-          <i class="far fa-bell fa-2x"></i>
-        <span class="badge badge-primary badge-pill">
-          {{ Auth::user()->unreadNotifications->count() }}
-        </span></a>
-        <div class="dropdown-menu">
-           @foreach(auth()->user()->unreadNotifications as $notification)
-        <a class="dropdown-item preview-item">
-            <div class="preview-thumbnail">
-                <div class="preview-icon bg-dark rounded-circle">
-                    <i class="mdi mdi-xbox-controller text-success"></i>
-                </div>
-            </div>
-            <div class="preview-item-content">
-                <p class="preview-subject mb-1">{{ $notification->data['title'] }}</p>
-                <p class="text-muted ellipsis mb-0">{{ $notification->data['text'] }}</p>
-            </div>
+      <li class="c-header-nav-item dropdown mx-2">
+        <a class="c-header-nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+          <i class="far fa-bell fa-2x"></i><span class="badge badge-primary badge-pill">
+            {{ Auth::user()->unreadNotifications->count() }}
+          </span>
         </a>
-    @endforeach
-  </div>
+      <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg  d-md-down-none pt-0">
+      <div class="dropdown-header bg-light">
+        <strong>You have {{ Auth::user()->unreadNotifications->count() }} unread notifications</strong>
+      </div>
+
+@foreach(Auth::user()->unreadNotifications as $notification)
+      <a class="dropdown-item" href="#">
+        <div class="message">
+          <div>
+            <small class="text-muted float-right mt-1">{{ $notification->created_at }}</small>
+          </div>
+          <div class="font-weight-bold">
+            {{ $notification->data['title'] }}
+          </div>
+          <div class="small text-muted">
+            {{ $notification->data['text'] }}
+          </div>
+        </div>
+      </a>
+@endforeach
+
+          <a class="dropdown-item text-center border-top" href="{{ route('notifications')}}">
+            View all notifications
+          </a>
+        </div>
       </li>
-
-
-      <li class="nav-item pr-2 list-group-item list-group-flush">
+      <li class="c-header-nav-item mx-2">
         {{ Auth::user()->forename }} {{Auth::user()->surname }}
       </li>
 
 @endguest
-</ul>
+    </ul>
   </header>
   <div class="c-body">
     <main class="c-main">

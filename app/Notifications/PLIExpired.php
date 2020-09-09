@@ -8,7 +8,7 @@ use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use App\User;
 
-class PLIDue extends Notification
+class PLIExpired extends Notification
 {
     use Queueable;
     protected $user;
@@ -58,9 +58,9 @@ class PLIDue extends Notification
     {
         return [
           'id' => $this->user->id,
-          'title' => "Your PLI is due in a month",
+          'title' => "Your PLI has Expired",
           'link' => "testlink?".$this->user->id,
-          'text' => "You need to pay your PLI in a month."
+          'text' => "You need to pay your PLI to have cover."
         ];
     }
 }
