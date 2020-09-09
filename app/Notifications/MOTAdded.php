@@ -12,6 +12,9 @@ class MOTAdded extends Notification
 {
     use Queueable;
     protected $mot;
+    protected $title;
+    protected $text;
+    protected $link;
 
     /**
      * Create a new notification instance.
@@ -21,6 +24,9 @@ class MOTAdded extends Notification
     public function __construct(MOT $mot)
     {
         $this->mot = $mot;
+        $this->title = "An MOT has been added.";
+        $this->text = "An MOT for one of your droids has been added.";
+        $this->link = route('mot.show', $this->mot->id);
     }
 
     /**
@@ -43,9 +49,9 @@ class MOTAdded extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+                      ->line($this->title)
+                      ->action('View MOT', $this->link)
+                      ->line($this->text);
     }
 
     /**
@@ -58,9 +64,9 @@ class MOTAdded extends Notification
     {
         return [
           'id' => $this->mot->id,
-          'title' => "An MOT has been added",
-          'link' => "testlink?".$this->mot->id,
-          'text' => "An MOT for one of your droids has been added."
+          'title' => $this->title,
+          'link' => $this->link,
+          'text' => $this->text
         ];
     }
 }

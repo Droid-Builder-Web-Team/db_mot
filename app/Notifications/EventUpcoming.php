@@ -12,6 +12,9 @@ class EventUpcoming extends Notification
 {
     use Queueable;
     protected $event;
+    protected $title;
+    protected $text;
+    protected $link;
 
     /**
      * Create a new notification instance.
@@ -21,6 +24,9 @@ class EventUpcoming extends Notification
     public function __construct(Event $event)
     {
         $this->event = $event;
+        $this->title = "An event is just a week away.";
+        $this->text = "One of the events you are interested in is happening in a week.";
+        $this->link = route('event.show', $this->event->id);
     }
 
     /**
@@ -43,9 +49,9 @@ class EventUpcoming extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+                    ->line($this->title)
+                    ->action('View Event', $this->link)
+                    ->line($this->text);
     }
 
     /**
@@ -58,9 +64,9 @@ class EventUpcoming extends Notification
     {
         return [
             'id' => $this->event->id,
-            'title' => "An event is just a week away",
-            'link' => "testlink?".$this->event->id,
-            'text' => "One of the events you are interested in is happening in a week."
+            'title' => $this->title,
+            'link' => $this->link,
+            'text' => $this->text
         ];
     }
 }

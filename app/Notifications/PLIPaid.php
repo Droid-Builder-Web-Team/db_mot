@@ -12,6 +12,9 @@ class PLIPaid extends Notification
 {
     use Queueable;
     protected $user;
+    protected $title;
+    protected $text;
+    protected $link;
 
     /**
      * Create a new notification instance.
@@ -21,6 +24,9 @@ class PLIPaid extends Notification
     public function __construct(User $user)
     {
         $this->user = $user;
+        $this->title = "Your PLI has been paid";
+        $this->text = "Your payment for PLI has been received. You are covered for another year.";
+        $this->link = route('user.show', $this->user->id);
     }
 
     /**
@@ -43,9 +49,9 @@ class PLIPaid extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+                          ->line($this->title)
+                          ->action('View User', $this->link)
+                          ->line($this->text);
     }
 
     /**
@@ -58,9 +64,9 @@ class PLIPaid extends Notification
     {
         return [
           'id' => $this->user->id,
-          'title' => "Your PLI has been paid",
-          'link' => "testlink?".$this->user->id,
-          'text' => "Your payment for PLI has been received. You are covered for another year."
+          'title' => $this->title,
+          'link' => $this->link,
+          'text' => $this->text
         ];
     }
 }

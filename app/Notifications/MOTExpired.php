@@ -12,6 +12,9 @@ class MOTExpired extends Notification
 {
     use Queueable;
     protected $droid;
+    protected $title;
+    protected $text;
+    protected $link;
 
     /**
      * Create a new notification instance.
@@ -21,6 +24,9 @@ class MOTExpired extends Notification
     public function __construct(Droid $droid)
     {
        $this->droid = $droid;
+       $this->title = "A droid's MOT has expired";
+       $this->text = "An MOT for one of your droids has expired.";
+       $this->link = route('droid.show', $this->droid->id);
     }
 
     /**
@@ -43,9 +49,9 @@ class MOTExpired extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+                      ->line($this->title)
+                      ->action('View Droid', $this->link)
+                      ->line($this->text);
     }
 
     /**
@@ -58,9 +64,9 @@ class MOTExpired extends Notification
     {
         return [
           'id' => $this->droid->id,
-          'title' => "A droid's MOT has expired",
-          'link' => "testlink?".$this->droid->id,
-          'text' => "An MOT for one of your droids has expired."
+          'title' => $this->title,
+          'link' => $this->link,
+          'text' => $this->text
         ];
     }
 }

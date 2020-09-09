@@ -12,6 +12,9 @@ class EventCreated extends Notification
 {
     use Queueable;
     protected $event;
+    protected $title;
+    protected $text;
+    protected $link;
 
     /**
      * Create a new notification instance.
@@ -21,6 +24,9 @@ class EventCreated extends Notification
     public function __construct(Event $event)
     {
         $this->event = $event;
+        $this->title = "An event has been created";
+        $this->text = "An event you may be interested in has been created.";
+        $this->link = route('event.show', $this->event->id);
     }
 
     /**
@@ -43,9 +49,9 @@ class EventCreated extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+                      ->line($this->title)
+                      ->action('View Event', $this->link)
+                      ->line($this->text);
     }
 
     /**
@@ -56,12 +62,11 @@ class EventCreated extends Notification
      */
     public function toArray($notifiable)
     {
-
         return [
           'id' => $this->event->id,
-          'title' => "An event has been created",
-          'link' => "testlink?".$this->event->id,
-          'text' => "An event you may be interested in has been created"
+          'title' => $this->title,
+          'link' => $this->link,
+          'text' => $this->text
         ];
     }
 }

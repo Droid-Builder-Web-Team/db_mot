@@ -12,6 +12,9 @@ class EventChanged extends Notification
 {
     use Queueable;
     protected $event;
+    protected $title;
+    protected $text;
+    protected $link;
 
     /**
      * Create a new notification instance.
@@ -21,6 +24,9 @@ class EventChanged extends Notification
     public function __construct(Event $event)
     {
         $this->event = $event;
+        $this->title = "An event has been changed";
+        $this->text = "One of the events you are interested in has been changed.";
+        $this->link = route('event.show', $this->event->id);
     }
 
     /**
@@ -31,7 +37,7 @@ class EventChanged extends Notification
      */
     public function via($notifiable)
     {
-        return ['database'];
+        return ['database', 'mail'];
     }
 
     /**
@@ -43,9 +49,9 @@ class EventChanged extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+                    ->line($this->title)
+                    ->action('View Event', $this->link)
+                    ->line($this->text);
     }
 
     /**
@@ -58,9 +64,9 @@ class EventChanged extends Notification
     {
         return [
           'id' => $this->event->id,
-          'title' => "An event has been changed",
-          'link' => "testlink?".$this->event->id,
-          'text' => "One of the events you are interested in has been changed."
+          'title' => $this->title,
+          'link' => $this->link,
+          'text' => $this->text
         ];
     }
 }

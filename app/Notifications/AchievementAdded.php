@@ -12,6 +12,9 @@ class AchievementAdded extends Notification
 {
     use Queueable;
     protected $achievement;
+    protected $title;
+    protected $text;
+    protected $link;
 
     /**
      * Create a new notification instance.
@@ -21,6 +24,9 @@ class AchievementAdded extends Notification
     public function __construct(Achievement $achievement)
     {
         $this->achievement = $achievement;
+        $this->title = "An achievement has been awarded.";
+        $this->text = "You have been awarded an achievement.";
+        $this->link = route('achievement.show', $this->achievement->id);
     }
 
     /**
@@ -43,9 +49,9 @@ class AchievementAdded extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+                    ->line($this->title)
+                    ->action('View Achievement', $this->link)
+                    ->line($this->text);
     }
 
     /**
@@ -57,7 +63,10 @@ class AchievementAdded extends Notification
     public function toArray($notifiable)
     {
         return [
-            'id' => $this->achievement->id,
+          'id' => $this->achievement->id,
+          'title' => $this->title,
+          'link' => $this->link,
+          'text' => $this->text
         ];
     }
 }
