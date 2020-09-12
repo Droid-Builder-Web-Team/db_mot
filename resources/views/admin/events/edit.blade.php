@@ -27,7 +27,7 @@
             <div class="col-xs-3 col-sm-3 col-md-3">
                 <div class="form-group">
                   <strong>Location</strong><br>
-                  <select name=location_id>
+                  <select class="js-example-basic-single" name=location_id>
                     @foreach($locations as $location)
                       <option value="{{ $location->id }}"
                       @if($event->location_id == $location->id)
@@ -81,4 +81,10 @@
         </div>
 
     </form>
+    <script>
+// In your Javascript (external .js resource or <script> tag)
+$(document).ready(function() {
+    $('.js-example-basic-single').select2();
+});
+</script>
 @endsection

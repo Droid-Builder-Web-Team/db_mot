@@ -54,6 +54,7 @@ class AchievementsDataTable extends DataTable
                     ->minifiedAjax()
                     ->dom('Bfrtipl')
                     ->orderBy(0, 'asc')
+                    ->lengthMenu([15,25,50])
                     ->buttons(
                         Button::make('create'),
                         Button::make('export'),

@@ -26,7 +26,7 @@
            <div class="col-xs-3 col-sm-3 col-md-3">
                <div class="form-group">
                  <strong>Club</strong><br>
-                 <select name=club_id>
+                 <select class="js-example-basic-single" name=club_id>
                    @foreach($clubs as $club)
                      <option value="{{ $club->id }}"
                      @if($droid->club_id == $club->id)
@@ -150,4 +150,10 @@
 
 
     </form>
+    <script>
+// In your Javascript (external .js resource or <script> tag)
+$(document).ready(function() {
+    $('.js-example-basic-single').select2();
+});
+</script>
 @endsection
