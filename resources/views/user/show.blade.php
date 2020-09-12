@@ -2,58 +2,115 @@
 
 @section('content')
 
-<div class="row">
-  <table class="table col-md-9 table-striped">
-    <tr><th>Name</th><td>{{ $user->forename }} {{ $user->surname }}</td></tr>
-    <tr><th>email</th><td>{{ $user->email }}</td></tr>
-    <tr><th>County</th><td>{{ $user->county }}</td></tr>
-    <tr><th>Postcode</th><td>{{ $user->postcode }}</td></tr>
-    <tr><th>Forum Username</th><td>{{ $user->username }}</td></tr>
-    <tr><th>Created On</th><td>{{ $user->created_on }}</td></tr>
+@php
+  $uses_pli = 0;
+  $has_mot = 0;
+@endphp
+@foreach($user->droids as $droid)
+  @if($droid->club->hasOption('mot'))
     @php
-      $uses_pli = 0;
-      $has_mot = 0;
+      $uses_pli = 1
     @endphp
-    @foreach($user->droids as $droid)
-      @if($droid->club->hasOption('mot'))
-        @php
-          $uses_pli = 1
-        @endphp
-        @if($droid->hasMOT() && !$droid->hasExpiringMOT())
-          @php
-            $has_mot = 1
-          @endphp
-        @endif
-      @endif
-    @endforeach
-    @if ($uses_pli)
-    <tr><th>PLI Last Payed</th>
-      <td>{{ $user->pli_date }}
-        @if($user->validPLI())
-            <a class="btn-sm btn-info" href="{{ action('UserController@downloadPDF', $user->id )}}" target="_blank">Cover Note</a>
-        @endif
-        @if($has_mot && !$user->validPLI() || $user->expiringPLI())
-          <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-            <input type="hidden" name="cmd" value="_s-xclick">
-            <input type="hidden" name="hosted_button_id" value="2NC9NZLY3CK58">
-            <input type="hidden" name="custom" value="{{ $user->id }}">
-            <input type="hidden" name="on0" value="MOT Type">
-            <input type="hidden" name="os0" value="Initial/Renewal">
-            <input type="hidden" name="currency_code" value="GBP">
-            <input type="image" src="https://www.paypalobjects.com/en_GB/i/btn/btn_paynow_SM.gif" border="0" name="submit" alt="PayPal – The safer, easier way to pay online!">
-            <img alt="" border="0" src="https://www.paypalobjects.com/en_GB/i/scr/pixel.gif" width="1" height="1">
-          </form>
-        @endif
-      </td>
-    </tr>
+    @if($droid->hasMOT() && !$droid->hasExpiringMOT())
+      @php
+        $has_mot = 1
+      @endphp
     @endif
-    <tr><th>ID Link</th>
-      <td><a href="{{ url('/')."/id.php?id=".$user->badge_id }}">{{ url('/')."/id.php?id=".$user->badge_id }}</a></td>
-    </tr>
-    <tr><th>QR Code:</th>
-      <td><img src="{{ route('image.displayQRCode',$user->id) }}" alt="qr_code" class="img-fluid mb-1 rounded" style="height:150px;"></td>
-    </tr>
-  </table>
+  @endif
+@endforeach
+
+
+<div class="row">
+  <div class="col md-4">
+    <div class="card">
+      <div class="card-header">
+        {{ $user->forename }} {{ $user->surname }}
+        @if ($uses_pli)
+          @if($user->validPLI())
+            <span class="badge badge-info float-right">
+              <a class="btn-sm btn-info" href="{{ action('UserController@downloadPDF', $user->id )}}" target="_blank">Cover Note</a>
+            </span>
+          @else
+            <span class="badge badge-danger float-right">
+              No Valid PLI
+            </span>
+          @endif
+          @if($has_mot && !$user->validPLI() || $user->expiringPLI())
+            <span class="badge badge-warning float-right">
+              <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                Pay PLI:
+                <input type="hidden" name="cmd" value="_s-xclick">
+                <input type="hidden" name="hosted_button_id" value="2NC9NZLY3CK58">
+                <input type="hidden" name="custom" value="{{ $user->id }}">
+                <input type="hidden" name="on0" value="MOT Type">
+                <input type="hidden" name="os0" value="Initial/Renewal">
+                <input type="hidden" name="currency_code" value="GBP">
+                <input type="image" src="https://www.paypalobjects.com/en_GB/i/btn/btn_paynow_SM.gif" border="0" name="submit" alt="PayPal – The safer, easier way to pay online!">
+                <img alt="" border="0" src="https://www.paypalobjects.com/en_GB/i/scr/pixel.gif" width="1" height="1">
+              </form>
+            </span>
+          @endif
+        @endif
+      </div>
+      <div class="card-body">
+        <table class="table table-striped">
+          <tr><th>email</th><td>{{ $user->email }}</td></tr>
+          <tr><th>County</th><td>{{ $user->county }}</td></tr>
+          <tr><th>Postcode</th><td>{{ $user->postcode }}</td></tr>
+          <tr><th>Forum Username</th><td>{{ $user->username }}</td></tr>
+          <tr><th>Created On</th><td>{{ $user->created_on }}</td></tr>
+          @if ($uses_pli)
+            <tr><th>PLI Last Payed</th><td>{{ $user->pli_date }}</td></tr>
+          @endif
+          <tr><th>QR Code:</th>
+            <td>
+              <a href="{{ url('/')."/id.php?id=".$user->badge_id }}">
+                <img src="{{ route('image.displayQRCode',$user->id) }}" alt="qr_code" class="img-fluid mb-1 rounded" style="height:150px;">
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class"col-md-3">
+    <div class="card">
+      <div class="card-body p-3 d-flex align-items-center">
+        <div class="bg-gradient-info p-3 mfe-3">
+          <i class="fas fa-calendar fa-fw"></i>
+        </div>
+        <div>
+          <div class="text-value text-info">{{ $user->events->count() }}</div>
+          <div class="text-muted text-uppercase font-weight-bold small">Events</div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-body p-3 d-flex align-items-center">
+        <div class="bg-gradient-primary p-3 mfe-3">
+          <i class="fas fa-calendar fa-fw"></i>
+        </div>
+        <div>
+          <div class="text-value text-primary">{{ $user->droids->count() }}</div>
+          <div class="text-muted text-uppercase font-weight-bold small">Droids</div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-body p-3 d-flex align-items-center">
+        <div class="bg-gradient-success p-3 mfe-3">
+          <i class="fas fa-calendar fa-fw"></i>
+        </div>
+        <div>
+          <div class="text-value text-success">8</div>
+          <div class="text-muted text-uppercase font-weight-bold small">Years</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
   <div class="col-md-3">
     <div class="droid-card-content">
       <div style="text-align:center">
