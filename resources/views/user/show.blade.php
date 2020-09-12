@@ -74,7 +74,7 @@
     </div>
   </div>
 
-  <div class"col-md-3">
+  <div class="col-md-3">
     <div class="card">
       <div class="card-body p-3 d-flex align-items-center">
         <div class="bg-gradient-info p-3 mfe-3">
@@ -89,7 +89,7 @@
     <div class="card">
       <div class="card-body p-3 d-flex align-items-center">
         <div class="bg-gradient-primary p-3 mfe-3">
-          <i class="fas fa-calendar fa-fw"></i>
+          <i class="fas fa-robot fa-fw"></i>
         </div>
         <div>
           <div class="text-value text-primary">{{ $user->droids->count() }}</div>
@@ -100,7 +100,7 @@
     <div class="card">
       <div class="card-body p-3 d-flex align-items-center">
         <div class="bg-gradient-success p-3 mfe-3">
-          <i class="fas fa-calendar fa-fw"></i>
+          <i class="fas fa-clock fa-fw"></i>
         </div>
         <div>
           <div class="text-value text-success">8</div>

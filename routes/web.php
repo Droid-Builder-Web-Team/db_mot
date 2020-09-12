@@ -51,7 +51,7 @@ Route::get('/', function () {    return view('home');
   Route::post('image/upload', 'ImageController@upload');
   Route::get('/cover_note/{id}', 'UserController@downloadPDF');
   Route::get('/id/{id}', 'ID');
-  Route::get('/topps', 'ToppsController');
+  Route::get('/topps', 'ToppsController')->name('topps');
   Route::get('notifications', 'UserNotificationsController@show')->middleware('auth')->name('notifications');
 //})->middleware('verified');
 

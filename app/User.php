@@ -73,6 +73,10 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsToMany(Event::class, 'members_events')->withPivot('spotter', 'date_added', 'status');
     }
 
+    public function event($id)
+    {
+        return $this->events->only($id)->first()->pivot;
+    }
 
     public function hasDroid( Droid $droid )
     {

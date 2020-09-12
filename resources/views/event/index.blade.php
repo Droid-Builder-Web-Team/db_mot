@@ -11,27 +11,29 @@
 
     <table class="table table-bordered">
         <tr>
-            <th>No</th>
+          <th width="120px">Date</th>
             <th>Name</th>
-            <th>Description</th>
-            <th width="120px">Date</th>
+            <th>Location</th>
             <th width="160px">Links</th>
             <th width="160px">Action</th>
         </tr>
         @foreach ($events as $event)
         <tr>
-            <td>{{ $event->id }}</td>
-            <td>{{ $event->name }}</td>
-            <td>{{ $event->description }}</td>
             <td>{{ $event->date }}</td>
+            <td>{{ $event->name }}</td>
+            <td><a class="btn-sm btn-info" href="{{ route('location.show', $event->location->id )}}">{{ $event->location->name}}</a></td>
+
             <td>
               @if(!empty($event->forum_link))
-                <a class="btn btn-primary" href="{{ $event->forum_link }}">Forum</a>
+                <a class="btn-sm btn-primary" href="{{ $event->forum_link }}">Forum</a>
               @endif
 
             </td>
             <td>
-              <a class="btn btn-primary" href="{{ route('event.show',$event->id) }}">View</a>
+              <a class="btn-sm btn-primary" href="{{ route('event.show',$event->id) }}">View</a>
+              @can('Edit Events')
+              <a class="btn-sm btn-info" href="{{ route('admin.events.edit',$event->id) }}">Edit</a>
+              @endcan
             </td>
         </tr>
         @endforeach

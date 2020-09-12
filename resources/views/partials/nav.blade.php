@@ -28,6 +28,13 @@
         </svg><span class="ml-1">Upcoming Events</span>
       </a>
     </li>
+    <li class="c-sidebar-nav-item">
+      <a class="c-sidebar-nav-link" href="{{ route('topps') }}">
+        <svg class="c-sidebar-nav-icon">
+          <i class="fas fa-grip-horizontal fa-fw"></i>
+        </svg><span class="ml-1">Topps Cards</span>
+      </a>
+    </li>
   @hasanyrole('Super Admin|Org Admin|Events Officer|MOT Officer')
     <li class="c-sidebar-nav-title">Admin</li>
 

@@ -36,6 +36,7 @@
                       >{{ $location->name }}</option>
                     @endforeach
                   </select>
+                  <a class="btn-sm btn-info" href={{ route('admin.locations.create')}}>New location</a>
                 </div>
             </div>
 
@@ -46,7 +47,7 @@
                 </div>
             </div>
 
-            <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="col-xs-3 col-sm-3 col-md-3">
                 <div class="form-group">
                     <strong>Date:</strong>
                     <input type="text" name="date" value="{{ $event->date }}" class="form-control" placeholder="Date">
