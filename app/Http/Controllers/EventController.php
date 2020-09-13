@@ -86,7 +86,7 @@ class EventController extends Controller
         }
 
         $result = $event->comments()->save($comment);
-
+        toastr()->success('Comment Added');
         return view('event.show', compact('event'));
     }
 

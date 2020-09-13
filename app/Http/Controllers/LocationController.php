@@ -43,7 +43,7 @@ class LocationController extends Controller
         $comment->user_id = auth()->user()->id;
 
         $result = $location->comments()->save($comment);
-
+        toastr()->success('Comment Added');
         return view('location.show', compact('location'));
     }
 
