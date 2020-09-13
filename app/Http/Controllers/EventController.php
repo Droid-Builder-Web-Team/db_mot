@@ -7,6 +7,8 @@ use Illuminate\Support\Carbon;
 use App\Event;
 use App\User;
 use App\Location;
+use App\Comment;
+use App\Notifications\EventUpdated;
 
 class EventController extends Controller
 {
@@ -64,6 +66,27 @@ class EventController extends Controller
         else
             $result = $event->users()->save($user, $attributes);
         toastr()->success('Interest registered for Event');
+        return view('event.show', compact('event'));
+    }
+
+    public function comment(Request $request, Event $event)
+    {
+
+        $comment = new Comment;
+        $comment->body = $request->body;
+        $comment->user_id = auth()->user()->id;
+
+        if (auth()->user()->can('Edit Events') && $request->broadcast == 'on')
+        {
+          foreach($event->users as $user)
+          {
+            $user->notify(new EventUpdated($event));
+          }
+          $comment->broadcast = true;
+        }
+
+        $result = $event->comments()->save($comment);
+
         return view('event.show', compact('event'));
     }
 

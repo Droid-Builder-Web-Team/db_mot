@@ -13,7 +13,6 @@ use App\Notifications\EventCreated;
 use App\Notifications\EventChanged;
 use App\Notifications\EventCancelled;
 
-
 class EventsController extends Controller
 {
 

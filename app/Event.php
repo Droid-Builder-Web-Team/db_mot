@@ -30,4 +30,9 @@ class Event extends Model
     {
         return $this->belongsTo(Location::class);
     }
+
+    public function comments()
+    {
+        return $this->morphMany('App\Comment', 'commentable');
+    }
 }

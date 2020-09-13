@@ -94,6 +94,59 @@
       </div>
     </div>
 
+    <div class="row">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header">
+            Comments
+          </div>
+          <div class="card-body">
+@foreach($event->comments as $comment)
+            <div class="card border-primary">
+              <div class="card-header">
+                <strong>{{ $comment->user->forename }} {{ $comment->user->surname }}</strong>
+                @if ($comment->user->can('Edit Events'))
+                <i class="fas fa-user-shield"></i>
+                @endif
+                <span class="float-right">
+                  @if ($comment->broadcast)
+                    <i class="fas fa-bullhorn"></i>
+                  @endif
+                  {{ $comment->created_at }}
+                </span>
+              </div>
+              <div class="card-body">
+                {!! nl2br(e($comment->body)) !!}
+              </div>
+            </div>
+@endforeach
+
+            <div class="card border-primary">
+              <div class="card-header">
+                <strong>Add Comment</strong>
+              </div>
+              <div class="card-body">
+                <form action="{{ route('event.comment', $event->id) }}" method="POST">
+                    @csrf
+                    @method('PUT')
+                  <input type="hidden" name="event_id" value="$event->id">
+                  <div class="form-group">
+                    <textarea type="text" class="form-control" name="body"></textarea>
+                  </div>
+                  <input type="submit" class="btn-sm btn-primary" name="comment" value="Add Comment">
+                  @can('Edit Events')
+                    <div class="form-check float-right">
+                      <input class="form-check-input" type="checkbox" name="broadcast" id="broadcast">
+                      <label class="form-check-label" for="broadcast">Broadcast</label>
+                    </div>
+                  @endcan
+                </form>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
 @if(!$parsed_date->isPast())
 @php
   $user_status="no";
@@ -104,12 +157,13 @@
       $user_spotter = $event->users->only([ Auth::user()->id ])->first()->pivot->spotter;
     }
 @endphp
-    <form action="{{ route('event.update',$event->id) }}" method="POST">
-              @csrf
-        @method('PUT')
-        <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-    <div row="row">
-      <div class="col-6-md">
+
+
+      <div class="col-md-4">
+        <form action="{{ route('event.update',$event->id) }}" method="POST">
+                  @csrf
+            @method('PUT')
+            <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
         <div class="card">
           <div class="card-header">Register Interest</div>
           <div class="card-body">
@@ -149,14 +203,12 @@
             </div>
 
             <div class="form-group">
-              <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                 <button type="submit" class="btn btn-primary">Submit</button>
-              </div>
             </div>
           </div>
         </div>
+      </form>
       </div>
     </div>
-  </form>
     @endif
 @endsection
