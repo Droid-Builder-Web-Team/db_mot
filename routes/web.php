@@ -47,6 +47,7 @@ Route::get('/', function () {    return view('home');
   Route::get('droid_image/{uid}/{view}', 'DroidController@displayDroidImage')->name('image.displayDroidImage');
   Route::put('event/comment/{event}', 'EventController@comment')->name('event.comment');
   Route::resource('event', 'EventController', ['only' => ['index', 'show', 'update']]);
+  Route::put('location/comment/{location}', 'LocationController@comment')->name('location.comment');
   Route::resource('location', 'LocationController', ['only' => ['show']]);
   Route::get('image', 'ImageController@index')->name('image');
   Route::post('image/upload', 'ImageController@upload');

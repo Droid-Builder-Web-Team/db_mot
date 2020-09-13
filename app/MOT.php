@@ -67,4 +67,9 @@ class MOT extends Model
         $officer = User::where('id', $this->user)->first();
         return $officer->forename." ".$officer->surname;
     }
+
+    public function comments()
+    {
+        return $this->morphMany('App\Comment', 'commentable');
+    }
 }

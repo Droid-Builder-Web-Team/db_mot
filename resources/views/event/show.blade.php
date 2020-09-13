@@ -129,7 +129,6 @@
                 <form action="{{ route('event.comment', $event->id) }}" method="POST">
                     @csrf
                     @method('PUT')
-                  <input type="hidden" name="event_id" value="$event->id">
                   <div class="form-group">
                     <textarea type="text" class="form-control" name="body"></textarea>
                   </div>
