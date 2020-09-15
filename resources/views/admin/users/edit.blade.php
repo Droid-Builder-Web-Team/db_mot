@@ -62,6 +62,10 @@
             <label>GDPR</label>
             <input type="checkbox" name="gdpr_accepted" {{ $user->gdpr_accepted ? 'checked=1 value=1' : 'value=1' }} class="form-control">
           </div>
+          <div class="col-md-4 mb-3">
+            <label>Join Date</label>
+            <input type="date" name="join_date" value="{{ $user->join_date }}" class="form-control" placeholder="">
+          </div>
       </div>
 
       <div class="form-row">

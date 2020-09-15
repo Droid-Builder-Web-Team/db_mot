@@ -12,7 +12,7 @@
  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.21/datatables.min.css"/>
  <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css">
  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
- <!-- <link href="{{ asset('css/dark.css') }}" rel="stylesheet"> -->
+<!-- <link href="{{ asset('css/dark.css') }}" rel="stylesheet">  -->
  <link href="{{ asset('css/mot.css') }}" rel="stylesheet">
 
  <script type="text/javascript" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js" defer></script>
@@ -47,6 +47,17 @@
 
 
     <ul class="c-header-nav mfs-auto">
+
+      <li class="c-header-nav-item px-3 c-d-legacy-none">
+<button class="c-class-toggler c-header-nav-btn" type="button" id="header-tooltip" data-target="body" data-class="c-dark-theme" data-toggle="c-tooltip" data-placement="bottom" title="" data-original-title="Toggle Light/Dark Mode">
+<svg class="c-icon c-d-dark-none">
+<use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-moon"></use>
+</svg>
+<svg class="c-icon c-d-default-none">
+<use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-sun"></use>
+</svg>
+</button>
+</li>
 @guest
     <li class="nav-item pr-3 list-group-item list-group-flush">
       <a class="c-sidebar-nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>

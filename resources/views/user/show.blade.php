@@ -24,7 +24,9 @@
   <div class="col md-4">
     <div class="card">
       <div class="card-header">
-        {{ $user->forename }} {{ $user->surname }}
+        <span class="float-left">
+          <h2>{{ $user->forename }} {{ $user->surname }} </h2>
+        </span>
         @if ($uses_pli)
           @if($user->validPLI())
             <span class="badge badge-info float-right">
@@ -53,12 +55,12 @@
         @endif
       </div>
       <div class="card-body">
-        <table class="table table-striped">
+        <table class="table table-striped table-sm">
           <tr><th>email</th><td>{{ $user->email }}</td></tr>
           <tr><th>County</th><td>{{ $user->county }}</td></tr>
           <tr><th>Postcode</th><td>{{ $user->postcode }}</td></tr>
           <tr><th>Forum Username</th><td>{{ $user->username }}</td></tr>
-          <tr><th>Created On</th><td>{{ $user->created_on }}</td></tr>
+          <tr><th>Joined On</th><td>{{ $user->join_date }}</td></tr>
           @if ($uses_pli)
             <tr><th>PLI Last Payed</th><td>{{ $user->pli_date }}</td></tr>
           @endif
@@ -97,14 +99,27 @@
         </div>
       </div>
     </div>
+    @if($user->join_date != "")
     <div class="card">
       <div class="card-body p-3 d-flex align-items-center">
         <div class="bg-gradient-success p-3 mfe-3">
           <i class="fas fa-clock fa-fw"></i>
         </div>
         <div>
-          <div class="text-value text-success">8</div>
+          <div class="text-value text-success">{{ $user->yearsService() }}</div>
           <div class="text-muted text-uppercase font-weight-bold small">Years</div>
+        </div>
+      </div>
+    </div>
+    @endif
+    <div class="card">
+      <div class="card-body p-3 d-flex align-items-center">
+        <div class="bg-gradient-warning p-3 mfe-3">
+          <i class="fas fa-trophy fa-fw"></i>
+        </div>
+        <div>
+          <div class="text-value text-achievements">{{ $user->achievements->count()  }}</div>
+          <div class="text-muted text-uppercase font-weight-bold small">Achievements</div>
         </div>
       </div>
     </div>
@@ -114,11 +129,12 @@
   <div class="col-md-3">
     <div class="droid-card-content">
       <div style="text-align:center">
-				<img src="{{ route('image.displayMugShot',$user->id) }}" alt="mug_shot" class="img-fluid mb-1 rounded" style="height:300px;">
+				<img src="{{ route('image.displayMugShot',[$user->id, '240']) }}" alt="mug_shot" class="img-fluid mb-1 rounded">
 			</div>
 			<div class="droid-card-table" style="z-index:2">
 				<div class="droid-card-row">
 					<div class="droid-card-center noclick">
+            @if( Auth::user()->can('Edit Members') || Auth::user()->id == $user->id)
             <form action="{{ route('image') }}" method="GET">
               @csrf
               <input type="hidden" name="user" value="{{ $user->id }}">
@@ -126,6 +142,7 @@
               <input type="hidden" name="photo_name" value="mug_shot">
               <button type="submit" class="btn btn-primary">Change</button>
             </form>
+            @endif
 					</div>
 				</div>
 			</div>
@@ -149,7 +166,7 @@
   <div class="col-md-3 mb-5 droid-card" onclick="document.location='{{ route('droid.show', $droid->id) }}'">
     <div class="droid-card-content">
       <div style="text-align:center">
-				<img src="{{ route('image.displayDroidImage', [$droid->id, 'photo_front']) }}" alt="{{ $droid->name }}" class="img-fluid mb-1 rounded" style="height:300px;">
+				<img src="{{ route('image.displayDroidImage', [$droid->id, 'photo_front', '240']) }}" alt="{{ $droid->name }}" class="img-fluid mb-1 rounded">
 			</div>
 
 			<div class="droid-card-table" style="z-index:2">
@@ -204,7 +221,7 @@
 <div class="row mb-5">
   <h4 class="sub-title">Achievements</h4>
   <div class="col-md-12 mb-2">
-      <table class="table">
+      <table class="table table-striped table-sm">
         <tr>
           <th>Name</th>
           <th>Notes</th>
@@ -226,7 +243,7 @@
 <div class="row mb-5">
   <h4 class="sub-title">Events</h4>
   <div class="col-md-12 mb-2">
-      <table class="table">
+      <table class="table table-striped table-sm">
         <tr>
           <th>Date</th>
           <th>Details</th>

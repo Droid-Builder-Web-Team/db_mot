@@ -110,11 +110,13 @@ class UserController extends Controller
         return view('user.id', compact('badge_data'));
     }
 
-    public function displayMugShot($uid)
+    public function displayMugShot($uid, $size = '')
     {
-        $path = 'members/'.$uid.'/mug_shot.png';
+        if ($size != "")
+          $size = $size.'-';
+        $path = 'members/'.$uid.'/'.$size.'mug_shot.png';
         if (!Storage::exists($path)) {
-            $path = 'members/'.$uid.'/mug_shot.jpg';
+            $path = 'members/'.$uid.'/'.$size.'mug_shot.jpg';
         }
         if (!Storage::exists($path)) {
             $path = getcwd().'/img/blank_mug_shot.jpg';

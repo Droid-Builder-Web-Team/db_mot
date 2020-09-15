@@ -1,7 +1,7 @@
 <div class="col-md-3 droid-card">       <!-- droid front -->
   <div class="droid-card-content">
     <div style="text-align:center">
-          <img src="{{ route('image.displayDroidImage', [$droid_id , $photo_name]) }}" alt="{{ $photo_name }}" class="img-fluid mb-1 rounded" style="height:300px;">
+          <img src="{{ route('image.displayDroidImage', [$droid_id , $photo_name, '240']) }}" alt="{{ $photo_name }}" class="img-fluid mb-1 rounded">
     </div>
 
 

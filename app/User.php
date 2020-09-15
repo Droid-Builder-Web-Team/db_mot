@@ -8,6 +8,7 @@ use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\Storage;
+use Carbon\Carbon;
 use App\Droid;
 use App\Event;
 use App\Achievement;
@@ -99,6 +100,13 @@ class User extends Authenticatable implements MustVerifyEmail
         } else {
             return false;
         }
+    }
+
+    public function yearsService()
+    {
+        $now = Carbon::now();
+        return Carbon::parse($this->join_date)->DiffInYears($now);
+
     }
 
     public static function generateQR($id, $user_id) {

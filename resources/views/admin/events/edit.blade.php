@@ -50,7 +50,7 @@
             <div class="col-xs-3 col-sm-3 col-md-3">
                 <div class="form-group">
                     <strong>Date:</strong>
-                    <input type="text" name="date" value="{{ $event->date }}" class="form-control" placeholder="Date">
+                    <input type="date" name="date" value="{{ $event->date }}" class="form-control" placeholder="Date">
                 </div>
             </div>
 

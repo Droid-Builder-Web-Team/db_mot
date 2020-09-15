@@ -140,11 +140,13 @@ class DroidController extends Controller
         return redirect()->route('user.show', auth()->user()->id);
     }
 
-    public function displayDroidImage($uid, $view)
+    public function displayDroidImage($uid, $view, $size = '')
     {
-        $path = 'droids/'.$uid.'/'.$view.'.png';
+        if ($size != "")
+          $size = $size.'-';
+        $path = 'droids/'.$uid.'/'.$size.''.$view.'.png';
         if (!Storage::exists($path)) {
-            $path = 'droids/'.$uid.'/'.$view.'.jpg';
+            $path = 'droids/'.$uid.'/'.$size.''.$view.'.jpg';
         }
         if (!Storage::exists($path)) {
             $path = getcwd().'/img/blank_'.$view.'.jpg';

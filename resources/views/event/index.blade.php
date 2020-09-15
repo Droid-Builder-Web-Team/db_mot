@@ -9,7 +9,7 @@
         </div>
     </div>
 
-    <table class="table table-bordered">
+    <table class="table table-bordered table-sm">
         <tr>
           <th width="120px">Date</th>
             <th>Name</th>
