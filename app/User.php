@@ -129,4 +129,9 @@ class User extends Authenticatable implements MustVerifyEmail
         }
         return $randomString;
     }
+
+    public function settings()
+    {
+        return $this->hasMany(UserSetting::class);
+    }
 }

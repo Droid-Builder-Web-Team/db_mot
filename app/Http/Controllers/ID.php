@@ -16,12 +16,21 @@ class ID extends Controller
      */
     public function __invoke($id)
     {
-      dd($id);
       $user = User::where('badge_id', $id)->first();
-      $path = 'members/'.$user->id.'/mug_shot.jpg';
+
+      $path = 'members/'.$user->id.'/240-mug_shot.png';
+      if (!Storage::exists($path)) {
+          $path = 'members/'.$user->id.'/240-mug_shot.jpg';
+      }
+      if (!Storage::exists($path)) {
+          $path = getcwd().'/img/blank_mug_shot.jpg';
+          $file = base64_encode(file_get_contents($path));
+      } else {
+          $file = base64_encode(Storage::get($path));
+      }
       $badge_data['name'] = $user->forename." ".$user->surname;
       $badge_data['mot'] = $user->validPLI();
-      $badge_data['imageData'] = Storage::get($path);
-      return view('user.id', compact('badge_data'));
+      $badge_data['imageData'] = $file;
+      return view('user.id', compact('badge_data', 'file'));
     }
 }

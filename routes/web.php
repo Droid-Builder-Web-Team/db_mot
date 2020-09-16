@@ -56,6 +56,7 @@ Route::get('/', function () {    return view('home');
   Route::get('/id/{id}', 'ID');
   Route::get('/topps', 'ToppsController')->name('topps');
   Route::get('notifications', 'UserNotificationsController@show')->middleware('auth')->name('notifications');
+  Route::resource('settings', 'UserSettingsController');
 //})->middleware('verified');
 
 

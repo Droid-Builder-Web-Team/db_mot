@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>UK R2D2 Builders Club - PLI Cover</title>
+    <title>Droid Builders Club - PLI Cover</title>
   </head>
   <body>
     <table class="table table-bordered">
@@ -13,7 +13,7 @@
     </table>
     <p>
       This document certifies that {{$user->forename}} {{ $user->surname}} has had their Astromech Droid checked by an officer of
-the UK R2D2 Builders Club, that it meets the requirements to be covered by the club PLI, and that
+the Droid Builders Club, that it meets the requirements to be covered by the club PLI, and that
 said member has paid their subscription to the club.
   </p>
   <p>
