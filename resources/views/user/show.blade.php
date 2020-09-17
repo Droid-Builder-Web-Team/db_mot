@@ -66,7 +66,7 @@
           @endif
           <tr><th>QR Code:</th>
             <td>
-              <a href="{{ url('/')."/id.php?id=".$user->badge_id }}">
+              <a href="{{ url('/')."/id/".$user->badge_id }}">
                 <img src="{{ route('image.displayQRCode',$user->id) }}" alt="qr_code" class="img-fluid mb-1 rounded" style="height:150px;">
               </a>
             </td>
