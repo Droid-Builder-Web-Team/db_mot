@@ -17,5 +17,9 @@
     # Send Requests To Front Controller...
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^/?id/(.*?)/?$ /id.php?id=$1 [L]
+
+    RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /id\.php\?id=([^\&\ ]+)
+    RewriteRule ^/?id\.php$ /id/%1? [L,R=301]
     RewriteRule ^ index.php [L]
 </IfModule>
