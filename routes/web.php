@@ -38,8 +38,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
 Route::get('/', function () {    return view('home');
 });
 
-//Route::get('/', function() {
-  //Route::get('user/id/{id}', 'UserController@id');
+Route::group(['middleware' => ['auth', 'gdpr.terms']], function() {
   Route::resource('user', 'UserController');
   Route::resource('droid', 'DroidController');
   Route::resource('mot', 'MOTController', ['only' => ['index', 'show']]);
@@ -57,7 +56,7 @@ Route::get('/', function () {    return view('home');
   Route::get('/topps', 'ToppsController')->name('topps');
   Route::get('notifications', 'UserNotificationsController@show')->middleware('auth')->name('notifications');
   Route::resource('settings', 'UserSettingsController');
-//})->middleware('verified');
+});
 
 
 

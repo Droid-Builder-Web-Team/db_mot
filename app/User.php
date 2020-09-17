@@ -12,12 +12,14 @@ use Carbon\Carbon;
 use App\Droid;
 use App\Event;
 use App\Achievement;
+use Dialect\Gdpr\Portable;
 
 
 class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
     use HasRoles;
+    use Portable;
 
     protected $table = 'members';
     const CREATED_AT = 'created_on';
@@ -43,6 +45,21 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * The attributes that should be hidden for the downloadable data.
+     *
+     * @var array
+     */
+    protected $gdprHidden = ['password'];
+
+    /**
+     * The relations to include in the downloadable data.
+     *
+     * @var array
+     */
+    protected $gdprWith = ['comments', 'droids', 'mot'];
+
 
     /**
      * Get all the user's Droids
