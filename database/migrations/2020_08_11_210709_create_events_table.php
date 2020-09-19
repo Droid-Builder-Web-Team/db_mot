@@ -23,7 +23,7 @@ class CreateEventsTable extends Migration
             $table->date('date');
             $table->float('charity_raised', 10, 0)->default(0);
             $table->timestamp('created_at')->useCurrent();
-            $table->timestamp('updated_at')->default('0000-00-00 00:00:00');
+            $table->timestamp('updated_at')->useCurrent();
         });
     }
 
