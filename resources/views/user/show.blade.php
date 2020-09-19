@@ -253,6 +253,7 @@
           <th>Actions</th>
         </tr>
         @foreach($user->events as $event)
+        @if(!$event->isFuture())
           <tr>
             <td>{{ $event->date }}</td>
             <td>{{ $event->name }}</td>
@@ -268,6 +269,7 @@
             </td>
             <td><a class="btn-sm btn-primary" href="{{ route('event.show', $event->id) }}">View</a></td>
           </tr>
+          @endif
         @endforeach
       </table>
   </div>

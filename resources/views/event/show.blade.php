@@ -2,10 +2,6 @@
 
 @section('content')
 
-@php
-  $parsed_date = \Carbon\Carbon::createFromFormat('Y-m-d', $event->date);
-@endphp
-
     <div class="row">
         <div class="col-lg-1">
             <div class="pull-right">
@@ -29,7 +25,8 @@
               <div class="col-md-8">
                 <h2 class="card-title">Description</h2>
                 {!! nl2br(e($event->description)) !!}
-                @if($parsed_date->isPast())
+                <br>
+                @if(!$event->isFuture())
                   <strong>Charity Raised:</strong>
                   £{{ $event->charity_raised }}
                 @endif
@@ -58,14 +55,14 @@
       <div class="col-xs-4 col-sm-4 col-md-4">
         <div class="card">
           <div class="card-header">
-            @if($parsed_date->isPast())
+            @if(!$event->isFuture())
               Attended By:
             @else
               Currently Interested:
             @endif
           </div>
           <div class="card-body">
-            @if($parsed_date->isPast())
+            @if(!$event->isFuture())
 
             @else
               <strong>Going</strong>
@@ -146,7 +143,7 @@
           </div>
         </div>
       </div>
-@if(!$parsed_date->isPast())
+@if($event->isFuture())
 @php
   $user_status="no";
   $user_spotter="no";

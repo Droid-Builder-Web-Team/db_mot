@@ -35,4 +35,14 @@ class Event extends Model
     {
         return $this->morphMany('App\Comment', 'commentable');
     }
+
+    public function isFuture()
+    {
+        if ($this->date > now())
+        {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
