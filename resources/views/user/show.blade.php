@@ -149,9 +149,7 @@
     </div>
   </div>
 </div>
-<div class="row">@php
-  $parsed_date = \Carbon\Carbon::createFromFormat('Y-m-d', $event->date);
-@endphp
+<div class="row">
   @can('Edit Members')
     <a class="btn btn-primary" href="{{ route('admin.users.edit',$user->id) }}">Edit</a>
   @else
