@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Droid;
 use App\MOT;
 use App\Club;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Response;
+use PDF;
 
 class DroidController extends Controller
 {
@@ -162,4 +164,13 @@ class DroidController extends Controller
         return $response;
     }
 
+    public function downloadPDF($id) {
+        $droid = Droid::find($id);
+        $user = User::find($droid->users->first()->id);
+        $pdf = PDF::loadView('droid.info', compact('droid', 'user'));
+        //$pdf->defaultFont = 'Arial';
+
+        return $pdf->download('cover_note.pdf');
+        //return view('droid.info', compact('droid', 'user'));
+    }
 }

@@ -44,13 +44,16 @@
               @endif
           @endif
         </table>
-
-  @can('Edit Droids')
-    <a class="btn btn-primary" href="{{ route('admin.droids.edit',$droid->id) }}">Edit</a>
-  @else
-    <a class="btn btn-primary" href="{{ route('droid.edit',$droid->id) }}">Edit</a>
-  @endcan
-
+        <span class="float-left">
+@can('Edit Droids')
+          <a class="btn btn-primary" href="{{ route('admin.droids.edit',$droid->id) }}">Edit</a>
+@else
+          <a class="btn btn-primary" href="{{ route('droid.edit',$droid->id) }}">Edit</a>
+@endcan
+        </span>
+        <span class="float-right">
+          <a class="btn-sm btn-info" href="{{ action('DroidController@downloadPDF', $droid->id )}}" target="_blank">Info Sheet</a>
+        </span>
       </div>
     </div>
 @if ($droid->club->hasOption('mot'))
