@@ -63,7 +63,8 @@ Route::group(['middleware' => ['auth', 'gdpr.terms']], function() {
 Route::get('change-password', 'ChangePasswordController@index');
 Route::post('change-password', 'ChangePasswordController@store')->name('change.password');
 
-
+Route::get('/auth/redirect/{provider}', 'SocialController@redirect');
+Route::get('/callback/{provider}', 'SocialController@callback');
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::post('ipn/notify','PaypalController@postNotify');
