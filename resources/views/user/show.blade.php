@@ -72,6 +72,11 @@
             </td>
           </tr>
         </table>
+          @can('Edit Members')
+            <a class="btn btn-primary" href="{{ route('admin.users.edit',$user->id) }}">Edit</a>
+          @else
+            <a class="btn btn-primary" href="{{ route('user.edit',$user->id) }}">Edit</a>
+          @endcan
       </div>
     </div>
   </div>
@@ -127,13 +132,17 @@
 
 
   <div class="col-md-3">
-    <div class="droid-card-content">
-      <div style="text-align:center">
-				<img src="{{ route('image.displayMugShot',[$user->id, '240']) }}" alt="mug_shot" class="img-fluid mb-1 rounded">
-			</div>
-			<div class="droid-card-table" style="z-index:2">
-				<div class="droid-card-row">
-					<div class="droid-card-center noclick">
+    <div class="card">
+      <div class="card-header">
+        <h4>ID Card Photo</h4>
+      </div>
+      <div class="card-body">
+        <div style="text-align:center">
+				  <img src="{{ route('image.displayMugShot',[$user->id, '240']) }}" alt="mug_shot" class="img-fluid mb-1 rounded">
+			  </div>
+			  <div class="droid-card-table" style="z-index:2">
+				  <div class="droid-card-row">
+					  <div class="droid-card-center noclick">
             @if( Auth::user()->can('Edit Members') || Auth::user()->id == $user->id)
             <form action="{{ route('image') }}" method="GET">
               @csrf
@@ -143,135 +152,152 @@
               <button type="submit" class="btn btn-primary">Change</button>
             </form>
             @endif
-					</div>
-				</div>
-			</div>
+					  </div>
+			    </div>
+			  </div>
+      </div>
     </div>
   </div>
 </div>
+
+
+
+
 <div class="row">
-  @can('Edit Members')
-    <a class="btn btn-primary" href="{{ route('admin.users.edit',$user->id) }}">Edit</a>
-  @else
-    <a class="btn btn-primary" href="{{ route('user.edit',$user->id) }}">Edit</a>
-  @endcan
-</div>
-<div class="row">
-  <div class="heading mb-4">
-    <h5 class="title text-center">Your Droids</h5>
-  </div>
-</div>
-<div class="row">
+  <div class="col-md-12">
+  <div class="card text-center">
+    <div class="card-header">
+      <h4 class="title text-center">Your Droids</h4>
+    </div>
+  <div class="card-body text-center">
+    <div class="row">
 @foreach($user->droids as $droid)
-  <div class="col-md-3 mb-5 droid-card" onclick="document.location='{{ route('droid.show', $droid->id) }}'">
-    <div class="droid-card-content">
-      <div style="text-align:center">
-				<img src="{{ route('image.displayDroidImage', [$droid->id, 'photo_front', '240']) }}" alt="{{ $droid->name }}" class="img-fluid mb-1 rounded">
-			</div>
+      <div class="col-md-3 mb-5 droid-card text-center" onclick="document.location='{{ route('droid.show', $droid->id) }}'">
+        <div class="droid-card-content">
+          <div style="text-align:center">
+			      <img src="{{ route('image.displayDroidImage', [$droid->id, 'photo_front', '240']) }}" alt="{{ $droid->name }}" class="img-fluid mb-1 rounded">
+			    </div>
 
-			<div class="droid-card-table" style="z-index:2">
-				<div class="droid-card-row">
-					<div class="droid-card-left">
-						<form action="" >
-							<input type="image" src="/img/share.png">
-						</form>
-					</div>
-					<div class="droid-card-center noclick">
-						<h2 style="margin-bottom:0px">{{ $droid->name }}</h2>
-					</div>
-					<div class="droid-card-right">
-						<form action="{{ route('droid.destroy', $droid->id) }}" method="POST">
-							@csrf
-							{{ method_field('DELETE') }}
-							<input type="image" src="/img/trash.png">
-						</form>
-					</div>
-				</div>
-			</div>
-      @if ($droid->club->hasOption('mot'))
-    	<div class="pli-container noclick">
-				<h5 class="pli-text">@include('partials.motstatus', $droid->displayMOT())</h5>
-			</div>
-      @endif
-    </div>
-  </div>
-@endforeach
-  @can('Edit Droids')
-    <div class="col-md-3 mb-5 droid-card" onclick="document.location='{{ route('admin.droids.create', [$user->id]) }}'">
-  @else
-    <div class="col-md-3 mb-5 droid-card" onclick="document.location='{{ route('droid.create') }}'">
-  @endcan
-    <div class="droid-card-content">
-
-      <div style="text-align:center">
-				<img src="/img/add.png" alt="Add Droid" class="img-fluid mb-1 rounded" style="height:300px, width:300px;">
-			</div>
-			<div class="droid-card-table" style="z-index:2">
-				<div class="droid-card-row">
-					<div class="droid-card-center noclick">
-						<h2 style="margin-bottom:0px">Add a Droid</h2>
-					</div>
-				</div>
-			</div>
-    </div>
-  </div>
-</div>
-
-
-<div class="row mb-5">
-  <h4 class="sub-title">Achievements</h4>
-  <div class="col-md-12 mb-2">
-      <table class="table table-striped table-sm">
-        <tr>
-          <th>Name</th>
-          <th>Notes</th>
-          <th>Date Added</th>
-          <th></th>
-        </tr>
-        @foreach($user->achievements as $achievement)
-          <tr>
-            <td>{{ $achievement->name }}</td>
-            <td>{!! $achievement->pivot->notes !!}</td>
-            <td>{{ $achievement->pivot->date_added }}</td>
-            <td></td>
-          </tr>
-        @endforeach
-      </table>
-  </div>
-</div>
-
-<div class="row mb-5">
-  <h4 class="sub-title">Events</h4>
-  <div class="col-md-12 mb-2">
-      <table class="table table-striped table-sm">
-        <tr>
-          <th>Date</th>
-          <th>Details</th>
-          <th>Spotter?</th>
-          <th>Charity Raised</th>
-          <th>Links</th>
-          <th>Actions</th>
-        </tr>
-        @foreach($user->events as $event)
-        @if(!$event->isFuture())
-          <tr>
-            <td>{{ $event->date }}</td>
-            <td>{{ $event->name }}</td>
-            <td>{{ $event->spotter }}</td>
-            <td>{{ $event->charity_raised }}</td>
-            <td>
-              @if(!empty($event->forum_link))
-                <a class="btn-sm btn-info" href="{{ $event->forum_link }}">Forum</a>
-              @endif
-              @if(!empty($event->report_link))
-                <a class="btn-sm btn-info" href="{{ $event->report_link }}">Report</a>
-              @endif
-            </td>
-            <td><a class="btn-sm btn-primary" href="{{ route('event.show', $event->id) }}">View</a></td>
-          </tr>
+			    <div class="droid-card-table" style="z-index:2">
+				     <div class="droid-card-row">
+					      <div class="droid-card-left">
+						       <form action="" >
+							        <input type="image" src="/img/share.png">
+						       </form>
+					      </div>
+					      <div class="droid-card-center noclick">
+						       <h2 style="margin-bottom:0px">{{ $droid->name }}</h2>
+					      </div>
+      					<div class="droid-card-right">
+						       <form action="{{ route('droid.destroy', $droid->id) }}" method="POST">
+							        @csrf
+							        {{ method_field('DELETE') }}
+							        <input type="image" src="/img/trash.png">
+						       </form>
+				        </div>
+				     </div>
+			    </div>
+          @if ($droid->club->hasOption('mot'))
+    	       <div class="pli-container noclick">
+				        <h5 class="pli-text">@include('partials.motstatus', $droid->displayMOT())</h5>
+			       </div>
           @endif
-        @endforeach
-      </table>
+        </div>
+      </div>
+
+@endforeach
+      @can('Edit Droids')
+        <div class="col-md-3 mb-5 droid-card" onclick="document.location='{{ route('admin.droids.create', [$user->id]) }}'">
+      @else
+        <div class="col-md-3 mb-5 droid-card" onclick="document.location='{{ route('droid.create') }}'">
+      @endcan
+        <div class="droid-card-content">
+
+          <div style="text-align:center">
+				     <img src="/img/add.png" alt="Add Droid" class="img-fluid mb-1 rounded" style="height:300px, width:300px;">
+			    </div>
+			       <div class="droid-card-table" style="z-index:2">
+				        <div class="droid-card-row">
+					         <div class="droid-card-center noclick">
+						           <h2 style="margin-bottom:0px">Add a Droid</h2>
+					         </div>
+				        </div>
+			       </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+<div class="row">
+  <div class="col-md-12 mb-2">
+    <div class="card">
+      <div class="card-header text-center">
+        <h4 class="sub-title">Achievements</h4>
+      </div>
+      <div class="card-body">
+        <table class="table table-striped table-sm">
+          <tr>
+            <th>Name</th>
+            <th>Notes</th>
+            <th>Date Added</th>
+            <th></th>
+          </tr>
+          @foreach($user->achievements as $achievement)
+            <tr>
+              <td>{{ $achievement->name }}</td>
+              <td>{!! $achievement->pivot->notes !!}</td>
+              <td>{{ $achievement->pivot->date_added }}</td>
+              <td></td>
+            </tr>
+          @endforeach
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12 mb-2">
+    <div class="card">
+      <div class="card-header text-center">
+        <h4 class="sub-title">Events</h4>
+      </div>
+      <div class="card-body">
+        <table class="table table-striped table-sm">
+          <tr>
+            <th>Date</th>
+            <th>Details</th>
+            <th>Spotter?</th>
+            <th>Charity Raised</th>
+            <th>Links</th>
+            <th>Actions</th>
+          </tr>
+          @foreach($user->events as $event)
+            @if(!$event->isFuture())
+              <tr>
+                <td>{{ $event->date }}</td>
+                <td>{{ $event->name }}</td>
+                <td>{{ $event->spotter }}</td>
+                <td>{{ $event->charity_raised }}</td>
+                <td>
+                  @if(!empty($event->forum_link))
+                    <a class="btn-sm btn-info" href="{{ $event->forum_link }}">Forum</a>
+                  @endif
+                  @if(!empty($event->report_link))
+                    <a class="btn-sm btn-info" href="{{ $event->report_link }}">Report</a>
+                  @endif
+                </td>
+                <td><a class="btn-sm btn-primary" href="{{ route('event.show', $event->id) }}">View</a></td>
+              </tr>
+            @endif
+          @endforeach
+        </table>
+      </div>
+    </div>
   </div>
 </div>
 

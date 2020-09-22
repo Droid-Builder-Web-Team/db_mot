@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Validator,Redirect,Response,File;
 use Socialite;
 use App\User;
+use App\Notifications\NewUser;
+
 
 class SocialController extends Controller
 {
@@ -39,8 +41,14 @@ class SocialController extends Controller
             'surname'             => $surname,
             'email_verified_at'   => now(),
             'email'               => $getInfo->email,
+            'badge_id'            => $id,
         ]);
         $qr = User::generateQR($id, $user->id);
+        $admins = User::whereHas("roles", function($q){ $q->where("name", "Super Admin"); })->get();
+        foreach($admins as $admin)
+        {
+            $admin->notify(new NewUser($user));
+        }
       }
 
       $user->update([

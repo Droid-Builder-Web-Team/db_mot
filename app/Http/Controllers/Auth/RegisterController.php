@@ -8,6 +8,7 @@ use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use App\Notifications\NewUser;
 
 class RegisterController extends Controller
 {
@@ -76,6 +77,11 @@ class RegisterController extends Controller
             'badge_id' => $id,
         ]);
         $qr = User::generateQR($id, $user->id);
+        $admins = User::whereHas("roles", function($q){ $q->where("name", "Super Admin"); })->get();
+        foreach($admins as $admin)
+        {
+            $admin->notify(new NewUser($user));
+        }
         return $user;
     }
 }
