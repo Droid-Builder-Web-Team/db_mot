@@ -135,6 +135,25 @@ class DroidsController extends Controller
      */
     public function destroy(Droid $droid)
     {
-        //
+      $users = $droid->users;
+      foreach($users as $user)
+      {
+          $droid->users()->detach($user->id);
+      }
+      $mots = $droid->mot;
+      foreach($mots as $mot)
+      {
+          $droid->mot()->delete();
+      }
+      $droid->delete();
+
+      try {
+        $droid->delete();
+        toastr()->success('Droid deleted successfully');
+      } catch (\Illuminate\Database\QueryException $exception) {
+        toastr()->error('Failed to delete Droid');
+      }
+
+      return redirect()->route('admin.droids.index');
     }
 }

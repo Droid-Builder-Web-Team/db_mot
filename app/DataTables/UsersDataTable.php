@@ -28,13 +28,21 @@ class UsersDataTable extends DataTable
           ->addColumn('droid_count', function(User $user) {
                 return $user->droids()->count();
             })
+          ->addColumn('roles', function(User $user) {
+                $roles = "";
+                foreach($user->roles as $role)
+                {
+                    $roles .= "<span class=\"badge badge-info\">".$role->name."</span>";
+                }
+                return $roles;
+            })
           ->addColumn('action', '')
           ->editColumn('action', function($row) {
             $crudRoutePart = "user";
             $parts = array('view', 'edit', 'delete');
             return view('partials.datatablesActions', compact('row', 'crudRoutePart', 'parts'));
           })
-          ->rawColumns(['action']);
+          ->rawColumns(['action', 'roles']);
     }
 
     /**
@@ -84,6 +92,7 @@ class UsersDataTable extends DataTable
             Column::make('surname'),
             Column::make('pli'),
             Column::make('droid_count'),
+            Column::make('roles'),
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)

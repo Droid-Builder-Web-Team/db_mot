@@ -128,7 +128,7 @@ class DroidController extends Controller
         $mots = $droid->mot;
         foreach($mots as $mot)
         {
-            $droid->mot()-detach($droid->id);
+            $droid->mot()->delete();
         }
         $droid->delete();
 
