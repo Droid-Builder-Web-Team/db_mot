@@ -16,9 +16,11 @@
 						</form>
 					</div>
 					<div class="droid-card-right">
-						<form action="{{ route('droid.destroy', $droid->id) }}" method="POST">
+						<form action="/image/destroy" method="GET">
 							@csrf
-							{{ method_field('DELETE') }}
+              <input type="hidden" name="user" value="{{ $user_id }}">
+              <input type="hidden" name="droid" value="{{ $droid_id }}">
+              <input type="hidden" name="photo_name" value="{{ $photo_name }}">
 							<button type="submit" class="fas fa-trash"></i>
 						</form>
 					</div>

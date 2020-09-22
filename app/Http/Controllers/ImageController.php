@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\User;
+use App\Droid;
 
 class ImageController extends Controller
 {
@@ -21,15 +23,21 @@ class ImageController extends Controller
 
     public function upload(Request $request)
     {
+        $droid = Droid::find($request->droid);
+        $user = User::find($request->user);
         $folderPath = $request->photo_name;
         switch($request->photo_name) {
             case 'mug_shot':
                 $folderPath = 'members/'.$request->user.'/';
+                if ($user != auth()->user() && !auth()->user()->can('Edit Members'))
+                    abort(403);
                 break;
             case 'photo_front':
             case 'photo_side':
             case 'photo_rear':
                 $folderPath = 'droids/'.$request->droid.'/';
+                if (!$droid->users->contains(auth()->user()) && !auth()->user()->can('Edit Droids'))
+                    abort(403);
                 break;
             case 'default':
                 $folderPath = '/';
@@ -63,4 +71,40 @@ class ImageController extends Controller
                         'receivedsize'=>strlen($image_base64),
                       ]);
     }
+
+    public function destroy(Request $request)
+    {
+
+        $folderPath = $request->photo_name;
+        switch($request->photo_name) {
+          case 'mug_shot':
+                $folderPath = 'members/'.$request->user.'/';
+                if ($user != auth()->user() && !auth()->user()->can('Edit Members'))
+                    abort(403);
+                break;
+          case 'photo_front':
+          case 'photo_side':
+          case 'photo_rear':
+                $folderPath = 'droids/'.$request->droid.'/';
+                if (!$droid->users->contains(auth()->user()) && !auth()->user()->can('Edit Droids'))
+                    abort(403);
+                break;
+          case 'default':
+                $folderPath = '/';
+                break;
+        }
+
+        $image_array = array(
+            $folderPath.$request->photo_name.'.jpg',
+            $folderPath.$request->photo_name.'.png',
+            $folderPath.'240-'.$request->photo_name.'.png',
+            $folderPath.'480-'.$request->photo_name.'.png'
+        );
+
+        Storage::delete($image_array);
+
+        toastr()->success('Image deleted successfully');
+        return redirect()->route('droid.show', $request->droid);
+    }
+
 }

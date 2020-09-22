@@ -38,6 +38,12 @@ class DroidController extends Controller
      */
     public function store(Request $request)
     {
+
+        if (!$droid->users->contains(auth()->user()) || !auth()->user()->can('Edit Droids'))
+        {
+            abort(403);
+        }
+
         $request->validate([
             'name' => 'required'
         ]);
@@ -87,7 +93,14 @@ class DroidController extends Controller
     public function edit(Droid $droid)
     {
         $clubs = Club::all();
-        return view('droid.edit', compact('clubs'))->with('droid', $droid);;
+        if ($droid->users->contains(auth()->user()) || auth()->user()->can('Edit Droids'))
+        {
+            return view('droid.edit', compact('clubs'))->with('droid', $droid);;
+        } else
+        {
+            abort(403);
+        }
+
     }
 
     /**
@@ -99,6 +112,12 @@ class DroidController extends Controller
      */
     public function update(Request $request, Droid $droid)
     {
+
+        if (!$droid->users->contains(auth()->user()) || !auth()->user()->can('Edit Droids'))
+        {
+            abort(403);
+        }
+
         $request->validate([
             'name' => 'required',
         ]);
@@ -120,6 +139,12 @@ class DroidController extends Controller
      */
     public function destroy(Droid $droid)
     {
+
+        if (!$droid->users->contains(auth()->user()) || !auth()->user()->can('Edit Droids'))
+        {
+            abort(403);
+        }
+
         $users = $droid->users;
         foreach($users as $user)
         {
@@ -144,6 +169,12 @@ class DroidController extends Controller
 
     public function displayDroidImage($uid, $view, $size = '')
     {
+        $droid = Droid::find($uid);
+        if (!$droid->users->contains(auth()->user()) && !auth()->user()->can('View Droids'))
+        {
+            abort(403);
+        }
+
         if ($size != "")
           $size = $size.'-';
         $path = 'droids/'.$uid.'/'.$size.''.$view.'.png';

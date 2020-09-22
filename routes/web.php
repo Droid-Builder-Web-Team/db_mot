@@ -42,21 +42,27 @@ Route::group(['middleware' => ['auth', 'gdpr.terms']], function() {
   Route::resource('user', 'UserController');
   Route::resource('droid', 'DroidController');
   Route::resource('mot', 'MOTController', ['only' => ['index', 'show']]);
-  Route::get('mug_shot/{uid}/{size?}', 'UserController@displayMugShot')->name('image.displayMugShot');
   Route::get('qr_code/{uid}', 'UserController@displayQRCode')->name('image.displayQRCode');
-  Route::get('droid_image/{uid}/{view}/{size?}', 'DroidController@displayDroidImage')->name('image.displayDroidImage');
   Route::put('event/comment/{event}', 'EventController@comment')->name('event.comment');
   Route::resource('event', 'EventController', ['only' => ['index', 'show', 'update']]);
   Route::put('location/comment/{location}', 'LocationController@comment')->name('location.comment');
   Route::resource('location', 'LocationController', ['only' => ['show']]);
   Route::get('image', 'ImageController@index')->name('image');
   Route::post('image/upload', 'ImageController@upload');
+  Route::get('image/destroy', 'ImageController@destroy');
   Route::get('/cover_note/{id}', 'UserController@downloadPDF');
   Route::get('/info_sheet/{id}', 'DroidController@downloadPDF');
   Route::get('/id/{id}', 'ID');
   Route::get('/topps', 'ToppsController')->name('topps');
   Route::get('notifications', 'UserNotificationsController@show')->middleware('auth')->name('notifications');
   Route::resource('settings', 'UserSettingsController');
+
+  Route::get('droid_image/{uid}/{view}/{size?}', 'DroidController@displayDroidImage')
+              ->middleware('cache.headers:max_age=0')
+              ->name('image.displayDroidImage');
+  Route::get('mug_shot/{uid}/{size?}', 'UserController@displayMugShot')
+              ->middleware('cache.headers:max_age=0')
+              ->name('image.displayMugShot');
 });
 
 
