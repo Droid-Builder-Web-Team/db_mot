@@ -249,6 +249,7 @@ table.dataTable td {
   /* Opera 11.10+ */
   background: linear-gradient(to bottom, white 0%, #dcdcdc 100%);
   /* W3C */
+
 }
 .dataTables_wrapper .dataTables_paginate .paginate_button.disabled, .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover, .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:active {
   cursor: default;
