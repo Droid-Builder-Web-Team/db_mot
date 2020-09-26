@@ -16,7 +16,7 @@ class Club extends Model
 
     public function options()
     {
-        return $this->hasMany(ClubOptions::class);
+        return $this->belongsToMany(ClubOptions::class);
     }
 
     public function droids()

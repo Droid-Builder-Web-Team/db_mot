@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Club;
+use App\ClubOptions;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -79,8 +80,15 @@ class ClubsController extends Controller
             'name' => 'required'
         ]);
 
+        $options = $request->get('options');
+        $club_options = [];
+        foreach($options as $option)
+        {
+            $find = ClubOptions::where('name', $option)->first();
+            $club_options[] = $find->id;
+        }
 
-        $club->options()->saveMany($request->options);
+        $club->options()->sync($club_options);
 
         $club->update($request->all());
 

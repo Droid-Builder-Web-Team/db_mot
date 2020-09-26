@@ -48,9 +48,9 @@
                   <div class="form-row">
           <label>Options</label>
           <div class="col-md-4">
-            @foreach(['topps', 'mot'] as $option)
+            @foreach(['topps', 'mot', 'tier_two'] as $option)
               <div class="form-check">
-                <input type="checkbox" name="options[]" value="{{  $option }}"
+                <input type="checkbox" name="options[]" value="{{ $option }}"
                 @if($club->hasOption($option)) checked @endif >
                 <label>{{ $option }}</label>
               </div>
