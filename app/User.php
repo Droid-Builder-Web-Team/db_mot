@@ -12,6 +12,7 @@ use Carbon\Carbon;
 use App\Droid;
 use App\Event;
 use App\Achievement;
+use App\CourseRun;
 use Dialect\Gdpr\Portable;
 
 
@@ -150,5 +151,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function settings()
     {
         return $this->hasMany(UserSetting::class);
+    }
+
+    public function course_runs()
+    {
+        return $this->hasMany(CourseRun::class)->orderBy('final_time');
     }
 }

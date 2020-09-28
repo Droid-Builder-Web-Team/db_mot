@@ -301,4 +301,40 @@
   </div>
 </div>
 
+<div class="row">
+  <div class="col-md-12 mb-2">
+    <div class="card">
+      <div class="card-header text-center">
+        <h4 class="sub-title">Driving Course Runs</h4>
+      </div>
+      <div class="card-body">
+        <table class="table table-striped table-sm">
+          <tr>
+            <th>Run Date</th>
+            <th>Droid Name</th>
+            <th>First Half</th>
+            <th>Second Half</th>
+            <th>Clock Time</th>
+            <th>Penalties</th>
+            <th>Final Time</th>
+            <th></th>
+          </tr>
+          @foreach($user->course_runs as $course_run)
+            <tr>
+              <td>{{ $course_run->run_timestamp}}
+              <td>{{ $course_run->droid->name }}</td>
+              <td>{{ formatMilliseconds($course_run->first_half)}}</td>
+              <td>{{ formatMilliseconds($course_run->second_half)}}</td>
+              <td>{{ formatMilliseconds($course_run->clock_time)}}</td>
+              <td>{{ $course_run->num_penalties }}</td>
+              <td>{{ formatMilliseconds($course_run->final_time)}}</td>
+              <td></td>
+            </tr>
+          @endforeach
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
 @endsection
