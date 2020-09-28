@@ -33,6 +33,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
   Route::resource('/dashboard', 'DashboardController', ['only' => ['index']]);
   Route::get('mot/{droid_id}', 'MOTController@create')->name('mot.create');
   Route::resource('/mot', 'MOTController', ['only' => ['store']]);
+
 });
 
 Route::get('/', function () {    return view('home');
@@ -52,7 +53,7 @@ Route::group(['middleware' => ['auth', 'gdpr.terms']], function() {
   Route::get('image/destroy', 'ImageController@destroy');
   Route::get('/cover_note/{id}', 'UserController@downloadPDF');
   Route::get('/info_sheet/{id}', 'DroidController@downloadPDF');
-  Route::get('/id/{id}', 'ID');
+
   Route::get('/topps', 'ToppsController')->name('topps');
   Route::get('notifications', 'UserNotificationsController@show')->middleware('auth')->name('notifications');
   Route::resource('settings', 'UserSettingsController');
@@ -63,9 +64,10 @@ Route::group(['middleware' => ['auth', 'gdpr.terms']], function() {
   Route::get('mug_shot/{uid}/{size?}', 'UserController@displayMugShot')
               ->middleware('cache.headers:max_age=0')
               ->name('image.displayMugShot');
+  Route::get('/images/update', 'ImageController@update');
 });
 
-
+Route::get('/id/{id}', 'ID');
 Route::get('change-password', 'ChangePasswordController@index');
 Route::post('change-password', 'ChangePasswordController@store')->name('change.password');
 

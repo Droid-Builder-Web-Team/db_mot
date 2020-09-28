@@ -62,7 +62,7 @@ class EventsController extends Controller
           $event = Event::create($request->all());
           toastr()->success('Event created successfully');
         } catch (\Illuminate\Database\QueryException $exception) {
-          toastr()->error('Failed to create Event');
+          toastr()->error('Failed to create Event ');
         }
 
         return redirect()->route('admin.events.index');

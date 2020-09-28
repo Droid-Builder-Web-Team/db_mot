@@ -107,4 +107,44 @@ class ImageController extends Controller
         return redirect()->route('droid.show', $request->droid);
     }
 
+    public function update() {
+        $droids = Droid::all();
+        $pic_types = [
+            'photo_front',
+            'photo_side',
+            'photo_rear',
+            'topps_front',
+            'topps_rear'
+        ];
+
+        foreach($droids as $droid)
+        {
+              echo "Updating images for: ".$droid->name. " ID: ".$droid->id."<br>";
+              foreach($pic_types as $type)
+              {
+                  echo "Checking for: ".$type." ";
+                  $path = 'droids/'.$droid->id.'/'.$type.'.png';
+                  if (!Storage::exists($path))
+                  {
+                      $path = 'droids/'.$droid->id.'/'.$type.'.jpg';
+                  }
+                  if (Storage::exists($path))
+                  {
+                      $folderPath = 'droids/'.$droid->id.'/';
+                      $img = \Image::make(Storage::get($path))->resize(480, null, function($constraint) {
+                          $constraint->aspectRatio();
+                      });
+                      $file = $folderPath . '480-' . $type . '.png';
+                      Storage::disk('local')->put($file, $img->encode());
+
+                      $img = \Image::make(Storage::get($file))->resize(240, null, function($constraint) {
+                          $constraint->aspectRatio();
+                      });
+                      $file = $folderPath . '240-' . $type . '.png';
+                      Storage::disk('local')->put($file, $img->encode());
+                  }
+              }
+              echo "<br>";
+        }
+    }
 }
