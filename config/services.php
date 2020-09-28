@@ -56,4 +56,9 @@ return [
     'discord' => [
         'token' => env('DISCORD_TOKEN'),
     ],
+
+    'recaptcha' => [
+        'sitekey' => env('RECAPTCHA_SITEKEY'),
+        'secret' => env('RECAPTCHA_SECRET'),
+    ],
 ];

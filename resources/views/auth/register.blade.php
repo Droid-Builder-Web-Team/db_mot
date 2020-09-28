@@ -8,6 +8,7 @@
         <div class="card-header">{{ __('Register') }}</div>
           <div class="card-body">
             <form method="POST" action="{{ route('register') }}">
+              <input type="hidden" name="recaptcha" id="recaptcha">
               @csrf
               <div class="form-group row">
                 <label for="forename" class="col-md-4 col-form-label text-md-right">{{ __('Forename') }}</label>
@@ -80,5 +81,18 @@
       </div>
     </div>
   </div>
+
+
+<script src="https://www.google.com/recaptcha/api.js?render={{ config('services.recaptcha.sitekey') }}"></script>
+<script>
+         grecaptcha.ready(function() {
+             grecaptcha.execute('{{ config('services.recaptcha.sitekey') }}', {action: 'contact'}).then(function(token) {
+                if (token) {
+                  document.getElementById('recaptcha').value = token;
+                }
+             });
+         });
+</script>
+
 
 @endsection

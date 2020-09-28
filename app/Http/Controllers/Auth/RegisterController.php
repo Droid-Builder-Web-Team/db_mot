@@ -67,21 +67,48 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
 
-        $id = User::generateID(60);
-        $qr = User::generateQR($id, 90);
-        $user = User::create([
-            'forename' => $data['forename'],
-            'surname' => $data['surname'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-            'badge_id' => $id,
-        ]);
-        $qr = User::generateQR($id, $user->id);
-        $admins = User::whereHas("roles", function($q){ $q->where("name", "Super Admin"); })->get();
-        foreach($admins as $admin)
-        {
-            $admin->notify(new NewUser($user));
+        $url = 'https://www.google.com/recaptcha/api/siteverify';
+        $remoteip = $_SERVER['REMOTE_ADDR'];
+        $recaptcha_data = [
+                'secret' => config('services.recaptcha.secret'),
+                'response' => $data['recaptcha'],
+                'remoteip' => $remoteip
+              ];
+        $options = [
+                'http' => [
+                  'header' => "Content-type: application/x-www-form-urlencoded\r\n",
+                  'method' => 'POST',
+                  'content' => http_build_query($recaptcha_data)
+                ]
+            ];
+        $context = stream_context_create($options);
+                $result = file_get_contents($url, false, $context);
+                $resultJson = json_decode($result);
+        if ($resultJson->success != true) {
+                return back()->withErrors(['captcha' => 'ReCaptcha Error']);
+                }
+        if ($resultJson->score > 0.3) {
+                //Validation was successful, add your form submission logic here
+                $id = User::generateID(60);
+                $qr = User::generateQR($id, 90);
+                $user = User::create([
+                    'forename' => $data['forename'],
+                    'surname' => $data['surname'],
+                    'email' => $data['email'],
+                    'password' => Hash::make($data['password']),
+                    'badge_id' => $id,
+                ]);
+                $qr = User::generateQR($id, $user->id);
+                $admins = User::whereHas("roles", function($q){ $q->where("name", "Super Admin"); })->get();
+                foreach($admins as $admin)
+                {
+                    $admin->notify(new NewUser($user));
+                }
+                return $user;
+
+        } else {
+                return back()->withErrors(['captcha' => 'ReCaptcha Error']);
         }
-        return $user;
+
     }
 }
