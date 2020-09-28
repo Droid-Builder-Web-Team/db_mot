@@ -26,6 +26,11 @@ class Event extends Model
         return $this->belongsToMany(User::class, 'members_events')->wherePivot('status', "maybe");
     }
 
+    public function attended()
+    {
+        return $this->belongsToMany(User::class, 'members_events')->wherePivot('attended', "1");
+    }
+
     public function location()
     {
         return $this->belongsTo(Location::class);

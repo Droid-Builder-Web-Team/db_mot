@@ -134,6 +134,9 @@
       <div class="card border-primary">
         <div class="card-header">
           <strong>{{ $comment->user->forename }} {{ $comment->user->surname }}</strong>
+          <span class="float-right">
+              {{ $comment->created_at }}
+          </span>
         </div>
         <div class="card-body">
           {!! nl2br(e($comment->body)) !!}

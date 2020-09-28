@@ -57,6 +57,13 @@
           <div class="card-header">
             @if(!$event->isFuture())
               Attended By:
+                @foreach($event->attended as $user)
+                  <li><a href="{{ route('user.show', $user->id) }}">{{ $user->forename}} {{ $user->surname }}</a>
+                    @if ($user->event($event->id)->spotter == 'yes')
+                      <i class="fas fa-binoculars"></i>
+                    @endif
+                  </li>
+                @endforeach
             @else
               Currently Interested:
             @endif

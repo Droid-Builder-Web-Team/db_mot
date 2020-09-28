@@ -95,9 +95,12 @@ class EventsController extends Controller
             'description' => 'required',
         ]);
 
-        foreach($event->users as $user)
+        if($event->isFuture())
         {
-            $user->notify(new EventChanged($event));
+            foreach($event->users as $user)
+            {
+                $user->notify(new EventChanged($event));
+            }
         }
 
         try {

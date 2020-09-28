@@ -24,7 +24,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
   });
   Route::resource('/users', 'UsersController', ['except' => ['show', 'create', 'store']]);
   Route::get('/droids/{id}', 'DroidsController@create')->name('droids.create');
-  Route::put('droids/comment/{location}', 'DroidsController@comment')->name('droids.comment');
+  Route::put('droids/comment/{droid}', 'DroidsController@comment')->name('droids.comment');
   Route::resource('/droids', 'DroidsController', ['except' => ['show', 'create']]);
   Route::resource('/events', 'EventsController', ['except' => ['show']]);
   Route::resource('/achievements', 'AchievementsController', ['except' => ['show']]);
@@ -32,6 +32,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
   Route::resource('/locations', 'LocationController', ['except' => ['show']]);
   Route::resource('/dashboard', 'DashboardController', ['only' => ['index']]);
   Route::get('mot/{droid_id}', 'MOTController@create')->name('mot.create');
+  Route::put('mot/comment/{mot}', 'MOTController@comment')->name('mot.comment');
   Route::resource('/mot', 'MOTController', ['only' => ['store']]);
 
 });

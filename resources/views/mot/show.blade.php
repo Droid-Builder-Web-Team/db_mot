@@ -20,7 +20,7 @@
 
   @foreach($mot->sections() as $section)
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-6">
       <h4>{{$section->section_description }}</h2>
       </div>
     </div>
@@ -43,5 +43,46 @@
     </div>
     @endforeach
   @endforeach
+
+  <div class="row">
+    <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        Officer Comments
+      </div>
+      <div class="card-body">
+  @foreach($mot->comments as $comment)
+        <div class="card border-primary">
+          <div class="card-header">
+            <strong>{{ $comment->user->forename }} {{ $comment->user->surname }}</strong>
+            <span class="float-right">
+                {{ $comment->created_at }}
+            </span>
+          </div>
+          <div class="card-body">
+            {!! nl2br(e($comment->body)) !!}
+          </div>
+        </div>
+  @endforeach
+  @can('Add MOT')
+        <div class="card border-primary">
+          <div class="card-header">
+            <strong>Add Comment</strong>
+          </div>
+          <div class="card-body">
+            <form action="{{ route('admin.mot.comment', $mot->id) }}" method="POST">
+                @csrf
+                @method('PUT')
+              <div class="form-group">
+                <textarea type="text" class="form-control" name="body"></textarea>
+              </div>
+              <input type="submit" class="btn-sm btn-primary" name="comment" value="Add Comment">
+            </form>
+          </div>
+        </div>
+  @endcan
+      </div>
+    </div>
+  </div>
 
 @endsection

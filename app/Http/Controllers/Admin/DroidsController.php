@@ -160,7 +160,6 @@ class DroidsController extends Controller
 
     public function comment(Request $request, Droid $droid)
     {
-
         $comment = new Comment;
         $comment->body = $request->body;
         $comment->user_id = auth()->user()->id;
