@@ -199,7 +199,8 @@ class DroidController extends Controller
         $droid = Droid::find($id);
         $user = User::find($droid->users->first()->id);
         $pdf = PDF::loadView('droid.info', compact('droid', 'user'));
-        //$pdf->defaultFont = 'Arial';
+        $pdf->defaultFont = 'Arial';
+        $pdf->setPaper('A4', 'portrait');
 
         return $pdf->download('cover_note.pdf');
         //return view('droid.info', compact('droid', 'user'));
