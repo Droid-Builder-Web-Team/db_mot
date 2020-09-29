@@ -88,7 +88,7 @@
           <i class="fas fa-calendar fa-fw"></i>
         </div>
         <div>
-          <div class="text-value text-info">{{ $user->events->count() }}</div>
+          <div class="text-value text-info">{{ $user->attended_events->count() }}</div>
           <div class="text-muted text-uppercase font-weight-bold small">Events</div>
         </div>
       </div>
@@ -276,8 +276,7 @@
             <th>Links</th>
             <th>Actions</th>
           </tr>
-          @foreach($user->events as $event)
-            @if(!$event->isFuture())
+          @foreach($user->attended_events as $event)
               <tr>
                 <td>{{ $event->date }}</td>
                 <td>{{ $event->name }}</td>
@@ -293,7 +292,6 @@
                 </td>
                 <td><a class="btn-sm btn-primary" href="{{ route('event.show', $event->id) }}">View</a></td>
               </tr>
-            @endif
           @endforeach
         </table>
       </div>
