@@ -21,8 +21,8 @@ class CreateLocationsTable extends Migration
             $table->string('county', 60)->nullable();
             $table->string('postcode', 10)->nullable();
             $table->text('other_details')->nullable();
-            $table->dateTime('created_at');
-            $table->dateTime('updated_at');
+            $table->dateTime('created_at')->nullable();
+            $table->dateTime('updated_at')->nullable();
         });
     }
 
