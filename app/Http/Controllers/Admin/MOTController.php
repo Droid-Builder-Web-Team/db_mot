@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\MOT;
 use App\Droid;
+use App\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Notifications\MOTAdded;
@@ -92,4 +93,15 @@ class MOTController extends Controller
         return redirect()->route('droid.show', $request->droid_id);
     }
 
+    public function comment(Request $request, MOT $mot)
+    {
+
+        $comment = new Comment;
+        $comment->body = $request->body;
+        $comment->user_id = auth()->user()->id;
+
+        $result = $mot->comments()->save($comment);
+        toastr()->success('Comment Added');
+        return view('mot.show', compact('mot'));
+    }
 }
