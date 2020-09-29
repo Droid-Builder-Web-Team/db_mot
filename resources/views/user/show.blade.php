@@ -326,7 +326,7 @@
               <td>{{ formatMilliseconds($course_run->clock_time)}}</td>
               <td>{{ $course_run->num_penalties }}</td>
               <td>{{ formatMilliseconds($course_run->final_time)}}</td>
-              <td></td>
+              <td><a class="btn-sm btn-primary" href="{{ route('runs.show', $course_run->id) }}">View</a></td>
             </tr>
           @endforeach
         </table>

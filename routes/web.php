@@ -66,6 +66,7 @@ Route::group(['middleware' => ['auth', 'gdpr.terms']], function() {
               ->middleware('cache.headers:max_age=0')
               ->name('image.displayMugShot');
   Route::get('/images/update', 'ImageController@update');
+  Route::resource('runs', 'CourseRunsController', ['only' => ['index', 'show']]);
 });
 
 Route::get('/id/{id}', 'ID');
