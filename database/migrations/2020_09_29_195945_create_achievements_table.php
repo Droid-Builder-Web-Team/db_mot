@@ -14,7 +14,7 @@ class CreateAchievementsTable extends Migration
     public function up()
     {
         Schema::create('achievements', function (Blueprint $table) {
-            $table->integer('achievement_uid', true);
+            $table->integer('id', true);
             $table->string('name', 60);
             $table->text('description');
             $table->timestamp('date_created')->useCurrent();

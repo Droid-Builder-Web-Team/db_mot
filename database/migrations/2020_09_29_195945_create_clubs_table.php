@@ -14,7 +14,7 @@ class CreateClubsTable extends Migration
     public function up()
     {
         Schema::create('clubs', function (Blueprint $table) {
-            $table->integer('club_uid', true);
+            $table->integer('id', true);
             $table->string('name', 40);
             $table->string('website', 80)->nullable();
             $table->string('facebook', 80)->nullable();

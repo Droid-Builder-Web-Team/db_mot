@@ -14,10 +14,10 @@ class CreateEventsTable extends Migration
     public function up()
     {
         Schema::create('events', function (Blueprint $table) {
-            $table->integer('event_uid', true);
+            $table->integer('id', true);
             $table->text('name');
             $table->text('description');
-            $table->integer('location_uid');
+            $table->integer('location_id');
             $table->text('forum_link')->nullable();
             $table->text('report_link')->nullable();
             $table->date('date');

@@ -14,13 +14,15 @@ class CreateMembersEventsTable extends Migration
     public function up()
     {
         Schema::create('members_events', function (Blueprint $table) {
-            $table->integer('uid', true);
-            $table->integer('event_uid');
+            $table->integer('id', true);
+            $table->integer('event_id');
             $table->timestamp('date_added')->useCurrent();
-            $table->integer('added_by');
-            $table->integer('member_uid');
+            $table->integer('added_by')->nullable();
+            $table->integer('user_id');
+            $table->text('details')->nullable();
             $table->string('spotter', 3)->nullable();
-            $table->tinyInteger('attended');
+            $table->tinyInteger('attended')->default(0);
+            $table->text('status');
         });
     }
 

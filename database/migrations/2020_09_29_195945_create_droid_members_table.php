@@ -15,8 +15,8 @@ class CreateDroidMembersTable extends Migration
     {
         Schema::create('droid_members', function (Blueprint $table) {
             $table->integer('id', true);
-            $table->integer('member_uid');
-            $table->integer('droid_uid');
+            $table->integer('user_id');
+            $table->integer('droid_id');
             $table->timestamp('timestamp')->useCurrent();
         });
     }

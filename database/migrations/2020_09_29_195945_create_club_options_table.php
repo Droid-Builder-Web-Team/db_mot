@@ -15,11 +15,9 @@ class CreateClubOptionsTable extends Migration
     {
         Schema::create('club_options', function (Blueprint $table) {
             $table->integer('id', true);
-            $table->integer('club_id');
-            $table->string('name', 16);
-            $table->string('value', 16);
-            $table->dateTime('create_at')->useCurrent();
-            $table->dateTime('update_at')->useCurrent();
+            $table->string('name', 30);
+            $table->dateTime('created_at')->useCurrent();
+            $table->dateTime('updated_at')->useCurrent();
         });
     }
 

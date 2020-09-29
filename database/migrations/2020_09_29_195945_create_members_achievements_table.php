@@ -14,9 +14,9 @@ class CreateMembersAchievementsTable extends Migration
     public function up()
     {
         Schema::create('members_achievements', function (Blueprint $table) {
-            $table->integer('uid', true);
-            $table->integer('member_uid');
-            $table->integer('achievement_uid');
+            $table->integer('id', true);
+            $table->integer('user_id');
+            $table->integer('achievement_id');
             $table->text('notes')->nullable();
             $table->timestamp('date_added')->useCurrent();
             $table->integer('added_by');

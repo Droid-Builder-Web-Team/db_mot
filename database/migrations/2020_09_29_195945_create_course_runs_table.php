@@ -14,10 +14,10 @@ class CreateCourseRunsTable extends Migration
     public function up()
     {
         Schema::create('course_runs', function (Blueprint $table) {
-            $table->integer('run_uid', true);
+            $table->integer('id', true);
             $table->integer('run_type')->default(1);
-            $table->integer('member_uid');
-            $table->integer('droid_uid');
+            $table->integer('user_id');
+            $table->integer('droid_id');
             $table->integer('first_half');
             $table->integer('second_half');
             $table->integer('clock_time');

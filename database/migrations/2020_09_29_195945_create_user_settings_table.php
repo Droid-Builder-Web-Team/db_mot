@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePermissionsOldTable extends Migration
+class CreateUserSettingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreatePermissionsOldTable extends Migration
      */
     public function up()
     {
-        Schema::create('permissions.old', function (Blueprint $table) {
-            $table->integer('permission_uid', true);
-            $table->string('name', 20);
-            $table->integer('value');
+        Schema::create('user_settings', function (Blueprint $table) {
+            $table->unsignedBigInteger('id');
+            $table->timestamps();
+            $table->unsignedBigInteger('user_id');
+            $table->string('name');
+            $table->string('value');
         });
     }
 
@@ -27,6 +29,6 @@ class CreatePermissionsOldTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('permissions.old');
+        Schema::dropIfExists('user_settings');
     }
 }

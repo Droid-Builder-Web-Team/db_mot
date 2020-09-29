@@ -14,12 +14,13 @@ class CreateMotLinesTable extends Migration
     public function up()
     {
         Schema::create('mot_lines', function (Blueprint $table) {
-            $table->integer('club_uid');
-            $table->integer('line_uid', true);
+            $table->integer('club_id')->index('club_uid');
+            $table->integer('id', true);
             $table->string('test_name', 32);
             $table->text('test_description');
             $table->text('test_long_description')->nullable();
             $table->string('test_section', 16);
+            $table->integer('section_id');
         });
     }
 
