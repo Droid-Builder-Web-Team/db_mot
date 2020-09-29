@@ -94,8 +94,6 @@
 @include('cookieConsent::index')
 @include('partials.footer')
 </div>
-
-
  <!-- Optional JavaScript -->
  <!-- Popper.js first, then CoreUI JS -->
  <script src="https://unpkg.com/@popperjs/core@2"></script>

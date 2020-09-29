@@ -1,3 +1,8 @@
+@import url(http://fonts.googleapis.com/css?family=Michroma:400,300,700);
+
+body {
+  font-family: 'Michroma', sans-serif !important;
+}
 
 .droid-card {
   border: 1px solid #7BAABC;
