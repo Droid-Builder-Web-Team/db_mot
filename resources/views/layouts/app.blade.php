@@ -91,6 +91,7 @@
       </div>
     </main>
   </div>
+@include('cookieConsent::index')
 @include('partials.footer')
 </div>
 
