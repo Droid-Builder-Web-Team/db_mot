@@ -123,7 +123,7 @@
           <i class="fas fa-trophy fa-fw"></i>
         </div>
         <div>
-          <div class="text-value text-achievements">{{ $user->achievements->count()  }}</div>
+          <div class="text-value text-warning">{{ $user->achievements->count()  }}</div>
           <div class="text-muted text-uppercase font-weight-bold small">Achievements</div>
         </div>
       </div>
