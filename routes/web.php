@@ -54,8 +54,6 @@ Route::group(['middleware' => ['auth', 'gdpr.terms']], function() {
   Route::get('image/destroy', 'ImageController@destroy');
   Route::get('/cover_note/{id}', 'UserController@downloadPDF');
   Route::get('/info_sheet/{id}', 'DroidController@downloadPDF');
-
-  Route::get('/topps', 'ToppsController')->name('topps');
   Route::get('notifications', 'UserNotificationsController@show')->middleware('auth')->name('notifications');
   Route::resource('settings', 'UserSettingsController');
 
@@ -67,14 +65,20 @@ Route::group(['middleware' => ['auth', 'gdpr.terms']], function() {
               ->name('image.displayMugShot');
   Route::get('/images/update', 'ImageController@update');
   Route::resource('runs', 'CourseRunsController', ['only' => ['index', 'show']]);
+  Route::get('change-password', 'ChangePasswordController@index');
+  Route::post('change-password', 'ChangePasswordController@store')->name('change.password');
 });
 
 Route::get('/id/{id}', 'ID');
-Route::get('change-password', 'ChangePasswordController@index');
-Route::post('change-password', 'ChangePasswordController@store')->name('change.password');
+
 
 Route::get('/auth/redirect/{provider}', 'SocialController@redirect');
 Route::get('/callback/{provider}', 'SocialController@callback');
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::post('ipn/notify','PaypalController@postNotify');
+
+Route::get('/topps', 'ToppsController@index')->name('topps');
+Route::get('topps_image/{uid}/{view}/{size?}', 'ToppsController@displayToppsImage')
+              ->middleware('cache.headers:max_age=0')
+              ->name('image.displayToppsImage');

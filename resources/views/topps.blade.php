@@ -9,13 +9,13 @@
  <body>
    <div class="topps">
 @foreach($droids as $droid)
-  <div class="flip-container">
-    <div class="flipper">
-      <div class="front">
-        <img width=240 src="{{ route('image.displayDroidImage', [$droid->id , 'topps_front']) }}" alt="topps_front">
+  <div class="flip-card">
+    <div class="flip-card-inner">
+      <div class="flip-card-front">
+        <img width=240 src="{{ route('image.displayToppsImage', [$droid->id , 'topps_front', 240]) }}" alt="topps_front">
       </div>
-      <div class="back">
-        <img width=240 src="{{ route('image.displayDroidImage', [$droid->id , 'topps_rear']) }}" alt="topps_rear">
+      <div class="flip-card-back">
+        <img width=240 src="{{ route('image.displayToppsImage', [$droid->id , 'topps_rear', 240]) }}" alt="topps_rear">
       </div>
     </div>
   </div>
