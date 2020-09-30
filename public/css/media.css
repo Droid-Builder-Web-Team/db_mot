@@ -1,8 +1,8 @@
-@media(min-width:360px){
+@media(min-width:1920px){
     .title.m-b-md{
-        font-size: 2rem;
+        font-size: 5rem;
     }
     .sub-title{
-        font-size: 1rem;
+        font-size: 2rem;
     }
 }
