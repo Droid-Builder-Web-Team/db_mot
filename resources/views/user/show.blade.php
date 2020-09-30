@@ -24,11 +24,9 @@
   <div class="col md-4">
     <div class="card">
       <div class="card-header">
-          <div class="col-md-4">
         <span class="float-left">
           <h2>{{ $user->forename }} {{ $user->surname }} </h2>
         </span>
-    </div>
         @if ($uses_pli)
           @if($user->validPLI())
             <span class="badge badge-info float-right">

@@ -137,6 +137,16 @@ body {
     background: white;
 }
 
+/*User Profile*/
+.message{
+    width:100%;
+}
+.text-muted.mt-1.text-right{
+    display:flex;
+    justify-content: right;
+    text-align:right;
+}
+
 /* Button */
 .btn-mot{
     text-transform:uppercase;
