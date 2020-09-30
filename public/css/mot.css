@@ -118,10 +118,10 @@ body {
     text-transform: uppercase;
     font-weight: 700;
     text-shadow: 4px 4px #226980;
-    font-size: 5rem;
+    font-size: 2rem;
 }
 .sub-title{
-    font-size:2rem;
+    font-size:1rem;
     text-transform: uppercase;
     font-weight: 500;
 }
@@ -135,4 +135,18 @@ body {
 .btn-auth:hover{
     color:black!important;
     background: white;
+}
+
+/* Button */
+.btn-mot{
+    text-transform:uppercase;
+    width:100%;
+    border: 1px solid grey;
+}
+.btn-mot:hover{
+    border: 1px solid white;
+    color:white;
+}
+#userStats{
+    justify-content:center;
 }

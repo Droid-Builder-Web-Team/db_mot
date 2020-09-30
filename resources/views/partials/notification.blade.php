@@ -4,7 +4,7 @@
             {{ Auth::user()->unreadNotifications->count() }}
           </span>
         </a>
-        <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg  d-md-down-none pt-0">
+        <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg pt-0">
           <div class="dropdown-header bg-light">
             <strong>You have {{ Auth::user()->unreadNotifications->count() }} unread notifications</strong>
           </div>
