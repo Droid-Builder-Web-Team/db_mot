@@ -110,6 +110,7 @@ body {
     text-transform: uppercase;
     font-weight: 700;
     text-shadow: 4px 4px #226980;
+    font-size: 5rem;
 }
 .sub-title{
     font-size:2rem;
@@ -124,6 +125,6 @@ body {
     text-transform: uppercase;
 }
 .btn-auth:hover{
-    color:black;
+    color:black!important;
     background: white;
 }
