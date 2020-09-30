@@ -114,13 +114,13 @@
            <div class="col-xs-6 col-sm-6 col-md-6">
              Builders Notes
              <div class="form-group">
-               <textarea type="text" class="form-control" name="notes"></textarea>
+               <textarea type="text" class="form-control" name="notes">{!! nl2br(e($droid->notes)) !!}</textarea>
              </div>
            </div>
             <div class="col-xs-6 col-sm-6 col-md-6">
               Back Story
               <div class="form-group">
-                <textarea type="text" class="form-control" name="back_story"></textarea>
+                <textarea type="text" class="form-control" name="back_story">{!! nl2br(e($droid->back_story)) !!}</textarea>
               </div>
            </div>
          </div>

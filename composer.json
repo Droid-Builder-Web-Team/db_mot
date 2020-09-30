@@ -23,6 +23,7 @@
         "laravel/ui": "^2.1",
         "laravelcollective/html": "^6.1",
         "orangehill/iseed": "^2.6",
+        "silviolleite/laravelpwa": "^2.0",
         "spatie/laravel-cookie-consent": "^2.12",
         "spatie/laravel-permission": "^3.13",
         "srmklive/paypal": "~1.0",
