@@ -21,8 +21,8 @@
                   </div>
                 </div>
 
-                <div class="row small text-muted">
-                  <div class="col-sm-12">
+                <div>
+                  <div class="col-sm-12 text-muted">
                     {{ $notification->data['text'] }}
                   </div>
                 </div>

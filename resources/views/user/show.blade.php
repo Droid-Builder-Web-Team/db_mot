@@ -24,9 +24,11 @@
   <div class="col md-4">
     <div class="card">
       <div class="card-header">
+          <div class="col-md-4">
         <span class="float-left">
           <h2>{{ $user->forename }} {{ $user->surname }} </h2>
         </span>
+    </div>
         @if ($uses_pli)
           @if($user->validPLI())
             <span class="badge badge-info float-right">
@@ -96,7 +98,7 @@
       </div>
     </div>
     <div class="card">
-      <div class="card-body p-3 d-flex align-items-center">
+      <div class="card-body p-3 d-flex">
         <div class="bg-gradient-primary p-3 mfe-3">
           <i class="fas fa-robot fa-fw"></i>
         </div>
@@ -108,7 +110,7 @@
     </div>
     @if($user->join_date != "")
     <div class="card">
-      <div class="card-body p-3 d-flex align-items-center">
+      <div class="card-body p-3 d-flex">
         <div class="bg-gradient-success p-3 mfe-3">
           <i class="fas fa-clock fa-fw"></i>
         </div>
@@ -120,7 +122,7 @@
     </div>
     @endif
     <div class="card">
-      <div class="card-body p-3 d-flex align-items-center">
+      <div class="card-body p-3 d-flex" >
         <div class="bg-gradient-warning p-3 mfe-3">
           <i class="fas fa-trophy fa-fw"></i>
         </div>

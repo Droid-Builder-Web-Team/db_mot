@@ -118,7 +118,7 @@
             <td><a class="btn-sm btn-primary" href="{{ route('location.show', $event->location->id ) }}">{{ $event->location->name }}</a></td>
             <td>{{ $event->going->count() }}/{{ $event->maybe->count() }}</td>
             <td>
-              <a class="btn-sm btn-primary" href="{{ route('event.show', $event->id) }}">View</a>
+              <a class="btn-sm btn-view" href="{{ route('event.show', $event->id) }}">View</a>
               @can('Edit Events')
                 <a class="btn-sm btn-info" href="{{ route('admin.events.edit',$event->id) }}">Edit</a>
               @endcan
