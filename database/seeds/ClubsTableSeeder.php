@@ -53,9 +53,9 @@ class ClubsTableSeeder extends Seeder
             array (
                 'id' => 5,
                 'name' => 'T3 Builders',
-                'website' => NULL,
-                'facebook' => NULL,
-                'forum' => NULL,
+                'website' => 'https://www.t3buildersclub.co.uk/',
+                'facebook' => 'https://www.facebook.com/groups/t3droidbuildersgroup',
+                'forum' => 'https://t3builders.proboards.com/',
             ),
             5 =>
             array (
@@ -66,7 +66,5 @@ class ClubsTableSeeder extends Seeder
                 'forum' => NULL,
             ),
         ));
-
-
     }
 }

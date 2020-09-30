@@ -151,7 +151,7 @@
               <input type="hidden" name="user" value="{{ $user->id }}">
               <input type="hidden" name="droid" value=0>
               <input type="hidden" name="photo_name" value="mug_shot">
-              <button type="submit" class="btn btn-primary">Change</button>
+              <button type="submit" class="btn btn-mot">Change</button>
             </form>
             @endif
                 </div>

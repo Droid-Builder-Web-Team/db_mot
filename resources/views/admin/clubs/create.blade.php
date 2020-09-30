@@ -7,7 +7,7 @@
             <h2>Add New Club</h2>
         </div>
         <div class="pull-right">
-            <a class="btn btn-primary" href="{{ route('admin.clubs.index') }}"> Back</a>
+            <a class="btn btn-mot" style="width:auto;" href="{{ route('admin.clubs.index') }}"> Back</a>
         </div>
     </div>
 </div>
@@ -45,7 +45,7 @@
         </div>
 
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-mot">Submit</button>
         </div>
     </div>
 

@@ -7,7 +7,7 @@
             <h2>Add New Droid for {{$user->forename}} {{$user->surname}}</h2>
         </div>
         <div class="pull-right">
-            <a class="btn btn-primary" href="{{ route('user.show', $user->id) }}">Back</a>
+            <a class="btn btn-mot" style="width:auto;" href="{{ route('user.show', $user->id) }}">Back</a>
         </div>
     </div>
 </div>
@@ -24,8 +24,8 @@
         </div>
         <div class="col-xs-3 col-sm-3 col-md-3">
             <div class="form-group">
-              <strong>Club</strong><br>
-              <select name=club_id>
+              <strong>Club:</strong><br>
+              <select class="form-select" name=club_id>
                 @foreach($clubs as $club)
                   <option value="{{ $club->id }}">{{ $club->name }}</option>
                 @endforeach
@@ -36,7 +36,7 @@
       <div class="row">
         <div class="col-xs-9 col-sm-9 col-md-9">
             <div class="form-group">
-                <strong>Style:</strong> (eg, ANH, custom, etc.)
+                <strong>Style:</strong> (eg, ANH, Custom, etc.)
                 <input type="text" name="style" class="form-control" placeholder="Style">
             </div>
         </div>
@@ -44,7 +44,7 @@
       <div class="row">
         <div class="col-xs-9 col-sm-9 col-md-9">
             <div class="form-group">
-                <strong>Control System:</strong> (eg, Padawan, shadow, custom.)
+                <strong>Control System:</strong> (eg, Padawan, Shadow, Custom.)
                 <input type="text" name="transmitter_type" class="form-control" placeholder="Controller">
             </div>
         </div>
@@ -80,7 +80,7 @@
         </div>
         <div class="col-xs-4 col-sm-4 col-md-4">
             <div class="form-group">
-                <strong>Drive Type:</strong> (eg, Warp drives, scavenger.)
+                <strong>Drive Type:</strong> (eg, Warp Drives, Scavenger.)
                 <input type="text" name="drive_type" class="form-control" placeholder="Drive Type">
             </div>
         </div>
@@ -100,14 +100,14 @@
         </div>
         <div class="col-xs-4 col-sm-4 col-md-4">
             <div class="form-group">
-                <strong>Approx Weight</strong> (in kg)
+                <strong>Approx Weight</strong> (in KG)
                 <input type="text" name="weight" class="form-control" placeholder="">
             </div>
         </div>
       </div>
       <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-mot">Submit</button>
         </div>
       </div>
 
