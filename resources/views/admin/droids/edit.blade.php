@@ -105,7 +105,7 @@
            </div>
            <div class="col-xs-4 col-sm-4 col-md-4">
                <div class="form-group">
-                   <strong>Approx Weight</strong> (in KG)
+                   <strong>Approx Weight</strong> (in kg)
                    <input type="text" name="weight" class="form-control" value="{{ $droid->weight }}">
                </div>
            </div>
