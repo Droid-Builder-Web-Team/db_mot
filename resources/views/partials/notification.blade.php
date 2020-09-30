@@ -4,23 +4,33 @@
             {{ Auth::user()->unreadNotifications->count() }}
           </span>
         </a>
-      <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg  d-md-down-none pt-0">
-      <div class="dropdown-header bg-light">
-        <strong>You have {{ Auth::user()->unreadNotifications->count() }} unread notifications</strong>
-      </div>
+        <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg  d-md-down-none pt-0">
+          <div class="dropdown-header bg-light">
+            <strong>You have {{ Auth::user()->unreadNotifications->count() }} unread notifications</strong>
+          </div>
 
-@foreach(Auth::user()->unreadNotifications as $notification)
-      <a class="dropdown-item" href="{{ $notification->data['link'] }}">
-        <div class="message">
-          <div>
-            <small class="text-muted float-right mt-1">{{ $notification->created_at }}</small>
-          </div>
-          <div class="font-weight-bold">
-            {{ $notification->data['title'] }}
-          </div>
-          <div class="small text-muted">
-            {{ $notification->data['text'] }}
-          </div>
+          @foreach(Auth::user()->unreadNotifications as $notification)
+            <a class="dropdown-item" href="{{ $notification->data['link'] }}">
+              <div class="message">
+                <div class="row">
+                  <div class="col-sm-6">
+                    {{ $notification->data['title'] }}
+                  </div>
+                  <div class="col-sm-6 float-right">
+                    <span class="float-right"><small class="text-muted mt-1">{{ $notification->created_at }}</small></span>
+                  </div>
+                </div>
+
+                <div class="row small text-muted">
+                  <div class="col-sm-12">
+                    {{ $notification->data['text'] }}
+                  </div>
+                </div>
+              </div>
+            </a>
+          @endforeach
+          <a class="dropdown-item text-center border-top" href="{{ route('notifications')}}">
+            View all notifications
+          </a>
         </div>
-      </a>
-@endforeach
+      </li>
