@@ -271,25 +271,16 @@
           <tr>
             <th>Date</th>
             <th>Details</th>
-            <th>Spotter?</th>
+            <th>Location</th>
             <th>Charity Raised</th>
-            <th>Links</th>
             <th>Actions</th>
           </tr>
           @foreach($user->attended_events as $event)
               <tr>
                 <td>{{ $event->date }}</td>
                 <td>{{ $event->name }}</td>
-                <td>{{ $event->spotter }}</td>
+                <td><a class="btn-sm btn-primary" href="{{ route('location.show', $event->location->id) }}">{{ $event->location->name }}</a></td>
                 <td>{{ $event->charity_raised }}</td>
-                <td>
-                  @if(!empty($event->forum_link))
-                    <a class="btn-sm btn-info" href="{{ $event->forum_link }}">Forum</a>
-                  @endif
-                  @if(!empty($event->report_link))
-                    <a class="btn-sm btn-info" href="{{ $event->report_link }}">Report</a>
-                  @endif
-                </td>
                 <td><a class="btn-sm btn-primary" href="{{ route('event.show', $event->id) }}">View</a></td>
               </tr>
           @endforeach
@@ -310,8 +301,6 @@
           <tr>
             <th>Run Date</th>
             <th>Droid Name</th>
-            <th>First Half</th>
-            <th>Second Half</th>
             <th>Clock Time</th>
             <th>Penalties</th>
             <th>Final Time</th>
@@ -319,12 +308,16 @@
           </tr>
           @foreach($user->course_runs as $course_run)
             <tr>
-              <td>{{ $course_run->run_timestamp}}
+              <td>{{ Carbon\Carbon::parse($course_run->run_timestamp)->format('d-m-Y') }}</td>
               <td>{{ $course_run->droid->name }}</td>
-              <td>{{ formatMilliseconds($course_run->first_half)}}</td>
-              <td>{{ formatMilliseconds($course_run->second_half)}}</td>
               <td>{{ formatMilliseconds($course_run->clock_time)}}</td>
-              <td>{{ $course_run->num_penalties }}</td>
+              <td>
+                @if ($course_run->num_penalties == 0)
+                  <a class="btn-sm btn-success">{{ $course_run->num_penalties }}</a>
+                @else
+                  <a class="btn-sm btn-danger">{{ $course_run->num_penalties }}</a>
+                @endif
+              </td>
               <td>{{ formatMilliseconds($course_run->final_time)}}</td>
               <td><a class="btn-sm btn-primary" href="{{ route('runs.show', $course_run->id) }}">View</a></td>
             </tr>
