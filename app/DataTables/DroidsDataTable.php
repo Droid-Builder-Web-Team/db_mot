@@ -63,7 +63,6 @@ class DroidsDataTable extends DataTable
                   ->lengthMenu([15,25,50])
                   ->orderBy(0)
                   ->buttons(
-                      Button::make('create'),
                       Button::make('export'),
                       Button::make('print'),
                       Button::make('reload')

@@ -75,7 +75,7 @@
             </table>
         </div>
           @can('Edit Members')
-            <a class="btn btn-primary" href="{{ route('admin.users.edit',$user->id) }}">Edit</a>
+            <a class="btn btn-mot" href="{{ route('admin.users.edit',$user->id) }}">Edit</a>
           @else
             <a class="btn btn-mot" href="{{ route('user.edit',$user->id) }}">Edit</a>
           @endcan
