@@ -101,24 +101,6 @@
     </li>
     <li class="c-sidebar-nav-item"></li>
     @endcan
-    <li class="c-sidebar-nav-item">
-      <a class="c-sidebar-nav-link" href="{{ route('change.password') }}">
-        <svg class="c-sidebar-nav-icon">
-          <i class="fas fa-key fa-fw"></i>
-        </svg><span class="ml-1">Change Password</span>
-      </a>
-    </li>
-    <li class="c-sidebar-nav-item"></li>
-
-    <li class="c-sidebar-nav-item">
-      <a class="c-sidebar-nav-link" href="{{ route('logout') }}"
-          onclick="event.preventDefault();
-          document.getElementById('logout-form').submit();">
-          <svg class="c-sidebar-nav-icon">
-            <i class="fas fa-sign-out-alt fa-fw"></i>
-          </svg><span class="ml-1">{{ __('Logout') }}</span>
-      </a>
-    </li>
 @endguest
   </ul>
 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

@@ -62,9 +62,7 @@
             @endif
           @else
             @include('partials.notification')
-            <li class="c-header-nav-item mx-2">
-              {{ Auth::user()->forename }} {{Auth::user()->surname }}
-            </li>
+            @include('partials.account')
 
           @endguest
         </ul>
