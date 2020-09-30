@@ -85,7 +85,7 @@
 
   <div class="col-md-3">
     <div class="card">
-      <div class="card-body p-3 d-flex" id="userStats">
+      <div class="card-body p-3 d-flex align-items-center">
         <div class="bg-gradient-info p-3 mfe-3">
           <i class="fas fa-calendar fa-fw"></i>
         </div>
@@ -96,7 +96,7 @@
       </div>
     </div>
     <div class="card">
-      <div class="card-body p-3 d-flex" id="userStats">
+      <div class="card-body p-3 d-flex align-items-center">
         <div class="bg-gradient-primary p-3 mfe-3">
           <i class="fas fa-robot fa-fw"></i>
         </div>
@@ -108,7 +108,7 @@
     </div>
     @if($user->join_date != "")
     <div class="card">
-      <div class="card-body p-3 d-flex" id="userStats">
+      <div class="card-body p-3 d-flex align-items-center">
         <div class="bg-gradient-success p-3 mfe-3">
           <i class="fas fa-clock fa-fw"></i>
         </div>
@@ -120,7 +120,7 @@
     </div>
     @endif
     <div class="card">
-      <div class="card-body p-3 d-flex" id="userStats">
+      <div class="card-body p-3 d-flex align-items-center">
         <div class="bg-gradient-warning p-3 mfe-3">
           <i class="fas fa-trophy fa-fw"></i>
         </div>
