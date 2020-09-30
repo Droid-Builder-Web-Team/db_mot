@@ -314,6 +314,8 @@
               <td>
                 @if ($course_run->num_penalties == 0)
                   <a class="btn-sm btn-success">{{ $course_run->num_penalties }}</a>
+                @elseif ($course_run->num_penalties == 1)
+                  <a class="btn-sm btn-warning">{{ $course_run->num_penalties }}</a>
                 @else
                   <a class="btn-sm btn-danger">{{ $course_run->num_penalties }}</a>
                 @endif

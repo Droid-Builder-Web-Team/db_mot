@@ -3,6 +3,14 @@
 body {
   font-family: 'Michroma', sans-serif !important;
 }
+.table table {
+  table-layout:fixed;
+}
+
+.table-sm th td {
+  padding: .2rem;
+  font-size: 0.75rem;
+}
 
 .droid-card {
   border: 1px solid #7BAABC;

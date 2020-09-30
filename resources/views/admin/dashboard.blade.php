@@ -105,25 +105,18 @@
     <div class="card-body">
       <table class="table">
         <tr>
-          <th>Name</th>
           <th>Date</th>
+          <th>Name</th>
           <th>Location</th>
-          <th>Confirmed</th>
-          <th>Maybe</th>
           <th></th>
+          <th>Actions</th>
         </tr>
         @foreach ($events as $event)
           <tr>
-            <td>{{ $event->name }}</td>
             <td>{{ $event->date }}</td>
-            <td><a href="{{ route('location.show', $event->location->id ) }}">{{ $event->location->name }}</a></td>
-            <td>{{ $event->going->count() }}</td>
-            <td>{{ $event->maybe->count() }}</td>
-            <td>
-              @if($event->forum_link != "")
-                <a class="btn-sm btn-primary" target="_blank" href="{{ $event->forum_link }}">Forum Link</a>
-              @endif
-            </td>
+            <td>{{ $event->name }}</td>
+            <td><a class="btn-sm btn-primary" href="{{ route('location.show', $event->location->id ) }}">{{ $event->location->name }}</a></td>
+            <td>{{ $event->going->count() }}/{{ $event->maybe->count() }}</td>
             <td>
               <a class="btn-sm btn-primary" href="{{ route('event.show', $event->id) }}">View</a>
               @can('Edit Events')
