@@ -55,27 +55,29 @@
         @endif
       </div>
       <div class="card-body">
-        <table class="table table-striped table-sm">
-          <tr><th>email</th><td>{{ $user->email }}</td></tr>
-          <tr><th>County</th><td>{{ $user->county }}</td></tr>
-          <tr><th>Postcode</th><td>{{ $user->postcode }}</td></tr>
-          <tr><th>Forum Username</th><td>{{ $user->username }}</td></tr>
-          <tr><th>Joined On</th><td>{{ $user->join_date }}</td></tr>
-          @if ($uses_pli)
-            <tr><th>PLI Last Payed</th><td>{{ $user->pli_date }}</td></tr>
-          @endif
-          <tr><th>QR Code:</th>
-            <td>
-              <a href="{{ url('/')."/id/".$user->badge_id }}">
-                <img src="{{ route('image.displayQRCode',$user->id) }}" alt="qr_code" class="img-fluid mb-1 rounded" style="height:150px;">
-              </a>
-            </td>
-          </tr>
-        </table>
+        <div class="table-responsive">
+            <table class="table table-striped table-sm table-hover table-dark">
+                <tr><th>Email</th><td>{{ $user->email }}</td></tr>
+                <tr><th>County</th><td>{{ $user->county }}</td></tr>
+                <tr><th>Postcode</th><td>{{ $user->postcode }}</td></tr>
+                <tr><th>Forum Username</th><td>{{ $user->username }}</td></tr>
+                <tr><th>Joined On</th><td>{{ $user->join_date }}</td></tr>
+                @if ($uses_pli)
+                    <tr><th>PLI Last Payed</th><td>{{ $user->pli_date }}</td></tr>
+                @endif
+                <tr><th>QR Code:</th>
+                    <td>
+                    <a href="{{ url('/')."/id/".$user->badge_id }}">
+                        <img src="{{ route('image.displayQRCode',$user->id) }}" alt="qr_code" class="img-fluid mb-1 rounded" style="height:150px;">
+                    </a>
+                    </td>
+                </tr>
+            </table>
+        </div>
           @can('Edit Members')
             <a class="btn btn-primary" href="{{ route('admin.users.edit',$user->id) }}">Edit</a>
           @else
-            <a class="btn btn-primary" href="{{ route('user.edit',$user->id) }}">Edit</a>
+            <a class="btn btn-mot" href="{{ route('user.edit',$user->id) }}">Edit</a>
           @endcan
       </div>
     </div>
@@ -83,7 +85,7 @@
 
   <div class="col-md-3">
     <div class="card">
-      <div class="card-body p-3 d-flex align-items-center">
+      <div class="card-body p-3 d-flex" id="userStats">
         <div class="bg-gradient-info p-3 mfe-3">
           <i class="fas fa-calendar fa-fw"></i>
         </div>
@@ -94,7 +96,7 @@
       </div>
     </div>
     <div class="card">
-      <div class="card-body p-3 d-flex align-items-center">
+      <div class="card-body p-3 d-flex" id="userStats">
         <div class="bg-gradient-primary p-3 mfe-3">
           <i class="fas fa-robot fa-fw"></i>
         </div>
@@ -106,7 +108,7 @@
     </div>
     @if($user->join_date != "")
     <div class="card">
-      <div class="card-body p-3 d-flex align-items-center">
+      <div class="card-body p-3 d-flex" id="userStats">
         <div class="bg-gradient-success p-3 mfe-3">
           <i class="fas fa-clock fa-fw"></i>
         </div>
@@ -118,7 +120,7 @@
     </div>
     @endif
     <div class="card">
-      <div class="card-body p-3 d-flex align-items-center">
+      <div class="card-body p-3 d-flex" id="userStats">
         <div class="bg-gradient-warning p-3 mfe-3">
           <i class="fas fa-trophy fa-fw"></i>
         </div>
@@ -152,9 +154,9 @@
               <button type="submit" class="btn btn-primary">Change</button>
             </form>
             @endif
-					  </div>
-			    </div>
-			  </div>
+                </div>
+        </div>
+        </div>
       </div>
     </div>
   </div>
@@ -172,7 +174,7 @@
   <div class="card-body text-center">
     <div class="row">
 @foreach($user->droids as $droid)
-      <div class="col-md-3 mb-5 droid-card text-center" onclick="document.location='{{ route('droid.show', $droid->id) }}'">
+      <div class="col-md-3 mb-5 droid-card mx-auto mx-auto text-center" onclick="document.location='{{ route('droid.show', $droid->id) }}'">
         <div class="droid-card-content">
           <div style="text-align:center">
 			      <img src="{{ route('image.displayDroidImage', [$droid->id, 'photo_front', '240']) }}" alt="{{ $droid->name }}" class="img-fluid mb-1 rounded">
@@ -207,9 +209,9 @@
 
 @endforeach
       @can('Edit Droids')
-        <div class="col-md-3 mb-5 droid-card" onclick="document.location='{{ route('admin.droids.create', [$user->id]) }}'">
+        <div class="col-md-3 mb-5 droid-card mx-auto" onclick="document.location='{{ route('admin.droids.create', [$user->id]) }}'">
       @else
-        <div class="col-md-3 mb-5 droid-card" onclick="document.location='{{ route('droid.create') }}'">
+        <div class="col-md-3 mb-5 droid-card mx-auto" onclick="document.location='{{ route('droid.create') }}'">
       @endcan
         <div class="droid-card-content">
 
@@ -239,22 +241,22 @@
         <h4 class="sub-title">Achievements</h4>
       </div>
       <div class="card-body">
-        <table class="table table-striped table-sm">
-          <tr>
-            <th>Name</th>
-            <th>Notes</th>
-            <th>Date Added</th>
-            <th></th>
-          </tr>
-          @foreach($user->achievements as $achievement)
+          <div class="table-responsive">
+            <table class="table table-striped table-sm table-hover table-dark text-center">
             <tr>
-              <td>{{ $achievement->name }}</td>
-              <td>{!! $achievement->pivot->notes !!}</td>
-              <td>{{ $achievement->pivot->date_added }}</td>
-              <td></td>
+                <th>Name</th>
+                <th>Notes</th>
+                <th>Date Added</th>
             </tr>
-          @endforeach
-        </table>
+            @foreach($user->achievements as $achievement)
+                <tr>
+                <td>{{ $achievement->name }}</td>
+                <td>{!! $achievement->pivot->notes !!}</td>
+                <td>{{ $achievement->pivot->date_added }}</td>
+                </tr>
+            @endforeach
+            </table>
+            </div>
       </div>
     </div>
   </div>
@@ -266,25 +268,27 @@
       <div class="card-header text-center">
         <h4 class="sub-title">Events</h4>
       </div>
-      <div class="card-body">
-        <table class="table table-striped table-sm">
-          <tr>
-            <th>Date</th>
-            <th>Details</th>
-            <th>Location</th>
-            <th>Charity Raised</th>
-            <th>Actions</th>
-          </tr>
-          @foreach($user->attended_events as $event)
-              <tr>
-                <td>{{ $event->date }}</td>
-                <td>{{ $event->name }}</td>
-                <td><a class="btn-sm btn-primary" href="{{ route('location.show', $event->location->id) }}">{{ $event->location->name }}</a></td>
-                <td>{{ $event->charity_raised }}</td>
-                <td><a class="btn-sm btn-primary" href="{{ route('event.show', $event->id) }}">View</a></td>
-              </tr>
-          @endforeach
-        </table>
+      <div class="card-body text-center">
+        <div class="table-responsive">
+            <table class="table table-striped table-sm table-hover table-dark text-center">
+            <tr>
+                <th>Date</th>
+                <th>Details</th>
+                <th>Location</th>
+                <th>Charity Raised</th>
+                <th>Actions</th>
+            </tr>
+            @foreach($user->attended_events as $event)
+                <tr>
+                    <td>{{ $event->date }}</td>
+                    <td>{{ $event->name }}</td>
+                    <td><a class="btn-sm btn-primary" href="{{ route('location.show', $event->location->id) }}">{{ $event->location->name }}</a></td>
+                    <td>{{ $event->charity_raised }}</td>
+                    <td><a class="btn-sm btn-primary" href="{{ route('event.show', $event->id) }}">View</a></td>
+                </tr>
+            @endforeach
+            </table>
+        </div>
       </div>
     </div>
   </div>
@@ -297,34 +301,35 @@
         <h4 class="sub-title">Driving Course Runs</h4>
       </div>
       <div class="card-body">
-        <table class="table table-striped table-sm">
-          <tr>
-            <th>Run Date</th>
-            <th>Droid Name</th>
-            <th>Clock Time</th>
-            <th>Penalties</th>
-            <th>Final Time</th>
-            <th></th>
-          </tr>
-          @foreach($user->course_runs as $course_run)
+        <div class="table-responsive">
+            <table class="table table-striped table-sm table-hover table-dark text-center">
             <tr>
-              <td>{{ Carbon\Carbon::parse($course_run->run_timestamp)->format('d-m-Y') }}</td>
-              <td>{{ $course_run->droid->name }}</td>
-              <td>{{ formatMilliseconds($course_run->clock_time)}}</td>
-              <td>
-                @if ($course_run->num_penalties == 0)
-                  <a class="btn-sm btn-success">{{ $course_run->num_penalties }}</a>
-                @elseif ($course_run->num_penalties == 1)
-                  <a class="btn-sm btn-warning">{{ $course_run->num_penalties }}</a>
-                @else
-                  <a class="btn-sm btn-danger">{{ $course_run->num_penalties }}</a>
-                @endif
-              </td>
-              <td>{{ formatMilliseconds($course_run->final_time)}}</td>
-              <td><a class="btn-sm btn-primary" href="{{ route('runs.show', $course_run->id) }}">View</a></td>
+                <th>Run Date</th>
+                <th>Droid Name</th>
+                <th>Clock Time</th>
+                <th>Penalties</th>
+                <th>Final Time</th>
             </tr>
-          @endforeach
-        </table>
+            @foreach($user->course_runs as $course_run)
+                <tr>
+                <td>{{ Carbon\Carbon::parse($course_run->run_timestamp)->format('d-m-Y') }}</td>
+                <td>{{ $course_run->droid->name }}</td>
+                <td>{{ formatMilliseconds($course_run->clock_time)}}</td>
+                <td>
+                    @if ($course_run->num_penalties == 0)
+                    <a class="btn-sm btn-success">{{ $course_run->num_penalties }}</a>
+                    @elseif ($course_run->num_penalties == 1)
+                    <a class="btn-sm btn-warning">{{ $course_run->num_penalties }}</a>
+                    @else
+                    <a class="btn-sm btn-danger">{{ $course_run->num_penalties }}</a>
+                    @endif
+                </td>
+                <td>{{ formatMilliseconds($course_run->final_time)}}</td>
+                <td><a class="btn-sm btn-primary" href="{{ route('runs.show', $course_run->id) }}">View</a></td>
+                </tr>
+            @endforeach
+            </table>
+        </div>
       </div>
     </div>
   </div>

@@ -1,8 +1,16 @@
+@media(min-width:1200px){
+    .title.m-b-md{
+        font-size:3rem;
+    }
+}
 @media(min-width:1920px){
     .title.m-b-md{
         font-size: 5rem;
     }
     .sub-title{
         font-size: 2rem;
+    }
+    #userStats{
+        justify-content:left;
     }
 }
