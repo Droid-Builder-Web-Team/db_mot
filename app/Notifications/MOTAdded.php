@@ -66,7 +66,7 @@ class MOTAdded extends Notification
           'id' => $this->mot->id,
           'title' => $this->title,
           'link' => $this->link,
-          'text' => $this->text
+          'text' => $this->text,
         ];
     }
 }
