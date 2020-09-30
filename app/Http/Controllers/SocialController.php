@@ -22,7 +22,7 @@ class SocialController extends Controller
         $getInfo = Socialite::driver($provider)->user();
 
         $user = $this->createUser($getInfo,$provider);
-        
+
         if ($user->active == "on")
         {
             auth()->login($user);
@@ -32,7 +32,7 @@ class SocialController extends Controller
           return redirect()->to('/login');
         }
 
-        return redirect()->to('/home');
+        return redirect()->to('/user');
 
     }
    function createUser($getInfo,$provider){
