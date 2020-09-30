@@ -24,11 +24,9 @@
   <div class="col md-4">
     <div class="card">
       <div class="card-header">
-          <div class="col-md-4">
         <span class="float-left">
           <h2>{{ $user->forename }} {{ $user->surname }} </h2>
         </span>
-    </div>
         @if ($uses_pli)
           @if($user->validPLI())
             <span class="badge badge-info float-right">
@@ -153,7 +151,7 @@
               <input type="hidden" name="user" value="{{ $user->id }}">
               <input type="hidden" name="droid" value=0>
               <input type="hidden" name="photo_name" value="mug_shot">
-              <button type="submit" class="btn btn-primary">Change</button>
+              <button type="submit" class="btn btn-mot">Change</button>
             </form>
             @endif
                 </div>

@@ -137,16 +137,48 @@ body {
     background: white;
 }
 
+/* User Profile */
+.message{
+    width:100%;
+}
+.text-muted.mt-1.text-right{
+    display:flex;
+    justify-content: right;
+    text-align:right;
+}
+
+/* Add New Droid */
+.form-select{
+    color:white;
+    background: #181924;
+}
+
 /* Button */
 .btn-mot{
     text-transform:uppercase;
     width:100%;
     border: 1px solid grey;
+    color:White;
 }
 .btn-view{
     text-transform:uppercase;
     width:100%;
     border: 1px solid #5342e7;
+}
+.btn-edit{
+    text-transform:uppercase;
+    width:100%;
+    border: 1px solid #2586e7;
+}
+.btn-kill{
+    text-transform:uppercase;
+    width:100%;
+    border: 1px solid #d16767;
+    background: transparent;
+    color:white;
+}
+.btn-link{
+    border: 1px solid #d8d7d7;
 }
 .btn-mot:hover{
     border: 1px solid white;
@@ -154,4 +186,15 @@ body {
 }
 .btn-view:hover{
     border: 1px solid #3b2fa4;
+}
+.btn-edit:hover{
+    border: 1px solid #1b5c9e;
+}
+.btn-kill:hover{
+    border: 1px solid #854242;
+}
+.btn-link:hover{
+    border: 1px solid #636262;
+    color:#cfcfcf;
+    text-decoration: none;
 }

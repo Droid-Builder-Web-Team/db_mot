@@ -7,7 +7,7 @@
                 <h2>Edit Droid</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('droid.show', $droid->id) }}">Back</a>
+                <a class="btn btn-mot" style="width:auto;" href="{{ route('droid.show', $droid->id) }}">Back</a>
             </div>
         </div>
     </div>
@@ -25,7 +25,7 @@
            </div>
            <div class="col-xs-3 col-sm-3 col-md-3">
                <div class="form-group">
-                 <strong>Club</strong><br>
+                 <strong>Club:</strong><br>
                  <select class="js-example-basic-single" name=club_id>
                    @foreach($clubs as $club)
                      <option value="{{ $club->id }}"
@@ -41,7 +41,7 @@
          <div class="form-row">
            <div class="col-xs-9 col-sm-9 col-md-9">
                <div class="form-group">
-                   <strong>Style:</strong> (eg, ANH, custom, etc.)
+                   <strong>Style:</strong> (eg, ANH, Custom, etc.)
                    <input type="text" name="style" class="form-control" value="{{ $droid->style }}">
                </div>
            </div>
@@ -49,7 +49,7 @@
          <div class="form-row">
            <div class="col-xs-9 col-sm-9 col-md-9">
                <div class="form-group">
-                   <strong>Control System:</strong> (eg, Padawan, shadow, custom.)
+                   <strong>Control System:</strong> (eg, Padawan, Shadow, Custom)
                    <input type="text" name="transmitter_type" class="form-control" value="{{ $droid->transmitter_type }}">
                </div>
            </div>
@@ -85,7 +85,7 @@
            </div>
            <div class="col-xs-4 col-sm-4 col-md-4">
                <div class="form-group">
-                   <strong>Drive Type:</strong> (eg, Warp drives, scavenger.)
+                   <strong>Drive Type:</strong> (eg, Warp drives, Scavenger.)
                    <input type="text" name="drive_type" class="form-control" value="{{ $droid->drive_type }}">
                </div>
            </div>

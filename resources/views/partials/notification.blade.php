@@ -13,18 +13,17 @@
             <a class="dropdown-item" href="{{ $notification->data['link'] }}">
               <div class="message">
                 <div class="row">
-                  <div class="col-sm-6">
-                    {{ $notification->data['title'] }}
-                  </div>
-                  <div class="col-sm-6 float-right">
-                    <span class="float-right"><small class="text-muted mt-1">{{ $notification->created_at }}</small></span>
-                  </div>
+                    <div class="col-md-6">
+                        {{ $notification->data['title'] }}
+                    </div>
+                    <div class="col-md-6">
+                        <small class="text-muted mt-1 text-right">{{ $notification->created_at }}</small>
+                    </div>
                 </div>
-
-                <div>
-                  <div class="col-sm-12 text-muted">
-                    {{ $notification->data['text'] }}
-                  </div>
+                <div class="row">
+                    <div class="col-md-12 text-muted">
+                        {{ $notification->data['text'] }}
+                    </div>
                 </div>
               </div>
             </a>
