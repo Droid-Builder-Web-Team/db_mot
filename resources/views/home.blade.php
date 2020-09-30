@@ -1,4 +1,6 @@
 @extends('layouts.home')
+@include('partials.login')
+@include('partials.register')
 
         <!-- Styles -->
         <style>
@@ -58,7 +60,7 @@
             }
         </style>
     </head>
-    <body >
+    <body>
         <div class="flex-center position-ref full-height" style="background: url('https://droidbuilders.uk/wp-content/uploads/2020/09/DBUKBG.jpg') no-repeat;
         background-position:center; background-size:cover;">
 
@@ -73,11 +75,13 @@
                 </div>
 
                 <div class="buttons">
-                    <a href="{{ route('login') }}" role="button" class="btn m-3 btn-lg btn-auth">{{ __('Login') }}</a>
-                    <a href="{{ route('register') }}" role="button" class="btn m-3 btn-lg btn-auth">{{ __('Register') }}</a>
+                    <a style="cursor: pointer" data-toggle="modal" data-target="#loginModal" role="button" class="btn m-3 btn-lg btn-auth">{{ __('Login') }}</a>
+                    <a style="cursor: pointer" data-toggle="modal" data-target="#registerModal" role="button" class="btn m-3 btn-lg btn-auth">{{ __('Register') }}</a>
                 </div>
 
             </div>
         </div>
+        @yield('scripts')
+
     </body>
 </html>

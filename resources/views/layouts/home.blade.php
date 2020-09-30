@@ -16,6 +16,7 @@
  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
  <link href="{{ asset('css/dark.css') }}" rel="stylesheet">
  <link href="{{ asset('css/mot.css') }}" rel="stylesheet">
+ <link href="{{ asset('css/media.css') }}" rel="stylesheet">
 
 
 
@@ -33,10 +34,9 @@
      <div class="c-body">
         <main class="c-main">
             <div class="container-fluid">
+                @yield('content')
 
-        @yield('content')
-
-        @include('partials.footer')
+                @include('partials.footer')
             </div>
         </main>
     </div>

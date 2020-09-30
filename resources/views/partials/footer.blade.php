@@ -1,4 +1,3 @@
-
 <footer class="c-footer fixed-bottom">
    <div class="container">
      <div class="row">

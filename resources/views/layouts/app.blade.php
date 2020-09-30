@@ -15,6 +15,7 @@
  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
  <link href="{{ asset('css/dark.css') }}" rel="stylesheet">
  <link href="{{ asset('css/mot.css') }}" rel="stylesheet">
+ <link href="{{ asset('css/media.css') }}" rel="stylesheet">
 
  <script type="text/javascript" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js" defer></script>
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
