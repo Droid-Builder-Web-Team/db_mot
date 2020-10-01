@@ -2,14 +2,14 @@
 <li class="c-header-nav-item dropdown">
   <a class="c-header-nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
     <div class="c-avatar">
-      <img class="c-avatar-img" src="{{ asset('img/blank_mug_shot.jpg') }}" alt="{{Auth::user()->email }}">
+      <img class="c-avatar-img" src="{{ route('image.displayMugShot',[Auth::user()->id, '240']) }}" alt="{{Auth::user()->email }}">
     </div>
   </a>
   <div class="dropdown-menu dropdown-menu-right pt-0">
     <div class="dropdown-header bg-light py-2">
       <strong>{{ Auth::user()->forename }} {{Auth::user()->surname }}</strong>
     </div>
-    <a class="dropdown-item" href="#">
+    <a class="dropdown-item" href="{{ route('settings.edit', Auth::user()->id) }}">
       <i class="fas fa-cog fa-fw"></i> Preferences
     </a>
     <a class="dropdown-item" href="{{ route('change.password') }}">

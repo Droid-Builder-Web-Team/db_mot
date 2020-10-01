@@ -158,6 +158,12 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(UserSetting::class);
     }
 
+    public function hasSetting()
+    {
+        $settings = $this->settings;
+        return true;
+    }
+
     public function course_runs()
     {
         return $this->hasMany(CourseRun::class)->orderBy('final_time');

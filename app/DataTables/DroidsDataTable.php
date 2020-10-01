@@ -45,7 +45,7 @@ class DroidsDataTable extends DataTable
      */
     public function query(Droid $model)
     {
-      return $model->newQuery();
+      return $model->newQuery()->where('active', 'on');
     }
 
     /**
@@ -78,7 +78,6 @@ class DroidsDataTable extends DataTable
     protected function getColumns()
     {
       return [
-          Column::make('id'),
           Column::make('name'),
           Column::computed('mot'),
           Column::computed('action')
