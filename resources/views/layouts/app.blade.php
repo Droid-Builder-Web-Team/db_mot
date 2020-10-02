@@ -48,10 +48,10 @@
           <li class="c-header-nav-item px-3 c-d-legacy-none">
             <button class="c-class-toggler c-header-nav-btn" type="button" id="header-tooltip" data-target="body" data-class="c-dark-theme" data-toggle="c-tooltip" data-placement="bottom" title="" data-original-title="Toggle Light/Dark Mode">
               <svg class="c-icon c-d-dark-none">
-                <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-moon"></use>
+
               </svg>
               <svg class="c-icon c-d-default-none">
-                <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-sun"></use>
+
               </svg>
             </button>
           </li>
