@@ -1,0 +1,62 @@
+
+body{
+    background: $background!important;
+    color: $primaryText!important;
+}
+.card{
+    background: $cardBg!important;
+    border: 1px solid white!important;
+}
+
+.card-header{
+    background: $headerBG!important;
+    background-position:center!important;
+    background-size: cover!important;
+    color: $headerText!important;
+}
+
+/* Button */
+.btn-mot{
+    text-transform:uppercase;
+    width:100%;
+    border: 1px solid #000000!important;
+    color:$primaryText!important;
+}
+.btn-view{
+    text-transform:uppercase;
+    width:100%;
+    border: 1px solid #5342e7;
+}
+.btn-edit{
+    text-transform:uppercase;
+    width:100%;
+    border: 1px solid #2586e7;
+}
+.btn-kill{
+    text-transform:uppercase;
+    width:100%;
+    border: 1px solid #d16767;
+    background: transparent;
+    color:white;
+}
+.btn-link{
+    border: 1px solid #d8d7d7;
+}
+.btn-mot:hover{
+    border: 1px solid white;
+    color:white;
+}
+.btn-view:hover{
+    border: 1px solid #3b2fa4;
+}
+.btn-edit:hover{
+    border: 1px solid #1b5c9e;
+}
+.btn-kill:hover{
+    border: 1px solid #854242;
+}
+.btn-link:hover{
+    border: 1px solid #636262;
+    color:#cfcfcf;
+    text-decoration: none;
+}
