@@ -46,9 +46,9 @@
         </table>
         <span class="float-left">
 @can('Edit Droids')
-          <a class="btn btn-primary" href="{{ route('admin.droids.edit',$droid->id) }}">Edit</a>
+          <a class="btn btn-edit" style="width:auto;" href="{{ route('admin.droids.edit',$droid->id) }}">Edit</a>
 @else
-          <a class="btn btn-primary" href="{{ route('droid.edit',$droid->id) }}">Edit</a>
+          <a class="btn btn-edit" href="{{ route('droid.edit',$droid->id) }}">Edit</a>
 @endcan
         </span>
         <span class="float-right">
@@ -76,12 +76,12 @@
               <td>{{ $mot->location }}</td>
               <td>{{ $mot->officer() }}</td>
               <td>{{ $mot->approved }}</td>
-              <td><a class="btn btn-primary btn-sm" href="{{ route('mot.show', $mot->id) }}">View</a></td>
+              <td><a class="btn btn-view btn-sm" href="{{ route('mot.show', $mot->id) }}">View</a></td>
             </tr>
           @endforeach
         </table>
         @can('Add MOT')
-          <a class="btn btn-primary" href="{{ route('admin.mot.create', $droid->id) }}">Add MOT</a>
+          <a class="btn btn-mot" href="{{ route('admin.mot.create', $droid->id) }}">Add MOT</a>
         @endcan
       </div>
     </div>
@@ -176,9 +176,9 @@
           {!! nl2br(e($droid->notes)) !!}
         </div>
           @can('Edit Droids')
-            <a class="btn btn-primary" href="{{ route('admin.droids.edit',$droid->id) }}">Edit</a>
+            <a class="btn btn-edit" style="width:auto;" href="{{ route('admin.droids.edit',$droid->id) }}">Edit</a>
           @else
-            <a class="btn btn-primary" href="{{ route('droid.edit',$droid->id) }}">Edit</a>
+            <a class="btn btn-edit" style="width:auto;" href="{{ route('droid.edit',$droid->id) }}">Edit</a>
           @endcan
       </div>
     </div>
@@ -193,9 +193,9 @@
           {!! nl2br(e($droid->back_story)) !!}
         </div>
           @can('Edit Droids')
-            <a class="btn btn-primary" href="{{ route('admin.droids.edit',$droid->id) }}">Edit</a>
+            <a class="btn btn-edit" style="width:auto;" href="{{ route('admin.droids.edit',$droid->id) }}">Edit</a>
           @else
-            <a class="btn btn-primary" href="{{ route('droid.edit',$droid->id) }}">Edit</a>
+            <a class="btn btn-edit" style="width:auto;" href="{{ route('droid.edit',$droid->id) }}">Edit</a>
           @endcan
       </div>
     </div>

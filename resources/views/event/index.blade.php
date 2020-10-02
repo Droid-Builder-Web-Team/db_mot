@@ -9,7 +9,7 @@
         </div>
     </div>
 
-    <table class="table table-bordered table-sm">
+    <table class="table table-bordered table-sm text-center">
         <tr>
           <th width="120px">Date</th>
             <th>Name</th>
@@ -20,11 +20,11 @@
         <tr>
             <td>{{ $event->date }}</td>
             <td>{{ $event->name }}</td>
-            <td><a class="btn-sm btn-info" href="{{ route('location.show', $event->location->id )}}">{{ $event->location->name}}</a></td>
+            <td><a class="btn-sm btn-link" href="{{ route('location.show', $event->location->id )}}">{{ $event->location->name}}</a></td>
             <td>
-              <a class="btn-sm btn-primary" href="{{ route('event.show',$event->id) }}">View</a>
+              <a class="btn-sm btn-view" href="{{ route('event.show',$event->id) }}">View</a>
               @can('Edit Events')
-              <a class="btn-sm btn-info" href="{{ route('admin.events.edit',$event->id) }}">Edit</a>
+              <a class="btn-sm btn-edit" href="{{ route('admin.events.edit',$event->id) }}">Edit</a>
               @endcan
             </td>
         </tr>
