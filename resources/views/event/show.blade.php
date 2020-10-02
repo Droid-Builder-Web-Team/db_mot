@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-lg-1">
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('event.index') }}"> Back</a>
+                <a class="btn btn-mot" href="{{ route('event.index') }}"> Back</a>
             </div>
         </div>
     </div>
@@ -44,7 +44,7 @@
               </div>
                 <br>
                 <span class="float-right">
-                  <a class="btn-sm btn-info" href="{{ route('location.show', $event->location->id )}}">{{ $event->location->name}}</a>
+                  <a class="btn-sm btn-link" href="{{ route('location.show', $event->location->id )}}">{{ $event->location->name}}</a>
                 </span>
               </div>
             </div>
@@ -206,7 +206,7 @@
             </div>
 
             <div class="form-group">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-mot">Submit</button>
             </div>
           </div>
         </div>
