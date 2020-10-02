@@ -1,5 +1,78 @@
 @import url(https://fonts.googleapis.com/css?family=Nunito);@charset "UTF-8";
 
+body {
+  background: #05080D !important;
+  color: #000000 !important;
+}
+
+.card {
+  background: #FFF !important;
+  border: 1px solid white !important;
+}
+
+.card-header {
+  background: url("https://droidbuilders.uk/wp-content/uploads/2019/10/BGimage.png") !important;
+  background-position: center !important;
+  background-size: cover !important;
+  color: #FFF !important;
+}
+
+/* Button */
+
+.btn-mot {
+  text-transform: uppercase;
+  width: 100%;
+  border: 1px solid #000000 !important;
+  color: #000000 !important;
+}
+
+.btn-view {
+  text-transform: uppercase;
+  width: 100%;
+  border: 1px solid #5342e7;
+}
+
+.btn-edit {
+  text-transform: uppercase;
+  width: 100%;
+  border: 1px solid #2586e7;
+}
+
+.btn-kill {
+  text-transform: uppercase;
+  width: 100%;
+  border: 1px solid #d16767;
+  background: transparent;
+  color: white;
+}
+
+.btn-link {
+  border: 1px solid #d8d7d7;
+}
+
+.btn-mot:hover {
+  border: 1px solid white;
+  color: white;
+}
+
+.btn-view:hover {
+  border: 1px solid #3b2fa4;
+}
+
+.btn-edit:hover {
+  border: 1px solid #1b5c9e;
+}
+
+.btn-kill:hover {
+  border: 1px solid #854242;
+}
+
+.btn-link:hover {
+  border: 1px solid #636262;
+  color: #cfcfcf;
+  text-decoration: none;
+}
+
 /*!
  * Bootstrap v4.5.0 (https://getbootstrap.com/)
  * Copyright 2011-2020 The Bootstrap Authors
@@ -72,7 +145,7 @@ body {
   line-height: 1.6;
   color: #212529;
   text-align: left;
-  background-color: #f8fafc;
+  background-color: #fff;
 }
 
 [tabindex="-1"]:focus:not(:focus-visible) {
@@ -510,7 +583,7 @@ mark,
 
 .img-thumbnail {
   padding: 0.25rem;
-  background-color: #f8fafc;
+  background-color: #fff;
   border: 1px solid #dee2e6;
   border-radius: 0.25rem;
   max-width: 100%;
@@ -2196,11 +2269,6 @@ pre code {
 }
 
 .form-control:-ms-input-placeholder {
-  color: #6c757d;
-  opacity: 1;
-}
-
-.form-control::-ms-input-placeholder {
   color: #6c757d;
   opacity: 1;
 }
@@ -4275,15 +4343,15 @@ input[type=button].btn-block {
 }
 
 .custom-range:focus::-webkit-slider-thumb {
-  box-shadow: 0 0 0 1px #f8fafc, 0 0 0 0.2rem rgba(52, 144, 220, 0.25);
+  box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem rgba(52, 144, 220, 0.25);
 }
 
 .custom-range:focus::-moz-range-thumb {
-  box-shadow: 0 0 0 1px #f8fafc, 0 0 0 0.2rem rgba(52, 144, 220, 0.25);
+  box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem rgba(52, 144, 220, 0.25);
 }
 
 .custom-range:focus::-ms-thumb {
-  box-shadow: 0 0 0 1px #f8fafc, 0 0 0 0.2rem rgba(52, 144, 220, 0.25);
+  box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem rgba(52, 144, 220, 0.25);
 }
 
 .custom-range::-moz-focus-outer {
@@ -4489,8 +4557,8 @@ input[type=button].btn-block {
 .nav-tabs .nav-link.active,
 .nav-tabs .nav-item.show .nav-link {
   color: #495057;
-  background-color: #f8fafc;
-  border-color: #dee2e6 #dee2e6 #f8fafc;
+  background-color: #fff;
+  border-color: #dee2e6 #dee2e6 #fff;
 }
 
 .nav-tabs .dropdown-menu {
@@ -10927,3 +10995,4 @@ a.text-dark:focus {
     border-color: #dee2e6;
   }
 }
+
