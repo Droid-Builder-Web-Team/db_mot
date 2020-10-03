@@ -37,7 +37,7 @@ class MOTExpired extends Notification
      */
     public function via($notifiable)
     {
-        return ['database'];
+        return $notifiable->settings()->get('notifications.mot') == 'on' ? ['mail', 'database'] : ['database'];
     }
 
     /**

@@ -146,7 +146,8 @@ class UserController extends Controller
         return $response;
     }
 
-    public function downloadPDF($id) {
+    public function downloadPDF($id)
+    {
         $user = User::find($id);
         $pdf = PDF::loadView('user.cover', compact('user'));
         //$pdf->defaultFont = 'Arial';
@@ -154,4 +155,20 @@ class UserController extends Controller
         return $pdf->download('cover_note.pdf');
       }
 
+    public function edit_settings(User $user)
+    {
+        $settings = $user->settings()->all();
+        return view('settings.edit', compact('settings'));
+    }
+
+    public function update_settings(Request $request, User $user)
+    {
+
+        foreach($request->input('notifications') as $notification => $value)
+        {
+          $user->settings()->update('notifications.'.$notification, $value);
+        }
+        toastr()->success('User settings updated successfully');
+        return redirect()->route('settings.edit', auth()->user()->id);
+    }
 }

@@ -37,7 +37,7 @@ class PLIExpired extends Notification
      */
     public function via($notifiable)
     {
-        return ['database'];
+        return $notifiable->settings()->get('notifications.account') == 'on' ? ['mail', 'database'] : ['database'];
     }
 
     /**

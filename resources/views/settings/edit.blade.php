@@ -11,7 +11,9 @@
         User Settings
       </div>
       <div class="card-body">
-
+        <form action="{{ route('settings.update',Auth::user()->id) }}" method="POST">
+        @csrf
+        @method('PUT')
 
         <div class="card">
           <div class="card-header">
@@ -23,27 +25,44 @@
               <table class="table table-striped table-sm table-hover table-dark text-center">
                 <tr>
                   <th>Account</th>
+                  <td>Get emails about the status of your account, eg. expiring or expired PLI</td>
                   <td>
                     <label class="switch">
-                      <input type="checkbox" name="noti_account" data-toggle="toggle" checked>
+                      <input type="hidden" name="notifications[account]" value="off">
+                      <input type="checkbox" name="notifications[account]" data-toggle="toggle" {{ $settings['notifications']['account'] == 'on' ? 'checked' : '' }}>
                       <span class="slider round"></span>
                     </label>
                   </td>
                 </tr>
                 <tr>
                   <th>MOT</th>
+                  <td>Get emails regarding your droid MOT status, eg. expiring or expired</td>
                   <td>
                     <label class="switch">
-                      <input type="checkbox" name="noti_mot" data-toggle="toggle">
+                      <input type="hidden" name="notifications[mot]" value="off">
+                      <input type="checkbox" name="notifications[mot]" data-toggle="toggle" {{ $settings['notifications']['mot'] == 'on' ? 'checked' : '' }}>
                       <span class="slider round"></span>
                     </label>
                   </td>
                 </tr>
                 <tr>
                   <th>Events</th>
+                  <td>Get emails about new events, and updates/reminders about events you are subscribed to</td>
                   <td>
                     <label class="switch">
-                      <input type="checkbox" name="noti_events" data-toggle="toggle">
+                      <input type="hidden" name="notifications[event]" value="off">
+                      <input type="checkbox" name="notifications[event]" data-toggle="toggle" {{ $settings['notifications']['event'] == 'on' ? 'checked' : '' }}>
+                      <span class="slider round"></span>
+                    </label>
+                  </td>
+                </tr>
+                <tr>
+                  <th>Achievements</th>
+                  <td>Get emails when you have been granted a new achievement</td>
+                  <td>
+                    <label class="switch">
+                      <input type="hidden" name="notifications[achievement]" value="off">
+                      <input type="checkbox" name="notifications[achievement]" data-toggle="toggle" {{ $settings['notifications']['achievement'] == 'on' ? 'checked' : '' }}>
                       <span class="slider round"></span>
                     </label>
                   </td>
@@ -62,7 +81,7 @@
             </div>
           </div>
         </div>
-
+        <input type="submit" class="btn btn-mot">
       </div>
     </div>
   </div>

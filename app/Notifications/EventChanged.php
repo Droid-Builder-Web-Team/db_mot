@@ -37,7 +37,7 @@ class EventChanged extends Notification
      */
     public function via($notifiable)
     {
-        return ['database'];
+        return $notifiable->settings()->get('notifications.event') == 'on' ? ['mail', 'database'] : ['database'];
     }
 
     /**

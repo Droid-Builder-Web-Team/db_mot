@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Glorand\Model\Settings\Traits\HasSettingsField;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
@@ -21,6 +22,7 @@ class User extends Authenticatable implements MustVerifyEmail
     use Notifiable;
     use HasRoles;
     use Portable;
+    use HasSettingsField;
 
     protected $table = 'members';
     const CREATED_AT = 'created_on';
@@ -151,17 +153,6 @@ class User extends Authenticatable implements MustVerifyEmail
             $randomString .= $characters[rand(0, $charactersLength - 1)];
         }
         return $randomString;
-    }
-
-    public function settings()
-    {
-        return $this->hasMany(UserSetting::class);
-    }
-
-    public function hasSetting()
-    {
-        $settings = $this->settings;
-        return true;
     }
 
     public function course_runs()

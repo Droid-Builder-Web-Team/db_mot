@@ -37,7 +37,7 @@ class AchievementAdded extends Notification
      */
     public function via($notifiable)
     {
-        return ['database'];
+        return $notifiable->settings()->get('notifications.achievement') == 'on' ? ['mail', 'database'] : ['database'];
     }
 
     /**
