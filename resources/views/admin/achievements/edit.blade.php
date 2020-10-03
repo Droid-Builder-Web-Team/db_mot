@@ -7,7 +7,7 @@
                 <h2>Edit Achievement</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('admin.achievements.index') }}"> Back</a>
+                <a class="btn btn-mot-invert" style="width:auto; color:white;" href="{{ route('admin.achievements.index') }}"> Back</a>
             </div>
         </div>
     </div>

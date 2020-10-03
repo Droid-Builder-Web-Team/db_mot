@@ -1,17 +1,20 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="row">
-        <div class="col-lg-12 margin-tb">
-          <div class="pull-right mb-4">
-            <a class="btn btn-primary" href="{{ route('admin.users.index') }}">Back</a>
-          </div>
-          <div class="pull-left mb-4">
-            <h2>Edit Member</h2>
-          </div>
+<div class="card">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-lg-12 margin-tb">
+            <div class="pull-right mb-4">
+                <a class="btn btn-mot-invert" style="width:auto; color:white;" href="{{ route('admin.users.index') }}">Back</a>
+            </div>
+            <div class="pull-left mb-4">
+                <h2>Edit Member</h2>
+            </div>
+            </div>
         </div>
     </div>
-
+<div class="card-body">
     <form action="{{ route('admin.users.update',$user->id) }}" method="POST">
         @csrf
         @method('PUT')
@@ -96,10 +99,12 @@
       </div>
 
       <div class="form-row">
-        <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-          <button type="submit" class="btn btn-primary">Submit</button>
+        <div class="col-xs-12 col-sm-12 col-md-12 text-center mb-3">
+          <button type="submit" style="width:auto;" class="btn btn-mot">Submit</button>
         </div>
       </div>
 
   </form>
+</div>
+</div>
 @endsection

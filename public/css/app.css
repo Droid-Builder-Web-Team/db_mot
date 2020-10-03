@@ -10963,6 +10963,12 @@ body {
   color: #000000;
 }
 
+.btn-mot-invert {
+  text-transform: uppercase;
+  border: 1px solid #FFF;
+  color: #FFF;
+}
+
 .btn-view {
   text-transform: uppercase;
   width: 100%;
@@ -10987,8 +10993,20 @@ body {
   border: 1px solid #d8d7d7;
 }
 
+.btn-comment {
+  text-transform: uppercase;
+  border: 1px solid #000000;
+  color: #000000;
+  background: none;
+}
+
 .btn-mot:hover {
   border: 1px solid #424242;
+  color: #696969;
+}
+
+.btn-mot-invert:hover {
+  text-transform: uppercase;
   color: #696969;
 }
 
@@ -11008,5 +11026,69 @@ body {
   border: 1px solid #636262;
   color: #cfcfcf;
   text-decoration: none;
+}
+
+.btn-comment:hover {
+  border: 1px solid #424242;
+  color: #696969;
+}
+
+/* Events */
+
+.c-dark-theme .form-control {
+  border: 1px solid black;
+}
+
+.form-check-label {
+  color: #000000;
+}
+
+.card,
+.card-body {
+  color: #000000;
+}
+
+/* Users */
+
+.form-control::-moz-placeholder {
+  color: #000000;
+}
+
+.form-control:-ms-input-placeholder {
+  color: #000000;
+}
+
+.c-dark-theme .form-control,
+.form-control::placeholder {
+  color: #000000;
+}
+
+/* Achievements */
+
+.c-dark-theme .form-control:focus {
+  color: black;
+}
+
+/* Datatables */
+
+.dataTables_wrapper .dataTables_length,
+.dataTables_wrapper .dataTables_filter,
+.dataTables_wrapper .dataTables_info,
+.dataTables_wrapper .dataTables_processing,
+.dataTables_wrapper .dataTables_paginate {
+  color: white;
+}
+
+/* Nav-Link */
+
+.c-dark-theme .c-sidebar .c-sidebar-nav-link:hover,
+.c-dark-theme .c-sidebar .c-sidebar-nav-dropdown-toggle {
+  transition: 0.5s ease-in-out;
+}
+
+.c-dark-theme .c-sidebar .c-sidebar-nav-link:hover,
+.c-dark-theme .c-sidebar .c-sidebar-nav-dropdown-toggle:hover {
+  background: #75a6d7;
+  background: radial-gradient(circle, #75a6d7 0%, #5d86db 20%, #46659d 40%, #233454 60%, #131c2d 80%, #010203 100%);
 }
 

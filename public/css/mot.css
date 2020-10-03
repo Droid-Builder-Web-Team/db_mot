@@ -111,9 +111,9 @@ body {
 /*Home Page Styling*/
 
 /*Override Dark.css .a styling*/
-.c-dark-theme a{
+/* .c-dark-theme a{
     color:white;
-}
+} */
 .title.m-b-md{
     text-transform: uppercase;
     font-weight: 700;

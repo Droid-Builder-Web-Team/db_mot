@@ -77,7 +77,7 @@
         </main>
       </div>
       @include('cookieConsent::index')
-      @include('partials.footer')
+      {{-- @include('partials.footer') --}}
     </div>
     <!-- Optional JavaScript -->
     <!-- Popper.js first, then CoreUI JS -->
