@@ -82,8 +82,8 @@ class RegisterController extends Controller
                 ]
             ];
         $context = stream_context_create($options);
-                $result = file_get_contents($url, false, $context);
-                $resultJson = json_decode($result);
+        $result = file_get_contents($url, false, $context);
+        $resultJson = json_decode($result);
         if ($resultJson->success != true) {
                 return back()->withErrors(['captcha' => 'ReCaptcha Error']);
                 }
@@ -97,6 +97,7 @@ class RegisterController extends Controller
                     'email' => $data['email'],
                     'password' => Hash::make($data['password']),
                     'badge_id' => $id,
+                    'active' => 'on'
                 ]);
                 $qr = User::generateQR($id, $user->id);
                 $admins = User::whereHas("roles", function($q){ $q->where("name", "Super Admin"); })->get();
