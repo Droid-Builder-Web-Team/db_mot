@@ -294,7 +294,7 @@
   </div>
 </div>
 
-<div class="row">
+<div class="row mb-5">
   <div class="col-md-12 mb-2">
     <div class="card">
       <div class="card-header text-center">

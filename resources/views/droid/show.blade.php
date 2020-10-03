@@ -14,7 +14,7 @@
         </span>
       </div>
       <div class="card-body">
-        <table class="table table-striped table-sm">
+        <table class="table table-striped table-sm table-hover table-dark">
           <tr>
             <th>Owner</th>
             <td>
@@ -62,7 +62,7 @@
         MOT Details
       </div>
       <div class="card-body">
-        <table class="table table-striped table-sm">
+        <table class="table table-striped table-sm table-hover table-dark">
           <tr>
             <th>Date</th>
             <th>Location</th>
@@ -165,7 +165,7 @@
 </div>
 </div>
   @endif
-<div class="row">
+<div class="row mb-5">
   <div class="col-md-6">
     <div class="card">
       <div class="card-header">
