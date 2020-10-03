@@ -4,10 +4,83 @@
 // Variables
 @import 'variables';
 
-// Style
-@import 'style';
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
 
+// User Profile
+body{
+    background: $background;
+    color: $primaryText;
+}
+.c-dark-theme .card{
+    background: $cardBg;
+    border: 1px solid white;
+}
+
+.card-header{
+    background: $headerBG;
+    background-position:center;
+    background-size: cover;
+    color: $headerText;
+}
+.c-dark-theme a{
+    color: $primaryText;
+}
+
+.fas.fa-plus{
+    font-size: 10rem;
+}
+
+.title{
+    text-transform: uppercase;
+    font-size:1.5rem;
+    letter-spacing: .7px;
+}
+
+/* Button */
+.btn-mot{
+    text-transform:uppercase;
+    width:100%;
+    border: 1px solid #000000;
+    color:$primaryText;
+}
+.btn-view{
+    text-transform:uppercase;
+    width:100%;
+    border: 1px solid #5342e7;
+}
+.btn-edit{
+    text-transform:uppercase;
+    width:100%;
+    border: 1px solid #2586e7;
+}
+.btn-kill{
+    text-transform:uppercase;
+    width:100%;
+    border: 1px solid #d16767;
+    background: transparent;
+    color:$primaryText;
+}
+.btn-link{
+    border: 1px solid #d8d7d7;
+}
+.btn-mot:hover{
+    border: 1px solid #424242;
+    color:#696969;
+}
+.btn-view:hover{
+    border: 1px solid #3b2fa4;
+}
+.btn-edit:hover{
+    border: 1px solid #1b5c9e;
+}
+.btn-kill:hover{
+    border: 1px solid #854242;
+}
+.btn-link:hover{
+    border: 1px solid #636262;
+    color:#cfcfcf;
+    text-decoration: none;
+}
