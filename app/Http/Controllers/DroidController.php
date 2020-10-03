@@ -39,11 +39,6 @@ class DroidController extends Controller
     public function store(Request $request)
     {
 
-        if (!$droid->users->contains(auth()->user()) || !auth()->user()->can('Edit Droids'))
-        {
-            abort(403);
-        }
-
         $request->validate([
             'name' => 'required'
         ]);

@@ -15,6 +15,7 @@ class AchievementAdded extends Notification
     protected $title;
     protected $text;
     protected $link;
+    protected $icon;
 
     /**
      * Create a new notification instance.
@@ -27,6 +28,7 @@ class AchievementAdded extends Notification
         $this->title = "An achievement has been awarded.";
         $this->text = "You have been awarded an achievement.";
         $this->link = route('achievement.show', $this->achievement->id);
+        $this->icon = "trophy";
     }
 
     /**
@@ -66,7 +68,8 @@ class AchievementAdded extends Notification
           'id' => $this->achievement->id,
           'title' => $this->title,
           'link' => $this->link,
-          'text' => $this->text
+          'text' => $this->text,
+          'icon' => $this->icon
         ];
     }
 }

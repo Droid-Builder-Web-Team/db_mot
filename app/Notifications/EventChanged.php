@@ -15,6 +15,7 @@ class EventChanged extends Notification
     protected $title;
     protected $text;
     protected $link;
+    protected $icon;
 
     /**
      * Create a new notification instance.
@@ -27,6 +28,7 @@ class EventChanged extends Notification
         $this->title = "An event has been changed";
         $this->text = "One of the events you are interested in has been changed.";
         $this->link = route('event.show', $this->event->id);
+        $this->icon = "calendar";
     }
 
     /**
@@ -66,7 +68,8 @@ class EventChanged extends Notification
           'id' => $this->event->id,
           'title' => $this->title,
           'link' => $this->link,
-          'text' => $this->text
+          'text' => $this->text,
+          'icon' => $this->icon
         ];
     }
 }

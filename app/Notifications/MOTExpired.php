@@ -15,6 +15,7 @@ class MOTExpired extends Notification
     protected $title;
     protected $text;
     protected $link;
+    protected $icon;
 
     /**
      * Create a new notification instance.
@@ -27,6 +28,7 @@ class MOTExpired extends Notification
        $this->title = "A droid's MOT has expired";
        $this->text = "An MOT for one of your droids has expired.";
        $this->link = route('droid.show', $this->droid->id);
+       $this->icon = "robot";
     }
 
     /**
@@ -66,7 +68,8 @@ class MOTExpired extends Notification
           'id' => $this->droid->id,
           'title' => $this->title,
           'link' => $this->link,
-          'text' => $this->text
+          'text' => $this->text,
+          'icon' => $this->icon
         ];
     }
 }

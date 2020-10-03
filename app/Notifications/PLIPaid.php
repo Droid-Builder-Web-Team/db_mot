@@ -15,6 +15,7 @@ class PLIPaid extends Notification
     protected $title;
     protected $text;
     protected $link;
+    protected $icon;
 
     /**
      * Create a new notification instance.
@@ -27,6 +28,7 @@ class PLIPaid extends Notification
         $this->title = "Your PLI has been paid";
         $this->text = "Your payment for PLI has been received. You are covered for another year.";
         $this->link = route('user.show', $this->user->id);
+        $this->icon = "user-circle";
     }
 
     /**
@@ -66,7 +68,8 @@ class PLIPaid extends Notification
           'id' => $this->user->id,
           'title' => $this->title,
           'link' => $this->link,
-          'text' => $this->text
+          'text' => $this->text,
+          'icon' => $this->icon
         ];
     }
 }

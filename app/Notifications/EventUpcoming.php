@@ -15,6 +15,7 @@ class EventUpcoming extends Notification
     protected $title;
     protected $text;
     protected $link;
+    protected $icon;
 
     /**
      * Create a new notification instance.
@@ -27,6 +28,7 @@ class EventUpcoming extends Notification
         $this->title = "An event is just a week away.";
         $this->text = "One of the events you are interested in is happening in a week.";
         $this->link = route('event.show', $this->event->id);
+        $this->icon = "calendar";
     }
 
     /**
@@ -66,7 +68,8 @@ class EventUpcoming extends Notification
             'id' => $this->event->id,
             'title' => $this->title,
             'link' => $this->link,
-            'text' => $this->text
+            'text' => $this->text,
+            'icon' => $this->icon
         ];
     }
 }

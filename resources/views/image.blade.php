@@ -8,9 +8,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha256-WqU1JavFxSAMcLP2WIOI+GB2zWmShMI82mTpLDcqFUg=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.css" integrity="sha256-jKV9n9bkk/CTP8zbtEtnKaKf+ehRovOYeKoyfthwbC8=" crossorigin="anonymous" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.js" integrity="sha256-CgvH7sz3tHhkiVKh05kSUgG97YtzYNnWt6OXcmYzqHY=" crossorigin="anonymous"></script>
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-</head>
-<style type="text/css">
+
+
+ <link href="https://portal.droidbuilders.uk/css/mot.css" rel="stylesheet">
+ <link href="https://portal.droidbuilders.uk/css/media.css" rel="stylesheet">
+ <link href="https://portal.droidbuilders.uk/css/dark.css" rel="stylesheet">
+ <link href="https://portal.droidbuilders.uk/css/app.css" rel="stylesheet">
+</head><style type="text/css">
 img {
   display: block;
   max-width: 100%;
@@ -28,9 +32,18 @@ img {
 </style>
 <body>
 <div class="container">
-    <h1>Upload Image</h1>
-    <input type="file" name="image" class="image">
-</div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header>"
+          <h4 class="title text-center">Upload Image</h4>
+        </div>
+        <div class="card-body">
+          <input type="file" name="image" class="image">
+        </div>
+      </div>
+    </div>
+  </div>
 
 <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
@@ -62,7 +75,7 @@ img {
 </div>
 
 </div>
-</div>
+
 <script>
 
 var $modal = $('#modal');

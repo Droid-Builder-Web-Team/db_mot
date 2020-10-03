@@ -16,6 +16,7 @@ class NewUser extends Notification
     protected $title;
     protected $text;
     protected $link;
+    protected $icon;
 
     /**
      * Create a new notification instance.
@@ -28,6 +29,7 @@ class NewUser extends Notification
         $this->title = "An new user has been created.";
         $this->text = "A new user has been created on the site (".$this->user->forename." ".$this->user->surname.")";
         $this->link = route('user.show', $this->user->id);
+        $this->icon = "users";
     }
 
     /**
@@ -67,7 +69,8 @@ class NewUser extends Notification
           'id' => $this->user->id,
           'title' => $this->title,
           'link' => $this->link,
-          'text' => $this->text
+          'text' => $this->text,
+          'icon' => $this->icon
         ];
     }
 }

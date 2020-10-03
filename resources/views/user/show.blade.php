@@ -29,8 +29,8 @@
         </span>
         @if ($uses_pli)
           @if($user->validPLI())
-            <span class="badge badge-info float-right">
-              <a class="btn-sm btn-info" href="{{ action('UserController@downloadPDF', $user->id )}}" target="_blank">Cover Note</a>
+            <span class="float-right">
+              <a class="btn-sm btn-edit" href="{{ action('UserController@downloadPDF', $user->id )}}" target="_blank">Cover Note</a>
             </span>
           @else
             <span class="badge badge-danger float-right">
@@ -282,9 +282,9 @@
                 <tr>
                     <td>{{ $event->date }}</td>
                     <td>{{ $event->name }}</td>
-                    <td><a class="btn-sm btn-primary" href="{{ route('location.show', $event->location->id) }}">{{ $event->location->name }}</a></td>
+                    <td><a class="btn-sm btn-view" href="{{ route('location.show', $event->location->id) }}">{{ $event->location->name }}</a></td>
                     <td>{{ $event->charity_raised }}</td>
-                    <td><a class="btn-sm btn-primary" href="{{ route('event.show', $event->id) }}">View</a></td>
+                    <td><a class="btn-sm btn-view" href="{{ route('event.show', $event->id) }}">View</a></td>
                 </tr>
             @endforeach
             </table>
@@ -325,7 +325,7 @@
                     @endif
                 </td>
                 <td>{{ formatMilliseconds($course_run->final_time)}}</td>
-                <td><a class="btn-sm btn-primary" href="{{ route('runs.show', $course_run->id) }}">View</a></td>
+                <td><a class="btn-sm btn-view" href="{{ route('runs.show', $course_run->id) }}">View</a></td>
                 </tr>
             @endforeach
             </table>

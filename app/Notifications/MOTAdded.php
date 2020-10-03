@@ -15,6 +15,7 @@ class MOTAdded extends Notification
     protected $title;
     protected $text;
     protected $link;
+    protected $icon;
 
     /**
      * Create a new notification instance.
@@ -27,6 +28,7 @@ class MOTAdded extends Notification
         $this->title = "An MOT has been added.";
         $this->text = "An MOT for one of your droids has been added.";
         $this->link = route('mot.show', $this->mot->id);
+        $this->icon = "robot";
     }
 
     /**
@@ -66,7 +68,8 @@ class MOTAdded extends Notification
           'id' => $this->mot->id,
           'title' => $this->title,
           'link' => $this->link,
-          'text' => $this->text
+          'text' => $this->text,
+          'icon' => $this->icon
         ];
     }
 }

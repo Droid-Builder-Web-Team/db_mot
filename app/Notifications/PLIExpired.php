@@ -15,6 +15,7 @@ class PLIExpired extends Notification
     protected $title;
     protected $text;
     protected $link;
+    protected $icon;
 
     /**
      * Create a new notification instance.
@@ -27,6 +28,7 @@ class PLIExpired extends Notification
         $this->title = "Your PLI has Expired";
         $this->text = "You need to pay your PLI to have cover.";
         $this->link = route('user.show', $this->user->id);
+        $this->icon = "user-circle";
     }
 
     /**
@@ -66,7 +68,8 @@ class PLIExpired extends Notification
           'id' => $this->user->id,
           'title' => $this->title,
           'link' => $this->link,
-          'text' => $this->text
+          'text' => $this->text,
+          'icon' => $this->icon
         ];
     }
 }

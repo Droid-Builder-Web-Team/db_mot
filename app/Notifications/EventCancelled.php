@@ -15,6 +15,7 @@ class EventCancelled extends Notification
     protected $title;
     protected $text;
     protected $link;
+    protected $icon;
 
     /**
      * Create a new notification instance.
@@ -27,6 +28,7 @@ class EventCancelled extends Notification
         $this->title = "An event is cancelled";
         $this->text = "One of the events you are interested has been cancelled.";
         $this->link = route('event.show', $this->event->id);
+        $this->icon = "calendar";
     }
 
     /**
@@ -66,7 +68,8 @@ class EventCancelled extends Notification
           'id' => $this->event->id,
           'title' => $this->title,
           'link' => $this->link,
-          'text' => $this->text
+          'text' => $this->text,
+          'icon' => $this->icon
         ];
     }
 }
