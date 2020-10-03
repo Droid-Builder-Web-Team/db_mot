@@ -8,7 +8,7 @@
 <div class="row mb-3">
   <div class="col-md-6 text-center">
     <div class="card border-primary">
-      <div class="card-header">Cleared Members</div>
+      <div class="card-header title text-center">Cleared Members</div>
       <div class="card-body">
         @php($count=0)
         @foreach ($users as $user)
@@ -16,14 +16,14 @@
             @php($count++)
           @endif
         @endforeach
-        <h2>{{ $count }}</h2>
+        <h2 style="color:#000000;">{{ $count }}</h2>
       </div>
     </div>
   </div>
 
   <div class="col-md-6 text-center">
     <div class="card border-primary">
-      <div class="card-header">Cleared Droids</div>
+      <div class="card-header title text-center">Cleared Droids</div>
       <div class="card-body">
         @php($count=0)
         @foreach ($droids as $droid)
@@ -31,7 +31,7 @@
             @php($count++)
           @endif
         @endforeach
-        <h2>{{ $count }}</h2>
+        <h2 style="color:#000000;">{{ $count }}</h2>
       </div>
     </div>
   </div>
@@ -40,9 +40,10 @@
 <div class="row">
   <div class="col-md-6 text-center">
     <div class="card border-primary">
-      <div class="card-header">Upcoming PLI</div>
+      <div class="card-header title text-center">Upcoming PLI</div>
       <div class="card-body">
-        <table class="table">
+        <div class="table-responsive">
+        <table class="table table-striped table-sm table-hover table-dark text-center">
           <tr>
             <th>Name</th>
             <th>PLI Date</th>
@@ -61,14 +62,16 @@
             @endif
           @endforeach
         </table>
+        </div>
       </div>
     </div>
   </div>
   <div class="col-md-6 text-center">
     <div class="card border-primary">
-      <div class="card-header">Upcoming MOT</div>
+      <div class="card-header title text-center">Upcoming MOT</div>
       <div class="card-body">
-        <table class="table">
+        <div class="table-responsive">
+        <table class="table table-striped table-sm table-hover table-dark text-center">
           <tr>
             <th>Name</th>
             <th>Owner</th>
@@ -93,6 +96,7 @@
               @endif
         @endforeach
         </table>
+        </div>
       </div>
     </div>
   </div>
@@ -101,9 +105,10 @@
 <div class="row">
   <div class="col-md-12 text-center">
   <div class="card border-primary">
-    <div class="card-header">Upcoming Events</div>
+    <div class="card-header title text-center">Upcoming Events</div>
     <div class="card-body">
-      <table class="table">
+        <div class="table-responsive">
+      <table class="table table-striped table-sm table-hover table-dark text-center">
         <tr>
           <th>Date</th>
           <th>Name</th>
@@ -126,6 +131,7 @@
           </tr>
         @endforeach
       </table>
+    </div>
     </div>
   </div>
 </div>

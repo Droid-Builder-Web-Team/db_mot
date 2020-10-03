@@ -216,16 +216,16 @@
         <div class="droid-card-content">
 
           <div style="text-align:center">
-				     <img src="/img/add.png" alt="Add Droid" class="img-fluid mb-1 rounded" style="height:300px, width:300px;">
-			    </div>
-			       <div class="droid-card-table" style="z-index:2">
-				        <div class="droid-card-row">
-					         <div class="droid-card-center noclick">
-						           <h2 style="margin-bottom:0px">Add a Droid</h2>
-					         </div>
-				        </div>
-			       </div>
-          </div>
+                <i class="fas fa-plus"></i>
+			</div>
+            <div class="droid-card-table" style="z-index:2">
+                <div class="droid-card-row">
+                        <div class="droid-card-center noclick">
+                            <h2 style="margin-bottom:0px">Add a Droid</h2>
+                        </div>
+                </div>
+            </div>
+        </div>
         </div>
       </div>
     </div>
@@ -238,7 +238,7 @@
   <div class="col-md-12 mb-2">
     <div class="card">
       <div class="card-header text-center">
-        <h4 class="sub-title">Achievements</h4>
+        <h4 class="title text-center">Achievements</h4>
       </div>
       <div class="card-body">
           <div class="table-responsive">
@@ -266,7 +266,7 @@
   <div class="col-md-12 mb-2">
     <div class="card">
       <div class="card-header text-center">
-        <h4 class="sub-title">Events</h4>
+        <h4 class="title text-center">Events</h4>
       </div>
       <div class="card-body text-center">
         <div class="table-responsive">
@@ -298,7 +298,7 @@
   <div class="col-md-12 mb-2">
     <div class="card">
       <div class="card-header text-center">
-        <h4 class="sub-title">Driving Course Runs</h4>
+        <h4 class="title text-center">Driving Course Runs</h4>
       </div>
       <div class="card-body">
         <div class="table-responsive">
