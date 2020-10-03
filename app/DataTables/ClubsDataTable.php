@@ -24,11 +24,11 @@ class ClubsDataTable extends DataTable
           ->addColumn('links', function(Club $club) {
               $output = "";
               if(isset($club->facebook))
-                  $output .="<a class=\"btn-sm btn-link\" href=\"".$club->facebook."\">Facebook</a>";
+                  $output .="<a class=\"btn-sm btn-link\" style='color:white;' href=\"".$club->facebook."\">Facebook</a>";
               if(isset($club->website))
-                  $output .="<a class=\"btn-sm btn-link\" href=\"".$club->website."\">Website</a>";
+                  $output .="<a class=\"btn-sm btn-link\" style='color:white;' href=\"".$club->website."\">Website</a>";
               if(isset($club->forum))
-                  $output .="<a class=\"btn-sm btn-link\" href=\"".$club->forum."\">Forum</a>";
+                  $output .="<a class=\"btn-sm btn-link\" style='color:white;' href=\"".$club->forum."\">Forum</a>";
               return $output;
             })
           ->addColumn('action', '')
