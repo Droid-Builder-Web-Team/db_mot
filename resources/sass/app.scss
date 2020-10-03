@@ -46,6 +46,11 @@ body{
     border: 1px solid #000000;
     color:$primaryText;
 }
+.btn-mot-invert{
+    text-transform:uppercase;
+    border: 1px solid #FFF;
+    color:#FFF;
+}
 .btn-view{
     text-transform:uppercase;
     width:100%;
@@ -66,8 +71,19 @@ body{
 .btn-link{
     border: 1px solid #d8d7d7;
 }
+.btn-comment{
+    text-transform:uppercase;
+    border: 1px solid #000000;
+    color:$primaryText;
+    background:none;
+}
+
 .btn-mot:hover{
     border: 1px solid #424242;
+    color:#696969;
+}
+.btn-mot-invert:hover{
+    text-transform:uppercase;
     color:#696969;
 }
 .btn-view:hover{
@@ -84,8 +100,37 @@ body{
     color:#cfcfcf;
     text-decoration: none;
 }
+.btn-comment:hover{
+    border: 1px solid #424242;
+    color:#696969;
+}
+/* Events */
+.c-dark-theme .form-control{
+    border: 1px solid black;
+}
+.form-check-label{
+    color:$primaryText;
+}
+.card,.card-body{
+    color:$primaryText;
+}
+/* Users */
+.c-dark-theme .form-control, .form-control::placeholder{
+    color:$primaryText;
+}
+/* Achievements */
+.c-dark-theme .form-control:focus{
+    color:black;
+}
 
+/* Datatables */
+.dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter, .dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_processing, .dataTables_wrapper .dataTables_paginate{
+    color:white;
+}
 
-
-
-
+/* Nav-Link */
+.c-dark-theme .c-sidebar .c-sidebar-nav-link:hover, .c-dark-theme .c-sidebar .c-sidebar-nav-dropdown-toggle{transition:0.5s ease-in-out;}
+.c-dark-theme .c-sidebar .c-sidebar-nav-link:hover, .c-dark-theme .c-sidebar .c-sidebar-nav-dropdown-toggle:hover{
+    background: rgb(117,166,215);
+    background: radial-gradient(circle, rgba(117,166,215,1) 0%, rgba(93,134,219,1) 20%, rgba(70,101,157,1) 40%, rgba(35,52,84,1) 60%, rgba(19,28,45,1) 80%, rgba(1,2,3,1) 100%);
+}

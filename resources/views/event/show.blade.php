@@ -72,7 +72,7 @@
             @if(!$event->isFuture())
 
             @else
-              <strong>Going</strong>
+            <i class="fas fa-check-circle"></i><strong> Going</strong>
               <ul>
                 @foreach($event->going as $user)
                   <li><a href="{{ route('user.show', $user->id) }}">{{ $user->forename}} {{ $user->surname }}</a>
@@ -82,7 +82,7 @@
                   </li>
                 @endforeach
               </ul>
-              <strong>Maybe:</strong>
+              <i class="far fa-question-circle"></i><strong> Maybe:</strong>
               <ul>
                 @foreach($event->maybe as $user)
                   <li><a href="{{ route('user.show', $user->id) }}">{{ $user->forename}} {{ $user->surname }}</a>
@@ -136,7 +136,7 @@
                   <div class="form-group">
                     <textarea type="text" class="form-control" name="body"></textarea>
                   </div>
-                  <input type="submit" class="btn-sm btn-primary" name="comment" value="Add Comment">
+                  <input type="submit" class="btn-sm btn-comment" name="comment" value="Add Comment">
                   @can('Edit Events')
                     <div class="form-check float-right">
                       <input class="form-check-input" type="checkbox" name="broadcast" id="broadcast">
