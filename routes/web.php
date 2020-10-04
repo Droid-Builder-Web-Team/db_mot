@@ -56,7 +56,8 @@ Route::group(['middleware' => ['auth', 'gdpr.terms']], function() {
   Route::get('image/destroy', 'ImageController@destroy');
   Route::get('/cover_note/{id}', 'UserController@downloadPDF');
   Route::get('/info_sheet/{id}', 'DroidController@downloadPDF');
-  Route::get('notifications', 'UserNotificationsController@show')->middleware('auth')->name('notifications');
+  Route::get('notifications', 'UserNotificationsController@index')->name('notifications');
+  Route::get('notifications/read/{id}', 'UserNotificationsController@read')->name('notifications.read');
   Route::get('droid_image/{uid}/{view}/{size?}', 'DroidController@displayDroidImage')
               ->middleware('cache.headers:max_age=0')
               ->name('image.displayDroidImage');
