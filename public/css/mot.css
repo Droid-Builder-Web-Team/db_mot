@@ -31,6 +31,7 @@ body {
 .droid-card-content {
   background-color: transparent;
   padding: 1%;
+  height:100%;
 }
 
 .droid-card-content :hover {

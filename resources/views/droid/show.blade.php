@@ -52,7 +52,7 @@
 @endcan
         </span>
         <span class="float-right">
-          <a class="btn-sm btn-info" href="{{ action('DroidController@downloadPDF', $droid->id )}}" target="_blank">Info Sheet</a>
+          <a class="btn-sm btn-details" style="color:#2586e7;" href="{{ action('DroidController@downloadPDF', $droid->id )}}" target="_blank">Info Sheet</a>
         </span>
       </div>
     </div>
