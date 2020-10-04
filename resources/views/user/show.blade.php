@@ -246,13 +246,13 @@
             <tr>
                 <th>Name</th>
                 <th>Notes</th>
-                <th>Date Added</th>
+                <th width=140>Date Added</th>
             </tr>
             @foreach($user->achievements as $achievement)
                 <tr>
                 <td>{{ $achievement->name }}</td>
                 <td>{!! $achievement->pivot->notes !!}</td>
-                <td>{{ $achievement->pivot->date_added }}</td>
+                <td>{{ Carbon\Carbon::parse($achievement->pivot->date_added)->format('d-m-Y') }}</td>
                 </tr>
             @endforeach
             </table>
