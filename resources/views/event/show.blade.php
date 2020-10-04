@@ -60,7 +60,12 @@
             </div>
             <div class="card-body">
                 @foreach($event->attended as $user)
-                  <li><a href="{{ route('user.show', $user->id) }}">{{ $user->forename ?? "Deactivated"}} {{ $user->surname ?? "User"}}</a>
+                  <li>
+                    @can('Edit Events')
+                      <a href="{{ route('user.show', $user->id) }}">{{ $user->forename ?? "Deactivated"}} {{ $user->surname ?? "User"}}</a>
+                    @else
+                      {{ $user->forename ?? "Deactivated"}} {{ $user->surname ?? "User"}}
+                    @endcan
                     @if ($user->event($event->id)->spotter == 'yes')
                       <i class="fas fa-binoculars"></i>
                     @endif
@@ -77,7 +82,12 @@
             <i class="fas fa-check-circle"></i><strong> Going</strong>
               <ul>
                 @foreach($event->going as $user)
-                  <li><a href="{{ route('user.show', $user->id) }}">{{ $user->forename ?? "Deactivated"}} {{ $user->surname ?? "User"}}</a>
+                  <li>
+                    @can('Edit Events')
+                      <a href="{{ route('user.show', $user->id) }}">{{ $user->forename ?? "Deactivated"}} {{ $user->surname ?? "User"}}</a>
+                    @else
+                      {{ $user->forename ?? "Deactivated"}} {{ $user->surname ?? "User"}}
+                    @endcan
                     @if ($user->event($event->id)->spotter == 'yes')
                       <i class="fas fa-binoculars"></i>
                     @endif
@@ -87,7 +97,12 @@
               <i class="far fa-question-circle"></i><strong> Maybe:</strong>
               <ul>
                 @foreach($event->maybe as $user)
-                  <li><a href="{{ route('user.show', $user->id) }}">{{ $user->forename}} {{ $user->surname }}</a>
+                  <li>
+                    @can('Edit Events')
+                      <a href="{{ route('user.show', $user->id) }}">{{ $user->forename ?? "Deactivated"}} {{ $user->surname ?? "User"}}</a>
+                    @else
+                      {{ $user->forename ?? "Deactivated"}} {{ $user->surname ?? "User"}}
+                    @endcan
                     @if ($user->event($event->id)->spotter == 'yes')
                       <i class="fas fa-binoculars"></i>
                     @endif
