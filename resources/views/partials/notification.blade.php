@@ -10,7 +10,7 @@
           </div>
 
           @foreach(Auth::user()->unreadNotifications as $notification)
-            <a class="dropdown-item" href="{{ $notification->data['link'] }}">
+            <a class="dropdown-item" href="{{ route('notifications.read', $notification->id) }}">
               <div class="row no-gutters align-items-center">
                 <div class="col-md-1">
                     <i class="fas fa-{{ $notification->data['icon'] ?? "clock" }} fa-fw"></i>

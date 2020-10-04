@@ -246,13 +246,13 @@
             <tr>
                 <th>Name</th>
                 <th>Notes</th>
-                <th>Date Added</th>
+                <th width=140>Date Added</th>
             </tr>
             @foreach($user->achievements as $achievement)
                 <tr>
                 <td>{{ $achievement->name }}</td>
                 <td>{!! $achievement->pivot->notes !!}</td>
-                <td>{{ $achievement->pivot->date_added }}</td>
+                <td>{{ Carbon\Carbon::parse($achievement->pivot->date_added)->format('d-m-Y') }}</td>
                 </tr>
             @endforeach
             </table>
@@ -306,7 +306,6 @@
             <tr>
                 <th>Run Date</th>
                 <th>Droid Name</th>
-                <th>Clock Time</th>
                 <th>Penalties</th>
                 <th>Final Time</th>
             </tr>
@@ -314,7 +313,6 @@
                 <tr>
                 <td>{{ Carbon\Carbon::parse($course_run->run_timestamp)->format('d-m-Y') }}</td>
                 <td>{{ $course_run->droid->name }}</td>
-                <td>{{ formatMilliseconds($course_run->clock_time)}}</td>
                 <td>
                     @if ($course_run->num_penalties == 0)
                     <a class="btn-sm btn-success">{{ $course_run->num_penalties }}</a>

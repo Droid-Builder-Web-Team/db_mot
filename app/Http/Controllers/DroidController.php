@@ -108,7 +108,7 @@ class DroidController extends Controller
     public function update(Request $request, Droid $droid)
     {
 
-        if (!$droid->users->contains(auth()->user()) || !auth()->user()->can('Edit Droids'))
+        if (!$droid->users->contains(auth()->user()) && !auth()->user()->can('Edit Droids'))
         {
             abort(403);
         }
