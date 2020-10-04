@@ -103,6 +103,7 @@
     @endcan
 @endguest
 <hr class="divider">
+@include('partials.sidebar_footer')
   </ul>
 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
   @csrf
