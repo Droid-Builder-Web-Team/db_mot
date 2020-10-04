@@ -57,6 +57,8 @@
           <div class="card-header">
             @if(!$event->isFuture())
               Attended By:
+            </div>
+            <div class="card-body">
                 @foreach($event->attended as $user)
                   <li><a href="{{ route('user.show', $user->id) }}">{{ $user->forename ?? "Deactivated"}} {{ $user->surname ?? "User"}}</a>
                     @if ($user->event($event->id)->spotter == 'yes')
