@@ -11000,6 +11000,17 @@ body {
   background: none;
 }
 
+.btn-details {
+  text-transform: uppercase;
+  border: 1px solid #2586e7;
+  background: none;
+}
+
+.btn-cover {
+  text-transform: uppercase;
+  border: 1px solid white;
+}
+
 .btn-mot:hover {
   border: 1px solid #424242;
   color: #696969;
@@ -11031,6 +11042,16 @@ body {
 .btn-comment:hover {
   border: 1px solid #424242;
   color: #696969;
+}
+
+.btn-details:hover {
+  border: 1px solid #035fbb;
+  text-decoration: none;
+}
+
+.btn-cover:hover {
+  border: 1px solid #969595;
+  text-decoration: none;
 }
 
 /* Events */
@@ -11090,5 +11111,12 @@ body {
 .c-dark-theme .c-sidebar .c-sidebar-nav-dropdown-toggle:hover {
   background: #75a6d7;
   background: radial-gradient(circle, #75a6d7 0%, #5d86db 20%, #46659d 40%, #233454 60%, #131c2d 80%, #010203 100%);
+}
+
+/* General */
+
+.divider {
+  width: 75%;
+  background: white;
 }
 

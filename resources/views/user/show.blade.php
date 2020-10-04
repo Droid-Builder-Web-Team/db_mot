@@ -30,7 +30,7 @@
         @if ($uses_pli)
           @if($user->validPLI())
             <span class="float-right">
-              <a class="btn-sm btn-edit" href="{{ action('UserController@downloadPDF', $user->id )}}" target="_blank">Cover Note</a>
+              <a class="btn btn-cover" style="color:white;" href="{{ action('UserController@downloadPDF', $user->id )}}" target="_blank">Cover Note</a>
             </span>
           @else
             <span class="badge badge-danger float-right">

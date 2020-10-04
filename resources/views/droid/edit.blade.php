@@ -5,8 +5,8 @@
   <div class="col-lg-12">
     <div class="card">
       <div class="card-header">
-        <div class="float-right mb-4">
-          <a class="btn btn-primary" href="{{ route('droid.show', $droid->id) }}">Back</a>
+        <div class="float-left mb-4">
+          <a class="btn btn-mot-invert" style="color:white;" href="{{ route('droid.show', $droid->id) }}">Back</a>
         </div>
         <h4 class="title text-center">Edit Droid</h4>
       </div>
@@ -126,7 +126,7 @@
          </div>
          <div class="form-row">
            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                   <button type="submit" class="btn btn-primary">Submit</button>
+                   <button type="submit" class="btn btn-mot">Submit</button>
            </div>
          </div>
 </div>

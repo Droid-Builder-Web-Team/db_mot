@@ -5,8 +5,8 @@
         <div class="col-lg-12">
           <div class="card">
             <div class="card-header">
-              <div class="float-right mb-4">
-                <a class="btn btn-primary" href="{{ route('user.show', Auth::user()->id) }}">Back</a>
+              <div class="float-left mb-4">
+                <a class="btn btn-mot-invert" style="color:White;" href="{{ route('user.show', Auth::user()->id) }}">Back</a>
               </div>
               <h4 class="title text-center">Edit Details</h4>
             </div>
@@ -51,7 +51,7 @@
                   </div>
                   <div class="form-row">
                     <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                      <button type="submit" class="btn btn-primary">Submit</button>
+                      <button type="submit" class="btn btn-mot">Submit</button>
                     </div>
                   </div>
                 </div>

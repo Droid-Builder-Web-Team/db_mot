@@ -77,6 +77,15 @@ body{
     color:$primaryText;
     background:none;
 }
+.btn-details{
+    text-transform:uppercase;
+    border: 1px solid #2586e7;
+    background:none;
+}
+.btn-cover{
+    text-transform:uppercase;
+    border: 1px solid white;
+}
 
 .btn-mot:hover{
     border: 1px solid #424242;
@@ -104,6 +113,15 @@ body{
     border: 1px solid #424242;
     color:#696969;
 }
+.btn-details:hover{
+    border: 1px solid #035fbb;
+    text-decoration: none;
+}
+.btn-cover:hover{
+    border: 1px solid rgb(150, 149, 149);
+    text-decoration: none;
+}
+
 /* Events */
 .c-dark-theme .form-control{
     border: 1px solid black;
@@ -133,4 +151,9 @@ body{
 .c-dark-theme .c-sidebar .c-sidebar-nav-link:hover, .c-dark-theme .c-sidebar .c-sidebar-nav-dropdown-toggle:hover{
     background: rgb(117,166,215);
     background: radial-gradient(circle, rgba(117,166,215,1) 0%, rgba(93,134,219,1) 20%, rgba(70,101,157,1) 40%, rgba(35,52,84,1) 60%, rgba(19,28,45,1) 80%, rgba(1,2,3,1) 100%);
+}
+/* General */
+.divider{
+    width:75%;
+    background:white;
 }

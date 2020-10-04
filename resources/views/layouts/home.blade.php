@@ -19,7 +19,7 @@
             <div class="container-fluid">
                 @yield('content')
 
-                @include('partials.footer')
+                {{-- @include('partials.footer') --}}
             </div>
         </main>
     </div>

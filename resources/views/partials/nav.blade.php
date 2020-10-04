@@ -102,6 +102,7 @@
     <li class="c-sidebar-nav-item"></li>
     @endcan
 @endguest
+<hr class="divider">
   </ul>
 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
   @csrf

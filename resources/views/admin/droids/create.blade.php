@@ -1,17 +1,20 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="card">
+    <div class="card-header">
 <div class="row">
     <div class="col-lg-12 margin-tb">
+        <div class="pull-right pb-3">
+            <a class="btn btn-mot" style="width:auto;" href="{{ route('user.show', $user->id) }}">Back</a>
+        </div>
         <div class="pull-left">
             <h2>Add New Droid for {{$user->forename}} {{$user->surname}}</h2>
         </div>
-        <div class="pull-right">
-            <a class="btn btn-mot" style="width:auto;" href="{{ route('user.show', $user->id) }}">Back</a>
-        </div>
     </div>
 </div>
-
+</div>
+<div class="card-body">
 <form action="{{ route('admin.droids.store') }}" method="POST">
     @csrf
 <input type="hidden" name="user_id" value="{{ $user->id }}">
@@ -112,4 +115,6 @@
       </div>
 
 </form>
+</div>
+</div>
 @endsection
