@@ -133,4 +133,9 @@ class EventsController extends Controller
 
         return redirect()->route('admin.events.index');
     }
+
+    public function delete_comment(Request $request, Event $event)
+    {
+        
+    }
 }

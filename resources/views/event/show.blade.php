@@ -85,6 +85,9 @@
                   <li>
                     @can('Edit Events')
                       <a href="{{ route('user.show', $user->id) }}">{{ $user->forename ?? "Deactivated"}} {{ $user->surname ?? "User"}}</a>
+                      @if($user->pli_expires() < \Carbon\Carbon::parse($event->date))
+                        <span class="badge badge-danger">PLI expired</span>
+                      @endif
                     @else
                       {{ $user->forename ?? "Deactivated"}} {{ $user->surname ?? "User"}}
                     @endcan
