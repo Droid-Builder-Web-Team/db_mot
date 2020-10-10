@@ -35,6 +35,7 @@
           <tr><th>Top Speed</th><td>{{ $droid->top_speed }}</td></tr>
           <tr><th>Sound System</th><td>{{ $droid->sound_system }}</td></tr>
           <tr><th>Approx Value</th><td>{{ $droid->value }}</td></tr>
+          <tr><th>Build Log</th><td><a target="_blank" href="{{ $droid->build_log }}">{{ $droid->build_log }}</a></td></tr>
           @if ($droid->club->hasOption('tier_two'))
             <tr><th>Tier 2</th><td>{{ $droid->tier_two }}</td></tr>
           @endif

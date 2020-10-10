@@ -77,7 +77,16 @@
             Event Requirements
           </div>
           <div class="card-body">
+            Requirements for getting notifications about new events added
             <div class="table-responsive">
+              <table class="table table-striped table-sm table-hover table-dark text-center">
+                <tr>
+                  <th>Distance</th>
+                  <td>Max distance from the postcode in your user profile</td>
+                  <td>
+                    <input type="text" name="max_event_distance" value="{{ $settings['max_event_distance'] }}">
+                  </td>
+              </table>
             </div>
           </div>
         </div>

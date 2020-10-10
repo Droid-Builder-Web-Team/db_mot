@@ -168,6 +168,7 @@ class UserController extends Controller
         {
           $user->settings()->update('notifications.'.$notification, $value);
         }
+        $user->settings()->update('max_event_distance', $request->input('max_event_distance'));
         toastr()->success('User settings updated successfully');
         return redirect()->route('settings.edit', auth()->user()->id);
     }
