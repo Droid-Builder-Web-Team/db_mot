@@ -80,7 +80,7 @@ class EventController extends Controller
         else
             $result = $event->users()->save($user, $attributes);
         toastr()->success('Interest registered for Event');
-        return view('event.show', compact('event'));
+        return back();
     }
 
     public function comment(Request $request, Event $event)
@@ -101,7 +101,7 @@ class EventController extends Controller
 
         $result = $event->comments()->save($comment);
         toastr()->success('Comment Added');
-        return view('event.show', compact('event'));
+        return back();
     }
 
 }

@@ -140,6 +140,6 @@ class EventsController extends Controller
         $comment = Comment::find($id);
         $event_id = $comment->commentable_id;
         $comment->delete();
-        return redirect()->route('event.show', $event_id);
+        return back();
     }
 }
