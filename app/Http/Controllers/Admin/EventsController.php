@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Event;
 use App\Location;
 use App\User;
+use App\Comment;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -132,5 +133,13 @@ class EventsController extends Controller
         }
 
         return redirect()->route('admin.events.index');
+    }
+
+    public function delete_comment($id)
+    {
+        $comment = Comment::find($id);
+        $event_id = $comment->commentable_id;
+        $comment->delete();
+        return back();
     }
 }

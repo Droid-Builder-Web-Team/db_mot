@@ -26,6 +26,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
   Route::get('/droids/{id}', 'DroidsController@create')->name('droids.create');
   Route::put('droids/comment/{droid}', 'DroidsController@comment')->name('droids.comment');
   Route::resource('/droids', 'DroidsController', ['except' => ['show', 'create']]);
+  Route::get('events/delete_comment/{id}', 'EventsController@delete_comment')->name('events.delete_comment');
   Route::resource('/events', 'EventsController', ['except' => ['show']]);
   Route::resource('/achievements', 'AchievementsController', ['except' => ['show']]);
   Route::resource('/clubs', 'ClubsController', ['except' => ['show']]);
@@ -68,6 +69,8 @@ Route::group(['middleware' => ['auth', 'gdpr.terms']], function() {
   Route::resource('runs', 'CourseRunsController', ['only' => ['index', 'show']]);
   Route::get('change-password', 'ChangePasswordController@index');
   Route::post('change-password', 'ChangePasswordController@store')->name('change.password');
+  Route::get('codeofconduct', 'CodeOfConductController@index');
+  Route::post('codeofconduct', 'CodeOfConductController@store');
 });
 
 Route::get('/id/{id}', 'ID');

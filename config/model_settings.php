@@ -13,7 +13,8 @@ return [
               'mot' => 'on',
               'event' => 'off',
               'achievement' => 'off'
-          ]
+          ],
+          'max_event_distance' => 50
 
         ]
     ]

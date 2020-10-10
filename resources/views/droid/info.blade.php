@@ -20,7 +20,7 @@ table { table-layout:fixed; width:100%; border-spacing: 5px;}
     <td colspan=2 align="center"><font size=26>{{ $droid->name }} Information Sheet</font></td>
   </tr>
   <tr>
-    <td align="center"><img src="../storage/app/droids/{{ $droid->id }}/240-photo_front.jpg" alt="{{ $droid->name }}" class="rounded"></td>
+    <td align="center"><img src="../storage/app/droids/{{ $droid->id }}/240-photo_front.png" alt="{{ $droid->name }}" class="rounded"></td>
     <td align="center"><img src="../storage/app/members/{{ $user->id }}/240-mug_shot.jpg" alt="{{ $user->forename }} {{ $user->surname }}" class="rounded"></td>
   </tr>
   <tr>

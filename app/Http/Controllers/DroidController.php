@@ -40,7 +40,9 @@ class DroidController extends Controller
     {
 
         $request->validate([
-            'name' => 'required'
+            'name' => 'required',
+            'build_log' => 'url',
+            'weight' => 'numeric'
         ]);
 
         try {

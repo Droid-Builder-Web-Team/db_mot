@@ -8,7 +8,9 @@ use App\Event;
 use App\User;
 use App\Location;
 use App\Comment;
+use DateTime;
 use App\Notifications\EventUpdated;
+use Spatie\CalendarLinks\Link;
 
 class EventController extends Controller
 {
@@ -26,6 +28,11 @@ class EventController extends Controller
      */
     public function index()
     {
+        if(auth()->user()->accepted_coc == 0)
+        {
+            return redirect('codeofconduct');
+        }
+
         $events = Event::whereDate('date', '>=', Carbon::now())
                   ->orderBy('date', 'desc')->paginate(15);
 
@@ -42,7 +49,14 @@ class EventController extends Controller
     public function show($id)
     {
         $event = Event::where('id', $id)->first();
-        return view('event.show', compact('event'));
+        $date = DateTime::createFromFormat('Y-m-d', $event->date);
+        $link = Link::create($event->name,
+                            $date,
+                            $date,
+                            true)
+                            ->description($event->description)
+                            ->address($event->location->name.','.$event->location->postcode);
+        return view('event.show', compact('event', 'link'));
     }
 
     /**
@@ -66,7 +80,7 @@ class EventController extends Controller
         else
             $result = $event->users()->save($user, $attributes);
         toastr()->success('Interest registered for Event');
-        return view('event.show', compact('event'));
+        return back();
     }
 
     public function comment(Request $request, Event $event)
@@ -87,7 +101,7 @@ class EventController extends Controller
 
         $result = $event->comments()->save($comment);
         toastr()->success('Comment Added');
-        return view('event.show', compact('event'));
+        return back();
     }
 
 }

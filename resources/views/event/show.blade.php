@@ -30,6 +30,11 @@
                   <strong>Charity Raised:</strong>
                   £{{ $event->charity_raised }}
                 @endif
+                <hr>
+                Add to:
+                <a target="_blank" href="{{ $link->google() }}" class="btn-sm">Google</a>
+                <a target="_blank" href="{{ $link->webOutlook() }}" class="btn-sm">Outlook</a>
+                <a target="_blank" href="{{ $link->ics() }}" class="btn-sm">Apple</a>
               </div>
               <div class="col-md-4">
                 <div class="map-responsive">
@@ -85,6 +90,9 @@
                   <li>
                     @can('Edit Events')
                       <a href="{{ route('user.show', $user->id) }}">{{ $user->forename ?? "Deactivated"}} {{ $user->surname ?? "User"}}</a>
+                      @if($user->pli_expires() < \Carbon\Carbon::parse($event->date))
+                        <span class="badge badge-danger">PLI expired</span>
+                      @endif
                     @else
                       {{ $user->forename ?? "Deactivated"}} {{ $user->surname ?? "User"}}
                     @endcan
@@ -140,6 +148,11 @@
               </div>
               <div class="card-body">
                 {!! nl2br(e($comment->body)) !!}
+                @can('Edit Events')
+                <span class="float-right">
+                  <a href="{{ route('admin.events.delete_comment', $comment->id )}}" class="btn-sm btn-danger">Delete</a>
+                </span>
+                @endcan
               </div>
             </div>
 @endforeach

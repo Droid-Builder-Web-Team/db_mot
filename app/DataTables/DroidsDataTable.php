@@ -22,6 +22,12 @@ class DroidsDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
+            ->addColumn('owner', function(Droid $droid) {
+                $owner = $droid->users()->first();
+                $name = $owner->forename.' '.$owner->surname;
+                //return '<a class="btn-link btn-sml" href="/user/'.$owner->id.'">'.$name.'</a>';
+                return $name;
+            })
             ->addColumn('mot', function(Droid $droid) {
                 if ($droid->club->hasOption('mot'))
                   return "<button class=\"btn-sm alert ".$droid->displayMOT()['state']." actions-buttons\">".$droid->displayMOT()['status']."</button>";
@@ -59,7 +65,7 @@ class DroidsDataTable extends DataTable
                   ->setTableId('droids-table')
                   ->columns($this->getColumns())
                   ->minifiedAjax()
-                  ->dom('lBfrtip')
+                  ->dom('Bfrtip')
                   ->lengthMenu([15,25,50])
                   ->orderBy(0)
                   ->buttons(
@@ -79,6 +85,7 @@ class DroidsDataTable extends DataTable
     {
       return [
           Column::make('name'),
+          Column::make('owner'),
           Column::computed('mot'),
           Column::computed('action')
                 ->exportable(false)

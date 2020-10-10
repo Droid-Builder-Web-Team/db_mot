@@ -15,7 +15,15 @@
         @csrf
         @method('PUT')
         <div class="card-body">
-
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
         <div class="form-row">
            <div class="col-xs-9 col-sm-9 col-md-9">
                <div class="form-group">
@@ -109,6 +117,14 @@
                    <input type="text" name="weight" class="form-control" value="{{ $droid->weight }}">
                </div>
            </div>
+         </div>
+         <div class="form-row">
+         <div class="col-xs-12 col-sm-12 col-md-12">
+             <div class="form-group">
+                 <strong>Build Log:</strong>
+                 <input type="text" name="build_log" class="form-control" value="{{ $droid->build_log }}">
+             </div>
+         </div>
          </div>
          <div class="form-row">
            <div class="col-xs-6 col-sm-6 col-md-6">

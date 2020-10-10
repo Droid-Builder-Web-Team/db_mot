@@ -127,6 +127,13 @@ class User extends Authenticatable implements MustVerifyEmail
         }
     }
 
+    public function pli_expires()
+    {
+        $expires = Carbon::parse($this->join_date)->addYear(1);
+        return $expires;
+
+    }
+
     public function yearsService()
     {
         $now = Carbon::now();
