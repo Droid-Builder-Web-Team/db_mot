@@ -143,6 +143,11 @@
               </div>
               <div class="card-body">
                 {!! nl2br(e($comment->body)) !!}
+                @can('Edit Events')
+                <span class="float-right">
+                  <a href="{{ route('admin.events.delete_comment', $comment->id )}}" class="btn-sm btn-danger">Delete</a>
+                </span>
+                @endcan
               </div>
             </div>
 @endforeach
