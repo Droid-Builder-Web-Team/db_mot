@@ -26,6 +26,11 @@ class EventController extends Controller
      */
     public function index()
     {
+        if(auth()->user()->accepted_coc == 0)
+        {
+            return redirect('codeofconduct');
+        }
+
         $events = Event::whereDate('date', '>=', Carbon::now())
                   ->orderBy('date', 'desc')->paginate(15);
 

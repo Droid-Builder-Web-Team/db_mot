@@ -68,6 +68,8 @@ Route::group(['middleware' => ['auth', 'gdpr.terms']], function() {
   Route::resource('runs', 'CourseRunsController', ['only' => ['index', 'show']]);
   Route::get('change-password', 'ChangePasswordController@index');
   Route::post('change-password', 'ChangePasswordController@store')->name('change.password');
+  Route::get('codeofconduct', 'CodeOfConductController@index');
+  Route::post('codeofconduct', 'CodeOfConductController@store');
 });
 
 Route::get('/id/{id}', 'ID');
