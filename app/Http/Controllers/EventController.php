@@ -8,7 +8,9 @@ use App\Event;
 use App\User;
 use App\Location;
 use App\Comment;
+use DateTime;
 use App\Notifications\EventUpdated;
+use Spatie\CalendarLinks\Link;
 
 class EventController extends Controller
 {
@@ -47,7 +49,14 @@ class EventController extends Controller
     public function show($id)
     {
         $event = Event::where('id', $id)->first();
-        return view('event.show', compact('event'));
+        $date = DateTime::createFromFormat('Y-m-d', $event->date);
+        $link = Link::create($event->name,
+                            $date,
+                            $date,
+                            true)
+                            ->description($event->description)
+                            ->address($event->location->name.','.$event->location->postcode);
+        return view('event.show', compact('event', 'link'));
     }
 
     /**

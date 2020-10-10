@@ -30,6 +30,11 @@
                   <strong>Charity Raised:</strong>
                   £{{ $event->charity_raised }}
                 @endif
+                <hr>
+                Add to:
+                <a target="_blank" href="{{ $link->google() }}" class="btn-sm">Google</a>
+                <a target="_blank" href="{{ $link->webOutlook() }}" class="btn-sm">Outlook</a>
+                <a target="_blank" href="{{ $link->ics() }}" class="btn-sm">Apple</a>
               </div>
               <div class="col-md-4">
                 <div class="map-responsive">

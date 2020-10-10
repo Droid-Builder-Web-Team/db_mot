@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c3017c0b2c571d39b421f15535888fc2",
+    "content-hash": "2225683cc0e243b987acc0dedda341c1",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -3414,6 +3414,53 @@
                 "pwa"
             ],
             "time": "2020-08-20T12:19:16+00:00"
+        },
+        {
+            "name": "spatie/calendar-links",
+            "version": "1.4.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/calendar-links.git",
+                "reference": "c705b17416e2cf0b673a742f9fb6716a111ed984"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/calendar-links/zipball/c705b17416e2cf0b673a742f9fb6716a111ed984",
+                "reference": "c705b17416e2cf0b673a742f9fb6716a111ed984",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.2 || ^8.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^8.5 || ^9.0",
+                "spatie/phpunit-snapshot-assertions": "^3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\CalendarLinks\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sebastian De Deyne",
+                    "email": "sebastian@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Generate add to calendar links for Google, iCal and other calendar systems",
+            "homepage": "https://github.com/spatie/calendar-links",
+            "keywords": [
+                "calendar-links",
+                "spatie"
+            ],
+            "time": "2020-09-01T09:49:15+00:00"
         },
         {
             "name": "spatie/laravel-cookie-consent",
