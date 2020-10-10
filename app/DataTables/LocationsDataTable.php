@@ -21,9 +21,6 @@ class LocationsDataTable extends DataTable
     {
       return datatables()
           ->eloquent($query)
-          ->addColumn('map', function(Location $location) {
-                return "<a class=\"btn btn-primary\" target=\"_blank\" href=\"https://www.google.com/maps/search/?api=1&query=".$location->postcode.">Map</a></td>";
-            })
           ->addColumn('action', '')
           ->editColumn('action', function($row) {
             $crudRoutePart = "location";
@@ -78,7 +75,6 @@ class LocationsDataTable extends DataTable
             Column::make('town'),
             Column::make('county'),
             Column::make('postcode'),
-            Column::computed('map'),
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)
