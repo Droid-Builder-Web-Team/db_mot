@@ -27,7 +27,10 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
   Route::put('droids/comment/{droid}', 'DroidsController@comment')->name('droids.comment');
   Route::resource('/droids', 'DroidsController', ['except' => ['show', 'create']]);
   Route::get('events/delete_comment/{id}', 'EventsController@delete_comment')->name('events.delete_comment');
+  Route::get('events/attendance/confirm/{event_id}/{user_id}', 'EventsController@confirm')->name('events.attendance.confirm');
+  Route::get('events/attendance/deny/{event_id}/{user_id}', 'EventsController@deny')->name('events.attendance.deny');
   Route::resource('/events', 'EventsController', ['except' => ['show']]);
+  Route::put('/achievements/award', 'AchievementsController@award')->name('achievements.award');
   Route::resource('/achievements', 'AchievementsController', ['except' => ['show']]);
   Route::resource('/clubs', 'ClubsController', ['except' => ['show']]);
   Route::resource('/locations', 'LocationController', ['except' => ['show']]);

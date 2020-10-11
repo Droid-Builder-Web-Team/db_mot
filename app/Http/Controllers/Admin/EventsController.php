@@ -142,4 +142,18 @@ class EventsController extends Controller
         $comment->delete();
         return back();
     }
+
+    public function confirm($event_id, $user_id)
+    {
+        $user = User::find($user_id);
+        $user->events()->updateExistingPivot($event_id, ["attended" => 1]);
+        return back();
+    }
+
+    public function deny($event_id, $user_id)
+    {
+        $user = User::find($user_id);
+        $user->event($event_id)->delete();
+        return back();
+    }
 }
