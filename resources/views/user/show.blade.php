@@ -255,8 +255,38 @@
                 <td>{{ Carbon\Carbon::parse($achievement->pivot->date_added)->format('d-m-Y') }}</td>
                 </tr>
             @endforeach
-            </table>
-            </div>
+          </table>
+        </div>
+        @can('Edit Members')
+            Award Achievement
+            <form action="{{ route('admin.achievements.award') }}" method="POST">
+              @csrf
+              @method('PUT')
+              <input type="hidden" name="user_id" value="{{ $user->id }}">
+              <div class="form-row">
+                <div class="col">
+                  <select name="achievement_id" class="form-control">
+                    @foreach($achievements as $achievement)
+                      <option value="{{ $achievement->id }}">{{ $achievement->name}}</option>
+                    @endforeach
+                  </select>
+                </div>
+                <div class="col">
+                  <input type="text" class="form-control" name="notes">
+                </div>
+                <div class="col">
+                  <input type="date" class="form-control" name="date" value="
+                  @php
+                    echo date("Y-m-d");
+                  @endphp
+                  ">
+                </div>
+                <div class="col">
+                  <input type="submit" class="btn-sm btn-primary" name="comment" value="Award">
+                </div>
+              </div>
+          </form>
+        @endcan
       </div>
     </div>
   </div>

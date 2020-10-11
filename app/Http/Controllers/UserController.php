@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Achievement;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Response;
@@ -39,7 +40,8 @@ class UserController extends Controller
         {
             abort(403);
         }
-        return view('user.show', compact('user'));
+        $achievements = Achievement::all();
+        return view('user.show', compact('user', 'achievements'));
     }
 
     /**
