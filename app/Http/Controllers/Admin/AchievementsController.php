@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Achievement;
+use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -104,6 +105,16 @@ class AchievementsController extends Controller
 
         return redirect()->route('admin.achievements.index')
                         ->with('success','Achievement deleted successfully');
+    }
+
+    public function award(Request $request)
+    {
+        $user = User::find($request->user_id);
+        $user->achievements()->attach($request->achievement_id, [
+                    'added_by' => auth()->user()->id,
+                    'notes' => $request->notes
+                  ]);
+        return back();
     }
 
 }
