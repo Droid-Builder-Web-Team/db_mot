@@ -104,7 +104,7 @@
       </div>
     </div>
 
-@if($droid->topps_id != null)
+@if($droid->topps_id != null && $droid->topps_id != 0)
     <div class="card">
       <div class="card-header">
         <span class="float-left">

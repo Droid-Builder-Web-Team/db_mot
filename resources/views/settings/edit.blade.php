@@ -82,7 +82,7 @@
               <table class="table table-striped table-sm table-hover table-dark text-center">
                 <tr>
                   <th>Distance</th>
-                  <td>Max distance from the postcode in your user profile</td>
+                  <td>Max distance from the postcode in your user profile (miles)</td>
                   <td>
                     <input type="text" name="max_event_distance" value="{{ $settings['max_event_distance'] }}">
                   </td>

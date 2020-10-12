@@ -86,6 +86,7 @@ class ImageController extends Controller
           case 'photo_side':
           case 'photo_rear':
                 $folderPath = 'droids/'.$request->droid.'/';
+                $droid = Droid::find($request->droid);
                 if (!$droid->users->contains(auth()->user()) && !auth()->user()->can('Edit Droids'))
                     abort(403);
                 break;
