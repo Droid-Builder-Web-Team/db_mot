@@ -26,8 +26,9 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
         $schedule->command('cron:checkmot')->dailyAt('10:00');
-        $schedule->command('cron:checkpli')->dailyAt('10:00');
-        $schedule->command('cron:eventupcoming')->dailyAt('10:00');
+        $schedule->command('cron:checkpli')->dailyAt('10:30');
+        $schedule->command('cron:eventupcoming')->dailyAt('11:00');
+        $schedule->command('cron:newevent')->dailyAt('11:30');
     }
 
     /**

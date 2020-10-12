@@ -39,7 +39,8 @@ class EventCreated extends Notification
      */
     public function via($notifiable)
     {
-        return $notifiable->settings()->get('notifications.event') == 'on' ? ['mail', 'database'] : ['database'];
+        //return $notifiable->settings()->get('notifications.event') == 'on' ? ['mail', 'database'] : ['database'];
+        return ['database'];
     }
 
     /**
