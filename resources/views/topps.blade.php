@@ -1,6 +1,20 @@
-@extends('layouts.home')
-@section('content')
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<!doctype html>
+<html lang="en">
+ <head>
+ <!-- Required meta tags -->
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+ <link href="{{ asset('css/mot.css') }}" rel="stylesheet">
+ <link href="{{ asset('css/media.css') }}" rel="stylesheet">
+ <link href="{{ asset('css/dark.css') }}" rel="stylesheet">
+ <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+ <title>@yield('page_title', config('app.name', 'Laravel'))</title>
+ </head>
+
+<body>
+
 <link href="{{ asset('css/topps.css') }}" rel="stylesheet">
    <div class="topps">
 @foreach($droids as $droid)
@@ -17,4 +31,6 @@
 
 @endforeach
   </div>
-  @endsection
+{{ $droids->links() }}
+
+</body>

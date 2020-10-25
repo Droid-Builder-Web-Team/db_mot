@@ -19,7 +19,7 @@ class ToppsController extends Controller
     {
         $droids = Droid::where('topps_id', '!=', 0)
                     ->orderBy('topps_id')
-                    ->get();
+                    ->paginate(8);
         return view('topps', compact('droids'));
     }
 
