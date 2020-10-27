@@ -63,10 +63,8 @@ Route::group(['middleware' => ['auth', 'gdpr.terms']], function() {
   Route::get('notifications', 'UserNotificationsController@index')->name('notifications');
   Route::get('notifications/read/{id}', 'UserNotificationsController@read')->name('notifications.read');
   Route::get('droid_image/{uid}/{view}/{size?}', 'DroidController@displayDroidImage')
-              ->middleware('cache.headers:max_age=0')
               ->name('image.displayDroidImage');
   Route::get('mug_shot/{uid}/{size?}', 'UserController@displayMugShot')
-              ->middleware('cache.headers:max_age=0')
               ->name('image.displayMugShot');
   Route::get('/images/update', 'ImageController@update');
   Route::resource('runs', 'CourseRunsController', ['only' => ['index', 'show']]);
@@ -87,5 +85,4 @@ Route::post('ipn/notify','PaypalController@postNotify');
 
 Route::get('/topps', 'ToppsController@index')->name('topps');
 Route::get('topps_image/{uid}/{view}/{size?}', 'ToppsController@displayToppsImage')
-              ->middleware('cache.headers:max_age=0')
               ->name('image.displayToppsImage');
