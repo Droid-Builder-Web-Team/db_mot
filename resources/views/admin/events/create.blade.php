@@ -31,7 +31,7 @@
                   <option value="{{ $location->id }}">{{ $location->name }}</option>
                 @endforeach
               </select>
-              <button id="addLocation">Add Location</button>
+              <a class="btn-sm btn-info" href={{ route('admin.locations.create')}}>New location</a>
             </div>
         </div>
 
