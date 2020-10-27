@@ -60,6 +60,7 @@
 
   <!-- Modal content -->
   <div class="modal-content">
+    <span class="close">&times;</span>
     <p>Add a location</p>
   </div>
 
