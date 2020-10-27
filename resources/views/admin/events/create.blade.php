@@ -31,7 +31,7 @@
                   <option value="{{ $location->id }}">{{ $location->name }}</option>
                 @endforeach
               </select>
-              <a class="btn-sm btn-info" href={{ route('admin.locations.create')}}>New location</a>
+              <button id="addLocation">Add Location</button>
             </div>
         </div>
 
@@ -55,10 +55,47 @@
     </div>
 
 </form>
+
+<div id="newLocation" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <p>Add a location</p>
+  </div>
+
+</div>
+
+
 <script>
 // In your Javascript (external .js resource or <script> tag)
 $(document).ready(function() {
     $('.js-example-basic-single').select2();
 });
+
+// Get the modal
+var modal = document.getElementById("newLocation");
+
+// Get the button that opens the modal
+var btn = document.getElementById("addLocation");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on the button, open the modal
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
 </script>
 @endsection
