@@ -81,7 +81,7 @@ class EventsDataTable extends DataTable
           Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
-                ->width(75)
+                ->width(85)
                 ->addClass('text-center'),
       ];
     }
