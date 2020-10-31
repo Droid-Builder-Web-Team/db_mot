@@ -55,8 +55,12 @@
                 <td>{{$user->forename}} {{ $user->surname}}</td>
                 <td>{{$user->pli_date}}</td>
                 <td>
-                  <a class="btn-sm btn-view" href="{{ route('user.show',$user->id) }}">View</a>
-                  <a class="btn-sm btn-edit" href="{{ route('admin.users.edit',$user->id) }}">Edit</a>
+                  @can('View Members')
+                    <a class="btn-sm btn-view" href="{{ route('user.show',$user->id) }}"><i class="fas fa-eye"></i></a>
+                  @endcan
+                  @can('Edit Members')
+                    <a class="btn-sm btn-edit" href="{{ route('admin.users.edit',$user->id) }}"><i class="fas fa-edit"></i></a>
+                  @endcan
                 </td>
               </tr>
             @endif
@@ -89,8 +93,12 @@
                 </td>
                 <td>{{$droid->motDate()}}</td>
                 <td>
-                  <a class="btn-sm btn-view" href="{{ route('droid.show',$droid->id) }}">View</a>
-                  <a class="btn-sm btn-edit" href="{{ route('admin.droids.edit',$droid->id) }}">Edit</a>
+                  @can('View Droids')
+                    <a class="btn-sm btn-view" href="{{ route('droid.show',$droid->id) }}"><i class="fas fa-eye"></i></a>
+                  @endcan
+                  @can('Edit Droids')
+                    <a class="btn-sm btn-edit" href="{{ route('admin.droids.edit',$droid->id) }}"><i class="fas fa-edit"></i></a>
+                  @endcan
                 </td>
               </tr>
               @endif
@@ -113,7 +121,7 @@
           <th>Date</th>
           <th>Name</th>
           <th>Location</th>
-          <th></th>
+          <th><i class="fas fa-check">/<i class="fas fa-question"></th>
           <th>Actions</th>
         </tr>
         @foreach ($events as $event)
@@ -123,9 +131,9 @@
             <td><a class="btn-sm btn-link" href="{{ route('location.show', $event->location->id ) }}">{{ $event->location->name }}</a></td>
             <td>{{ $event->going->count() }}/{{ $event->maybe->count() }}</td>
             <td>
-              <a class="btn-sm btn-view" href="{{ route('event.show', $event->id) }}">View</a>
+              <a class="btn-sm btn-view" href="{{ route('event.show', $event->id) }}"><i class="fas fa-eye"></a>
               @can('Edit Events')
-                <a class="btn-sm btn-edit" href="{{ route('admin.events.edit',$event->id) }}">Edit</a>
+                <a class="btn-sm btn-edit" href="{{ route('admin.events.edit',$event->id) }}"><i class="fas fa-edit"></a>
               @endcan
             </td>
           </tr>

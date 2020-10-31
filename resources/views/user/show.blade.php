@@ -314,7 +314,7 @@
                     <td>{{ $event->name }}</td>
                     <td><a class="btn-sm btn-link" href="{{ route('location.show', $event->location->id) }}">{{ $event->location->name }}</a></td>
                     <td>{{ $event->charity_raised }}</td>
-                    <td><a class="btn-sm btn-view" href="{{ route('event.show', $event->id) }}">View</a></td>
+                    <td><a class="btn-sm btn-view" href="{{ route('event.show', $event->id) }}"><i class="fas fa-eye"></a></td>
                 </tr>
             @endforeach
             </table>
@@ -353,7 +353,7 @@
                     @endif
                 </td>
                 <td>{{ formatMilliseconds($course_run->final_time)}}</td>
-                <td><a class="btn-sm btn-view" href="{{ route('runs.show', $course_run->id) }}">View</a></td>
+                <td><a class="btn-sm btn-view" href="{{ route('runs.show', $course_run->id) }}"><i class="fas fa-eye"></a></td>
                 </tr>
             @endforeach
             </table>
