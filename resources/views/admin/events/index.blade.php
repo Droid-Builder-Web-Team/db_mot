@@ -1,6 +1,20 @@
 @extends('layouts.app')
 
 @section('content')
+
+<style>
+@media only screen and (max-width: 800px) {
+
+  td:nth-child(3) {
+    display:none;
+  }
+
+  th:nth-child(3) {
+    display:none;
+  }
+
+}
+</style>
 <div class="row">
   <div class="col-md-12">
     <div class="card">

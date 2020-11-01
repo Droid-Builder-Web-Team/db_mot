@@ -3,12 +3,28 @@
 @section('content')
 
 <style>
-  @media only screen and (max-width: 800px) {
-  td:nth-child(2) {
+@media only screen and (max-width: 800px) {
+  td:nth-child(3) {
     display:none;
   }
 
-  th:nth-child(2) {
+  th:nth-child(3) {
+    display:none;
+  }
+
+  td:nth-child(4) {
+    display:none;
+  }
+
+  th:nth-child(4) {
+    display:none;
+  }
+
+  td:nth-child(5) {
+    display:none;
+  }
+
+  th:nth-child(5) {
     display:none;
   }
 }
