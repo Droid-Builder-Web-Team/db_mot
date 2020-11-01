@@ -306,7 +306,7 @@
                 <th>Details</th>
                 <th>Location</th>
                 <th>Charity Raised</th>
-                <th>Actions</th>
+                <th></th>
             </tr>
             @foreach($user->attended_events as $event)
                 <tr>
@@ -338,6 +338,7 @@
                 <th>Droid Name</th>
                 <th>Penalties</th>
                 <th>Final Time</th>
+                <th></th>
             </tr>
             @foreach($user->course_runs as $course_run)
                 <tr>
