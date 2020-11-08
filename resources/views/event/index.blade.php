@@ -14,7 +14,7 @@
               <th width="120px">Date</th>
               <th>Name</th>
               <th>Location</th>
-              <th width="60px">Action</th>
+              <th width="80px">Action</th>
             </tr>
             @foreach ($events as $event)
               <tr>
