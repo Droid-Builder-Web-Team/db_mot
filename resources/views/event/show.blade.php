@@ -37,6 +37,9 @@
                 <a target="_blank" href="{{ $link->ics() }}" class="btn-sm">Apple</a>
               </div>
               <div class="col-md-4">
+                @if($event->location->name == "Online")
+                  <!-- Online Event -->
+                @else
                 <div class="map-responsive">
                 <iframe
                   width="200"
@@ -47,6 +50,7 @@
                   allowfullscreen>
                 </iframe>
               </div>
+              @endif
                 <br>
                 <span class="float-right">
                   <a class="btn-sm btn-link" href="{{ route('location.show', $event->location->id )}}">{{ $event->location->name}}</a>
