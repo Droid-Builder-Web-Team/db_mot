@@ -22,9 +22,9 @@
                 <td>{{ $event->name }}</td>
                 <td><a class="btn-sm btn-link" href="{{ route('location.show', $event->location->id )}}">{{ $event->location->name}}</a></td>
                 <td>
-                  <a class="btn-sm btn-view" href="{{ route('event.show',$event->id) }}"><i class="fas fa-eye"></a>
+                  <a class="btn-sm btn-view" href="{{ route('event.show',$event->id) }}"><i class="fas fa-eye"></i></a>
                   @can('Edit Events')
-                    <a class="btn-sm btn-edit" href="{{ route('admin.events.edit',$event->id) }}"><i class="fas fa-edit"></a>
+                    <a class="btn-sm btn-edit" href="{{ route('admin.events.edit',$event->id) }}"><i class="fas fa-edit"></i></a>
                   @endcan
                 </td>
               </tr>
