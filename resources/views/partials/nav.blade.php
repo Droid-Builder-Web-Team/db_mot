@@ -14,6 +14,8 @@
   @endif
 @else
 
+    <li class="c-sidebar-nav-title">Club Functions</li>
+
     <li class="c-sidebar-nav-item">
       <a class="c-sidebar-nav-link" href="{{ route('user.show', Auth::user()->id ) }}">
         <svg class="c-sidebar-nav-icon">
@@ -28,6 +30,25 @@
         </svg><span class="ml-1">Upcoming Events</span>
       </a>
     </li>
+
+    <li class="c-sidebar-nav-title">Info</li>
+
+    <li class="c-sidebar-nav-item">
+      <a class="c-sidebar-nav-link" href="{{ route('motinfo.index') }}">
+        <svg class="c-sidebar-nav-icon">
+          <i class="fas fa-info-circle fa-fw"></i>
+        </svg><span class="ml-1">MOT Info</span>
+      </a>
+    </li>
+
+    <li class="c-sidebar-nav-item">
+      <a class="c-sidebar-nav-link" target="_blank" href="https://robsrobots.co.uk/guides.php">
+        <svg class="c-sidebar-nav-icon">
+          <i class="fas fa-tools fa-fw"></i>
+        </svg><span class="ml-1">Builders Guides</span>
+      </a>
+    </li>
+
     <li class="c-sidebar-nav-item">
       <a class="c-sidebar-nav-link" href="{{ route('topps') }}">
         <svg class="c-sidebar-nav-icon">
