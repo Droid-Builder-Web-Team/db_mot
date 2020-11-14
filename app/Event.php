@@ -13,7 +13,7 @@ class Event extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class, 'members_events')->withPivot('spotter', 'date_added', 'status');
+        return $this->belongsToMany(User::class, 'members_events')->withPivot('spotter', 'date_added', 'status', 'mot_required');
     }
 
     public function going()

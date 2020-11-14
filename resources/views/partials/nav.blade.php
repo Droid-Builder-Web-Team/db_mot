@@ -50,6 +50,15 @@
     </li>
 
     <li class="c-sidebar-nav-item">
+      <a class="c-sidebar-nav-link" target="_blank" href="https://wiki.droidbuilders.net/">
+        <svg class="c-sidebar-nav-icon">
+          <i class="fab fa-wikipedia-w fa-fw"></i>
+        </svg><span class="ml-1">Droidbuilders Wiki</span>
+      </a>
+    </li>
+
+
+    <li class="c-sidebar-nav-item">
       <a class="c-sidebar-nav-link" href="{{ route('topps') }}">
         <svg class="c-sidebar-nav-icon">
           <i class="fas fa-grip-horizontal fa-fw"></i>

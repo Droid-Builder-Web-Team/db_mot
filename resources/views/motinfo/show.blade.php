@@ -11,7 +11,15 @@
       </div>
       <div class="card-body ">
           <div class="mb-4">
-            This is a guide for things that an MOT officer will look at on your droid and with your driving. Use this to help prepare for your MOT.
+            <p>Why MOT? Droids can be rather heavy and dangerous if built wrong. The MOT process is a way to make sure your droid is safe for taking out in public and
+              is unlikely to cause any injuries or issues. Not just to the people you interact with, but also the environment itself. A 60kg+ runaway droid can do a lot of
+              damage to stalls, cars, etc. After your droid has passed its MOT, you can then join in the club PLI to make sure you are insured incase of any incidents. The MOT process is
+              a requirement for the PLI. <p>
+            <p>Below are the checks that the MOT officers will perform as part of the MOT process. This is just a (fairly detailed) guideline, the overall aim of
+            the officer is to ascertain that you and your droid are safe for both you and the public in general. </p>
+            <p>That being said, the club want you to pass. This is a hobby for fun, and we don't want to stop that. The MOT officer will be able to help you should
+              there be any issues, and if they can't the club in general are there to help. The more droids out and about across the country raising money
+              for charity, the better.</p>
           </div>
             <div class="accordion" id="accordionMOT">
           @foreach($sections as $section)

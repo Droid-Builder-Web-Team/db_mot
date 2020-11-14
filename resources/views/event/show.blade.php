@@ -1,7 +1,18 @@
 @extends('layouts.app')
 
 @section('content')
-
+@if($event->isFuture())
+@php
+  $user_status="no";
+  $user_spotter="no";
+  $user_mot="0";
+  $user = $event->users->only([ Auth::user()->id ])->first();
+  if ($user != NULL) {
+      $user_status = $event->users->only([ Auth::user()->id ])->first()->pivot->status;
+      $user_spotter = $event->users->only([ Auth::user()->id ])->first()->pivot->spotter;
+      $user_mot = $event->users->only([ Auth::user()->id ])->first()->pivot->mot_required;
+    }
+@endphp
     <div class="row">
         <div class="col-lg-1">
             <div class="pull-right">
@@ -113,11 +124,14 @@
                       @if($user->pli_expires() < \Carbon\Carbon::parse($event->date))
                         <span class="badge badge-danger">PLI expired</span>
                       @endif
+                      @if($user->event($event->id)->mot_required)
+                        <i class="fas fa-tools" title="MOT will be required"></i>
+                      @endif
                     @else
                       {{ $user->forename ?? "Deactivated"}} {{ $user->surname ?? "User"}}
                     @endcan
                     @if ($user->event($event->id)->spotter == 'yes')
-                      <i class="fas fa-binoculars"></i>
+                      <i class="fas fa-binoculars" title="No droid, just a spotter"></i>
                     @endif
                   </li>
                 @endforeach
@@ -202,16 +216,7 @@
           </div>
         </div>
       </div>
-@if($event->isFuture())
-@php
-  $user_status="no";
-  $user_spotter="no";
-  $user = $event->users->only([ Auth::user()->id ])->first();
-  if ($user != NULL) {
-      $user_status = $event->users->only([ Auth::user()->id ])->first()->pivot->status;
-      $user_spotter = $event->users->only([ Auth::user()->id ])->first()->pivot->spotter;
-    }
-@endphp
+
 
 
       <div class="col-md-4">
@@ -254,6 +259,13 @@
                 <label class="form-check-label" for="no_droid">
                   Spotter
                 </label>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="form-check form-check-inline">
+                {{Form::hidden('mot_required','0')}}
+                <input type="checkbox" id="mot_required" name="mot_required" {{ $user_mot ? 'checked=1 value=1' : 'value=1' }} class="form-check-input">
+                <label class="form-check-label" for="mot_required">Request MOT</label>
               </div>
             </div>
 
