@@ -65,6 +65,15 @@
         </svg><span class="ml-1">Topps Cards</span>
       </a>
     </li>
+
+    <li class="c-sidebar-nav-item">
+      <a class="c-sidebar-nav-link" href="{{ route('about') }}">
+        <svg class="c-sidebar-nav-icon">
+          <i class="fas fa-info fa-fw"></i>
+        </svg><span class="ml-1">About Us</span>
+      </a>
+    </li>
+
   @hasanyrole('Super Admin|Org Admin|Events Officer|MOT Officer')
     <li class="c-sidebar-nav-title">Admin</li>
 

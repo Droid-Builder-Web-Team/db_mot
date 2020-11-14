@@ -32,6 +32,8 @@
           </table>
         </div>
         {!! $events->links() !!}
+        <p>
+          <a class="btn-sm btn-edit" href="{{ route('codeofconduct') }}">Droid Builders UK - Event Code of Conduct</a>
       </div>
     </div>
   </div>
