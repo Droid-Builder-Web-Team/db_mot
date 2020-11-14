@@ -265,7 +265,7 @@
               <div class="form-check form-check-inline">
                 {{Form::hidden('mot_required','0')}}
                 <input type="checkbox" id="mot_required" name="mot_required" {{ $user_mot ? 'checked=1 value=1' : 'value=1' }} class="form-check-input">
-                <label class="form-check-label" for="mot_required">Request MOT</label>
+                <label class="form-check-label" for="mot_required">Request MOT at event</label>
               </div>
             </div>
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Club;
+use App\User;
 
 class MOTInfoController extends Controller
 {
@@ -62,8 +63,8 @@ class MOTInfoController extends Controller
             ->where('section_id', $section->id)
             ->get();
         }
-        //dd($lines);
-        return view('motinfo.show', compact('sections', 'lines'));
+        $mot_officers = User::role('MOT Officer')->get();
+        return view('motinfo.show', compact('sections', 'lines', 'mot_officers'));
     }
 
     /**

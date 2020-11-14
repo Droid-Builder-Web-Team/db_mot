@@ -15,11 +15,23 @@
               is unlikely to cause any injuries or issues. Not just to the people you interact with, but also the environment itself. A 60kg+ runaway droid can do a lot of
               damage to stalls, cars, etc. After your droid has passed its MOT, you can then join in the club PLI to make sure you are insured incase of any incidents. The MOT process is
               a requirement for the PLI. <p>
+            <div>
+              MOT Officers:
+              <ul>
+                @foreach($mot_officers as $officer)
+                  <li>{{ $officer->forename}} {{ $officer->surname}} - {{ $officer->county }}</li>
+                @endforeach
+              </ul>
+            </div>
             <p>Below are the checks that the MOT officers will perform as part of the MOT process. This is just a (fairly detailed) guideline, the overall aim of
             the officer is to ascertain that you and your droid are safe for both you and the public in general. </p>
             <p>That being said, the club want you to pass. This is a hobby for fun, and we don't want to stop that. The MOT officer will be able to help you should
               there be any issues, and if they can't the club in general are there to help. The more droids out and about across the country raising money
-              for charity, the better.</p>
+              for charity, the better. It will also benefit you from club experience and the officers know where the common failure points are, hopefully saving you the embarassment of
+            winning the Walk Of Shame achievement.</p>
+            <p>Ideally, an MOT will be done at one of the large events where we have plenty of room to move. However, if you need one before doing a small local event for example, then
+              feel free to get in touch with one of the MOT officers listed above and see if we can arrange a test for you at a suitable location. Village halls, or even a quiet street should be
+              fine.  </p>
           </div>
             <div class="accordion" id="accordionMOT">
           @foreach($sections as $section)
