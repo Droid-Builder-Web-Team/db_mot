@@ -37,7 +37,7 @@
           @foreach($sections as $section)
 
               <div class="card">
-                <div class="card-header" id="heading{{ $section->id}}">
+                <div class="card-header-mot" id="heading{{ $section->id}}">
                   <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapse{{ $section->id}}" aria-expanded="false" aria-controls="collapse{{ $section->id}}">
                     {{ $section->section_description }}
                   </button>
@@ -50,7 +50,7 @@
                     <div class="accordion" id="accordionLines{{ $section->id}}">
                       @foreach($lines[$section->id] as $line)
                         <div class="card">
-                          <div class="card-header" id=headingLine{{ $line->id}}">
+                          <div class="card-header-mot" id=headingLine{{ $line->id}}">
                             <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseLine{{ $line->id}}" aria-expanded="false" aria-controls="collapseLine{{ $line->id}}">
                               {{ $line->test_description }}
                             </button>
