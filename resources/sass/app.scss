@@ -181,6 +181,15 @@ body{
     background: #ff0000;
 }
 
+.card-mot {
+    border: 0px;
+}
+
 .card-header-mot{
+    background: $background;
+    color: $headerText;
+}
+.btn-motinfo{
+    border: 0px;
     color: $headerText;
 }

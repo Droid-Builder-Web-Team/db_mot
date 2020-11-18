@@ -11130,7 +11130,17 @@ body {
   background: #ff0000;
 }
 
+.card-mot {
+  border: 0px;
+}
+
 .card-header-mot {
+  background: #05080D;
+  color: #FFF;
+}
+
+.btn-motinfo {
+  border: 0px;
   color: #FFF;
 }
 
