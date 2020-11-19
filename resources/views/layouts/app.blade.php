@@ -10,7 +10,7 @@
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
     <link href="{{ asset('css/dark.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/app.css') }}?ver=2" rel="stylesheet">
+    <link href="{{asset(mix('css/app.css'), true)}}" rel="stylesheet">
     <link href="{{ asset('css/mot.css') }}" rel="stylesheet">
     <link href="{{ asset('css/media.css') }}" rel="stylesheet">
 
@@ -21,6 +21,7 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/1.5.0/perfect-scrollbar.min.js" integrity="sha512-yUNtg0k40IvRQNR20bJ4oH6QeQ/mgs9Lsa6V+3qxTj58u2r+JiAYOhOW0o+ijuMmqCtCEg7LZRA+T4t84/ayVA==" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+    <script src="{{asset(mix('js/app.js'), true)}}"></script>
 
     @laravelPWA
 

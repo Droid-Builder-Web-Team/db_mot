@@ -14,7 +14,6 @@
         "bootstrap": "^4.5.3",
         "cross-env": "^7.0",
         "jquery": "^3.2",
-        "laravel-mix": "^5.0.7",
         "lodash": "^4.17.20",
         "node-forge": ">=0.10.0",
         "popper.js": "^1.12",
@@ -25,6 +24,7 @@
         "vue-template-compiler": "^2.6.12"
     },
     "dependencies": {
-        "@coreui/icons": "^1.0.1"
+        "@coreui/icons": "^1.0.1",
+        "laravel-mix": "^5.0.9"
     }
 }
