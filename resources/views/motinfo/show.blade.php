@@ -16,7 +16,7 @@
               damage to stalls, cars, etc. After your droid has passed its MOT, you can then join in the club PLI to make sure you are insured incase of any incidents. The MOT process is
               a requirement for the PLI. <p>
             <div>
-              MOT Officers:
+              <h5>MOT Officers:</h5>
               <ul>
                 @foreach($mot_officers as $officer)
                   <li>{{ $officer->forename}} {{ $officer->surname}} - {{ $officer->county }}</li>
