@@ -202,7 +202,7 @@ class DroidController extends Controller
         $pdf->defaultFont = 'Arial';
         $pdf->setPaper('A4', 'portrait');
 
-        return $pdf->download('cover_note.pdf');
+        return $pdf->download('info_sheet_'.$droid->name.'.pdf');
         //return view('droid.info', compact('droid', 'user'));
     }
 }
