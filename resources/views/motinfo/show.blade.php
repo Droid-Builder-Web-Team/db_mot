@@ -50,14 +50,14 @@
                     <div class="accordion" id="accordionLines{{ $section->id}}">
                       @foreach($lines[$section->id] as $line)
                         <div class="card-mot">
-                          <div class="card-header-mot" id=headingLine{{ $line->id}}">
-                            <button class="btn btn-motinfo collapsed" type="button" data-toggle="collapse" data-target="#collapseLine{{ $line->id}}" aria-expanded="false" aria-controls="collapseLine{{ $line->id}}">
+                          <div class="card-header-line" id=headingLine{{ $line->id}}">
+                            <button class="btn btn-motinfosub collapsed" type="button" data-toggle="collapse" data-target="#collapseLine{{ $line->id}}" aria-expanded="false" aria-controls="collapseLine{{ $line->id}}">
                               {{ $line->test_description }}
                             </button>
                           </div>
                           <div id="collapseLine{{ $line->id}}" class="collapse" aria-labelledby="headingLine{{ $line->id}}" data-parent="#accordionLines{{ $section->id}}">
                             <div class="card-body">
-                              {!! nl2br(e($line->test_long_description)) !!}
+                              <p class="sub">{!! nl2br(e($line->test_long_description)) !!}</p>
                             </div>
                           </div>
                         </div>
