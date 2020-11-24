@@ -203,6 +203,20 @@ class DroidController extends Controller
         $pdf->setPaper('A4', 'portrait');
 
         return $pdf->download('info_sheet_'.$droid->name.'.pdf');
-        //return view('droid.info', compact('droid', 'user'));
+    }
+
+    public function togglePublic(Request $request) {
+
+      $droid = Droid::find($request->id);
+      if (!$droid->users->contains(auth()->user()) || !auth()->user()->can('Edit Droids'))
+      {
+            abort(403);
+      }
+      if ($request->mode == 'true') {
+        $droid->public = 1;
+      } else {
+        $droid->public = 0;
+      }
+      $droid->save();
     }
 }

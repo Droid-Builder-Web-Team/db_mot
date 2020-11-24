@@ -90,6 +90,7 @@ class UsersDataTable extends DataTable
             Column::make('pli'),
             Column::make('droid_count'),
             Column::make('roles'),
+            Column::make('last_activity'),
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)

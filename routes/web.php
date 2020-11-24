@@ -48,7 +48,9 @@ Route::group(['middleware' => ['auth', 'gdpr.terms']], function() {
   Route::get('user/{user}/settings', 'UserController@edit_settings')->name('settings.edit');
   Route::put('user/{user}/settings', 'UserController@update_settings')->name('settings.update');
   Route::resource('user', 'UserController');
+  Route::post('droid/togglePublic', 'DroidController@togglePublic')->name('droid.togglePublic');
   Route::resource('droid', 'DroidController');
+  Route::get('database', 'DroidDatabase@index');
   Route::resource('mot', 'MOTController', ['only' => ['index', 'show']]);
   Route::resource('motinfo', 'MOTInfoController');
   Route::get('qr_code/{uid}', 'UserController@displayQRCode')->name('image.displayQRCode');

@@ -11,6 +11,12 @@
         </span>
         <span class="float-right">
           {{ $droid->club->name }}
+          <div class="custom-control custom-switch">
+            <input type="checkbox" class="custom-control-input" id="publicToggle" value="{{$droid->public}}"
+            {{ $droid->public === 1 ? 'checked' : '' }}>
+            <label class="custom-control-label" for="publicToggle">Public Profile</label>
+          </div>
+
         </span>
       </div>
       <div class="card-body">
@@ -202,4 +208,25 @@
     </div>
   </div>
 </div>
+
+<script>
+$('#publicToggle').change(function(){
+   var mode= $(this).prop('checked');
+   var id=$( this ).val();
+       var droid = {};
+       droid.mode = $(this).prop('checked');
+       droid.publicstatus = $( this ).val();
+       droid._token = '{{csrf_token()}}';
+       droid.id = '{{ $droid->id }}';
+   $.ajax({
+     type:"POST",
+     dataType:"JSON",
+     url:"{{ route('droid.togglePublic') }}",
+     data:droid,
+     success:function(data)
+     {
+     }
+   });
+  });
+</script>
 @endsection
