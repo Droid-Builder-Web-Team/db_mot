@@ -26,6 +26,7 @@
         "laravel/ui": "^3.0",
         "laravelcollective/html": "^6.1",
         "orangehill/iseed": "^2.6",
+        "rennokki/rating": "^2.4",
         "silviolleite/laravelpwa": "^2.0",
         "spatie/calendar-links": "^1.4",
         "spatie/laravel-cookie-consent": "^2.12",

@@ -3,9 +3,14 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Rennokki\Rating\Traits\CanBeRated;
+use Rennokki\Rating\Contracts\Rateable;
 
-class Location extends Model
+class Location extends Model implements Rateable
 {
+
+    use CanBeRated;
+
     protected $guarded = [];
 
     public function events()

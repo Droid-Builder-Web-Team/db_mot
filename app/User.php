@@ -16,13 +16,17 @@ use App\Achievement;
 use App\CourseRun;
 use Dialect\Gdpr\Portable;
 
+use Rennokki\Rating\Traits\CanRate;
+use Rennokki\Rating\Contracts\Rater;
 
-class User extends Authenticatable implements MustVerifyEmail
+
+class User extends Authenticatable implements MustVerifyEmail, Rater
 {
     use Notifiable;
     use HasRoles;
     use Portable;
     use HasSettingsField;
+    use CanRate;
 
     protected $table = 'members';
     const CREATED_AT = 'created_on';
@@ -166,4 +170,5 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(CourseRun::class)->orderBy('final_time');
     }
+
 }

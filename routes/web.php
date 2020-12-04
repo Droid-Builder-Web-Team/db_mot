@@ -34,6 +34,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
   Route::resource('/achievements', 'AchievementsController', ['except' => ['show']]);
   Route::resource('/clubs', 'ClubsController', ['except' => ['show']]);
   Route::resource('/locations', 'LocationController', ['except' => ['show']]);
+  Route::post('/location/{id}/rating', 'LocationController@store');
   Route::resource('/dashboard', 'DashboardController', ['only' => ['index']]);
   Route::get('mot/{droid_id}', 'MOTController@create')->name('mot.create');
   Route::put('mot/comment/{mot}', 'MOTController@comment')->name('mot.comment');

@@ -2,6 +2,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use DB;
 
 class ClubsTableSeeder extends Seeder
 {
@@ -15,9 +16,8 @@ class ClubsTableSeeder extends Seeder
     {
 
 
-        \DB::table('clubs')->delete();
-
-        \DB::table('clubs')->insert(array (
+        DB::table('clubs')->delete();
+        DB::table('clubs')->insert(array (
             0 =>
             array (
                 'id' => 1,
