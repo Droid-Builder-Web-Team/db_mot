@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Location;
 use App\Comment;
+use App\User;
 use Illuminate\Http\Request;
 
 class LocationController extends Controller
@@ -45,6 +46,12 @@ class LocationController extends Controller
         $result = $location->comments()->save($comment);
         toastr()->success('Comment Added');
         return view('location.show', compact('location'));
+    }
+
+    public function store(Request $request, User $user)
+    {
+        $userRating = $request->input('ratings');
+        dd($userRating);
     }
 
 }

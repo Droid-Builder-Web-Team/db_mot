@@ -9,6 +9,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Validation\Validator;
 use PDF;
 
 class DroidController extends Controller
@@ -39,10 +40,10 @@ class DroidController extends Controller
     public function store(Request $request)
     {
 
-        $request->validate([
+        $validatedData = $request->validate([
             'name' => 'required',
-            'build_log' => 'url',
-            'weight' => 'numeric'
+            'build_log' => 'url|nullable',
+            'weight' => 'numeric|nullable'
         ]);
 
         try {
@@ -117,6 +118,8 @@ class DroidController extends Controller
 
         $request->validate([
             'name' => 'required',
+            'build_log' => 'url|nullable',
+            'weight' => 'numeric|nullable'
         ]);
 
         try {
@@ -199,7 +202,21 @@ class DroidController extends Controller
         $pdf->defaultFont = 'Arial';
         $pdf->setPaper('A4', 'portrait');
 
-        return $pdf->download('cover_note.pdf');
-        //return view('droid.info', compact('droid', 'user'));
+        return $pdf->download('info_sheet_'.$droid->name.'.pdf');
+    }
+
+    public function togglePublic(Request $request) {
+
+      $droid = Droid::find($request->id);
+      if (!$droid->users->contains(auth()->user()) || !auth()->user()->can('Edit Droids'))
+      {
+            abort(403);
+      }
+      if ($request->mode == 'true') {
+        $droid->public = 1;
+      } else {
+        $droid->public = 0;
+      }
+      $droid->save();
     }
 }

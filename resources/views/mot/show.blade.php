@@ -26,7 +26,7 @@
     </div>
     @foreach($mot->lines($section->id) as $line)
     <div class="row">
-      <div class="col-md-3 offset-md-1">
+      <div class="col-md-3 offset-md-1" data-toggle="tooltip" data-placement="top" title="{{ $line->test_long_description }}">
         {{ $line->test_description}}
       </div>
 

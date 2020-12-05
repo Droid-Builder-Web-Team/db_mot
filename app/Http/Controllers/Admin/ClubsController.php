@@ -82,10 +82,12 @@ class ClubsController extends Controller
 
         $options = $request->get('options');
         $club_options = [];
-        foreach($options as $option)
-        {
-            $find = ClubOptions::where('name', $option)->first();
-            $club_options[] = $find->id;
+        if(is_array($options)) {
+          foreach($options as $option)
+          {
+              $find = ClubOptions::where('name', $option)->first();
+              $club_options[] = $find->id;
+          }
         }
 
         $club->options()->sync($club_options);

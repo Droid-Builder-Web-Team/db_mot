@@ -31,6 +31,19 @@
                 </div>
               </div>
             </div>
+            <div class="rating">
+              <h5>Venue Rating</h5>
+              <form method="POST" action="/rating">
+                <select id="locationRating">
+                  <option name="ratings[]" value="1">1</option>
+                  <option name="ratings[]" value="2">2</option>
+                  <option name="ratings[]" value="3">3</option>
+                  <option name="ratings[]" value="4">4</option>
+                  <option name="ratings[]" value="5">5</option>
+                </select>
+                <button type="submit">Rate Location</button>
+              </form>
+            </div>
           </div>
         </div>
       </div>

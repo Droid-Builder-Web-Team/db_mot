@@ -180,3 +180,53 @@ body{
 #youtubeLi:hover{
     background: #ff0000;
 }
+
+.card-mot {
+    border: 0px;
+}
+
+.card-header-mot {
+  background: #05080D;
+  color: #FFF;
+  border-top: 1px solid white;
+  border-bottom: 1px solid white;
+
+}
+.card-header-line {
+  background: #293A62;
+  color: #FFF;
+    border-top: 1px solid white;
+  border-bottom: 1px solid white;
+
+}
+.btn-motinfo {
+  border: 0px;
+  color: #FFF;
+  font-size:1rem;
+  line-height:40px;
+}
+.btn-motinfo:hover{
+  color: #75A5D6
+}
+
+.btn-motinfosub {
+    border: 0px;
+  color: #FFF;
+  font-size:1rem;
+  line-height:40px;
+}
+
+.btn-motinfosub:hover{
+  color: #A4B1D0;
+}
+
+.btn-motinfo,
+.btn-motinfosub:focus{
+  text-decoration:none;
+  border: none;
+  box-shadow:none!important;
+}
+
+.sub {
+  padding: .5%;
+}

@@ -34,6 +34,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
   Route::resource('/achievements', 'AchievementsController', ['except' => ['show']]);
   Route::resource('/clubs', 'ClubsController', ['except' => ['show']]);
   Route::resource('/locations', 'LocationController', ['except' => ['show']]);
+  Route::post('/location/{id}/rating', 'LocationController@store');
   Route::resource('/dashboard', 'DashboardController', ['only' => ['index']]);
   Route::get('mot/{droid_id}', 'MOTController@create')->name('mot.create');
   Route::put('mot/comment/{mot}', 'MOTController@comment')->name('mot.comment');
@@ -41,15 +42,18 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
 
 });
 
-Route::get('/', function () {    return view('home');
+Route::get('/', function () {    return view('about');
 });
 
 Route::group(['middleware' => ['auth', 'gdpr.terms']], function() {
   Route::get('user/{user}/settings', 'UserController@edit_settings')->name('settings.edit');
   Route::put('user/{user}/settings', 'UserController@update_settings')->name('settings.update');
   Route::resource('user', 'UserController');
+  Route::post('droid/togglePublic', 'DroidController@togglePublic')->name('droid.togglePublic');
   Route::resource('droid', 'DroidController');
+  Route::get('database', 'DroidDatabase@index');
   Route::resource('mot', 'MOTController', ['only' => ['index', 'show']]);
+  Route::resource('motinfo', 'MOTInfoController');
   Route::get('qr_code/{uid}', 'UserController@displayQRCode')->name('image.displayQRCode');
   Route::put('event/comment/{event}', 'EventController@comment')->name('event.comment');
   Route::resource('event', 'EventController', ['only' => ['index', 'show', 'update']]);
@@ -63,17 +67,18 @@ Route::group(['middleware' => ['auth', 'gdpr.terms']], function() {
   Route::get('notifications', 'UserNotificationsController@index')->name('notifications');
   Route::get('notifications/read/{id}', 'UserNotificationsController@read')->name('notifications.read');
   Route::get('droid_image/{uid}/{view}/{size?}', 'DroidController@displayDroidImage')
-              ->middleware('cache.headers:max_age=0')
               ->name('image.displayDroidImage');
   Route::get('mug_shot/{uid}/{size?}', 'UserController@displayMugShot')
-              ->middleware('cache.headers:max_age=0')
               ->name('image.displayMugShot');
   Route::get('/images/update', 'ImageController@update');
   Route::resource('runs', 'CourseRunsController', ['only' => ['index', 'show']]);
   Route::get('change-password', 'ChangePasswordController@index');
   Route::post('change-password', 'ChangePasswordController@store')->name('change.password');
-  Route::get('codeofconduct', 'CodeOfConductController@index');
+  Route::get('codeofconduct', 'CodeOfConductController@index')->name('codeofconduct');
   Route::post('codeofconduct', 'CodeOfConductController@store');
+  Route::get('about', function() {
+    return view('about');
+  } )->name('about');
 });
 
 Route::get('/id/{id}', 'ID');
@@ -87,5 +92,4 @@ Route::post('ipn/notify','PaypalController@postNotify');
 
 Route::get('/topps', 'ToppsController@index')->name('topps');
 Route::get('topps_image/{uid}/{view}/{size?}', 'ToppsController@displayToppsImage')
-              ->middleware('cache.headers:max_age=0')
               ->name('image.displayToppsImage');

@@ -15,7 +15,7 @@
         <ul>
           <li>Make sure your droid is up to MOT standards before each event, even if your MOT is not due</li>
           <li>Refrain from swearing or using adult language when in public at an event. Especially if there may be children in the vicinity.</li>
-          <li>Always ask permission when taking photographs involving members of the public whenever possible.</li>
+          <li>Always ask permission when taking photographs involving members of the public whenever possible, especially children.</li>
           <li>Make sure your droid is powered off or otherwise has its main drive disabled when leaving it unattended.</li>
           <li>Never leave any batteries charging unattended, especially over night at weekend events.</li>
           <li>Do not accept payment for attending events, beyond typical expenses. Charitable donations to the club's designated charity are perfectly fine.</li>

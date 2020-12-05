@@ -73,7 +73,8 @@ class EventController extends Controller
         $hasEntry = $user->events()->where('event_id', $event->id)->exists();
         $attributes = [
           'spotter' => $request->spotter,
-          'status' => $request->going
+          'status' => $request->going,
+          'mot_required' => $request->mot_required
         ];
         if ($hasEntry)
             $result = $event->users()->updateExistingPivot($user, $attributes);
