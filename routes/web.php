@@ -34,7 +34,6 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
   Route::resource('/achievements', 'AchievementsController', ['except' => ['show']]);
   Route::resource('/clubs', 'ClubsController', ['except' => ['show']]);
   Route::resource('/locations', 'LocationController', ['except' => ['show']]);
-  Route::post('/location/{id}/rating', 'LocationController@store');
   Route::resource('/dashboard', 'DashboardController', ['only' => ['index']]);
   Route::get('mot/{droid_id}', 'MOTController@create')->name('mot.create');
   Route::put('mot/comment/{mot}', 'MOTController@comment')->name('mot.comment');
@@ -59,6 +58,7 @@ Route::group(['middleware' => ['auth', 'gdpr.terms']], function() {
   Route::resource('event', 'EventController', ['only' => ['index', 'show', 'update']]);
   Route::put('location/comment/{location}', 'LocationController@comment')->name('location.comment');
   Route::resource('location', 'LocationController', ['only' => ['show']]);
+  Route::post('/location/{location}/rating', 'LocationController@store')->name('location.rating');
   Route::get('image', 'ImageController@index')->name('image');
   Route::post('image/upload', 'ImageController@upload');
   Route::get('image/destroy', 'ImageController@destroy');

@@ -22,4 +22,9 @@ class Location extends Model implements Rateable
     {
         return $this->morphMany('App\Comment', 'commentable');
     }
+
+    public function hasRating()
+    {
+        //
+    }
 }
