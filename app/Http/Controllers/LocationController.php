@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Location;
 use App\Comment;
 use App\User;
+use DB;
 use Illuminate\Http\Request;
 
 class LocationController extends Controller
@@ -32,13 +33,16 @@ class LocationController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Location $location)
-    {
+    {       
+        $ratings = DB::table('ratings')
+            ->where('rateable_id', $location->id)
+            ->get();
+
         return view('location.show', compact('location'));
     }
 
     public function comment(Request $request, Location $location)
     {
-
         $comment = new Comment;
         $comment->body = $request->body;
         $comment->user_id = auth()->user()->id;
@@ -48,10 +52,16 @@ class LocationController extends Controller
         return view('location.show', compact('location'));
     }
 
-    public function store(Request $request, User $user)
+    public function store(Request $request, Location $location)
     {
-        $userRating = $request->input('ratings');
-        dd($userRating);
+        $location = Location::find($location->id);
+        $user = auth()->user();
+
+        $userRating = $request->input('locationRating');
+        
+        $user->rate($location, $userRating);
+        
+        return redirect()->back();
     }
 
 }

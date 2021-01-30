@@ -32,9 +32,12 @@
               </div>
             </div>
             <div class="rating">
+                <h1>Current Rating: {{ $location->rating }}</h1>
+
               <h5>Venue Rating</h5>
-              <form method="POST" action="/rating">
-                <select id="locationRating">
+              <form method="POST" action="{{ route('location.rating', $location) }}">
+                @csrf
+                <select id="locationRating" name="locationRating">
                   <option name="ratings[]" value="1">1</option>
                   <option name="ratings[]" value="2">2</option>
                   <option name="ratings[]" value="3">3</option>
