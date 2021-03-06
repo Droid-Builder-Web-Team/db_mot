@@ -68,6 +68,7 @@
                 </span>
               </div>
             </div>
+            <a class="btn btn-edit" style="width:auto;" href="{{ route('admin.events.edit',$event->id) }}">Edit</a>
           </div>
         </div>
       </div>

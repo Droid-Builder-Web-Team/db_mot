@@ -8,7 +8,7 @@ use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use App\User;
 
-class PLIDue extends Notification
+class PLIPaid extends Notification
 {
     use Queueable;
     protected $user;
@@ -25,12 +25,8 @@ class PLIDue extends Notification
     public function __construct(User $user)
     {
         $this->user = $user;
-        $this->title = "Your PLI is due in a month";
-        $this->text = "You need to pay your PLI in a month. Please make sure "
-              + "you have a valid MOT on your droid too. To pay, click on the "
-              + "link above and you should be able to click the payment button "
-              + "at the top of your profile. Or you can log in to: "
-              + "https://portal.droidbuilders.uk/";
+        $this->title = "A member has paid their PLI";
+        $this->text = "A member has just paid their PLI for the next year (".$this->user->forename." ".$this->user->surname.")";
         $this->link = route('user.show', $this->user->id);
         $this->icon = "user-circle";
     }
@@ -43,7 +39,7 @@ class PLIDue extends Notification
      */
     public function via($notifiable)
     {
-        return $notifiable->settings()->get('notifications.account') == 'on' ? ['mail', 'database'] : ['database'];
+        return ['database', 'mail'];
     }
 
     /**
@@ -55,9 +51,9 @@ class PLIDue extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                        ->line($this->title)
-                        ->action('View User', $this->link)
-                        ->line($this->text);
+                          ->line($this->title)
+                          ->action('View User', $this->link)
+                          ->line($this->text);
     }
 
     /**

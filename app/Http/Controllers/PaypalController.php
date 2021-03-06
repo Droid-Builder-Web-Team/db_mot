@@ -29,7 +29,11 @@ class PaypalController extends Controller
             $user = User::find($post['custom']);
             $user->update([ 'pli_date' => Carbon::today()->format('Y-m-d')]);
             $user->notify(new PLIPaid($user));
-
+        }
+        $admins = User::has('roles')->whereHas("permissions", function($q){ $q->where("name", "Add MOT"); })->get();
+        foreach($admins as $admin)
+        {
+            $admin->notify(new NewUser($user));
         }
     }
 }
