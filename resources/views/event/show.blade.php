@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-@if($event->isFuture())
 @php
   $user_status="no";
   $user_spotter="no";
@@ -13,6 +12,7 @@
       $user_mot = $event->users->only([ Auth::user()->id ])->first()->pivot->mot_required;
     }
 @endphp
+
     <div class="row">
         <div class="col-lg-1">
             <div class="pull-right">
@@ -100,10 +100,11 @@
                   <ul>
                     @foreach( $event->users as $user)
                       @if($user->event($event->id)->attended == 0)
-                        {{$user->forename}} {{ $user->surname}}
+                        <li>{{$user->forename}} {{ $user->surname}}
                         <a href="{{ route('admin.events.attendance.confirm', [ 'event_id' => $event->id, 'user_id' => $user->id] )}}"><i class="fas fa-check-circle"></i></a>
                         /
                         <a href="{{ route('admin.events.attendance.deny', [ 'event_id' => $event->id, 'user_id' => $user->id] )}}"><i class="fas fa-times-circle"></i></a>
+                      </li>
                       @endif
                     @endforeach
                   </ul>
@@ -278,5 +279,4 @@
       </form>
       </div>
     </div>
-    @endif
 @endsection
