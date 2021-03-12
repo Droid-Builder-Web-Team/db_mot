@@ -34,7 +34,7 @@ class EventController extends Controller
         }
 
         $events = Event::whereDate('date', '>=', Carbon::now())
-                  ->orderBy('date', 'desc')->paginate(15);
+                  ->orderBy('date', 'asc')->paginate(15);
 
         return view('event.index', compact('events'))
           ->with('i', (request()->input('page', 1) -1) *15);
