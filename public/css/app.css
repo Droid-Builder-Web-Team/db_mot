@@ -10941,6 +10941,7 @@ body {
   width: 100%;
   border: 1px solid #000000;
   color: #000000;
+  display: inline-block;
 }
 
 .btn-mot-invert {
@@ -10971,6 +10972,7 @@ body {
 
 .btn-link {
   border: 1px solid #d8d7d7;
+  display: inline-block;
 }
 
 .btn-comment {
@@ -10989,6 +10991,7 @@ body {
 .btn-cover {
   text-transform: uppercase;
   border: 1px solid white;
+  display: inline-block;
 }
 
 .btn-mot:hover {
@@ -11180,4 +11183,3 @@ body {
 .sub {
   padding: 0.5%;
 }
-

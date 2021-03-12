@@ -45,6 +45,7 @@ body{
     width:100%;
     border: 1px solid #000000;
     color:$primaryText;
+    display: inline-block;
 }
 .btn-mot-invert{
     text-transform:uppercase;
@@ -70,6 +71,7 @@ body{
 }
 .btn-link{
     border: 1px solid #d8d7d7;
+    display: inline-block;
 }
 .btn-comment{
     text-transform:uppercase;
@@ -85,6 +87,7 @@ body{
 .btn-cover{
     text-transform:uppercase;
     border: 1px solid white;
+    display: inline-block;
 }
 
 .btn-mot:hover{

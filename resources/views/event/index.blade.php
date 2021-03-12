@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+
 <div class="row">
   <div class="col-lg-12 margin-tb">
     <div class="card">
@@ -8,6 +9,11 @@
         <h4 class="title text-center">Upcoming Events</h4>
       </div>
       <div class="card-body">
+        @if(app('request')->input('view') == "calendar")
+
+          <p>
+            <a class="btn-sm btn-link" href="{{ route('codeofconduct') }}">Droid Builders UK - Event Code of Conduct</a>
+        @else
         <div class="table-responsive">
           <table class="table table-striped table-sm table-hover table-dark text-center">
             <tr>
@@ -33,7 +39,8 @@
         </div>
         {!! $events->links() !!}
         <p>
-          <a class="btn-sm btn-edit" href="{{ route('codeofconduct') }}">Droid Builders UK - Event Code of Conduct</a>
+          <a class="btn-sm btn-link" href="{{ route('codeofconduct') }}">Droid Builders UK - Event Code of Conduct</a>
+        @endif
       </div>
     </div>
   </div>
