@@ -70,7 +70,7 @@ class EventController extends Controller
                 'listMonth' => 'fa-list'
             ],
             'buttonText' => [
-                'listYear' => 'All Year',
+                'listYear' => 'Year',
             ],
             'buttonIcons' => [
 
