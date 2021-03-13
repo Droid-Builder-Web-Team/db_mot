@@ -4,12 +4,17 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Event extends Model
+class Event extends Model implements \Acaronlex\LaravelCalendar\Event
 {
 
 
     protected $guarded = [];
 
+    public function getEventOptions()
+    {
+        return [
+        ];
+    }
 
     public function users()
     {
@@ -50,4 +55,48 @@ class Event extends Model
             return false;
         }
     }
+    public function isAllDay()
+    {
+        return True;
+    }
+
+        /**
+     * Get the start time
+     *
+     * @return DateTime
+     */
+    public function getStart()
+    {
+        return $this->date;
+    }
+
+    /**
+     * Get the end time
+     *
+     * @return DateTime
+     */
+    public function getEnd()
+    {
+        return $this->date;
+    }
+
+        /**
+     * Get the event's title
+     *
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->name;
+    }
+
+
+    /**
+     * Get the event's id number
+     *
+     * @return int
+     */
+    public function getId() {
+		return $this->id;
+	}    
 }
