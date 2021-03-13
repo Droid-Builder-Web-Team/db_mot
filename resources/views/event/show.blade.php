@@ -35,7 +35,7 @@
             <div class="row no-gutters">
               <div class="col-md-8">
                 <h2 class="card-title">Description</h2>
-                {!! nl2br(e($event->description)) !!}
+                {!! nl2br($event->description) !!}
                 <br>
                 @if(!$event->isFuture())
                   <strong>Charity Raised:</strong>

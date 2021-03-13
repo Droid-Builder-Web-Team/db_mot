@@ -14,6 +14,7 @@ use App\Notifications\EventCreated;
 use App\Notifications\EventChanged;
 use App\Notifications\EventCancelled;
 
+
 class EventsController extends Controller
 {
 
@@ -59,8 +60,12 @@ class EventsController extends Controller
             'date' => 'required'
         ]);
 
+        $event = $request->all();
+        $linkify = new \Misd\Linkify\Linkify();
+        $event['description'] = $linkify->process($request->description);
+        //dd($request->description);
         try {
-          $event = Event::create($request->all());
+          $newevent = Event::create($event);
           toastr()->success('Event created successfully');
         } catch (\Illuminate\Database\QueryException $exception) {
           toastr()->error('Failed to create Event ');
@@ -104,8 +109,11 @@ class EventsController extends Controller
             }
         }
 
+        $event = $request->all();
+        $linkify = new \Misd\Linkify\Linkify();
+        $event['description'] = $linkify->process($request->description);
         try {
-          $event->update($request->all());
+          $newevent->update($event);
           toastr()->success('Event updated successfully');
         } catch (\Illuminate\Database\QueryException $exception) {
           toastr()->error('Failed to update Event');
