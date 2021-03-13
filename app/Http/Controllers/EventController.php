@@ -65,6 +65,13 @@ class EventController extends Controller
                 'month' => 'short',
                 'year' => 'numeric'
             ],
+            'views' => [
+                'listYear' => [
+                    'titleFormat' => [
+                        'year' => 'numeric',
+                      ]
+                ],
+            ],
             'displayEventTime' => False,
             'selectable' => true,
             'initialView' => 'listYear',
