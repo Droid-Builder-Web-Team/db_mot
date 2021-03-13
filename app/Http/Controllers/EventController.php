@@ -11,6 +11,7 @@ use App\Comment;
 use DateTime;
 use App\Notifications\EventUpdated;
 use Spatie\CalendarLinks\Link;
+use Acaronlex\LaravelCalendar\Calendar;
 
 class EventController extends Controller
 {
@@ -36,8 +37,51 @@ class EventController extends Controller
         $events = Event::whereDate('date', '>=', Carbon::now())
                   ->orderBy('date', 'asc')->paginate(15);
 
-        return view('event.index', compact('events'))
-          ->with('i', (request()->input('page', 1) -1) *15);
+        $calevents = [];
+
+        foreach($events as $event){
+          $calevents[] = Calendar::event(
+            $event->name,
+            True,
+            $event->date,
+            $event->date,
+            $event->id,
+            [
+              'url' => 'event/'.$event->id,
+              'title' => $event->name.' - ('.$event->location->name.')',
+
+            ]
+          );
+        }
+
+        $calendar = new Calendar();
+        $calendar->addEvents($calevents)
+        ->setOptions([
+            'locale' => 'en',
+            'themeSystem' => 'bootstrap',
+            'contentHeight' => 400,
+            'firstDay' => 0,
+            'displayEventTime' => False,
+            'selectable' => true,
+            'initialView' => 'listYear',
+            'bootstrapFontAwesome' => [
+                'today' => 'calendar-day',
+                'dayGridMonth' => 'fa-calendar-alt',
+                'listMonth' => 'fa-list'
+            ],
+            'buttonText' => [
+                'listYear' => 'All Year',
+            ],
+            'buttonIcons' => [
+
+            ],
+            'headerToolbar' => [
+                'end' => 'today prev,next dayGridMonth listMonth listYear'
+            ]
+        ]);
+        $calendar->setId('1');
+
+        return view('event.index', compact('calendar'));
     }
 
     /**
