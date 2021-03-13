@@ -61,6 +61,10 @@ class EventController extends Controller
             'themeSystem' => 'bootstrap',
             'contentHeight' => 400,
             'firstDay' => 0,
+            'titleFormat' => [
+                'month' => 'short',
+                'year' => 'numeric'
+            ],
             'displayEventTime' => False,
             'selectable' => true,
             'initialView' => 'listYear',
@@ -76,7 +80,7 @@ class EventController extends Controller
 
             ],
             'headerToolbar' => [
-                'end' => 'today prev,next dayGridMonth listMonth listYear'
+                'end' => 'today,prev,next dayGridMonth,listMonth,listYear'
             ]
         ]);
         $calendar->setId('1');
