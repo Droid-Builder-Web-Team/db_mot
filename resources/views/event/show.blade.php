@@ -48,7 +48,7 @@
                 <a target="_blank" href="{{ $link->ics() }}" class="btn-sm">Apple</a>
               </div>
               <div class="col-md-4">
-                @if($event->location->name == "Online")
+                @if($event->location->name == "Online" || $event->location->name == "No Location")
                   <!-- Online Event -->
                 @else
                 <div class="map-responsive">
