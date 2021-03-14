@@ -39,6 +39,7 @@
                   <i class="far fa-star"></i>
                 @endif
               @endfor
+              ( {{ $location->raters(\App\User::class)->get()->count() }} ratings )
               <form method="POST" action="{{ route('location.rating', $location) }}">
                 @csrf
                 <select id="locationRating" name="locationRating">
