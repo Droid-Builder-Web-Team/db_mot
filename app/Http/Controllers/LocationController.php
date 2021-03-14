@@ -33,7 +33,7 @@ class LocationController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Location $location)
-    {       
+    {
         $ratings = DB::table('ratings')
             ->where('rateable_id', $location->id)
             ->get();
@@ -58,9 +58,13 @@ class LocationController extends Controller
         $user = auth()->user();
 
         $userRating = $request->input('locationRating');
-        
-        $user->rate($location, $userRating);
-        
+
+        if ($user->hasRated($location))
+        {
+            $user->updateRatingFor($location,$userRating);
+        } else {
+            $user->rate($location, $userRating);
+        }
         return redirect()->back();
     }
 

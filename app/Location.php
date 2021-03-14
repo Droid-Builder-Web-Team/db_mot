@@ -27,4 +27,9 @@ class Location extends Model implements Rateable
     {
         //
     }
+
+    public function gateRatingAttribute()
+    {
+      return $this->averageRating(User::class);
+    }
 }

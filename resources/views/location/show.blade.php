@@ -32,17 +32,23 @@
               </div>
             </div>
             <div class="rating">
-                <h1>Current Rating: {{ $location->rating }}</h1>
-
-              <h5>Venue Rating</h5>
+              @for ($i = 0; $i < 5; $i++)
+                @if ($i < $location->averageRating(\App\User::class))
+                  <i class="fas fa-star"></i>
+                @else
+                  <i class="far fa-star"></i>
+                @endif
+              @endfor
               <form method="POST" action="{{ route('location.rating', $location) }}">
                 @csrf
                 <select id="locationRating" name="locationRating">
-                  <option name="ratings[]" value="1">1</option>
-                  <option name="ratings[]" value="2">2</option>
-                  <option name="ratings[]" value="3">3</option>
-                  <option name="ratings[]" value="4">4</option>
-                  <option name="ratings[]" value="5">5</option>
+                  @for ($i = 1; $i <= 5; $i++)
+                    @if(Auth::user()->hasRated($location))
+                      <option name="ratings[]" value="{{ $i }}">{{$i}}</option>
+                    @else
+                      <option name="ratings[]" value="{{ $i }}">{{$i}}</option>
+                    @endif
+                  @endfor
                 </select>
                 <button type="submit">Rate Location</button>
               </form>
