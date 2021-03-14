@@ -1,22 +1,25 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="row">
-        <div class="col-lg-12 margin-tb">
-            <div class="pull-left">
+<div class="card">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-lg-12 margin-tb">
+            <div class="pull-right mb-4">
+                <a class="btn btn-mot-invert" style="width:auto; color:white;" href="{{ route('admin.events.index') }}">Back</a>
+            </div>
+            <div class="pull-left mb-4">
                 <h2>Edit Event</h2>
             </div>
-            <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('admin.events.index') }}"> Back</a>
             </div>
         </div>
     </div>
-
+<div class="card-body">
     <form action="{{ route('admin.events.update',$event->id) }}" method="POST">
         @csrf
         @method('PUT')
 
-         <div class="row">
+         <div class="form-row">
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Name:</strong>
@@ -27,7 +30,7 @@
             <div class="col-xs-3 col-sm-3 col-md-3">
                 <div class="form-group">
                   <strong>Location</strong><br>
-                  <select class="js-example-basic-single" name=location_id>
+                  <select class="form-select" name=location_id>
                     @foreach($locations as $location)
                       <option value="{{ $location->id }}"
                       @if($event->location_id == $location->id)
@@ -82,10 +85,6 @@
         </div>
 
     </form>
-    <script>
-// In your Javascript (external .js resource or <script> tag)
-$(document).ready(function() {
-    $('.js-example-basic-single').select2();
-});
-</script>
+  </div>
+</div>
 @endsection

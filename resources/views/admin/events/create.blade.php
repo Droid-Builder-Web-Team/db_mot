@@ -1,16 +1,20 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="row">
-    <div class="col-lg-12 margin-tb">
-        <div class="pull-left">
-            <h2>Add New Event</h2>
-        </div>
-        <div class="pull-right">
-            <a class="btn btn-primary" href="{{ route('admin.events.index') }}"> Back</a>
+<div class="card">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-lg-12 margin-tb">
+            <div class="pull-right mb-4">
+                <a class="btn btn-mot-invert" style="width:auto; color:white;" href="{{ route('admin.events.index') }}">Back</a>
+            </div>
+            <div class="pull-left mb-4">
+                <h2>Create Event</h2>
+            </div>
+            </div>
         </div>
     </div>
-</div>
+<div class="card-body">
 
 <form action="{{ route('admin.events.store') }}" method="POST">
     @csrf
@@ -26,7 +30,7 @@
         <div class="col-xs-3 col-sm-3 col-md-3">
             <div class="form-group">
               <strong>Location</strong><br>
-              <select class="js-example-basic-single" name=location_id>
+              <select class="form-select" name=location_id>
                 @foreach($locations as $location)
                   <option value="{{ $location->id }}">{{ $location->name }}</option>
                 @endforeach
@@ -55,7 +59,8 @@
     </div>
 
 </form>
-
+</div>
+</div>
 <div id="newLocation" class="modal">
 
   <!-- Modal content -->

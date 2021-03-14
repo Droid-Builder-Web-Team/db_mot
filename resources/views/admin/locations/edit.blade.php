@@ -1,17 +1,20 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="row">
-    <div class="col-lg-12 margin-tb">
-        <div class="pull-left">
-            <h2>Add New Location</h2>
-        </div>
-        <div class="pull-right">
-            <a class="btn btn-primary" href="{{ route('admin.locations.index') }}"> Back</a>
+<div class="card">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-lg-12 margin-tb">
+            <div class="pull-right mb-4">
+                <a class="btn btn-mot-invert" style="width:auto; color:white;" href="{{ route('admin.locations.index') }}">Back</a>
+            </div>
+            <div class="pull-left mb-4">
+                <h2>Create Location</h2>
+            </div>
+            </div>
         </div>
     </div>
-</div>
-
+<div class="card-body">
 <form action="{{ route('admin.locations.update', $location->id) }}" method="POST">
     @csrf
     @method('PUT')
@@ -65,4 +68,7 @@
     </div>
 
 </form>
+</div>
+</div>
+
 @endsection
