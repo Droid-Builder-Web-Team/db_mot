@@ -72,6 +72,7 @@ Route::group(['middleware' => ['auth', 'gdpr.terms']], function() {
               ->name('image.displayMugShot');
   Route::get('/images/update', 'ImageController@update');
   Route::resource('runs', 'CourseRunsController', ['only' => ['index', 'show']]);
+  Route::resource('achievements', 'AchievementController');
   Route::get('change-password', 'ChangePasswordController@index');
   Route::post('change-password', 'ChangePasswordController@store')->name('change.password');
   Route::get('codeofconduct', 'CodeOfConductController@index')->name('codeofconduct');

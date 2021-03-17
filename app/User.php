@@ -88,6 +88,11 @@ class User extends Authenticatable implements MustVerifyEmail, Rater
         return $this->belongsToMany(Achievement::class, 'members_achievements')->withPivot('notes', 'date_added');
     }
 
+    public function hasAchievement(Achievement $achievement)
+    {
+        return $this->achievements->contains( $achievement );
+    }
+
     /**
      * Get all the user's Events
      *

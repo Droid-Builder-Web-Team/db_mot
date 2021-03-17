@@ -288,6 +288,9 @@
               </div>
           </form>
         @endcan
+        <span class="float-right">
+          <a class="btn btn-edit" href="{{ route('achievements.index')}}">View All</a>
+        </span>
       </div>
     </div>
   </div>
