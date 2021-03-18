@@ -63,6 +63,9 @@
               </li>
             @endif
           @else
+          <li class="c-header-nav-item">
+            <a href="/Droid Builders Portal User Guide.pdf" target="_blank"><i class="far fa-question-circle fa-2x" title="User Guide"></i></a>
+          </li>
             @include('partials.notification')
             @include('partials.account')
 
