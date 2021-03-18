@@ -81,7 +81,7 @@ class LocationController extends Controller
     {
       $request->validate([
           'name' => 'required',
-          'town' => 'required',
+          'postcode' => 'required',
       ]);
 
       try {
