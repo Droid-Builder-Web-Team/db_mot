@@ -285,6 +285,7 @@
             </div>
             @else
               <div class="form-group">
+                {{Form::hidden('mot_required','0')}}
                 MOT are not available at this event
               </div>
             @endif

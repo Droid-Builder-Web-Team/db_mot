@@ -64,6 +64,12 @@
                 <input type="checkbox" id="mot" name="mot" class="form-check-input" {{ $event->mot ? 'checked=1 value=1' : 'value=1' }}>
                 <label class="form-check-label" for="mot">MOTs can be done at this event</label>
               </div>
+
+              <div class="form-check-inline">
+              {{Form::hidden('public','0')}}
+              <input type="checkbox" id="public" name="public" class="form-check-input" {{ $event->public ? 'checked=1 value=1' : 'value=1' }}>
+              <label class="form-check-label" for="public">Display publicly</label>
+            </div>
               </div>
             </div>
 

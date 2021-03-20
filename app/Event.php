@@ -100,6 +100,10 @@ class Event extends Model implements \Acaronlex\LaravelCalendar\Event
         return $this->mot;
     }
 
+    public function isPublic()
+    {
+        return $this->public;
+    }
     /**
      * Get the event's id number
      *
