@@ -157,6 +157,14 @@
                   </li>
                 @endforeach
               </ul>
+              @can('Edit Events')
+                <i class="far fa-question-circle"></i><strong> Cancelled:</strong>
+                <ul>
+                  @foreach($event->notgoing as $user)
+                    <li><a href="{{ route('user.show', $user->id) }}">{{ $user->forename ?? "Deactivated"}} {{ $user->surname ?? "User"}}</a></li>
+                  @endforeach
+                </ul>
+              @endcan
             @endif
           </div>
         </div>

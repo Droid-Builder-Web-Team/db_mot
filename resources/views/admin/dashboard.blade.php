@@ -121,7 +121,7 @@
           <th>Date</th>
           <th>Name</th>
           <th>Location</th>
-          <th><i class="fas fa-check">/<i class="fas fa-question"></th>
+          <th><i class="fas fa-check">/<i class="fas fa-question">/<i class="fas fa-times"></i></th>
           <th>Actions</th>
         </tr>
         @foreach ($events as $event)
@@ -129,7 +129,7 @@
             <td>{{ $event->date }}</td>
             <td>{{ $event->name }}</td>
             <td><a class="btn-sm btn-link" href="{{ route('location.show', $event->location->id ) }}">{{ $event->location->name }}</a></td>
-            <td>{{ $event->going->count() }}/{{ $event->maybe->count() }}</td>
+            <td>{{ $event->going->count() }}/{{ $event->maybe->count() }}/{{$event->notgoing->count()}}</td>
             <td>
               <a class="btn-sm btn-view" href="{{ route('event.show', $event->id) }}"><i class="fas fa-eye"></i></a>
               @can('Edit Events')
