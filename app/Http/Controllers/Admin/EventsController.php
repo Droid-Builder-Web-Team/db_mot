@@ -109,11 +109,11 @@ class EventsController extends Controller
             }
         }
 
-        $event = $request->all();
+        $newevent = $request->all();
         $linkify = new \Misd\Linkify\Linkify();
-        $event['description'] = $linkify->process($request->description);
+        $newevent['description'] = $linkify->process($request->description);
         try {
-          $newevent->update($event);
+          $event->update($newevent);
           toastr()->success('Event updated successfully');
         } catch (\Illuminate\Database\QueryException $exception) {
           toastr()->error('Failed to update Event');

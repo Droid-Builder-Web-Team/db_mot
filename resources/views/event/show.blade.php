@@ -41,6 +41,10 @@
                   <strong>Charity Raised:</strong>
                   £{{ $event->charity_raised }}
                 @endif
+                @if($event->url != "")
+                  <br>
+                  <strong>Event URL:</strong> <a href="{{ $event->url }}" target="_blank">{{$event->url}}</a>
+                @endif
                 <hr>
                 Add to:
                 <a target="_blank" href="{{ $link->google() }}" class="btn-sm">Google</a>
@@ -263,6 +267,7 @@
                 </label>
               </div>
             </div>
+            @if ($event->canMOT())
             <div class="form-group">
               <div class="form-check form-check-inline">
                 {{Form::hidden('mot_required','0')}}
@@ -270,7 +275,11 @@
                 <label class="form-check-label" for="mot_required">Request MOT at event</label>
               </div>
             </div>
-
+            @else
+              <div class="form-group">
+                MOT are not available at this event
+              </div>
+            @endif
             <div class="form-group">
                 <button type="submit" class="btn btn-mot">Submit</button>
             </div>

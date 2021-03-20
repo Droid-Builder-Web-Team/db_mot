@@ -90,6 +90,10 @@ class Event extends Model implements \Acaronlex\LaravelCalendar\Event
         return $this->name;
     }
 
+    public function canMOT()
+    {
+        return $this->mot;
+    }
 
     /**
      * Get the event's id number
@@ -98,5 +102,5 @@ class Event extends Model implements \Acaronlex\LaravelCalendar\Event
      */
     public function getId() {
 		return $this->id;
-	}    
+	}
 }

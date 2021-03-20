@@ -57,6 +57,23 @@
                 </div>
             </div>
 
+            <div class="col-xs-3 col-sm-3 col-md-3">
+              <div class="form-group">
+                <div class="form-check-inline">
+                {{Form::hidden('mot','0')}}
+                <input type="checkbox" id="mot" name="mot" class="form-check-input" {{ $event->mot ? 'checked=1 value=1' : 'value=1' }}>
+                <label class="form-check-label" for="mot">MOTs can be done at this event</label>
+              </div>
+              </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>URL:</strong>
+                    <input type="text" name="url" value="{{ $event->url }}" class="form-control" placeholder="URL">
+                </div>
+            </div>
+
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Charity Raised:</strong>
