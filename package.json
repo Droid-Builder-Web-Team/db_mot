@@ -25,6 +25,7 @@
     },
     "dependencies": {
         "@coreui/icons": "^1.0.1",
+        "is-svg": ">=4.2.2",
         "laravel-mix": "^5.0.9"
     }
 }
