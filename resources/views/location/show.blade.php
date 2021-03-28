@@ -19,6 +19,9 @@
                 {{ $location->postcode }}<br>
               </div>
               <div class="col-md-4">
+                @if($location->name == "Online" || $location->name == "No Location")
+                      <!-- No map to display -->
+                @else
                 <div class="map-responsive">
                   <iframe
                     width="200"
@@ -29,6 +32,7 @@
                     allowfullscreen>
                   </iframe>
                 </div>
+                @endif
               </div>
             </div>
             <div class="rating">

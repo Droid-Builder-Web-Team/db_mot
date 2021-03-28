@@ -52,8 +52,19 @@
                 <a target="_blank" href="{{ $link->ics() }}" class="btn-sm">Apple</a>
               </div>
               <div class="col-md-4">
-                @if($event->location->name == "Online" || $event->location->name == "No Location")
-                  <!-- Online Event -->
+                @if($event->location->name == "No Location")
+                  <!-- No Location -->
+                @elseif ($event->location->name == "Online")
+                  @if($event->url != "")
+                    @php
+                      parse_str( parse_url( $event->url, PHP_URL_QUERY ), $args );
+                    @endphp
+                    <iframe id="ytplayer" type="text/html" width="250" height="200"
+                      src="https://www.youtube.com/embed/{{ $args['v'] }}?autoplay=0&origin=https://portal.droidbuilders.uk"
+                      frameborder="0"></iframe>
+                  @else
+                    <iframe src="https://www.youtube.com/embed/?listType=user_uploads&list=DroidbuildersUK" width="250" height="200"></iframe>
+                  @endif
                 @else
                 <div class="map-responsive">
                 <iframe
