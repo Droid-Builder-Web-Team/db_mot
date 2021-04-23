@@ -90,6 +90,25 @@ class MOTController extends Controller
               $user->notify(new MOTAdded($mot));
         }
         toastr()->success('MOT added successfully');
+
+/*
+        if ($mot->approved == "Yes") {
+            $url = "https://graph.facebook.com/v8.0/".config('fb.fbgroup')."/feed";
+            $message = "Congratulations to our latest member to have their droid pass its first MOT\r\n";
+
+            $data['message'] = $message;
+            $data['access_token'] = config('fb.fb_access_token');
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            $return = curl_exec($ch);
+            curl_close($ch);
+            dd($return);
+
+        }
+*/
         return redirect()->route('droid.show', $request->droid_id);
     }
 
