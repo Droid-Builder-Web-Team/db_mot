@@ -215,7 +215,7 @@
               </div>
             </div>
 @endforeach
-
+@if($event->isFuture())
             <div class="card border-primary">
               <div class="card-header">
                 <strong>Add Comment</strong>
@@ -237,13 +237,13 @@
                 </form>
               </div>
             </div>
-
+@endif
           </div>
         </div>
       </div>
 
 
-
+      @if($event->isFuture())
       <div class="col-md-4">
         <form action="{{ route('event.update',$event->id) }}" method="POST">
                   @csrf
@@ -307,5 +307,6 @@
         </div>
       </form>
       </div>
+      @endif
     </div>
 @endsection
