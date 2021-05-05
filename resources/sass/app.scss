@@ -13,6 +13,7 @@
 body{
     background: $background;
     color: $primaryText;
+    font-size: calc(0.3vw + #{$font-size-base});
 }
 .c-dark-theme .card{
     background: $cardBg;
@@ -35,17 +36,22 @@ body{
 
 .title{
     text-transform: uppercase;
-    font-size:1.5rem;
+    font-size:calc(1.5rem + 0.3vw);
     letter-spacing: .7px;
 }
 
 /* Button */
+
+.btn-sm {
+    font-size:calc(0.4rem + 0.4vw);
+}
 .btn-mot{
     text-transform:uppercase;
     width:100%;
     border: 1px solid #000000;
     color:$primaryText;
     display: inline-block;
+    font-size:calc(0.5rem + 0.3vw);
 }
 .btn-mot-invert{
     text-transform:uppercase;
@@ -155,6 +161,14 @@ body{
     background: rgb(117,166,215);
     background: radial-gradient(circle, rgba(117,166,215,1) 0%, rgba(93,134,219,1) 20%, rgba(70,101,157,1) 40%, rgba(35,52,84,1) 60%, rgba(19,28,45,1) 80%, rgba(1,2,3,1) 100%);
 }
+
+.dropdown-menu {
+  font-size: calc(0.5rem + 0.3vw);
+}
+
+.dropdown-header {
+  font-size: calc(0.5rem + 0.3vw);
+}
 /* General */
 .divider{
     width:75%;
@@ -205,7 +219,7 @@ body{
 .btn-motinfo {
   border: 0px;
   color: #FFF;
-  font-size:1rem;
+  font-size:calc(0.6rem + 0.3vw);
   line-height:40px;
 }
 .btn-motinfo:hover{
@@ -213,9 +227,9 @@ body{
 }
 
 .btn-motinfosub {
-    border: 0px;
+  border: 0px;
   color: #FFF;
-  font-size:1rem;
+  font-size:calc(0.6rem + 0.3vw);
   line-height:40px;
 }
 

@@ -9,7 +9,7 @@ body {
 
 .table-sm th td {
   padding: .2rem;
-  font-size: 0.75rem;
+  font-size: calc(0.6rem + 0.4vw);
 }
 
 .droid-card {
