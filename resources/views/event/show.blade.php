@@ -13,6 +13,18 @@
     }
 @endphp
 
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId            : '{{ config('fb.fb_app_id', 'Laravel') }}',
+      autoLogAppEvents : true,
+      xfbml            : true,
+      version          : 'v10.0'
+    });
+  };
+</script>
+
     <div class="row">
         <div class="col-lg-1">
             <div class="pull-right">
@@ -35,7 +47,7 @@
             <div class="row no-gutters">
               <div class="col-md-8">
                 <h2 class="card-title">Description</h2>
-                {!! nl2br($event->description) !!}
+                 <div id="event_description">{!! nl2br($event->description) !!}</div>
                 <br>
                 @if(!$event->isFuture())
                   <strong>Charity Raised:</strong>
@@ -84,6 +96,22 @@
               </div>
             </div>
             <a class="btn btn-edit" style="width:auto;" href="{{ route('admin.events.edit',$event->id) }}">Edit</a>
+            <div id="shareBtn" class="btn btn-success clearfix">Share to Facebook</div>
+            <script>
+
+document.getElementById('shareBtn').onclick = function() {
+  var body = 'A new event has been added to the Droid Builders Portal. ';
+  body += 'Follow the link to see more details and to register your interest or ask any questions';
+  FB.ui({
+    display: 'iframe',
+    app_id: '{{ config('fb.fb_app_id', 'Laravel') }}',
+    method: 'share',
+    hashtag: '#dbukevent',
+    href: '{{ URL::current() }}',
+    quote: body,
+  }, function(response){});
+}
+</script>
           </div>
         </div>
       </div>

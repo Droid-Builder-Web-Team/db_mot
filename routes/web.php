@@ -55,7 +55,6 @@ Route::group(['middleware' => ['auth', 'gdpr.terms']], function() {
   Route::resource('motinfo', 'MOTInfoController');
   Route::get('qr_code/{uid}', 'UserController@displayQRCode')->name('image.displayQRCode');
   Route::put('event/comment/{event}', 'EventController@comment')->name('event.comment');
-  Route::resource('event', 'EventController', ['only' => ['index', 'show', 'update']]);
   Route::put('location/comment/{location}', 'LocationController@comment')->name('location.comment');
   Route::resource('location', 'LocationController', ['only' => ['show']]);
   Route::post('/location/{location}/rating', 'LocationController@store')->name('location.rating');
@@ -80,6 +79,10 @@ Route::group(['middleware' => ['auth', 'gdpr.terms']], function() {
   Route::get('about', function() {
     return view('about');
   } )->name('about');
+});
+
+Route::group(['middleware' => ['auth', 'gdpr.terms']], function() {
+  Route::resource('event', 'EventController', ['only' => ['index', 'show', 'update']]);
 });
 
 Route::get('/id/{id}', 'ID');

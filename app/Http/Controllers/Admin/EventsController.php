@@ -73,35 +73,6 @@ class EventsController extends Controller
           toastr()->error('Failed to create Event ');
         }
 
-        if ($success == 1) {
-            $url = "https://graph.facebook.com/v8.0/".config('fb.fbgroup')."/feed";
-            $message =  "A new event has been created on the Droid Builders Portal\r\n";
-            $message .= "\r\n";
-            $message .= "Name: ".$newevent->name."\r\n";
-            $message .= "Date: ".$newevent->date."\r\n";
-            $message .= "Location: ".$newevent->location->name." (".$newevent->location->county."/".$newevent->location->postcode.")\r\n";
-            $message .= "\r\n";
-            $message .= "Log into the portal for more information and to register interest.\r\n\r\n";
-            $message .= config('app.url')."/event/".$newevent->id;
-
-            $data['message'] = $message;
-            $data['access_token'] = config('fb.fb_access_token');
-            $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, $url);
-            curl_setopt($ch, CURLOPT_POST, 1);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-            try {
-              $return = curl_exec($ch);
-              toastr()->success('Event posted to Facebook successfully');
-            } catch (Exception $e) {
-              toastr()->success('Event failed to Facebook.');
-            }
-
-            curl_close($ch);
-
-        }
-
         return redirect()->route('admin.events.index');
     }
 
