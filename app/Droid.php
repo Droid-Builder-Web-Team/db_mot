@@ -6,9 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 use App\MOT;
 use App\User;
 use App\Club;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class Droid extends Model
+class Droid extends Model implements Auditable
 {
+    use \OwenIt\Auditing\Auditable;
     const CREATED_AT = 'date_added';
     const UPDATED_AT = 'last_updated';
 

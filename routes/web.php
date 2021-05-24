@@ -38,6 +38,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
   Route::get('mot/{droid_id}', 'MOTController@create')->name('mot.create');
   Route::put('mot/comment/{mot}', 'MOTController@comment')->name('mot.comment');
   Route::resource('/mot', 'MOTController', ['only' => ['store']]);
+  Route::get('audits', 'AuditController@index')->name('audits.index');
 
 });
 

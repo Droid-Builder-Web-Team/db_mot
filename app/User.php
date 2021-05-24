@@ -18,15 +18,16 @@ use Dialect\Gdpr\Portable;
 
 use Rennokki\Rating\Traits\CanRate;
 use Rennokki\Rating\Contracts\Rater;
+use OwenIt\Auditing\Contracts\Auditable;
 
-
-class User extends Authenticatable implements MustVerifyEmail, Rater
+class User extends Authenticatable implements MustVerifyEmail, Rater, Auditable
 {
     use Notifiable;
     use HasRoles;
     use Portable;
     use HasSettingsField;
     use CanRate;
+    use \OwenIt\Auditing\Auditable;
 
     protected $table = 'members';
     const CREATED_AT = 'created_on';
@@ -66,6 +67,15 @@ class User extends Authenticatable implements MustVerifyEmail, Rater
      * @var array
      */
     protected $gdprWith = ['comments', 'droids', 'mot'];
+
+    /**
+     * Attributes to exclude from the Audit.
+     *
+     * @var array
+     */
+    protected $auditExclude = [
+        'last_activity', 'last_updated',
+    ];
 
 
     /**

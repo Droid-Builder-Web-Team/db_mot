@@ -140,6 +140,16 @@
     </li>
     <li class="c-sidebar-nav-item"></li>
     @endcan
+    @hasanyrole('Super Admin|Org Admin')
+    <li class="c-sidebar-nav-item">
+      <a class="c-sidebar-nav-link" href="{{ route('admin.audits.index') }}">
+        <svg class="c-sidebar-nav-icon">
+          <i class="fas fa-file-contract fa-fw"></i>
+        </svg><span class="ml-1">Audit</span>
+      </a>
+    </li>
+    <li class="c-sidebar-nav-item"></li>
+    @endhasanyrole
 @endguest
 <hr class="divider">
 @include('partials.sidebar_footer')

@@ -5,10 +5,11 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Rennokki\Rating\Traits\CanBeRated;
 use Rennokki\Rating\Contracts\Rateable;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class Location extends Model implements Rateable
+class Location extends Model implements Rateable, Auditable
 {
-
+    use \OwenIt\Auditing\Auditable;
     use CanBeRated;
 
     protected $guarded = [];

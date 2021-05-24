@@ -7,10 +7,12 @@ use App\Club;
 use App\Droid;
 use App\User;
 use Illuminate\Support\Facades\DB;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class MOT extends Model
+class MOT extends Model implements Auditable
 {
     //
+    use \OwenIt\Auditing\Auditable;
 
     protected $table = 'mot';
 

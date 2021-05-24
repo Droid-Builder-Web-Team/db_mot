@@ -58,10 +58,10 @@
                   <strong>Event URL:</strong> <a href="{{ $event->url }}" target="_blank">{{$event->url}}</a>
                 @endif
                 <hr>
-                Add to:
-                <a target="_blank" href="{{ $link->google() }}" class="btn-sm">Google</a>
-                <a target="_blank" href="{{ $link->webOutlook() }}" class="btn-sm">Outlook</a>
-                <a target="_blank" href="{{ $link->ics() }}" class="btn-sm">Apple</a>
+                <i class="fas fa-calendar-day"></i> Add to Calendar:
+                <a target="_blank" href="{{ $link->google() }}" class="btn-sm btn-link">Google</a>
+                <a target="_blank" href="{{ $link->webOutlook() }}" class="btn-sm btn-link">Outlook</a>
+                <a target="_blank" href="{{ $link->ics() }}" class="btn-sm btn-link">Apple</a>
               </div>
               <div class="col-md-4">
                 @if($event->location->name == "No Location")

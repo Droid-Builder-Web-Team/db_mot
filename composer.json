@@ -28,6 +28,7 @@
         "laravelcollective/html": "^6.1",
         "misd/linkify": "^1.1",
         "orangehill/iseed": "^2.6",
+        "owen-it/laravel-auditing": "^12.0",
         "rennokki/rating": "^2.4",
         "silviolleite/laravelpwa": "^2.0",
         "spatie/calendar-links": "^1.4",
