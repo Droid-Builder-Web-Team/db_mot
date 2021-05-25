@@ -165,6 +165,7 @@ return [
         Spatie\Permission\PermissionServiceProvider::class,
         Srmklive\PayPal\Providers\PayPalServiceProvider::class,
         LaravelPWA\Providers\LaravelPWAServiceProvider::class,
+        Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
         /*
          * Package Service Providers...
          */

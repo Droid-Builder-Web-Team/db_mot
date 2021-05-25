@@ -153,7 +153,7 @@
 
     @hasanyrole('Super Admin')
     <li class="c-sidebar-nav-item">
-      <a class="c-sidebar-nav-link" href="/admin/log-reader">
+      <a class="c-sidebar-nav-link" href="{{ route('admin.logs.index') }}">
         <svg class="c-sidebar-nav-icon">
           <i class="fas fa-truck fa-fw"></i>
         </svg><span class="ml-1">Laravel Logs</span>

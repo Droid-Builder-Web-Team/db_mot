@@ -39,7 +39,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
   Route::put('mot/comment/{mot}', 'MOTController@comment')->name('mot.comment');
   Route::resource('/mot', 'MOTController', ['only' => ['store']]);
   Route::get('audits', 'AuditController@index')->name('audits.index');
-
+  Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index')->name('logs.index');
 });
 
 Route::get('/', function () {    return view('about');
