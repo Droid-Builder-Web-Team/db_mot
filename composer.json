@@ -20,6 +20,7 @@
         "glorand/laravel-model-settings": "^4.0",
         "google/apiclient": "^2.7",
         "guzzlehttp/guzzle": "^7.0.1",
+        "haruncpi/laravel-log-reader": "^1.0",
         "intervention/image": "^2.5",
         "laravel/framework": "^8.0",
         "laravel/socialite": "^5.0",
