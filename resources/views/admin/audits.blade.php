@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+{{ $audits->links() }}
 <div class="table-responsive">
     <table class="table table-striped table-sm table-hover table-dark text-center" >
       <thead class="thead-dark">
