@@ -14,6 +14,7 @@ use App\Droid;
 use App\Event;
 use App\Achievement;
 use App\CourseRun;
+use App\Club;
 use Dialect\Gdpr\Portable;
 
 use Rennokki\Rating\Traits\CanRate;
@@ -186,4 +187,14 @@ class User extends Authenticatable implements MustVerifyEmail, Rater, Auditable
         return $this->hasMany(CourseRun::class)->orderBy('final_time');
     }
 
+    public function clubs()
+    {
+        return $this->belongsToMany(Club::class, 'club_members');
+        //return false;
+    }
+
+    public function isAdminOf(Club $club)
+    {
+        return $this->clubs->contains($club);
+    }
 }

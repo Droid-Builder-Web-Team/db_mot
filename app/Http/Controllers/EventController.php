@@ -48,7 +48,7 @@ class EventController extends Controller
             $event->id,
             [
               'url' => 'event/'.$event->id,
-              'title' => $event->name.' - ('.$event->location->name.')',
+              'title' => $event->name.' - ('.$event->location->name.' - '.$event->location->town.')',
 
             ]
           );

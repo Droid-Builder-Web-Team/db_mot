@@ -45,7 +45,7 @@
           @if ($droid->club->hasOption('tier_two'))
             <tr><th>Tier 2</th><td>{{ $droid->tier_two }}</td></tr>
           @endif
-          @if ($droid->club->hasOption('mot'))
+          @if ($droid->club->hasOption('topps'))
             @if ($droid->topps_id != null)
               <tr><th>Topps Number</th><td>{{ $droid->topps_id }}</td></tr>
               @endif
@@ -53,7 +53,9 @@
         </table>
         <span class="float-left">
 @can('Edit Droids')
+  @if(Auth::user()->isAdminOf($droid->club))
           <a class="btn btn-edit" style="width:auto;" href="{{ route('admin.droids.edit',$droid->id) }}">Edit</a>
+  @endif
 @else
           <a class="btn btn-edit" href="{{ route('droid.edit',$droid->id) }}">Edit</a>
 @endcan
@@ -88,7 +90,9 @@
           @endforeach
         </table>
         @can('Add MOT')
+          @if(Auth::user()->isAdminOf($droid->club))
           <a class="btn btn-mot" href="{{ route('admin.mot.create', $droid->id) }}">Add MOT</a>
+          @endif
         @endcan
       </div>
     </div>
@@ -151,6 +155,7 @@
       </div>
 @endforeach
 @can('Add MOT')
+  @if(Auth::user()->isAdminOf($droid->club))
       <div class="card border-primary">
         <div class="card-header">
           <strong>Add Comment</strong>
@@ -166,6 +171,7 @@
           </form>
         </div>
       </div>
+  @endif
 @endcan
     </div>
   </div>
@@ -183,7 +189,9 @@
           {!! nl2br(e($droid->notes)) !!}
         </div>
           @can('Edit Droids')
-            <a class="btn btn-edit" style="width:auto;" href="{{ route('admin.droids.edit',$droid->id) }}">Edit</a>
+            @if(Auth::user()->isAdminOf($droid->club))
+              <a class="btn btn-edit" style="width:auto;" href="{{ route('admin.droids.edit',$droid->id) }}">Edit</a>
+            @endif
           @else
             <a class="btn btn-edit" style="width:auto;" href="{{ route('droid.edit',$droid->id) }}">Edit</a>
           @endcan
@@ -200,7 +208,9 @@
           {!! nl2br(e($droid->back_story)) !!}
         </div>
           @can('Edit Droids')
-            <a class="btn btn-edit" style="width:auto;" href="{{ route('admin.droids.edit',$droid->id) }}">Edit</a>
+            @if(Auth::user()->isAdminOf($droid->club))
+              <a class="btn btn-edit" style="width:auto;" href="{{ route('admin.droids.edit',$droid->id) }}">Edit</a>
+            @endif
           @else
             <a class="btn btn-edit" style="width:auto;" href="{{ route('droid.edit',$droid->id) }}">Edit</a>
           @endcan

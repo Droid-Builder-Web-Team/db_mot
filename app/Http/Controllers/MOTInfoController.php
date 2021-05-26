@@ -63,7 +63,12 @@ class MOTInfoController extends Controller
             ->where('section_id', $section->id)
             ->get();
         }
-        $mot_officers = User::role('MOT Officer')->get();
+        $mot_officers = [];
+        $club = Club::find($id);
+        foreach (User::role('MOT Officer')->get() as $officer) {
+          if($officer->isAdminOf($club))
+            $mot_officers[] = $officer;
+        }
         return view('motinfo.show', compact('sections', 'lines', 'mot_officers'));
     }
 
