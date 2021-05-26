@@ -22,7 +22,7 @@ class LocationController extends Controller
      */
     public function index(LocationsDataTable $dataTable)
     {
-        return $dataTable->render('admin.events.index');
+        return $dataTable->render('admin.locations.index');
     }
 
     /**
