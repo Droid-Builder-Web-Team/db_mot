@@ -74,7 +74,7 @@ class User extends Authenticatable implements MustVerifyEmail, Rater, Auditable
      * @var array
      */
     protected $auditExclude = [
-        'last_activity', 'last_updated', 'last_login'
+        'last_activity', 'last_updated', 'last_login', 'password', 'remember_token'
     ];
 
 

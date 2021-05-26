@@ -20,7 +20,11 @@
             <td>{{ $audit->created_at }}</td>
             <td>{{ $audit->auditable_type }} (id: {{ $audit->auditable_id }})</td>
             <td>{{ $audit->event }}</td>
-            <td>{{ $audit->user->forename }} {{ $audit->user->surname }}</td>
+            @if($audit->user)
+              <td>{{ $audit->user->forename }} {{ $audit->user->surname }}</td>
+            @else
+              <td></td>
+            @endif
             <td>
               <table class="table">
                 @foreach($audit->old_values as $attribute => $value)
