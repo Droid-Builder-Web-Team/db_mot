@@ -52,13 +52,11 @@
           @endif
         </table>
         <span class="float-left">
-@can('Edit Droids')
-  @if(Auth::user()->isAdminOf($droid->club))
+@if(Auth::user()->isAdminOf($droid->club) && Auth::user()->can('Edit Droids'))
           <a class="btn btn-edit" style="width:auto;" href="{{ route('admin.droids.edit',$droid->id) }}">Edit</a>
-  @endif
 @else
           <a class="btn btn-edit" href="{{ route('droid.edit',$droid->id) }}">Edit</a>
-@endcan
+@endif
         </span>
         <span class="float-right">
           <a class="btn-sm btn-details" style="color:#2586e7;" href="{{ action('DroidController@downloadPDF', $droid->id )}}" target="_blank">Info Sheet</a>
@@ -89,11 +87,9 @@
             </tr>
           @endforeach
         </table>
-        @can('Add MOT')
-          @if(Auth::user()->isAdminOf($droid->club))
+          @if(Auth::user()->isAdminOf($droid->club) && Auth::user()->can('Add MOT'))
           <a class="btn btn-mot" href="{{ route('admin.mot.create', $droid->id) }}">Add MOT</a>
           @endif
-        @endcan
       </div>
     </div>
 @endif
@@ -154,8 +150,8 @@
         </div>
       </div>
 @endforeach
-@can('Add MOT')
-  @if(Auth::user()->isAdminOf($droid->club))
+
+  @if(Auth::user()->isAdminOf($droid->club) && Auth::user()->can('Add MOT'))
       <div class="card border-primary">
         <div class="card-header">
           <strong>Add Comment</strong>
@@ -172,7 +168,6 @@
         </div>
       </div>
   @endif
-@endcan
     </div>
   </div>
 </div>

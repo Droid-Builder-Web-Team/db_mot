@@ -59,7 +59,8 @@ class EventController extends Controller
         ->setOptions([
             'locale' => 'en',
             'themeSystem' => 'bootstrap',
-            'contentHeight' => 400,
+            'aspectRatio' => 2.5,
+            'height' => 'auto',
             'firstDay' => 0,
             'titleFormat' => [
                 'month' => 'short',
