@@ -143,6 +143,9 @@ class EventController extends Controller
     public function comment(Request $request, Event $event)
     {
 
+        $request->validate([
+            'body' => 'required',
+        ]);
         $comment = new Comment;
         $comment->body = $request->body;
         $comment->user_id = auth()->user()->id;
