@@ -18,7 +18,7 @@ return [
                  * The list of directories and files that will be included in the backup.
                  */
                 'include' => [
-                    base_path(),
+                    base_path('storage'),
                 ],
 
                 /*
@@ -27,8 +27,6 @@ return [
                  * Directories used by the backup process will automatically be excluded.
                  */
                 'exclude' => [
-                    base_path('vendor'),
-                    base_path('node_modules'),
                 ],
 
                 /*
