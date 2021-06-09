@@ -15,6 +15,9 @@
               <input type="hidden" name="photo_name" value="{{ $photo_name }}">
 						</form>
 					</div>
+          <div class="droid-card-center">
+            {{ $photo_name }}
+          </div>
 					<div class="droid-card-right">
 						<form action="/image/destroy" method="GET">
 							@csrf
