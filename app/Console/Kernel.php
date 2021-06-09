@@ -29,6 +29,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('cron:checkpli')->dailyAt('10:30');
         $schedule->command('cron:eventupcoming')->dailyAt('11:00');
         $schedule->command('cron:newevent')->dailyAt('11:30');
+        $schedule->command('backup:run')->dailyAt('05:00');
     }
 
     /**
