@@ -164,7 +164,7 @@ document.getElementById('shareBtn').onclick = function() {
               <ul>
                 @foreach($event->going as $user)
                   <li>
-                    @can('Edit Events')
+                    @canany(['Edit Events', 'Add MOT'])
                       <a href="{{ route('user.show', $user->id) }}">{{ $user->forename ?? "Deactivated"}} {{ $user->surname ?? "User"}}</a>
                       @if($user->pli_expires() < \Carbon\Carbon::parse($event->date))
                         <span class="badge badge-danger">PLI expired</span>
