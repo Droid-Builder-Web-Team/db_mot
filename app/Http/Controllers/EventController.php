@@ -105,14 +105,19 @@ class EventController extends Controller
     public function show($id)
     {
         $event = Event::where('id', $id)->first();
-        $date = DateTime::createFromFormat('Y-m-d', $event->date);
-        $link = Link::create($event->name,
+        if($event == null) {
+            toastr()->error('No such event');
+            return redirect('/event');
+        } else {
+            $date = DateTime::createFromFormat('Y-m-d', $event->date);
+            $link = Link::create($event->name,
                             $date,
                             $date,
                             true)
                             ->description($event->description)
                             ->address($event->location->name.','.$event->location->postcode);
-        return view('event.show', compact('event', 'link'));
+            return view('event.show', compact('event', 'link'));
+        }
     }
 
     /**
