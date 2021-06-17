@@ -185,7 +185,7 @@ document.getElementById('shareBtn').onclick = function() {
               <ul>
                 @foreach($event->maybe as $user)
                   <li>
-                    @can('Edit Events')
+                    @canany(['Edit Events', 'Add MOT'])
                       <a href="{{ route('user.show', $user->id) }}">{{ $user->forename ?? "Deactivated"}} {{ $user->surname ?? "User"}}</a>
                     @else
                       {{ $user->forename ?? "Deactivated"}} {{ $user->surname ?? "User"}}
@@ -196,7 +196,7 @@ document.getElementById('shareBtn').onclick = function() {
                   </li>
                 @endforeach
               </ul>
-              @can('Edit Events')
+              @canany(['Edit Events', 'Add MOT'])
                 <i class="far fa-question-circle"></i><strong> Cancelled:</strong>
                 <ul>
                   @foreach($event->notgoing as $user)
