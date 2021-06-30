@@ -1,7 +1,10 @@
 <?php
 namespace Database\Seeders;
 
+use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,7 +15,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UserSeeder::class);
+        // Admin
+        $this->call(MemberSeeder::class);
+       
+        // Seeders
         $this->call(AchievementsTableSeeder::class);
         $this->call(ClubOptionsTableSeeder::class);
         $this->call(ClubsTableSeeder::class);
@@ -21,6 +27,5 @@ class DatabaseSeeder extends Seeder
         $this->call(PermissionsTableSeeder::class);
         $this->call(RolesTableSeeder::class);
         $this->call(RoleHasPermissionsTableSeeder::class);
-        $this->call(MemberSeeder::class);
     }
 }
