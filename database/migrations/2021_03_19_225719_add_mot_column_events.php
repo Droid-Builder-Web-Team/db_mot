@@ -15,7 +15,7 @@ class AddMotColumnEvents extends Migration
     {
         if (!Schema::hasColumn('events', 'mot'))
         {
-          Schema::table('users', function (Blueprint $table) {
+          Schema::table('events', function (Blueprint $table) {
             $table->boolean('mot');
           });
         }

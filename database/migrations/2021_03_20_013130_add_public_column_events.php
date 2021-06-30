@@ -15,7 +15,7 @@ class AddPublicColumnEvents extends Migration
     {
       if (!Schema::hasColumn('events', 'public'))
       {
-        Schema::table('users', function (Blueprint $table) {
+        Schema::table('events', function (Blueprint $table) {
           $table->boolean('public');
         });
       }
