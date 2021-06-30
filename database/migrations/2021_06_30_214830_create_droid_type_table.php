@@ -15,7 +15,9 @@ class CreateDroidTypeTable extends Migration
     {
         Schema::create('droid_type', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

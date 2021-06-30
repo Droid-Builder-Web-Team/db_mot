@@ -15,7 +15,23 @@ class CreatePartsRunAdTable extends Migration
     {
         Schema::create('parts_run_ad', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
+            $table->text('description');
+            $table->longText('history');
+            $table->decimal('price', 65, 2);
+            $table->string('includes');
+            $table->unsignedBigInteger('instructions_id');
+            $table->string('location');
+            $table->json('shipping_costs');
+            $table->string('purchase_url');
+            $table->string('contact_email');
             $table->timestamps();
+            $table->softDeletes();
+
+            /**
+             * Foreign Keys
+             */
+            $table->foreign('instructions_id')->references('id')->on('instructions');
         });
     }
 

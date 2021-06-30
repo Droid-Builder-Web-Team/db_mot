@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePartsRunDataTable extends Migration
+class CreateInstructionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,13 @@ class CreatePartsRunDataTable extends Migration
      */
     public function up()
     {
-        Schema::create('parts_run_data', function (Blueprint $table) {
+        Schema::create('instructions', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
+            $table->string('filepath')->nullable();
+            $table->string('url')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -26,6 +30,6 @@ class CreatePartsRunDataTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('parts_run_data');
+        Schema::dropIfExists('instructions');
     }
 }
