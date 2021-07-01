@@ -197,4 +197,22 @@ class User extends Authenticatable implements MustVerifyEmail, Rater, Auditable
     {
         return $this->clubs->contains($club);
     }
+
+    /**
+     * Parts Run Extension
+     */
+    public function partsRun()
+    {
+        return $this->hasMany(PartsRunData::class);
+    }
+
+    public function partsRunAd()
+    {
+        return $this->hasMany(PartsRunAd::class);
+    }
+
+    public function bcRep()
+    {
+        return $this->hasOne(BcRep::class);
+    }
 }

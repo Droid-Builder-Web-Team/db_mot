@@ -10,4 +10,29 @@ class PartsRunAd extends Model
 {
     use HasFactory;
     use SoftDeletes;
+
+    protected $table = 'parts_run_ad';
+
+    protected $fillable = [
+        'title',
+        'description',
+        'history',
+        'price',
+        'includes',
+        'instructions_id',
+        'location',
+        'shipping_costs',
+        'purchase_url',
+        'contact_email'
+    ];
+
+    public function partsRun()
+    {
+        return $this->belongsTo(PartsRunData::class);
+    }
+
+    public function instructions()
+    {
+        return $this->hasMany(Instructions::class);
+    }
 }

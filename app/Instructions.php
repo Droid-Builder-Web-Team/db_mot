@@ -10,4 +10,17 @@ class Instructions extends Model
 {
     use HasFactory;
     use SoftDeletes;
+
+    protected $table = 'instructions';
+
+    protected $fillable = [
+        'title',
+        'filepath',
+        'url'
+    ];
+
+    public function partsRunAd()
+    {
+        return $this->belongsTo(PartsRunAd::class);
+    }
 }
