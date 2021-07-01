@@ -15,6 +15,7 @@ class CreatePartsRunAdTable extends Migration
     {
         Schema::create('parts_run_ad', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('parts_run_data_id');
             $table->string('title');
             $table->text('description');
             $table->longText('history');
@@ -31,6 +32,7 @@ class CreatePartsRunAdTable extends Migration
             /**
              * Foreign Keys
              */
+            $table->foreign('parts_run_data_id')->references('id')->on('parts_run_data');
             $table->foreign('instructions_id')->references('id')->on('instructions');
         });
     }

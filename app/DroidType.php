@@ -19,7 +19,7 @@ class DroidType extends Model
 
     public function partsRun()
     {
-        return $this->belongsTo(PartsRunData::class);
+        return $this->hasMany(PartsRunData::class);
     }
 
     public function partsRunAd()

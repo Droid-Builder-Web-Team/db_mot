@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\PartsRunAd;
 use App\PartsRunData;
 use Illuminate\Http\Request;
-
 class PartsRunDataController extends Controller
 {
     /**
@@ -14,7 +14,11 @@ class PartsRunDataController extends Controller
      */
     public function index()
     {
-        //
+        $partsRunData = PartsRunData::with(['partsRunAd', 'droidType'])->get();
+
+        return view('part-runs.list', [
+            'partsRunData'=> $partsRunData,
+        ]);
     }
 
     /**
@@ -44,13 +48,16 @@ class PartsRunDataController extends Controller
      * @param  \App\PartsRunData  $partsRunData
      * @return \Illuminate\Http\Response
      */
-    public function show(PartsRunData $partsRunData)
+    public function show($id)
     {
-        //
+        $partsRun = PartsRunAd::where('id', $id)->with('partsRun')->get();
+        return view('part-runs.show', [
+            'partsRun' => $partsRun
+        ]);
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified resource.z
      *
      * @param  \App\PartsRunData  $partsRunData
      * @return \Illuminate\Http\Response
@@ -81,5 +88,10 @@ class PartsRunDataController extends Controller
     public function destroy(PartsRunData $partsRunData)
     {
         //
+    }
+
+    public function requestPartsRun(Request $request)
+    {
+        return "Request a Parts Run";
     }
 }

@@ -13,7 +13,7 @@
     </li>
   @endif
 @else
-
+    {{-- Heading --}}
     <li class="c-sidebar-nav-title">Club Functions</li>
 
     <li class="c-sidebar-nav-item">
@@ -31,6 +31,25 @@
       </a>
     </li>
 
+    <li class="c-sidebar-nav-title">Parts Runs</li>
+
+    <li class="c-sidebar-nav-item">
+      <a class="c-sidebar-nav-link" href="{{ route('part-runs.index') }}">
+        <svg class="c-sidebar-nav-icon">
+          <i class="fas fa-hammer"></i>
+        </svg><span class="ml-1">Current Runs</span>
+      </a>
+    </li>
+
+    <li class="c-sidebar-nav-item">
+      <a class="c-sidebar-nav-link" href="{{ route('request') }}">
+        <svg class="c-sidebar-nav-icon">
+          <i class="far fa-question-circle"></i>
+        </svg><span class="ml-1">Request A Run</span>
+      </a>
+    </li>
+    
+    {{-- Heading --}}
     <li class="c-sidebar-nav-title">Info</li>
 
     <li class="c-sidebar-nav-item">
@@ -50,13 +69,20 @@
     </li>
 
     <li class="c-sidebar-nav-item">
-      <a class="c-sidebar-nav-link" target="_blank" href="https://wiki.droidbuilders.net/">
+      <a class="c-sidebar-nav-link" href="#">
         <svg class="c-sidebar-nav-icon">
           <i class="fab fa-wikipedia-w fa-fw"></i>
         </svg><span class="ml-1">Droidbuilders Wiki</span>
       </a>
     </li>
 
+    <li class="c-sidebar-nav-item">
+      <a class="c-sidebar-nav-link" target="_blank" href="{{ route('partsRunInfo') }}">
+        <svg class="c-sidebar-nav-icon">
+          <i class="fas fa-list"></i>
+        </svg><span class="ml-1">Parts Runs</span>
+      </a>
+    </li>
 
     <li class="c-sidebar-nav-item">
       <a class="c-sidebar-nav-link" href="{{ route('topps') }}">
@@ -73,7 +99,7 @@
         </svg><span class="ml-1">About Us</span>
       </a>
     </li>
-
+    {{-- Heading --}}
   @hasanyrole('Super Admin|Org Admin|Events Officer|MOT Officer')
     <li class="c-sidebar-nav-title">Admin</li>
 

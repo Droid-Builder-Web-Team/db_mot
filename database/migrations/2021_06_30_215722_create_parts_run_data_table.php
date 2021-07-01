@@ -19,7 +19,6 @@ class CreatePartsRunDataTable extends Migration
             $table->integer('user_id');
             $table->unsignedBigInteger('bc_rep_id');
             $table->string('status');
-            $table->unsignedBigInteger('parts_run_ad_id');
             $table->timestamps();
             $table->softDeletes();
 
@@ -29,7 +28,6 @@ class CreatePartsRunDataTable extends Migration
             $table->foreign('droid_type_id')->references('id')->on('droid_type');
             $table->foreign('user_id')->references('id')->on('members');
             $table->foreign('bc_rep_id')->references('id')->on('bc_rep');
-            $table->foreign('parts_run_ad_id')->references('id')->on('parts_run_ad');
         });
     }
 

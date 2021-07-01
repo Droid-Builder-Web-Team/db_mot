@@ -28,8 +28,13 @@ class PartsRunAd extends Model
 
     public function partsRun()
     {
-        return $this->belongsTo(PartsRunData::class);
+        return $this->belongsTo(PartsRunData::class, 'parts_run_data_id');
     }
+
+    // public function droidType()
+    // {
+    //     return $this->hasOne(DroidType::class);
+    // }
 
     public function instructions()
     {

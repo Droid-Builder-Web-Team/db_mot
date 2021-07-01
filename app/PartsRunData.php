@@ -28,7 +28,7 @@ class PartsRunData extends Model
 
     public function droidType()
     {
-        return $this->hasOne(DroidType::class);
+        return $this->belongsTo(DroidType::class);
     }
 
     public function user()
