@@ -21,7 +21,8 @@ class MemberSeeder extends Seeder
             'username' => 'Administrator',
             'email' => 'droidbuilderwebteam@gmail.com',
             'password' => Hash::make('Password1'),
-            'email_verified_at' => Carbon::now()
+            'email_verified_at' => Carbon::now(),
+            'gdpr_accepted' => 1
         ]);
     }
 }
