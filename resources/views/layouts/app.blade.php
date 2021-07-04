@@ -85,7 +85,7 @@
     <!-- Optional JavaScript -->
     <!-- Popper.js first, then CoreUI JS -->
     <script src="https://unpkg.com/@popperjs/core@2"></script>
-    <script src="https://unpkg.com/@coreui/coreui/dist/js/coreui.min.js"></script>
+    <script src="https://unpkg.com/@coreui/coreui@3.0.0/dist/js/coreui.min.js"></script>
     <script src="{{ asset('vendor/datatables/buttons.server-side.js') }}"></script>
     @stack('scripts')
     @toastr_render
