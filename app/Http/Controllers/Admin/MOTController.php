@@ -62,12 +62,12 @@ class MOTController extends Controller
         $mot->save();
 
         if ($request->new_comment != "") {
-            $comment = DB::table('mot_comments')
-                          ->insert([
-                              'mot_uid' => $mot->id,
-                              'comment' => $request->new_comment,
-                              'added_by' => $request->user
-                          ]);
+          $comment = new Comment;
+          $comment->body = $request->body;
+          $comment->user_id = auth()->user()->id;
+
+          $result = $mot->comments()->save($comment);
+          toastr()->success('Comment Added');
         }
 
         $lines = DB::table('mot_lines')
