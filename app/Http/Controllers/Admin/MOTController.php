@@ -63,7 +63,7 @@ class MOTController extends Controller
 
         if ($request->new_comment != "") {
           $comment = new Comment;
-          $comment->body = $request->body;
+          $comment->body = $request->new_comment;
           $comment->user_id = auth()->user()->id;
 
           $result = $mot->comments()->save($comment);
