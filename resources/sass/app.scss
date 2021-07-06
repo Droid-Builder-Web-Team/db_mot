@@ -3,19 +3,42 @@
 
 // Variables
 @import "variables";
+@import "topps";
 
-// Bootstrap
-@import "~bootstrap/scss/bootstrap";
+.social-icons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    a {
+        padding: 16px;
+        color: #FFFFFF;
+    }
+}
+
+.dropdown-item {
+    .fas {
+        margin-right: 16px;
+    }
+}
+
+.c-sidebar-nav-link {
+    .fas, .fab {
+        margin-right: 16px;
+    }
+}
 
 // User Profile
 body {
-    background: $background;
-    color: $primaryText;
-    font-size: calc(0.3vw + #{$font-size-base});
+    // background: $background;
+    // // color: $primaryText;
+    // font-size: $font-size-base;
+    font-family: -apple-system, BlinkMacSystemFont, segoe ui, Roboto, helvetica neue, Arial, noto sans, sans-serif,
+        apple color emoji, segoe ui emoji, segoe ui symbol, noto color emoji;
 }
-.c-dark-theme .card {
-    background: $cardBg;
-    border: 1px solid white;
+
+.c-sidebar-brand {
+    font-family: "Michroma", sans-serif !important;
 }
 
 .card-header {
@@ -23,9 +46,6 @@ body {
     background-position: center;
     background-size: cover;
     color: $headerText;
-}
-.c-dark-theme a {
-    color: $primaryText;
 }
 
 .fas.fa-plus {
@@ -41,15 +61,15 @@ body {
 /* Button */
 
 .btn-sm {
-    font-size: calc(0.4rem + 0.4vw);
+    // font-size: calc(0.4rem + 0.4vw);
 }
 .btn-mot {
     text-transform: uppercase;
     width: 100%;
     border: 1px solid #000000;
-    color: $primaryText;
+    // color: $primaryText;
     display: inline-block;
-    font-size: calc(0.5rem + 0.3vw);
+    // font-size: calc(0.5rem + 0.3vw);
 }
 .btn-mot-invert {
     text-transform: uppercase;
@@ -71,7 +91,7 @@ body {
     width: 100%;
     border: 1px solid #d16767;
     background: transparent;
-    color: $primaryText;
+    // color: $primaryText;
 }
 .btn-link {
     border: 1px solid #d8d7d7;
@@ -80,7 +100,7 @@ body {
 .btn-comment {
     text-transform: uppercase;
     border: 1px solid #000000;
-    color: $primaryText;
+    // color: $primaryText;
     background: none;
 }
 .btn-details {
@@ -133,22 +153,6 @@ body {
 .c-dark-theme .form-control {
     border: 1px solid black;
 }
-.form-check-label {
-    color: $primaryText;
-}
-.card,
-.card-body {
-    color: $primaryText;
-}
-/* Users */
-.c-dark-theme .form-control,
-.form-control::placeholder {
-    color: $primaryText;
-}
-/* Achievements */
-.c-dark-theme .form-control:focus {
-    color: black;
-}
 
 /* Datatables */
 .dataTables_wrapper .dataTables_length,
@@ -179,11 +183,11 @@ body {
 }
 
 .dropdown-menu {
-    font-size: calc(0.5rem + 0.3vw);
+    // font-size: calc(0.5rem + 0.3vw);
 }
 
 .dropdown-header {
-    font-size: calc(0.5rem + 0.3vw);
+    // font-size: calc(0.5rem + 0.3vw);
 }
 /* General */
 .divider {
@@ -193,7 +197,7 @@ body {
 
 /* Side Footer */
 .sideFooter {
-    padding: 5%;
+    padding: 8px;
 }
 .fab.fa-facebook:hover {
     color: white;
@@ -233,7 +237,7 @@ body {
 .btn-motinfo {
     border: 0px;
     color: #fff;
-    font-size: calc(0.6rem + 0.3vw);
+    // font-size: calc(0.6rem + 0.3vw);
     line-height: 40px;
 }
 .btn-motinfo:hover {
@@ -243,7 +247,7 @@ body {
 .btn-motinfosub {
     border: 0px;
     color: #fff;
-    font-size: calc(0.6rem + 0.3vw);
+    // font-size: calc(0.6rem + 0.3vw);
     line-height: 40px;
 }
 
