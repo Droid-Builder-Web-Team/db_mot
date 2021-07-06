@@ -10,7 +10,7 @@
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
     <link href="{{ asset('css/dark.css') }}" rel="stylesheet">
-    <link href="{{asset('css/app.css')}}" rel="stylesheet">
+    <link href="{{asset(mix('css/app.css'), true)}}" rel="stylesheet">
     <link href="{{ asset('css/mot.css') }}" rel="stylesheet">
     <link href="{{ asset('css/media.css') }}" rel="stylesheet">
 
