@@ -1,34 +1,11 @@
 // Fonts
 @import url("https://fonts.googleapis.com/css?family=Nunito");
 
-// Variables
 @import "variables";
-@import "topps";
+@import "buttons";
+@import "cards";
+@import "sidebar";
 
-.social-icons {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    a {
-        padding: 16px;
-        color: #FFFFFF;
-    }
-}
-
-.dropdown-item {
-    .fas {
-        margin-right: 16px;
-    }
-}
-
-.c-sidebar-nav-link {
-    .fas, .fab {
-        margin-right: 16px;
-    }
-}
-
-// User Profile
 body {
     // background: $background;
     // // color: $primaryText;
@@ -37,16 +14,12 @@ body {
         apple color emoji, segoe ui emoji, segoe ui symbol, noto color emoji;
 }
 
-.c-sidebar-brand {
-    font-family: "Michroma", sans-serif !important;
+.dropdown-item {
+    .fas {
+        margin-right: 8px;
+    }
 }
 
-.card-header {
-    background: $headerBG;
-    background-position: center;
-    background-size: cover;
-    color: $headerText;
-}
 
 .fas.fa-plus {
     font-size: 10rem;
@@ -58,100 +31,16 @@ body {
     letter-spacing: 0.7px;
 }
 
-/* Button */
-
-.btn-sm {
-    // font-size: calc(0.4rem + 0.4vw);
-}
-.btn-mot {
-    text-transform: uppercase;
-    width: 100%;
-    border: 1px solid #000000;
-    // color: $primaryText;
-    display: inline-block;
-    // font-size: calc(0.5rem + 0.3vw);
-}
-.btn-mot-invert {
-    text-transform: uppercase;
-    border: 1px solid #fff;
-    color: #fff;
-}
-.btn-view {
-    text-transform: uppercase;
-    width: 100%;
-    border: 1px solid #5342e7;
-}
-.btn-edit {
-    text-transform: uppercase;
-    width: 100%;
-    border: 1px solid #2586e7;
-}
-.btn-kill {
-    text-transform: uppercase;
-    width: 100%;
-    border: 1px solid #d16767;
-    background: transparent;
-    // color: $primaryText;
-}
-.btn-link {
-    border: 1px solid #d8d7d7;
-    display: inline-block;
-}
-.btn-comment {
-    text-transform: uppercase;
-    border: 1px solid #000000;
-    // color: $primaryText;
-    background: none;
-}
-.btn-details {
-    text-transform: uppercase;
-    border: 1px solid #2586e7;
-    background: none;
-}
-.btn-cover {
-    text-transform: uppercase;
-    border: 1px solid white;
-    display: inline-block;
-}
-
-.btn-mot:hover {
-    border: 1px solid #424242;
-    color: #696969;
-}
-.btn-mot-invert:hover {
-    text-transform: uppercase;
-    color: #696969;
-}
-.btn-view:hover {
-    border: 1px solid #3b2fa4;
-}
-.btn-edit:hover {
-    border: 1px solid #1b5c9e;
-}
-.btn-kill:hover {
-    border: 1px solid #854242;
-}
-.btn-link:hover {
-    border: 1px solid #636262;
-    color: #cfcfcf;
-    text-decoration: none;
-}
-.btn-comment:hover {
-    border: 1px solid #424242;
-    color: #696969;
-}
-.btn-details:hover {
-    border: 1px solid #035fbb;
-    text-decoration: none;
-}
-.btn-cover:hover {
-    border: 1px solid rgb(150, 149, 149);
-    text-decoration: none;
-}
-
 /* Events */
-.c-dark-theme .form-control {
-    border: 1px solid black;
+.c-dark-theme {
+    .form-control {
+        color: $primaryColor !important;
+        border: 1px solid $primaryColor !important;
+
+        &::placeholder {
+            color: #444 !important;
+        }
+    }
 }
 
 /* Datatables */
@@ -193,73 +82,6 @@ body {
 .divider {
     width: 75%;
     background: white;
-}
-
-/* Side Footer */
-.sideFooter {
-    padding: 8px;
-}
-.fab.fa-facebook:hover {
-    color: white;
-}
-.fab.fa-discord:hover {
-    color: white;
-}
-.fab.fa-youtube:hover {
-    color: white;
-}
-#facebookLi:hover {
-    background: #3b5998;
-}
-#discordLi:hover {
-    background: #7289da;
-}
-#youtubeLi:hover {
-    background: #ff0000;
-}
-
-.card-mot {
-    border: 0px;
-}
-
-.card-header-mot {
-    background: #05080d;
-    color: #fff;
-    border-top: 1px solid white;
-    border-bottom: 1px solid white;
-}
-.card-header-line {
-    background: #293a62;
-    color: #fff;
-    border-top: 1px solid white;
-    border-bottom: 1px solid white;
-}
-.btn-motinfo {
-    border: 0px;
-    color: #fff;
-    // font-size: calc(0.6rem + 0.3vw);
-    line-height: 40px;
-}
-.btn-motinfo:hover {
-    color: #75a5d6;
-}
-
-.btn-motinfosub {
-    border: 0px;
-    color: #fff;
-    // font-size: calc(0.6rem + 0.3vw);
-    line-height: 40px;
-}
-
-.btn-motinfosub:hover {
-    color: #a4b1d0;
-}
-
-.btn-motinfo,
-.btn-motinfosub:focus {
-    text-decoration: none;
-    border: none;
-    box-shadow: none !important;
 }
 
 .sub {
