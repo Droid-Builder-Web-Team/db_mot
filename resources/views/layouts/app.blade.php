@@ -60,6 +60,7 @@
 
                 @endguest
             </ul>
+            @yield('breadcrumbs')
         </header>
 
         <div class="c-body">
