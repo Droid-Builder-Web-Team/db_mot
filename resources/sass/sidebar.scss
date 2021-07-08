@@ -1,0 +1,54 @@
+@import "variables";
+
+.c-sidebar-brand {
+    font-family: "Michroma", sans-serif !important;
+}
+
+.c-sidebar-nav-link {
+    .fas,
+    .fab {
+        margin-right: 16px;
+    }
+}
+
+.sideFooter {
+    padding: 8px;
+}
+
+#facebookLi:hover {
+    background: #3b5998;
+    a:hover {
+        color: #FFF !important;
+    }
+}
+
+#discordLi:hover {
+    background: #7289da;
+    a:hover {
+        color: #FFF !important;
+    }
+}
+
+#youtubeLi:hover {
+    background: #ff0000;
+    a:hover {
+        color: #FFF !important;
+    }
+}
+
+.social-icons {
+    display: flex;
+    flex-direction: row !important;
+    align-items: center;
+    justify-content: center;
+
+    a {
+        padding: 16px;
+        color: #ffffff;
+    }
+
+    li {
+        border: none !important;
+        border-radius: 0 !important;
+    }
+}

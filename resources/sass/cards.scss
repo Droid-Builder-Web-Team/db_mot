@@ -1,0 +1,43 @@
+@import "variables";
+
+.card {
+    &.card-mot-info {
+        font-family: "Michroma", sans-serif !important;
+
+        .text-muted {
+            color: #6c757d !important;
+        }
+    }
+
+    .card-header {
+        background: $headerBG;
+        background-position: center;
+        background-size: cover;
+        color: $headerText;
+        font-family: "Michroma", sans-serif !important;
+    }
+}
+
+.card-mot {
+    border: 0px;
+}
+
+.c-dark-theme .card {
+    background: #eee;
+    border: 1px solid #fff !important;
+    color: #000;
+}
+
+.card-header-mot {
+    background: #05080d;
+    color: #fff;
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
+}
+
+.card-header-line {
+    background: #293a62;
+    color: #fff;
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
+}

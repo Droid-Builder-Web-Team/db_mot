@@ -4,7 +4,9 @@
 
 <div class="row">
   <div class="col-md-12">
-    <img src="https://droidbuilders.uk/wp-content/uploads/2019/10/DBUK-banner-1470.png" class="img-fluid">
+    <div class="image-wrapper">
+      <img src="https://droidbuilders.uk/wp-content/uploads/2019/10/DBUK-banner-1470.png" class="img-fluid w-100">
+    </div>
   </div>
 </div>
 <div class="row">

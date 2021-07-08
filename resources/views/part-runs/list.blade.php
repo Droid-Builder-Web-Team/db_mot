@@ -7,8 +7,9 @@
     <div class="card">
       <div class="card-header">
         <h4 class="text-center title">Part Runs</h4>
+        <a class="btn btn-primary" href={{ route('part-runs.create') }}>Create Run</a>
       </div>
-      <div class="table text-center card-body table-striped table-sm table-hover table-dark">
+      <div class="table text-center card-body table-striped table-hover table-dark">
         <table class="table">
             <thead>
                 <tr>
@@ -27,7 +28,10 @@
                     <td>{{ $data->user->username }}</td>
                     <th>{{ $data->status }}</th>
                     <td>
-                        <a class="btn btn-primary" href={{ route('part-runs.show', $data->id) }}>View</a>
+                      <div class="d-flex">
+                        <a class="btn btn-view" href={{ route('part-runs.show', $data->id) }}>View</a>
+                        <a class="btn btn-edit" href={{ route('part-runs.edit', $data->id) }}>Edit</a>
+                      </div>
                     </td>
                 </tr>
                 @endforeach

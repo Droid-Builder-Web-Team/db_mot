@@ -21,5 +21,19 @@
     </div>
   </div>
 </div>
-
+<div class="row">
+	<div class="col-lg-12 margin-tb">
+	<p>Club PLI covers you for any events listed here. If you want to do an event that is not listed here, either get the event organiser to
+	email the club, or email in yourself with the details. </p>
+	<p>Details required:
+		<ul>
+			<li>Event name</li>
+			<li>Location (Town and Postcode at least)</li>
+			<li>Date/Time</li>
+			<li>Public/Private</li>
+		</ul>
+	</p>
+	<a href="mailto:events@droidbuilders.uk">events@droidbuilders.uk</a>
+	</div>
+</div>
 @endsection

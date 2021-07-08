@@ -1,5 +1,14 @@
 @extends('layouts.app')
 
+@section('breadcrumbs')
+<div class="c-subheader justify-content-between px-3">
+    <ol class="breadcrumb border-0 m-0 px-0 px-md-3">
+        <li class="breadcrumb-item"><a href="{{ route('event.index') }}">Events</a></li>
+        <li class="breadcrumb-item active">{{ $event->name }}</li>
+    </ol>
+</div>
+@endsection
+
 @section('content')
 @php
   $user_status="no";
@@ -24,14 +33,6 @@
     });
   };
 </script>
-
-    <div class="row">
-        <div class="col-lg-1">
-            <div class="pull-right">
-                <a class="btn btn-mot" href="{{ route('event.index') }}"> Back</a>
-            </div>
-        </div>
-    </div>
 
     <div class="row">
       <div class="col-xs-8 col-sm-8 col-md-8">
