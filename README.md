@@ -1,6 +1,6 @@
-## DroidBuilder MOT
+# DroidBuilder Portal
 
-Welcome to the UK R2 Builders MOT system
+Welcome to the DroidBuilders Portal system
 
 To allow us to get Public Liability Insurance (PLI) and also keep a good relationship with Lucasfilm/Disney, the UK R2 Builders Club put in place an MOT system to ensure that droids and their drivers are safe to operate in public places. (MOT is a UK test that is required for vehicles to be allowed on the road)
 
