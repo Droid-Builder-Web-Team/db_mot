@@ -8,6 +8,7 @@ This software was put in place to keep track of all the details, as the original
 
 Since the original version that just kept track of the MOT specific details, it has been expanded to become a portal for builders to keep track of club events (and charity raised at the events), 'achievements' they have gained, and their times on the UK driving course.
 
+[![GitHub Super-Linter](https://github.com/Droid-Builder-Web-Team/db_mot/workflows/Lint%20Code%20Base/badge.svg)](https://github.com/marketplace/actions/super-linter)
 
 
 <p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
