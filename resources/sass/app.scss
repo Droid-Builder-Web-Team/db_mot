@@ -2,7 +2,7 @@
 @import url("https://fonts.googleapis.com/css?family=Nunito");
 
 @import "variables";
-@import "buttons";
+@import "buttons.scss";
 @import "cards";
 @import "sidebar";
 
@@ -12,6 +12,10 @@ body {
     // font-size: $font-size-base;
     font-family: -apple-system, BlinkMacSystemFont, segoe ui, Roboto, helvetica neue, Arial, noto sans, sans-serif,
         apple color emoji, segoe ui emoji, segoe ui symbol, noto color emoji;
+}
+
+.c-dark-theme a {
+    color: #000
 }
 
 .dropdown-item {

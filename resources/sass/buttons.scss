@@ -4,25 +4,28 @@
     box-shadow: none !important;
 }
 
-.btn-sm {
-    // font-size: calc(0.4rem + 0.4vw);
-}
-
-// .btn-header {
-//     color: #FFF !important;
-// }
-
 .btn-mot {
     text-transform: uppercase;
     width: 100%;
-    border: 1px solid #000 !important;
+    border: 1px solid #000;
     color: #000;
     display: inline-block;
-    box-shadow: none !important;
-    font-family: "Michroma", sans-serif !important;
+    box-shadow: none;
+    font-family: "Michroma", sans-serif;
 
     &.btn-mot--light {
         background: $cardBg;
+    }
+}
+
+.btn-motinfo {
+    border: 0px;
+    color: #fff;
+    line-height: 40px;
+    box-shadow: none;
+
+    &:hover {
+        color: #75a5d6;
     }
 }
 
@@ -101,16 +104,6 @@
 .btn-cover:hover {
     border: 1px solid rgb(150, 149, 149);
     text-decoration: none;
-}
-
-.btn-motinfo {
-    border: 0px;
-    color: #fff;
-    // font-size: calc(0.6rem + 0.3vw);
-    line-height: 40px;
-}
-.btn-motinfo:hover {
-    color: #75a5d6;
 }
 
 .btn-motinfosub {
