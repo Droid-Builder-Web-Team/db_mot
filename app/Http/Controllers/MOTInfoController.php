@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use App\Club;
 use App\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class MOTInfoController extends Controller
 {
 
     public function __construct()
     {
-      $this->middleware('auth');
-      $this->middleware('verified');
+        $this->middleware('auth');
+        $this->middleware('verified');
     }
     /**
      * Display a listing of the resource.
@@ -58,16 +58,24 @@ class MOTInfoController extends Controller
         $sections = DB::table('mot_sections')
             ->where('club_id', $id)
             ->get();
-        foreach($sections as $section) {
+
+        $lines = [];
+
+        foreach ($sections as $section)
+        {
             $lines[$section->id] = DB::table('mot_lines')
-            ->where('section_id', $section->id)
-            ->get();
+                ->where('section_id', $section->id)
+                ->get();
         }
         $mot_officers = [];
         $club = Club::find($id);
-        foreach (User::role('MOT Officer')->get() as $officer) {
-          if($officer->isAdminOf($club))
-            $mot_officers[] = $officer;
+        foreach (User::role('MOT Officer')->get() as $officer)
+        {
+            if ($officer->isAdminOf($club))
+            {
+                $mot_officers[] = $officer;
+            }
+
         }
         return view('motinfo.show', compact('sections', 'lines', 'mot_officers'));
     }

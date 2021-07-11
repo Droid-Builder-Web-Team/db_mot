@@ -1,9 +1,10 @@
 <?php
 namespace Database\Seeders;
 
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
-use DB;
-use Hash;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class MemberSeeder extends Seeder
 {
@@ -14,10 +15,14 @@ class MemberSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('members')->insert([
-            'username' => 'RobHowdle',
-            'email' => 'robhowdle94@gmail.com',
+        $user = DB::table('members')->insert([
+            'forename' => 'Admin',
+            'surname' => 'Istrator',
+            'username' => 'Administrator',
+            'email' => 'droidbuilderwebteam@gmail.com',
             'password' => Hash::make('Password1'),
+            'email_verified_at' => Carbon::now(),
+            'gdpr_accepted' => 1
         ]);
     }
 }

@@ -30,6 +30,13 @@
                     </svg><span class="ml-1">Upcoming Events</span>
                 </a>
             </li>
+            <li class="c-sidebar-nav-item">
+                <a class="c-sidebar-nav-link" href="{{ route('part-runs.index') }}">
+                    <svg class="c-sidebar-nav-icon">
+                        <i class="fas fa-calendar fa-fw"></i>
+                    </svg><span class="ml-1">Part Runs</span>
+                </a>
+            </li>
 
             <li class="c-sidebar-nav-title">Info</li>
 
@@ -57,6 +64,13 @@
                 </a>
             </li>
 
+            <li class="c-sidebar-nav-item">
+                <a class="c-sidebar-nav-link" target="_blank" href="{{ route('partsRunInfo') }}">
+                    <svg class="c-sidebar-nav-icon">
+                    <i class="fas fa-list"></i>
+                    </svg><span class="ml-1">Parts Runs</span>
+                </a>
+            </li>
 
             <li class="c-sidebar-nav-item">
                 <a class="c-sidebar-nav-link" href="{{ route('topps') }}">
