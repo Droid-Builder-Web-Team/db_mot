@@ -23,6 +23,10 @@ class PaypalController extends Controller
         $request->merge(['cmd' => '_notify-validate']);
         $post = $request->all();
 
+        $fp = fopen('debug.txt', 'w');
+        fwrite($fp, print_r($post, TRUE));
+        fclose($fp);
+
         $response = (string) $provider->verifyIPN($post);
 
         if ($response === 'VERIFIED') {
