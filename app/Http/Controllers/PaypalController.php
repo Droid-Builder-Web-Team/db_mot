@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use Srmklive\PayPal\Services\ExpressCheckout;
 use App\User;
 use App\Notifications\PLIPaid;
@@ -23,11 +24,10 @@ class PaypalController extends Controller
         $request->merge(['cmd' => '_notify-validate']);
         $post = $request->all();
 
-        $fp = fopen('debug.txt', 'w');
+        $fp = fopen('debug.txt', 'a');
         fwrite($fp, print_r($post, TRUE));
-        fclose($fp);
-
         $response = (string) $provider->verifyIPN($post);
+        fwrite($fp, print_r($response, TRUE));
 
         if ($response === 'VERIFIED') {
             $user = User::find($post['custom']);
@@ -37,7 +37,9 @@ class PaypalController extends Controller
         $admins = User::has('roles')->whereHas("permissions", function($q){ $q->where("name", "Add MOT"); })->get();
         foreach($admins as $admin)
         {
-            $admin->notify(new NewUser($user));
+            $admin->notify(new PLIPaidAdmin($user));
         }
+
+        fclose($fp);
     }
 }
