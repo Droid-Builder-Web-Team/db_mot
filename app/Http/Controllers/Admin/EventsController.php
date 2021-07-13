@@ -73,6 +73,8 @@ class EventsController extends Controller
           toastr()->error('Failed to create Event ');
         }
 
+        $newevent->createdEventNotification($newevent);
+
         return redirect()->route('admin.events.index');
     }
 
@@ -121,6 +123,8 @@ class EventsController extends Controller
           toastr()->error('Failed to update Event');
         }
 
+
+        $event->updatedEventNotification($event);
         return redirect()->route('admin.events.index');
 
     }
@@ -142,6 +146,7 @@ class EventsController extends Controller
           toastr()->error('Failed to delete Event');
         }
 
+        $event->deletedEventNotification($event);
         return redirect()->route('admin.events.index');
     }
 

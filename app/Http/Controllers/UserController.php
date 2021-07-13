@@ -151,7 +151,8 @@ class UserController extends Controller
     public function downloadPDF($id)
     {
         $user = User::find($id);
-        $pdf = PDF::loadView('user.cover', compact('user'));
+        $pdf = PDF::loadView('user.
+        ', compact('user'));
         //$pdf->defaultFont = 'Arial';
 
         return $pdf->download('cover_note.pdf');
