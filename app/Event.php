@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Support\Facades\Http;
 use Illuminate\Database\Eloquent\Model;
 use OwenIt\Auditing\Contracts\Auditable;
 
@@ -113,4 +114,57 @@ class Event extends Model implements \Acaronlex\LaravelCalendar\Event, Auditable
     public function getId() {
 		return $this->id;
 	}
+
+    public function createdEventNotification($newevent)
+     {
+        $webHook = env('EVENT_DISCORD_HOOK', 'none');
+        if($webHook != 'none') {
+            return Http::post( $webHook, [
+                'content' => "A new event has been created in the Droid Builders Portal. Click below to view the event.",
+                'embeds' => [
+                    [
+                        'title' => $newevent->name,
+                        'description' => $newevent->location->name . ', ' . $newevent->location->county . ', ' . $newevent->location->postcode,
+                        'url' => route('event.show', $newevent->id),
+                        'color' => '7506394',
+                    ]
+                ],
+            ]);
+        }
+     }
+
+    public function updatedEventNotification($event)
+     {
+        $webHook = env('EVENT_DISCORD_HOOK', 'none');
+        if($webHook != 'none') {
+            return Http::post( $webHook, [
+                'content' => "An event has been updated in the Droid Builders Portal. Click below to view the event.",
+                'embeds' => [
+                    [
+                        'title' => $event->name,
+                        'description' => $event->location->name . ', ' . $event->location->county . ', ' . $event->location->postcode,
+                        'url' => route('event.show', $event->id),
+                        'color' => '7506394',
+                    ]
+                ],
+            ]);
+        }
+     }
+
+    public function deletedEventNotification($event)
+     {
+        $webHook = env('EVENT_DISCORD_HOOK', 'none');
+        if($webHook != 'none') {
+            return Http::post( $webHook, [
+                'content' => "An event has been deleted in the Droid Builders Portal. ",
+                'embeds' => [
+                    [
+                        'title' => $event->name,
+                        'description' => $event->location->name . ', ' . $event->location->county . ', ' . $event->location->postcode,
+                        'color' => '7506394',
+                    ]
+                ],
+            ]);
+        }
+    }
 }
