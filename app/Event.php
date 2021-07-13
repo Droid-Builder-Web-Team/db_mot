@@ -117,7 +117,7 @@ class Event extends Model implements \Acaronlex\LaravelCalendar\Event, Auditable
 
     public function createdEventNotification($newevent)
      {
-         return Http::post('https://discord.com/api/webhooks/864568577859518464/zT9N5vZamyUdXSF5au4JxX0V6AF2uFUdMzbpFDR0ZUwAdFz6A1zODz9GBcDpw4PRcZwy', [
+         return Http::post('https://discord.com/api/webhooks/864626233160368138/Pc2Ka6MpK8YaujupOVYK6uKWWsolbC78kQRU0m8P5eUPHwuNBFainY-BV-TsOqFuZRHU', [
             'content' => "A new event has been created in the Droid Builders Portal. Click below to view the event.",
             'embeds' => [
                 [
@@ -132,7 +132,7 @@ class Event extends Model implements \Acaronlex\LaravelCalendar\Event, Auditable
 
     public function updatedEventNotification($event)
      {
-         return Http::post('https://discord.com/api/webhooks/864568577859518464/zT9N5vZamyUdXSF5au4JxX0V6AF2uFUdMzbpFDR0ZUwAdFz6A1zODz9GBcDpw4PRcZwy', [
+         return Http::post('https://discord.com/api/webhooks/864626233160368138/Pc2Ka6MpK8YaujupOVYK6uKWWsolbC78kQRU0m8P5eUPHwuNBFainY-BV-TsOqFuZRHU', [
             'content' => "An event has been updated in the Droid Builders Portal. Click below to view the event.",
             'embeds' => [
                 [
@@ -147,7 +147,7 @@ class Event extends Model implements \Acaronlex\LaravelCalendar\Event, Auditable
 
     public function deletedEventNotification($event)
      {
-         return Http::post('https://discord.com/api/webhooks/864568577859518464/zT9N5vZamyUdXSF5au4JxX0V6AF2uFUdMzbpFDR0ZUwAdFz6A1zODz9GBcDpw4PRcZwy', [
+         return Http::post('https://discord.com/api/webhooks/864626233160368138/Pc2Ka6MpK8YaujupOVYK6uKWWsolbC78kQRU0m8P5eUPHwuNBFainY-BV-TsOqFuZRHU', [
             'content' => "An event has been deleted in the Droid Builders Portal. ",
             'embeds' => [
                 [

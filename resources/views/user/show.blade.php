@@ -21,7 +21,7 @@
 
 
 <div class="row">
-  <div class="col md-4">
+  <div class="col-md-12 col-lg-12 col-xl-6">
     <div class="card">
       <div class="card-header">
         <span class="float-left">
@@ -84,7 +84,7 @@
     </div>
   </div>
 
-  <div class="col-md-3">
+  <div class="col-md-6 col-sm-12 col-lg-6 col-xl-3">
     <div class="card card-mot-info">
       <div class="card-body p-3 d-flex align-items-center">
         <div class="bg-gradient-info p-3 mfe-3">
@@ -146,7 +146,7 @@
   </div>
 
 
-  <div class="col-md-3">
+  <div class="col-md-6 col-lg-6 col-xl-3">
     <div class="card">
       <div class="card-header">
         <h4>ID Card Photo</h4>
