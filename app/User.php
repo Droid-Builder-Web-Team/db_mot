@@ -167,7 +167,7 @@ class User extends Authenticatable implements MustVerifyEmail, Rater, Auditable
         $image = imagecreatefrompng($url);
         $file = '/members/'. $user_id . '/qr_code.png';
 
-        Storage::disk('local')->put($file, file_get_contents($url));
+        Storage::put($file, file_get_contents($url));
 
         return "Ok";
     }

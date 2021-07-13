@@ -50,19 +50,19 @@ class ImageController extends Controller
         $image_base64 = base64_decode($image_parts[1]);
         $file = $folderPath . $request->photo_name . '.png';
 
-        Storage::disk('local')->put($file, $image_base64);
+        Storage::put($file, $image_base64);
 
         $img = \Image::make(Storage::get($file))->resize(480, null, function($constraint) {
             $constraint->aspectRatio();
         });
         $file = $folderPath . '480-' . $request->photo_name . '.png';
-        Storage::disk('local')->put($file, $img->encode());
+        Storage::put($file, $img->encode());
 
         $img = \Image::make(Storage::get($file))->resize(240, null, function($constraint) {
             $constraint->aspectRatio();
         });
         $file = $folderPath . '240-' . $request->photo_name . '.png';
-        Storage::disk('local')->put($file, $img->encode());
+        Storage::put($file, $img->encode());
 
         toastr()->success('Image uploaded successfully');
 
@@ -136,13 +136,13 @@ class ImageController extends Controller
                           $constraint->aspectRatio();
                       });
                       $file = $folderPath . '480-' . $type . '.png';
-                      Storage::disk('local')->put($file, $img->encode());
+                      Storage::put($file, $img->encode());
 
                       $img = \Image::make(Storage::get($file))->resize(240, null, function($constraint) {
                           $constraint->aspectRatio();
                       });
                       $file = $folderPath . '240-' . $type . '.png';
-                      Storage::disk('local')->put($file, $img->encode());
+                      Storage::put($file, $img->encode());
                   }
               }
               echo "<br>";
