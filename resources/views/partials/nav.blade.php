@@ -65,7 +65,7 @@
                     </svg><span class="ml-1">Droidbuilders Wiki</span>
                 </a>
             </li>
-
+            @if(config('features.partrun', FALSE))
             <li class="c-sidebar-nav-item">
                 <a class="c-sidebar-nav-link" target="_blank" href="{{ route('partsRunInfo') }}">
                     <svg class="c-sidebar-nav-icon">
@@ -73,6 +73,7 @@
                     </svg><span class="ml-1">Parts Runs</span>
                 </a>
             </li>
+            @endif
 
             <li class="c-sidebar-nav-item">
                 <a class="c-sidebar-nav-link" href="{{ route('topps') }}">
