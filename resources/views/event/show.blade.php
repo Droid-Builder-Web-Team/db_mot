@@ -182,21 +182,6 @@ document.getElementById('shareBtn').onclick = function() {
                   </li>
                 @endforeach
               </ul>
-              <i class="far fa-question-circle"></i><strong> Maybe:</strong>
-              <ul>
-                @foreach($event->maybe as $user)
-                  <li>
-                    @canany(['Edit Events', 'Add MOT'])
-                      <a href="{{ route('user.show', $user->id) }}">{{ $user->forename ?? "Deactivated"}} {{ $user->surname ?? "User"}}</a>
-                    @else
-                      {{ $user->forename ?? "Deactivated"}} {{ $user->surname ?? "User"}}
-                    @endcan
-                    @if ($user->event($event->id)->spotter == 'yes')
-                      <i class="fas fa-binoculars"></i>
-                    @endif
-                  </li>
-                @endforeach
-              </ul>
               @canany(['Edit Events', 'Add MOT'])
                 <i class="far fa-question-circle"></i><strong> Cancelled:</strong>
                 <ul>
@@ -286,12 +271,6 @@ document.getElementById('shareBtn').onclick = function() {
                 <input class="form-check-input" type="radio" name="going" id="not_going" value="no" {{ $user_status == 'no' ? 'checked' : '' }}>
                 <label class="form-check-label" for="not_going">
                   Not Going
-                </label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="going" id="maybe_going" value="maybe" {{ $user_status == 'maybe' ? 'checked' : '' }}>
-                <label class="form-check-label" for="maybe_going">
-                  Maybe
                 </label>
               </div>
               <div class="form-check form-check-inline">

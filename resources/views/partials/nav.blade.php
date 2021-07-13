@@ -30,6 +30,7 @@
                     </svg><span class="ml-1">Upcoming Events</span>
                 </a>
             </li>
+            @if(config('features.partrun', FALSE))
             <li class="c-sidebar-nav-item">
                 <a class="c-sidebar-nav-link" href="{{ route('part-runs.index') }}">
                     <svg class="c-sidebar-nav-icon">
@@ -37,6 +38,7 @@
                     </svg><span class="ml-1">Part Runs</span>
                 </a>
             </li>
+            @endif
 
             <li class="c-sidebar-nav-title">Info</li>
 
@@ -179,9 +181,9 @@
         <hr class="divider">
 
     </ul>
-    
+
     @include('partials.sidebar_footer')
-    
+
     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
         @csrf
     </form>
