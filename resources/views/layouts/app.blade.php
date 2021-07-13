@@ -44,11 +44,11 @@
             <ul class="c-header-nav mfs-auto">
                 @guest
                     <li class="c-header-nav-item mr-2">
-                        <a class="btn btn-mot" href="{{ route('login') }}">{{ __('Login') }}</a>
+                        <a class="btn btn-primary" href="{{ route('login') }}">{{ __('Login') }}</a>
                     </li>
                     @if (Route::has('register'))
                         <li class="c-header-nav-item mr-2">
-                            <a class="btn btn-mot" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            <a class="btn btn-primary" href="{{ route('register') }}">{{ __('Register') }}</a>
                         </li>
                     @endif
                 @else
