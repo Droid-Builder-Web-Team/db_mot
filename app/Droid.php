@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\MOT;
 use App\User;
 use App\Club;
+use Carbon\Carbon;
 use OwenIt\Auditing\Contracts\Auditable;
 
 class Droid extends Model implements Auditable
@@ -102,15 +103,15 @@ class Droid extends Model implements Auditable
         $motstatus = "No Valid MOT";
         $motstate = "alert-danger";
         if ($this->hasFullMOT()) {
-            $motstatus = "Valid ".$this->motDate();
+            $motstatus = "Valid ".Carbon::parse($this->motDate())->isoFormat(auth()->user()->settings()->get('date_format'));
             $motstate = "alert-success";
         }
         if ($this->hasAdvisoryMOT()) {
-            $motstatus = "Advisory ".$this->motDate();
+            $motstatus = "Advisory ".Carbon::parse($this->motDate())->isoFormat(auth()->user()->settings()->get('date_format'));
             $motstate = "alert-warning";
         }
         if ($this->hasWIPMOT()) {
-            $motstatus = "WIP ".$this->motDate();
+            $motstatus = "WIP ".Carbon::parse($this->motDate())->isoFormat(auth()->user()->settings()->get('date_format'));
             $motstate = "alert-warning";
         }
         if ($this->hasExpiringMOT()) {

@@ -72,6 +72,54 @@
                 </div>
 
                 <div class="card">
+                  <div class="card-header">
+                    Display Preferences
+                  </div>
+                  <div class="card-body">
+                    <div class="table-responsive">
+                      <table class="table table-striped table-sm table-hover table-dark text-center">
+                        <tr>
+                          <th>Date Format</th>
+                          <td>Format to display dates</td>
+                          <td>
+                            <select id="date_format" name="date_format">
+                              @php
+                                $formats = ['YYYY-MM-DD', 'YYYY/MM/DD', 'DD/MM/YYYY', 'DD MMM YYYY', 'YY/MM/DD', 'DD/MM/YY'];
+                              @endphp
+                              @foreach($formats as $format)
+                                <option value='{{ $format }}'
+                                @if($format == $settings['date_format'])
+                                  selected
+                                @endif
+                                >{{ $format }} </option>
+                              @endforeach
+                            </select>
+                          </td>
+                        </tr>
+                        <tr>
+                          <th>Time Format</th>
+                          <td>24 Hour or 12 Hour clock</td>
+                          <td>
+                            <select id="time_format" name="time_format">
+                                <option value='HH:mm:ss'
+                                @if($settings['time_format'] == 'HH:mm:ss')
+                                  selected
+                                @endif
+                                >24H</option>
+                                <option value='hh:mm:ss a'
+                                @if($settings['time_format'] == 'hh:mm:ss a')
+                                  selected
+                                @endif
+                                >12H</option>
+                            </select>
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="card">
                     <div class="card-header">
                         Event Requirements
                     </div>

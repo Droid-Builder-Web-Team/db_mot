@@ -79,7 +79,7 @@
           </tr>
           @foreach($droid->mot as $mot)
             <tr>
-              <td>{{ $mot->date }}</td>
+              <td>{{ Carbon\Carbon::parse($mot->date)->isoFormat(Auth::user()->settings()->get('date_format')) }}</td>
               <td>{{ $mot->location }}</td>
               <td>{{ $mot->officer() }}</td>
               <td>{{ $mot->approved }}</td>
@@ -142,7 +142,7 @@
         <div class="card-header">
           <strong>{{ $comment->user->forename }} {{ $comment->user->surname }}</strong>
           <span class="float-right">
-              {{ $comment->created_at }}
+              {{ Carbon\Carbon::parse($comment->created_at, Auth::user()->settings()->get('timezone'))->isoFormat(Auth::user()->settings()->get('date_format').' - '.Auth::user()->settings()->get('time_format')) }}
           </span>
         </div>
         <div class="card-body">

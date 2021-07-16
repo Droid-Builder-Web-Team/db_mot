@@ -62,9 +62,9 @@
                 <tr><th>County</th><td>{{ $user->county }}</td></tr>
                 <tr><th>Postcode</th><td>{{ $user->postcode }}</td></tr>
                 <tr><th>Forum Username</th><td>{{ $user->username }}</td></tr>
-                <tr><th>Joined On</th><td>{{ $user->join_date }}</td></tr>
+                <tr><th>Joined On</th><td>{{ \Carbon\Carbon::parse($user->join_date)->isoFormat($user->settings()->get('date_format'))}}</td></tr>
                 @if ($uses_pli)
-                    <tr><th>PLI Last Payed</th><td>{{ $user->pli_date }}</td></tr>
+                    <tr><th>PLI Last Payed</th><td>{{ \Carbon\Carbon::parse($user->pli_date)->isoFormat($user->settings()->get('date_format')) }}</td></tr>
                 @endif
                 <tr><th>QR Code:</th>
                     <td>
@@ -265,7 +265,7 @@
                 <tr>
                 <td>{{ $achievement->name }}</td>
                 <td>{!! $achievement->pivot->notes !!}</td>
-                <td>{{ Carbon\Carbon::parse($achievement->pivot->date_added)->format('d-m-Y') }}</td>
+                <td>{{ Carbon\Carbon::parse($achievement->pivot->date_added)->isoFormat($user->settings()->get('date_format')) }}</td>
                 </tr>
             @endforeach
           </table>
@@ -326,7 +326,7 @@
             </tr>
             @foreach($user->attended_events as $event)
                 <tr>
-                    <td>{{ $event->date }}</td>
+                    <td>{{ \Carbon\Carbon::parse($event->date)->isoFormat($user->settings()->get('date_format'))}}</td>
                     <td>{{ $event->name }}</td>
                     <td><a class="btn-sm btn-link" href="{{ route('location.show', $event->location->id) }}">{{ $event->location->name }}</a></td>
                     <td>{{ $event->charity_raised }}</td>
@@ -358,7 +358,7 @@
             </tr>
             @foreach($user->course_runs as $course_run)
                 <tr>
-                <td>{{ Carbon\Carbon::parse($course_run->run_timestamp)->format('d-m-Y') }}</td>
+                <td>{{ Carbon\Carbon::parse($course_run->run_timestamp)->isoFormat($user->settings()->get('date_format')) }}</td>
                 <td>{{ $course_run->droid->name }}</td>
                 <td>
                     @if ($course_run->num_penalties == 0)

@@ -11,10 +11,13 @@ return [
           'notifications' => [
               'account' => 'on',
               'mot' => 'on',
-              'event' => 'off',
-              'achievement' => 'off'
+              'event' => 'on',
+              'achievement' => 'on'
           ],
-          'max_event_distance' => 50
+          'max_event_distance' => 50,
+          'date_format' => 'YYYY-MM-DD',
+          'time_format' => 'HH:mm:ss',
+          'timezone' => 'Europe/London'
 
         ]
     ]

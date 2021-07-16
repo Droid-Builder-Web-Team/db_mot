@@ -41,7 +41,7 @@
             <strong>{{ $event->name }}</strong>
             <span class="float-right">
               <i class="fas fa-calendar-day"></i>
-              {{ $event->date }}
+              {{ Carbon\Carbon::parse($event->date)->isoFormat($user->settings()->get('date_format')) }}
             </span>
           </div>
           <div class="card-body">
@@ -216,7 +216,7 @@ document.getElementById('shareBtn').onclick = function() {
                   @if ($comment->broadcast)
                     <i class="fas fa-bullhorn"></i>
                   @endif
-                  {{ $comment->created_at }}
+                  {{ Carbon\Carbon::parse($comment->created_at, Auth::user()->settings()->get('timezone'))->isoFormat(Auth::user()->settings()->get('date_format').' - '.Auth::user()->settings()->get('time_format')) }}
                 </span>
               </div>
               <div class="card-body">

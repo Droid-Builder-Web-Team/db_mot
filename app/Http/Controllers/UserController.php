@@ -171,6 +171,9 @@ class UserController extends Controller
           $user->settings()->update('notifications.'.$notification, $value);
         }
         $user->settings()->update('max_event_distance', $request->input('max_event_distance'));
+        $user->settings()->update('date_format', $request->input('date_format'));
+        $user->settings()->update('time_format', $request->input('time_format'));
+        $user->settings()->update('timezone', $request->input('timezone'));
         toastr()->success('User settings updated successfully');
         return redirect()->route('settings.edit', auth()->user()->id);
     }
