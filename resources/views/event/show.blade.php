@@ -41,7 +41,7 @@
             <strong>{{ $event->name }}</strong>
             <span class="float-right">
               <i class="fas fa-calendar-day"></i>
-              {{ Carbon\Carbon::parse($event->date)->isoFormat($user->settings()->get('date_format')) }}
+              {{ Carbon\Carbon::parse($event->date)->isoFormat(Auth::user()->settings()->get('date_format')) }}
             </span>
           </div>
           <div class="card-body">
