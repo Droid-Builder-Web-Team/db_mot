@@ -40,6 +40,7 @@ class LocationController extends Controller
             ->get();
 
 	$events = Event::where('location_id', $location->id)
+		->whereDate('date', '<=', Carbon::now())
 		->orderBy('date', 'desc')
 		->get();
 
