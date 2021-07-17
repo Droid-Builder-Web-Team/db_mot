@@ -22,3 +22,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('events/future', 'EventApiController@getFutureAllPublicEvents');
 Route::get('events/charity', 'EventApiController@getCharityYtd');
 Route::get('events/charity/{year}', 'EventApiController@getCharityYtd');
+Route::get('mot/{id}', 'MOTController@json');

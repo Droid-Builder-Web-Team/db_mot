@@ -21,7 +21,13 @@
           <tr><th>Date:</th><td><input type=date name=date></td></tr>
           <tr><th>Location:</th><td><input type=text name=location></td></tr>
           <tr><th>Officer:</th><td>{{ Auth::user()->forename }} {{Auth::user()->surname }}</td></tr>
-          <tr><th>Type:</th><td><select name=mot_type><option value=Initial>Initial</option><option value=Renewal>Renewal</option><option value=Retest>Retest</option></select></td></tr>
+	  <tr><th>Type:</th><td>
+		<select id=mot_type name=mot_type onchange="autoFill()">
+			<option value=Initial>Initial</option>
+			<option value=Renewal>Renewal</option>
+			<option value=Retest>Retest</option>
+		</select>
+	  </td></tr>
           <tr><th>Overall:</th><td><select name=approved><option value=Yes>Yes</option><option value=No>No</option><option value=WIP>WIP</option><option value=Advisory>Yes (Advisory)</option></select></td></tr>
         </table>
       </div>
@@ -41,13 +47,31 @@
             {{ $line->test_description}}
           </div>
           <div class="col-md-2 mb-1">
-              <input type=radio name="{{ $line->test_name }}" value=Pass>Pass
-  			      <input type=radio name="{{ $line->test_name }}" value=Fail checked>Fail
-			        <input type=radio name="{{ $line->test_name }}" value=NA>NA
+              <input type=radio id="{{ $line->test_name }}_Pass" name="{{ $line->test_name }}" value="Pass">Pass
+  			      <input type=radio id="{{ $line->test_name }}_Fail" name="{{ $line->test_name }}" value="Fail" checked>Fail
+			        <input type=radio id="{{ $line->test_name }}_NA" name="{{ $line->test_name }}" value="NA">NA
           </div>
         </div>
         @endforeach
       @endforeach
       <input type=submit value=Submit name=new_mot>
 </form>
+
+<script>
+	function autoFill() {
+		var x = document.getElementById("mot_type").value
+		if(x == 'Retest' || x == 'Renewal') {
+			console.log('retest/renewal - {{ $droid->lastMotId() }}');
+			$.getJSON('/api/mot/{{ $droid->lastMotId() }}', function(data) {
+				for (var i = 0; i < data.length; i++){
+					var test = data[i]['mot_test'];
+					var result = data[i]['mot_test_result'];
+					var id = test + '_' + result;
+					$('#' + id ).prop('checked', true);
+
+				}
+			});
+		}
+	}
+</script>
 @endsection

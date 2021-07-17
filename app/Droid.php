@@ -123,6 +123,16 @@ class Droid extends Model implements Auditable
         return $displayMOT;
     }
 
+    public function lastMotId()
+    {
+        $latest_mot = $this->mot()->latest('date')->first();
+        if ($latest_mot != NULL)
+        {
+            return $latest_mot->id;
+        }
+        return 0;
+    }
+
     public function comments()
     {
         return $this->morphMany('App\Comment', 'commentable');
