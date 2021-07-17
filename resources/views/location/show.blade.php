@@ -64,7 +64,7 @@
     </div>
 
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-8">
         <div class="card">
           <div class="card-header">
             Comments
@@ -81,7 +81,7 @@
                   @if ($comment->broadcast)
                     <i class="fas fa-bullhorn"></i>
                   @endif
-                  {{ $comment->created_at }}
+		  {{ Carbon\Carbon::parse($comment->created_at, Auth::user()->settings()->get('timezone'))->isoFormat(Auth::user()->settings()->get('date_format').' - '.Auth::user()->settings()->get('time_format')) }}
                 </span>
               </div>
               <div class="card-body">
@@ -109,5 +109,23 @@
           </div>
         </div>
       </div>
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-header">
+          Previous Events
+        </div>
+        <div class="card-body">
+         <table>
+           <tr><th>Date</th><th>Name</th></tr>
+           @foreach($events as $event)
+           <tr>
+	    <td>{{ Carbon\Carbon::parse($event->date)->isoFormat(Auth::user()->settings()->get('date_format')) }}</td>
+            <td><a href="{{ route('event.show', $event->id) }}">{{ $event->name }}</a></td>
+           </tr>
+           @endforeach
+         </table>
+        </div>
+      </div>
     </div>
+   </div>
 @endsection

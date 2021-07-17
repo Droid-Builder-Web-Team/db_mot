@@ -19,7 +19,7 @@
 		</tr>
 		@foreach($events as $event)
 			<tr>
-				<td>{{ $event->date }}</td>
+				<td>{{ Carbon\Carbon::parse($event->date)->isoFormat(Auth::user()->settings()->get('date_format')) }}</td>
 				<td><a href="{{ route('event.show', $event->id) }}">{{ $event->name }}<a/></td>
 				<td><a class="btn-sm btn-link" href="{{ route('location.show', $event->location->id) }}">{{ $event->location->name }}</a></td>
 				<td>
