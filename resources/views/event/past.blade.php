@@ -14,12 +14,24 @@
 			<th>Date</th>
 			<th>Event</th>
 			<th>Location</th>
+			<th>Charity Raised</th>
+			<th>Report Link</th>
 		</tr>
 		@foreach($events as $event)
 			<tr>
 				<td>{{ $event->date }}</td>
 				<td><a href="{{ route('event.show', $event->id) }}">{{ $event->name }}<a/></td>
 				<td><a class="btn-sm btn-link" href="{{ route('location.show', $event->location->id) }}">{{ $event->location->name }}</a></td>
+				<td>
+					@if($event->charity_raised > 0)
+						£{{ $event->charity_raised }}
+					@endif
+				</td>
+				<td>
+					@if($event->report_link != "")
+						<a class="btn-sm btn-link" href="{{ $event->report_link }}">Report</a>
+					@endif
+				</td>
 			</tr>
 		@endforeach
 	</table>
