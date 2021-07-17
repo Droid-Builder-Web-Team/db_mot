@@ -17,7 +17,7 @@ class CreateMotSectionsTable extends Migration
             $table->integer('club_id');
             $table->integer('id', true);
             $table->string('section_name', 16);
-            $table->text('section_description');
+            $table->text('section_long_description');
         });
     }
 

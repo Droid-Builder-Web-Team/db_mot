@@ -8,6 +8,9 @@
     <div class="card">
       <div class="card-header">
         <h4 class="title text-center">MOT Info</h4>
+        @foreach($sections as $s)
+        <a class="btn btn-primary" href="{{ route('motinfo.export', $s->id) }}">Export MOT Info</a>
+        @endforeach
       </div>
       <div class="card-body mb-2">
           <div>
@@ -40,7 +43,7 @@
                 <div class="card-header-mot" id="heading{{ $section->id}}">
                   <h5 class="mb-0 d-inline">
                   <button class="btn btn-motinfo collapsed" type="button" data-toggle="collapse" data-target="#collapse{{ $section->id}}" aria-expanded="false" aria-controls="collapse{{ $section->id}}">
-                    {{ $section->section_description }}
+                    {{ $section->section_long_description }}
                   </button>
                 </h5>
                 </div>
