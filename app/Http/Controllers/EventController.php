@@ -169,4 +169,11 @@ class EventController extends Controller
         return back();
     }
 
+    public function past() {
+	    $events = Event::whereDate('date', '<=', Carbon::now())
+                  ->orderBy('date', 'asc')->paginate(25);
+
+	    return view('event.past', compact('events'));
+    }
+
 }
