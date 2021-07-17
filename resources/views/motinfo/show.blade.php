@@ -8,9 +8,9 @@
     <div class="card">
       <div class="card-header">
         <h4 class="title text-center">MOT Info</h4>
-        @foreach($sections as $s)
+        {{-- @foreach($sections as $s)
         <a class="btn btn-primary" href="{{ route('motinfo.export', $s->id) }}">Export MOT Info</a>
-        @endforeach
+        @endforeach --}}
       </div>
       <div class="card-body mb-2">
           <div>
