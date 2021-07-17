@@ -54,6 +54,7 @@ Route::group(['middleware' => ['auth', 'gdpr.terms']], function() {
   Route::get('database', 'DroidDatabase@index');
   Route::resource('mot', 'MOTController', ['only' => ['index', 'show']]);
   Route::resource('motinfo', 'MOTInfoController');
+  Route::get('motinfo/{id}/export', 'MOTInfoController@exportMotInfo')->name('motinfo.export');
   Route::get('qr_code/{uid}', 'UserController@displayQRCode')->name('image.displayQRCode');
   Route::put('event/comment/{event}', 'EventController@comment')->name('event.comment');
   Route::put('location/comment/{location}', 'LocationController@comment')->name('location.comment');

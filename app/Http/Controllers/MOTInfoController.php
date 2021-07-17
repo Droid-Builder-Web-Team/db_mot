@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use PDF;
 use App\Club;
 use App\User;
 use Illuminate\Http\Request;
@@ -80,37 +81,16 @@ class MOTInfoController extends Controller
         return view('motinfo.show', compact('sections', 'lines', 'mot_officers'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function exportMotInfo($id)
     {
-        //
-    }
+        // retreive all records from db
+        $data = DB::table('mot_sections')->where('club_id', $id)->get();
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+        // share data to view
+        view()->share('sections',$data);
+        $pdf = PDF::loadView('pdfs.motinfo', $data);
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        // download PDF file with download method
+        return $pdf->download('pdfs.motinfo.pdf');
     }
 }
