@@ -40,6 +40,7 @@ class LocationController extends Controller
             ->get();
 
 	$events = Event::where('location_id', $location->id)
+		->orderBy('date', 'desc')
 		->get();
 
         return view('location.show', compact('location', 'events'));
