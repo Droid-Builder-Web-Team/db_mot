@@ -115,7 +115,10 @@
           Previous Events
         </div>
         <div class="card-body">
-         <table>
+         @empty($events)
+		No previous events listed
+	 @else
+         <table class="table table-striped table-sm table-hover table-dark text-center">
            <tr><th>Date</th><th>Name</th></tr>
            @foreach($events as $event)
            <tr>
@@ -124,6 +127,7 @@
            </tr>
            @endforeach
          </table>
+         @endempty
         </div>
       </div>
     </div>
