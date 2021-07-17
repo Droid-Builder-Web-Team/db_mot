@@ -43,7 +43,7 @@
                 <div class="card-header-mot" id="heading{{ $section->id}}">
                   <h5 class="mb-0 d-inline">
                   <button class="btn btn-motinfo collapsed" type="button" data-toggle="collapse" data-target="#collapse{{ $section->id}}" aria-expanded="false" aria-controls="collapse{{ $section->id}}">
-                    {{ $section->section_long_description }}
+                    {{ $section->section_description }}
                   </button>
                 </h5>
                 </div>
