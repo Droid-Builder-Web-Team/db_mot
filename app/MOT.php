@@ -64,6 +64,16 @@ class MOT extends Model implements Auditable
         return $detail;
     }
 
+    public function details()
+    {
+
+        $details = DB::table('mot_details')
+          ->where('mot_uid', $this->id)
+          ->get();
+
+        return $details;
+    }
+
     public function officer()
     {
         $officer = User::where('id', $this->user)->first();
