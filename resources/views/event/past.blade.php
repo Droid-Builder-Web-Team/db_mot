@@ -35,9 +35,9 @@
 			</tr>
 		@endforeach
 	</table>
-	{{ $events->links() }}
       </div>
     </div>
+    {{ $events->links() }}
   </div>
 </div>
 
