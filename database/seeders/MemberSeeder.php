@@ -24,5 +24,11 @@ class MemberSeeder extends Seeder
             'email_verified_at' => Carbon::now(),
             'gdpr_accepted' => 1
         ]);
+
+        $adminRole = DB::table('model_has_roles')->insert([
+            'role_id' => 2,
+            'model_type' => 'App\User',
+            'model_id' => 1
+        ]);
     }
 }
