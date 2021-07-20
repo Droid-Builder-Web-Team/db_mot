@@ -67,8 +67,17 @@ class PartsRunDataController extends Controller
             $partsRunData->save();
 
             // Image Upload
+            $imageName = $request->image->extension();
+            $request->image->move(public_path('/img/'), $imageName);
 
-            $imageName = time().'.'.$request->image->extension();
+            $file_url = 'public/img/' . $imageName;
+            $content = file_get_contents(base_path($file_url));
+
+            $content = $content . "\r\n" . $imageName;
+            file_put_contents(base_path($file_url), $content);
+            $partRunAdImage = "/img/" . $imageName;
+
+
 
             // Instructions Upload
             // $validated = $request->validate([
@@ -96,6 +105,7 @@ class PartsRunDataController extends Controller
                 'history' => $request->history,
                 'price' => $request->price,
                 'includes' => $request->includes,
+                'image_url' => $partRunAdImage,
                 'instructions_id' => 1,
                 'location' => $request->location,
                 'shipping_costs' => $request->shipping_costs,
