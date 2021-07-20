@@ -15,7 +15,7 @@ body {
 }
 
 .c-dark-theme a {
-    color: #000
+    color: #000;
 }
 
 .dropdown-item {
@@ -23,7 +23,6 @@ body {
         margin-right: 8px;
     }
 }
-
 
 .fas.fa-plus {
     font-size: 10rem;
@@ -37,8 +36,8 @@ body {
 
 /* Parts Run */
 .run-header {
-    width:100%;
-    display:flex;
+    width: 100%;
+    display: flex;
     align-items: center;
 }
 
@@ -48,8 +47,8 @@ body {
 .includes,
 .purchase-email,
 .history {
-    width:100%;
-    display:flex;
+    width: 100%;
+    display: flex;
     align-items: center;
 }
 
@@ -117,4 +116,8 @@ body {
 
 .sub {
     padding: 0.5%;
+}
+
+.c-dark-theme select.form-control option {
+    background-color: #ffffff !important;
 }

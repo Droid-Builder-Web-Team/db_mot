@@ -31,7 +31,7 @@
           </tr>
           <tr><th>Type</th><td>{{ $droid->type }}</td></tr>
           <tr><th>Style</th><td>{{ $droid->style }}</td></tr>
-          <tr><th>Radio Controlled?</th><td>{{ $droid->radio_controller }}</td></tr>
+          <tr><th>Radio Controlled?</th><td>{{ $droid->radio_controlled }}</td></tr>
           <tr><th>Transmitter Type</th><td>{{ $droid->transmitter_type }}</td></tr>
           <tr><th>Material</th><td>{{ $droid->material }}</td></tr>
           <tr><th>Approx Weight</th><td>{{ $droid->weight }}</td></tr>
