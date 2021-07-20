@@ -19,7 +19,7 @@ class PartsRunDataController extends Controller
     public function index()
     {
         $partsRunData = PartsRunData::with(['partsRunAd', 'droidType'])->get();
-        // dd($partsRunData);
+
         return view('part-runs.list', [
             'partsRunData'=> $partsRunData,
         ]);
@@ -43,9 +43,6 @@ class PartsRunDataController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
-        // $validated = collect($request->validated());
-
         $user = Auth::user();
 
             // Check if a part run with the exact title exists
@@ -59,46 +56,57 @@ class PartsRunDataController extends Controller
                 'bc_rep_id' => 1,
                 'status' => 'Active',
             ]);
+
+            // $partsRunData = app(PartsRunData::class)->create([
+            //     'droid_type_id' => 1,
+            //     'user_id' => $user->id,
+            //     'bc_rep_id' => 1,
+            //     'status' => 'Active',
+            // ]);
+
             $partsRunData->save();
-
-            // Instructions Upload
-            $request->validate([
-                'file' => 'required|sometimes|mimes:pdf,doc,docx,txt|max:2048'
-            ]);
-
-            $file = new Instructions;
-
-            if($request->file()) {
-                $fileName = time().'_'.$req->file->getClientOriginalName();
-                $filePath = $request->file('file')->storeAs('uploads', $fileName, 'public');
-                $file->title = time().'_'.$request->file->getClientOriginalName();
-                $file->filepath = '/storage/' . $filePath;
-                $file->url = '';
-                $file->save();
-            }
-
-            dd($file);
 
             // Image Upload
 
-            // Parts run data. To be created last
-            $partsRunAd = new PartsRunAd;
-            $partsRunAd->parts_run_data_id = $partsRunData->id;
-            $partsRunAd->title = $request->title;
-            $partsRunAd->description = $request->description;
-            $partsRunAd->history = $request->history;
-            $partsRunAd->price = $request->price;
-            $partsRunAd->includes = $request->includes;
-            $partsRunAd->instructions_id = $file->id;
-            $partsRunAd->location = $request->location;
-            $partsRunAd->shipping_costs = $request->shipping_costs;
-            $partsRunAd->purchase_url = $request->purchase_url;
-            $partsRunAd->contact_email = $request->contact_email;
-            dd($partsRunAd);
-            $partsRunAd->save();
-        }
+            $imageName = time().'.'.$request->image->extension();
 
-            return view('part-runs.create');
+            // Instructions Upload
+            // $validated = $request->validate([
+            //     'instructions' => 'mimes:pdf,doc,docx,txt|max:2048'
+            // ]);
+            // dd($validated);
+
+            // $fileName = time().'_'.$validated->getClientOriginalName();
+
+            // if($request->file('instructions')) {
+            //    $instructions = app(Instructions::class)->create([
+            //         'title' => 'filename',
+            //         'filepath' => 'filePath',
+            //         'url' => 'fileUrl'
+            //     ]);
+
+            //     $instructions->save();
+            // }
+
+            // Parts run data. To be created last
+            $partsRunAd = app(PartsRunAd::class)->create([
+                'parts_run_data_id' => $partsRunData->id,
+                'title' => $request->title,
+                'description' => $request->description,
+                'history' => $request->history,
+                'price' => $request->price,
+                'includes' => $request->includes,
+                'instructions_id' => 1,
+                'location' => $request->location,
+                'shipping_costs' => $request->shipping_costs,
+                'purchase_url' => $request->purchase_url,
+                'contact_email' => $request->contact_email,
+            ]);
+
+            $partsRunAd->save();
+
+            return view('part-runs.list');
+        }
     }
 
     /**

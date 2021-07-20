@@ -26,7 +26,17 @@
                     <td>{{ $data->partsRunAd->title }}</td>
                     <td>{{ $data->droidType->name }}</td>
                     <td>{{ $data->user->username }}</td>
-                    <th>{{ $data->status }}</th>
+                    @if($data->status = "Active")
+                    <th class="status-class">
+                      <div class="active"></div>
+                      {{ $data->status }}
+                    </th>
+                    @else
+                    <th>
+                      <div class="inactive"></div>
+                      {{ $data->status }}
+                    </th>
+                    @endif
                     <td>
                       <div class="d-flex">
                         <a class="btn btn-view" href={{ route('part-runs.show', $data->id) }}>View</a>

@@ -269,6 +269,26 @@ body {
   background: #000000;
 }
 
+.active {
+  width: 20px;
+  height: 20px;
+  background: green;
+  border-radius: 50px;
+}
+
+.inactive {
+  width: 20px;
+  height: 20px;
+  background: red;
+  border-radius: 50px;
+}
+
+.status-class {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
 /* Events */
 .c-dark-theme .form-control {
   color: #000000 !important;

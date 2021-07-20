@@ -113,8 +113,7 @@
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Instructions</span>
-                                    {{-- <input type="file" name="file" class="form-control-file" id="exampleFormControlFile1"> --}}
-                                    <textarea type="text" name="instructions"  class="form-control"></textarea>
+                                    <input type="file" name="instructions" class="form-control-file" id="exampleFormControlFile1">
                                 </div>
                             </div>
                         </div>
