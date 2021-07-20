@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Instructions;
 use App\PartsRunAd;
 use App\PartsRunData;
 use Illuminate\Http\Request;
@@ -47,9 +48,11 @@ class PartsRunDataController extends Controller
 
         $user = Auth::user();
 
+            // Check if a part run with the exact title exists
         if(PartsRunAd::where('title', $request->title)->exists()) {
             return PartsRunAd::where('title', $request->title);
         } else {
+            // Parts Run Data
             $partsRunData = app(PartsRunData::class)->create([
                 'droid_type_id' => 1,
                 'user_id' => $user->id,
@@ -58,6 +61,27 @@ class PartsRunDataController extends Controller
             ]);
             $partsRunData->save();
 
+            // Instructions Upload
+            $request->validate([
+                'file' => 'required|sometimes|mimes:pdf,doc,docx,txt|max:2048'
+            ]);
+
+            $file = new Instructions;
+
+            if($request->file()) {
+                $fileName = time().'_'.$req->file->getClientOriginalName();
+                $filePath = $request->file('file')->storeAs('uploads', $fileName, 'public');
+                $file->title = time().'_'.$request->file->getClientOriginalName();
+                $file->filepath = '/storage/' . $filePath;
+                $file->url = '';
+                $file->save();
+            }
+
+            dd($file);
+
+            // Image Upload
+
+            // Parts run data. To be created last
             $partsRunAd = new PartsRunAd;
             $partsRunAd->parts_run_data_id = $partsRunData->id;
             $partsRunAd->title = $request->title;
@@ -65,14 +89,13 @@ class PartsRunDataController extends Controller
             $partsRunAd->history = $request->history;
             $partsRunAd->price = $request->price;
             $partsRunAd->includes = $request->includes;
-            $partsRunAd->instructions_id = 1;
+            $partsRunAd->instructions_id = $file->id;
             $partsRunAd->location = $request->location;
             $partsRunAd->shipping_costs = $request->shipping_costs;
             $partsRunAd->purchase_url = $request->purchase_url;
             $partsRunAd->contact_email = $request->contact_email;
-            // dd($partsRunAd);
+            dd($partsRunAd);
             $partsRunAd->save();
-
         }
 
             return view('part-runs.create');
@@ -123,7 +146,7 @@ class PartsRunDataController extends Controller
             'partsRunData' => $partsRunData,
             'includesArray' => $includesArray,
             'shippingCostsArray' => $shippingCostsArray
-        ]);    
+        ]);
     }
 
     /**
