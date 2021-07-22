@@ -35,7 +35,7 @@ class EventController extends Controller
         }
 
         $events = Event::whereDate('date', '>=', Carbon::now())
-                  ->orderBy('date', 'asc')->paginate(15);
+                  ->orderBy('date', 'asc')->get();
 
         $calevents = [];
 
