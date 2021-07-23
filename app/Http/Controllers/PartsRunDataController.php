@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Instructions;
 use App\PartsRunAd;
 use App\PartsRunData;
 use Illuminate\Http\Request;
@@ -18,7 +19,7 @@ class PartsRunDataController extends Controller
     public function index()
     {
         $partsRunData = PartsRunData::with(['partsRunAd', 'droidType'])->get();
-        // dd($partsRunData);
+
         return view('part-runs.list', [
             'partsRunData'=> $partsRunData,
         ]);
@@ -42,40 +43,75 @@ class PartsRunDataController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
-        // $validated = collect($request->validated());
-
         $user = Auth::user();
 
-        if(PartsRunAd::where('title', $request->title)->exists()) {
-            return PartsRunAd::where('title', $request->title);
-        } else {
+            // Check if a part run with the exact title exists
+        // if(PartsRunAd::where('title', $request->title)->exists()) {
+        //     return PartsRunAd::where('title', $request->title);
+        // } else {
+            // Parts Run Data
             $partsRunData = app(PartsRunData::class)->create([
                 'droid_type_id' => 1,
                 'user_id' => $user->id,
                 'bc_rep_id' => 1,
                 'status' => 'Active',
             ]);
+
             $partsRunData->save();
 
-            $partsRunAd = new PartsRunAd;
-            $partsRunAd->parts_run_data_id = $partsRunData->id;
-            $partsRunAd->title = $request->title;
-            $partsRunAd->description = $request->description;
-            $partsRunAd->history = $request->history;
-            $partsRunAd->price = $request->price;
-            $partsRunAd->includes = $request->includes;
-            $partsRunAd->instructions_id = 1;
-            $partsRunAd->location = $request->location;
-            $partsRunAd->shipping_costs = $request->shipping_costs;
-            $partsRunAd->purchase_url = $request->purchase_url;
-            $partsRunAd->contact_email = $request->contact_email;
-            // dd($partsRunAd);
-            $partsRunAd->save();
+            // Image Upload
+            if ($request->hasFile('image')) {
 
-        }
+                $request->validate([
+                    'image' => 'mimes:jpeg,bmp,png' // Only allow .jpg, .bmp and .png file types.
+                ]);
 
-            return view('part-runs.create');
+                // Save the file locally in the storage/public/ folder under a new folder named /product
+                $partsRunImage = $request->image->store('parts-run-images');
+
+                // Parts run data. To be created last
+                $partsRunAd = app(PartsRunAd::class)->create([
+                    'parts_run_data_id' => $partsRunData->id,
+                    'title' => $request->title,
+                    'description' => $request->description,
+                    'history' => $request->history,
+                    'price' => $request->price,
+                    'includes' => $request->includes,
+                    'image_url' => $partsRunImage,
+                    'instructions_id' => 1,
+                    'location' => $request->location,
+                    'shipping_costs' => $request->shipping_costs,
+                    'purchase_url' => $request->purchase_url,
+                    'contact_email' => $request->contact_email,
+                ]);
+
+                $partsRunAd->save();
+            }
+
+
+
+            // Instructions Upload
+            // $validated = $request->validate([
+            //     'instructions' => 'mimes:pdf,doc,docx,txt|max:2048'
+            // ]);
+            // dd($validated);
+
+            // $fileName = time().'_'.$validated->getClientOriginalName();
+
+            // if($request->file('instructions')) {
+            //    $instructions = app(Instructions::class)->create([
+            //         'title' => 'filename',
+            //         'filepath' => 'filePath',
+            //         'url' => 'fileUrl'
+            //     ]);
+
+            //     $instructions->save();
+            // }
+
+
+
+            return view('part-runs.list');
+        // }
     }
 
     /**
@@ -94,7 +130,7 @@ class PartsRunDataController extends Controller
         foreach($partsRunData as $shippingCosts) {
             $shippingCostsArray = explode(",", $shippingCosts->partsRunAd->shipping_costs);
         };
-
+        // dd($partsRunData);
         return view('part-runs.show', [
             'partsRunData' => $partsRunData,
             'includesArray' => $includesArray,
@@ -123,7 +159,7 @@ class PartsRunDataController extends Controller
             'partsRunData' => $partsRunData,
             'includesArray' => $includesArray,
             'shippingCostsArray' => $shippingCostsArray
-        ]);    
+        ]);
     }
 
     /**

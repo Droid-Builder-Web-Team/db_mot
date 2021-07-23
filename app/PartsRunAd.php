@@ -14,11 +14,13 @@ class PartsRunAd extends Model
     protected $table = 'parts_run_ad';
 
     protected $fillable = [
+        'parts_run_data_id',
         'title',
         'description',
         'history',
         'price',
         'includes',
+        'image_url',
         'instructions_id',
         'location',
         'shipping_costs',
@@ -30,11 +32,6 @@ class PartsRunAd extends Model
     {
         return $this->belongsTo(PartsRunData::class, 'parts_run_data_id');
     }
-
-    // public function droidType()
-    // {
-    //     return $this->hasOne(DroidType::class);
-    // }
 
     public function instructions()
     {

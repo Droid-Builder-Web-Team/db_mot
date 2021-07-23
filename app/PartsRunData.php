@@ -18,7 +18,6 @@ class PartsRunData extends Model
         'user_id',
         'bc_rep_id',
         'status',
-        'parts_run_ad_id',
     ];
 
     public function partsRunAd()

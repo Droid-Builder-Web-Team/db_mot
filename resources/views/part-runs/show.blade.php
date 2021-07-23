@@ -114,12 +114,9 @@
 
                     <div class="col-12 col-md-4">
                         <div class="image-wrapper" style="display:flex; justify-content:right;">
-                            <a href="https://cdn.shopify.com/s/files/1/0174/8616/products/R_series_data_port_and_cbi_logic_set_1024x1024.jpg?v=1571706165" data-toggle="lightbox">
-                                <img src="https://cdn.shopify.com/s/files/1/0174/8616/products/R_series_data_port_and_cbi_logic_set_1024x1024.jpg?v=1571706165" class="img-fluid">
+                            <a href="{{ $data->partsRunAd->image_url }}" data-toggle="lightbox">
+                                <img src="{{ asset($data->partsRunAd->image_url) }}" class="img-fluid">
                             </a>
-                            {{-- <a href="https://unsplash.it/1200/768.jpg" data-toggle="lightbox">
-                                <img src="https://unsplash.it/600.jpg" class="img-fluid">
-                            </a> --}}
                         </div>
                     </div>
                 </div>
