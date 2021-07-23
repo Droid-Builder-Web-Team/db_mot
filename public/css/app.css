@@ -180,6 +180,10 @@
   margin-right: 16px;
 }
 
+.c-sidebar-nav-item {
+  line-height: 1;
+}
+
 .sideFooter {
   padding: 8px;
 }
@@ -333,4 +337,8 @@ body {
 
 .sub {
   padding: 0.5%;
+}
+
+.c-dark-theme select.form-control option {
+  background-color: #ffffff !important;
 }

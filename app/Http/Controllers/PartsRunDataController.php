@@ -46,9 +46,9 @@ class PartsRunDataController extends Controller
         $user = Auth::user();
 
             // Check if a part run with the exact title exists
-        if(PartsRunAd::where('title', $request->title)->exists()) {
-            return PartsRunAd::where('title', $request->title);
-        } else {
+        // if(PartsRunAd::where('title', $request->title)->exists()) {
+        //     return PartsRunAd::where('title', $request->title);
+        // } else {
             // Parts Run Data
             $partsRunData = app(PartsRunData::class)->create([
                 'droid_type_id' => 1,
@@ -57,25 +57,36 @@ class PartsRunDataController extends Controller
                 'status' => 'Active',
             ]);
 
-            // $partsRunData = app(PartsRunData::class)->create([
-            //     'droid_type_id' => 1,
-            //     'user_id' => $user->id,
-            //     'bc_rep_id' => 1,
-            //     'status' => 'Active',
-            // ]);
-
             $partsRunData->save();
 
             // Image Upload
-            $imageName = $request->image->extension();
-            $request->image->move(public_path('/img/'), $imageName);
+            if ($request->hasFile('image')) {
 
-            $file_url = 'public/img/' . $imageName;
-            $content = file_get_contents(base_path($file_url));
+                $request->validate([
+                    'image' => 'mimes:jpeg,bmp,png' // Only allow .jpg, .bmp and .png file types.
+                ]);
 
-            $content = $content . "\r\n" . $imageName;
-            file_put_contents(base_path($file_url), $content);
-            $partRunAdImage = "/img/" . $imageName;
+                // Save the file locally in the storage/public/ folder under a new folder named /product
+                $partsRunImage = $request->image->store('parts-run-images');
+
+                // Parts run data. To be created last
+                $partsRunAd = app(PartsRunAd::class)->create([
+                    'parts_run_data_id' => $partsRunData->id,
+                    'title' => $request->title,
+                    'description' => $request->description,
+                    'history' => $request->history,
+                    'price' => $request->price,
+                    'includes' => $request->includes,
+                    'image_url' => $partsRunImage,
+                    'instructions_id' => 1,
+                    'location' => $request->location,
+                    'shipping_costs' => $request->shipping_costs,
+                    'purchase_url' => $request->purchase_url,
+                    'contact_email' => $request->contact_email,
+                ]);
+
+                $partsRunAd->save();
+            }
 
 
 
@@ -97,26 +108,10 @@ class PartsRunDataController extends Controller
             //     $instructions->save();
             // }
 
-            // Parts run data. To be created last
-            $partsRunAd = app(PartsRunAd::class)->create([
-                'parts_run_data_id' => $partsRunData->id,
-                'title' => $request->title,
-                'description' => $request->description,
-                'history' => $request->history,
-                'price' => $request->price,
-                'includes' => $request->includes,
-                'image_url' => $partRunAdImage,
-                'instructions_id' => 1,
-                'location' => $request->location,
-                'shipping_costs' => $request->shipping_costs,
-                'purchase_url' => $request->purchase_url,
-                'contact_email' => $request->contact_email,
-            ]);
 
-            $partsRunAd->save();
 
             return view('part-runs.list');
-        }
+        // }
     }
 
     /**
@@ -135,7 +130,7 @@ class PartsRunDataController extends Controller
         foreach($partsRunData as $shippingCosts) {
             $shippingCostsArray = explode(",", $shippingCosts->partsRunAd->shipping_costs);
         };
-
+        // dd($partsRunData);
         return view('part-runs.show', [
             'partsRunData' => $partsRunData,
             'includesArray' => $includesArray,

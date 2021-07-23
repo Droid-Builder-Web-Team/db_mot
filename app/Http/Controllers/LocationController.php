@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Location;
 use App\Comment;
 use App\User;
+use App\Event;
+use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;
 
@@ -38,7 +40,12 @@ class LocationController extends Controller
             ->where('rateable_id', $location->id)
             ->get();
 
-        return view('location.show', compact('location'));
+	$events = Event::where('location_id', $location->id)
+		->whereDate('date', '<=', Carbon::now())
+		->orderBy('date', 'desc')
+		->get();
+
+        return view('location.show', compact('location', 'events'));
     }
 
     public function comment(Request $request, Location $location)

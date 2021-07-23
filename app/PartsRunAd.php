@@ -20,6 +20,7 @@ class PartsRunAd extends Model
         'history',
         'price',
         'includes',
+        'image_url',
         'instructions_id',
         'location',
         'shipping_costs',

@@ -57,6 +57,7 @@ Route::group(['middleware' => ['auth', 'gdpr.terms']], function() {
   Route::get('motinfo/{id}/export', 'MOTInfoController@exportMotInfo')->name('motinfo.export');
   Route::get('qr_code/{uid}', 'UserController@displayQRCode')->name('image.displayQRCode');
   Route::put('event/comment/{event}', 'EventController@comment')->name('event.comment');
+  Route::get('event/past', 'EventController@past')->name('event.past');
   Route::put('location/comment/{location}', 'LocationController@comment')->name('location.comment');
   Route::resource('location', 'LocationController', ['only' => ['show']]);
   Route::post('/location/{location}/rating', 'LocationController@store')->name('location.rating');

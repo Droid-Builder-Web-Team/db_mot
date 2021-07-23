@@ -62,11 +62,20 @@
                </div>
            </div>
            <div class="col-xs-3 col-sm-3 col-md-3">
+            <div class="form-group">
+                <strong>RC?</strong>
+                <select class="form-control" name="radio_controlled">
+                    <option value="No" <?php echo $droid->radio_controlled == "No" ? "selected" : "" ?>>No</option>
+                    <option value="Yes" <?php echo $droid->radio_controlled == "Yes" ? "selected" : "" ?>>Yes</option>   
+                </select>
+            </div>
+        </div>
+           {{-- <div class="col-xs-3 col-sm-3 col-md-3">
                <div class="form-group">
                    <strong>RC?</strong>
-                   <input type="text" name="radio_controlled" class="form-control" value="{{ $droid->radio_controller }}">
+                   <input type="text" name="radio_controlled" class="form-control" value="{{ $droid->radio_controlled }}">
                </div>
-           </div>
+           </div> --}}
          </div>
          <div class="form-row">
            <div class="col-xs-12 col-sm-12 col-md-12">

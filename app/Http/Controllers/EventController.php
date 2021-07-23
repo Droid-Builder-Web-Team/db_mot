@@ -35,7 +35,7 @@ class EventController extends Controller
         }
 
         $events = Event::whereDate('date', '>=', Carbon::now())
-                  ->orderBy('date', 'asc')->paginate(15);
+                  ->orderBy('date', 'asc')->get();
 
         $calevents = [];
 
@@ -167,6 +167,13 @@ class EventController extends Controller
         $result = $event->comments()->save($comment);
         toastr()->success('Comment Added');
         return back();
+    }
+
+    public function past() {
+	    $events = Event::whereDate('date', '<=', Carbon::now())
+                  ->orderBy('date', 'desc')->paginate(25);
+
+	    return view('event.past', compact('events'));
     }
 
 }
