@@ -64,7 +64,13 @@
                 <tr><th>Forum Username</th><td>{{ $user->username }}</td></tr>
                 <tr><th>Joined On</th><td>{{ \Carbon\Carbon::parse($user->join_date)->isoFormat($user->settings()->get('date_format'))}}</td></tr>
                 @if ($uses_pli)
-                    <tr><th>PLI Last Payed</th><td>{{ \Carbon\Carbon::parse($user->pli_date)->isoFormat($user->settings()->get('date_format')) }}</td></tr>
+                    <tr><th>PLI Last Payed</th>
+                      <td>
+                        @if($user->pli_date != NULL)
+                          {{ \Carbon\Carbon::parse($user->pli_date)->isoFormat($user->settings()->get('date_format')) }}
+                        @endif
+                      </td>
+                    </tr>
                 @endif
                 <tr><th>QR Code:</th>
                     <td>
