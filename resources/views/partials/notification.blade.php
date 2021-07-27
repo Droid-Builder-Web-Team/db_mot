@@ -9,7 +9,7 @@
             <strong>You have {{ Auth::user()->unreadNotifications->count() }} unread notifications</strong>
           </div>
 
-          @foreach(Auth::user()->unreadNotifications as $notification)
+          @foreach(Auth::user()->unreadNotifications->slice(0,10) as $notification)
             <a class="dropdown-item" href="{{ route('notifications.read', $notification->id) }}">
               <div class="row no-gutters align-items-center">
                 <div class="col-md-1">
@@ -26,7 +26,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-12 text-muted" style="overflow: hidden;">
+                    <div class="col-md-12 text-muted" style="overflow: hidden; text-overflow: ellipsis; max-width: 400px;">
                         {{ $notification->data['text'] }}
                     </div>
                 </div>
