@@ -96,6 +96,16 @@
               </div>
             @endforeach
           </div>
+          <label>Clubs</label>
+          <div class="col-md-4">
+            @foreach($clubs as $club)
+              <div class="form-check">
+                <input type="checkbox" name="clubs[]" value="{{  $club->id }}"
+                @if($user->isAdminOf($club)) checked @endif >
+                <label>{{ $club->name }}</label>
+              </div>
+            @endforeach
+          </div>
       </div>
 
 

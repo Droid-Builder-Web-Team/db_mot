@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\User;
 use App\Droid;
+use App\Club;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Yajra\Datatables\Facades\Datatables;
@@ -41,9 +42,17 @@ class UsersController extends Controller
             abort(403);
         }
         $roles = Role::all();
+        $allclubs = Club::all();
+        $clubs = [];
+        foreach($allclubs as $club) {
+          if ($club->hasOption('mot')) {
+            array_push($clubs, $club);
+          }
+        }
         return view('admin.users.edit')->with([
           'user' => $user,
           'roles' => $roles,
+          'clubs' => $clubs
         ]);
     }
 
@@ -59,6 +68,7 @@ class UsersController extends Controller
 
         if (auth()->user()->can('Edit Permissions')) {
             $user->syncRoles($request->roles);
+            $user->clubs()->sync($request->clubs);
         } else {
             abort(403);
         }
@@ -72,7 +82,7 @@ class UsersController extends Controller
         ]);
 
       try {
-          $user->update($request->except('roles'));
+          $user->update($request->except('roles', 'clubs'));
           toastr()->success('User updated successfully');
       } catch (\Illuminate\Database\QueryException $exception) {
           toastr()->error('Failed to update User');
