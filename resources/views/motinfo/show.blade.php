@@ -2,15 +2,13 @@
 
 @section('content')
 
-
 <div class="row">
   <div class="col-lg-12 margin-tb">
     <div class="card">
       <div class="card-header">
         <h4 class="title text-center">MOT Info</h4>
-        {{-- @foreach($sections as $s)
-        <a class="btn btn-primary" href="{{ route('motinfo.export', $s->id) }}">Export MOT Info</a>
-        @endforeach --}}
+        <a class="btn btn-primary" href="{{ route('motinfo.export', $sections[0]->club_id) }}">Export MOT Info</a>
+        <a class="btn btn-primary" href="{{ route('motinfo.test', $sections[0]->club_id) }}">Export MOT Test Sheet</a>
       </div>
       <div class="card-body mb-2">
           <div>

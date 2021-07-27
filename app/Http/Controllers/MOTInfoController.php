@@ -84,13 +84,42 @@ class MOTInfoController extends Controller
     public function exportMotInfo($id)
     {
         // retreive all records from db
-        $data = DB::table('mot_sections')->where('club_id', $id)->get();
+        $sections = DB::table('mot_sections')->where('club_id', $id)->get();
 
+        $lines = [];
+
+        foreach ($sections as $section)
+        {
+            $lines[$section->id] = DB::table('mot_lines')
+                ->where('section_id', $section->id)
+                ->get();
+        }
+        $club = Club::find($id);
         // share data to view
-        view()->share('sections',$data);
-        $pdf = PDF::loadView('pdfs.motinfo', $data);
+        $pdf = PDF::loadView('pdfs.motinfo', compact('sections', 'lines', 'club'));
 
         // download PDF file with download method
-        return $pdf->download('pdfs.motinfo.pdf');
+        return $pdf->download('MOT Info.pdf');
+    }
+
+    public function exportMotTest($id)
+    {
+        // retreive all records from db
+        $sections = DB::table('mot_sections')->where('club_id', $id)->get();
+
+        $lines = [];
+
+        foreach ($sections as $section)
+        {
+            $lines[$section->id] = DB::table('mot_lines')
+                ->where('section_id', $section->id)
+                ->get();
+        }
+        $club = Club::find($id);
+        // share data to view
+        $pdf = PDF::loadView('pdfs.mottest', compact('sections', 'lines', 'club'));
+
+        // download PDF file with download method
+        return $pdf->download('MOT Test.pdf');
     }
 }
