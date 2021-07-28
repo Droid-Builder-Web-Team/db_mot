@@ -111,7 +111,8 @@ class PartsRunDataController extends Controller
 
 
 
-            return view('part-runs.list');
+            return redirect()->route('part-runs.index');
+
         // }
     }
 
