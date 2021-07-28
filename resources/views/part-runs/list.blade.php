@@ -24,7 +24,7 @@
                 @foreach($partsRunData as $data)
                 <tr>
                     <td>{{ $data->partsRunAd->title }}</td>
-                    <td>{{ $data->droidType->name }}</td>
+                    <td>{{ $data->club->name }}</td>
                     <td>{{ $data->user->username }}</td>
                     @if($data->status = "Active")
                     <th class="status-class">

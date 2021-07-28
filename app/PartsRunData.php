@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Club;
 
 class PartsRunData extends Model
 {
@@ -38,5 +39,10 @@ class PartsRunData extends Model
     public function bcRep()
     {
         return $this->hasOne(BcRep::class);
+    }
+
+    public function club()
+    {
+        return $this->belongsTo(Club::class);
     }
 }
