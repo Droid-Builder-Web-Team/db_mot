@@ -38,7 +38,7 @@ class PartsRunData extends Model
 
     public function bcRep()
     {
-        return $this->hasOne(BcRep::class);
+        return $this->hasOne(User::class, 'id', 'bc_rep_id');
     }
 
     public function club()

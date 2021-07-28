@@ -6,7 +6,7 @@
         <div class="card">
             @foreach($partsRunData as $data)
             <div class="card-header">
-                <h4 class="text-center title">Parts Run #{{ $data->id }} - BC Rep: olivers - {{ $data->status }}</h4>
+                <h4 class="text-center title">Parts Run #{{ $data->id }} - BC Rep: {{$data->bcrep->forename }} - {{ $data->status }}</h4>
                 <a class="btn btn-primary" href={{ route('part-runs.edit', $data->id) }}>Edit Run</a>
             </div>
             <div class="card-body">
