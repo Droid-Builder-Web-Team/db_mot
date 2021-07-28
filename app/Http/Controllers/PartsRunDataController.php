@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Club;
 use App\PartsRunAd;
 use App\Instructions;
 use App\PartsRunData;
@@ -33,11 +34,11 @@ class PartsRunDataController extends Controller
      */
     public function create()
     {
-        $bcRepUsers = User::permission('BC Rep')->get();
-        
+        $clubs = Club::all();
+
         return view('part-runs.create', [
-            'bcRepUsers' => $bcRepUsers,
-        ]);    
+            'clubs' => $clubs,
+        ]);
     }
 
     /**
@@ -48,17 +49,14 @@ class PartsRunDataController extends Controller
      */
     public function store(Request $request)
     {
-        $user = Auth::user();
+            $user = Auth::user();
             // Parts Run Data
-        // dd($request->all());
             $partsRunData = app(PartsRunData::class)->create([
-                'club_id' => 1,
+                'club_id' => $request->club_id,
                 'user_id' => $user->id,
-                'bc_rep_id' => 1,
+                'bc_rep_id' => $request->bc_rep_id,
                 'status' => 'Active',
             ]);
-
-            dd($partsRunData);
 
             $partsRunData->save();
 

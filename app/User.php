@@ -211,8 +211,4 @@ class User extends Authenticatable implements MustVerifyEmail, Rater, Auditable
         return $this->hasMany(PartsRunAd::class);
     }
 
-    public function bcRep()
-    {
-        return $this->hasOne(BcRep::class);
-    }
 }
