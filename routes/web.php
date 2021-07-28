@@ -38,6 +38,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
   Route::get('mot/{droid_id}', 'MOTController@create')->name('mot.create');
   Route::put('mot/comment/{mot}', 'MOTController@comment')->name('mot.comment');
   Route::resource('/mot', 'MOTController', ['only' => ['store']]);
+  Route::resource('/motdesign', 'MOTDesignController', ['only' => ['edit', 'update']]);
   Route::get('audits', 'AuditController@index')->name('audits.index');
   Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index')->name('logs.index');
 });

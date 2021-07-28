@@ -117,7 +117,7 @@ class Event extends Model implements \Acaronlex\LaravelCalendar\Event, Auditable
 
     public function createdEventNotification($newevent)
      {
-        $webHook = env('EVENT_DISCORD_HOOK', 'none');
+        $webHook = config('discord.eventhook');
         if($webHook != 'none') {
             return Http::post( $webHook, [
                 'content' => "A new event has been created in the Droid Builders Portal. Click below to view the event.",
@@ -135,7 +135,7 @@ class Event extends Model implements \Acaronlex\LaravelCalendar\Event, Auditable
 
     public function updatedEventNotification($event)
      {
-        $webHook = env('EVENT_DISCORD_HOOK', 'none');
+        $webHook = config('discord.eventhook');
         if($webHook != 'none') {
             return Http::post( $webHook, [
                 'content' => "An event has been updated in the Droid Builders Portal. Click below to view the event.",
@@ -153,7 +153,7 @@ class Event extends Model implements \Acaronlex\LaravelCalendar\Event, Auditable
 
     public function deletedEventNotification($event)
      {
-        $webHook = env('EVENT_DISCORD_HOOK', 'none');
+        $webHook = config('discord.eventhook');
         if($webHook != 'none') {
             return Http::post( $webHook, [
                 'content' => "An event has been deleted in the Droid Builders Portal. ",

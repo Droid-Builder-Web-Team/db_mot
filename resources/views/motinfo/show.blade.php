@@ -9,6 +9,9 @@
         <h4 class="title text-center">MOT Info</h4>
         <a class="btn btn-primary" href="{{ route('motinfo.export', $sections[0]->club_id) }}">Export MOT Info</a>
         <a class="btn btn-primary" href="{{ route('motinfo.test', $sections[0]->club_id) }}">Export MOT Test Sheet</a>
+        @can('Edit Clubs')
+        <a class="btn btn-primary" href="{{ route('admin.motdesign.edit', $sections[0]->club_id) }}">Edit MOT</a>
+        @endcan
       </div>
       <div class="card-body mb-2">
           <div>
