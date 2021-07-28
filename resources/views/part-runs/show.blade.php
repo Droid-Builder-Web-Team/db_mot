@@ -34,7 +34,7 @@
                                         <p class="seller"><strong>Seller:</strong> {{ $data->user->username }}</p>
                                     </div>
                                     <div class="col-12 col-md-6">
-                                        <p class="droid"><strong>Droid:</strong> {{ $data->droidType->name }}</p>
+                                        <p class="droid"><strong>Club:</strong> {{ $data->club->name }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -52,7 +52,7 @@
                                                     <li>{{ $s }}</li>
                                                 @endforeach
                                             </ul>
-                                            
+
                                         </div>
                                     </div>
                                 </div>
@@ -70,7 +70,7 @@
                             <div class="row">
                                 <div class="includes">
                                     <div class="col-12">
-                                        <p class="includes"><strong>Included:</strong> 
+                                        <p class="includes"><strong>Included:</strong>
                                             <ul>
                                             @foreach($includesArray as $i)
                                                 <li>{{ $i }}</li>

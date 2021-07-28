@@ -44,9 +44,9 @@
                         <div class="col-md-6 mb-3">
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text">Droid</span>
+                                    <span class="input-group-text">Club</span>
                                 </div>
-                                <input type="text" name="droid" value="{{ $data->droidType->name }}" class="form-control">
+                                <input type="text" name="droid" value="{{ $data->club->name }}" class="form-control">
                             </div>
                         </div>
                     </div>
