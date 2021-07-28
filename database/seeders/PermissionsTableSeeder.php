@@ -90,6 +90,12 @@ class PermissionsTableSeeder extends Seeder
                 'name' => 'Edit Permissions',
                 'guard_name' => 'web',
             ),
+            12 =>
+            array (
+                'id' => 23,
+                'name' => 'BC Rep',
+                'guard_name' => 'web',
+            ),
         ));
 
 

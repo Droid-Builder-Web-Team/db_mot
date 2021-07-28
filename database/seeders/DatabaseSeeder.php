@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call(MemberSeeder::class);
 
         // Parts Run Example - Disable in Production.
-        $this->call(PartsRunExampleSeeder::class);
+        // $this->call(PartsRunExampleSeeder::class);
 
         // Seeders
         $this->call(AchievementsTableSeeder::class);

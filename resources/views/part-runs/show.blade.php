@@ -20,8 +20,8 @@
                                     </div>
                                     <div class="col-12 col-md-6">
                                         <div class="d-flex">
-                                            <p class="pr-1 price"><strong>Price:</strong> </p>
-                                            @money($data->partsRunAd->price)
+                                            <p class="pr-1 price"><strong>Price:</strong></p>
+                                            <?php echo '£' . number_format($data->partsRunAd->price, 2); ?>
                                         </div>
                                     </div>
                                 </div>

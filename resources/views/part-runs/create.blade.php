@@ -11,16 +11,31 @@
                 <form action="{{ route('part-runs.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-row">
-                        <div class="col-md-6 mb-3">
-                            <div class="input-group mb-3">
+                        <div class="mb-3 col-md-12">
+                            <div class="mb-3 input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">BC Rep</div>
+                                    <select name="bc_rep">
+                                        <option value="null">Select Your BC Rep</option>
+                                        @foreach($bcRepUsers as $u)
+                                            <option name="bc_rep_id" value={{ $u->id }}>{{ $u->username }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="mb-3 col-md-6">
+                            <div class="mb-3 input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Title</span>
                                 </div>
                                 <input type="text" name="title" class="form-control" placeholder="Title">
                             </div>
                         </div>
-                        <div class="col-md-6 mb-3">
-                            <div class="input-group mb-3">
+                        <div class="mb-3 col-md-6">
+                            <div class="mb-3 input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Price</span>
                                 </div>
@@ -30,35 +45,35 @@
                     </div>
 
                     <div class="form-row">
-                        <div class="col-md-6 mb-3">
-                            <div class="input-group mb-3">
+                        <div class="mb-3 col-md-6">
+                            <div class="mb-3 input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">User</span>
                                 </div>
                                 <input type="text" name="user"  class="form-control">
                             </div>
                         </div>
-                        <div class="col-md-6 mb-3">
-                            <div class="input-group mb-3">
+                        <div class="mb-3 col-md-6">
+                            <div class="mb-3 input-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text">Droid</span>
+                                    <span class="input-group-text">Club</span>
                                 </div>
-                                <input type="text" name="droid"  class="form-control">
+                                <input type="text" name="club"  class="form-control">
                             </div>
                         </div>
                     </div>
 
                     <div class="form-row">
-                        <div class="col-md-6 mb-3">
-                            <div class="input-group mb-3">
+                        <div class="mb-3 col-md-6">
+                            <div class="mb-3 input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Location</span>
                                 </div>
                                 <input type="text" name="location"  class="form-control">
                             </div>
                         </div>
-                        <div class="col-md-6 mb-3">
-                            <div class="input-group mb-3">
+                        <div class="mb-3 col-md-6">
+                            <div class="mb-3 input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Shipping Costs</span>
                                 </div>
@@ -68,8 +83,8 @@
                     </div>
 
                     <div class="form-row">
-                        <div class="col-md-12 mb-3">
-                            <div class="input-group mb-3">
+                        <div class="mb-3 col-md-12">
+                            <div class="mb-3 input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Description</span>
                                 </div>
@@ -79,8 +94,8 @@
                     </div>
 
                     <div class="form-row">
-                        <div class="col-md-12 mb-3">
-                            <div class="input-group mb-3">
+                        <div class="mb-3 col-md-12">
+                            <div class="mb-3 input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Includes</span>
                                 </div>
@@ -90,16 +105,16 @@
                     </div>
 
                     <div class="form-row">
-                        <div class="col-md-6 mb-3">
-                            <div class="input-group mb-3">
+                        <div class="mb-3 col-md-6">
+                            <div class="mb-3 input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Purchase URL</span>
                                 </div>
                                 <input type="text" name="purchase_url"  class="form-control">
                             </div>
                         </div>
-                        <div class="col-md-6 mb-3">
-                            <div class="input-group mb-3">
+                        <div class="mb-3 col-md-6">
+                            <div class="mb-3 input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Contact Email</span>
                                 </div>
@@ -109,16 +124,16 @@
                     </div>
 
                     <div class="form-row">
-                        <div class="col-md-12 mb-3">
-                            <div class="input-group mb-3">
+                        <div class="mb-3 col-md-12">
+                            <div class="mb-3 input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Instructions</span>
                                     <input type="file" name="instructions" class="form-control-file" id="exampleFormControlFile1">
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-12 mb-3">
-                            <div class="input-group mb-3">
+                        <div class="mb-3 col-md-12">
+                            <div class="mb-3 input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Image</span>
                                     <input type="file" name="image" class="form-control-file" id="exampleFormControlFile1">
@@ -128,8 +143,8 @@
                     </div>
 
                     <div class="form-row">
-                        <div class="col-md-12 mb-3">
-                            <div class="input-group mb-3">
+                        <div class="mb-3 col-md-12">
+                            <div class="mb-3 input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">History</span>
                                 </div>
@@ -139,7 +154,7 @@
                     </div>
 
                     <div class="form-row">
-                        <div class="col-xs-12 col-sm-12 col-md-12 text-center mb-3">
+                        <div class="mb-3 text-center col-xs-12 col-sm-12 col-md-12">
                         <button type="submit" style="width:auto;" class="btn btn-mot">Submit</button>
                         </div>
                     </div>
