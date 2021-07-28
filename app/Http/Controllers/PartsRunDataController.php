@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Instructions;
+use App\User;
 use App\PartsRunAd;
+use App\Instructions;
 use App\PartsRunData;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -32,7 +33,11 @@ class PartsRunDataController extends Controller
      */
     public function create()
     {
-        return view('part-runs.create');
+        $bcRepUsers = User::permission('BC Rep')->get();
+        
+        return view('part-runs.create', [
+            'bcRepUsers' => $bcRepUsers,
+        ]);    
     }
 
     /**
@@ -44,18 +49,16 @@ class PartsRunDataController extends Controller
     public function store(Request $request)
     {
         $user = Auth::user();
-
-            // Check if a part run with the exact title exists
-        // if(PartsRunAd::where('title', $request->title)->exists()) {
-        //     return PartsRunAd::where('title', $request->title);
-        // } else {
             // Parts Run Data
+        // dd($request->all());
             $partsRunData = app(PartsRunData::class)->create([
-                'droid_type_id' => 1,
+                'club_id' => 1,
                 'user_id' => $user->id,
                 'bc_rep_id' => 1,
                 'status' => 'Active',
             ]);
+
+            dd($partsRunData);
 
             $partsRunData->save();
 
