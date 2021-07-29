@@ -22,7 +22,10 @@ class UsersDataTable extends DataTable
       return datatables()
           ->eloquent($query)
           ->addColumn('pli', function(User $user) {
-                $pli = $user->validPLI() ? "Valid" : "Expired";
+                if($user->pli_date == NULL)
+                  $pli = "-";
+                else
+                  $pli = $user->validPLI() ? "Valid" : "Expired";
                 return $pli;
             })
           ->addColumn('droid_count', function(User $user) {

@@ -149,7 +149,7 @@ class User extends Authenticatable implements MustVerifyEmail, Rater, Auditable
 
     public function pli_expires()
     {
-        $expires = Carbon::parse($this->join_date)->addYear(1);
+        $expires = Carbon::parse($this->pli_date)->addYear(1);
         return $expires;
 
     }
