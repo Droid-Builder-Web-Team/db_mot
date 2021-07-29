@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Database\Eloquent\Model;
 use OwenIt\Auditing\Contracts\Auditable;
+use Illuminate\Support\Facades\Storage;
 
 class Event extends Model implements \Acaronlex\LaravelCalendar\Event, Auditable
 {
@@ -112,8 +113,13 @@ class Event extends Model implements \Acaronlex\LaravelCalendar\Event, Auditable
      * @return int
      */
     public function getId() {
-		return $this->id;
-	}
+		    return $this->id;
+	  }
+
+    public function hasImage() {
+        $filePath = 'events/'.$this->id.'/event_image.jpg';
+        return Storage::exists($filePath);
+    }
 
     public function createdEventNotification($newevent)
      {

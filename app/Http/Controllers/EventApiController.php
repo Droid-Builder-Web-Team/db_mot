@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Event;
 use App\Location;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Response;
 
 class EventApiController extends Controller
 {
@@ -46,5 +48,18 @@ class EventApiController extends Controller
           $charity += $event->charity_raised;
         }
         return response($charity, 200);
+    }
+
+    public function showimage($event_id)
+    {
+        $filePath = 'events/'.$event_id.'/event_image.jpg';
+
+        $file = Storage::get($filePath);
+        $type = Storage::mimeType($filePath);
+
+        $response = Response::make($file, 200);
+        $response->header("Content-Type", $type);
+
+        return $response;
     }
 }

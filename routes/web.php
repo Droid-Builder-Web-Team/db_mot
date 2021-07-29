@@ -29,6 +29,8 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
   Route::get('events/delete_comment/{id}', 'EventsController@delete_comment')->name('events.delete_comment');
   Route::get('events/attendance/confirm/{event_id}/{user_id}', 'EventsController@confirm')->name('events.attendance.confirm');
   Route::get('events/attendance/deny/{event_id}/{user_id}', 'EventsController@deny')->name('events.attendance.deny');
+  Route::get('events/image/{event_id}', 'EventsController@addimage')->name('events.addimage');
+  Route::post('events/image', 'EventsController@storeimage')->name('events.storeimage');
   Route::resource('/events', 'EventsController', ['except' => ['show']]);
   Route::put('/achievements/award', 'AchievementsController@award')->name('achievements.award');
   Route::resource('/achievements', 'AchievementsController', ['except' => ['show']]);
@@ -112,3 +114,4 @@ Route::post('ipn/notify','PaypalController@postNotify');
 Route::get('/topps', 'ToppsController@index')->name('topps');
 Route::get('topps_image/{uid}/{view}/{size?}', 'ToppsController@displayToppsImage')
               ->name('image.displayToppsImage');
+Route::get('events/image/show/{event_id}', 'EventApiController@showimage')->name('events.showimage');

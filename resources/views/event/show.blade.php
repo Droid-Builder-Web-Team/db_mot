@@ -65,6 +65,13 @@
                 <a target="_blank" href="{{ $link->ics() }}" class="btn-sm btn-link">Apple</a>
               </div>
               <div class="col-md-4">
+                @if($event->hasImage())
+                <div class="image-wrapper" style="display:flex; justify-content:right;">
+                    <a href="{{ route('events.showimage', $event->id) }}" data-toggle="lightbox">
+                        <img src="{{ route('events.showimage', $event->id) }}" class="img-fluid">
+                    </a>
+                </div>
+                @endif
                 @if($event->location->name == "No Location")
                   <!-- No Location -->
                 @elseif ($event->location->name == "Online")
@@ -96,10 +103,14 @@
                 </span>
               </div>
             </div>
-            <a class="btn btn-edit" style="width:auto;" href="{{ route('admin.events.edit',$event->id) }}">Edit</a>
-            <div id="shareBtn" class="btn btn-success clearfix">Share to Facebook</div>
-            <script>
+            @can('Edit Events')
+              <a class="btn btn-edit" style="width:auto;" href="{{ route('admin.events.edit',$event->id) }}">Edit</a>
+              <a class="btn btn-edit" style="width:auto;" href="{{ route('admin.events.addimage',[ 'event_id' => $event->id]) }}">Add Image</a>
+              <div id="shareBtn" class="btn btn-success clearfix">Share to Facebook</div>
 
+            @endcan
+
+<script>
 document.getElementById('shareBtn').onclick = function() {
   var body = 'A new event has been added to the Droid Builders Portal. ';
   body += 'Follow the link to see more details and to register your interest or ask any questions';
@@ -317,4 +328,12 @@ document.getElementById('shareBtn').onclick = function() {
       </div>
       @endif
     </div>
+
+<script>
+    $(document).on('click', '[data-toggle="lightbox"]', function (event) {
+        $(this).ekkoLightbox();
+        event.preventDefault();
+    });
+</script>
+
 @endsection

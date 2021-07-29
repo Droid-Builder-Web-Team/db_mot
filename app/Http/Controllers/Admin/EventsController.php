@@ -13,6 +13,8 @@ use App\DataTables\EventsDataTable;
 use App\Notifications\EventCreated;
 use App\Notifications\EventChanged;
 use App\Notifications\EventCancelled;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Response;
 
 
 class EventsController extends Controller
@@ -120,7 +122,8 @@ class EventsController extends Controller
           $event->update($newevent);
           toastr()->success('Event updated successfully');
         } catch (\Illuminate\Database\QueryException $exception) {
-          toastr()->error('Failed to update Event');
+          toastr()->error('Failed to upuse Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Response;date Event');
         }
 
 
@@ -171,4 +174,25 @@ class EventsController extends Controller
         $user->event($event_id)->delete();
         return back();
     }
+
+    public function addimage($event_id)
+    {
+        $event = Event::find($event_id);
+        return view('admin.events.addimage', compact('event'));
+    }
+
+    public function storeimage(Request $request)
+    {
+        // Check image
+        if ($request->hasFile('image')) {
+            $request->validate([
+                'image' => 'mimes:jpeg,bmp,png' // Only allow .jpg, .bmp and .png file types.
+            ]);
+        }
+
+        $eventImage = $request->image->storeAs('events/'.$request->event_id.'/', 'event_image.jpg');
+
+        return redirect()->route('event.show', $request->event_id);
+    }
+
 }
