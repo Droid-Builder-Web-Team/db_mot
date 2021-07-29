@@ -28,12 +28,12 @@
                     <td>{{ $data->user->username }}</td>
                     @if($data->status = "Active")
                     <th class="status-class">
-                      <div class="active"></div>
+                      <div class="pr-active"></div>
                       {{ $data->status }}
                     </th>
                     @else
                     <th>
-                      <div class="inactive"></div>
+                      <div class="pr-inactive"></div>
                       {{ $data->status }}
                     </th>
                     @endif
