@@ -19,7 +19,7 @@
 </div>
 <div class="row">
   <div class="col-md-12">
-    <p>Welcome {{ $user->forename }} to the Droid Builders UK Portal.</p>
+    <p>Welcome to the Droid Builders UK Portal, {{ $user->forename }} .</p>
     <p>The Portal is designed to help you keep track of club activities, along with the MOT status of your droids and your PLI payments.</p>
   </div>
 </div>
