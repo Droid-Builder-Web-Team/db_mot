@@ -72,6 +72,7 @@
                     </a>
                 </div>
                 @endif
+                <div>
                 @if($event->location->name == "No Location")
                   <!-- No Location -->
                 @elseif ($event->location->name == "Online")
@@ -102,6 +103,7 @@
                   <a class="btn-sm btn-link" href="{{ route('location.show', $event->location->id )}}">{{ $event->location->name}}</a>
                 </span>
               </div>
+            </div>
             </div>
             @can('Edit Events')
               <a class="btn btn-edit" style="width:auto;" href="{{ route('admin.events.edit',$event->id) }}">Edit</a>
