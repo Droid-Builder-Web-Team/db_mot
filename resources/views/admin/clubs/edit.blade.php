@@ -54,11 +54,11 @@
                 <div class="form-row">
                     <label>Options</label>
                     <div class="col-md-4">
-                    @foreach(['topps', 'mot', 'tier_two'] as $option)
+                    @foreach($options as $option)
                         <div class="form-check">
-                            <input type="checkbox" name="options[]" value="{{ $option }}"
-                            @if($club->hasOption($option)) checked @endif >
-                            <label>{{ $option }}</label>
+                            <input type="checkbox" name="options[]" value="{{ $option->id }}"
+                            @if($club->hasOption($option->name)) checked @endif >
+                            <label>{{ $option->name }}</label>
                         </div>
                     @endforeach
                     </div>

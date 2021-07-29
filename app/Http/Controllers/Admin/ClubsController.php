@@ -64,7 +64,8 @@ class ClubsController extends Controller
      */
     public function edit(Club $club)
     {
-        return view('admin.clubs.edit')->with('club', $club);
+        $options = ClubOptions::all();
+        return view('admin.clubs.edit', compact('club', 'options'));
     }
 
     /**
@@ -80,17 +81,7 @@ class ClubsController extends Controller
             'name' => 'required'
         ]);
 
-        $options = $request->get('options');
-        $club_options = [];
-        if(is_array($options)) {
-          foreach($options as $option)
-          {
-              $find = ClubOptions::where('name', $option)->first();
-              $club_options[] = $find->id;
-          }
-        }
-
-        $club->options()->sync($club_options);
+        $club->options()->sync($request->options);
 
         $club->update($request->all());
 

@@ -45,7 +45,7 @@ class UsersController extends Controller
         $allclubs = Club::all();
         $clubs = [];
         foreach($allclubs as $club) {
-          if ($club->hasOption('mot')) {
+          if ($club->hasOption('mot') || $club->hasOption('partruns')) {
             array_push($clubs, $club);
           }
         }
