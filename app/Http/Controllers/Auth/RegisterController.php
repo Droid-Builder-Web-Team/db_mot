@@ -105,6 +105,7 @@ class RegisterController extends Controller
                 {
                     $admin->notify(new NewUser($user));
                 }
+                Mail::to($user)->send(new App\Mail\WelcomeUser($user));
                 return $user;
 
         } else {
