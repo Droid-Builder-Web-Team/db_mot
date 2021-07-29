@@ -114,8 +114,8 @@
 
                     <div class="col-12 col-md-4">
                         <div class="image-wrapper" style="display:flex; justify-content:right;">
-                            <a href="{{ $data->partsRunAd->image_url }}" data-toggle="lightbox">
-                                <img src="{{ asset($data->partsRunAd->image_url) }}" class="img-fluid">
+                            <a href="{{ route('image.displayPartsRunImage', $data->id) }}" data-toggle="lightbox">
+                                <img src="{{ route('image.displayPartsRunImage', $data->id) }}" class="img-fluid">
                             </a>
                         </div>
                     </div>

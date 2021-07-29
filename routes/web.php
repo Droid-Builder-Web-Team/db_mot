@@ -87,6 +87,8 @@ Route::group(['middleware' => ['auth', 'gdpr.terms']], function() {
 
   // Parts Runs Extension
   Route::resource('/part-runs', 'PartsRunDataController');
+  Route::get('parts-run/image/{run_id}/{number?}/{size?}', 'PartsRunImageController@show')
+                    ->name('image.displayPartsRunImage');
   Route::get('/request-a-part-run', 'PartsRunDataController@requestPartsRun')->name('request');
   Route::get('/parts-run-info', function() {
     return view('part-runs.info');

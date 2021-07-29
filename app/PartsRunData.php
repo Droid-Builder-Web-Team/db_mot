@@ -6,11 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Club;
+use App\PartsRunImage;
+use App\PartsRunAd;
+use App\User;
 
 class PartsRunData extends Model
 {
     use HasFactory;
-    use SoftDeletes;
 
     protected $table = 'parts_run_data';
 
@@ -26,11 +28,6 @@ class PartsRunData extends Model
         return $this->hasOne(PartsRunAd::class);
     }
 
-    public function droidType()
-    {
-        return $this->belongsTo(DroidType::class);
-    }
-
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -44,5 +41,10 @@ class PartsRunData extends Model
     public function club()
     {
         return $this->belongsTo(Club::class);
+    }
+
+    public function images()
+    {
+        return $this->hasMany(PartsRunImage::class);
     }
 }

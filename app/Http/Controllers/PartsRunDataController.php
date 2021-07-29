@@ -7,6 +7,7 @@ use App\Club;
 use App\PartsRunAd;
 use App\Instructions;
 use App\PartsRunData;
+use App\PartsRunImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StorePartsRunRequest;
@@ -20,7 +21,7 @@ class PartsRunDataController extends Controller
      */
     public function index()
     {
-        $partsRunData = PartsRunData::with(['partsRunAd', 'droidType'])->get();
+        $partsRunData = PartsRunData::with(['partsRunAd'])->get();
 
         return view('part-runs.list', [
             'partsRunData'=> $partsRunData,
@@ -50,6 +51,14 @@ class PartsRunDataController extends Controller
     public function store(Request $request)
     {
             $user = Auth::user();
+
+            // Check image
+            if ($request->hasFile('image')) {
+                $request->validate([
+                    'image' => 'mimes:jpeg,bmp,png' // Only allow .jpg, .bmp and .png file types.
+                ]);
+            }
+
             // Parts Run Data
             $partsRunData = app(PartsRunData::class)->create([
                 'club_id' => $request->club_id,
@@ -60,36 +69,30 @@ class PartsRunDataController extends Controller
 
             $partsRunData->save();
 
-            // Image Upload
-            if ($request->hasFile('image')) {
+            // Save image
+            $partsRunImage = $request->image->store('parts-run/'.$partsRunData->id.'/');
+            $partsRunImage = app(PartsRunImage::class)->create([
+                'parts_run_data_id' => $partsRunData->id,
+                'filename' => basename($partsRunImage),
+                'filetype' => $request->file('image')->getMimeType()
+            ]);
 
-                $request->validate([
-                    'image' => 'mimes:jpeg,bmp,png' // Only allow .jpg, .bmp and .png file types.
-                ]);
+            // Parts run data. To be created last
+            $partsRunAd = app(PartsRunAd::class)->create([
+                'parts_run_data_id' => $partsRunData->id,
+                'title' => $request->title,
+                'description' => $request->description,
+                'history' => $request->history,
+                'price' => $request->price,
+                'includes' => $request->includes,
+                'instructions_id' => 1,
+                'location' => $request->location,
+                'shipping_costs' => $request->shipping_costs,
+                'purchase_url' => $request->purchase_url,
+                'contact_email' => $request->contact_email,
+            ]);
 
-                // Save the file locally in the storage/public/ folder under a new folder named /product
-                $partsRunImage = $request->image->store('parts-run-images');
-
-                // Parts run data. To be created last
-                $partsRunAd = app(PartsRunAd::class)->create([
-                    'parts_run_data_id' => $partsRunData->id,
-                    'title' => $request->title,
-                    'description' => $request->description,
-                    'history' => $request->history,
-                    'price' => $request->price,
-                    'includes' => $request->includes,
-                    'image_url' => $partsRunImage,
-                    'instructions_id' => 1,
-                    'location' => $request->location,
-                    'shipping_costs' => $request->shipping_costs,
-                    'purchase_url' => $request->purchase_url,
-                    'contact_email' => $request->contact_email,
-                ]);
-
-                $partsRunAd->save();
-            }
-
-
+            $partsRunAd->save();
 
             // Instructions Upload
             // $validated = $request->validate([
@@ -108,9 +111,6 @@ class PartsRunDataController extends Controller
 
             //     $instructions->save();
             // }
-
-
-
             return redirect()->route('part-runs.index');
 
         // }

@@ -20,7 +20,6 @@ class PartsRunAd extends Model
         'history',
         'price',
         'includes',
-        'image_url',
         'instructions_id',
         'location',
         'shipping_costs',
@@ -33,8 +32,4 @@ class PartsRunAd extends Model
         return $this->belongsTo(PartsRunData::class, 'parts_run_data_id');
     }
 
-    public function instructions()
-    {
-        return $this->hasMany(Instructions::class);
-    }
 }

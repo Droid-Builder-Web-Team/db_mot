@@ -21,6 +21,6 @@ class Instructions extends Model
 
     public function partsRunAd()
     {
-        return $this->belongsTo(PartsRunAd::class);
+        return $this->belongsTo(PartsRunData::class);
     }
 }
