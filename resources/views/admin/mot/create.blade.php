@@ -9,7 +9,8 @@
     </div>
 </div>
 
-<form action="{{ route('admin.mot.store') }}" method="POST">
+
+<form id="motform" action="{{ route('admin.mot.store') }}" method="POST">
     @csrf
 
     <input type=hidden name="droid_id" value="{{ $droid->id }}">
@@ -54,7 +55,13 @@
         </div>
         @endforeach
       @endforeach
-      <input type=submit value=Submit name=new_mot>
+      <div class="text-right">
+
+        <button class="submit btn btn-block btn-primary" type="submit">
+        <i class="loading-icon fa-lg fas fa-spinner fa-spin invisible"></i> &nbsp;
+        <i class="czi-user mr-2 ml-n1"></i>
+        <span class="btn-txt">{{ __('Submit') }}</span></button>
+      </div>
 </form>
 
 <script>
@@ -74,4 +81,17 @@
 		}
 	}
 </script>
+
+<script>
+$(document).ready(function() {
+  $("#motform").submit(function() {
+    $(".result").text("");
+    $(".loading-icon").removeClass("invisible");
+    $(".submit").attr("disabled", true);
+    $(".btn-txt").text("Processing ...");
+  });
+});
+</script>
+
+
 @endsection
