@@ -26,7 +26,7 @@ class MemberSeeder extends Seeder
         ]);
 
         $adminRole = DB::table('model_has_roles')->insert([
-            'role_id' => 2,
+            'role_id' => 6,
             'model_type' => 'App\User',
             'model_id' => 1
         ]);

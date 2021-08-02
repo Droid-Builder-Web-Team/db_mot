@@ -33,6 +33,11 @@ class ClubOptionsTableSeeder extends Seeder
                 'id' => 4,
                 'name' => 'tier_two',
             ),
+            3 =>
+            array (
+                'id' => 9,
+                'name' => 'partruns',
+            ),
         ));
 
 
