@@ -93,6 +93,7 @@
                     </div>
                 </div>
             </div>
+          </div>
 
             @foreach ($sections as $section)
                 <div class="row">
