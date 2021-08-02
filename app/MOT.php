@@ -16,6 +16,15 @@ class MOT extends Model implements Auditable
 
     protected $table = 'mot';
 
+    public $fillable = [
+        'date',
+        'location',
+        'droid_id',
+        'approved',
+        'mot_type',
+        'user',
+    ];
+
     protected $guarded = [
     ];
 
