@@ -22,6 +22,9 @@ class CreateEventsTable extends Migration
             $table->text('report_link')->nullable();
             $table->date('date');
             $table->float('charity_raised', 10, 0)->default(0);
+            $table->boolean('public');
+            $table->boolean('mot');
+            $table->text('url')->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
         });

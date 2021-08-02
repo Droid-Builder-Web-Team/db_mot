@@ -37,6 +37,7 @@ class CreateDroidsTable extends Migration
             $table->string('active', 3)->default('on');
             $table->timestamp('last_updated')->useCurrent();
             $table->integer('club_id');
+            $table->text('build_log')->nullable();
             $table->string('public', 3)->default('No');
         });
     }

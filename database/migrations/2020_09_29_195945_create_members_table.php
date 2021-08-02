@@ -41,6 +41,7 @@ class CreateMembersTable extends Migration
             $table->dateTime('last_activity')->nullable();
             $table->tinyInteger('accepted_gdpr')->nullable();
             $table->tinyInteger('isAnonymized')->default(0);
+            $table->json('settings')->nullable();
         });
     }
 
