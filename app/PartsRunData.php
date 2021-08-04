@@ -17,10 +17,10 @@ class PartsRunData extends Model
     protected $table = 'parts_run_data';
 
     protected $fillable = [
-        'club_id',
         'user_id',
-        'bc_rep_id',
+        'club_id',
         'status',
+        'bc_rep_id',
     ];
 
     public function partsRunAd()

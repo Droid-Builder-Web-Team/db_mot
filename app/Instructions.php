@@ -14,13 +14,18 @@ class Instructions extends Model
     protected $table = 'instructions';
 
     protected $fillable = [
-        'title',
-        'filepath',
-        'url'
+        'parts_run_data_id',
+        'filename',
+        'filetype'
     ];
+
+    public function partsRunData()
+    {
+        return $this->belongsTo(PartsRunData::class);
+    }
 
     public function partsRunAd()
     {
-        return $this->belongsTo(PartsRunData::class);
+        return $this->belongsTo(PartsRunAd::class);
     }
 }

@@ -10,7 +10,6 @@
             <div class="card-body">
                 <form action="{{ route('part-runs.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
-
                     <div class="form-row">
                         <div class="mb-3 col-md-6">
                             <div class="mb-3 input-group">
@@ -88,12 +87,21 @@
                     </div>
 
                     <div class="form-row">
-                        <div class="mb-3 col-md-12">
+                        <div class="mb-3 col-md-6">
                             <div class="mb-3 input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Includes</span>
                                 </div>
                                 <textarea type="text" name="includes" class="form-control"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="mb-3 col-md-6">
+                            <div class="mb-3 input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">History</span>
+                                </div>
+                                <textarea type="text" name="history"  class="form-control"></textarea>
                             </div>
                         </div>
                     </div>
@@ -118,7 +126,7 @@
                     </div>
 
                     <div class="form-row">
-                        <div class="mb-3 col-md-12">
+                        <div class="mb-3 col-md-6">
                             <div class="mb-3 input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Instructions</span>
@@ -126,23 +134,12 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="mb-3 col-md-12">
+                        <div class="mb-3 col-md-6">
                             <div class="mb-3 input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Image</span>
                                     <input type="file" name="image" class="form-control-file" id="exampleFormControlFile1">
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="mb-3 col-md-12">
-                            <div class="mb-3 input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">History</span>
-                                </div>
-                                <textarea type="text" name="history"  class="form-control"></textarea>
                             </div>
                         </div>
                     </div>

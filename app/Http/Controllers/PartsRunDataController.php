@@ -77,6 +77,15 @@ class PartsRunDataController extends Controller
                 'filetype' => $request->file('image')->getMimeType()
             ]);
 
+            // Instructions Upload
+            $partsRunInstructions = $request->instructions->store('parts-run/'.$partsRunData->id.'/');
+            $partsRunInstructions = app(Instructions::class)->create([
+                'parts_run_data_id' => $partsRunData->id,
+                'filename' => basename($partsRunInstructions),
+                'filetype' => $request->file('instructions')->getMimeType()
+
+            ]);
+
             // Parts run data. To be created last
             $partsRunAd = app(PartsRunAd::class)->create([
                 'parts_run_data_id' => $partsRunData->id,
@@ -85,7 +94,6 @@ class PartsRunDataController extends Controller
                 'history' => $request->history,
                 'price' => $request->price,
                 'includes' => $request->includes,
-                'instructions_id' => 1,
                 'location' => $request->location,
                 'shipping_costs' => $request->shipping_costs,
                 'purchase_url' => $request->purchase_url,
@@ -94,26 +102,7 @@ class PartsRunDataController extends Controller
 
             $partsRunAd->save();
 
-            // Instructions Upload
-            // $validated = $request->validate([
-            //     'instructions' => 'mimes:pdf,doc,docx,txt|max:2048'
-            // ]);
-            // dd($validated);
-
-            // $fileName = time().'_'.$validated->getClientOriginalName();
-
-            // if($request->file('instructions')) {
-            //    $instructions = app(Instructions::class)->create([
-            //         'title' => 'filename',
-            //         'filepath' => 'filePath',
-            //         'url' => 'fileUrl'
-            //     ]);
-
-            //     $instructions->save();
-            // }
             return redirect()->route('part-runs.index');
-
-        // }
     }
 
     /**
@@ -148,6 +137,7 @@ class PartsRunDataController extends Controller
      */
     public function edit($id)
     {
+        $clubs = Club::all();
         $partsRunData = PartsRunData::where('id', $id)->with('partsRunAd')->get();
         foreach($partsRunData as $include) {
             $includesArray = explode(",", $include->partsRunAd->includes);
@@ -160,7 +150,8 @@ class PartsRunDataController extends Controller
         return view('part-runs.edit', [
             'partsRunData' => $partsRunData,
             'includesArray' => $includesArray,
-            'shippingCostsArray' => $shippingCostsArray
+            'shippingCostsArray' => $shippingCostsArray,
+            'clubs' => $clubs
         ]);
     }
 
