@@ -25,6 +25,9 @@
 
     <link rel="stylesheet" href="https://unpkg.com/@coreui/icons@2.0.0-beta.3/css/all.min.css">
 
+    <!-- Scripts -->
+    <script src="{{ asset(mix('js/app.js')) }}"></script>
+
     @laravelPWA
 
     <title>@yield('page_title', config('app.name', 'Laravel'))</title>
