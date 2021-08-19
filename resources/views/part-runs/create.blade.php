@@ -10,6 +10,7 @@
             <div class="card-body">
                 <form action="{{ route('part-runs.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
+                    .form
                     <div class="form-row">
                         <div class="mb-3 col-md-6">
                             <div class="mb-3 input-group">
