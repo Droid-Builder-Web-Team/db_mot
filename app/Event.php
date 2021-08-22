@@ -103,6 +103,11 @@ class Event extends Model implements \Acaronlex\LaravelCalendar\Event, Auditable
         return $this->mot;
     }
 
+    public function canWIP()
+    {
+        return $this->wip_allowed;
+    }
+
     public function isPublic()
     {
         return $this->public;
