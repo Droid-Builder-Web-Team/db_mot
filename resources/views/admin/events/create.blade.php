@@ -68,6 +68,14 @@
                 </div>
 
                 <div class="form-group">
+                    <div class="form-check">
+                        {{ Form::hidden('wip_allowed', '0') }}
+                        <input type="checkbox" id="wip_allowed" name="wip_allowed" class="form-check-input" value="1">
+                        <label class="form-check-label" for="wip_allowed">WIP Allowed</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
                     <label for="url"><strong>URL</strong></label>
                     <input type="text" name="url" class="form-control" placeholder="URL">
                 </div>

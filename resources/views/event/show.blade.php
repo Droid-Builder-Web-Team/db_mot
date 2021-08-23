@@ -321,6 +321,11 @@ document.getElementById('shareBtn').onclick = function() {
                 MOT are not available at this event
               </div>
             @endif
+            @if (!$event->canWIP())
+              <div class="form-group">
+                Only completed droids at this event please.
+              </div>
+            @endif
             <div class="form-group">
                 <button type="submit" class="btn btn-mot">Submit</button>
             </div>
