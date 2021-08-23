@@ -48,7 +48,11 @@
             <div class="row no-gutters">
               <div class="col-md-8">
                 <h2 class="card-title">Description</h2>
+                @if($event->created_at > \Carbon\Carbon::create(2021,8,23,0,0,0, 'Europe/London'))
+                 <div id="event_description">{!! $event->description !!}</div>
+                @else
                  <div id="event_description">{!! nl2br($event->description) !!}</div>
+                @endif
                 <br>
                 @if(!$event->isFuture())
                   <strong>Charity Raised:</strong>

@@ -27,6 +27,7 @@
         "@coreui/icons": "^1.0.1",
         "bootstrap-select": "^1.13.18",
         "is-svg": ">=4.2.2",
-        "laravel-mix": "^6.0.25"
+        "laravel-mix": "^6.0.25",
+        "tinymce": "^5.8.2"
     }
 }

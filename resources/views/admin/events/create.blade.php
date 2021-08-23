@@ -41,7 +41,7 @@
 
                 <div class="form-group">
                     <label for="description"><strong>Description</strong></label>
-                    <textarea class="form-control" style="height:150px" id="eventdescription" name="eventdescription" placeholder="Event Description"></textarea>
+                    <textarea class="form-control" style="height:150px" id="description" name="description" placeholder="Event Description"></textarea>
                 </div>
 
                 <div class="form-group row">
@@ -87,15 +87,13 @@
         </div>
     </div>
 
-<script src="https://cdn.tiny.cloud/1/alel9md8kmx7v6ege8dws2rr5uu4cpyhr3z0j809x1099rfk/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script src="{{ asset('node_modules/tinymce/tinymce.js') }}"></script>
 <script>
     tinymce.init({
-        selector: '#eventdescription',
-        plugins: 'a11ychecker advcode casechange export formatpainter linkchecker autolink lists checklist permanentpen powerpaste table advtable tinycomments tinymcespellchecker',
-        toolbar: 'a11ycheck addcomment showcomments casechange checklist code export formatpainter permanentpen table',
+        selector: '#description',
+        plugins: 'autolink lists table link hr autoresize',
+        toolbar: 'table numlist bullist link hr',
         toolbar_mode: 'floating',
-        tinycomments_mode: 'embedded',
-        tinycomments_author: 'Author name',
     });
 </script>
 @endsection
