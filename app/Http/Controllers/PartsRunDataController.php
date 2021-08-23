@@ -50,70 +50,57 @@ class PartsRunDataController extends Controller
      */
     public function store(Request $request)
     {
-            $user = Auth::user();
-
-            // Check image
-            if ($request->hasFile('image')) {
-                $request->validate([
-                    'image' => 'mimes:jpeg,bmp,png' // Only allow .jpg, .bmp and .png file types.
-                ]);
-            }
-
-            // Parts Run Data
-            $partsRunData = app(PartsRunData::class)->create([
-                'club_id' => $request->club_id,
-                'user_id' => $user->id,
-                'bc_rep_id' => $request->bc_rep_id,
-                'status' => 'Active',
+        // Check image
+        if ($request->hasFile('image')) {
+            $request->validate([
+                'image' => 'mimes:jpeg,bmp,png' // Only allow .jpg, .bmp and .png file types.
             ]);
+        }
 
-            $partsRunData->save();
+        // Parts Run Data
+        $partsRunData = app(PartsRunData::class)->create([
+            'club_id' => $request->club_id,
+            'user_id' => Auth::user()->id,
+            'bc_rep_id' => $request->bc_rep_id,
+            'status' => $request->status,
+        ]);
 
-            // Save image
-            $partsRunImage = $request->image->store('parts-run/'.$partsRunData->id.'/');
-            $partsRunImage = app(PartsRunImage::class)->create([
-                'parts_run_data_id' => $partsRunData->id,
-                'filename' => basename($partsRunImage),
-                'filetype' => $request->file('image')->getMimeType()
-            ]);
+        $partsRunData->save();
 
-            // Parts run data. To be created last
-            $partsRunAd = app(PartsRunAd::class)->create([
-                'parts_run_data_id' => $partsRunData->id,
-                'title' => $request->title,
-                'description' => $request->description,
-                'history' => $request->history,
-                'price' => $request->price,
-                'includes' => $request->includes,
-                'instructions_id' => 1,
-                'location' => $request->location,
-                'shipping_costs' => $request->shipping_costs,
-                'purchase_url' => $request->purchase_url,
-                'contact_email' => $request->contact_email,
-            ]);
+        // Save image
+        $partsRunImage = $request->image->store('parts-run/'.$partsRunData->id.'/');
+        $partsRunImage = app(PartsRunImage::class)->create([
+            'parts_run_data_id' => $partsRunData->id,
+            'filename' => basename($partsRunImage),
+            'filetype' => $request->file('image')->getMimeType()
+        ]);
 
-            $partsRunAd->save();
+        // Instructions Upload
+        $partsRunInstructions = $request->instructions->store('parts-run/'.$partsRunData->id.'/');
+        $partsRunInstructions = app(Instructions::class)->create([
+            'parts_run_data_id' => $partsRunData->id,
+            'filename' => basename($partsRunInstructions),
+            'filetype' => $request->file('instructions')->getMimeType()
 
-            // Instructions Upload
-            // $validated = $request->validate([
-            //     'instructions' => 'mimes:pdf,doc,docx,txt|max:2048'
-            // ]);
-            // dd($validated);
+        ]);
 
-            // $fileName = time().'_'.$validated->getClientOriginalName();
+        // Parts run data. To be created last
+        $partsRunAd = app(PartsRunAd::class)->create([
+            'parts_run_data_id' => $partsRunData->id,
+            'title' => $request->title,
+            'description' => $request->description,
+            'history' => $request->history,
+            'price' => $request->price,
+            'includes' => $request->includes,
+            'location' => $request->location,
+            'shipping_costs' => $request->shipping_costs,
+            'purchase_url' => $request->purchase_url,
+            'contact_email' => $request->contact_email,
+        ]);
 
-            // if($request->file('instructions')) {
-            //    $instructions = app(Instructions::class)->create([
-            //         'title' => 'filename',
-            //         'filepath' => 'filePath',
-            //         'url' => 'fileUrl'
-            //     ]);
+        $partsRunAd->save();
 
-            //     $instructions->save();
-            // }
-            return redirect()->route('part-runs.index');
-
-        // }
+        return redirect()->route('part-runs.index');
     }
 
     /**
@@ -148,6 +135,7 @@ class PartsRunDataController extends Controller
      */
     public function edit($id)
     {
+        $clubs = Club::all();
         $partsRunData = PartsRunData::where('id', $id)->with('partsRunAd')->get();
         foreach($partsRunData as $include) {
             $includesArray = explode(",", $include->partsRunAd->includes);
@@ -160,7 +148,8 @@ class PartsRunDataController extends Controller
         return view('part-runs.edit', [
             'partsRunData' => $partsRunData,
             'includesArray' => $includesArray,
-            'shippingCostsArray' => $shippingCostsArray
+            'shippingCostsArray' => $shippingCostsArray,
+            'clubs' => $clubs
         ]);
     }
 
@@ -175,6 +164,7 @@ class PartsRunDataController extends Controller
     {
         $data = $request->all();
         $partsRunData = PartsRunData::findOrFail($id)->with('partsRunAd');
+        // dd($data);
         // $partsRunAd = PartsRunAd::findOrFail('parts_run_data_id', $id);
         $partsRunData->update($data);
     }

@@ -9,147 +9,139 @@
             </div>
             <div class="card-body">
                 <form action="{{ route('part-runs.store') }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-
-                    <div class="form-row">
-                        <div class="mb-3 col-md-6">
-                            <div class="mb-3 input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">Title</span>
-                                </div>
-                                <input type="text" name="title" class="form-control" placeholder="Title">
-                            </div>
-                        </div>
-                        <div class="mb-3 col-md-6">
-                            <div class="mb-3 input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">Price</span>
-                                </div>
-                                <input type="number" name="price"  class="form-control" placeholder="Price">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                      <div class="mb-3 col-md-6">
-                          <div class="mb-3 input-group">
-                              <div class="input-group-prepend">
-                                  <span class="input-group-text">Club</span>
-                              </div>
-                              <select id="club_id" name="club_id">
-                                <option value="null">Select Club</option>
-                                @foreach($clubs as $club)
-                                  <option value={{ $club->id }}>{{ $club->name }}</option>
+                    @csrf         
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
                                 @endforeach
-                              </select>
-                          </div>
-                      </div>
-                          <div class="mb-3 col-md-6">
-                              <div class="mb-3 input-group">
-                                  <div class="input-group-prepend">
-                                      <div class="input-group-text">BC Rep</div>
-                                      <select id="bc_rep_id" name="bc_rep_id">
-                                        <option value="null">Please select club first</option>
-                                      </select>
-                                  </div>
-                              </div>
-                          </div>
-
-                    </div>
-
-                    <div class="form-row">
-                        <div class="mb-3 col-md-6">
-                            <div class="mb-3 input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">Location</span>
-                                </div>
-                                <input type="text" name="location"  class="form-control">
+                            </ul>
+                        </div>
+                        @endif
+                     <div class="form-group row">
+                        <div class="col-12">
+                            <label for="status" class="col-4 col-form-label">Parts Run Status</label> 
+                            <div class="col-12">
+                                <select id="status" name="status" class="custom-select" required>
+                                    <option value="Active">Active</option>
+                                    <option value="Gathering_Interest">Gathering Interest</option>
+                                    <option value="Inactive">Inactive</option>
+                                </select>
                             </div>
                         </div>
-                        <div class="mb-3 col-md-6">
-                            <div class="mb-3 input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">Shipping Costs</span>
-                                </div>
-                                <input type="text" name="shipping_costs"  class="form-control">
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-6 col-12">
+                            <label for="title" class="col-4 col-form-label">Title</label> 
+                            <div class="col-12">
+                                <input type="text" name="title"  class="form-control" placeholder="Title of Parts Run" required>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-12">
+                            <label for="price" class="col-4 col-form-label">Price</label> 
+                            <div class="col-12">
+                            <input type="number" name="price" class="form-control" placeholder="Cost of Parts Run" required>
                             </div>
                         </div>
                     </div>
 
-                    <div class="form-row">
-                        <div class="mb-3 col-md-12">
-                            <div class="mb-3 input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">Description</span>
-                                </div>
-                                <input type="text" name="description"  class="form-control">
+                    <div class="form-group row">
+                        <div class="col-md-6 col-12">
+                            <label for="select" class="col-4 col-form-label">Club</label> 
+                            <div class="col-12">
+                                <select id="club_id" name="club_id" class="custom-select"  required>
+                                    <option value="null">Select a club</option>
+                                    @foreach($clubs as $club)
+                                        <option value={{ $club->id }}>{{ $club->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-12">
+                            <label for="select1" class="col-4 col-form-label">BC Rep</label> 
+                            <div class="col-12">
+                                <select id="bc_rep_id" name="bc_rep_id" class="custom-select" required>
+                                    <option value="null">Please select club first</option>
+                                </select>
                             </div>
                         </div>
                     </div>
 
-                    <div class="form-row">
-                        <div class="mb-3 col-md-12">
-                            <div class="mb-3 input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">Includes</span>
-                                </div>
-                                <textarea type="text" name="includes" class="form-control"></textarea>
+                    <div class="form-group row">
+                        <div class="col-md-6 col-12">
+                            <label for="location" class="col-4 col-form-label">Location</label> 
+                            <div class="col-12">
+                                <input type="text" name="location" class="form-control" placeholder="Where is the run coming from?" required>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-12">
+                            <label for="shipping_costs" class="col-4 col-form-label">Shipping Costs</label> 
+                            <div class="col-12">
+                                <input type="text" name="shipping_costs" class="form-control" placeholder="What are the standard shipping costs?" required>
                             </div>
                         </div>
                     </div>
 
-                    <div class="form-row">
-                        <div class="mb-3 col-md-6">
-                            <div class="mb-3 input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">Purchase URL</span>
-                                </div>
-                                <input type="text" name="purchase_url"  class="form-control">
-                            </div>
-                        </div>
-                        <div class="mb-3 col-md-6">
-                            <div class="mb-3 input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">Contact Email</span>
-                                </div>
-                                <input type="text" name="contact_email"  class="form-control">
+                    <div class="form-group row">
+                        <div class="col-12">
+                            <label for="description" class="col-4 col-form-label">Description</label> 
+                            <div class="col-12">
+                                <input type="text" name="description" class="form-control" placeholder="A detailed description of the part run" required>
                             </div>
                         </div>
                     </div>
 
-                    <div class="form-row">
-                        <div class="mb-3 col-md-12">
-                            <div class="mb-3 input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">Instructions</span>
-                                    <input type="file" name="instructions" class="form-control-file" id="exampleFormControlFile1">
-                                </div>
+                    <div class="form-group row">
+                        <div class="col-md-6 col-12">
+                            <label for="includes" class="col-4 col-form-label">Includes</label> 
+                            <div class="col-12">
+                                <textarea type="text" name="includes" class="form-control" placeholder="What is included in this run?"></textarea>
                             </div>
                         </div>
-                        <div class="mb-3 col-md-12">
-                            <div class="mb-3 input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">Image</span>
-                                    <input type="file" name="image" class="form-control-file" id="exampleFormControlFile1">
-                                </div>
+                        <div class="col-md-6 col-12">
+                            <label for="includes" class="col-4 col-form-label">History</label> 
+                            <div class="col-12">
+                                <textarea type="text" name="history" class="form-control" placeholder="Optional History of Parts Run"></textarea>
                             </div>
                         </div>
                     </div>
 
-                    <div class="form-row">
-                        <div class="mb-3 col-md-12">
-                            <div class="mb-3 input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">History</span>
-                                </div>
-                                <textarea type="text" name="history"  class="form-control"></textarea>
+                    <div class="form-group row">
+                        <div class="col-md-6 col-12">
+                            <label for="purchase_url" class="col-4 col-form-label">Purchase URL</label> 
+                            <div class="col-12">
+                                <input type="text" name="purchase_url" class="form-control" placeholder="Link to purchase the part" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-12">
+                            <label for="email" class="col-4 col-form-label">Email</label> 
+                            <div class="col-12">
+                                <input type="text" name="contact_email" class="form-control" value="{{ Auth()->user()->email }}" placeholder="Contact Email for Seller"  required>
                             </div>
                         </div>
                     </div>
 
-                    <div class="form-row">
-                        <div class="mb-3 text-center col-xs-12 col-sm-12 col-md-12">
-                        <button type="submit" style="width:auto;" class="btn btn-mot">Submit</button>
+                    <div class="form-group row">
+                        <div class="col-md-6 col-12">
+                            <label for="text" class="col-4 col-form-label">Instructions</label> 
+                            <div class="col-12">
+                                <input type="file" name="instructions" class="form-control-file" id="exampleFormControlFile1" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-12">
+                            <label for="text1" class="col-4 col-form-label">Image</label> 
+                            <div class="col-12">
+                                <input type="file" name="image" class="form-control-file" id="exampleFormControlFile1" required>
+                            </div>
+                        </div>
+                    </div> 
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 text-center mt-3">
+                            <button type="submit" style="width:auto;" class="btn btn-mot">Submit</button>
                         </div>
                     </div>
                 </form>

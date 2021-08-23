@@ -75,6 +75,8 @@ class EventsController extends Controller
           toastr()->error('Failed to create Event ');
         }
 
+        dd($newevent);
+
         $newevent->createdEventNotification($newevent);
 
         return redirect()->route('admin.events.index');

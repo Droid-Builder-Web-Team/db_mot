@@ -15,11 +15,13 @@ class CreateInstructionsTable extends Migration
     {
         Schema::create('instructions', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->string('filepath')->nullable();
-            $table->string('url')->nullable();
+            $table->unsignedBigInteger('parts_run_data_id');
+            $table->string('filename')->nullable();
+            $table->string('filetype')->nullable();
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('parts_run_data_id')->references('id')->on('parts_run_data');
         });
     }
 

@@ -31,8 +31,13 @@
                       <div class="pr-active"></div>
                       {{ $data->status }}
                     </th>
+                    @elseif($data->status = "Gathering_Interest")
+                    <th class="status-class">
+                      <div class="pr-interest"></div>
+                      {{ $data->status }}
+                    </th>
                     @else
-                    <th>
+                    <th class="status-class">
                       <div class="pr-inactive"></div>
                       {{ $data->status }}
                     </th>

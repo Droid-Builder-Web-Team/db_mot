@@ -21,7 +21,6 @@ class CreatePartsRunAdTable extends Migration
             $table->longText('history');
             $table->decimal('price', 65, 2);
             $table->string('includes');
-            $table->unsignedBigInteger('instructions_id');
             $table->string('location');
             $table->json('shipping_costs');
             $table->string('purchase_url');
@@ -33,7 +32,6 @@ class CreatePartsRunAdTable extends Migration
              * Foreign Keys
              */
             $table->foreign('parts_run_data_id')->references('id')->on('parts_run_data');
-            $table->foreign('instructions_id')->references('id')->on('instructions');
         });
     }
 

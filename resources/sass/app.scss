@@ -68,6 +68,13 @@ body {
     border-radius: 50px;
 }
 
+.pr-interest {
+    width: 20px;
+    height: 20px;
+    background: orange;
+    border-radius: 50px;
+}
+
 .pr-inactive {
     width: 20px;
     height: 20px;
@@ -140,4 +147,10 @@ body {
 
 .c-dark-theme select.form-control option {
     background-color: #ffffff !important;
+}
+
+.c-dark-theme {
+    .custom-select {
+        color: black;
+    }
 }
