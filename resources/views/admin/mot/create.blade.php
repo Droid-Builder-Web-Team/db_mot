@@ -18,7 +18,7 @@
         <input type=hidden name="user" value="{{ Auth::user()->id }}">
 
         <div class="row">
-            <div class="col-sm-6">
+            <div class="col-sm-12">
                 <div class="card">
                     <div class="card-body">
 
@@ -27,7 +27,7 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="name">Date</label>
-                                    <input class="form-control" id="date" name="date" type="date" required>
+                                    <input class="form-control" id="date" name="date" type="date" value="{{ Carbon\Carbon::today()->toDateString() }}" required>
                                 </div>
                             </div>
                         </div>
@@ -119,7 +119,7 @@
 
         <!-- Submit -->
         <div class="row">
-            <div class="col-sm-6">
+            <div class="col-sm-12">
                 <div class="form-group">
                     <button class="submit btn btn-block btn-primary" type="submit">
                         <i class="loading-icon fa-lg fas fa-spinner fa-spin invisible"></i> &nbsp;
