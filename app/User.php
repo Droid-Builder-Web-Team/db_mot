@@ -121,7 +121,12 @@ class User extends Authenticatable implements MustVerifyEmail, Rater, Auditable
 
     public function event($id)
     {
-        return $this->events->only($id)->first()->pivot;
+        $status = $this->events->only($id)->first();
+        if ($status != null)
+          return $status->pivot;
+        else
+          return null;
+
     }
 
     public function hasDroid( Droid $droid )

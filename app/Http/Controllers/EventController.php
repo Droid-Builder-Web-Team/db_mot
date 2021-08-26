@@ -40,6 +40,11 @@ class EventController extends Controller
         $calevents = [];
 
         foreach($events as $event){
+          $title = $event->name.' - ('.$event->location->name.' - '.$event->location->town.')';
+          $background = "lightgrey";
+          if(Auth()->user()->event($event->id)){
+            $background = "green";
+          }
           $calevents[] = Calendar::event(
             $event->name,
             True,
@@ -48,7 +53,8 @@ class EventController extends Controller
             $event->id,
             [
               'url' => 'event/'.$event->id,
-              'title' => $event->name.' - ('.$event->location->name.' - '.$event->location->town.')',
+              'title' => $title,
+              'borderColor' =>  $background,
 
             ]
           );
