@@ -31,8 +31,8 @@
                   </div>
                   <div class="form-row">
                     <div class="col-md-12 mb-3">
-                      <label>Email</label>
-                      <input type="text" name="email" value="{{ $user->email }}" class="form-control" placeholder="Email">
+                      Email:
+                      <b>{{ $user->email }}</b> <i>(If you need your email changing, please contact an admin.)</i>
                     </div>
                   </div>
                   <div class="form-row">
