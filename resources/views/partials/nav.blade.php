@@ -65,7 +65,7 @@
                     </svg><span class="ml-1">Droidbuilders Wiki</span>
                 </a>
             </li>
-            @if(config('features.partrun', FALSE))
+            @if(config('features.partrun', TRUE))
             <li class="c-sidebar-nav-item">
                 <a class="c-sidebar-nav-link" target="_blank" href="{{ route('partsRunInfo') }}">
                     <svg class="c-sidebar-nav-icon">

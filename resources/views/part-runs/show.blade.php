@@ -5,9 +5,26 @@
     <div class="col-md-12">
         <div class="card">
             @foreach($partsRunData as $data)
-            <div class="card-header">
-                <h4 class="text-center title">Parts Run #{{ $data->id }} - BC Rep: {{$data->bcrep->forename }} - {{ $data->status }}</h4>
-                <a class="btn btn-primary" href={{ route('part-runs.edit', $data->id) }}>Edit Run</a>
+            <div class="card-header padding-container">
+                <div class="mb-4 text-center row d-flex justify-content-center align-items-center">
+                    <div class="col-12 col-md-4 club">
+                        <h6>Club: {{ $data->club->name }}</h6>
+                    </div>
+                    <div class="col-12 col-md-4 active_since">
+                        <h6>Active Since: {{  \Carbon\Carbon::createFromTimeString($data->partsRunAd->updated_at)->format('d/m/Y') }}</h6>
+                    </div>
+                    <div class="col-12 col-md-4 status">
+                        <h6>Status: {{ $data->status }}</h6>
+                    </div>
+                </div>
+                @role('Super Admin')
+                <div class="text-center row">
+                    <div class="col-12">
+                        <a class="btn btn-primary" href={{ route('part-runs.edit', $data->id) }}>Edit Run</a>
+                        {{-- <a class="btn btn-danger" href={{ route('part-runs.destroy', $data->id) }}>Delete Run</a> --}}
+                    </div>
+                </div>            
+                @endrole   
             </div>
             <div class="card-body">
                 <div class="row">
@@ -28,7 +45,7 @@
                             </div>
                             <hr class="parts-run-break">
 
-                            <div class="row">
+                            <div class="mb-4 row">
                                 <div class="seller-info">
                                     <div class="col-12 col-md-6">
                                         <p class="seller"><strong>Seller:</strong> {{ $data->user->username }}</p>
@@ -39,7 +56,7 @@
                                 </div>
                             </div>
 
-                            <div class="row">
+                            <div class="mb-4 row">
                                 <div class="location-shipping">
                                     <div class="col-12 col-md-6">
                                         <p class="location"><strong>Location:</strong> {{ $data->partsRunAd->location }}</p>
@@ -58,7 +75,7 @@
                                 </div>
                             </div>
 
-                            <div class="row">
+                            <div class="mb-4 row">
                                 <div class="description">
                                     <div class="col-12">
                                         <p class="description-text"><strong>Description:</strong></p>
@@ -67,7 +84,7 @@
                                 </div>
                             </div>
 
-                            <div class="row">
+                            <div class="mb-4 row">
                                 <div class="includes">
                                     <div class="col-12">
                                         <p class="includes"><strong>Included:</strong>
@@ -81,11 +98,18 @@
                                 </div>
 
                             </div>
-                            <div class="row">
+                            <div class="mb-4 row">
                                 <div class="purchase-email">
                                     <div class="col-12 col-md-6">
-                                        <p class="location"><strong>Purchase Link:</strong></p>
-                                        <p><a class="btn btn-primary" href="{{ $data->partsRunAd->purchase_url }}"> Buy Here</a></p>
+                                        @if($data->status == "Active")
+                                            <p><strong>Purchase Link:</strong></p>
+                                            <p><a class="btn btn-primary" href="{{ $data->partsRunAd->purchase_url }}"> Buy Here</a></p>
+                                        @elseif($data->status == "Gathering_Interest")
+                                            <p><strong>Register Your Interest:</strong></p>
+                                            <p><a class="btn btn-primary" href="#">Interested!</a></p>
+                                        @else
+                                            <p>This run is inactive. Please wait for it to become active again.</p>
+                                        @endif
                                     </div>
                                     <div class="col-12 col-md-6">
                                         <p class="droid"><strong>Contact Email: </strong></p>

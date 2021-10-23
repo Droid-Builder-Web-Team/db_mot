@@ -14,6 +14,10 @@ body {
         apple color emoji, segoe ui emoji, segoe ui symbol, noto color emoji;
 }
 
+.padding-container {
+    padding: 2rem 2rem;
+}
+
 .c-dark-theme a {
     color: #000;
 }
@@ -32,6 +36,19 @@ body {
     text-transform: uppercase;
     font-size: calc(1.5rem + 0.3vw);
     letter-spacing: 0.7px;
+}
+
+.far.fa-question-circle.fa-2x,
+.fab.fa-facebook,
+.fab.fa-discord,
+.fab.fa-youtube {
+    color: $white;
+}
+
+/* Global CSS */
+.c-sidebar-nav-link,
+.c-sidebar-nav-item:hover {
+    transition: 0.3s all;
 }
 
 /* Parts Run */
@@ -86,6 +103,23 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
+
+    .pr-active,
+    .pr-interest,
+    .pr-inactive {
+        float: left;
+    }
+}
+
+.status-box {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    p {
+        text-align: center;
+        width: 100%;
+    }
 }
 
 /* Events */
@@ -128,13 +162,6 @@ body {
     );
 }
 
-.dropdown-menu {
-    // font-size: calc(0.5rem + 0.3vw);
-}
-
-.dropdown-header {
-    // font-size: calc(0.5rem + 0.3vw);
-}
 /* General */
 .divider {
     width: 75%;
