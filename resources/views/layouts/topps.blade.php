@@ -30,8 +30,8 @@
 <body class="c-app c-dark-theme">
     <div class="c-wrapper">
         <header class="c-header c-header-light c-header-fixed">
-            <div class="c-sidebar-brand w-100">
-                {{ config('app.name', 'Laravel') }}
+            <div class="col-10 d-flex align-items-center">
+                <a href="{{ url()->previous() }}" class="btn btn-primary">Back</a>
             </div>
             <ul class="c-header-nav mfs-auto">
                 @guest

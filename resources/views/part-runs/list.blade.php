@@ -6,10 +6,18 @@
   <div class="col-md-12">
     <div class="card">
       <div class="card-header">
-        <h4 class="text-center title">Part Runs</h4>
-        @role('Super Admin')
-          <a class="btn btn-primary" href={{ route('part-runs.create') }}>Create Run</a>
-        @endrole
+        <div class="row d-flex align-items-center">
+          <div class="col-sm-2 text-left">
+            @role('Super Admin')
+              <a class="btn btn-primary" href={{ route('part-runs.create') }}>Create Run</a>
+            @endrole
+          </div>
+          <div class="col-sm-8 text-center">
+            <h4 class="text-center title">Part Runs</h4>
+          </div>
+          <div class="col-sm-2 text-right"></div>
+        </div>
+        
       </div>
       <div class="table text-center card-body table-striped table-hover table-dark">
         <table class="table">

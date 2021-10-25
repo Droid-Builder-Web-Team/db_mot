@@ -7,13 +7,13 @@
             @foreach($partsRunData as $data)
             <div class="card-header padding-container">
                 <div class="mb-4 text-center row d-flex justify-content-center align-items-center">
-                    <div class="col-12 col-md-4 club">
+                    <div class="col-12 col-md-3 club">
                         <h6>Club: {{ $data->club->name }}</h6>
                     </div>
-                    <div class="col-12 col-md-4 active_since">
+                    <div class="col-12 col-md-3 active_since">
                         <h6>Active Since: {{  \Carbon\Carbon::createFromTimeString($data->partsRunAd->updated_at)->format('d/m/Y') }}</h6>
                     </div>
-                    <div class="col-12 col-md-4 status">
+                    <div class="col-12 col-md-3 status">
                         <h6>Status: {{ $data->status }}</h6>
                     </div>
                 </div>
@@ -100,7 +100,7 @@
                             </div>
                             <div class="mb-4 row">
                                 <div class="purchase-email">
-                                    <div class="col-12 col-md-6">
+                                    <div class="col-12 col-md-4">
                                         @if($data->status == "Active")
                                             <p><strong>Purchase Link:</strong></p>
                                             <p><a class="btn btn-primary" href="{{ $data->partsRunAd->purchase_url }}"> Buy Here</a></p>
@@ -111,7 +111,18 @@
                                             <p>This run is inactive. Please wait for it to become active again.</p>
                                         @endif
                                     </div>
-                                    <div class="col-12 col-md-6">
+
+                                    <div class="col-12 col-md-4">
+                                        @if($data->status == "Gathering_Interest")
+                                            <p><strong>Interest List:</strong></p>
+                                            <ul>
+                                                <li>Test</li>
+
+                                            </ul>
+                                        @endif
+                                    </div>
+
+                                    <div class="col-12 col-md-4">
                                         <p class="droid"><strong>Contact Email: </strong></p>
                                         <p><a href="mailto:{{ $data->partsRunAd->contact_email }}"> {{ $data->partsRunAd->contact_email }}</a></p>
                                     </div>

@@ -123,7 +123,7 @@ class EventsController extends Controller
           toastr()->success('Event updated successfully');
         } catch (\Illuminate\Database\QueryException $exception) {
           toastr()->error('Failed to upuse Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Response;date Event');
+            use Illuminate\Support\Facades\Response;date Event');
         }
 
 

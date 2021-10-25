@@ -79,7 +79,7 @@
                             </tr>
                             @if ($uses_pli)
                                 <tr>
-                                    <th>PLI Last Payed</th>
+                                    <th>PLI Last Paied</th>
                                     <td>
                                         @if ($user->pli_date != null)
                                             {{ \Carbon\Carbon::parse($user->pli_date)->isoFormat($user->settings()->get('date_format')) }}
