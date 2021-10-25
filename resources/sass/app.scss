@@ -5,11 +5,9 @@
 @import "buttons.scss";
 @import "cards";
 @import "sidebar";
+@import "responsive";
 
 body {
-    // background: $background;
-    // // color: $primaryColor;
-    // font-size: $font-size-base;
     font-family: -apple-system, BlinkMacSystemFont, segoe ui, Roboto, helvetica neue, Arial, noto sans, sans-serif,
         apple color emoji, segoe ui emoji, segoe ui symbol, noto color emoji;
 }
@@ -45,10 +43,19 @@ body {
     color: $white;
 }
 
+
+
 /* Global CSS */
 .c-sidebar-nav-link,
 .c-sidebar-nav-item:hover {
     transition: 0.3s all;
+}
+
+/* Login */
+.oauth-buttons a {
+    margin-left: 1rem;
+    margin-right: 1rem;
+    margin-top: 1rem;
 }
 
 /* Parts Run */
@@ -99,26 +106,21 @@ body {
     border-radius: 50px;
 }
 
-.status-class {
+.status-box {
+    width: 100%;
     display: flex;
-    align-items: center;
-    justify-content: space-evenly;
+    justify-content: center;
 
     .pr-active,
     .pr-interest,
     .pr-inactive {
         float: left;
     }
-}
-
-.status-box {
-    width: 100%;
-    display: flex;
-    justify-content: center;
 
     p {
         text-align: center;
         width: 100%;
+        margin-bottom: 0;
     }
 }
 
@@ -180,4 +182,31 @@ body {
     .custom-select {
         color: black;
     }
+}
+
+/* Buttons */
+a.btn-header-primary {
+    color: $white;
+    background: transparent;
+    border: 1px solid $purple !important;
+    padding: 10px 20px;
+}
+
+a.btn-header-primary:hover,
+a.btn-header-primary:focus {
+    background: $purple;
+    color: $white;
+}
+
+a.btn-header-secondary {
+    color: $white;
+    background: $purple;
+    border: 1px solid $purple !important;
+    padding: 10px 20px;
+}
+
+a.btn-header-secondary:hover,
+a.btn-header-secondary:focus {
+    background: transparent;
+    color: $white;
 }

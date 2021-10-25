@@ -1,13 +1,21 @@
-@media(min-width:1200px){
-    .title.m-b-md{
-        font-size:2rem;
-    }
-}
 @media(min-width:1920px){
     .title.m-b-md{
         font-size: 5rem;
     }
     .sub-title{
         font-size: 2rem;
+    }
+}
+
+@media(min-width:1200px){
+    .title.m-b-md{
+        font-size:2rem;
+    }
+}
+
+@media(max-width: 400px) {
+    .oauth-buttons a {
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
     }
 }

@@ -139,6 +139,9 @@
 .card.card-mot-info .text-muted {
   color: #6c757d !important;
 }
+.card.card-mot-info i {
+  color: #fff;
+}
 .card .card-header {
   background: url("https://droidbuilders.uk/wp-content/uploads/2019/10/BGimage.png");
   background-position: center;
@@ -224,6 +227,12 @@
   border-radius: 0 !important;
 }
 
+@media only screen and (max-width: 400px) {
+  .oauth-buttons a {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+  }
+}
 body {
   font-family: -apple-system, BlinkMacSystemFont, segoe ui, Roboto, helvetica neue, Arial, noto sans, sans-serif, apple color emoji, segoe ui emoji, segoe ui symbol, noto color emoji;
 }
@@ -261,6 +270,13 @@ body {
 .c-sidebar-nav-link,
 .c-sidebar-nav-item:hover {
   transition: 0.3s all;
+}
+
+/* Login */
+.oauth-buttons a {
+  margin-left: 1rem;
+  margin-right: 1rem;
+  margin-top: 1rem;
 }
 
 /* Parts Run */
@@ -311,25 +327,20 @@ body {
   border-radius: 50px;
 }
 
-.status-class {
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-}
-.status-class .pr-active,
-.status-class .pr-interest,
-.status-class .pr-inactive {
-  float: left;
-}
-
 .status-box {
   width: 100%;
   display: flex;
   justify-content: center;
 }
+.status-box .pr-active,
+.status-box .pr-interest,
+.status-box .pr-inactive {
+  float: left;
+}
 .status-box p {
   text-align: center;
   width: 100%;
+  margin-bottom: 0;
 }
 
 /* Events */
@@ -384,4 +395,31 @@ body {
 
 .c-dark-theme .custom-select {
   color: black;
+}
+
+/* Buttons */
+a.btn-header-primary {
+  color: #fff;
+  background: transparent;
+  border: 1px solid #9561e2 !important;
+  padding: 10px 20px;
+}
+
+a.btn-header-primary:hover,
+a.btn-header-primary:focus {
+  background: #9561e2;
+  color: #fff;
+}
+
+a.btn-header-secondary {
+  color: #fff;
+  background: #9561e2;
+  border: 1px solid #9561e2 !important;
+  padding: 10px 20px;
+}
+
+a.btn-header-secondary:hover,
+a.btn-header-secondary:focus {
+  background: transparent;
+  color: #fff;
 }

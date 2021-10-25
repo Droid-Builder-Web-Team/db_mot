@@ -75,7 +75,7 @@ body {
 
 .droid-card-row input[type=image] {
   height: 20px;
-  opacity: 0.2;
+  opacity: 0.5;
 }
 
 .droid-card-row input[type=image]:hover {

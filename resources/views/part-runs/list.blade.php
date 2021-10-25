@@ -30,7 +30,7 @@
                     <td>{{ $data->user->username }}</td>
 
                     <th class="status-class">
-                      <div class="status-box">
+                      <div class="status-box d-flex align-items-center">
                        @if($data->status == "Active")
                           <div class="pr-active"></div>
                         <p>{{ $data->status }}</p>

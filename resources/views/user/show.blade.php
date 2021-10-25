@@ -32,12 +32,12 @@
                                 <a class="btn btn-cover" style="color:white;" href="{{ action('UserController@downloadPDF', $user->id) }}" target="_blank">Cover Note</a>
                             </span>
                         @else
-                            <span class="badge badge-danger float-right">
+                            <span class="float-right badge badge-danger">
                                 No Valid PLI
                             </span>
                         @endif
                         @if (($has_mot && !$user->validPLI()) || $user->expiringPLI())
-                            <span class="badge badge-warning float-right">
+                            <span class="float-right badge badge-warning">
                                 <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
                                     Pay PLI:
                                     <input type="hidden" name="cmd" value="_s-xclick">
@@ -91,7 +91,7 @@
                                 <th>QR Code:</th>
                                 <td>
                                     <a href="{{ url('/') . '/id/' . $user->badge_id }}">
-                                        <img src="{{ route('image.displayQRCode', $user->id) }}" alt="qr_code" class="img-fluid mb-1 rounded" style="height:150px;">
+                                        <img src="{{ route('image.displayQRCode', $user->id) }}" alt="qr_code" class="mb-1 rounded img-fluid" style="height:150px;">
                                     </a>
                                 </td>
                             </tr>
@@ -108,8 +108,8 @@
 
         <div class="col-md-6 col-sm-12 col-lg-6 col-xl-3">
             <div class="card card-mot-info">
-                <div class="card-body p-3 d-flex align-items-center">
-                    <div class="bg-gradient-info p-3 mfe-3">
+                <div class="p-3 card-body d-flex align-items-center">
+                    <div class="p-3 bg-gradient-info mfe-3">
                         <i class="fas fa-calendar fa-fw"></i>
                     </div>
                     <div>
@@ -119,8 +119,8 @@
                 </div>
             </div>
             <div class="card card-mot-info">
-                <div class="card-body p-3 d-flex">
-                    <div class="bg-gradient-primary p-3 mfe-3">
+                <div class="p-3 card-body d-flex">
+                    <div class="p-3 bg-gradient-primary mfe-3">
                         <i class="fas fa-robot fa-fw"></i>
                     </div>
                     <div>
@@ -131,8 +131,8 @@
             </div>
             @if ($user->join_date != '')
                 <div class="card card-mot-info">
-                    <div class="card-body p-3 d-flex">
-                        <div class="bg-gradient-success p-3 mfe-3">
+                    <div class="p-3 card-body d-flex">
+                        <div class="p-3 bg-gradient-success mfe-3">
                             <i class="fas fa-clock fa-fw"></i>
                         </div>
                         <div>
@@ -143,8 +143,8 @@
                 </div>
             @else
                 <div class="card card-mot-info">
-                    <div class="card-body p-3 d-flex">
-                        <div class="bg-gradient-success p-3 mfe-3">
+                    <div class="p-3 card-body d-flex">
+                        <div class="p-3 bg-gradient-success mfe-3">
                             <i class="fas fa-clock fa-fw"></i>
                         </div>
                         <div>
@@ -155,8 +155,8 @@
                 </div>
             @endif
             <div class="card card-mot-info">
-                <div class="card-body p-3 d-flex">
-                    <div class="bg-gradient-warning p-3 mfe-3">
+                <div class="p-3 card-body d-flex">
+                    <div class="p-3 bg-gradient-warning mfe-3">
                         <i class="fas fa-trophy fa-fw"></i>
                     </div>
                     <div>
@@ -174,7 +174,7 @@
                 </div>
                 <div class="card-body">
                     <div style="text-align:center">
-                        <img src="{{ route('image.displayMugShot', [$user->id, '240']) }}" alt="mug_shot" class="img-fluid mb-1 rounded">
+                        <img src="{{ route('image.displayMugShot', [$user->id, '240']) }}" alt="mug_shot" class="mb-1 rounded img-fluid">
                     </div>
                     <div class="droid-card-table" style="z-index:2">
                         <div class="droid-card-row">
@@ -198,17 +198,17 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="card text-center">
+            <div class="text-center card">
                 <div class="card-header">
-                    <h4 class="title text-center">Your Droids</h4>
+                    <h4 class="text-center title">Your Droids</h4>
                 </div>
-                <div class="card-body text-center">
+                <div class="text-center card-body">
                     <div class="row">
                         @foreach ($user->droids as $droid)
-                            <div class="col-md-3 mb-5 droid-card mx-auto mx-auto text-center">
+                            <div class="mx-auto my-auto text-center col-md-3 droid-card">
                                 <div class="droid-card-content">
                                     <div style="text-align:center" onclick="document.location='{{ route('droid.show', $droid->id) }}'">
-                                        <img src="{{ route('image.displayDroidImage', [$droid->id, 'photo_front', '240']) }}" alt="{{ $droid->name }}" class="img-fluid mb-1 rounded">
+                                        <img src="{{ route('image.displayDroidImage', [$droid->id, 'photo_front', '240']) }}" alt="{{ $droid->name }}" class="mb-1 rounded img-fluid">
                                     </div>
 
                                     <div class="droid-card-table" style="z-index:2">
@@ -240,9 +240,9 @@
 
                         @endforeach
                         @can('Edit Droids')
-                            <div class="col-md-3 mb-5 droid-card mx-auto" onclick="document.location='{{ route('admin.droids.create', [$user->id]) }}'">
+                            <div class="mx-auto my-auto col-md-3 droid-card" onclick="document.location='{{ route('admin.droids.create', [$user->id]) }}'">
                             @else
-                                <div class="col-md-3 mb-5 droid-card mx-auto" onclick="document.location='{{ route('droid.create') }}'">
+                                <div class="mx-auto my-auto col-md-3 droid-card" onclick="document.location='{{ route('droid.create') }}'">
                                 @endcan
                                 <div class="droid-card-content">
 
@@ -265,14 +265,14 @@
         </div>
 
         <div class="row">
-            <div class="col-md-12 mb-2">
+            <div class="mb-2 col-md-12">
                 <div class="card">
-                    <div class="card-header text-center">
-                        <h4 class="title text-center">Achievements</h4>
+                    <div class="text-center card-header">
+                        <h4 class="text-center title">Achievements</h4>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-striped table-sm table-hover table-dark text-center">
+                            <table class="table text-center table-striped table-sm table-hover table-dark">
                                 <tr>
                                     <th>Name</th>
                                     <th>Notes</th>
@@ -326,14 +326,14 @@
         </div>
 
         <div class="row">
-            <div class="col-md-12 mb-2">
+            <div class="mb-2 col-md-12">
                 <div class="card">
-                    <div class="card-header text-center">
-                        <h4 class="title text-center">Events</h4>
+                    <div class="text-center card-header">
+                        <h4 class="text-center title">Events</h4>
                     </div>
-                    <div class="card-body text-center">
+                    <div class="text-center card-body">
                         <div class="table-responsive">
-                            <table class="table table-striped table-sm table-hover table-dark text-center">
+                            <table class="table text-center table-striped table-sm table-hover table-dark">
                                 <tr>
                                     <th>Date</th>
                                     <th>Details</th>
@@ -357,15 +357,15 @@
             </div>
         </div>
 
-        <div class="row mb-5">
-            <div class="col-md-12 mb-2">
+        <div class="mb-5 row">
+            <div class="mb-2 col-md-12">
                 <div class="card">
-                    <div class="card-header text-center">
-                        <h4 class="title text-center">Driving Course Runs</h4>
+                    <div class="text-center card-header">
+                        <h4 class="text-center title">Driving Course Runs</h4>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-striped table-sm table-hover table-dark text-center">
+                            <table class="table text-center table-striped table-sm table-hover table-dark">
                                 <tr>
                                     <th>Run Date</th>
                                     <th>Droid Name</th>
