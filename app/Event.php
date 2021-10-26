@@ -88,7 +88,7 @@ class Event extends Model implements \Acaronlex\LaravelCalendar\Event, Auditable
         return $this->date;
     }
 
-        /**
+    /**
      * Get the event's title
      *
      * @return string

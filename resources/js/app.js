@@ -1,3 +1,5 @@
+const { entries } = require('lodash');
+
 require('./bootstrap');
 
 window.confirmDeleteDroid = function (event)

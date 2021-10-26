@@ -3,6 +3,7 @@
 .card {
     &.card-mot-info {
         font-family: "Michroma", sans-serif !important;
+        margin-bottom: 1.5rem;
 
         .text-muted {
             color: #6c757d !important;
@@ -11,6 +12,10 @@
         i {
             color: $white;
         }
+    }
+
+    &.card-mot-info:last-child {
+        margin-bottom: 0;
     }
 
     .card-header {
@@ -44,4 +49,13 @@
     color: #fff;
     border-top: 1px solid white;
     border-bottom: 1px solid white;
+}
+
+.user.card {
+    height: 100%;
+
+    .id-photo-wrapper {
+        display: flex;
+        justify-content: center;
+    }
 }

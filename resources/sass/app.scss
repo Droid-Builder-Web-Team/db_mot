@@ -184,6 +184,17 @@ body {
     }
 }
 
+/* User */
+.new-award {
+    .form-control {
+        height: 40px;
+    }
+}
+
+.table > tbody > tr > td {
+     vertical-align: middle;
+}
+
 /* Buttons */
 a.btn-header-primary {
     color: $white;

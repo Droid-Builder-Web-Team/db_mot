@@ -2056,6 +2056,9 @@ module.exports = JSON.parse('{"_args":[["axios@0.21.2","C:\\\\laragon\\\\www\\\\
   \*****************************/
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
+var _require = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js"),
+    entries = _require.entries;
+
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.confirmDeleteDroid = function (event) {

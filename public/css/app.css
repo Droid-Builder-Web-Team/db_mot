@@ -34,7 +34,10 @@
 .btn-view {
   text-transform: uppercase;
   width: 100%;
-  border: 1px solid #5342e7;
+  border: 1px solid #fff;
+}
+.btn-view .fas.fa-eye {
+  color: #fff;
 }
 
 .btn-edit {
@@ -133,14 +136,71 @@
   box-shadow: none !important;
 }
 
+.btn-transparent-outline-blue {
+  text-transform: uppercase;
+  border: 1px solid #3490dc;
+  color: #000 !important;
+  padding: 10px 40px;
+  border-radius: calc(0.25rem - 1px);
+  transition: 0.3s ease-in-out;
+}
+
+.btn-transparent-outline-blue:hover,
+.btn-transparent-outline-blue:focus {
+  background: #3490dc;
+  color: #fff !important;
+}
+
+.btn-transparent-outline-view-event {
+  border: 1px solid #fff;
+  color: #fff !important;
+  background: transparent;
+  padding: 5px 20px;
+  border-radius: calc(0.25rem - 1px);
+  transition: 0.3s ease-in-out;
+}
+
+.btn-transparent-outline-view-event:hover,
+.btn-transparent-outline-view-event:focus {
+  background: #fff;
+  color: #000 !important;
+}
+
+.btn-outline-icon-view {
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid #fff;
+  border-radius: calc(0.25rem - 1px);
+  padding: 2px 5px;
+  color: #fff;
+  background: transparent;
+  transition: 0.3s ease-in-out;
+}
+.btn-outline-icon-view .fas.fa-eye {
+  color: #fff;
+}
+
+.btn-outline-icon-view:hover,
+.btn-outline-icon-view:focus {
+  background: #fff;
+}
+.btn-outline-icon-view:hover .fas.fa-eye,
+.btn-outline-icon-view:focus .fas.fa-eye {
+  color: #9561e2;
+}
+
 .card.card-mot-info {
   font-family: "Michroma", sans-serif !important;
+  margin-bottom: 1.5rem;
 }
 .card.card-mot-info .text-muted {
   color: #6c757d !important;
 }
 .card.card-mot-info i {
   color: #fff;
+}
+.card.card-mot-info:last-child {
+  margin-bottom: 0;
 }
 .card .card-header {
   background: url("https://droidbuilders.uk/wp-content/uploads/2019/10/BGimage.png");
@@ -172,6 +232,14 @@
   color: #fff;
   border-top: 1px solid white;
   border-bottom: 1px solid white;
+}
+
+.user.card {
+  height: 100%;
+}
+.user.card .id-photo-wrapper {
+  display: flex;
+  justify-content: center;
 }
 
 .c-sidebar-brand {
@@ -395,6 +463,15 @@ body {
 
 .c-dark-theme .custom-select {
   color: black;
+}
+
+/* User */
+.new-award .form-control {
+  height: 40px;
+}
+
+.table > tbody > tr > td {
+  vertical-align: middle;
 }
 
 /* Buttons */

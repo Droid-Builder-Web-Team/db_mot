@@ -4,13 +4,13 @@
     <div class="card">
         <div class="card-header">
             <div class="row d-flex ">
-                <div class="col-3 text-left">
+                <div class="text-left col-3">
                     <a class="btn btn-mot-invert" style="width:auto; color:white;" href="{{ route('admin.events.index') }}">Back</a>
                 </div>
-                <div class="col-6 text-center">
+                <div class="text-center col-6">
                     <h2 class="justify-content-center">Create Event</h2>
                 </div>
-                <div class="col-3 text-right"></div>
+                <div class="text-right col-3"></div>
             </div>
         </div>
         <div class="card-body">
@@ -43,6 +43,16 @@
 
                     <div class="col-sm-5">
                         <a class="btn btn-info" href={{ route('admin.locations.create') }}>New Location</a>
+                    </div>
+                </div>
+                
+                <div class="form-group row d-flex justify-content-center align-items-center">
+                    <div class="col-sm-2">
+                        <label for="date"><strong>Parking Details</strong></label>
+                    </div>
+
+                    <div class="col-sm-10">
+                        <input type="text" name="parking_details" id="parking_details" class="form-control" placeholder="Event Parking Details">
                     </div>
                 </div>
 
@@ -103,7 +113,7 @@
                     </div>
                 </div>
 
-                <div class="form-group text-center">
+                <div class="text-center form-group">
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
             </form>

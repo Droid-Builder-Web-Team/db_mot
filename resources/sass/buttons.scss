@@ -36,7 +36,11 @@
 .btn-view {
     text-transform: uppercase;
     width: 100%;
-    border: 1px solid #5342e7;
+    border: 1px solid $white;
+    
+    .fas.fa-eye {
+        color: $white;
+    }
 }
 .btn-edit {
     text-transform: uppercase;
@@ -122,4 +126,58 @@
     text-decoration: none;
     border: none;
     box-shadow: none !important;
+}
+
+.btn-transparent-outline-blue {
+    text-transform: uppercase;
+    border: 1px solid $blue;
+    color: $black!important;
+    padding: 10px 40px;
+    border-radius: calc(0.25rem - 1px);
+    transition: 0.3s ease-in-out;
+}
+
+.btn-transparent-outline-blue:hover, 
+.btn-transparent-outline-blue:focus {
+    background: $blue;
+    color: $white !important;
+}
+
+.btn-transparent-outline-view-event {
+    border: 1px solid $white;
+    color: $white!important;
+    background: transparent;
+    padding: 5px 20px;
+    border-radius: calc(0.25rem - 1px);
+    transition: 0.3s ease-in-out;
+}
+
+.btn-transparent-outline-view-event:hover,
+.btn-transparent-outline-view-event:focus {
+    background: $white;
+    color: $black !important;;
+}
+
+.btn-outline-icon-view {
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid $white;
+    border-radius: calc(0.25rem - 1px);
+    padding: 2px 5px;
+    color: $white;
+    background: transparent;
+    transition: 0.3s ease-in-out;
+
+    .fas.fa-eye {
+        color: $white;
+    }
+}
+
+.btn-outline-icon-view:hover,
+.btn-outline-icon-view:focus {
+    background: $white;
+    
+    .fas.fa-eye {
+        color: $purple;
+    }
 }

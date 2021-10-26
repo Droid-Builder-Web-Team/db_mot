@@ -65,7 +65,7 @@ class EventsController extends Controller
         $event = $request->all();
         $linkify = new \Misd\Linkify\Linkify();
         $event['description'] = $linkify->process($request->description);
-        //dd($request->description);
+        
         $success = 0;
         try {
           $newevent = Event::create($event);
