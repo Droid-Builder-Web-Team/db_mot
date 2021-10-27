@@ -137,6 +137,13 @@
                         </svg><span class="ml-1">Locations</span>
                     </a>
                 </li>
+                <li class="c-sidebar-nav-item">
+                    <a class="c-sidebar-nav-link" href="{{ route('admin.venue-contacts.index') }}">
+                        <svg class="c-sidebar-nav-icon">
+                            <i class="fas fa-user"></i>
+                        </svg><span class="ml-1">Venue Contacts</span>
+                    </a>
+                </li>
             @endcan
             @can('Edit Achievements')
                 <li class="c-sidebar-nav-item">

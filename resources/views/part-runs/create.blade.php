@@ -42,7 +42,7 @@
                         <div class="col-md-6 col-12">
                             <label for="price" class="col-4 col-form-label">Price</label> 
                             <div class="col-12">
-                            <input type="number" name="price" class="form-control" placeholder="Cost of Parts Run" required>
+                            <input type="text" name="price" class="form-control" placeholder="Cost of Parts Run" required>
                             </div>
                         </div>
                     </div>
@@ -129,7 +129,8 @@
                         <div class="col-md-6 col-12">
                             <label for="text" class="col-4 col-form-label">Instructions</label> 
                             <div class="col-12">
-                                <input type="file" name="instructions" class="form-control-file" id="exampleFormControlFile1" required>
+                                <input type="file" name="instructions" class="form-control-file" id="exampleFormControlFile1">
+                                <input type="text" name="instructions_url" class="mt-4 form-control" placeholder="Instructions URL">
                             </div>
                         </div>
                         <div class="col-md-6 col-12">
@@ -140,8 +141,8 @@
                         </div>
                     </div> 
                     <div class="form-group row">
-                        <div class="col-xs-12 col-sm-12 col-md-12 text-center mt-3">
-                            <button type="submit" style="width:auto;" class="btn btn-mot">Submit</button>
+                        <div class="mt-3 text-center col-xs-12 col-sm-12 col-md-12">
+                            <button type="submit" style="width:auto;" class="btn btn-transparent-outline-blue">Submit</button>
                         </div>
                     </div>
                 </form>

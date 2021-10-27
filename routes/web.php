@@ -1,5 +1,6 @@
 <?php
 
+use App\VenueContact;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -43,6 +44,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
   Route::resource('/motdesign', 'MOTDesignController', ['only' => ['edit', 'update']]);
   Route::get('audits', 'AuditController@index')->name('audits.index');
   Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index')->name('logs.index');
+  Route::resource('/venue-contacts', 'VenueContactController', ['except' => ['show']]);
 });
 
 Route::get('/', function () {    return view('about');
@@ -65,6 +67,7 @@ Route::group(['middleware' => ['auth', 'gdpr.terms']], function() {
   Route::put('location/comment/{location}', 'LocationController@comment')->name('location.comment');
   Route::resource('location', 'LocationController', ['only' => ['show']]);
   Route::post('/location/{location}/rating', 'LocationController@store')->name('location.rating');
+  Route::resource('/venue-contact', 'VenueContactController', ['only' => ['show']]);
   Route::get('image', 'ImageController@index')->name('image');
   Route::post('image/upload', 'ImageController@upload');
   Route::get('image/destroy', 'ImageController@destroy');

@@ -133,12 +133,13 @@
                                 <div class="instructions">
                                     <div class="col-12">
                                         <p class="instructions"><strong>Instructions:</strong></p>
+                        
                                         @if(is_null($data->partsRunAd->instructions->filename))
-                                            <p><a href="{{ $data->partsRunAd->instructions-> }}"> {{ $data->partsRunAd->instructions->title }}</a></p>
+                                            <p>Test</p>
                                         @elseif(is_null($data->partsRunAd->instructions->url))
                                             <p><a href="{{ $data->partsRunAd->instructions->filepath }}"> {{ $data->partsRunAd->instructions->title }}</a></p>
                                         @else
-                                            <p>No Instructions Given :()</p>
+                                            <p>No Instructions Given :(</p>
                                         @endif
                                     </div>
                                 </div>

@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Location;
+use App\VenueContact;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\DataTables\LocationsDataTable;
 
 class LocationController extends Controller
@@ -67,7 +68,11 @@ class LocationController extends Controller
      */
     public function edit(Location $location)
     {
-        return view('admin.locations.edit')->with('location', $location);
+        $venueContacts = VenueContact::where('locations_id', $location->id)->get();
+        return view('admin.locations.edit')->with([
+            'location' => $location,
+            'venueContacts' => $venueContacts
+        ]);
     }
 
     /**

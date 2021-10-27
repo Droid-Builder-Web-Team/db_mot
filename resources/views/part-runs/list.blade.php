@@ -17,7 +17,6 @@
           </div>
           <div class="col-sm-2 text-right"></div>
         </div>
-        
       </div>
       <div class="table text-center card-body table-striped table-hover table-dark">
         <table class="table">

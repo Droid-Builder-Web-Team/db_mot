@@ -23,6 +23,7 @@ class PartsRunDataController extends Controller
     {
         $partsRunData = app(PartsRunData::class)
             ->with(['partsRunAd'])
+            ->orderBy('updated_at', 'desc')
             ->get();
 
         return view('part-runs.list', [
@@ -78,13 +79,16 @@ class PartsRunDataController extends Controller
         ]);
 
         // Instructions Upload - RH
-        $partsRunInstructions = $request->instructions->store('parts-run/'.$partsRunData->id.'/');
-        $partsRunInstructions = app(Instructions::class)->create([
-            'parts_run_data_id' => $partsRunData->id,
-            'filename' => basename($partsRunInstructions),
-            'filetype' => $request->file('instructions')->getMimeType()
-
-        ]);
+        if(!is_null($request->instructions)) {
+            $partsRunInstructions = $request->instructions->store('parts-run/'.$partsRunData->id.'/');
+            $partsRunInstructions = app(Instructions::class)->create([
+                'parts_run_data_id' => $partsRunData->id,
+                'filename' => basename($partsRunInstructions),
+                'filetype' => $request->file('instructions')->getMimeType()
+            ]);
+        } else {
+            $partsRunInstructionUrl = $request->validate('instructions_url');
+        }
 
         // Parts run data. To be created last - RH
         $partsRunAd = app(PartsRunAd::class)->create([
@@ -96,6 +100,7 @@ class PartsRunDataController extends Controller
             'includes' => $request->includes,
             'location' => $request->location,
             'shipping_costs' => $request->shipping_costs,
+            'instructions_url' => optional($partsRunInstructionUrl),
             'purchase_url' => $request->purchase_url,
             'contact_email' => $request->contact_email,
         ]);
@@ -191,7 +196,7 @@ class PartsRunDataController extends Controller
             'contact_email' => $request->contact_email
         ]);
 
-        return back();
+        return redirect()->route('part-runs.index');
     }
 
     /**
