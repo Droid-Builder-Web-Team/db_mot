@@ -70,6 +70,7 @@
       </div>
     </div>
   </div>
+
   <div class="col-md-6 text-center">
     <div class="card border-primary">
       <div class="card-header title text-center">Upcoming MOT</div>
@@ -110,39 +111,39 @@
   </div>
 </div>
 
-<div class="row">
-  <div class="col-md-12 text-center">
-  <div class="card border-primary">
-    <div class="card-header title text-center">Upcoming Events</div>
-    <div class="card-body">
-        <div class="table-responsive">
-      <table class="table table-striped table-sm table-hover table-dark text-center">
-        <tr>
-          <th>Date</th>
-          <th>Name</th>
-          <th>Location</th>
-          <th><i class="fas fa-check">/<i class="fas fa-times"></i></th>
-          <th>Actions</th>
-        </tr>
-        @foreach ($events as $event)
+  <div class="row">
+    <div class="col-md-12 text-center">
+    <div class="card border-primary">
+      <div class="card-header title text-center">Upcoming Events</div>
+      <div class="card-body">
+          <div class="table-responsive">
+        <table class="table table-striped table-sm table-hover table-dark text-center">
           <tr>
-            <td>{{ $event->date }}</td>
-            <td>{{ $event->name }}</td>
-            <td><a class="btn-sm btn-link" href="{{ route('location.show', $event->location->id ) }}">{{ $event->location->name }}</a></td>
-            <td>{{ $event->going->count() }}/{{$event->notgoing->count()}}</td>
-            <td>
-              <a class="btn-sm btn-view" href="{{ route('event.show', $event->id) }}"><i class="fas fa-eye"></i></a>
-              @can('Edit Events')
-                <a class="btn-sm btn-edit" href="{{ route('admin.events.edit',$event->id) }}"><i class="fas fa-edit"></i></a>
-              @endcan
-            </td>
+            <th>Date</th>
+            <th>Name</th>
+            <th>Location</th>
+            <th><i class="fas fa-check">/<i class="fas fa-times"></i></th>
+            <th>Actions</th>
           </tr>
-        @endforeach
-      </table>
-    </div>
+          @foreach ($events as $event)
+            <tr>
+              <td>{{ $event->date }}</td>
+              <td>{{ $event->name }}</td>
+              <td><a class="btn-sm btn-link" href="{{ route('location.show', $event->location->id ) }}">{{ $event->location->name }}</a></td>
+              <td>{{ $event->going->count() }}/{{$event->notgoing->count()}}</td>
+              <td>
+                <a class="btn-sm btn-view" href="{{ route('event.show', $event->id) }}"><i class="fas fa-eye"></i></a>
+                @can('Edit Events')
+                  <a class="btn-sm btn-edit" href="{{ route('admin.events.edit',$event->id) }}"><i class="fas fa-edit"></i></a>
+                @endcan
+              </td>
+            </tr>
+          @endforeach
+        </table>
+      </div>
+      </div>
     </div>
   </div>
-</div>
 </div>
 
 

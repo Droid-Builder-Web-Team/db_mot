@@ -65,7 +65,7 @@ class EventsController extends Controller
         $event = $request->all();
         $linkify = new \Misd\Linkify\Linkify();
         $event['description'] = $linkify->process($request->description);
-        //dd($request->description);
+        
         $success = 0;
         try {
           $newevent = Event::create($event);
@@ -123,7 +123,7 @@ class EventsController extends Controller
           toastr()->success('Event updated successfully');
         } catch (\Illuminate\Database\QueryException $exception) {
           toastr()->error('Failed to upuse Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Response;date Event');
+            use Illuminate\Support\Facades\Response;date Event');
         }
 
 

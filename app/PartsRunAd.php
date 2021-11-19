@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -27,9 +28,8 @@ class PartsRunAd extends Model
         'contact_email'
     ];
 
-    public function partsRun()
+    public function partsRunData()
     {
         return $this->belongsTo(PartsRunData::class, 'parts_run_data_id');
     }
-
 }

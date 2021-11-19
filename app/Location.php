@@ -19,6 +19,11 @@ class Location extends Model implements Rateable, Auditable
         return $this->hasMany(Event::class);
     }
 
+    public function venueContact()
+    {
+        return $this->hasMany(VenueContact::class);
+    }
+
     public function comments()
     {
         return $this->morphMany('App\Comment', 'commentable');

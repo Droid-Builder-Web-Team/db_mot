@@ -11,17 +11,11 @@
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
     <link href="{{ asset('css/dark.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/topps.css') }}" rel="stylesheet">
     <link href="{{ asset(mix('css/app.css'), true) }}" rel="stylesheet">
-    <link href="{{ asset('css/mot.css') }}" rel="stylesheet">
     <link href="{{ asset('css/media.css') }}" rel="stylesheet">
 
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js" defer></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.21/datatables.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/1.5.0/perfect-scrollbar.min.js" integrity="sha512-yUNtg0k40IvRQNR20bJ4oH6QeQ/mgs9Lsa6V+3qxTj58u2r+JiAYOhOW0o+ijuMmqCtCEg7LZRA+T4t84/ayVA==" crossorigin="anonymous"></script>
-
-    <script src="{{ asset('vendor/datatables/buttons.server-side.js') }}"></script>
 
     <link rel="stylesheet" href="https://unpkg.com/@coreui/icons@2.0.0-beta.3/css/all.min.css">
 
@@ -34,16 +28,11 @@
 </head>
 
 <body class="c-app c-dark-theme">
-    @include('partials.nav')
-
     <div class="c-wrapper">
         <header class="c-header c-header-light c-header-fixed">
-            <button class="c-header-toggler c-class-toggler d-lg-none mfe-auto" type="button" data-target="#sidebar" data-class="c-sidebar-show">
-                <i class="c-icon c-icon-lg cil-menu"></i>
-            </button>
-            <button class="c-header-toggler c-class-toggler mfs-3 d-md-down-none" type="button" data-target="#sidebar" data-class="c-sidebar-lg-show" responsive="true">
-                <i class="c-icon c-icon-lg cil-menu"></i>
-            </button>
+            <div class="col-10 d-flex align-items-center">
+                <a href="{{ url()->previous() }}" class="btn btn-primary">Back</a>
+            </div>
             <ul class="c-header-nav mfs-auto">
                 @guest
                     <li class="mr-2 c-header-nav-item">

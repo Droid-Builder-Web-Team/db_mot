@@ -5,13 +5,15 @@
 @import "buttons.scss";
 @import "cards";
 @import "sidebar";
+@import "responsive";
 
 body {
-    // background: $background;
-    // // color: $primaryColor;
-    // font-size: $font-size-base;
     font-family: -apple-system, BlinkMacSystemFont, segoe ui, Roboto, helvetica neue, Arial, noto sans, sans-serif,
         apple color emoji, segoe ui emoji, segoe ui symbol, noto color emoji;
+}
+
+.padding-container {
+    padding: 2rem 2rem;
 }
 
 .c-dark-theme a {
@@ -32,6 +34,28 @@ body {
     text-transform: uppercase;
     font-size: calc(1.5rem + 0.3vw);
     letter-spacing: 0.7px;
+}
+
+.far.fa-question-circle.fa-2x,
+.fab.fa-facebook,
+.fab.fa-discord,
+.fab.fa-youtube {
+    color: $white;
+}
+
+
+
+/* Global CSS */
+.c-sidebar-nav-link,
+.c-sidebar-nav-item:hover {
+    transition: 0.3s all;
+}
+
+/* Login */
+.oauth-buttons a {
+    margin-left: 1rem;
+    margin-right: 1rem;
+    margin-top: 1rem;
 }
 
 /* Parts Run */
@@ -82,10 +106,22 @@ body {
     border-radius: 50px;
 }
 
-.status-class {
+.status-box {
+    width: 100%;
     display: flex;
-    align-items: center;
-    justify-content: space-evenly;
+    justify-content: center;
+
+    .pr-active,
+    .pr-interest,
+    .pr-inactive {
+        float: left;
+    }
+
+    p {
+        text-align: center;
+        width: 100%;
+        margin-bottom: 0;
+    }
 }
 
 /* Events */
@@ -128,13 +164,6 @@ body {
     );
 }
 
-.dropdown-menu {
-    // font-size: calc(0.5rem + 0.3vw);
-}
-
-.dropdown-header {
-    // font-size: calc(0.5rem + 0.3vw);
-}
 /* General */
 .divider {
     width: 75%;
@@ -153,4 +182,46 @@ body {
     .custom-select {
         color: black;
     }
+}
+
+/* User */
+.new-award {
+    .form-control {
+        height: 40px;
+    }
+}
+
+.table > tbody > tr > td {
+     vertical-align: middle;
+}
+
+.fas.fa-trophy.fa-fw {
+    width: 1.25rem;
+}
+
+/* Buttons */
+a.btn-header-primary {
+    color: $white;
+    background: transparent;
+    border: 1px solid $purple !important;
+    padding: 10px 20px;
+}
+
+a.btn-header-primary:hover,
+a.btn-header-primary:focus {
+    background: $purple;
+    color: $white;
+}
+
+a.btn-header-secondary {
+    color: $white;
+    background: $purple;
+    border: 1px solid $purple !important;
+    padding: 10px 20px;
+}
+
+a.btn-header-secondary:hover,
+a.btn-header-secondary:focus {
+    background: transparent;
+    color: $white;
 }

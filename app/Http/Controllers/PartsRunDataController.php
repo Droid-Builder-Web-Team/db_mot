@@ -21,7 +21,10 @@ class PartsRunDataController extends Controller
      */
     public function index()
     {
-        $partsRunData = PartsRunData::with(['partsRunAd'])->get();
+        $partsRunData = app(PartsRunData::class)
+            ->with(['partsRunAd'])
+            ->orderBy('updated_at', 'desc')
+            ->get();
 
         return view('part-runs.list', [
             'partsRunData'=> $partsRunData,
@@ -50,14 +53,14 @@ class PartsRunDataController extends Controller
      */
     public function store(Request $request)
     {
-        // Check image
+        // Check image - RH
         if ($request->hasFile('image')) {
             $request->validate([
                 'image' => 'mimes:jpeg,bmp,png' // Only allow .jpg, .bmp and .png file types.
             ]);
         }
 
-        // Parts Run Data
+        // Parts Run Data - RH
         $partsRunData = app(PartsRunData::class)->create([
             'club_id' => $request->club_id,
             'user_id' => Auth::user()->id,
@@ -67,7 +70,7 @@ class PartsRunDataController extends Controller
 
         $partsRunData->save();
 
-        // Save image
+        // Save image - RH
         $partsRunImage = $request->image->store('parts-run/'.$partsRunData->id.'/');
         $partsRunImage = app(PartsRunImage::class)->create([
             'parts_run_data_id' => $partsRunData->id,
@@ -75,16 +78,19 @@ class PartsRunDataController extends Controller
             'filetype' => $request->file('image')->getMimeType()
         ]);
 
-        // Instructions Upload
-        $partsRunInstructions = $request->instructions->store('parts-run/'.$partsRunData->id.'/');
-        $partsRunInstructions = app(Instructions::class)->create([
-            'parts_run_data_id' => $partsRunData->id,
-            'filename' => basename($partsRunInstructions),
-            'filetype' => $request->file('instructions')->getMimeType()
+        // Instructions Upload - RH
+        if(!is_null($request->instructions)) {
+            $partsRunInstructions = $request->instructions->store('parts-run/'.$partsRunData->id.'/');
+            $partsRunInstructions = app(Instructions::class)->create([
+                'parts_run_data_id' => $partsRunData->id,
+                'filename' => basename($partsRunInstructions),
+                'filetype' => $request->file('instructions')->getMimeType()
+            ]);
+        } else {
+            $partsRunInstructionUrl = $request->validate('instructions_url');
+        }
 
-        ]);
-
-        // Parts run data. To be created last
+        // Parts run data. To be created last - RH
         $partsRunAd = app(PartsRunAd::class)->create([
             'parts_run_data_id' => $partsRunData->id,
             'title' => $request->title,
@@ -94,6 +100,7 @@ class PartsRunDataController extends Controller
             'includes' => $request->includes,
             'location' => $request->location,
             'shipping_costs' => $request->shipping_costs,
+            'instructions_url' => optional($partsRunInstructionUrl),
             'purchase_url' => $request->purchase_url,
             'contact_email' => $request->contact_email,
         ]);
@@ -119,7 +126,7 @@ class PartsRunDataController extends Controller
         foreach($partsRunData as $shippingCosts) {
             $shippingCostsArray = explode(",", $shippingCosts->partsRunAd->shipping_costs);
         };
-        // dd($partsRunData);
+        
         return view('part-runs.show', [
             'partsRunData' => $partsRunData,
             'includesArray' => $includesArray,
@@ -136,19 +143,22 @@ class PartsRunDataController extends Controller
     public function edit($id)
     {
         $clubs = Club::all();
-        $partsRunData = PartsRunData::where('id', $id)->with('partsRunAd')->get();
+        $partsRunData = PartsRunData::where('id', $id)->get();
+
         foreach($partsRunData as $include) {
             $includesArray = explode(",", $include->partsRunAd->includes);
+            $includes = implode(",", $includesArray); // Implode to return as a string when displaying update form - RH
         };
 
         foreach($partsRunData as $shippingCosts) {
             $shippingCostsArray = explode(",", $shippingCosts->partsRunAd->shipping_costs);
+            $shipping = implode(",", $shippingCostsArray); // Implode to return as a string when displaying update form - RH
         };
 
         return view('part-runs.edit', [
             'partsRunData' => $partsRunData,
-            'includesArray' => $includesArray,
-            'shippingCostsArray' => $shippingCostsArray,
+            'includes' => $includes,
+            'shipping' => $shipping,
             'clubs' => $clubs
         ]);
     }
@@ -162,11 +172,31 @@ class PartsRunDataController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = $request->all();
-        $partsRunData = PartsRunData::findOrFail($id)->with('partsRunAd');
-        // dd($data);
-        // $partsRunAd = PartsRunAd::findOrFail('parts_run_data_id', $id);
-        $partsRunData->update($data);
+        $partsRunData = app(PartsRunData::class)->find($id);
+        $data = $request->except(['_method', '_token']);
+        // $partsRunData->update($data);
+
+        $partsRunData->update([
+            // 'club_id' => $request->club_id, - Commented out for now as problems when testing this - RH
+            // 'bc_rep_id' => $request->bc_rep_id, - Commented out for now as problems when testing this - RH
+            'club_id' => 1,
+            'bc_rep_id' => 1,
+            'status' => $request->status
+        ]);
+
+        $partsRunData->partsRunAd()->update([
+            'title' => $request->title,
+            'description' => $request->description,
+            'history' => $request->history,
+            'price' => $request->price,
+            'includes' => $request->includes,
+            'location' => $request->location,
+            'shipping_costs' => $request->shipping_costs,
+            'purchase_url' => $request->purchase_url,
+            'contact_email' => $request->contact_email
+        ]);
+
+        return redirect()->route('part-runs.index');
     }
 
     /**
@@ -177,7 +207,8 @@ class PartsRunDataController extends Controller
      */
     public function destroy(PartsRunData $partsRunData)
     {
-        //
+        $partsRunData = app(PartsRunData::class)->find($partsRunData->id)->destroy();
+        return back();
     }
 
     public function requestPartsRun(Request $request)

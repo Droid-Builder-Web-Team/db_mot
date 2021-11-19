@@ -37,6 +37,7 @@ class User extends Authenticatable implements MustVerifyEmail, Rater, Auditable
     protected $guarded = [
 
     ];
+
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -53,6 +54,7 @@ class User extends Authenticatable implements MustVerifyEmail, Rater, Auditable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'usersEvents' => 'array',
     ];
 
     /**
@@ -102,6 +104,16 @@ class User extends Authenticatable implements MustVerifyEmail, Rater, Auditable
     public function hasAchievement(Achievement $achievement)
     {
         return $this->achievements->contains( $achievement );
+    }
+
+    public function charity()
+    {
+    //     return $this->belongsToMany(Event::class, 'members_events')
+    //     ->wherePivot('attended', "1")
+    //     ->join('events', 'members_events.event_id', 'events.id')
+    //     ->OrderBy('date', 'desc');
+
+        // return $this->attended_events()->sum('charity_raised');
     }
 
     /**

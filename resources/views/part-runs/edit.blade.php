@@ -5,21 +5,22 @@
     <div class="col-md-12">
         <div class="card">
             @foreach($partsRunData as $data)
+            {{-- <pre><?php print_r($data); exit; ?></pre> --}}
             <div class="card-header">
                 <h4 class="text-center title">Editing Parts Run #{{ $data->id }}</h4>
             </div>
             <div class="card-body">
                 <form action="{{ route('part-runs.update', $data->id) }}" method="POST">
-                    @csrf
                     @method('PUT')
+                    @csrf
                      <div class="form-group row">
                         <div class="col-12">
-                            <label for="parts_run_status" class="col-4 col-form-label">Parts Run Status</label> 
+                            <label for="status" class="col-4 col-form-label">Parts Run Status</label> 
                             <div class="col-12">
-                                <select id="parts_run_status" name="parts_run_status" value="{{ $data->status }}" class="custom-select" required="required">
-                                    <option value="Active">Active</option>
-                                    <option value="Inactive">Inactive</option>
-                                    <option value="Gathering_Interest">Gathering Interest</option>
+                                <select id="status" name="status" class="custom-select">
+                                    <option {{ ($data->status) == 'Active' ? 'selected' : '' }} value="Active">Active</option>
+                                    <option {{ ($data->status) == 'Inactive' ? 'selected' : '' }} value="Inactive">Inactive</option>
+                                    <option {{ ($data->status) == 'Gathering_Interest' ? 'selected' : '' }} value="Gathering_Interest">Gathering Interest</option>
                                 </select>
                             </div>
                         </div>
@@ -44,7 +45,7 @@
                         <div class="col-md-6 col-12">
                             <label for="select" class="col-4 col-form-label">Club</label> 
                             <div class="col-12">
-                                <select id="club_id" name="club_id" class="custom-select">
+                                <select id="club_id" name="club_id" class="custom-select"  required>
                                     <option value="null">Select a club</option>
                                     @foreach($clubs as $club)
                                         <option value={{ $club->id }}>{{ $club->name }}</option>
@@ -56,7 +57,7 @@
                         <div class="col-md-6 col-12">
                             <label for="select1" class="col-4 col-form-label">BC Rep</label> 
                             <div class="col-12">
-                                <select id="bc_rep_id" name="bc_rep_id" class="custom-select">
+                                <select id="bc_rep_id" name="bc_rep_id" class="custom-select" required>
                                     <option value="null">Please select club first</option>
                                 </select>
                             </div>
@@ -92,7 +93,7 @@
                         <div class="col-md-6 col-12">
                             <label for="includes" class="col-4 col-form-label">Includes</label> 
                             <div class="col-12">
-                                <textarea type="text" name="includes" value="{{ $data->partsRunAd->includes }}" class="form-control"></textarea>
+                                <textarea type="text" name="includes" class="form-control">{{ $includes }}</textarea>
                             </div>
                         </div>
                         <div class="col-md-6 col-12">

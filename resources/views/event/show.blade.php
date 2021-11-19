@@ -53,6 +53,12 @@
                 @else
                  <div id="event_description">{!! nl2br($event->description) !!}</div>
                 @endif
+
+                @if(!is_null($event->parking_details))
+                  <div class="parking_details">
+                    <p>{{ $event->parking_details }}</p>
+                  </div>
+                @endif
                 <br>
                 @if(!$event->isFuture())
                   <strong>Charity Raised:</strong>

@@ -36,7 +36,7 @@ class PartsRunDataTable extends DataTable
      */
     public function query(PartsRunData $model)
     {
-      return $model->newQuery()->where('status', 'active' || 'inactive');
+      return $model->newQuery()->where('status', 'Active' || 'Gathering_Interest' || 'Inactive');
     }
 
     /**

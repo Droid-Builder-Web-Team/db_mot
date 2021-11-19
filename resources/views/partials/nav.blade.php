@@ -65,7 +65,7 @@
                     </svg><span class="ml-1">Droidbuilders Wiki</span>
                 </a>
             </li>
-            @if(config('features.partrun', FALSE))
+            @if(config('features.partrun', TRUE))
             <li class="c-sidebar-nav-item">
                 <a class="c-sidebar-nav-link" target="_blank" href="{{ route('partsRunInfo') }}">
                     <svg class="c-sidebar-nav-icon">
@@ -135,6 +135,13 @@
                         <svg class="c-sidebar-nav-icon">
                             <i class="fas fa-map-marker fa-fw"></i>
                         </svg><span class="ml-1">Locations</span>
+                    </a>
+                </li>
+                <li class="c-sidebar-nav-item">
+                    <a class="c-sidebar-nav-link" href="{{ route('admin.venue-contacts.index') }}">
+                        <svg class="c-sidebar-nav-icon">
+                            <i class="fas fa-user"></i>
+                        </svg><span class="ml-1">Venue Contacts</span>
                     </a>
                 </li>
             @endcan

@@ -5,10 +5,10 @@
         <div class="card-header">
             <div class="row">
                 <div class="col-lg-12 margin-tb">
-                    <div class="pull-right mb-4">
+                    <div class="mb-4 pull-right">
                         <a class="btn btn-mot-invert" style="width:auto; color:white;" href="{{ route('admin.locations.index') }}">Back</a>
                     </div>
-                    <div class="pull-left mb-4">
+                    <div class="mb-4 pull-left">
                         <h2>Create Location</h2>
                     </div>
                 </div>
@@ -49,7 +49,7 @@
                     <textarea class="form-control" style="height:150px" name="other_details" placeholder="Other Details"></textarea>
                 </div>
 
-                <div class="form-group text-center">
+                <div class="text-center form-group">
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
 
