@@ -9,10 +9,12 @@ use App\Club;
 use App\PartsRunImage;
 use App\PartsRunAd;
 use App\User;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class PartsRunData extends Model
+class PartsRunData extends Model implements Auditable
 {
     use HasFactory;
+    use \OwenIt\Auditing\Auditable;
 
     protected $table = 'parts_run_data';
 
@@ -46,5 +48,10 @@ class PartsRunData extends Model
     public function images()
     {
         return $this->hasMany(PartsRunImage::class);
+    }
+
+    public function comments()
+    {
+        return $this->morphMany('App\Comment', 'commentable');
     }
 }

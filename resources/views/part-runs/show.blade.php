@@ -23,8 +23,8 @@
                         <a class="btn btn-primary" href={{ route('part-runs.edit', $data->id) }}>Edit Run</a>
                         {{-- <a class="btn btn-danger" href={{ route('part-runs.destroy', $data->id) }}>Delete Run</a> --}}
                     </div>
-                </div>            
-                @endrole   
+                </div>
+                @endrole
             </div>
             <div class="card-body">
                 <div class="row">
@@ -133,7 +133,7 @@
                                 <div class="instructions">
                                     <div class="col-12">
                                         <p class="instructions"><strong>Instructions:</strong></p>
-                        
+
                                         @if(is_null($data->partsRunAd->instructions->filename))
                                             <p>Test</p>
                                         @elseif(is_null($data->partsRunAd->instructions->url))
@@ -172,6 +172,63 @@
     </div>
 </div>
 </div>
+<div class="row">
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-header">
+        Comments
+      </div>
+      <div class="card-body">
+@foreach($data->comments as $comment)
+        <div class="card border-primary">
+          <div class="card-header">
+            <strong>{{ $comment->user->forename ?? "Deactivated"}} {{ $comment->user->surname ?? "User"}}</strong>
+            @if ($comment->user != NULL)
+              @if ($comment->user->can('Edit Partsrun'))
+                <i class="fas fa-user-shield"></i>
+              @endif
+            @endif
+            <span class="float-right">
+              @if ($comment->broadcast)
+                <i class="fas fa-bullhorn"></i>
+              @endif
+              {{ Carbon\Carbon::parse($comment->created_at, Auth::user()->settings()->get('timezone'))->isoFormat(Auth::user()->settings()->get('date_format').' - '.Auth::user()->settings()->get('time_format')) }}
+            </span>
+          </div>
+          <div class="card-body">
+            {!! nl2br(e($comment->body)) !!}
+            @can('Edit Partsrun')
+            <span class="float-right">
+              <a href="{{ route('admin.parts-run.delete_comment', $comment->id )}}" class="btn-sm btn-danger">Delete</a>
+            </span>
+            @endcan
+          </div>
+        </div>
+@endforeach
+        <div class="card border-primary">
+          <div class="card-header">
+            <strong>Add Comment</strong>
+          </div>
+          <div class="card-body">
+            <form action="{{ route('parts-run.comment', $data->id) }}" method="POST">
+                @csrf
+                @method('PUT')
+              <div class="form-group">
+                <textarea type="text" class="form-control" name="body"></textarea>
+              </div>
+              <input type="submit" class="btn-sm btn-comment" name="comment" value="Add Comment">
+              @can('Edit Partrun')
+                <div class="form-check float-right">
+                  <input class="form-check-input" type="checkbox" name="broadcast" id="broadcast">
+                  <label class="form-check-label" for="broadcast">Broadcast</label>
+                </div>
+              @endcan
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 <script>
     $(document).on('click', '[data-toggle="lightbox"]', function (event) {
         $(this).ekkoLightbox();

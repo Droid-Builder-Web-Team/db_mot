@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Club;
+use App\Comment;
 use App\PartsRunAd;
 use App\Instructions;
 use App\PartsRunData;
@@ -126,7 +127,7 @@ class PartsRunDataController extends Controller
         foreach($partsRunData as $shippingCosts) {
             $shippingCostsArray = explode(",", $shippingCosts->partsRunAd->shipping_costs);
         };
-        
+
         return view('part-runs.show', [
             'partsRunData' => $partsRunData,
             'includesArray' => $includesArray,
@@ -214,5 +215,29 @@ class PartsRunDataController extends Controller
     public function requestPartsRun(Request $request)
     {
         return "Request a Parts Run";
+    }
+
+    public function comment(Request $request, PartsRunData $partsrun)
+    {
+
+        $request->validate([
+            'body' => 'required',
+        ]);
+        $comment = new Comment;
+        $comment->body = $request->body;
+        $comment->user_id = auth()->user()->id;
+
+        if (auth()->user()->id ==  $partsrun->user_id && $request->broadcast == 'on')
+        {
+          foreach($partsrun->users as $user)
+          {
+            $user->notify(new PartsRunUpdated($event));
+          }
+          $comment->broadcast = true;
+        }
+
+        $result = $partsrun->comments()->save($comment);
+        toastr()->success('Comment Added');
+        return back();
     }
 }

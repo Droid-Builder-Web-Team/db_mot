@@ -140,7 +140,7 @@
                 <li class="c-sidebar-nav-item">
                     <a class="c-sidebar-nav-link" href="{{ route('admin.venue-contacts.index') }}">
                         <svg class="c-sidebar-nav-icon">
-                            <i class="fas fa-user"></i>
+                            <i class="fas fa-user fa-fw"></i>
                         </svg><span class="ml-1">Venue Contacts</span>
                     </a>
                 </li>

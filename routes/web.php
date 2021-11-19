@@ -99,6 +99,7 @@ Route::group(['middleware' => ['auth', 'gdpr.terms']], function() {
     return view('part-runs.info');
   })->name('partsRunInfo');
   Route::get('/bcreps/{club_id}', 'BcRepController@list');
+  Route::put('parts-run/comment/{partsrun}', 'PartsRunDataController@comment')->name('parts-run.comment');
 });
 
 Route::group(['middleware' => ['auth', 'gdpr.terms']], function() {
