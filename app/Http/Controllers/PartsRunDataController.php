@@ -178,10 +178,6 @@ class PartsRunDataController extends Controller
         // $partsRunData->update($data);
 
         $partsRunData->update([
-            // 'club_id' => $request->club_id, - Commented out for now as problems when testing this - RH
-            // 'bc_rep_id' => $request->bc_rep_id, - Commented out for now as problems when testing this - RH
-            'club_id' => 1,
-            'bc_rep_id' => 1,
             'status' => $request->status
         ]);
 
@@ -194,7 +190,8 @@ class PartsRunDataController extends Controller
             'location' => $request->location,
             'shipping_costs' => $request->shipping_costs,
             'purchase_url' => $request->purchase_url,
-            'contact_email' => $request->contact_email
+            'contact_email' => $request->contact_email,
+            'quantity' => $request->quantity
         ]);
 
         return redirect()->route('part-runs.index');
