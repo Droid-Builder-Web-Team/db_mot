@@ -6,15 +6,15 @@ use App\User;
 use App\Club;
 use Illuminate\Http\Request;
 
-class BcRepController extends Controller
+class ApiController extends Controller
 {
 
-  public function list($club_id)
+  public function list_bcreps($club_id)
   {
         $reps = [];
         $club = Club::find($club_id);
 
-        $allreps = User::role('BC Rep')->get();
+        $allreps = User::role('BC Rep')->get(['id', 'surname', 'forename']);
         foreach($allreps as $rep)
         {
             if($rep->isAdminOf($club))

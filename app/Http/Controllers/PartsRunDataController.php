@@ -12,6 +12,7 @@ use App\PartsRunImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StorePartsRunRequest;
+use App\Notifications\PartsRunUpdated;
 
 class PartsRunDataController extends Controller
 {
@@ -27,7 +28,7 @@ class PartsRunDataController extends Controller
             ->orderBy('updated_at', 'desc')
             ->get();
 
-        return view('part-runs.list', [
+        return view('parts-run.list', [
             'partsRunData'=> $partsRunData,
         ]);
     }
@@ -39,10 +40,14 @@ class PartsRunDataController extends Controller
      */
     public function create()
     {
+        if (!auth()->user()->can('Create Partrun'))
+              abort(403);
         $clubs = Club::all();
+        $runners = User::permission('Edit Partrun')->get();
 
-        return view('part-runs.create', [
+        return view('parts-run.create', [
             'clubs' => $clubs,
+            'runners' => $runners,
         ]);
     }
 
@@ -54,22 +59,19 @@ class PartsRunDataController extends Controller
      */
     public function store(Request $request)
     {
+        if (!auth()->user()->can('Create Partrun'))
+            abort(403);
+
+        $email = User::find($request->user_id)->email;
+        $location = User::find($request->user_id)->county;
+
+/*
         // Check image - RH
         if ($request->hasFile('image')) {
             $request->validate([
                 'image' => 'mimes:jpeg,bmp,png' // Only allow .jpg, .bmp and .png file types.
             ]);
         }
-
-        // Parts Run Data - RH
-        $partsRunData = app(PartsRunData::class)->create([
-            'club_id' => $request->club_id,
-            'user_id' => Auth::user()->id,
-            'bc_rep_id' => $request->bc_rep_id,
-            'status' => $request->status,
-        ]);
-
-        $partsRunData->save();
 
         // Save image - RH
         $partsRunImage = $request->image->store('parts-run/'.$partsRunData->id.'/');
@@ -91,24 +93,26 @@ class PartsRunDataController extends Controller
             $partsRunInstructionUrl = $request->validate('instructions_url');
         }
 
+*/
+        // Parts Run Data - RH
+        $partsRunData = app(PartsRunData::class)->create([
+          'club_id' => $request->club_id,
+          'bc_rep_id' => Auth::user()->id,
+          'user_id' => $request->user_id,
+          'status' => "Initial",
+        ]);
+        $partsRunData->save();
+
         // Parts run data. To be created last - RH
         $partsRunAd = app(PartsRunAd::class)->create([
             'parts_run_data_id' => $partsRunData->id,
-            'title' => $request->title,
-            'description' => $request->description,
-            'history' => $request->history,
-            'price' => $request->price,
-            'includes' => $request->includes,
-            'location' => $request->location,
-            'shipping_costs' => $request->shipping_costs,
-            'instructions_url' => optional($partsRunInstructionUrl),
-            'purchase_url' => $request->purchase_url,
-            'contact_email' => $request->contact_email,
+            'contact_email' => $email,
+            'location' => $location,
         ]);
 
         $partsRunAd->save();
 
-        return redirect()->route('part-runs.index');
+        return redirect()->route('parts-run.index');
     }
 
     /**
@@ -143,6 +147,8 @@ class PartsRunDataController extends Controller
      */
     public function edit($id)
     {
+        if (!auth()->user()->can('Edit Partrun'))
+            abort(403);
         $clubs = Club::all();
         $partsRunData = PartsRunData::where('id', $id)->get();
 
@@ -156,7 +162,7 @@ class PartsRunDataController extends Controller
             $shipping = implode(",", $shippingCostsArray); // Implode to return as a string when displaying update form - RH
         };
 
-        return view('part-runs.edit', [
+        return view('parts-run.edit', [
             'partsRunData' => $partsRunData,
             'includes' => $includes,
             'shipping' => $shipping,
@@ -173,9 +179,29 @@ class PartsRunDataController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         $partsRunData = app(PartsRunData::class)->find($id);
+
+        // Only people with Edit Partrun can edit this page
+        if (!auth()->user()->can('Edit Partrun'))
+          abort(403);
+
+        if (!auth()->user()->id == $partsRunData->user_id || !auth()->user()->can('Create Partrun'))
+          abort(403);
+
         $data = $request->except(['_method', '_token']);
         // $partsRunData->update($data);
+
+
+        if ($partsRunData->status != $request->status)
+        {
+          foreach($partsRunData->is_interested as $user)
+          {
+            $user->notify(new PartsRunUpdated($partsRunData));
+          }
+          $bc_rep = User::find($partsRunData->bc_rep_id)->first();
+          $bc_rep->notify(new PartsRunUpdated($partsRunData));
+        }
 
         $partsRunData->update([
             'status' => $request->status
@@ -194,7 +220,18 @@ class PartsRunDataController extends Controller
             'quantity' => $request->quantity
         ]);
 
-        return redirect()->route('part-runs.index');
+        if ($partsRunData->isDirty('status'))
+        {
+          dd($partsRunData->isDirty('status'));
+          foreach($partsRunData->interested as $user)
+          {
+            $user->notify(new PartsRunUpdate($partsRunData));
+          }
+          $bc_rep = User::find($partsRunData->bc_rep_id)->get();
+          $bc_rep->notify(new PartsRunUpdate($partsRunData));
+        }
+
+        return redirect()->route('parts-run.index');
     }
 
     /**

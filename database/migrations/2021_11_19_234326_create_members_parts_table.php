@@ -18,6 +18,7 @@ class CreateMembersPartsTable extends Migration
             $table->integer('user_id');
             $table->integer('parts_run_data_id');
             $table->text('status');
+            $table->integer('quantity')->default(1);
             $table->timestamp('timestamp')->useCurrent();
         });
     }

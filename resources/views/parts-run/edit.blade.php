@@ -10,7 +10,7 @@
                 <h4 class="text-center title">Editing Parts Run #{{ $data->id }}</h4>
             </div>
             <div class="card-body">
-                <form action="{{ route('part-runs.update', $data->id) }}" method="POST">
+                <form action="{{ route('parts-run.update', $data->id) }}" method="POST">
                     @method('PUT')
                     @csrf
                      <div class="form-group row">
@@ -21,6 +21,7 @@
                                     <option {{ ($data->status) == 'Active' ? 'selected' : '' }} value="Active">Active</option>
                                     <option {{ ($data->status) == 'Inactive' ? 'selected' : '' }} value="Inactive">Inactive</option>
                                     <option {{ ($data->status) == 'Gathering_Interest' ? 'selected' : '' }} value="Gathering_Interest">Gathering Interest</option>
+                                    <option {{ ($data->status) == 'Initial' ? 'selected' : '' }} value="Initial">Initial</option>
                                 </select>
                             </div>
                         </div>

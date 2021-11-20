@@ -45,6 +45,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
   Route::get('audits', 'AuditController@index')->name('audits.index');
   Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index')->name('logs.index');
   Route::resource('/venue-contacts', 'VenueContactController', ['except' => ['show']]);
+  Route::get('/api/bcreps/{club_id}', 'ApiController@list_bcreps');
 });
 
 Route::get('/', function () {    return view('about');
@@ -91,14 +92,14 @@ Route::group(['middleware' => ['auth', 'gdpr.terms']], function() {
   } )->name('about');
 
   // Parts Runs Extension
-  Route::resource('/part-runs', 'PartsRunDataController');
+  Route::resource('/parts-run', 'PartsRunDataController');
   Route::get('parts-run/image/{run_id}/{number?}/{size?}', 'PartsRunImageController@show')
                     ->name('image.displayPartsRunImage');
   Route::get('/request-a-part-run', 'PartsRunDataController@requestPartsRun')->name('request');
   Route::get('/parts-run-info', function() {
-    return view('part-runs.info');
+    return view('parts-run.info');
   })->name('partsRunInfo');
-  Route::get('/bcreps/{club_id}', 'BcRepController@list');
+
   Route::put('parts-run/comment/{partsrun}', 'PartsRunDataController@comment')->name('parts-run.comment');
   Route::get('parts-run/interested/{partsrun}', 'PartsRunDataController@interested')->name('parts-run.interested');
 });

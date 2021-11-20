@@ -24,9 +24,9 @@
                 @if(Gate::check('Edit Partrun') && (Auth()->user()->id == $data->user_id || Auth()->user()->id == $data->bc_rep_id))
                 <div class="text-center row">
                     <div class="col-12">
-                        <a class="btn btn-primary" href={{ route('part-runs.edit', $data->id) }}>Edit Run</a>
+                        <a class="btn btn-primary" href={{ route('parts-run.edit', $data->id) }}>Edit Run</a>
                         @can('Create Partrun')
-                          <a class="btn btn-danger" href={{ route('part-runs.destroy', $data->id) }}>Delete Run</a>
+                          <a class="btn btn-danger" href={{ route('parts-run.destroy', $data->id) }}>Delete Run</a>
                         @endcan
                     </div>
                 </div>

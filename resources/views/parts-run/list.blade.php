@@ -9,7 +9,7 @@
         <div class="row d-flex align-items-center">
           <div class="col-sm-2 text-left">
             @can('Create Partrun')
-              <a class="btn btn-primary" href={{ route('part-runs.create') }}>Create Run</a>
+              <a class="btn btn-primary" href={{ route('parts-run.create') }}>Create Run</a>
             @endcan
           </div>
           <div class="col-sm-8 text-center">
@@ -54,9 +54,9 @@
                     <td>{{ $data->interested->count() }}</td>
                     <td>
                       <div class="d-flex">
-                        <a class="btn btn-view" href={{ route('part-runs.show', $data->id) }}>View</a>
+                        <a class="btn btn-view" href={{ route('parts-run.show', $data->id) }}>View</a>
                         @if(Gate::check('Edit Partrun') && (Auth()->user()->id == $data->user_id || Auth()->user()->id == $data->bc_rep_id))
-                          <a class="btn btn-edit" href={{ route('part-runs.edit', $data->id) }}>Edit</a>
+                          <a class="btn btn-edit" href={{ route('parts-run.edit', $data->id) }}>Edit</a>
                         @endif
                       </div>
                     </td>
@@ -76,7 +76,7 @@
     <div class="card">
       <div class="card-header">
         <div class="row d-flex align-items-center">
-          <div class="col-sm-8 text-center">
+          <div class="col-sm-12 text-center">
             <h4 class="text-center title">Part Runs</h4>
           </div>
         </div>
@@ -117,9 +117,9 @@
 
                     <td>
                       <div class="d-flex">
-                        <a class="btn btn-view" href={{ route('part-runs.show', $data->id) }}>View</a>
+                        <a class="btn btn-view" href={{ route('parts-run.show', $data->id) }}>View</a>
                         @if(Gate::check('Edit Partrun') && (Auth()->user()->id == $data->user_id || Auth()->user()->id == $data->bc_rep_id))
-                          <a class="btn btn-edit" href={{ route('part-runs.edit', $data->id) }}>Edit</a>
+                          <a class="btn btn-edit" href={{ route('parts-run.edit', $data->id) }}>Edit</a>
                         @endif
                       </div>
                     </td>
