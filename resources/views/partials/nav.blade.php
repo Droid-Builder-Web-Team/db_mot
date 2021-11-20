@@ -69,7 +69,7 @@
             <li class="c-sidebar-nav-item">
                 <a class="c-sidebar-nav-link" target="_blank" href="{{ route('partsRunInfo') }}">
                     <svg class="c-sidebar-nav-icon">
-                    <i class="fas fa-list"></i>
+                    <i class="fas fa-list fa-fw"></i>
                     </svg><span class="ml-1">Parts Runs</span>
                 </a>
             </li>

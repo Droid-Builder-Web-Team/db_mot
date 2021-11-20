@@ -1,8 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-8">
         <div class="card">
             @foreach($partsRunData as $data)
             <div class="card-header padding-container">
@@ -16,15 +17,20 @@
                     <div class="col-12 col-md-3 status">
                         <h6>Status: {{ $data->status }}</h6>
                     </div>
+                    <div class="col-12 col-md-3 status">
+                        <h6>Rep: {{ $data->bcRep->forename }} {{ $data->bcRep->surname }}</h6>
+                    </div>
                 </div>
-                @role('Super Admin')
+                @if(Gate::check('Edit Partrun') && (Auth()->user()->id == $data->user_id || Auth()->user()->id == $data->bc_rep_id))
                 <div class="text-center row">
                     <div class="col-12">
                         <a class="btn btn-primary" href={{ route('part-runs.edit', $data->id) }}>Edit Run</a>
-                        {{-- <a class="btn btn-danger" href={{ route('part-runs.destroy', $data->id) }}>Delete Run</a> --}}
+                        @can('Create Partrun')
+                          <a class="btn btn-danger" href={{ route('part-runs.destroy', $data->id) }}>Delete Run</a>
+                        @endcan
                     </div>
                 </div>
-                @endrole
+                @endif
             </div>
             <div class="card-body">
                 <div class="row">
@@ -48,7 +54,7 @@
                             <div class="mb-4 row">
                                 <div class="seller-info">
                                     <div class="col-12 col-md-6">
-                                        <p class="seller"><strong>Seller:</strong> {{ $data->user->username }}</p>
+                                        <p class="seller"><strong>Seller:</strong> {{ $data->user->forename }} {{ $data->user->surname }}</p>
                                     </div>
                                     <div class="col-12 col-md-6">
                                         <p class="droid"><strong>Club:</strong> {{ $data->club->name }}</p>
@@ -103,26 +109,31 @@
                                     <div class="col-12 col-md-4">
                                         @if($data->status == "Active")
                                             <p><strong>Purchase Link:</strong></p>
-                                            <p><a class="btn btn-primary" href="{{ $data->partsRunAd->purchase_url }}"> Buy Here</a></p>
+                                            <p><a class="btn btn-primary" target=_default href="{{ $data->partsRunAd->purchase_url }}"> Buy Here</a></p>
                                         @elseif($data->status == "Gathering_Interest")
                                             <p><strong>Register Your Interest:</strong></p>
-                                            <p><a class="btn btn-primary" href="#">Interested!</a></p>
+                                            @php
+                                              $status="no";
+                                              $user = $data->interested->only([ Auth::user()->id ])->first();
+                                              if ($user != NULL) {
+                                                $status = $user->pivot->status;
+                                              }
+                                            @endphp
+                                            @if($status != 'no')
+                                              <p><a class="btn btn-primary" href="{{ route('parts-run.interested',[$data->id, 'interest' => 'no']) }}">Remove Interest!</a></p>
+                                            @else
+                                              @if($data->partsRunAd->quantity == 0 || $data->partsRunAd->quantity > $data->interested->count())
+                                                <p><a class="btn btn-primary" href="{{ route('parts-run.interested',[$data->id, 'interest' => 'yes']) }}">Interested!</a></p>
+                                              @else
+                                                <p>Interest List is Full</p>
+                                              @endif
+                                            @endif
                                         @else
                                             <p>This run is inactive. Please wait for it to become active again.</p>
                                         @endif
                                     </div>
 
-                                    <div class="col-12 col-md-4">
-                                        @if($data->status == "Gathering_Interest")
-                                            <p><strong>Interest List:</strong></p>
-                                            <ul>
-                                                <li>Test</li>
-
-                                            </ul>
-                                        @endif
-                                    </div>
-
-                                    <div class="col-12 col-md-4">
+                                    <div class="col-12 col-md-8">
                                         <p class="droid"><strong>Contact Email: </strong></p>
                                         <p><a href="mailto:{{ $data->partsRunAd->contact_email }}"> {{ $data->partsRunAd->contact_email }}</a></p>
                                     </div>
@@ -170,7 +181,32 @@
             </div>
         @endforeach
     </div>
+  </div>
+
+<!-- Interest -->
+
+<div class="col-xs-4 col-sm-4 col-md-4">
+  <div class="card">
+    <div class="card-header">
+      Interest:
+    </div>
+    <div class="card-body">
+      @foreach($data->interested as $user)
+        @if($user->pivot->status != 'no')
+        <li>
+          @can('Edit Partsrun')
+            <a href="{{ route('user.show', $user->id) }}">{{ $user->forename ?? "Deactivated"}} {{ $user->surname ?? "User"}}</a>
+          @else
+            {{ $user->forename ?? "Deactivated"}} {{ $user->surname ?? "User"}}
+          @endcan
+        </li>
+        @endif
+      @endforeach
+    </div>
+  </div>
 </div>
+
+
 </div>
 <div class="row">
   <div class="col-md-8">
@@ -228,6 +264,10 @@
         </div>
       </div>
     </div>
+  </div>
+
+
+
   </div>
 <script>
     $(document).on('click', '[data-toggle="lightbox"]', function (event) {

@@ -240,4 +240,25 @@ class PartsRunDataController extends Controller
         toastr()->success('Comment Added');
         return back();
     }
+
+    public function interested(Request $request, PartsRunData $partsrun)
+    {
+
+        if (!$partsrun->partsRunAd->quantity < $partsrun->interested->count() && $request->interest == 'yes')
+        {
+          toastr()->error('Part Run Full');
+          return back();
+        }
+        $user = auth()->user();
+        $hasEntry = $user->parts_interested()->where('parts_run_data_id', $partsrun->id)->exists();
+        $attributes = [
+          'status' => $request->interest,
+        ];
+        if ($hasEntry)
+            $result = $partsrun->is_interested()->updateExistingPivot($user, $attributes);
+        else
+            $result = $partsrun->is_interested()->save($user, $attributes);
+        toastr()->success('Interest registered for Parts Run');
+        return back();
+    }
 }

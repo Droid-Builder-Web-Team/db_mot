@@ -65,7 +65,7 @@ class EventsController extends Controller
         $event = $request->all();
         $linkify = new \Misd\Linkify\Linkify();
         $event['description'] = $linkify->process($request->description);
-        
+
         $success = 0;
         try {
           $newevent = Event::create($event);
@@ -107,14 +107,6 @@ class EventsController extends Controller
             'description' => 'required',
         ]);
 
-        if($event->isFuture())
-        {
-            foreach($event->users as $user)
-            {
-                $user->notify(new EventChanged($event));
-            }
-        }
-
         $newevent = $request->all();
         $linkify = new \Misd\Linkify\Linkify();
         $newevent['description'] = $linkify->process($request->description);
@@ -126,8 +118,17 @@ class EventsController extends Controller
             use Illuminate\Support\Facades\Response;date Event');
         }
 
+        if($event->isFuture())
+        {
+            foreach($event->users as $user)
+            {
+                $user->notify(new EventChanged($event));
+            }
+            // Only notify discord if its a future event.
+            $event->updatedEventNotification($event);
+        }
 
-        $event->updatedEventNotification($event);
+
         return redirect()->route('admin.events.index');
 
     }
@@ -149,7 +150,8 @@ class EventsController extends Controller
           toastr()->error('Failed to delete Event');
         }
 
-        $event->deletedEventNotification($event);
+        // Don't need to notify discord if event gets deleted.
+        //$event->deletedEventNotification($event);
         return redirect()->route('admin.events.index');
     }
 

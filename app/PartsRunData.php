@@ -54,4 +54,14 @@ class PartsRunData extends Model implements Auditable
     {
         return $this->morphMany('App\Comment', 'commentable');
     }
+
+    public function is_interested()
+    {
+        return $this->belongsToMany(User::class, 'members_parts')->withPivot('status');
+    }
+
+    public function interested()
+    {
+        return $this->belongsToMany(User::class, 'members_parts')->wherePivot('status', 'yes');
+    }
 }

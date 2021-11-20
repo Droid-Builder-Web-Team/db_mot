@@ -12,7 +12,8 @@ return [
               'account' => 'on',
               'mot' => 'on',
               'event' => 'on',
-              'achievement' => 'on'
+              'achievement' => 'on',
+              'partsrun' => 'on'
           ],
           'max_event_distance' => 50,
           'date_format' => 'YYYY-MM-DD',
