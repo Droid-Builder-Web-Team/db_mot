@@ -132,7 +132,7 @@ class PartsRunDataController extends Controller
             $shippingCostsArray = explode(",", $shippingCosts->partsRunAd->shipping_costs);
         };
 
-        return view('part-runs.show', [
+        return view('parts-run.show', [
             'partsRunData' => $partsRunData,
             'includesArray' => $includesArray,
             'shippingCostsArray' => $shippingCostsArray
