@@ -278,7 +278,7 @@ class PartsRunDataController extends Controller
     public function interested(Request $request, PartsRunData $partsrun)
     {
 
-        if (!$partsrun->partsRunAd->quantity < $partsrun->interested->count() && $request->interest == 'yes')
+        if (!$partsrun->partsRunAd->quantity < $partsrun->is_interested->count() && $request->interest == 'interested')
         {
           toastr()->error('Part Run Full');
           return back();
@@ -287,12 +287,30 @@ class PartsRunDataController extends Controller
         $hasEntry = $user->parts_interested()->where('parts_run_data_id', $partsrun->id)->exists();
         $attributes = [
           'status' => $request->interest,
+          'quantity' => $request->quantity
         ];
         if ($hasEntry)
-            $result = $partsrun->is_interested()->updateExistingPivot($user, $attributes);
+            $result = $partsrun->interested()->updateExistingPivot($user, $attributes);
         else
-            $result = $partsrun->is_interested()->save($user, $attributes);
+            $result = $partsrun->interested()->save($user, $attributes);
         toastr()->success('Interest registered for Parts Run');
+        return back();
+    }
+
+    public function status_update(Request $request, PartsRunData $partsrun)
+    {
+        $status_array = array('paid','shipped');
+
+        if (in_array($request->status, $status_array))
+        {
+          $user = User::find($request->user_id);
+          $attributes = [
+            'status' => $request->status,
+          ];
+          $result = $partsrun->interested()->updateExistingPivot($user, $attributes);
+          toastr()->success('Status Updated');
+
+        }
         return back();
     }
 }

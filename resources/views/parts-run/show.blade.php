@@ -106,24 +106,32 @@
                             </div>
                             <div class="mb-4 row">
                                 <div class="purchase-email">
-                                    <div class="col-12 col-md-4">
+                                    <div class="col-12 col-md-6">
                                         @if($data->status == "Active")
                                             <p><strong>Purchase Link:</strong></p>
                                             <p><a class="btn btn-primary" target=_default href="{{ $data->partsRunAd->purchase_url }}"> Buy Here</a></p>
+                                            Note: Purchases are between you and the person doing the run. This site does not handle any transactions.
                                         @elseif($data->status == "Gathering_Interest")
                                             <p><strong>Register Your Interest:</strong></p>
                                             @php
                                               $status="no";
-                                              $user = $data->interested->only([ Auth::user()->id ])->first();
+                                              $quantity = 1;
+                                              $user = $data->is_interested->only([ Auth::user()->id ])->first();
                                               if ($user != NULL) {
                                                 $status = $user->pivot->status;
                                               }
                                             @endphp
                                             @if($status != 'no')
-                                              <p><a class="btn btn-primary" href="{{ route('parts-run.interested',[$data->id, 'interest' => 'no']) }}">Remove Interest!</a></p>
+                                              <p><a class="btn btn-primary" href="{{ route('parts-run.interested',[$data->id, 'interest' => 'no', 'quantity' => 0]) }}">Remove Interest!</a></p>
                                             @else
                                               @if($data->partsRunAd->quantity == 0 || $data->partsRunAd->quantity > $data->interested->count())
-                                                <p><a class="btn btn-primary" href="{{ route('parts-run.interested',[$data->id, 'interest' => 'yes']) }}">Interested!</a></p>
+                                              <form action="{{ route('parts-run.interested',$data->id) }}" method="GET">
+
+                                                <input size=4 type=number value="1" name="quantity">
+                                                <input type="hidden" name="interest" value="interested">
+                                                <input class="btn btn-primary" type=submit value="Interested">
+                                              </form>
+                                                Note: Registering interest is not a commitment to buy, but please only do so if you think you will.
                                               @else
                                                 <p>Interest List is Full</p>
                                               @endif
@@ -133,7 +141,7 @@
                                         @endif
                                     </div>
 
-                                    <div class="col-12 col-md-8">
+                                    <div class="col-12 col-md-6">
                                         <p class="droid"><strong>Contact Email: </strong></p>
                                         <p><a href="mailto:{{ $data->partsRunAd->contact_email }}"> {{ $data->partsRunAd->contact_email }}</a></p>
                                     </div>
@@ -188,22 +196,66 @@
 <div class="col-xs-4 col-sm-4 col-md-4">
   <div class="card">
     <div class="card-header">
-      Interest:
+      Status:
     </div>
     <div class="card-body">
+      <h3>Interest</h3>
+      <ul>
       @foreach($data->interested as $user)
-        @if($user->pivot->status != 'no')
+        @if($user->pivot->status == 'interested')
         <li>
-          @can('Edit Partsrun')
-            <a href="{{ route('user.show', $user->id) }}">{{ $user->forename ?? "Deactivated"}} {{ $user->surname ?? "User"}}</a>
-          @else
             {{ $user->forename ?? "Deactivated"}} {{ $user->surname ?? "User"}}
-          @endcan
+            @if($user->pivot->quantity != 1)
+             ({{$user->pivot->quantity}})
+            @endif
+            @if(auth()->user()->id == $data->user_id || auth()->user()->id == $data->bc_rep_id)
+              @if ($data->status == "Active")
+                <a href="{{ route('parts-run.status_update',[$data->id, 'status' => 'paid', 'user_id' => $user->id]) }}"><i class="fas fa-dollar-sign"></i></a>
+              @endif
+            @endif
         </li>
         @endif
       @endforeach
-    </div>
+    </ul>
+
+    @if ($data->status == "Active")
+    <h3>Paid</h3>
+    <ul>
+    @foreach($data->interested as $user)
+      @if($user->pivot->status == 'paid')
+      <li>
+          {{ $user->forename ?? "Deactivated"}} {{ $user->surname ?? "User"}}
+          @if($user->pivot->quantity != 1)
+           ({{$user->pivot->quantity}})
+          @endif
+          @if(auth()->user()->id == $data->user_id || auth()->user()->id == $data->bc_rep_id)
+            @if ($data->status == "Active")
+              <a href="{{ route('parts-run.status_update',[$data->id, 'status' => 'shipped', 'user_id' => $user->id]) }}"><i class="fas fa-truck"></i></a>
+            @endif
+          @endif
+      </li>
+      @endif
+    @endforeach
+    </ul>
+    <h3>Shipped</h3>
+    <ul>
+    @foreach($data->interested as $user)
+      @if($user->pivot->status == 'shipped')
+      <li>
+          {{ $user->forename ?? "Deactivated"}} {{ $user->surname ?? "User"}}
+          @if($user->pivot->quantity != 1)
+           ({{$user->pivot->quantity}})
+          @endif
+      </li>
+      @endif
+    @endforeach
+  </ul>
+
+
+    @endif
   </div>
+  </div>
+
 </div>
 
 

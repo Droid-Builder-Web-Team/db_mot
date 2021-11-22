@@ -51,7 +51,13 @@
                       @endif
                     </th>
 
-                    <td>{{ $data->interested->count() }}</td>
+                    <td>{{ $data->interest_quantity() }} /
+                      @if ($data->quantity == 0)
+                        unlimited
+                      @else
+                        {{ $data->quantity }}
+                      @endif
+                    </td>
                     <td>
                       <div class="d-flex">
                         <a class="btn btn-view" href={{ route('parts-run.show', $data->id) }}>View</a>

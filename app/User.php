@@ -223,14 +223,9 @@ class User extends Authenticatable implements MustVerifyEmail, Rater, Auditable
         return $this->hasMany(PartsRunData::class);
     }
 
-    public function partsRunAd()
-    {
-        return $this->hasMany(PartsRunAd::class);
-    }
-
     public function parts_interested()
     {
-        return $this->belongsToMany(PartsRunData::class, 'members_parts')->withPivot('status');
+        return $this->belongsToMany(PartsRunData::class, 'members_parts')->withPivot('status', 'quantity');
     }
 
 }
