@@ -8,16 +8,13 @@
             @foreach($partsRunData as $data)
             <div class="card-header padding-container">
                 <div class="mb-4 text-center row d-flex justify-content-center align-items-center">
-                    <div class="col-12 col-md-3 club">
-                        <h6>Club: {{ $data->club->name }}</h6>
-                    </div>
-                    <div class="col-12 col-md-3 active_since">
+                    <div class="col-12 col-md-4 active_since">
                         <h6>Active Since: {{  \Carbon\Carbon::createFromTimeString($data->partsRunAd->updated_at)->format('d/m/Y') }}</h6>
                     </div>
-                    <div class="col-12 col-md-3 status">
+                    <div class="col-12 col-md-4 status">
                         <h6>Status: {{ $data->status }}</h6>
                     </div>
-                    <div class="col-12 col-md-3 status">
+                    <div class="col-12 col-md-4 status">
                         <h6>Rep: {{ $data->bcRep->forename }} {{ $data->bcRep->surname }}</h6>
                     </div>
                 </div>
@@ -34,7 +31,7 @@
             </div>
             <div class="card-body">
                 <div class="row">
-                    <div class="col-12 col-md-8">
+                    <div class="col-12 col-md-12">
                         <div class="text-left part-content">
                             <div class="row">
                                 <div class="run-header">
@@ -169,14 +166,6 @@
                                 </div>
                             </div> --}}
 
-                        </div>
-                    </div>
-
-                    <div class="col-12 col-md-4">
-                        <div class="image-wrapper" style="display:flex; justify-content:right;">
-                            <a href="{{ route('image.displayPartsRunImage', $data->id) }}" data-toggle="lightbox">
-                                <img src="{{ route('image.displayPartsRunImage', $data->id) }}" class="img-fluid">
-                            </a>
                         </div>
                     </div>
                 </div>
