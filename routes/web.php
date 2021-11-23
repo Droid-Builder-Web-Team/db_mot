@@ -102,7 +102,7 @@ Route::group(['middleware' => ['auth', 'gdpr.terms']], function() {
   })->name('partsRunInfo');
   Route::put('parts-run/comment/{partsrun}', 'PartsRunDataController@comment')->name('parts-run.comment');
   Route::get('parts-run/interested/{partsrun}', 'PartsRunDataController@interested')->name('parts-run.interested');
-    Route::get('parts-run/status_update/{partsrun}', 'PartsRunDataController@status_update')->name('parts-run.status_update');
+  Route::get('parts-run/status_update/{partsrun}', 'PartsRunDataController@status_update')->name('parts-run.status_update');
 });
 
 

@@ -23,6 +23,7 @@ class PartsRunData extends Model implements Auditable
         'club_id',
         'status',
         'bc_rep_id',
+        'open'
     ];
 
     public function partsRunAd()

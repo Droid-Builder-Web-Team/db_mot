@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-9">
         <div class="card">
             @foreach($partsRunData as $data)
             <div class="card-header padding-container">
@@ -85,7 +85,7 @@
                                 <div class="description">
                                     <div class="col-12">
                                         <p class="description-text"><strong>Description:</strong></p>
-                                        <p>{{ $data->partsRunAd->description }}</p>
+                                        <p>{!! $data->partsRunAd->description !!}</p>
                                     </div>
                                 </div>
                             </div>
@@ -108,9 +108,14 @@
                                 <div class="purchase-email">
                                     <div class="col-12 col-md-6">
                                         @if($data->status == "Active")
+                                          <p><strong>Purchase Link:</strong></p>
+                                          @if($data->open == 1)
                                             <p><strong>Purchase Link:</strong></p>
                                             <p><a class="btn btn-primary" target=_default href="{{ $data->partsRunAd->purchase_url }}"> Buy Here</a></p>
                                             Note: Purchases are between you and the person doing the run. This site does not handle any transactions.
+                                          @else
+                                            Run is currently only open to those who registered interest. It will become an open run once those people have had a chance to purchase.
+                                          @endif
                                         @elseif($data->status == "Gathering_Interest")
                                             <p><strong>Register Your Interest:</strong></p>
                                             @php
@@ -193,7 +198,7 @@
 
 <!-- Interest -->
 
-<div class="col-xs-4 col-sm-4 col-md-4">
+<div class="col-xs-3 col-sm-3 col-md-3">
   <div class="card">
     <div class="card-header">
       Status:
@@ -261,7 +266,7 @@
 
 </div>
 <div class="row">
-  <div class="col-md-8">
+  <div class="col-md-9">
     <div class="card">
       <div class="card-header">
         Comments

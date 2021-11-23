@@ -14,9 +14,9 @@
                     @method('PUT')
                     @csrf
                      <div class="form-group row">
-                        <div class="col-12">
+                        <div class="col-10">
                             <label for="status" class="col-4 col-form-label">Parts Run Status</label>
-                            <div class="col-12">
+                            <div class="col-10">
                                 <select id="status" name="status" class="custom-select">
                                     <option {{ ($data->status) == 'Active' ? 'selected' : '' }} value="Active">Active</option>
                                     <option {{ ($data->status) == 'Inactive' ? 'selected' : '' }} value="Inactive">Inactive</option>
@@ -24,6 +24,11 @@
                                     <option {{ ($data->status) == 'Initial' ? 'selected' : '' }} value="Initial">Initial</option>
                                 </select>
                             </div>
+                        </div>
+                        <div class="col-md-1 mb-2">
+                          {{Form::hidden('open','0')}}
+                          <label>Open for all</label>
+                          <input type="checkbox" name="open" {{ $data->open ? 'checked=1 value=1' : 'value=1' }} class="form-control">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -62,7 +67,9 @@
                         <div class="col-12">
                             <label for="description" class="col-4 col-form-label">Description</label>
                             <div class="col-12">
-                                <input type="text" name="description" value="{{ $data->partsRunAd->description }}" class="form-control">
+                                <textarea class="form-control" style="height:150px" id="description" name="description" placeholder="Description">
+                                  {{ $data->partsRunAd->description }}
+                                </textarea>
                             </div>
                         </div>
                     </div>
@@ -134,4 +141,14 @@
     </div>
 </div>
 </div>
+<script src="{{ asset('node_modules/tinymce/tinymce.js') }}"></script>
+<script>
+    tinymce.init({
+        selector: '#description',
+        plugins: 'autolink lists table link hr autoresize code image media',
+        toolbar: 'table numlist bullist link hr code image media',
+        toolbar_mode: 'floating',
+        image_caption: true
+    });
+</script>
 @endsection

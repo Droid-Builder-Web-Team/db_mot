@@ -41,7 +41,7 @@
 
                 <div class="form-group">
                     <label for="description"><strong>Description</strong></label>
-                    <textarea class="form-control" style="height:150px" name="description" placeholder="Description">{{ $event->description }}</textarea>
+                    <textarea class="form-control" style="height:150px" id="description" name="description" placeholder="Description">{{ $event->description }}</textarea>
                 </div>
 
                 <div class="form-group row">
@@ -102,4 +102,14 @@
             </form>
         </div>
     </div>
+
+    <script src="{{ asset('node_modules/tinymce/tinymce.js') }}"></script>
+    <script>
+        tinymce.init({
+            selector: '#description',
+            plugins: 'autolink lists table link hr autoresize',
+            toolbar: 'table numlist bullist link hr',
+            toolbar_mode: 'floating',
+        });
+    </script>
 @endsection

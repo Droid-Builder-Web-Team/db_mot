@@ -190,8 +190,6 @@ class PartsRunDataController extends Controller
           abort(403);
 
         $data = $request->except(['_method', '_token']);
-        // $partsRunData->update($data);
-
 
         if ($partsRunData->status != $request->status)
         {
@@ -203,8 +201,10 @@ class PartsRunDataController extends Controller
           $bc_rep->notify(new PartsRunUpdated($partsRunData));
         }
 
+
         $partsRunData->update([
-            'status' => $request->status
+            'status' => $request->status,
+            'open' => $request->open
         ]);
 
         $partsRunData->partsRunAd()->update([
@@ -219,17 +219,6 @@ class PartsRunDataController extends Controller
             'contact_email' => $request->contact_email,
             'quantity' => $request->quantity
         ]);
-
-        if ($partsRunData->isDirty('status'))
-        {
-          dd($partsRunData->isDirty('status'));
-          foreach($partsRunData->interested as $user)
-          {
-            $user->notify(new PartsRunUpdate($partsRunData));
-          }
-          $bc_rep = User::find($partsRunData->bc_rep_id)->get();
-          $bc_rep->notify(new PartsRunUpdate($partsRunData));
-        }
 
         return redirect()->route('parts-run.index');
     }
@@ -263,9 +252,9 @@ class PartsRunDataController extends Controller
 
         if (auth()->user()->id ==  $partsrun->user_id && $request->broadcast == 'on')
         {
-          foreach($partsrun->users as $user)
+          foreach($partsrun->interested as $user)
           {
-            $user->notify(new PartsRunUpdated($event));
+            $user->notify(new PartsRunUpdated($partsrun));
           }
           $comment->broadcast = true;
         }
