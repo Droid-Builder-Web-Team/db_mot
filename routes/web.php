@@ -85,6 +85,8 @@ Route::group(['middleware' => ['auth', 'gdpr.terms']], function() {
   Route::resource('achievements', 'AchievementController');
   Route::post('comments/{id}', 'CommentController@store')->name('comment.add');
   Route::get('comments/{id}', 'CommentController@delete')->name('comment.delete');
+  Route::post('/reaction', 'CommentController@fetchReactions');
+  Route::post('/reaction/{id}', 'CommentController@handleReaction');
   Route::get('change-password', 'ChangePasswordController@index');
   Route::post('change-password', 'ChangePasswordController@store')->name('change.password');
   Route::get('codeofconduct', 'CodeOfConductController@index')->name('codeofconduct');

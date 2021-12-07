@@ -59,4 +59,23 @@ class CommentController extends Controller
         toastr()->success('Comment Deleted');
         return back();
     }
+
+
+    public function fetchReactions(Request $request)
+    {
+        $comment = Comment::find($request->comment);
+        return response()->json(
+            $comment->reaction_summary->toArray(),
+        );
+    }
+
+    public function handleReaction(Request $request)
+    {
+        $comment = Comment::find($request->id);
+        $comment->toggleReaction($request->reaction);
+        return response()->json([
+            'message' => 'Liked',
+        ]);
+    }
+
 }
