@@ -262,8 +262,9 @@ document.getElementById('shareBtn').onclick = function() {
                 <span class="float-right">
                   <a href="{{ route('comment.delete', $comment->id )}}" class="btn-sm btn-danger">Delete</a>
                 </span>
+                @endcan
                 <span class="float-right">
-                  <reaction-component 
+                  <reaction-component
                         :comment="{{ $comment->id }}"
                         :summary='@json($comment->reactionSummary())'
                         @auth
@@ -271,7 +272,6 @@ document.getElementById('shareBtn').onclick = function() {
                         @endauth
                   />
                 </span>
-                @endcan
               </div>
             </div>
 @endforeach

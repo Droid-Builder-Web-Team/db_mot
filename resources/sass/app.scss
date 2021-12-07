@@ -6,3 +6,149 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+@media only screen and (max-width: 400px) {
+  .oauth-buttons a {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+  }
+}
+body {
+  font-family: -apple-system, BlinkMacSystemFont, segoe ui, Roboto, helvetica neue, Arial, noto sans, sans-serif, apple color emoji, segoe ui emoji, segoe ui symbol, noto color emoji;
+}
+
+.padding-container {
+  padding: 2rem 2rem;
+}
+
+.c-dark-theme a {
+  color: #000;
+}
+
+.dropdown-item .fas {
+  margin-right: 8px;
+}
+
+.fas.fa-plus {
+  font-size: 10rem;
+}
+
+.title {
+  text-transform: uppercase;
+  font-size: calc(1.5rem + 0.3vw);
+  letter-spacing: 0.7px;
+}
+
+.far.fa-question-circle.fa-2x,
+.fab.fa-facebook,
+.fab.fa-discord,
+.fab.fa-youtube {
+  color: #fff;
+}
+
+/* Global CSS */
+.c-sidebar-nav-link,
+.c-sidebar-nav-item:hover {
+  transition: 0.3s all;
+}
+
+/* Login */
+.oauth-buttons a {
+  margin-left: 1rem;
+  margin-right: 1rem;
+  margin-top: 1rem;
+}
+
+/* Events */
+.c-dark-theme .form-control {
+  color: #000000 !important;
+  border: 1px solid #000000 !important;
+}
+.c-dark-theme .form-control::-moz-placeholder {
+  color: #444 !important;
+}
+.c-dark-theme .form-control:-ms-input-placeholder {
+  color: #444 !important;
+}
+.c-dark-theme .form-control::placeholder {
+  color: #444 !important;
+}
+
+/* Datatables */
+.dataTables_wrapper .dataTables_length,
+.dataTables_wrapper .dataTables_filter,
+.dataTables_wrapper .dataTables_info,
+.dataTables_wrapper .dataTables_processing,
+.dataTables_wrapper .dataTables_paginate {
+  color: white;
+}
+
+/* Nav-Link */
+.c-dark-theme .c-sidebar .c-sidebar-nav-link:hover,
+.c-dark-theme .c-sidebar .c-sidebar-nav-dropdown-toggle {
+  transition: 0.5s ease-in-out;
+}
+
+.c-dark-theme .c-sidebar .c-sidebar-nav-link:hover,
+.c-dark-theme .c-sidebar .c-sidebar-nav-dropdown-toggle:hover {
+  background: #75a6d7;
+  background: radial-gradient(circle, #75a6d7 0%, #5d86db 20%, #46659d 40%, #233454 60%, #131c2d 80%, #010203 100%);
+}
+
+/* General */
+.divider {
+  width: 75%;
+  background: white;
+}
+
+.sub {
+  padding: 0.5%;
+}
+
+.c-dark-theme select.form-control option {
+  background-color: #ffffff !important;
+}
+
+.c-dark-theme .custom-select {
+  color: black;
+}
+
+/* User */
+.new-award .form-control {
+  height: 40px;
+}
+
+.table > tbody > tr > td {
+  vertical-align: middle;
+}
+
+.fas.fa-trophy.fa-fw {
+  width: 1.25rem;
+}
+
+/* Buttons */
+a.btn-header-primary {
+  color: #fff;
+  background: transparent;
+  border: 1px solid #9561e2 !important;
+  padding: 10px 20px;
+}
+
+a.btn-header-primary:hover,
+a.btn-header-primary:focus {
+  background: #9561e2;
+  color: #fff;
+}
+
+a.btn-header-secondary {
+  color: #fff;
+  background: #9561e2;
+  border: 1px solid #9561e2 !important;
+  padding: 10px 20px;
+}
+
+a.btn-header-secondary:hover,
+a.btn-header-secondary:focus {
+  background: transparent;
+  color: #fff;
+}
