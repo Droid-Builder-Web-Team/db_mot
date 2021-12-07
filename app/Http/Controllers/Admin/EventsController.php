@@ -155,14 +155,6 @@ class EventsController extends Controller
         return redirect()->route('admin.events.index');
     }
 
-    public function delete_comment($id)
-    {
-        $comment = Comment::find($id);
-        $event_id = $comment->commentable_id;
-        $comment->delete();
-        return back();
-    }
-
     public function confirm($event_id, $user_id)
     {
         $user = User::find($user_id);

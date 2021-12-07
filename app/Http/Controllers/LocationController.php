@@ -48,17 +48,6 @@ class LocationController extends Controller
         return view('location.show', compact('location', 'events'));
     }
 
-    public function comment(Request $request, Location $location)
-    {
-        $comment = new Comment;
-        $comment->body = $request->body;
-        $comment->user_id = auth()->user()->id;
-
-        $result = $location->comments()->save($comment);
-        toastr()->success('Comment Added');
-        return view('location.show', compact('location'));
-    }
-
     public function store(Request $request, Location $location)
     {
         $location = Location::find($location->id);

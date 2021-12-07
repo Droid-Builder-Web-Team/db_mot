@@ -246,7 +246,7 @@ document.getElementById('shareBtn').onclick = function() {
                 {!! nl2br(e($comment->body)) !!}
                 @can('Edit Events')
                 <span class="float-right">
-                  <a href="{{ route('admin.events.delete_comment', $comment->id )}}" class="btn-sm btn-danger">Delete</a>
+                  <a href="{{ route('comment.delete', $comment->id )}}" class="btn-sm btn-danger">Delete</a>
                 </span>
                 @endcan
               </div>
@@ -258,9 +258,9 @@ document.getElementById('shareBtn').onclick = function() {
                 <strong>Add Comment</strong>
               </div>
               <div class="card-body">
-                <form action="{{ route('event.comment', $event->id) }}" method="POST">
+                <form action="{{ route('comment.add', ['id' => $event->id] ) }}" method="POST">
                     @csrf
-                    @method('PUT')
+                    <input type="hidden" name="model" value="App\Event">
                   <div class="form-group">
                     <textarea type="text" class="form-control" name="body"></textarea>
                   </div>

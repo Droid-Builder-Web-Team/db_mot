@@ -151,30 +151,6 @@ class EventController extends Controller
         return back();
     }
 
-    public function comment(Request $request, Event $event)
-    {
-
-        $request->validate([
-            'body' => 'required',
-        ]);
-        $comment = new Comment;
-        $comment->body = $request->body;
-        $comment->user_id = auth()->user()->id;
-
-        if (auth()->user()->can('Edit Events') && $request->broadcast == 'on')
-        {
-          foreach($event->users as $user)
-          {
-            $user->notify(new EventUpdated($event));
-          }
-          $comment->broadcast = true;
-        }
-
-        $result = $event->comments()->save($comment);
-        toastr()->success('Comment Added');
-        return back();
-    }
-
     public function past() {
 	    $events = Event::whereDate('date', '<=', Carbon::now())
                   ->orderBy('date', 'desc')->paginate(25);
