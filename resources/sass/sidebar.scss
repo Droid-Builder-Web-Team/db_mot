@@ -40,6 +40,13 @@
     }
 }
 
+#youtubeLi:hover {
+  background: #ff0000;
+  a:hover {
+    color: #FFF !important;
+  }
+}
+
 .social-icons {
     display: flex;
     flex-direction: row !important;

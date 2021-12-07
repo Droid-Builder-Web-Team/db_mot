@@ -34,6 +34,7 @@
         "misd/linkify": "^1.1",
         "orangehill/iseed": "^2.6",
         "owen-it/laravel-auditing": "^12.0",
+        "qirolab/laravel-reactions": "^2.5",
         "rap2hpoutre/laravel-log-viewer": "^1.7",
         "rennokki/rating": "^2.4",
         "silviolleite/laravelpwa": "^2.0",

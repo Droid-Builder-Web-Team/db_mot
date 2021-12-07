@@ -1,0 +1,65 @@
+@import 'variables';
+
+/* Parts Run */
+.run-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.seller-info,
+.location-shipping,
+.description,
+.includes,
+.purchase-email,
+.history {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.parts-run-break {
+  width: 85%;
+  background: #000000;
+}
+
+.input-group-prepend {
+  background: #000000;
+}
+
+.pr-active {
+  width: 20px;
+  height: 20px;
+  background: green;
+  border-radius: 50px;
+}
+
+.pr-interest {
+  width: 20px;
+  height: 20px;
+  background: orange;
+  border-radius: 50px;
+}
+
+.pr-inactive {
+  width: 20px;
+  height: 20px;
+  background: red;
+  border-radius: 50px;
+}
+
+.status-box {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.status-box .pr-active,
+.status-box .pr-interest,
+.status-box .pr-inactive {
+  float: left;
+}
+.status-box p {
+  text-align: center;
+  width: 100%;
+  margin-bottom: 0;
+}

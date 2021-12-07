@@ -12,6 +12,9 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
     <link href="{{ asset('css/dark.css') }}" rel="stylesheet">
     <link href="{{ asset(mix('css/app.css'), true) }}" rel="stylesheet">
+    <link href="{{ asset(mix('css/buttons.css'), true) }}" rel="stylesheet">
+    <link href="{{ asset(mix('css/cards.css'), true) }}" rel="stylesheet">
+    <link href="{{ asset(mix('css/sidebar.css'), true) }}" rel="stylesheet">
     <link href="{{ asset('css/mot.css') }}" rel="stylesheet">
     <link href="{{ asset('css/media.css') }}" rel="stylesheet">
 
@@ -20,7 +23,7 @@
     <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.21/datatables.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/1.5.0/perfect-scrollbar.min.js" integrity="sha512-yUNtg0k40IvRQNR20bJ4oH6QeQ/mgs9Lsa6V+3qxTj58u2r+JiAYOhOW0o+ijuMmqCtCEg7LZRA+T4t84/ayVA==" crossorigin="anonymous"></script>
-
+    <script src="{{ asset('js/app.js?test2') }}" defer></script>
     <script src="{{ asset('vendor/datatables/buttons.server-side.js') }}"></script>
 
     <link rel="stylesheet" href="https://unpkg.com/@coreui/icons@2.0.0-beta.3/css/all.min.css">
@@ -66,7 +69,8 @@
             @yield('breadcrumbs')
         </header>
 
-        <div class="c-body">
+        @yield('scripts')
+        <div class="c-body" id="app">
             <main class="c-main">
                 <div class="container-fluid">
                     @yield('content')

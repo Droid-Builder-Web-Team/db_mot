@@ -9,7 +9,46 @@
 </div>
 @endsection
 
+@section('scripts')
+
+<script>
+document.getElementById('shareBtn').onclick = function() {
+  var body = 'A new event has been added to the Droid Builders Portal. ';
+  body += 'Follow the link to see more details and to register your interest or ask any questions';
+  FB.ui({
+    display: 'iframe',
+    app_id: '{{ config('fb.fb_app_id', 'Laravel') }}',
+    method: 'share',
+    hashtag: '#dbukevent',
+    href: '{{ URL::current() }}',
+    quote: body,
+  }, function(response){});
+}
+</script>
+
+<script type="application/javascript" async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId            : '{{ config('fb.fb_app_id', 'Laravel') }}',
+      autoLogAppEvents : true,
+      xfbml            : true,
+      version          : 'v10.0'
+    });
+  };
+</script>
+
+<script type="application/javascript">
+    $(document).on('click', '[data-toggle="lightbox"]', function (event) {
+        $(this).ekkoLightbox();
+        event.preventDefault();
+    });
+</script>
+
+@endsection
+
 @section('content')
+
 @php
   $user_status="no";
   $user_spotter="no";
@@ -21,18 +60,6 @@
       $user_mot = $event->users->only([ Auth::user()->id ])->first()->pivot->mot_required;
     }
 @endphp
-
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
-<script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId            : '{{ config('fb.fb_app_id', 'Laravel') }}',
-      autoLogAppEvents : true,
-      xfbml            : true,
-      version          : 'v10.0'
-    });
-  };
-</script>
 
     <div class="row">
       <div class="col-xs-8 col-sm-8 col-md-8">
@@ -122,20 +149,7 @@
 
             @endcan
 
-<script>
-document.getElementById('shareBtn').onclick = function() {
-  var body = 'A new event has been added to the Droid Builders Portal. ';
-  body += 'Follow the link to see more details and to register your interest or ask any questions';
-  FB.ui({
-    display: 'iframe',
-    app_id: '{{ config('fb.fb_app_id', 'Laravel') }}',
-    method: 'share',
-    hashtag: '#dbukevent',
-    href: '{{ URL::current() }}',
-    quote: body,
-  }, function(response){});
-}
-</script>
+
           </div>
         </div>
       </div>
@@ -246,9 +260,18 @@ document.getElementById('shareBtn').onclick = function() {
                 {!! nl2br(e($comment->body)) !!}
                 @can('Edit Events')
                 <span class="float-right">
-                  <a href="{{ route('admin.events.delete_comment', $comment->id )}}" class="btn-sm btn-danger">Delete</a>
+                  <a href="{{ route('comment.delete', $comment->id )}}" class="btn-sm btn-danger">Delete</a>
                 </span>
                 @endcan
+                <span class="float-right">
+                  <reaction-component
+                        :comment="{{ $comment->id }}"
+                        :summary='@json($comment->reactionSummary())'
+                        @auth
+                        :reacted='@json($comment->reacted())'
+                        @endauth
+                  />
+                </span>
               </div>
             </div>
 @endforeach
@@ -258,9 +281,9 @@ document.getElementById('shareBtn').onclick = function() {
                 <strong>Add Comment</strong>
               </div>
               <div class="card-body">
-                <form action="{{ route('event.comment', $event->id) }}" method="POST">
+                <form action="{{ route('comment.add', ['id' => $event->id] ) }}" method="POST">
                     @csrf
-                    @method('PUT')
+                    <input type="hidden" name="model" value="App\Event">
                   <div class="form-group">
                     <textarea type="text" class="form-control" name="body"></textarea>
                   </div>
@@ -346,11 +369,6 @@ document.getElementById('shareBtn').onclick = function() {
       @endif
     </div>
 
-<script>
-    $(document).on('click', '[data-toggle="lightbox"]', function (event) {
-        $(this).ekkoLightbox();
-        event.preventDefault();
-    });
-</script>
+
 
 @endsection
