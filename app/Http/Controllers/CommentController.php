@@ -22,6 +22,8 @@ class CommentController extends Controller
       switch ($request->model) {
         case "App\Event":
           $permission = "Edit Events";
+        case "App\PartRunData":
+          $permission = "Edit Partrun";
         default:
           $permission = "";
       }
@@ -34,7 +36,9 @@ class CommentController extends Controller
           {
             switch ($request->model) {
               case "App\Event":
-                $user->notify(new EventUpdated($event));
+                $user->notify(new EventUpdated($model));
+              case "App\PartRunData":
+                $user->notify(new PartsRunUpdated($model));
               default:
                 echo "error";
             }

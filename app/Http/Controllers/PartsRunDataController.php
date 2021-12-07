@@ -240,30 +240,6 @@ class PartsRunDataController extends Controller
         return "Request a Parts Run";
     }
 
-    public function comment(Request $request, PartsRunData $partsrun)
-    {
-
-        $request->validate([
-            'body' => 'required',
-        ]);
-        $comment = new Comment;
-        $comment->body = $request->body;
-        $comment->user_id = auth()->user()->id;
-
-        if (auth()->user()->id ==  $partsrun->user_id && $request->broadcast == 'on')
-        {
-          foreach($partsrun->interested as $user)
-          {
-            $user->notify(new PartsRunUpdated($partsrun));
-          }
-          $comment->broadcast = true;
-        }
-
-        $result = $partsrun->comments()->save($comment);
-        toastr()->success('Comment Added');
-        return back();
-    }
-
     public function interested(Request $request, PartsRunData $partsrun)
     {
 
