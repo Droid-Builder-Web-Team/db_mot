@@ -14,6 +14,7 @@
     <link href="{{ asset(mix('css/buttons.css'), true) }}" rel="stylesheet">
     <link href="{{ asset(mix('css/cards.css'), true) }}" rel="stylesheet">
     <link href="{{ asset(mix('css/sidebar.css'), true) }}" rel="stylesheet">
+    <link href="{{ asset(mix('css/partsrun.css'), true) }}" rel="stylesheet">
     <link href="{{ asset('css/mot.css') }}" rel="stylesheet">
     <link href="{{ asset('css/media.css') }}" rel="stylesheet">
 
