@@ -2,10 +2,10 @@
 
 @section('content')
 
+<div id="app">
 <div class="row">
     <div class="col-md-9">
         <div class="card">
-            @foreach($partsRunData as $data)
             <div class="card-header padding-container">
                 <div class="mb-4 text-center row d-flex justify-content-center align-items-center">
                     <div class="col-12 col-md-4 active_since">
@@ -181,7 +181,6 @@
                     </div>
                 </div>
             </div>
-        @endforeach
     </div>
   </div>
 
@@ -279,11 +278,20 @@
           </div>
           <div class="card-body">
             {!! nl2br(e($comment->body)) !!}
-            @can('Edit Partsrun')
+            @can('Edit Partrun')
             <span class="float-right">
               <a href="{{ route('comment.delete', $comment->id )}}" class="btn-sm btn-danger">Delete</a>
             </span>
             @endcan
+            <span class="float-right">
+              <reaction-component
+                    :comment="{{ $comment->id }}"
+                    :summary='@json($comment->reactionSummary())'
+                    @auth
+                    :reacted='@json($comment->reacted())'
+                    @endauth
+              />
+            </span>
           </div>
         </div>
 @endforeach
@@ -292,9 +300,9 @@
             <strong>Add Comment</strong>
           </div>
           <div class="card-body">
-            <form action="{{ route('comment.add', [ id => $data->id]) }}" method="POST">
+            <form action="{{ route('comment.add', [ 'id' => $data->id]) }}" method="POST">
                 @csrf
-                <input type="hidden" name="model" value="App\PartRunData">
+                <input type="hidden" name="model" value="App\PartsRunData">
               <div class="form-group">
                 <textarea type="text" class="form-control" name="body"></textarea>
               </div>
@@ -315,6 +323,7 @@
 
 
   </div>
+</div>
 <script>
     $(document).on('click', '[data-toggle="lightbox"]', function (event) {
         $(this).ekkoLightbox();

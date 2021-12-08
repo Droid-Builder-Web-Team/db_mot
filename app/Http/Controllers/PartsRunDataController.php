@@ -133,7 +133,7 @@ class PartsRunDataController extends Controller
         };
 
         return view('parts-run.show', [
-            'partsRunData' => $partsRunData,
+            'data' => $partsRunData[0],
             'includesArray' => $includesArray,
             'shippingCostsArray' => $shippingCostsArray
         ]);

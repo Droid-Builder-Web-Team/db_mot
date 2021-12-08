@@ -22,7 +22,7 @@ class CommentController extends Controller
       switch ($request->model) {
         case "App\Event":
           $permission = "Edit Events";
-        case "App\PartRunData":
+        case "App\PartsRunData":
           $permission = "Edit Partrun";
         default:
           $permission = "";
