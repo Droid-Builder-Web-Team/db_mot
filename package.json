@@ -26,9 +26,13 @@
     },
     "dependencies": {
         "@coreui/icons": "^1.0.1",
+        "@revolist/vue-datagrid": "^3.0.98",
+        "@revolist/vue3-datagrid": "^3.0.97",
         "bootstrap-select": "^1.13.18",
         "is-svg": ">=4.2.2",
         "laravel-mix": "^6.0.25",
-        "tinymce": "^5.8.2"
+        "tinymce": "^5.8.2",
+        "vue-datasource": "^1.0.10",
+        "vue-good-table-next": "^0.1.0"
     }
 }
