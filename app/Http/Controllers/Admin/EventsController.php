@@ -206,7 +206,7 @@ class EventsController extends Controller
             "Expires"             => "0"
       );
 
-      $columns = array('Forename', 'Surname', 'Status');
+      $columns = array('Forename', 'Surname', 'Status', 'Spotter', 'MOT Requested');
 
       $callback = function() use($event, $columns) {
             $file = fopen('php://output', 'w');
@@ -216,8 +216,10 @@ class EventsController extends Controller
                 $row['Forename']  = $user->forename;
                 $row['Surname']    = $user->surname;
                 $row['Status']  = $user->pivot->status;
+                $row['Spotter'] = $user->pivot->spotter;
+                $row['MOT Requested'] = $user->pivot->mot_required;
 
-                fputcsv($file, array($row['Forename'], $row['Surname'], $row['Status']));
+                fputcsv($file, array($row['Forename'], $row['Surname'], $row['Status'], $row['Spotter'], $row['MOT Requested']));
             }
 
             fclose($file);
