@@ -60,7 +60,7 @@ document.getElementById('shareBtn').onclick = function() {
       $user_mot = $event->users->only([ Auth::user()->id ])->first()->pivot->mot_required;
     }
 @endphp
-
+<div id='app'>
     <div class="row">
       <div class="col-xs-8 col-sm-8 col-md-8">
         <div class="card">
@@ -369,6 +369,6 @@ document.getElementById('shareBtn').onclick = function() {
       @endif
     </div>
 
-
+</div>
 
 @endsection

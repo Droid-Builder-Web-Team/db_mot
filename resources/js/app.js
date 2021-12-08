@@ -7,7 +7,9 @@
 import { createApp } from 'vue'
 require('./bootstrap');
 import ReactionComponent from './components/ReactionComponent.vue';
+
 const app = createApp({});
 
 app.component('reaction-component', ReactionComponent);
+
 app.mount('#app');
