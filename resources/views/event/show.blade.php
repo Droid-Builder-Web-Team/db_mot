@@ -12,6 +12,14 @@
 @section('scripts')
 
 <script>
+   function exportList(_this) {
+      let _url = $(_this).data('href');
+      window.location.href = _url;
+   }
+</script>
+
+
+<script>
 document.getElementById('shareBtn').onclick = function() {
   var body = 'A new event has been added to the Droid Builders Portal. ';
   body += 'Follow the link to see more details and to register your interest or ask any questions';
@@ -226,6 +234,10 @@ document.getElementById('shareBtn').onclick = function() {
                     <li><a href="{{ route('user.show', $user->id) }}">{{ $user->forename ?? "Deactivated"}} {{ $user->surname ?? "User"}}</a></li>
                   @endforeach
                 </ul>
+              @endcan
+              @can('Edit Events')
+              <span id="export" class="btn btn-primary" data-href={{ route('admin.events.export', $event->id) }} onclick="exportList(event.target);">Download list as CSV
+              </span>
               @endcan
             @endif
           </div>

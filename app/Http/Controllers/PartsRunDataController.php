@@ -184,7 +184,7 @@ class PartsRunDataController extends Controller
 
         // Only people with Edit Partrun can edit this page
         if (!auth()->user()->can('Edit Partrun'))
-          abort(403);
+            abort(403);
 
         if (!auth()->user()->id == $partsRunData->user_id || !auth()->user()->can('Create Partrun'))
           abort(403);
@@ -277,5 +277,47 @@ class PartsRunDataController extends Controller
 
         }
         return back();
+    }
+
+    public function export($id)
+    {
+      if (!auth()->user()->can('Edit Partrun'))
+        abort(403);
+
+      $partsRunData = app(PartsRunData::class)->find($id);
+      if (auth()->user()->id != $partsRunData->user_id)
+        abort(403);
+
+      $fileName = 'interest.csv';
+
+      $headers = array(
+            "Content-type"        => "text/csv",
+            "Content-Disposition" => "attachment; filename=$fileName",
+            "Pragma"              => "no-cache",
+            "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
+            "Expires"             => "0"
+      );
+
+      $columns = array('Forename', 'Surname', 'email', 'Quantity', 'Status', 'Date Added');
+
+      $callback = function() use($partsRunData, $columns) {
+            $file = fopen('php://output', 'w');
+            fputcsv($file, $columns);
+
+            foreach ($partsRunData->interested as $user) {
+                $row['Forename']  = $user->forename;
+                $row['Surname']    = $user->surname;
+                $row['email']    = $user->email;
+                $row['Quantity']  = $user->pivot->quantity;
+                $row['Status']  = $user->pivot->status;
+                $row['Date Added'] = $user->pivot->timestamp;
+
+                fputcsv($file, array($row['Forename'], $row['Surname'], $row['email'], $row['Quantity'], $row['Status'], $row['Date Added']));
+            }
+
+            fclose($file);
+        };
+
+        return response()->stream($callback, 200, $headers);
     }
 }

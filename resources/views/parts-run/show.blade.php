@@ -1,5 +1,14 @@
 @extends('layouts.app')
 
+@section('scripts')
+<script>
+   function exportTasks(_this) {
+      let _url = $(_this).data('href');
+      window.location.href = _url;
+   }
+</script>
+@endsection
+
 @section('content')
 
 <div id="app">
@@ -133,7 +142,7 @@
                                                 <input type="hidden" name="interest" value="interested">
                                                 <input class="btn btn-primary" type=submit value="Interested">
                                               </form>
-                                                Note: Registering interest is not a commitment to buy, but please only do so if you think you will.
+                                                Note: Registering interest is not a commitment to buy, but please only do so if you think you will. This will give the person doing the run access to your email address.
                                               @else
                                                 <p>Interest List is Full</p>
                                               @endif
@@ -245,6 +254,10 @@
   </ul>
 
 
+    @endif
+    @if(Gate::check('Edit Partrun') && (Auth()->user()->id == $data->user_id || Auth()->user()->id == $data->bc_rep_id))
+      <span id="export" class="btn btn-primary" data-href={{ route('parts-run.export', $data->id) }} onclick="exportTasks(event.target);">Download list as CSV
+      </span>
     @endif
   </div>
   </div>

@@ -189,4 +189,41 @@ class EventsController extends Controller
         return redirect()->route('event.show', $request->event_id);
     }
 
+    public function export($id)
+    {
+      if (!auth()->user()->can('Edit Events'))
+        abort(403);
+
+      $event = app(Event::class)->find($id);
+
+      $fileName = 'attendance.csv';
+
+      $headers = array(
+            "Content-type"        => "text/csv",
+            "Content-Disposition" => "attachment; filename=$fileName",
+            "Pragma"              => "no-cache",
+            "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
+            "Expires"             => "0"
+      );
+
+      $columns = array('Forename', 'Surname', 'Status');
+
+      $callback = function() use($event, $columns) {
+            $file = fopen('php://output', 'w');
+            fputcsv($file, $columns);
+
+            foreach ($event->users as $user) {
+                $row['Forename']  = $user->forename;
+                $row['Surname']    = $user->surname;
+                $row['Status']  = $user->pivot->status;
+
+                fputcsv($file, array($row['Forename'], $row['Surname'], $row['Status']));
+            }
+
+            fclose($file);
+        };
+
+        return response()->stream($callback, 200, $headers);
+    }
+
 }

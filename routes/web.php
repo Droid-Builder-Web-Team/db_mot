@@ -32,6 +32,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
   Route::get('events/attendance/deny/{event_id}/{user_id}', 'EventsController@deny')->name('events.attendance.deny');
   Route::get('events/image/{event_id}', 'EventsController@addimage')->name('events.addimage');
   Route::post('events/image', 'EventsController@storeimage')->name('events.storeimage');
+  Route::get('events/export/{id}', 'EventsController@export')->name('events.export');
   Route::resource('/events', 'EventsController', ['except' => ['show']]);
   Route::put('/achievements/award', 'AchievementsController@award')->name('achievements.award');
   Route::resource('/achievements', 'AchievementsController', ['except' => ['show']]);
@@ -107,6 +108,7 @@ Route::group(['middleware' => ['auth', 'gdpr.terms']], function() {
   Route::put('parts-run/comment/{partsrun}', 'PartsRunDataController@comment')->name('parts-run.comment');
   Route::get('parts-run/interested/{partsrun}', 'PartsRunDataController@interested')->name('parts-run.interested');
   Route::get('parts-run/status_update/{partsrun}', 'PartsRunDataController@status_update')->name('parts-run.status_update');
+  Route::get('parts-run/export/{partsrun}', 'PartsRunDataController@export')->name('parts-run.export');
 });
 
 
