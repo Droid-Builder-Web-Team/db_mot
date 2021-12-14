@@ -20,7 +20,7 @@
 
 
 <script>
-document.getElementById('shareBtn').onclick = function() {
+   function shareToFacebook(_this) {
   var body = 'A new event has been added to the Droid Builders Portal. ';
   body += 'Follow the link to see more details and to register your interest or ask any questions';
   FB.ui({
@@ -68,7 +68,7 @@ document.getElementById('shareBtn').onclick = function() {
       $user_mot = $event->users->only([ Auth::user()->id ])->first()->pivot->mot_required;
     }
 @endphp
-<div id='app'>
+
     <div class="row">
       <div class="col-xs-8 col-sm-8 col-md-8">
         <div class="card">
@@ -153,7 +153,8 @@ document.getElementById('shareBtn').onclick = function() {
             @can('Edit Events')
               <a class="btn btn-edit" style="width:auto;" href="{{ route('admin.events.edit',$event->id) }}">Edit</a>
               <a class="btn btn-edit" style="width:auto;" href="{{ route('admin.events.addimage',[ 'event_id' => $event->id]) }}">Add Image</a>
-              <div id="shareBtn" class="btn btn-success clearfix">Share to Facebook</div>
+              <span id="export" class="btn btn-info" onclick="shareToFacebook(event.target);">Share to Facebook
+              </span>
 
             @endcan
 
@@ -244,7 +245,7 @@ document.getElementById('shareBtn').onclick = function() {
         </div>
       </div>
     </div>
-
+<div id='app'>
     <div class="row">
       <div class="col-md-8">
         <div class="card">

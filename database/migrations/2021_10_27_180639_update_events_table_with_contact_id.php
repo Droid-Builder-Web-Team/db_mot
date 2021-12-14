@@ -17,7 +17,7 @@ class UpdateEventsTableWithContactId extends Migration
             $table->integer('venue_contacts_id');
 
             // Foreign
-            $table->foreign('venue_contacts_id')->references('id')->on('venue_contacts');
+            $table->foreign('venue_contacts_id')->references('id')->on('venue_contacts')->nullable();
         });
     }
 
