@@ -46,11 +46,22 @@
                                 </tr>
                                 <tr>
                                     <th>Events</th>
-                                    <td>Get emails about new events, and updates/reminders about events you are subscribed to</td>
+                                    <td>Get emails about new events</td>
                                     <td>
                                         <label class="switch">
                                             <input type="hidden" name="notifications[event]" value="off">
                                             <input type="checkbox" name="notifications[event]" data-toggle="toggle" {{ $settings['notifications']['event'] == 'on' ? 'checked' : '' }}>
+                                            <span class="slider round"></span>
+                                        </label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Broadcasts</th>
+                                    <td>Get emails for broadcast comments from event organisers, part runs, etc. that you have registered interest in.</td>
+                                    <td>
+                                        <label class="switch">
+                                            <input type="hidden" name="notifications[broadcast]" value="off">
+                                            <input type="checkbox" name="notifications[broadcast]" data-toggle="toggle" {{ $settings['notifications']['broadcast'] == 'on' ? 'checked' : '' }}>
                                             <span class="slider round"></span>
                                         </label>
                                     </td>

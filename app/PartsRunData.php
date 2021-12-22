@@ -53,7 +53,7 @@ class PartsRunData extends Model implements Auditable
 
     public function comments()
     {
-        return $this->morphMany('App\Comment', 'commentable');
+        return $this->morphMany('App\Comment', 'commentable')->orderBy('created_at');
     }
 
     public function interested()
@@ -64,6 +64,11 @@ class PartsRunData extends Model implements Auditable
     public function is_interested()
     {
         return $this->belongsToMany(User::class, 'members_parts')->wherePivot('status', 'interested')->withPivot('status', 'quantity');
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'members_parts')->withPivot('status');
     }
 
     public function interest_quantity()

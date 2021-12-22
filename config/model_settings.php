@@ -13,7 +13,8 @@ return [
               'mot' => 'on',
               'event' => 'on',
               'achievement' => 'on',
-              'partsrun' => 'on'
+              'partsrun' => 'on',
+              'broadcast' => 'on'
           ],
           'max_event_distance' => 50,
           'date_format' => 'YYYY-MM-DD',

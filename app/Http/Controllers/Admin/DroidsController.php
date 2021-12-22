@@ -157,15 +157,4 @@ class DroidsController extends Controller
 
       return redirect()->route('admin.droids.index');
     }
-
-    public function comment(Request $request, Droid $droid)
-    {
-        $comment = new Comment;
-        $comment->body = $request->body;
-        $comment->user_id = auth()->user()->id;
-
-        $result = $droid->comments()->save($comment);
-        toastr()->success('Comment Added');
-        return view('droid.show', compact('droid'));
-    }
 }

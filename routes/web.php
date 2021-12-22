@@ -25,9 +25,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
   });
   Route::resource('/users', 'UsersController', ['except' => ['show', 'create', 'store']]);
   Route::get('/droids/{id}', 'DroidsController@create')->name('droids.create');
-  Route::put('droids/comment/{droid}', 'DroidsController@comment')->name('droids.comment');
   Route::resource('/droids', 'DroidsController', ['except' => ['show', 'create']]);
-  Route::get('events/delete_comment/{id}', 'EventsController@delete_comment')->name('events.delete_comment');
   Route::get('events/attendance/confirm/{event_id}/{user_id}', 'EventsController@confirm')->name('events.attendance.confirm');
   Route::get('events/attendance/deny/{event_id}/{user_id}', 'EventsController@deny')->name('events.attendance.deny');
   Route::get('events/image/{event_id}', 'EventsController@addimage')->name('events.addimage');
@@ -40,7 +38,6 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
   Route::resource('/locations', 'LocationController', ['except' => ['show']]);
   Route::resource('/dashboard', 'DashboardController', ['only' => ['index']]);
   Route::get('mot/{droid_id}', 'MOTController@create')->name('mot.create');
-  Route::put('mot/comment/{mot}', 'MOTController@comment')->name('mot.comment');
   Route::resource('/mot', 'MOTController', ['only' => ['store']]);
   Route::resource('/motdesign', 'MOTDesignController', ['only' => ['edit', 'update']]);
   Route::get('audits', 'AuditController@index')->name('audits.index');
@@ -64,9 +61,7 @@ Route::group(['middleware' => ['auth', 'gdpr.terms']], function() {
   Route::get('motinfo/{id}/export', 'MOTInfoController@exportMotInfo')->name('motinfo.export');
   Route::get('motinfo/{id}/test', 'MOTInfoController@exportMotTest')->name('motinfo.test');
   Route::get('qr_code/{uid}', 'UserController@displayQRCode')->name('image.displayQRCode');
-  Route::put('event/comment/{event}', 'EventController@comment')->name('event.comment');
   Route::get('event/past', 'EventController@past')->name('event.past');
-  Route::put('location/comment/{location}', 'LocationController@comment')->name('location.comment');
   Route::resource('location', 'LocationController', ['only' => ['show']]);
   Route::post('/location/{location}/rating', 'LocationController@store')->name('location.rating');
   Route::resource('/venue-contact', 'VenueContactController', ['only' => ['show']]);

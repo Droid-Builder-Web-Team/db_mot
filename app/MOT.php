@@ -91,6 +91,6 @@ class MOT extends Model implements Auditable
 
     public function comments()
     {
-        return $this->morphMany('App\Comment', 'commentable');
+        return $this->morphMany('App\Comment', 'commentable')->orderBy('created_at');
     }
 }

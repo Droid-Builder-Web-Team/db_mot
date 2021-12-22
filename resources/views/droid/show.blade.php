@@ -147,6 +147,11 @@
         </div>
         <div class="card-body">
           {!! nl2br(e($comment->body)) !!}
+          @can('Add MOT')
+          <span class="float-right">
+            <a href="{{ route('comment.delete', $comment->id )}}" class="btn-sm btn-danger">Delete</a>
+          </span>
+          @endcan
         </div>
       </div>
 @endforeach
@@ -157,9 +162,9 @@
           <strong>Add Comment</strong>
         </div>
         <div class="card-body">
-          <form action="{{ route('admin.droids.comment', $droid->id) }}" method="POST">
+          <form action="{{ route('comment.add', [ 'id' => $droid->id]) }}" method="POST">
               @csrf
-              @method('PUT')
+              <input type="hidden" name="model" value="App\Droid">
             <div class="form-group">
               <textarea type="text" class="form-control" name="body"></textarea>
             </div>

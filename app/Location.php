@@ -26,7 +26,7 @@ class Location extends Model implements Rateable, Auditable
 
     public function comments()
     {
-        return $this->morphMany('App\Comment', 'commentable');
+        return $this->morphMany('App\Comment', 'commentable')->orderBy('created_at');
     }
 
     public function hasRating()

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use App\Comment;
+use App\Notifications\CommentBroadcast;
 
 class CommentController extends Controller
 {
@@ -19,35 +20,48 @@ class CommentController extends Controller
       $comment->body = $request->body;
       $comment->user_id = auth()->user()->id;
 
-      switch ($request->model) {
-        case "App\Event":
-          $permission = "Edit Events";
-        case "App\PartsRunData":
-          $permission = "Edit Partrun";
-        default:
-          $permission = "";
-      }
-
-      if ($permission != "")
-      {
-        if (auth()->user()->can($permission) && $request->broadcast == 'on')
-        {
-          foreach($event->users as $user)
-          {
-            switch ($request->model) {
-              case "App\Event":
-                $user->notify(new EventUpdated($model));
-              case "App\PartRunData":
-                $user->notify(new PartsRunUpdated($model));
-              default:
-                echo "error";
-            }
-          }
-          $comment->broadcast = true;
-        }
-      }
-
       $result = $model->comments()->save($comment);
+
+      if ($request->broadcast == 'on')
+      {
+        switch ($request->model) {
+          case "App\Event":
+            $permission = "Edit Events";
+            break;
+          case "App\PartsRunData":
+            $permission = "Edit Partrun";
+            break;
+          default:
+            $permission = "";
+            break;
+        }
+
+        if ($permission != "")
+        {
+          if (auth()->user()->can($permission))
+          {
+            foreach($model->users as $user)
+            {
+              switch ($request->model) {
+                case "App\Event":
+                  $user->notify(new CommentBroadcast($result));
+                  break;
+                case "App\PartsRunData":
+                  $user->notify(new CommentBroadcast($result));
+                  break;
+                default:
+                  echo "error";
+                  break;
+              }
+            }
+            $result->broadcast = true;
+            $result->save();
+          }
+        }
+
+      }
+
+
       toastr()->success('Comment Added');
       return back();
     }
