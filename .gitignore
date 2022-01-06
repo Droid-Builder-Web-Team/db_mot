@@ -11,3 +11,5 @@ Homestead.yaml
 npm-debug.log
 yarn-error.log
 .remote-sync.json
+.vscode/
+Portal.session.sql
