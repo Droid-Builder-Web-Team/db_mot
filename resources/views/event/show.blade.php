@@ -300,7 +300,8 @@
                   <div class="form-group">
                     <textarea type="text" class="form-control" name="body"></textarea>
                   </div>
-                  <input type="submit" class="btn-sm btn-comment" name="comment" value="Add Comment">
+                  <input type="submit" class="btn-sm btn-comment" name="comment" value="Add Comment"
+                            onclick="this.disabled=true;this.form.submit();">
                   @can('Edit Events')
                     <div class="form-check float-right">
                       <input class="form-check-input" type="checkbox" name="broadcast" id="broadcast">

@@ -168,7 +168,8 @@
             <div class="form-group">
               <textarea type="text" class="form-control" name="body"></textarea>
             </div>
-            <input type="submit" class="btn-sm btn-primary" name="comment" value="Add Comment">
+            <input type="submit" class="btn-sm btn-primary" name="comment" value="Add Comment"
+                    onclick="this.disabled=true;this.form.submit();">
           </form>
         </div>
       </div>
