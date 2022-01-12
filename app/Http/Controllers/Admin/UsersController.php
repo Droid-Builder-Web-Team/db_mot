@@ -69,8 +69,6 @@ class UsersController extends Controller
         if (auth()->user()->can('Edit Permissions')) {
             $user->syncRoles($request->roles);
             $user->clubs()->sync($request->clubs);
-        } else {
-            abort(403);
         }
 
         if (auth()->user()->cannot('Edit Members')) {
