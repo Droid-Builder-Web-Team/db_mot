@@ -93,8 +93,16 @@ class EventController extends Controller
             'buttonIcons' => [
 
             ],
+            'customButtons' => [
+                'map' => [
+                    'text'=> 'View as Map',
+                    'click' => 'function() {
+                        window.open("event/map","_self")
+                    }'
+                ]
+            ],
             'headerToolbar' => [
-                'end' => 'today,prev,next dayGridMonth,listMonth,listYear'
+                'end' => 'map today,prev,next dayGridMonth,listMonth,listYear'
             ]
         ]);
         $calendar->setId('1');
@@ -168,7 +176,9 @@ class EventController extends Controller
             $entry = array();
             $entry['id'] = $index;
             $entry['uid'] = $event->id;
-            $entry['title'] = $event->date.' - '.$event->name.' - ('.$event->location->name.' - '.$event->location->town.')';
+            $entry['title'] = $event->name.' - ('.$event->location->name.' - '.$event->location->town.')';
+            $entry['url'] = "<a href=".route('event.show', ['event' => $event->id]).">".$entry['title']."</a>";
+            $entry['extra'] = $event->date;
             $entry['position'] = array(
                 "lat" => floatval($event->location->latitude),
                 "lng" => floatval($event->location->longitude)

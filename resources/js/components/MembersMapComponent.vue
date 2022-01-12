@@ -5,7 +5,7 @@
       style="width: 100vw; height: 600px"
   >
     <GMapCluster
-      :minimumClusterSize="10"
+      :minimumClusterSize="15"
       :zoomOnClick="true"
       >
       <GMapMarker
@@ -22,7 +22,8 @@
           @closeclick="openMarker(null)"
           :opened="openedMarkerID === m.id"
           >
-          <div>Test: {{ m.title }}</div>
+          <div v-html="m.url" class="gmap-marker"></div>
+          <div v-html="m.extra" class="gmap-marker"></div>
         </GMapInfoWindow>
       </GMapMarker>
     </GMapCluster>
@@ -39,14 +40,13 @@ export default {
   data() {
     return {
       openedMarkerID: null,
-      center: {lat: 51.49, lng: -3.2},
+      center: {lat: 50.49, lng: -3.2},
       markers: this.markerlist,
     }
   },
   methods: {
       openMarker(id) {
-          console.log(id);
-          this.openedMarkerID = this.markerlist[id]['title'];
+          this.openedMarkerID = id;
       },
   }
 };
