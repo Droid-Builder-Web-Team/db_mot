@@ -16,7 +16,8 @@
           <p>
             <br />
             <a class="btn-sm btn-link" href="{{ route('codeofconduct') }}">Droid Builders UK - Event Code of Conduct</a>
-	    <a class="btn-sm btn-link" href="{{ route('event.past') }}">Past Events</a>
+	        <a class="btn-sm btn-link" href="{{ route('event.past') }}">Past Events</a>
+            <a class="btn-sm btn-link" href="{{ route('event.map') }}">View as Map</a>
           </p>
       </div>
     </div>

@@ -44,6 +44,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
   Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index')->name('logs.index');
   Route::resource('/venue-contacts', 'VenueContactController', ['except' => ['show']]);
   Route::get('/api/bcreps/{club_id}', 'ApiController@list_bcreps');
+  Route::resource('/map', 'MapsController', ['only' => ['index']]);
 });
 
 Route::get('/', function () {    return view('about');
@@ -62,6 +63,7 @@ Route::group(['middleware' => ['auth', 'gdpr.terms']], function() {
   Route::get('motinfo/{id}/test', 'MOTInfoController@exportMotTest')->name('motinfo.test');
   Route::get('qr_code/{uid}', 'UserController@displayQRCode')->name('image.displayQRCode');
   Route::get('event/past', 'EventController@past')->name('event.past');
+  Route::get('events/map', 'EventController@map')->name('event.map');
   Route::resource('location', 'LocationController', ['only' => ['show']]);
   Route::post('/location/{location}/rating', 'LocationController@store')->name('location.rating');
   Route::resource('/venue-contact', 'VenueContactController', ['only' => ['show']]);
@@ -124,3 +126,4 @@ Route::get('/topps', 'ToppsController@index')->name('topps');
 Route::get('topps_image/{uid}/{view}/{size?}', 'ToppsController@displayToppsImage')
               ->name('image.displayToppsImage');
 Route::get('events/image/show/{event_id}', 'EventApiController@showimage')->name('events.showimage');
+

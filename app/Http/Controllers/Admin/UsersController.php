@@ -81,12 +81,25 @@ class UsersController extends Controller
             'surname' => 'required'
         ]);
 
-      try {
-          $user->update($request->except('roles', 'clubs'));
-          toastr()->success('User updated successfully');
-      } catch (\Illuminate\Database\QueryException $exception) {
-          toastr()->error('Failed to update User');
-      }
+        if ($request['postcode'] != "")
+        {
+            $address = str_replace(' ','+',$request['postcode']);
+            $url = "https://maps.google.com/maps/api/geocode/json?key=".config('gmap.google_api_key')."&address=".$address."&sensor=false";
+            $geocode=file_get_contents($url);
+            $output= json_decode($geocode);
+            $request['latitude'] = strval($output->results[0]->geometry->location->lat);
+            $request['longitude'] = strval($output->results[0]->geometry->location->lng);
+        } else {
+            $request['latitude'] = "";
+            $request['longitude'] = "";
+        }
+
+        try {
+            $user->update($request->except('roles', 'clubs'));
+            toastr()->success('User updated successfully');
+        } catch (\Illuminate\Database\QueryException $exception) {
+            toastr()->error('Failed to update User');
+        }
 
         return redirect()->route('admin.users.index');
     }

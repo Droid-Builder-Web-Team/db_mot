@@ -26,6 +26,8 @@
     },
     "dependencies": {
         "@coreui/icons": "^1.0.1",
+        "@fawmi/vue-google-maps": "^0.9.4",
+        "@googlemaps/markerclustererplus": "^1.2.10",
         "@revolist/vue-datagrid": "^3.0.98",
         "@revolist/vue3-datagrid": "^3.0.97",
         "bootstrap-select": "^1.13.18",

@@ -122,6 +122,15 @@
                     </a>
                 </li>
             @endcan
+            @can('Edit Members')
+            <li class="c-sidebar-nav-item">
+                <a class="c-sidebar-nav-link" href="{{ route('admin.map.index') }}">
+                    <svg class="c-sidebar-nav-icon">
+                        <i class="fas fa-map-marked-alt fa-fw"></i>
+                    </svg><span class="ml-1">Members Map</span>
+                </a>
+            </li>
+            @endcan
             @can('Edit Events')
                 <li class="c-sidebar-nav-item">
                     <a class="c-sidebar-nav-link" href="{{ route('admin.events.index') }}">

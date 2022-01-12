@@ -158,4 +158,27 @@ class EventController extends Controller
 	    return view('event.past', compact('events'));
     }
 
+    public function map() {
+        $key = config('gmap.google_api_key');
+        $events = Event::whereDate('date', '>=', Carbon::now())->get();
+
+        $eventlist = [];
+        $index = 0;
+        foreach($events as $event) {
+            $entry = array();
+            $entry['id'] = $index;
+            $entry['uid'] = $event->id;
+            $entry['title'] = $event->date.' - '.$event->name.' - ('.$event->location->name.' - '.$event->location->town.')';
+            $entry['position'] = array(
+                "lat" => floatval($event->location->latitude),
+                "lng" => floatval($event->location->longitude)
+            );
+
+            array_push($eventlist, $entry);
+            $index++;
+        }
+
+        return view('event.map', compact('eventlist'));
+    }
+
 }
