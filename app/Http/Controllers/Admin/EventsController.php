@@ -62,6 +62,13 @@ class EventsController extends Controller
             'date' => 'required'
         ]);
 
+        if ($request['url'] != "")
+        {
+            if (!str_starts_with($request['url'], 'http'))
+            {
+                $request['url'] = "http://".$request['url'];
+            }
+        }
         $event = $request->all();
         $linkify = new \Misd\Linkify\Linkify();
         $event['description'] = $linkify->process($request->description);
@@ -107,6 +114,13 @@ class EventsController extends Controller
             'description' => 'required',
         ]);
 
+        if ($request['url'] != "")
+        {
+            if (!str_starts_with($request['url'], 'http'))
+            {
+                $request['url'] = "http://".$request['url'];
+            }
+        }
         $newevent = $request->all();
         $linkify = new \Misd\Linkify\Linkify();
         $newevent['description'] = $linkify->process($request->description);
