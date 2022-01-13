@@ -16,6 +16,7 @@
                 {{ $location->street }}<br>
                 {{ $location->town }}<br>
                 {{ $location->county }}<br>
+                {{ $location->country }}<br>
                 {{ $location->postcode }}<br>
               </div>
               <div class="col-md-4">

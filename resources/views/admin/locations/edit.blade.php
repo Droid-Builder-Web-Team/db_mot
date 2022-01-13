@@ -40,6 +40,11 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="country"><strong>Country</strong></label>
+                    <input type="text" name="country" class="form-control" placeholder="Country" value="{{ $location->country }}">
+                </div>
+
+                <div class="form-group">
                     <label for="postcode"><strong>Postcode</strong></label>
                     <input type="text" name="postcode" class="form-control" placeholder="Postcode" value="{{ $location->postcode }}">
                 </div>
