@@ -40,12 +40,17 @@ class LocationController extends Controller
             ->where('rateable_id', $location->id)
             ->get();
 
-	$events = Event::where('location_id', $location->id)
-		->whereDate('date', '<=', Carbon::now())
-		->orderBy('date', 'desc')
-		->get();
+        $events = Event::where('location_id', $location->id)
+            ->whereDate('date', '<=', Carbon::now())
+            ->orderBy('date', 'desc')
+            ->get();
 
-        return view('location.show', compact('location', 'events'));
+        $upcoming = Event::where('location_id', $location->id)
+            ->whereDate('date', '>=', Carbon::now())
+            ->orderBy('date', 'desc')
+            ->get();
+
+        return view('location.show', compact('location', 'events', 'upcoming'));
     }
 
     public function store(Request $request, Location $location)

@@ -119,22 +119,38 @@
     <div class="col-md-4">
       <div class="card">
         <div class="card-header">
-          Previous Events
+          Events
         </div>
         <div class="card-body">
-         @empty($events)
-		No previous events listed
-	 @else
+         <h2>Previous</h2>
+         @if( count($events) === 0 )
+		    No previous events listed
+	    @else
          <table class="table table-striped table-sm table-hover table-dark text-center">
            <tr><th>Date</th><th>Name</th></tr>
            @foreach($events as $event)
            <tr>
-	    <td>{{ Carbon\Carbon::parse($event->date)->isoFormat(Auth::user()->settings()->get('date_format')) }}</td>
+	        <td>{{ Carbon\Carbon::parse($event->date)->isoFormat(Auth::user()->settings()->get('date_format')) }}</td>
             <td><a href="{{ route('event.show', $event->id) }}">{{ $event->name }}</a></td>
            </tr>
            @endforeach
          </table>
-         @endempty
+         @endif
+         <hr>
+         <h2>Upcoming</h2>
+         @if( count($upcoming) === 0 )
+             No upcoming events listed
+         @else
+          <table class="table table-striped table-sm table-hover table-dark text-center">
+            <tr><th>Date</th><th>Name</th></tr>
+            @foreach($upcoming as $event)
+            <tr>
+             <td>{{ Carbon\Carbon::parse($event->date)->isoFormat(Auth::user()->settings()->get('date_format')) }}</td>
+             <td><a href="{{ route('event.show', $event->id) }}">{{ $event->name }}</a></td>
+            </tr>
+            @endforeach
+          </table>
+          @endif
         </div>
       </div>
     </div>
