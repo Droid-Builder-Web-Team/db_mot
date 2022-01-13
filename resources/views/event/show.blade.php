@@ -138,7 +138,7 @@
                   height="200"
                   frameborder="0"
                   style="border:1"
-                  src="https://www.google.com/maps/embed/v1/place?key={{ config('gmap.google_api_key') }}&q={{ $event->location->name}},{{ $event->location->postcode}}"
+                  src="https://www.google.com/maps/embed/v1/place?key={{ config('gmap.google_api_key') }}&q={{ urlencode($event->location->name) }},{{ urlencode($event->location->postcode) }}"
                   allowfullscreen>
                 </iframe>
               </div>
