@@ -65,7 +65,7 @@ return [
             'endpoint' => env('AWS_ENDPOINT'),
         ],
 
-        's3-backup' => [
+        's3-backups' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),
             'secret' => env('AWS_SECRET_ACCESS_KEY'),
