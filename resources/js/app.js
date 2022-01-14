@@ -8,12 +8,12 @@ import { createApp } from 'vue'
 require('./bootstrap');
 import ReactionComponent from './components/ReactionComponent.vue';
 import VueGoogleMaps from '@fawmi/vue-google-maps'
-import MembersMapComponent from './components/MembersMapComponent.vue'
+import MapComponent from './components/MapComponent.vue'
 
 const app = createApp({});
 
 app.component('reaction-component', ReactionComponent);
-app.component('members-map', MembersMapComponent);
+app.component('map-component', MapComponent);
 app.use(VueGoogleMaps, {
     load: {
         key: 'AIzaSyCOE-y6rIHLsG6ONcNib1pfv0eq3xTWRok',

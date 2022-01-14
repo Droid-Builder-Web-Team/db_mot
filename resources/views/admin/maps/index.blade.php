@@ -3,7 +3,7 @@
 @section('content')
 <div id='app' style="height: 600px;">
 
-    <members-map
+    <map-component
         :markerlist='@json($userlist)'
                     />
 

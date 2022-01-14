@@ -40,7 +40,7 @@ export default {
   data() {
     return {
       openedMarkerID: null,
-      center: {lat: 50.49, lng: -3.2},
+      center: {lat: 52.49, lng: -3.2},
       markers: this.markerlist,
     }
   },
