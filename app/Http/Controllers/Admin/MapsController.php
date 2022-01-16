@@ -17,13 +17,14 @@ class MapsController extends Controller
 
         $userlist = [];
         $index = 0;
-        foreach($users as $user) {
+        foreach ($users as $user) {
             $entry = array();
             $entry['id'] = $index;
             $entry['uid'] = $user->id;
-            $entry['title'] = $user->forename." ".$user->surname;
+            $entry['title'] = $user->forename . " " . $user->surname;
             $entry['url'] = "<a href=".route('user.show', ['user' => $user->id]).">".$entry['title']."</a>";
-            $entry['extra'] = "Droids: ".$user->droids->count()."</br>PLI Status: ".($user->validPLI() ? "Valid" : "None");
+            $entry['extra'] = "Droids: " . $user->droids->count() . "</br>PLI Status: " .
+                    ($user->validPLI() ? "Valid" : "None");
             $entry['position'] = array(
                 "lat" => floatval($user->latitude),
                 "lng" => floatval($user->longitude)
