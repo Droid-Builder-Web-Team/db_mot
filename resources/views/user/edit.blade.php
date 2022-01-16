@@ -45,6 +45,12 @@
                       <input type="text" name="postcode" value="{{ $user->postcode }}" class="form-control" placeholder="Postcode">
                     </div>
                     <div class="col-md-3 mb-3">
+                        <label>Country</label>
+                        <input type="text" name="country" value="{{ $user->country }}" class="form-control" placeholder="Country">
+                      </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="col-md-3 mb-3">
                       <label>Join Date</label>
                       <input type="date" name="join_date" value="{{ $user->join_date }}" class="form-control" placeholder="">
                     </div>

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddLatlngColumnsLocationsTable extends Migration
+class AddCountryToMembersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,7 @@ class AddLatlngColumnsLocationsTable extends Migration
      */
     public function up()
     {
-        Schema::table('locations', function (Blueprint $table) {
-            $table->text('latitude')->nullable();
-            $table->text('longitude')->nullable();
+        Schema::table('members', function (Blueprint $table) {
             $table->string('country')->default('United Kingdom');
         });
     }
@@ -27,7 +25,8 @@ class AddLatlngColumnsLocationsTable extends Migration
      */
     public function down()
     {
-        Schema::table('locations', function (Blueprint $table) {
+        Schema::table('members', function (Blueprint $table) {
+            //
         });
     }
 }

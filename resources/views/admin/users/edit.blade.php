@@ -40,13 +40,17 @@
           </div>
       </div>
       <div class="form-row">
-          <div class="col-md-6 mb-3">
+          <div class="col-md-4 mb-3">
             <label>County</label>
             <input type="text" name="county" value="{{ $user->county }}" class="form-control" placeholder="County">
           </div>
-          <div class="col-md-6 mb-3">
+          <div class="col-md-4 mb-3">
             <label>Postcode</label>
             <input type="text" name="postcode" value="{{ $user->postcode }}" class="form-control" placeholder="Postcode">
+          </div>
+          <div class="col-md-4 mb-3">
+            <label>Country</label>
+            <input type="text" name="country" value="{{ $user->country }}" class="form-control" placeholder="Country">
           </div>
       </div>
 

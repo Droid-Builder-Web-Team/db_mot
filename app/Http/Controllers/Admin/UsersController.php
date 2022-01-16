@@ -81,7 +81,7 @@ class UsersController extends Controller
 
         if ($request['postcode'] != "")
         {
-            $address = str_replace(' ','+',$request['postcode']);
+            $address = str_replace(' ','+',$request['postcode']).'+'.str_replace(' ','+',$request['country']);
             $url = "https://maps.google.com/maps/api/geocode/json?key=".config('gmap.google_api_key')."&address=".$address."&sensor=false";
             $geocode=file_get_contents($url);
             $output= json_decode($geocode);
