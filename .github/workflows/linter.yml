@@ -45,9 +45,8 @@ jobs:
           # Full git history is needed to get a proper list of changed files within `super-linter`
           fetch-depth: 0
       - name: Install
-        uses: docker://composer
-        with:
-          args: install
+        uses: php-actions/composer@v6
+
 
       ################################
       # Run Linter against code base #
