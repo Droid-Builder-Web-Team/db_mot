@@ -34,11 +34,6 @@ jobs:
       ##########################
       # Checkout the code base #
       ##########################
-      - name: Setup PHP with PECL extension
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '7.4'
-          extensions: imagick, gd
       - name: Checkout Code
         uses: actions/checkout@v2
         with:
@@ -46,6 +41,9 @@ jobs:
           fetch-depth: 0
       - name: Install
         uses: php-actions/composer@v6
+        with:
+          php_version: 7.4
+          php_extensions: redis exif gd
 
 
       ################################
