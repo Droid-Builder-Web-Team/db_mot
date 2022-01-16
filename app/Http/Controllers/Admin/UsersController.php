@@ -1,5 +1,14 @@
 <?php
-
+/**
+ * Controller for Admin editing of Users
+ * php version 7.4
+ *
+ * @category Controller
+ * @package  Admin
+ * @author   Darren Poulson <darren.poulson@gmail.com>
+ * @license  https://opensource.org/licenses/MIT MIT License
+ * @link     https://portal.droidbuilders.uk/
+ */
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
@@ -11,9 +20,21 @@ use Spatie\Permission\Models\Role;
 use Yajra\Datatables\Facades\Datatables;
 use App\DataTables\UsersDataTable;
 
+/**
+ * UsersController
+ *
+ * @category Class
+ * @package  Admin
+ * @author   Darren Poulson <darren.poulson@gmail.com>
+ * @license  https://opensource.org/licenses/MIT MIT License
+ * @link     https://portal.droidbuilders.uk/
+ */
 class UsersController extends Controller
 {
 
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         $this->middleware(['auth', 'permission:View Members', 'verified']);
@@ -22,17 +43,20 @@ class UsersController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param \App\DataTables\UsersDataTable $dataTable Users Datatable
+     *
      * @return \Illuminate\Http\Response
      */
-     public function index(UsersDataTable $dataTable)
-     {
-         return $dataTable->render('admin.users.index');
-     }
+    public function index(UsersDataTable $dataTable)
+    {
+        return $dataTable->render('admin.users.index');
+    }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\User  $user
+     * @param \App\User $user User Object
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit(User $user)
@@ -44,28 +68,30 @@ class UsersController extends Controller
         $roles = Role::all();
         $allclubs = Club::all();
         $clubs = [];
-        foreach($allclubs as $club) {
-          if ($club->hasOption('mot') || $club->hasOption('partruns')) {
-            array_push($clubs, $club);
-          }
+        foreach ($allclubs as $club) {
+            if ($club->hasOption('mot') || $club->hasOption('partruns')) {
+                array_push($clubs, $club);
+            }
         }
-        return view('admin.users.edit')->with([
-          'user' => $user,
-          'roles' => $roles,
-          'clubs' => $clubs
-        ]);
+        return view('admin.users.edit')->with(
+            [
+                'user' => $user,
+                'roles' => $roles,
+                'clubs' => $clubs
+            ]
+        );
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\User  $user
+     * @param \Illuminate\Http\Request $request POST Request
+     * @param \App\User                $user    User Model
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, User $user)
     {
-
         if (auth()->user()->can('Edit Permissions')) {
             $user->syncRoles($request->roles);
             $user->clubs()->sync($request->clubs);
@@ -74,19 +100,24 @@ class UsersController extends Controller
         if (auth()->user()->cannot('Edit Members')) {
             abort(403);
         }
-        $request->validate([
-            'forename' => 'required',
-            'surname' => 'required'
-        ]);
+        $request->validate(
+            [
+                'forename' => 'required',
+                'surname' => 'required'
+            ]
+        );
 
-        if ($request['postcode'] != "")
-        {
-            $address = str_replace(' ','+',$request['postcode']).'+'.str_replace(' ','+',$request['country']);
-            $url = "https://maps.google.com/maps/api/geocode/json?key=".config('gmap.google_api_key')."&address=".$address."&sensor=false";
+        if ($request['postcode'] != "") {
+            $address = str_replace(' ', '+', $request['postcode']).'+'.
+                str_replace(' ', '+', $request['country']);
+            $url = "https://maps.google.com/maps/api/geocode/json?key="
+                .config('gmap.google_api_key')."&address=".$address."&sensor=false";
             $geocode=file_get_contents($url);
             $output= json_decode($geocode);
-            $request['latitude'] = strval($output->results[0]->geometry->location->lat);
-            $request['longitude'] = strval($output->results[0]->geometry->location->lng);
+            $request['latitude']
+                = strval($output->results[0]->geometry->location->lat);
+            $request['longitude']
+                = strval($output->results[0]->geometry->location->lng);
         } else {
             $request['latitude'] = "";
             $request['longitude'] = "";
@@ -105,7 +136,8 @@ class UsersController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\User  $user
+     * @param \App\User $user User Model
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy(User $user)
@@ -113,6 +145,13 @@ class UsersController extends Controller
         //
     }
 
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param \Illuminate\Http\Request $request POST Request
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function upload(Request $request)
     {
         $folderPath = public_path('upload/');
