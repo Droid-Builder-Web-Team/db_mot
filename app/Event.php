@@ -124,6 +124,16 @@ class Event extends Model implements \Acaronlex\LaravelCalendar\Event, Auditable
     }
 
     /**
+     * Required by calendar plugin isAllDay
+     *
+     * @return true
+     */
+    public function isAllDay()
+    {
+        return true;
+    }
+
+    /**
      * Get the start time
      *
      * @return DateTime

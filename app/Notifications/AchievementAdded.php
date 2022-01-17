@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * Achievement Notifications
+ * php version 7.4
+ *
+ * @category Notification
+ * @package  Notifications
+ * @author   Darren Poulson <darren.poulson@gmail.com>
+ * @license  https://opensource.org/licenses/MIT MIT License
+ * @link     https://portal.droidbuilders.uk/
+ */
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
@@ -8,6 +18,15 @@ use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use App\Achievement;
 
+/**
+ * Achievement Notifications
+ *
+ * @category Class
+ * @package  Notifications
+ * @author   Darren Poulson <darren.poulson@gmail.com>
+ * @license  https://opensource.org/licenses/MIT MIT License
+ * @link     https://portal.droidbuilders.uk/
+ */
 class AchievementAdded extends Notification
 {
     use Queueable;
@@ -19,6 +38,8 @@ class AchievementAdded extends Notification
 
     /**
      * Create a new notification instance.
+     *
+     * @param App\Achievement $achievement Achievement awarded
      *
      * @return void
      */
@@ -34,18 +55,22 @@ class AchievementAdded extends Notification
     /**
      * Get the notification's delivery channels.
      *
-     * @param  mixed $notifiable
+     * @param mixed $notifiable Notifiable Object
+     *
      * @return array
      */
     public function via($notifiable)
     {
-        return $notifiable->settings()->get('notifications.achievement') == 'on' ? ['mail', 'database'] : ['database'];
+        return $notifiable->settings()
+            ->get('notifications.achievement')
+                == 'on' ? ['mail', 'database'] : ['database'];
     }
 
     /**
      * Get the mail representation of the notification.
      *
-     * @param  mixed $notifiable
+     * @param mixed $notifiable Notifiable Object
+     *
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
     public function toMail($notifiable)
@@ -59,7 +84,8 @@ class AchievementAdded extends Notification
     /**
      * Get the array representation of the notification.
      *
-     * @param  mixed $notifiable
+     * @param mixed $notifiable Notifiable object
+     *
      * @return array
      */
     public function toArray($notifiable)

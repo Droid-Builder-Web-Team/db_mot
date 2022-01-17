@@ -46,14 +46,16 @@ class CommentBroadcast extends Notification
         }
         $this->comment = $comment;
         $this->title = $type_text." has a broadcast";
-        $this->text = "A broadcast comment has been submitted for ".strtolower($type_text)." - ".$model_title;
+        $this->text = "A broadcast comment has been submitted for "
+            . strtolower($type_text) . " - ".$model_title;
         $this->icon = "bullhorn";
     }
 
     /**
      * Get the notification's delivery channels.
      *
-     * @param  mixed $notifiable
+     * @param mixed $notifiable
+     *
      * @return array
      */
     public function via($notifiable)
@@ -64,7 +66,8 @@ class CommentBroadcast extends Notification
     /**
      * Get the mail representation of the notification.
      *
-     * @param  mixed $notifiable
+     * @param mixed $notifiable
+     *
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
     public function toMail($notifiable)
@@ -78,7 +81,8 @@ class CommentBroadcast extends Notification
     /**
      * Get the array representation of the notification.
      *
-     * @param  mixed $notifiable
+     * @param mixed $notifiable
+     *
      * @return array
      */
     public function toArray($notifiable)

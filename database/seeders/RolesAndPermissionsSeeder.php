@@ -1,17 +1,43 @@
 <?php
 
+/**
+ * Seeder for permissions and roles
+ * php version 7.4
+ *
+ * @category Seeder
+ * @package  Seeders
+ * @author   Darren Poulson <darren.poulson@gmail.com>
+ * @license  https://opensource.org/licenses/MIT MIT License
+ * @link     https://portal.droidbuilders.uk/
+ */
+
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
+/**
+ * Roles and Permissions Seeder
+ *
+ * @category Class
+ * @package  Seeders
+ * @author   Darren Poulson <darren.poulson@gmail.com>
+ * @license  https://opensource.org/licenses/MIT MIT License
+ * @link     https://portal.droidbuilders.uk/
+ */
 class RolesAndPermissionsSeeder extends Seeder
 {
+    /**
+     * Create permissions and assign to roles
+     *
+     * @return void
+     */
     public function run()
     {
         // Reset cached roles and permissions
-        app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
+        app()[\Spatie\Permission\PermissionRegistrar::class]
+            ->forgetCachedPermissions();
 
         // create permissions
         Permission::create(['name' => 'Edit Config']);
@@ -23,6 +49,7 @@ class RolesAndPermissionsSeeder extends Seeder
         Permission::create(['name' => 'Edit Clubs']);
         Permission::create(['name' => 'Edit Permissions']);
         Permission::create(['name' => 'Edit Partrun']);
+        Permission::create(['name' => 'Create Partrun']);
 
         Permission::create(['name' => 'View Droids']);
         Permission::create(['name' => 'View Members']);
@@ -59,6 +86,7 @@ class RolesAndPermissionsSeeder extends Seeder
         // this can be done as separate statements
         $role = Role::create(['name' => 'BC Rep']);
         $role->givePermissionTo('Edit Partrun');
+        $role->givePermissionTo('Create Partrun');
 
         $role = Role::create(['name' => 'Super Admin']);
         $role->givePermissionTo(Permission::all());
