@@ -30,8 +30,8 @@ class DashboardController extends Controller
         $users = User::all();
         $droids = Droid::all();
         $events = Event::whereDate('date', '>=', Carbon::now())
-                  ->orderBy('date', 'asc')
-                  ->get();
+            ->orderBy('date', 'asc')
+            ->get();
         return view('admin.dashboard', compact('users', 'droids', 'events'));
     }
 

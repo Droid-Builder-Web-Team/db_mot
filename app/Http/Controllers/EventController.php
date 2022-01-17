@@ -18,8 +18,8 @@ class EventController extends Controller
 
     public function __construct()
     {
-      $this->middleware('auth');
-      $this->middleware('verified');
+        $this->middleware('auth');
+        $this->middleware('verified');
     }
 
     /**
@@ -29,82 +29,83 @@ class EventController extends Controller
      */
     public function index()
     {
-        if(auth()->user()->accepted_coc == 0)
-        {
+        if(auth()->user()->accepted_coc == 0) {
             return redirect('codeofconduct');
         }
 
         $events = Event::whereDate('date', '>=', Carbon::now())
-                  ->orderBy('date', 'asc')->get();
+            ->orderBy('date', 'asc')->get();
 
         $calevents = [];
 
         foreach($events as $event){
-          $title = $event->name.' - ('.$event->location->name.' - '.$event->location->town.')';
-          $background = "lightgrey";
-          if(Auth()->user()->event($event->id)){
-            $background = "green";
-          }
-          $calevents[] = Calendar::event(
-            $event->name,
-            True,
-            $event->date,
-            $event->date,
-            $event->id,
-            [
-              'url' => 'event/'.$event->id,
-              'title' => $title,
-              'borderColor' =>  $background,
+            $title = $event->name.' - ('.$event->location->name.' - '.$event->location->town.')';
+            $background = "lightgrey";
+            if(Auth()->user()->event($event->id)) {
+                $background = "green";
+            }
+            $calevents[] = Calendar::event(
+                $event->name,
+                true,
+                $event->date,
+                $event->date,
+                $event->id,
+                [
+                'url' => 'event/'.$event->id,
+                'title' => $title,
+                'borderColor' =>  $background,
 
-            ]
-          );
+                ]
+            );
         }
 
         $calendar = new Calendar();
         $calendar->addEvents($calevents)
-        ->setOptions([
-            'locale' => 'en',
-            'themeSystem' => 'bootstrap',
-            'aspectRatio' => 2.5,
-            'height' => 'auto',
-            'firstDay' => 0,
-            'titleFormat' => [
+            ->setOptions(
+                [
+                'locale' => 'en',
+                'themeSystem' => 'bootstrap',
+                'aspectRatio' => 2.5,
+                'height' => 'auto',
+                'firstDay' => 0,
+                'titleFormat' => [
                 'month' => 'short',
                 'year' => 'numeric'
-            ],
-            'views' => [
+                ],
+                'views' => [
                 'listYear' => [
                     'titleFormat' => [
                         'year' => 'numeric',
                       ]
                 ],
-            ],
-            'displayEventTime' => False,
-            'selectable' => true,
-            'initialView' => 'listYear',
-            'bootstrapFontAwesome' => [
+                ],
+                'displayEventTime' => false,
+                'selectable' => true,
+                'initialView' => 'listYear',
+                'bootstrapFontAwesome' => [
                 'today' => 'calendar-day',
                 'dayGridMonth' => 'fa-calendar-alt',
                 'listMonth' => 'fa-list'
-            ],
-            'buttonText' => [
+                ],
+                'buttonText' => [
                 'listYear' => 'Year',
-            ],
-            'buttonIcons' => [
+                ],
+                'buttonIcons' => [
 
-            ],
-            'customButtons' => [
+                ],
+                'customButtons' => [
                 'map' => [
                     'text'=> 'View as Map',
                     'click' => 'function() {
                         window.open("event/map","_self")
                     }'
                 ]
-            ],
-            'headerToolbar' => [
+                ],
+                'headerToolbar' => [
                 'end' => 'map today,prev,next dayGridMonth,listMonth,listYear'
-            ]
-        ]);
+                ]
+                ]
+            );
         $calendar->setId('1');
 
         return view('event.index', compact('calendar'));
@@ -113,7 +114,7 @@ class EventController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -124,10 +125,12 @@ class EventController extends Controller
             return redirect('/event');
         } else {
             $date = DateTime::createFromFormat('Y-m-d', $event->date);
-            $link = Link::create($event->name,
-                            $date,
-                            $date,
-                            true)
+            $link = Link::create(
+                $event->name,
+                $date,
+                $date,
+                true
+            )
                             ->description($event->description)
                             ->address($event->location->name.','.$event->location->postcode);
             return view('event.show', compact('event', 'link'));
@@ -137,8 +140,8 @@ class EventController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Event  $event
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\Event               $event
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Event $event)
@@ -151,22 +154,25 @@ class EventController extends Controller
           'status' => $request->going,
           'mot_required' => $request->mot_required
         ];
-        if ($hasEntry)
+        if ($hasEntry) {
             $result = $event->users()->updateExistingPivot($user, $attributes);
-        else
+        } else {
             $result = $event->users()->save($user, $attributes);
+        }
         toastr()->success('Interest registered for Event');
         return back();
     }
 
-    public function past() {
-	    $events = Event::whereDate('date', '<=', Carbon::now())
-                  ->orderBy('date', 'desc')->paginate(25);
+    public function past()
+    {
+        $events = Event::whereDate('date', '<=', Carbon::now())
+            ->orderBy('date', 'desc')->paginate(25);
 
-	    return view('event.past', compact('events'));
+        return view('event.past', compact('events'));
     }
 
-    public function map() {
+    public function map()
+    {
         $key = config('gmap.google_api_key');
         $events = Event::whereDate('date', '>=', Carbon::now())->get();
 

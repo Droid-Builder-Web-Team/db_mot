@@ -30,7 +30,7 @@ class PartsRunAdController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -41,7 +41,7 @@ class PartsRunAdController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\PartsRunAd  $partsRunAd
+     * @param  \App\PartsRunAd $partsRunAd
      * @return \Illuminate\Http\Response
      */
     public function show(PartsRunAd $partsRunAd)
@@ -52,7 +52,7 @@ class PartsRunAdController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\PartsRunAd  $partsRunAd
+     * @param  \App\PartsRunAd $partsRunAd
      * @return \Illuminate\Http\Response
      */
     public function edit(PartsRunAd $partsRunAd)
@@ -63,8 +63,8 @@ class PartsRunAdController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\PartsRunAd  $partsRunAd
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\PartsRunAd          $partsRunAd
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, PartsRunAd $partsRunAd)
@@ -75,7 +75,7 @@ class PartsRunAdController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\PartsRunAd  $partsRunAd
+     * @param  \App\PartsRunAd $partsRunAd
      * @return \Illuminate\Http\Response
      */
     public function destroy(PartsRunAd $partsRunAd)

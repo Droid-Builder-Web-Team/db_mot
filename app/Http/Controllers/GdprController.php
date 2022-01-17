@@ -12,7 +12,7 @@ class GdprController extends Controller
     /**
      * Download the GDPR compliant data portability JSON file.
      *
-     * @param  \Dialect\Package\Gdpr\Http\Requests\GdprDownload  $request
+     * @param  \Dialect\Package\Gdpr\Http\Requests\GdprDownload $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function download(GdprDownload $request)
@@ -52,9 +52,11 @@ class GdprController extends Controller
     {
         $user = Auth::user();
 
-        $user->update([
+        $user->update(
+            [
             'accepted_gdpr' => true,
-        ]);
+            ]
+        );
 
         return redirect()->to('/');
     }
@@ -68,9 +70,11 @@ class GdprController extends Controller
     {
         $user = Auth::user();
 
-        $user->update([
+        $user->update(
+            [
             'accepted_gdpr' => false,
-        ]);
+            ]
+        );
 
         return redirect()->to('/');
     }
@@ -88,9 +92,11 @@ class GdprController extends Controller
 
         $user->anonymize();
 
-        $user->update([
+        $user->update(
+            [
             'isAnonymized' => true,
-        ]);
+            ]
+        );
 
         return redirect()->back();
     }

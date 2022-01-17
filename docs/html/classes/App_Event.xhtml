@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <title>phpDox - App\Event</title>
+    <link rel="stylesheet" type="text/css" href="../css/style.css" media="screen"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+  </head>
+  <body>
+    <nav class="topnav">
+      <ul>
+        <li>
+          <div class="logo"><span>/**</span>phpDox</div>
+        </li>
+        <li class="separator">
+          <a href="../index.xhtml">Overview</a>
+        </li>
+        <li class="separator">
+          <a href="../namespaces.xhtml">Namespaces</a>
+        </li>
+        <li>
+          <a href="../classes.xhtml">Classes</a>
+        </li>
+        <li class="separator">
+          <a href="../source/index.xhtml">Source</a>
+        </li>
+      </ul>
+    </nav>
+    <div id="mainstage">
+      <div class="box">
+        <ul class="breadcrumb">
+          <li>
+            <a href="../index.xhtml">Overview</a>
+          </li>
+          <li class="separator">
+            <a href="../classes.xhtml">Classes</a>
+          </li>
+          <li class="separator">
+            <a href="../classes.xhtml#App">App</a>
+          </li>
+          <li class="separator">Event</li>
+        </ul>
+      </div>
+      <nav class="box">
+        <ul>
+          <li>
+            <a href="#introduction">Introduction</a>
+          </li>
+          <li>
+            <a href="#synopsis">Synopsis</a>
+          </li>
+          <li>
+            <a href="#hierarchy">Hierarchy</a>
+          </li>
+          <li>
+            <a href="#members">Members</a>
+          </li>
+          <li>
+            <a href="#methods">Methods</a>
+          </li>
+          <li>
+            <a href="../source/Event.php.xhtml#line30">Source</a>
+          </li>
+        </ul>
+      </nav>
+      <section>
+        <h1 id="introduction"><small>App\</small>Event</h1>
+        <h4>Event</h4>
+        <p/>
+        <ul>
+          <li>Author: Darren Poulson &lt;darren.poulson@gmail.com&gt;</li>
+          <li>License: https://opensource.org/licenses/MIT MIT License</li>
+        </ul>
+        <h2 id="synopsis">Synopsis</h2>
+        <div class="synopsis">class Event
+                extends Model
+                implements
+                Event,Auditable
+            {<br/><ul class="none"><li>// members</li><li>protected array <a href="#members">$guarded</a> =
+                        ;
+                    </li></ul><ul class="none"><li>// methods</li><li>public null <a title="App\Event" href="../classes/App_Event/getEventOptions.xhtml">getEventOptions</a>()
+                    </li><li>public array <a title="App\Event" href="../classes/App_Event/users.xhtml">users</a>()
+                    </li><li>public array <a title="App\Event" href="../classes/App_Event/going.xhtml">going</a>()
+                    </li><li>public array <a title="App\Event" href="../classes/App_Event/notgoing.xhtml">notgoing</a>()
+                    </li><li>public array <a title="App\Event" href="../classes/App_Event/attended.xhtml">attended</a>()
+                    </li><li>public Location <a title="App\Event" href="../classes/App_Event/location.xhtml">location</a>()
+                    </li><li>public array <a title="App\Event" href="../classes/App_Event/comments.xhtml">comments</a>()
+                    </li><li>public bool <a title="App\Event" href="../classes/App_Event/isFuture.xhtml">isFuture</a>()
+                    </li><li>public DateTime <a title="App\Event" href="../classes/App_Event/getStart.xhtml">getStart</a>()
+                    </li><li>public DateTime <a title="App\Event" href="../classes/App_Event/getEnd.xhtml">getEnd</a>()
+                    </li><li>public string <a title="App\Event" href="../classes/App_Event/getTitle.xhtml">getTitle</a>()
+                    </li><li>public bool <a title="App\Event" href="../classes/App_Event/canMOT.xhtml">canMOT</a>()
+                    </li><li>public bool <a title="App\Event" href="../classes/App_Event/canWIP.xhtml">canWIP</a>()
+                    </li><li>public bool <a title="App\Event" href="../classes/App_Event/isPublic.xhtml">isPublic</a>()
+                    </li><li>public int <a title="App\Event" href="../classes/App_Event/getId.xhtml">getId</a>()
+                    </li><li>public bool <a title="App\Event" href="../classes/App_Event/hasImage.xhtml">hasImage</a>()
+                    </li><li>public null <a title="App\Event" href="../classes/App_Event/createdEventNotification.xhtml">createdEventNotification</a>()
+                    </li><li>public null <a title="App\Event" href="../classes/App_Event/updatedEventNotification.xhtml">updatedEventNotification</a>()
+                    </li><li>public null <a title="App\Event" href="../classes/App_Event/deletedEventNotification.xhtml">deletedEventNotification</a>()
+                    </li></ul>
+
+            }<br/></div>
+        <h2 id="hierarchy">Hierarchy</h2>
+        <div class="styled">
+          <h4>Extends</h4>
+          <ul>
+            <li>Illuminate\Database\Eloquent\Model</li>
+          </ul>
+          <h4>Uses</h4>
+          <ul>
+            <li>OwenIt\Auditing\Auditable</li>
+          </ul>
+          <h4>Implements</h4>
+          <ul>
+            <li>Acaronlex\LaravelCalendar\Event</li>
+            <li>OwenIt\Auditing\Contracts\Auditable</li>
+          </ul>
+        </div>
+        <h2 id="members">Members</h2>
+        <div class="styled members">
+          <h4>protected</h4>
+          <ul class="members">
+            <li id="guarded">
+              <strong>$guarded</strong>
+            </li>
+          </ul>
+        </div>
+        <h2 id="methods">Methods</h2>
+        <div class="styled">
+          <h4>public</h4>
+          <ul>
+            <li id="attended"><a title="App\Event" href="../classes/App_Event/attended.xhtml">attended()</a>
+                — Get all who have attended</li>
+            <li id="canMOT"><a title="App\Event" href="../classes/App_Event/canMOT.xhtml">canMOT()</a>
+                — Can MOTs be done at the event</li>
+            <li id="canWIP"><a title="App\Event" href="../classes/App_Event/canWIP.xhtml">canWIP()</a>
+                — Are WIP droids welcome at the event</li>
+            <li id="comments"><a title="App\Event" href="../classes/App_Event/comments.xhtml">comments()</a>
+                — Get comments written on this event</li>
+            <li id="createdEventNotification"><a title="App\Event" href="../classes/App_Event/createdEventNotification.xhtml">createdEventNotification()</a>
+                — Notify discord an event has been created</li>
+            <li id="deletedEventNotification"><a title="App\Event" href="../classes/App_Event/deletedEventNotification.xhtml">deletedEventNotification()</a>
+                — Notify discord an event has been deleted</li>
+            <li id="getEnd"><a title="App\Event" href="../classes/App_Event/getEnd.xhtml">getEnd()</a>
+                — Get the end time</li>
+            <li id="getEventOptions"><a title="App\Event" href="../classes/App_Event/getEventOptions.xhtml">getEventOptions()</a>
+                — Return event options</li>
+            <li id="getId"><a title="App\Event" href="../classes/App_Event/getId.xhtml">getId()</a>
+                — Get the event's id number</li>
+            <li id="getStart"><a title="App\Event" href="../classes/App_Event/getStart.xhtml">getStart()</a>
+                — Get the start time</li>
+            <li id="getTitle"><a title="App\Event" href="../classes/App_Event/getTitle.xhtml">getTitle()</a>
+                — Get the event's title</li>
+            <li id="going"><a title="App\Event" href="../classes/App_Event/going.xhtml">going()</a>
+                — Get all who have said they are going</li>
+            <li id="hasImage"><a title="App\Event" href="../classes/App_Event/hasImage.xhtml">hasImage()</a>
+                — Is there an image stored for this event</li>
+            <li id="isFuture"><a title="App\Event" href="../classes/App_Event/isFuture.xhtml">isFuture()</a>
+                — Is the event in the future</li>
+            <li id="isPublic"><a title="App\Event" href="../classes/App_Event/isPublic.xhtml">isPublic()</a>
+                — Is the event open to the public</li>
+            <li id="location"><a title="App\Event" href="../classes/App_Event/location.xhtml">location()</a>
+                — Get location of event</li>
+            <li id="notgoing"><a title="App\Event" href="../classes/App_Event/notgoing.xhtml">notgoing()</a>
+                — Get all who have said they are no longer going</li>
+            <li id="updatedEventNotification"><a title="App\Event" href="../classes/App_Event/updatedEventNotification.xhtml">updatedEventNotification()</a>
+                — Notify discord an event has been updated</li>
+            <li id="users"><a title="App\Event" href="../classes/App_Event/users.xhtml">users()</a>
+                — Get list of users registered against an event</li>
+          </ul>
+        </div>
+      </section>
+    </div>
+    <footer>
+      <span>Generated using phpDox 0.12.0-dev - Copyright (C) 2010 - 2022 by Arne Blankerts and Contributors</span>
+    </footer>
+  </body>
+</html>

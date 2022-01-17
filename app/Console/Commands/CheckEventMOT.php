@@ -46,14 +46,13 @@ class CheckEventMOT extends Command
         foreach($events as $event)
         {
             $this->info('Event: Checking event: '.$event->name.' Date: '.$event->date);
-            if ($event->date == $upcoming->format('Y-m-d'))
-            {
+            if ($event->date == $upcoming->format('Y-m-d')) {
                 $this->info('Event: An event is happening in a couple of days: '.$event->name);
                 foreach($event->users as $user)
                 {
                     if($user->pivot->mot_required) {
-                      $this->info('Event: Notifying: '.$user->forename);
-                      $user->notify(new EventMOT($event));
+                        $this->info('Event: Notifying: '.$user->forename);
+                        $user->notify(new EventMOT($event));
                     }
                 }
             }

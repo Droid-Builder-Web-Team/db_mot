@@ -17,10 +17,11 @@ class PartsRunImageController extends Controller
         $image = $images[$number - 1];
 
         $folderPath = 'parts-run/'.$id;
-        if ($size == 'full')
-          $fileName = $image->filename;
-        else
-          $fileName = $size.'_'.$image->filename;
+        if ($size == 'full') {
+            $fileName = $image->filename;
+        } else {
+            $fileName = $size.'_'.$image->filename;
+        }
 
         $file = Storage::get($folderPath.'/'.$fileName);
 

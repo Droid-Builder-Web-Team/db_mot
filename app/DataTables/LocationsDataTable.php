@@ -14,26 +14,28 @@ class LocationsDataTable extends DataTable
     /**
      * Build DataTable class.
      *
-     * @param mixed $query Results from query() method.
+     * @param  mixed $query Results from query() method.
      * @return \Yajra\DataTables\DataTableAbstract
      */
     public function dataTable($query)
     {
-      return datatables()
-          ->eloquent($query)
-          ->addColumn('action', '')
-          ->editColumn('action', function($row) {
-            $crudRoutePart = "location";
-            $parts = array( 'view', 'edit', 'delete');
-            return view('partials.datatablesActions', compact('row', 'crudRoutePart', 'parts'));
-          })
+        return datatables()
+            ->eloquent($query)
+            ->addColumn('action', '')
+            ->editColumn(
+                'action', function ($row) {
+                    $crudRoutePart = "location";
+                    $parts = array( 'view', 'edit', 'delete');
+                    return view('partials.datatablesActions', compact('row', 'crudRoutePart', 'parts'));
+                }
+            )
           ->rawColumns(['action', 'map']);
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Location $model
+     * @param  \App\Location $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function query(Location $model)
@@ -49,18 +51,18 @@ class LocationsDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->setTableId('locations-table')
-                    ->columns($this->getColumns())
-                    ->minifiedAjax()
-                    ->dom('Bfrtip')
-                    ->lengthMenu([15,25,50])
-                    ->orderBy(1)
-                    ->buttons(
-                        Button::make('create'),
-                        Button::make('export'),
-                        Button::make('print'),
-                        Button::make('reload')
-                    );
+            ->setTableId('locations-table')
+            ->columns($this->getColumns())
+            ->minifiedAjax()
+            ->dom('Bfrtip')
+            ->lengthMenu([15,25,50])
+            ->orderBy(1)
+            ->buttons(
+                Button::make('create'),
+                Button::make('export'),
+                Button::make('print'),
+                Button::make('reload')
+            );
     }
 
     /**
@@ -76,10 +78,10 @@ class LocationsDataTable extends DataTable
             Column::make('county'),
             Column::make('postcode'),
             Column::computed('action')
-                  ->exportable(false)
-                  ->printable(false)
-                  ->width(85)
-                  ->addClass('text-center'),
+                ->exportable(false)
+                ->printable(false)
+                ->width(85)
+                ->addClass('text-center'),
         ];
     }
 

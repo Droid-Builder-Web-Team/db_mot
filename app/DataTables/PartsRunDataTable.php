@@ -15,28 +15,30 @@ class PartsRunDataTable extends DataTable
     /**
      * Build DataTable class.
      *
-     * @param mixed $query Results from query() method.
+     * @param  mixed $query Results from query() method.
      * @return \Yajra\DataTables\DataTableAbstract
      */
     public function dataTable($query)
     {
         $query = PartsRunData::query();
         return DataTables::eloquent($query)
-          ->withQuery('count', function() use ($query) {
-            return $query->count();
-          })
+            ->withQuery(
+                'count', function () use ($query) {
+                    return $query->count();
+                }
+            )
           ->toJson();
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param \App\PartsRunDataTable $model
+     * @param  \App\PartsRunDataTable $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function query(PartsRunData $model)
     {
-      return $model->newQuery()->where('status', 'Active' || 'Gathering_Interest' || 'Inactive');
+        return $model->newQuery()->where('status', 'Active' || 'Gathering_Interest' || 'Inactive');
     }
 
     /**
@@ -46,18 +48,18 @@ class PartsRunDataTable extends DataTable
      */
     public function html()
     {
-      return $this->builder()
-                  ->setTableId('parts-run-data-table')
-                  ->columns($this->getColumns())
-                  ->minifiedAjax()
-                  ->dom('Bfrtip')
-                  ->lengthMenu([15,25,50])
-                  ->orderBy(0)
-                  ->buttons(
-                      Button::make('export'),
-                      Button::make('print'),
-                      Button::make('reload')
-                  );
+        return $this->builder()
+            ->setTableId('parts-run-data-table')
+            ->columns($this->getColumns())
+            ->minifiedAjax()
+            ->dom('Bfrtip')
+            ->lengthMenu([15,25,50])
+            ->orderBy(0)
+            ->buttons(
+                Button::make('export'),
+                Button::make('print'),
+                Button::make('reload')
+            );
 
     }
 
@@ -68,11 +70,11 @@ class PartsRunDataTable extends DataTable
      */
     protected function getColumns()
     {
-      return [
+        return [
           Column::make('title'),
           Column::make('droid'),
           Column::make('status')
-      ];
+        ];
     }
 
     /**

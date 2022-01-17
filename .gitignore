@@ -13,3 +13,4 @@ yarn-error.log
 .remote-sync.json
 .vscode/
 Portal.session.sql
+/build

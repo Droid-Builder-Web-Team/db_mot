@@ -1,5 +1,16 @@
 <?php
 
+/**
+ * Model for Achievements
+ * php version 7.4
+ *
+ * @category Model
+ * @package  Models
+ * @author   Darren Poulson <darren.poulson@gmail.com>
+ * @license  https://opensource.org/licenses/MIT MIT License
+ * @link     https://portal.droidbuilders.uk/
+ */
+
 namespace App;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -23,7 +34,19 @@ use OwenIt\Auditing\Contracts\Auditable;
 use Qirolab\Laravel\Reactions\Traits\Reacts;
 use Qirolab\Laravel\Reactions\Contracts\ReactsInterface;
 
-class User extends Authenticatable implements MustVerifyEmail, Rater, Auditable, ReactsInterface
+/**
+ * Achievements
+ *
+ * @category Class
+ * @package  Models
+ * @author   Darren Poulson <darren.poulson@gmail.com>
+ * @license  https://opensource.org/licenses/MIT MIT License
+ * @link     https://portal.droidbuilders.uk/
+ */
+class User extends Authenticatable implements MustVerifyEmail,
+                                                Rater,
+                                                Auditable,
+                                                ReactsInterface
 {
     use Notifiable;
     use HasRoles;
@@ -101,20 +124,33 @@ class User extends Authenticatable implements MustVerifyEmail, Rater, Auditable,
      */
     public function achievements()
     {
-        return $this->belongsToMany(Achievement::class, 'members_achievements')->withPivot('notes', 'date_added');
+        return $this->belongsToMany(Achievement::class, 'members_achievements')
+            ->withPivot('notes', 'date_added');
     }
 
+    /**
+     * Has the user got an Achievement
+     *
+     * @param mixed $achievement Achievement to check for
+     *
+     * @return void
+     */
     public function hasAchievement(Achievement $achievement)
     {
-        return $this->achievements->contains( $achievement );
+        return $this->achievements->contains($achievement);
     }
 
+    /**
+     * Get total of charity raised
+     *
+     * @return int
+     */
     public function charity()
     {
-    //     return $this->belongsToMany(Event::class, 'members_events')
-    //     ->wherePivot('attended', "1")
-    //     ->join('events', 'members_events.event_id', 'events.id')
-    //     ->OrderBy('date', 'desc');
+        //     return $this->belongsToMany(Event::class, 'members_events')
+        //     ->wherePivot('attended', "1")
+        //     ->join('events', 'members_events.event_id', 'events.id')
+        //     ->OrderBy('date', 'desc');
 
         // return $this->attended_events()->sum('charity_raised');
     }
@@ -126,47 +162,93 @@ class User extends Authenticatable implements MustVerifyEmail, Rater, Auditable,
      */
     public function events()
     {
-        return $this->belongsToMany(Event::class, 'members_events')->withPivot('spotter', 'date_added', 'status', 'attended', 'mot_required');
+        return $this->belongsToMany(Event::class, 'members_events')
+            ->withPivot(
+                'spotter',
+                'date_added',
+                'status',
+                'attended',
+                'mot_required'
+            );
     }
 
+    /**
+     * Get list of all events user has attended
+     *
+     * @return array of App\Event
+     */
     public function attended_events()
     {
-        return $this->belongsToMany(Event::class, 'members_events')->wherePivot('attended', "1")->OrderBy('date', 'desc');
+        return $this->belongsToMany(Event::class, 'members_events')
+            ->wherePivot('attended', "1")
+            ->OrderBy('date', 'desc');
     }
 
+    /**
+     * Get status of event
+     *
+     * @param int $id Event ID
+     *
+     * @return string or null
+     */
     public function event($id)
     {
         $status = $this->events->only($id)->first();
-        if ($status != null)
-          return $status->pivot;
-        else
-          return null;
+        if ($status != null) {
+            return $status->pivot;
+        } else {
+            return null;
+        }
 
     }
 
+    /**
+     * Does a droid belong to this user
+     *
+     * @param App\Droid $droid Droid Model
+     *
+     * @return bool
+     */
     public function hasDroid( Droid $droid )
     {
-        return $this->droids->contains( $droid );
+        return $this->droids->contains($droid);
     }
 
+    /**
+     * Does user have a valid PLI
+     *
+     * @return bool
+     */
     public function validPLI()
     {
-        if ( strtotime($this->pli_date) > strtotime('-1 year') ) {
+        if (strtotime($this->pli_date) > strtotime('-1 year') ) {
             return true;
         } else {
             return false;
         }
     }
 
+    /**
+     * Is the users PLI expiring
+     *
+     * @return bool
+     */
     public function expiringPLI()
     {
-        if ((strtotime($this->pli_date) < strtotime('-11 months')) && (strtotime($this->pli_date) > strtotime('-1 year'))) {
+        if ((strtotime($this->pli_date) < strtotime('-11 months'))
+            && (strtotime($this->pli_date) > strtotime('-1 year'))
+        ) {
             return true;
         } else {
             return false;
         }
     }
 
+    /**
+     * When does the PLI expire
+     *
+     * @return Carbon
+     */
     public function pli_expires()
     {
         $expires = Carbon::parse($this->pli_date)->addYear(1);
@@ -174,6 +256,11 @@ class User extends Authenticatable implements MustVerifyEmail, Rater, Auditable,
 
     }
 
+    /**
+     * How many years has user been a member
+     *
+     * @return Carbon
+     */
     public function yearsService()
     {
         $now = Carbon::now();
@@ -181,19 +268,38 @@ class User extends Authenticatable implements MustVerifyEmail, Rater, Auditable,
 
     }
 
-    public static function generateQR($id, $user_id) {
+    /**
+     * Generate a QR for user and store image
+     *
+     * @param int $id      ID of users badge
+     * @param int $user_id id of user
+     *
+     * @return string
+     */
+    public static function generateQR($id, $user_id)
+    {
         $link = url('/')."/id.php?id=".$id;
-        $url = "https://chart.googleapis.com/chart?cht=qr&chld=L|1&chs=500x500&chl=".urlencode($link);
+        $url = "https://chart.googleapis.com/chart?cht=qr&chld=L|1&chs=500x500&chl="
+            . urlencode($link);
         $image = imagecreatefrompng($url);
-        $file = '/members/'. $user_id . '/qr_code.png';
+        $file = '/members/' . $user_id . '/qr_code.png';
 
         Storage::put($file, file_get_contents($url));
 
         return "Ok";
     }
 
-    public static function generateID($length) {
-        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    /**
+     * Generate unique badge ID
+     *
+     * @param int $length Length of string
+     *
+     * @return string
+     */
+    public static function generateID($length)
+    {
+        $characters
+            = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $charactersLength = strlen($characters);
         $randomString = '';
         for ($i = 0; $i < $length; $i++) {
@@ -202,33 +308,57 @@ class User extends Authenticatable implements MustVerifyEmail, Rater, Auditable,
         return $randomString;
     }
 
+    /**
+     * Get CourseRuns for user
+     *
+     * @return array of App\CourseRun
+     */
     public function course_runs()
     {
         return $this->hasMany(CourseRun::class)->orderBy('final_time');
     }
 
+    /**
+     * What clubs is user a member of
+     *
+     * @return array of App\Clubs
+     */
     public function clubs()
     {
         return $this->belongsToMany(Club::class, 'club_members');
         //return false;
     }
 
+    /**
+     * Is user an admin of a club
+     *
+     * @param App\Club $club Club Model
+     *
+     * @return bool
+     */
     public function isAdminOf(Club $club)
     {
         return $this->clubs->contains($club);
     }
 
     /**
-     * Parts Run Extension
+     * Part runs user is organiser of
+     *
+     * @return array of App\PartsRunData
      */
     public function partsRun()
     {
         return $this->hasMany(PartsRunData::class);
     }
 
+    /**
+     * Part runs user is interested in
+     *
+     * @return array of App\PartsRunData
+     */
     public function parts_interested()
     {
-        return $this->belongsToMany(PartsRunData::class, 'members_parts')->withPivot('status', 'quantity');
+        return $this->belongsToMany(PartsRunData::class, 'members_parts')
+            ->withPivot('status', 'quantity');
     }
-
 }

@@ -47,25 +47,24 @@ class CheckMOT extends Command
         $expiring = Carbon::today()->subYear()->addMonth();
         foreach(Club::all() as $club)
         {
-            if($club->hasOption('mot'))
-            {
+            if($club->hasOption('mot')) {
                 $this->info('MOT: Checking droids in club: '.$club->name.' ID: '.$club->id);
 
                 $droids = Droid::where('club_id', $club->id)->get();
                 foreach($droids as $droid)
                 {
-                    $this->info('MOT: Checking droid: '.$droid->name.' MOT Date: '.$droid->motDate().' Expire Date: '
-                                  .$expired->format('Y-m-d').' Expiring Date: '.$expiring->format('Y-m-d'));
-                    if ($droid->motDate() == $expired->format('Y-m-d'))
-                    {
+                    $this->info(
+                        'MOT: Checking droid: '.$droid->name.' MOT Date: '.$droid->motDate().' Expire Date: '
+                        .$expired->format('Y-m-d').' Expiring Date: '.$expiring->format('Y-m-d')
+                    );
+                    if ($droid->motDate() == $expired->format('Y-m-d')) {
                         $this->info('MOT: Droid MOT expires today: '.$droid->name);
                         foreach($droid->users as $user)
                         {
                             $user->notify(new MOTExpired($droid));
                         }
                     }
-                    if ($droid->motDate() == $expiring->format('Y-m-d'))
-                    {
+                    if ($droid->motDate() == $expiring->format('Y-m-d')) {
                         $this->info('MOT: Droid MOT expires in a month: '.$droid->name);
                         foreach($droid->users as $user)
                         {

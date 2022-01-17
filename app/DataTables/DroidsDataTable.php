@@ -15,43 +15,50 @@ class DroidsDataTable extends DataTable
     /**
      * Build DataTable class.
      *
-     * @param mixed $query Results from query() method.
+     * @param  mixed $query Results from query() method.
      * @return \Yajra\DataTables\DataTableAbstract
      */
     public function dataTable($query)
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('owner', function(Droid $droid) {
-                $owner = $droid->users()->first();
-                $name = $owner->forename.' '.$owner->surname;
-                //return '<a class="btn-link btn-sml" href="/user/'.$owner->id.'">'.$name.'</a>';
-                return $name;
-            })
-            ->addColumn('mot', function(Droid $droid) {
-                if ($droid->club->hasOption('mot'))
-                  return "<button class=\"btn-sm alert ".$droid->displayMOT()['state']." actions-buttons\">".$droid->displayMOT()['status']."</button>";
-                else
-                  return "";
-            })
+            ->addColumn(
+                'owner', function (Droid $droid) {
+                    $owner = $droid->users()->first();
+                    $name = $owner->forename.' '.$owner->surname;
+                    //return '<a class="btn-link btn-sml" href="/user/'.$owner->id.'">'.$name.'</a>';
+                    return $name;
+                }
+            )
+            ->addColumn(
+                'mot', function (Droid $droid) {
+                    if ($droid->club->hasOption('mot')) {
+                        return "<button class=\"btn-sm alert ".$droid->displayMOT()['state']." actions-buttons\">".$droid->displayMOT()['status']."</button>";
+                    } else {
+                        return "";
+                    }
+                }
+            )
             ->addColumn('action', '')
-            ->editColumn('action', function($row) {
-              $crudRoutePart = "droid";
-              $parts = array('view', 'edit', 'delete');
-              return view('partials.datatablesActions', compact('row', 'crudRoutePart', 'parts'));
-            })
+            ->editColumn(
+                'action', function ($row) {
+                    $crudRoutePart = "droid";
+                    $parts = array('view', 'edit', 'delete');
+                    return view('partials.datatablesActions', compact('row', 'crudRoutePart', 'parts'));
+                }
+            )
             ->rawColumns(['mot', 'action']);
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param \App\DroidsDataTable $model
+     * @param  \App\DroidsDataTable $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function query(Droid $model)
     {
-      return $model->newQuery()->where('active', 'on');
+        return $model->newQuery()->where('active', 'on');
     }
 
     /**
@@ -61,18 +68,18 @@ class DroidsDataTable extends DataTable
      */
     public function html()
     {
-      return $this->builder()
-                  ->setTableId('droids-table')
-                  ->columns($this->getColumns())
-                  ->minifiedAjax()
-                  ->dom('Bfrtip')
-                  ->lengthMenu([15,25,50])
-                  ->orderBy(0)
-                  ->buttons(
-                      Button::make('export'),
-                      Button::make('print'),
-                      Button::make('reload')
-                  );
+        return $this->builder()
+            ->setTableId('droids-table')
+            ->columns($this->getColumns())
+            ->minifiedAjax()
+            ->dom('Bfrtip')
+            ->lengthMenu([15,25,50])
+            ->orderBy(0)
+            ->buttons(
+                Button::make('export'),
+                Button::make('print'),
+                Button::make('reload')
+            );
 
     }
 
@@ -83,16 +90,16 @@ class DroidsDataTable extends DataTable
      */
     protected function getColumns()
     {
-      return [
+        return [
           Column::make('name'),
           Column::make('owner'),
           Column::computed('mot'),
           Column::computed('action')
-                ->exportable(false)
-                ->printable(false)
-                ->width(85)
-                ->addClass('text-center'),
-      ];
+              ->exportable(false)
+              ->printable(false)
+              ->width(85)
+              ->addClass('text-center'),
+        ];
     }
 
     /**

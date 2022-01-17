@@ -12,14 +12,14 @@ class ToppsController extends Controller
     /**
      * Handle the incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
         $droids = Droid::where('topps_id', '!=', 0)
-                    ->orderBy('topps_id')
-                    ->paginate(8);
+            ->orderBy('topps_id')
+            ->paginate(8);
         return view('topps', compact('droids'));
     }
 
@@ -27,13 +27,13 @@ class ToppsController extends Controller
     {
         $droid = Droid::find($uid);
 
-        if(!in_array($view, array('topps_front', 'topps_rear')))
-        {
+        if(!in_array($view, array('topps_front', 'topps_rear'))) {
             abort(403);
         }
 
-        if ($size != "")
-          $size = $size.'-';
+        if ($size != "") {
+            $size = $size.'-';
+        }
         $path = 'droids/'.$uid.'/'.$size.''.$view.'.png';
         if (!Storage::exists($path)) {
             $path = 'droids/'.$uid.'/'.$size.''.$view.'.jpg';

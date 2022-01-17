@@ -1,5 +1,16 @@
 <?php
 
+/**
+ * Model for Event
+ * php version 7.4
+ *
+ * @category Model
+ * @package  Models
+ * @author   Darren Poulson <darren.poulson@gmail.com>
+ * @license  https://opensource.org/licenses/MIT MIT License
+ * @link     https://portal.droidbuilders.uk/
+ */
+
 namespace App;
 
 use Illuminate\Support\Facades\Http;
@@ -7,68 +18,112 @@ use Illuminate\Database\Eloquent\Model;
 use OwenIt\Auditing\Contracts\Auditable;
 use Illuminate\Support\Facades\Storage;
 
+/**
+ * Event
+ *
+ * @category Class
+ * @package  Models
+ * @author   Darren Poulson <darren.poulson@gmail.com>
+ * @license  https://opensource.org/licenses/MIT MIT License
+ * @link     https://portal.droidbuilders.uk/
+ */
 class Event extends Model implements \Acaronlex\LaravelCalendar\Event, Auditable
 {
     use \OwenIt\Auditing\Auditable;
 
     protected $guarded = [];
 
+    /**
+     * Return event options
+     *
+     * @return null
+     */
     public function getEventOptions()
     {
         return [
         ];
     }
 
+    /**
+     * Get list of users registered against an event
+     *
+     * @return array of App\User
+     */
     public function users()
     {
-        return $this->belongsToMany(User::class, 'members_events')->withPivot('spotter', 'date_added', 'status', 'mot_required');
+        return $this->belongsToMany(User::class, 'members_events')
+            ->withPivot('spotter', 'date_added', 'status', 'mot_required');
     }
 
+    /**
+     * Get all who have said they are going
+     *
+     * @return array of App\User
+     */
     public function going()
     {
-        return $this->belongsToMany(User::class, 'members_events')->wherePivot('status', "yes");
+        return $this->belongsToMany(User::class, 'members_events')
+            ->wherePivot('status', "yes");
     }
 
-    public function maybe()
-    {
-        return $this->belongsToMany(User::class, 'members_events')->wherePivot('status', "maybe");
-    }
-
+    /**
+     * Get all who have said they are no longer going
+     *
+     * @return array of App\User
+     */
     public function notgoing()
     {
-        return $this->belongsToMany(User::class, 'members_events')->wherePivot('status', "no");
+        return $this->belongsToMany(User::class, 'members_events')
+            ->wherePivot('status', "no");
     }
 
+    /**
+     * Get all who have attended
+     *
+     * @return array of App\User
+     */
     public function attended()
     {
-        return $this->belongsToMany(User::class, 'members_events')->wherePivot('attended', "1");
+        return $this->belongsToMany(User::class, 'members_events')
+            ->wherePivot('attended', "1");
     }
 
+    /**
+     * Get location of event
+     *
+     * @return App\Location
+     */
     public function location()
     {
         return $this->belongsTo(Location::class);
     }
 
+    /**
+     * Get comments written on this event
+     *
+     * @return array of App\Comment
+     */
     public function comments()
     {
-        return $this->morphMany('App\Comment', 'commentable')->orderBy('created_at');
+        return $this->morphMany('App\Comment', 'commentable')
+            ->orderBy('created_at');
     }
 
+    /**
+     * Is the event in the future
+     *
+     * @return bool
+     */
     public function isFuture()
     {
-        if ($this->date > now())
-        {
+        if ($this->date > now()) {
             return true;
         } else {
             return false;
         }
     }
-    public function isAllDay()
-    {
-        return True;
-    }
 
-        /**
+    /**
      * Get the start time
      *
      * @return DateTime
@@ -98,84 +153,145 @@ class Event extends Model implements \Acaronlex\LaravelCalendar\Event, Auditable
         return $this->name;
     }
 
+    /**
+     * Can MOTs be done at the event
+     *
+     * @return bool
+     */
     public function canMOT()
     {
         return $this->mot;
     }
 
+    /**
+     * Are WIP droids welcome at the event
+     *
+     * @return bool
+     */
     public function canWIP()
     {
         return $this->wip_allowed;
     }
 
+    /**
+     * Is the event open to the public
+     *
+     * @return bool
+     */
     public function isPublic()
     {
         return $this->public;
     }
+
     /**
      * Get the event's id number
      *
      * @return int
      */
-    public function getId() {
-		    return $this->id;
-	  }
+    public function getId()
+    {
+        return $this->id;
+    }
 
-    public function hasImage() {
-        $filePath = 'events/'.$this->id.'/event_image.jpg';
+    /**
+     * Is there an image stored for this event
+     *
+     * @return bool
+     */
+    public function hasImage()
+    {
+        $filePath = 'events/' . $this->id . '/event_image.jpg';
         return Storage::exists($filePath);
     }
 
-    public function createdEventNotification($newevent)
-     {
+    /**
+     * Notify discord an event has been created
+     *
+     * @param App\Event $event Event to pass
+     *
+     * @return null
+     */
+    public function createdEventNotification($event)
+    {
         $webHook = config('discord.eventhook');
-        if($webHook != 'none') {
-            return Http::post( $webHook, [
-                'content' => "A new event has been created in the Droid Builders Portal. Click below to view the event.",
+        if ($webHook != 'none') {
+            return Http::post(
+                $webHook, [
+                'content' =>
+                    "A new event has been created in the Droid Builders Portal. "
+                    . "Click below to view the event.",
                 'embeds' => [
                     [
-                        'title' => $newevent->name,
-                        'description' => $newevent->location->name . ', ' . $newevent->location->county . ', ' . $newevent->location->postcode,
-                        'url' => route('event.show', $newevent->id),
-                        'color' => '7506394',
-                    ]
-                ],
-            ]);
-        }
-     }
-
-    public function updatedEventNotification($event)
-     {
-        $webHook = config('discord.eventhook');
-        if($webHook != 'none') {
-            return Http::post( $webHook, [
-                'content' => "An event has been updated in the Droid Builders Portal. Click below to view the event.",
-                'embeds' => [
-                    [
-                        'title' => $event->name,
-                        'description' => $event->location->name . ', ' . $event->location->county . ', ' . $event->location->postcode,
+                        'title' => $event->name . ' - ' . $event->date,
+                        'description' => $event->location->name . ', '
+                            . $event->location->county . ', '
+                            . $event->location->postcode,
                         'url' => route('event.show', $event->id),
                         'color' => '7506394',
                     ]
                 ],
-            ]);
+                 ]
+            );
         }
-     }
+    }
 
-    public function deletedEventNotification($event)
-     {
+    /**
+     * Notify discord an event has been updated
+     *
+     * @param App\Event $event Event to pass
+     *
+     * @return null
+     */
+    public function updatedEventNotification($event)
+    {
         $webHook = config('discord.eventhook');
-        if($webHook != 'none') {
-            return Http::post( $webHook, [
-                'content' => "An event has been deleted in the Droid Builders Portal. ",
+        if ($webHook != 'none') {
+            return Http::post(
+                $webHook, [
+                'content' =>
+                    "An event has been updated in the Droid Builders Portal. "
+                    . "Click below to view the event.",
                 'embeds' => [
                     [
-                        'title' => $event->name,
-                        'description' => $event->location->name . ', ' . $event->location->county . ', ' . $event->location->postcode,
+                        'title' => $event->name . ' - ' . $event->date,
+                        'description' => $event->location->name . ', '
+                            . $event->location->county . ', '
+                            . $event->location->postcode,
+                        'url' => route('event.show', $event->id),
                         'color' => '7506394',
                     ]
                 ],
-            ]);
+                 ]
+            );
+        }
+    }
+
+    /**
+     * Notify discord an event has been deleted
+     *
+     * @param App\Event $event Event to pass
+     *
+     * @return null
+     */
+    public function deletedEventNotification($event)
+    {
+        $webHook = config('discord.eventhook');
+        if ($webHook != 'none') {
+            return Http::post(
+                $webHook, [
+                'content' =>
+                    "An event has been deleted in the Droid Builders Portal. ",
+                'embeds' => [
+                    [
+                        'title' => $event->name . ' - ' . $event->date,
+                        'description' => $event->location->name . ', '
+                            . $event->location->county . ', '
+                            . $event->location->postcode,
+                        'color' => '7506394',
+                    ]
+                ],
+                 ]
+            );
         }
     }
 }

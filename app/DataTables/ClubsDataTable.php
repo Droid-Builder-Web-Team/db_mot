@@ -14,36 +14,43 @@ class ClubsDataTable extends DataTable
     /**
      * Build DataTable class.
      *
-     * @param mixed $query Results from query() method.
+     * @param  mixed $query Results from query() method.
      * @return \Yajra\DataTables\DataTableAbstract
      */
     public function dataTable($query)
     {
-      return datatables()
-          ->eloquent($query)
-          ->addColumn('links', function(Club $club) {
-              $output = "";
-              if(isset($club->facebook))
-                  $output .="<a class=\"btn-sm btn-link\" style='color:white;' href=\"".$club->facebook."\">Facebook</a>";
-              if(isset($club->website))
-                  $output .="<a class=\"btn-sm btn-link\" style='color:white;' href=\"".$club->website."\">Website</a>";
-              if(isset($club->forum))
-                  $output .="<a class=\"btn-sm btn-link\" style='color:white;' href=\"".$club->forum."\">Forum</a>";
-              return $output;
-            })
+        return datatables()
+            ->eloquent($query)
+            ->addColumn(
+                'links', function (Club $club) {
+                    $output = "";
+                    if(isset($club->facebook)) {
+                        $output .="<a class=\"btn-sm btn-link\" style='color:white;' href=\"".$club->facebook."\">Facebook</a>";
+                    }
+                    if(isset($club->website)) {
+                        $output .="<a class=\"btn-sm btn-link\" style='color:white;' href=\"".$club->website."\">Website</a>";
+                    }
+                    if(isset($club->forum)) {
+                        $output .="<a class=\"btn-sm btn-link\" style='color:white;' href=\"".$club->forum."\">Forum</a>";
+                    }
+                    return $output;
+                }
+            )
           ->addColumn('action', '')
-          ->editColumn('action', function($row) {
-            $crudRoutePart = "club";
-            $parts = array( 'edit', 'delete');
-            return view('partials.datatablesActions', compact('row', 'crudRoutePart', 'parts'));
-          })
+        ->editColumn(
+            'action', function ($row) {
+                $crudRoutePart = "club";
+                $parts = array( 'edit', 'delete');
+                return view('partials.datatablesActions', compact('row', 'crudRoutePart', 'parts'));
+            }
+        )
           ->rawColumns(['action', 'links']);
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Club $model
+     * @param  \App\Club $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function query(Club $model)
@@ -59,17 +66,17 @@ class ClubsDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->setTableId('clubs-table')
-                    ->columns($this->getColumns())
-                    ->minifiedAjax()
-                    ->dom('Bfrtip')
-                    ->orderBy(0, 'asc')
-                    ->buttons(
-                        Button::make('create'),
-                        Button::make('export'),
-                        Button::make('print'),
-                        Button::make('reload')
-                    );
+            ->setTableId('clubs-table')
+            ->columns($this->getColumns())
+            ->minifiedAjax()
+            ->dom('Bfrtip')
+            ->orderBy(0, 'asc')
+            ->buttons(
+                Button::make('create'),
+                Button::make('export'),
+                Button::make('print'),
+                Button::make('reload')
+            );
     }
 
     /**
@@ -79,16 +86,16 @@ class ClubsDataTable extends DataTable
      */
     protected function getColumns()
     {
-      return [
+        return [
           Column::make('id'),
           Column::make('name'),
           Column::computed('links'),
           Column::computed('action')
-                ->exportable(false)
-                ->printable(false)
-                ->width(85)
-                ->addClass('text-center'),
-      ];
+              ->exportable(false)
+              ->printable(false)
+              ->width(85)
+              ->addClass('text-center'),
+        ];
     }
 
     /**

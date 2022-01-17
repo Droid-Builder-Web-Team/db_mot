@@ -39,19 +39,20 @@ class LocationController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $request->validate(
+            [
             'name' => 'required',
             'postcode' => 'required'
-        ]);
+            ]
+        );
 
-        if ($request['postcode'] != "")
-        {
-            $address = str_replace(' ','+',$request['postcode']).'+'.str_replace(' ','+',$request['country']);
+        if ($request['postcode'] != "") {
+            $address = str_replace(' ', '+', $request['postcode']).'+'.str_replace(' ', '+', $request['country']);
             $url = "https://maps.google.com/maps/api/geocode/json?key=".config('gmap.google_api_key')."&address=".$address."&sensor=false";
             $geocode=file_get_contents($url);
             $output= json_decode($geocode);
@@ -63,10 +64,10 @@ class LocationController extends Controller
         }
 
         try {
-          $location = Location::create($request->all());
-          toastr()->success('Location created successfully');
+            $location = Location::create($request->all());
+            toastr()->success('Location created successfully');
         } catch (\Illuminate\Database\QueryException $exception) {
-          toastr()->error('Failed to create Location');
+            toastr()->error('Failed to create Location');
         }
 
         return redirect()->route('admin.locations.index');
@@ -76,66 +77,69 @@ class LocationController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Location  $location
+     * @param  \App\Location $location
      * @return \Illuminate\Http\Response
      */
     public function edit(Location $location)
     {
         $venueContacts = VenueContact::where('locations_id', $location->id)->get();
-        return view('admin.locations.edit')->with([
+        return view('admin.locations.edit')->with(
+            [
             'location' => $location,
             'venueContacts' => $venueContacts
-        ]);
+            ]
+        );
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Location  $location
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\Location            $location
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Location $location)
     {
-      $request->validate([
-          'name' => 'required',
-          'postcode' => 'required',
-      ]);
+        $request->validate(
+            [
+            'name' => 'required',
+            'postcode' => 'required',
+            ]
+        );
 
-      if ($request['postcode'] != "")
-      {
-          $address = str_replace(' ','+',$request['postcode']).'+'.str_replace(' ','+',$request['country']);
-          $url = "https://maps.google.com/maps/api/geocode/json?key=".config('gmap.google_api_key')."&address=".$address."&sensor=false";
-          $geocode=file_get_contents($url);
-          $output= json_decode($geocode);
-          $request['latitude'] = strval($output->results[0]->geometry->location->lat);
-          $request['longitude'] = strval($output->results[0]->geometry->location->lng);
-      } else {
-          $request['latitude'] = "";
-          $request['longitude'] = "";
-      }
+        if ($request['postcode'] != "") {
+            $address = str_replace(' ', '+', $request['postcode']).'+'.str_replace(' ', '+', $request['country']);
+            $url = "https://maps.google.com/maps/api/geocode/json?key=".config('gmap.google_api_key')."&address=".$address."&sensor=false";
+            $geocode=file_get_contents($url);
+            $output= json_decode($geocode);
+            $request['latitude'] = strval($output->results[0]->geometry->location->lat);
+            $request['longitude'] = strval($output->results[0]->geometry->location->lng);
+        } else {
+            $request['latitude'] = "";
+            $request['longitude'] = "";
+        }
 
-      try {
-          $location->update($request->all());
-          toastr()->success('Location updated successfully');
-      } catch (\Illuminate\Database\QueryException $exception) {
-          toastr()->error('Failed to update Location');
-      }
+        try {
+            $location->update($request->all());
+            toastr()->success('Location updated successfully');
+        } catch (\Illuminate\Database\QueryException $exception) {
+            toastr()->error('Failed to update Location');
+        }
 
-      return redirect()->route('admin.locations.index');
+        return redirect()->route('admin.locations.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Location  $location
+     * @param  \App\Location $location
      * @return \Illuminate\Http\Response
      */
     public function destroy(Location $location)
     {
-      $location->delete();
+        $location->delete();
 
-      return redirect()->route('admin.locations.index')
-                      ->with('success','Location deleted successfully');
+        return redirect()->route('admin.locations.index')
+            ->with('success', 'Location deleted successfully');
     }
 }

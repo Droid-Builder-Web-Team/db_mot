@@ -14,26 +14,28 @@ class AchievementsDataTable extends DataTable
     /**
      * Build DataTable class.
      *
-     * @param mixed $query Results from query() method.
+     * @param  mixed $query Results from query() method.
      * @return \Yajra\DataTables\DataTableAbstract
      */
     public function dataTable($query)
     {
-      return datatables()
-          ->eloquent($query)
-          ->addColumn('action', '')
-          ->editColumn('action', function($row) {
-            $crudRoutePart = "achievement";
-            $parts = array( 'edit', 'delete');
-            return view('partials.datatablesActions', compact('row', 'crudRoutePart', 'parts'));
-          })
+        return datatables()
+            ->eloquent($query)
+            ->addColumn('action', '')
+            ->editColumn(
+                'action', function ($row) {
+                    $crudRoutePart = "achievement";
+                    $parts = array( 'edit', 'delete');
+                    return view('partials.datatablesActions', compact('row', 'crudRoutePart', 'parts'));
+                }
+            )
           ->rawColumns(['action']);
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Achievement $model
+     * @param  \App\Achievement $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function query(Achievement $model)
@@ -49,18 +51,18 @@ class AchievementsDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->setTableId('achievements-table')
-                    ->columns($this->getColumns())
-                    ->minifiedAjax()
-                    ->dom('Bfrtipl')
-                    ->orderBy(0, 'asc')
-                    ->lengthMenu([15,25,50])
-                    ->buttons(
-                        Button::make('create'),
-                        Button::make('export'),
-                        Button::make('print'),
-                        Button::make('reload')
-                    );
+            ->setTableId('achievements-table')
+            ->columns($this->getColumns())
+            ->minifiedAjax()
+            ->dom('Bfrtipl')
+            ->orderBy(0, 'asc')
+            ->lengthMenu([15,25,50])
+            ->buttons(
+                Button::make('create'),
+                Button::make('export'),
+                Button::make('print'),
+                Button::make('reload')
+            );
     }
 
     /**
@@ -70,15 +72,15 @@ class AchievementsDataTable extends DataTable
      */
     protected function getColumns()
     {
-      return [
+        return [
           Column::make('name'),
           Column::make('description'),
           Column::computed('action')
-                ->exportable(false)
-                ->printable(false)
-                ->width(85)
-                ->addClass('text-center'),
-      ];
+              ->exportable(false)
+              ->printable(false)
+              ->width(85)
+              ->addClass('text-center'),
+        ];
     }
 
     /**

@@ -12,8 +12,8 @@ class ImageController extends Controller
 
     public function __construct()
     {
-      $this->middleware('auth');
-      $this->middleware('verified');
+        $this->middleware('auth');
+        $this->middleware('verified');
     }
 
     public function index(Request $request)
@@ -27,21 +27,23 @@ class ImageController extends Controller
         $user = User::find($request->user);
         $folderPath = $request->photo_name;
         switch($request->photo_name) {
-            case 'mug_shot':
-                $folderPath = 'members/'.$request->user.'/';
-                if ($user != auth()->user() && !auth()->user()->can('Edit Members'))
-                    abort(403);
-                break;
-            case 'photo_front':
-            case 'photo_side':
-            case 'photo_rear':
-                $folderPath = 'droids/'.$request->droid.'/';
-                if (!$droid->users->contains(auth()->user()) && !auth()->user()->can('Edit Droids'))
-                    abort(403);
-                break;
-            case 'default':
-                $folderPath = '/';
-                break;
+        case 'mug_shot':
+            $folderPath = 'members/'.$request->user.'/';
+            if ($user != auth()->user() && !auth()->user()->can('Edit Members')) {
+                abort(403);
+            }
+            break;
+        case 'photo_front':
+        case 'photo_side':
+        case 'photo_rear':
+            $folderPath = 'droids/'.$request->droid.'/';
+            if (!$droid->users->contains(auth()->user()) && !auth()->user()->can('Edit Droids')) {
+                abort(403);
+            }
+            break;
+        case 'default':
+            $folderPath = '/';
+            break;
         }
 
         $image_parts = explode(";base64,", $request->image);
@@ -52,24 +54,30 @@ class ImageController extends Controller
 
         Storage::put($file, $image_base64);
 
-        $img = \Image::make(Storage::get($file))->resize(480, null, function($constraint) {
-            $constraint->aspectRatio();
-        });
+        $img = \Image::make(Storage::get($file))->resize(
+            480, null, function ($constraint) {
+                $constraint->aspectRatio();
+            }
+        );
         $file = $folderPath . '480-' . $request->photo_name . '.png';
         Storage::put($file, $img->encode());
 
-        $img = \Image::make(Storage::get($file))->resize(240, null, function($constraint) {
-            $constraint->aspectRatio();
-        });
+        $img = \Image::make(Storage::get($file))->resize(
+            240, null, function ($constraint) {
+                $constraint->aspectRatio();
+            }
+        );
         $file = $folderPath . '240-' . $request->photo_name . '.png';
         Storage::put($file, $img->encode());
 
         toastr()->success('Image uploaded successfully');
 
-        return response()->json(['success'=>'success',
+        return response()->json(
+            ['success'=>'success',
                         'sentsize'=>$request->image_size,
                         'receivedsize'=>strlen($image_base64),
-                      ]);
+            ]
+        );
     }
 
     public function destroy(Request $request)
@@ -77,22 +85,24 @@ class ImageController extends Controller
 
         $folderPath = $request->photo_name;
         switch($request->photo_name) {
-          case 'mug_shot':
-                $folderPath = 'members/'.$request->user.'/';
-                if ($user != auth()->user() && !auth()->user()->can('Edit Members'))
-                    abort(403);
-                break;
-          case 'photo_front':
-          case 'photo_side':
-          case 'photo_rear':
-                $folderPath = 'droids/'.$request->droid.'/';
-                $droid = Droid::find($request->droid);
-                if (!$droid->users->contains(auth()->user()) && !auth()->user()->can('Edit Droids'))
-                    abort(403);
-                break;
-          case 'default':
-                $folderPath = '/';
-                break;
+        case 'mug_shot':
+              $folderPath = 'members/'.$request->user.'/';
+            if ($user != auth()->user() && !auth()->user()->can('Edit Members')) {
+                abort(403);
+            }
+            break;
+        case 'photo_front':
+        case 'photo_side':
+        case 'photo_rear':
+              $folderPath = 'droids/'.$request->droid.'/';
+              $droid = Droid::find($request->droid);
+            if (!$droid->users->contains(auth()->user()) && !auth()->user()->can('Edit Droids')) {
+                abort(403);
+            }
+            break;
+        case 'default':
+              $folderPath = '/';
+            break;
         }
 
         $image_array = array(
@@ -108,7 +118,8 @@ class ImageController extends Controller
         return redirect()->route('droid.show', $request->droid);
     }
 
-    public function update() {
+    public function update()
+    {
         $droids = Droid::all();
         $pic_types = [
             'photo_front',
@@ -121,30 +132,32 @@ class ImageController extends Controller
         foreach($droids as $droid)
         {
               echo "Updating images for: ".$droid->name. " ID: ".$droid->id."<br>";
-              foreach($pic_types as $type)
+            foreach($pic_types as $type)
               {
-                  echo "Checking for: ".$type." ";
-                  $path = 'droids/'.$droid->id.'/'.$type.'.png';
-                  if (!Storage::exists($path))
-                  {
-                      $path = 'droids/'.$droid->id.'/'.$type.'.jpg';
-                  }
-                  if (Storage::exists($path))
-                  {
-                      $folderPath = 'droids/'.$droid->id.'/';
-                      $img = \Image::make(Storage::get($path))->resize(480, null, function($constraint) {
-                          $constraint->aspectRatio();
-                      });
-                      $file = $folderPath . '480-' . $type . '.png';
-                      Storage::put($file, $img->encode());
+                echo "Checking for: ".$type." ";
+                $path = 'droids/'.$droid->id.'/'.$type.'.png';
+                if (!Storage::exists($path)) {
+                    $path = 'droids/'.$droid->id.'/'.$type.'.jpg';
+                }
+                if (Storage::exists($path)) {
+                    $folderPath = 'droids/'.$droid->id.'/';
+                    $img = \Image::make(Storage::get($path))->resize(
+                        480, null, function ($constraint) {
+                            $constraint->aspectRatio();
+                        }
+                    );
+                    $file = $folderPath . '480-' . $type . '.png';
+                    Storage::put($file, $img->encode());
 
-                      $img = \Image::make(Storage::get($file))->resize(240, null, function($constraint) {
-                          $constraint->aspectRatio();
-                      });
-                      $file = $folderPath . '240-' . $type . '.png';
-                      Storage::put($file, $img->encode());
-                  }
-              }
+                    $img = \Image::make(Storage::get($file))->resize(
+                        240, null, function ($constraint) {
+                            $constraint->aspectRatio();
+                        }
+                    );
+                    $file = $folderPath . '240-' . $type . '.png';
+                    Storage::put($file, $img->encode());
+                }
+            }
               echo "<br>";
         }
     }

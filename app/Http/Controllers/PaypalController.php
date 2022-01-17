@@ -25,16 +25,20 @@ class PaypalController extends Controller
         $post = $request->all();
 
         $fp = fopen('debug.txt', 'a');
-        fwrite($fp, print_r($post, TRUE));
+        fwrite($fp, print_r($post, true));
         $response = (string) $provider->verifyIPN($post);
-        fwrite($fp, print_r($response, TRUE));
+        fwrite($fp, print_r($response, true));
 
         if ($response === 'VERIFIED') {
             $user = User::find($post['custom']);
             $user->update([ 'pli_date' => Carbon::today()->format('Y-m-d')]);
             $user->notify(new PLIPaid($user));
         }
-        $admins = User::has('roles')->whereHas("permissions", function($q){ $q->where("name", "Add MOT"); })->get();
+        $admins = User::has('roles')->whereHas(
+            "permissions", function ($q) {
+                $q->where("name", "Add MOT"); 
+            }
+        )->get();
         foreach($admins as $admin)
         {
             $admin->notify(new PLIPaidAdmin($user));

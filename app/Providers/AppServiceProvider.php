@@ -28,10 +28,12 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
         Paginator::useBootstrap();
-        Models\Audit::creating(function (\OwenIt\Auditing\Models\Audit $model) {
-          if (empty($model->old_values) && empty($model->new_values)) {
-            return false;
-          }
-        });
+        Models\Audit::creating(
+            function (\OwenIt\Auditing\Models\Audit $model) {
+                if (empty($model->old_values) && empty($model->new_values)) {
+                    return false;
+                }
+            }
+        );
     }
 }

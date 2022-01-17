@@ -15,8 +15,8 @@ class LocationController extends Controller
 
     public function __construct()
     {
-      $this->middleware('auth');
-      $this->middleware('verified');
+        $this->middleware('auth');
+        $this->middleware('verified');
     }
     /**
      * Display a listing of the resource.
@@ -31,7 +31,7 @@ class LocationController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Location  $location
+     * @param  \App\Location $location
      * @return \Illuminate\Http\Response
      */
     public function show(Location $location)
@@ -60,9 +60,8 @@ class LocationController extends Controller
 
         $userRating = $request->input('locationRating');
 
-        if ($user->hasRated($location))
-        {
-            $user->updateRatingFor($location,$userRating);
+        if ($user->hasRated($location)) {
+            $user->updateRatingFor($location, $userRating);
         } else {
             $user->rate($location, $userRating);
         }

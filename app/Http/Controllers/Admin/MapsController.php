@@ -12,8 +12,8 @@ class MapsController extends Controller
     {
         $key = config('gmap.google_api_key');
         $users = User::where('latitude', '!=', '')
-                    ->where('active', 'on')
-                    ->get(['forename', 'surname', 'latitude', 'longitude', 'id', 'pli_date']);
+            ->where('active', 'on')
+            ->get(['forename', 'surname', 'latitude', 'longitude', 'id', 'pli_date']);
 
         $userlist = [];
         $index = 0;

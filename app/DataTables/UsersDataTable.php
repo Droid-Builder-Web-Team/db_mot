@@ -44,10 +44,11 @@ class UsersDataTable extends DataTable
             ->eloquent($query)
             ->addColumn(
                 'pli', function (User $user) {
-                    if ($user->pli_date == null)
+                    if ($user->pli_date == null) {
                         $pli = "-";
-                    else
+                    } else {
                         $pli = $user->validPLI() ? "Valid" : "Expired";
+                    }
                     return $pli;
                 }
             )

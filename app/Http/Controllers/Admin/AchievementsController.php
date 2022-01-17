@@ -41,21 +41,23 @@ class AchievementsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $request->validate(
+            [
             'name' => 'required',
             'description' => 'required',
-        ]);
+            ]
+        );
 
         try {
-          Achievement::create($request->all());
-          toastr()->success('Achievement created successfully');
+            Achievement::create($request->all());
+            toastr()->success('Achievement created successfully');
         } catch (\Illuminate\Database\QueryException $exception) {
-          toastr()->error('Failed to create Achievement');
+            toastr()->error('Failed to create Achievement');
         }
 
         return redirect()->route('admin.achievements.index');
@@ -64,7 +66,7 @@ class AchievementsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Achievement  $achievement
+     * @param  \App\Achievement $achievement
      * @return \Illuminate\Http\Response
      */
     public function edit(Achievement $achievement)
@@ -75,28 +77,30 @@ class AchievementsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Achievement  $achievement
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\Achievement         $achievement
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Achievement $achievement)
     {
-        $request->validate([
+        $request->validate(
+            [
             'name' => 'required',
             'description' => 'required',
-        ]);
+            ]
+        );
 
         $achievement->update($request->all());
 
         return redirect()->route('admin.achievements.index')
-                        ->with('success','Achievement updated successfully.');
+            ->with('success', 'Achievement updated successfully.');
 
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Achievement  $achievement
+     * @param  \App\Achievement $achievement
      * @return \Illuminate\Http\Response
      */
     public function destroy(Achievement $achievement)
@@ -104,16 +108,18 @@ class AchievementsController extends Controller
         $achievement->delete();
 
         return redirect()->route('admin.achievements.index')
-                        ->with('success','Achievement deleted successfully');
+            ->with('success', 'Achievement deleted successfully');
     }
 
     public function award(Request $request)
     {
         $user = User::find($request->user_id);
-        $user->achievements()->attach($request->achievement_id, [
+        $user->achievements()->attach(
+            $request->achievement_id, [
                     'added_by' => auth()->user()->id,
                     'notes' => $request->notes
-                  ]);
+            ]
+        );
         return back();
     }
 

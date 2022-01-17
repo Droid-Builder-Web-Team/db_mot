@@ -30,8 +30,7 @@ class MOTController extends Controller
         $droid = Droid::find($droid_id);
 
         // If club doesn't use MOTs, return to droid
-        if (!$droid->club->hasOption('mot'))
-        {
+        if (!$droid->club->hasOption('mot')) {
             return view('droid.show', compact('droid'));
         }
 
@@ -44,61 +43,63 @@ class MOTController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(MOTStoreRequest $request)
     {
-        $mot = DB::transaction(function () use ($request)
-        {
-            // Save main data
-            $mot = MOT::create($request->all());
+        $mot = DB::transaction(
+            function () use ($request) {
+                // Save main data
+                $mot = MOT::create($request->all());
 
-            if ($request->body != "")
-            {
-                $comment = new Comment();
-                $comment->body = $request->body;
-                $comment->user_id = auth()->user()->id;
+                if ($request->body != "") {
+                    $comment = new Comment();
+                    $comment->body = $request->body;
+                    $comment->user_id = auth()->user()->id;
 
-                $mot->comments()->save($comment);
-                toastr()->success('Comment Added');
-            }
+                    $mot->comments()->save($comment);
+                    toastr()->success('Comment Added');
+                }
 
-            $lines = DB::table('mot_lines')
-                ->where('club_id', $request->club_id)
-                ->get();
+                $lines = DB::table('mot_lines')
+                    ->where('club_id', $request->club_id)
+                    ->get();
 
-            foreach ($lines as $line)
-            {
-                DB::table('mot_details')->insert([
-                    'mot_uid' => $mot->id,
-                    'mot_test' => $line->test_name,
-                    'mot_test_result' => $request->{$line->test_name},
-                ]);
-            }
+                foreach ($lines as $line)
+                {
+                    DB::table('mot_details')->insert(
+                        [
+                        'mot_uid' => $mot->id,
+                        'mot_test' => $line->test_name,
+                        'mot_test_result' => $request->{$line->test_name},
+                        ]
+                    );
+                }
 
-            return $mot;
+                return $mot;
 
             
-            /*
-            if ($mot->approved == "Yes") {
-            $url = "https://graph.facebook.com/v8.0/".config('fb.fbgroup')."/feed";
-            $message = "Congratulations to our latest member to have their droid pass its first MOT\r\n";
+                /*
+                if ($mot->approved == "Yes") {
+                $url = "https://graph.facebook.com/v8.0/".config('fb.fbgroup')."/feed";
+                $message = "Congratulations to our latest member to have their droid pass its first MOT\r\n";
 
-            $data['message'] = $message;
-            $data['access_token'] = config('fb.fb_access_token');
-            $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, $url);
-            curl_setopt($ch, CURLOPT_POST, 1);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-            $return = curl_exec($ch);
-            curl_close($ch);
-            dd($return);
+                $data['message'] = $message;
+                $data['access_token'] = config('fb.fb_access_token');
+                $ch = curl_init();
+                curl_setopt($ch, CURLOPT_URL, $url);
+                curl_setopt($ch, CURLOPT_POST, 1);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                $return = curl_exec($ch);
+                curl_close($ch);
+                dd($return);
 
+                }
+                */
             }
-            */
-        });
+        );
 
         // Notify owners
         $droid = Droid::find($request->droid_id);

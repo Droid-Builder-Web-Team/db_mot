@@ -13,8 +13,8 @@ class ClubsController extends Controller
 {
     public function __construct()
     {
-      $this->middleware('auth');
-      $this->middleware('permission:Edit Clubs');
+        $this->middleware('auth');
+        $this->middleware('permission:Edit Clubs');
     }
 
     /**
@@ -24,7 +24,7 @@ class ClubsController extends Controller
      */
     public function index(ClubsDataTable $dataTable)
     {
-      return $dataTable->render('admin.clubs.index');
+        return $dataTable->render('admin.clubs.index');
     }
 
     /**
@@ -40,26 +40,28 @@ class ClubsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $request->validate(
+            [
             'name' => 'required'
-        ]);
+            ]
+        );
 
         $club = Club::create($request->all());
         Storage::makeDirectory('clubs/'.$club->id);
 
         return redirect()->route('admin.clubs.index')
-                        ->with('success','Club created successfully.');
+            ->with('success', 'Club created successfully.');
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Club  $club
+     * @param  \App\Club $club
      * @return \Illuminate\Http\Response
      */
     public function edit(Club $club)
@@ -71,28 +73,30 @@ class ClubsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Club  $club
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\Club                $club
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Club $club)
     {
-        $request->validate([
+        $request->validate(
+            [
             'name' => 'required'
-        ]);
+            ]
+        );
 
         $club->options()->sync($request->options);
 
         $club->update($request->all());
 
         return redirect()->route('admin.clubs.index')
-                        ->with('success','Club updated successfully.');
+            ->with('success', 'Club updated successfully.');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Club  $club
+     * @param  \App\Club $club
      * @return \Illuminate\Http\Response
      */
     public function destroy(Club $club)
@@ -101,7 +105,7 @@ class ClubsController extends Controller
 
         Storage::deleteDirectory('clubs/'.$club->id);
         return redirect()->route('admin.clubs.index')
-                        ->with('success','Club deleted successfully');
+            ->with('success', 'Club deleted successfully');
     }
 
 }

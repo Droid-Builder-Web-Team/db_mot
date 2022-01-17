@@ -36,11 +36,13 @@ class ChangePasswordController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $request->validate(
+            [
             'current_password' => ['required', new MatchOldPassword],
             'new_password' => ['required'],
             'new_confirm_password' => ['same:new_password'],
-        ]);
+            ]
+        );
 
         try {
             User::find(auth()->user()->id)->update(['password'=> Hash::make($request->new_password)]);
@@ -50,6 +52,6 @@ class ChangePasswordController extends Controller
         }
 
 
-        return redirect()->route('user.show', auth()->user()->id );
+        return redirect()->route('user.show', auth()->user()->id);
     }
 }

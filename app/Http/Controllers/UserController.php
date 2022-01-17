@@ -15,8 +15,8 @@ class UserController extends Controller
 
     public function __construct()
     {
-      $this->middleware('auth');
-      $this->middleware('verified');
+        $this->middleware('auth');
+        $this->middleware('verified');
     }
     /**
      * Display a listing of the resource.
@@ -31,13 +31,12 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\User  $user
+     * @param  \App\User $user
      * @return \Illuminate\Http\Response
      */
     public function show(User $user)
     {
-        if ($user->id !== auth()->user()->id && auth()->user()->cannot('View Members'))
-        {
+        if ($user->id !== auth()->user()->id && auth()->user()->cannot('View Members')) {
             abort(403);
         }
         $achievements = Achievement::all();
@@ -47,13 +46,12 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\User  $user
+     * @param  \App\User $user
      * @return \Illuminate\Http\Response
      */
     public function edit(User $user)
     {
-        if ($user->id !== auth()->user()->id && auth()->user()->cannot('Edit Members'))
-        {
+        if ($user->id !== auth()->user()->id && auth()->user()->cannot('Edit Members')) {
             abort(403);
         }
         return view('user.edit')->with('user', $user);
@@ -62,24 +60,24 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\User  $user
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\User                $user
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, User $user)
     {
-        if ($user->id !== auth()->user()->id && auth()->user()->cannot('Edit Members'))
-        {
+        if ($user->id !== auth()->user()->id && auth()->user()->cannot('Edit Members')) {
             abort(403);
         }
-        $request->validate([
+        $request->validate(
+            [
             'forename' => 'required',
             'surname' => 'required',
-        ]);
+            ]
+        );
 
-        if ($request['postcode'] != "")
-        {
-            $address = str_replace(' ','+',$request['postcode']).'+'.str_replace(' ','+',$request['country']);
+        if ($request['postcode'] != "") {
+            $address = str_replace(' ', '+', $request['postcode']).'+'.str_replace(' ', '+', $request['country']);
             $url = "https://maps.google.com/maps/api/geocode/json?key=".config('gmap.google_api_key')."&address=".$address."&sensor=false";
             $geocode=file_get_contents($url);
             $output= json_decode($geocode);
@@ -91,10 +89,10 @@ class UserController extends Controller
         }
 
         try {
-          $user->update($request->all());
-          toastr()->success('User updated successfully');
+            $user->update($request->all());
+            toastr()->success('User updated successfully');
         } catch (\Illuminate\Database\QueryException $exception) {
-          toastr()->error('Failed to update User');
+            toastr()->error('Failed to update User');
         }
 
         return redirect()->route('user.show', auth()->user()->id);
@@ -103,13 +101,12 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\User  $user
+     * @param  \App\User $user
      * @return \Illuminate\Http\Response
      */
     public function destroy(User $user)
     {
-        if ($user->id !== auth()->user()->id && auth()->user()->cannot('Edit Members'))
-        {
+        if ($user->id !== auth()->user()->id && auth()->user()->cannot('Edit Members')) {
             abort(403);
         }
     }
@@ -126,8 +123,9 @@ class UserController extends Controller
 
     public function displayMugShot($uid, $size = '')
     {
-        if ($size != "")
-          $size = $size.'-';
+        if ($size != "") {
+            $size = $size.'-';
+        }
         $path = 'members/'.$uid.'/'.$size.'mug_shot.png';
         if (!Storage::exists($path)) {
             $path = 'members/'.$uid.'/'.$size.'mug_shot.jpg';
@@ -167,7 +165,7 @@ class UserController extends Controller
         //$pdf->defaultFont = 'Arial';
 
         return $pdf->download('cover_note.pdf');
-      }
+    }
 
     public function edit_settings(User $user)
     {
@@ -180,7 +178,7 @@ class UserController extends Controller
 
         foreach($request->input('notifications') as $notification => $value)
         {
-          $user->settings()->update('notifications.'.$notification, $value);
+            $user->settings()->update('notifications.'.$notification, $value);
         }
         $user->settings()->update('max_event_distance', $request->input('max_event_distance'));
         $user->settings()->update('date_format', $request->input('date_format'));

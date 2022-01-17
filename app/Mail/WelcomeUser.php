@@ -32,6 +32,6 @@ class WelcomeUser extends Mailable
     public function build()
     {
         return $this->view('emails.welcome')
-                    ->text('emails.welcome_text');
+            ->text('emails.welcome_text');
     }
 }

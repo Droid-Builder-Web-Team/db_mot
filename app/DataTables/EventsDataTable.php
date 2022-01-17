@@ -14,35 +14,39 @@ class EventsDataTable extends DataTable
     /**
      * Build DataTable class.
      *
-     * @param mixed $query Results from query() method.
+     * @param  mixed $query Results from query() method.
      * @return \Yajra\DataTables\DataTableAbstract
      */
     public function dataTable($query)
     {
-      return datatables()
-          ->eloquent($query)
-          ->addColumn('location', function(Event $event) {
-              $location_name = $event->location->name;
-              return $location_name;
-            })
+        return datatables()
+            ->eloquent($query)
+            ->addColumn(
+                'location', function (Event $event) {
+                    $location_name = $event->location->name;
+                    return $location_name;
+                }
+            )
           ->addColumn('action', '')
-          ->editColumn('action', function($row) {
-            $crudRoutePart = "event";
-            $parts = array('view', 'edit', 'delete');
-            return view('partials.datatablesActions', compact('row', 'crudRoutePart', 'parts'));
-          })
+        ->editColumn(
+            'action', function ($row) {
+                $crudRoutePart = "event";
+                $parts = array('view', 'edit', 'delete');
+                return view('partials.datatablesActions', compact('row', 'crudRoutePart', 'parts'));
+            }
+        )
           ->rawColumns(['action']);
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Event $model
+     * @param  \App\Event $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function query(Event $model)
     {
-      return $model->newQuery();
+        return $model->newQuery();
     }
 
     /**
@@ -52,19 +56,19 @@ class EventsDataTable extends DataTable
      */
     public function html()
     {
-      return $this->builder()
-                  ->setTableId('events-table')
-                  ->columns($this->getColumns())
-                  ->minifiedAjax()
-                  ->dom('Bfrtip')
-                  ->lengthMenu([15,25,50])
-                  ->orderBy(0)
-                  ->buttons(
-                      Button::make('create'),
-                      Button::make('export'),
-                      Button::make('print'),
-                      Button::make('reload')
-                  );
+        return $this->builder()
+            ->setTableId('events-table')
+            ->columns($this->getColumns())
+            ->minifiedAjax()
+            ->dom('Bfrtip')
+            ->lengthMenu([15,25,50])
+            ->orderBy(0)
+            ->buttons(
+                Button::make('create'),
+                Button::make('export'),
+                Button::make('print'),
+                Button::make('reload')
+            );
     }
 
     /**
@@ -74,16 +78,16 @@ class EventsDataTable extends DataTable
      */
     protected function getColumns()
     {
-      return [
+        return [
           Column::make('date'),
           Column::make('name'),
           Column::computed('location'),
           Column::computed('action')
-                ->exportable(false)
-                ->printable(false)
-                ->width(85)
-                ->addClass('text-center'),
-      ];
+              ->exportable(false)
+              ->printable(false)
+              ->width(85)
+              ->addClass('text-center'),
+        ];
     }
 
     /**

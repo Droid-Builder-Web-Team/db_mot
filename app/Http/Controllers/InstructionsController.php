@@ -30,7 +30,7 @@ class InstructionsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -41,7 +41,7 @@ class InstructionsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Instructions  $instructions
+     * @param  \App\Instructions $instructions
      * @return \Illuminate\Http\Response
      */
     public function show(Instructions $instructions)
@@ -52,7 +52,7 @@ class InstructionsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Instructions  $instructions
+     * @param  \App\Instructions $instructions
      * @return \Illuminate\Http\Response
      */
     public function edit(Instructions $instructions)
@@ -63,8 +63,8 @@ class InstructionsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Instructions  $instructions
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\Instructions        $instructions
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Instructions $instructions)
@@ -75,7 +75,7 @@ class InstructionsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Instructions  $instructions
+     * @param  \App\Instructions $instructions
      * @return \Illuminate\Http\Response
      */
     public function destroy(Instructions $instructions)

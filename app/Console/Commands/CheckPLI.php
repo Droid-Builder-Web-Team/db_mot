@@ -47,13 +47,11 @@ class CheckPLI extends Command
         foreach($users as $user)
         {
             $this->info('PLI: Checking droid: '.$user->forename.' PLI Date: '.$user->pli_date);
-            if ($user->pli_date == $expired->format('Y-m-d'))
-            {
+            if ($user->pli_date == $expired->format('Y-m-d')) {
                 $this->info('PLI: User PLI expires today: '.$user->forename);
                 $user->notify(new PLIExpired($user));
             }
-            if ($user->pli_date == $expiring->format('Y-m-d'))
-            {
+            if ($user->pli_date == $expiring->format('Y-m-d')) {
                 $this->info('PLI: User PLI expires in a month: '.$user->forename);
                 $user->notify(new PLIDue($user));
             }

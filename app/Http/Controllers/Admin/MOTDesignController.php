@@ -10,7 +10,8 @@ use Illuminate\Support\Facades\DB;
 
 class MOTDesignController extends Controller
 {
-    public function edit($id) {
+    public function edit($id)
+    {
         // retreive all records from db
         $sections = DB::table('mot_sections')->where('club_id', $id)->get();
 
@@ -29,6 +30,6 @@ class MOTDesignController extends Controller
 
     public function update(Request $request)
     {
-       dd($request);
+        dd($request);
     }
 }

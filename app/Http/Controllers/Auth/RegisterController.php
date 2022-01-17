@@ -46,23 +46,25 @@ class RegisterController extends Controller
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
+        return Validator::make(
+            $data, [
             'forename' => ['required', 'string', 'max:60'],
             'surname' => ['required', 'string', 'max:60'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:members'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+            ]
+        );
     }
 
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return \App\User
      */
     protected function create(array $data)
@@ -87,25 +89,31 @@ class RegisterController extends Controller
         $resultJson = json_decode($result);
         if ($resultJson->success != true) {
                 return back()->withErrors(['captcha' => 'ReCaptcha Error']);
-                }
+        }
         if ($resultJson->score > 0.3) {
                 //Validation was successful, add your form submission logic here
                 $id = User::generateID(60);
                 $qr = User::generateQR($id, 90);
-                $user = User::create([
+                $user = User::create(
+                    [
                     'forename' => $data['forename'],
                     'surname' => $data['surname'],
                     'email' => $data['email'],
                     'password' => Hash::make($data['password']),
                     'badge_id' => $id,
                     'active' => 'on'
-                ]);
+                    ]
+                );
                 $qr = User::generateQR($id, $user->id);
-                $admins = User::whereHas("roles", function($q){ $q->where("name", "Super Admin"); })->get();
-                foreach($admins as $admin)
+                $admins = User::whereHas(
+                    "roles", function ($q) {
+                        $q->where("name", "Super Admin"); 
+                    }
+                )->get();
+            foreach($admins as $admin)
                 {
-                    $admin->notify(new NewUser($user));
-                }
+                $admin->notify(new NewUser($user));
+            }
                 Mail::to($user)->send(new \App\Mail\WelcomeUser($user));
                 return $user;
 

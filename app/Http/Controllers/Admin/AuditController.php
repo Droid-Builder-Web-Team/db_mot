@@ -8,10 +8,10 @@ use Illuminate\Support\Facades\DB;
 
 class AuditController extends Controller
 {
-  public function index()
-  {
-      $audits = \OwenIt\Auditing\Models\Audit::with('user')
-          ->orderBy('created_at', 'desc')->paginate(25);
-      return view('admin.audits', ['audits' => $audits]);
-  }
+    public function index()
+    {
+        $audits = \OwenIt\Auditing\Models\Audit::with('user')
+            ->orderBy('created_at', 'desc')->paginate(25);
+        return view('admin.audits', ['audits' => $audits]);
+    }
 }

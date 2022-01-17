@@ -29,17 +29,17 @@ class CommentBroadcast extends Notification
     {
         $model = app($comment->commentable_type)::find($comment->commentable_id);
         switch ($comment->commentable_type) {
-          case "App\Event":
+        case "App\Event":
             $type_text = "An Event";
             $model_title = $model->name;
             $this->link = route('event.show', $comment->commentable_id);
             break;
-          case "App\PartsRunData":
+        case "App\PartsRunData":
             $type_text = "A Parts Run";
             $model_title = $model->partsRunAd->title;
             $this->link = route('parts-run.show', $comment->commentable_id);
             break;
-          default:
+        default:
             $type_text = "An error";
             $model_title = "Null model";
             break;
@@ -53,7 +53,7 @@ class CommentBroadcast extends Notification
     /**
      * Get the notification's delivery channels.
      *
-     * @param  mixed  $notifiable
+     * @param  mixed $notifiable
      * @return array
      */
     public function via($notifiable)
@@ -64,21 +64,21 @@ class CommentBroadcast extends Notification
     /**
      * Get the mail representation of the notification.
      *
-     * @param  mixed  $notifiable
+     * @param  mixed $notifiable
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line($this->title)
-                    ->action('View on Portal', $this->link)
-                    ->line($this->text);
+            ->line($this->title)
+            ->action('View on Portal', $this->link)
+            ->line($this->text);
     }
 
     /**
      * Get the array representation of the notification.
      *
-     * @param  mixed  $notifiable
+     * @param  mixed $notifiable
      * @return array
      */
     public function toArray($notifiable)

@@ -40,7 +40,7 @@ class MOTInfoController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -51,7 +51,7 @@ class MOTInfoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -72,8 +72,7 @@ class MOTInfoController extends Controller
         $club = Club::find($id);
         foreach (User::role('MOT Officer')->get() as $officer)
         {
-            if ($officer->isAdminOf($club))
-            {
+            if ($officer->isAdminOf($club)) {
                 $mot_officers[] = $officer;
             }
 

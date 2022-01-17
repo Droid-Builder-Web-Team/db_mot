@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <title>phpDox - App\User</title>
+    <link rel="stylesheet" type="text/css" href="../css/style.css" media="screen"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+  </head>
+  <body>
+    <nav class="topnav">
+      <ul>
+        <li>
+          <div class="logo"><span>/**</span>phpDox</div>
+        </li>
+        <li class="separator">
+          <a href="../index.xhtml">Overview</a>
+        </li>
+        <li class="separator">
+          <a href="../namespaces.xhtml">Namespaces</a>
+        </li>
+        <li>
+          <a href="../classes.xhtml">Classes</a>
+        </li>
+        <li class="separator">
+          <a href="../source/index.xhtml">Source</a>
+        </li>
+      </ul>
+    </nav>
+    <div id="mainstage">
+      <div class="box">
+        <ul class="breadcrumb">
+          <li>
+            <a href="../index.xhtml">Overview</a>
+          </li>
+          <li class="separator">
+            <a href="../classes.xhtml">Classes</a>
+          </li>
+          <li class="separator">
+            <a href="../classes.xhtml#App">App</a>
+          </li>
+          <li class="separator">User</li>
+        </ul>
+      </div>
+      <nav class="box">
+        <ul>
+          <li>
+            <a href="#introduction">Introduction</a>
+          </li>
+          <li>
+            <a href="#synopsis">Synopsis</a>
+          </li>
+          <li>
+            <a href="#hierarchy">Hierarchy</a>
+          </li>
+          <li>
+            <a href="#constants">Constants</a>
+          </li>
+          <li>
+            <a href="#members">Members</a>
+          </li>
+          <li>
+            <a href="#methods">Methods</a>
+          </li>
+          <li>
+            <a href="../source/User.php.xhtml#line46">Source</a>
+          </li>
+        </ul>
+      </nav>
+      <section>
+        <h1 id="introduction"><small>App\</small>User</h1>
+        <h4>Achievements</h4>
+        <p/>
+        <ul>
+          <li>Author: Darren Poulson &lt;darren.poulson@gmail.com&gt;</li>
+          <li>License: https://opensource.org/licenses/MIT MIT License</li>
+        </ul>
+        <h2 id="synopsis">Synopsis</h2>
+        <div class="synopsis">class User
+                extends User
+                implements
+                MustVerifyEmail,Rater,Auditable,ReactsInterface
+            {<br/><ul class="none"><li>// constants</li><li>const CREATED_AT = 'created_on';</li><li>const UPDATED_AT = 'last_updated';</li></ul><ul class="none"><li>// members</li><li>protected string <a href="#members">$table</a> =
+                        'members';
+                    </li><li>protected array <a href="#members">$guarded</a> =
+                        ;
+                    </li><li>protected array <a href="#members">$hidden</a> =
+                        ;
+                    </li><li>protected array <a href="#members">$casts</a> =
+                        ;
+                    </li><li>protected array <a href="#members">$gdprHidden</a> =
+                        ;
+                    </li><li>protected array <a href="#members">$gdprWith</a> =
+                        ;
+                    </li><li>protected array <a href="#members">$auditExclude</a> =
+                        ;
+                    </li></ul><ul class="none"><li>// methods</li><li>public array <a title="App\User" href="../classes/App_User/droids.xhtml">droids</a>()
+                    </li><li>public array <a title="App\User" href="../classes/App_User/achievements.xhtml">achievements</a>()
+                    </li><li>public void <a title="App\User" href="../classes/App_User/hasAchievement.xhtml">hasAchievement</a>()
+                    </li><li>public int <a title="App\User" href="../classes/App_User/charity.xhtml">charity</a>()
+                    </li><li>public array <a title="App\User" href="../classes/App_User/events.xhtml">events</a>()
+                    </li><li>public array <a title="App\User" href="../classes/App_User/attended_events.xhtml">attended_events</a>()
+                    </li><li>public string <a title="App\User" href="../classes/App_User/event.xhtml">event</a>()
+                    </li><li>public bool <a title="App\User" href="../classes/App_User/hasDroid.xhtml">hasDroid</a>()
+                    </li><li>public bool <a title="App\User" href="../classes/App_User/validPLI.xhtml">validPLI</a>()
+                    </li><li>public bool <a title="App\User" href="../classes/App_User/expiringPLI.xhtml">expiringPLI</a>()
+                    </li><li>public Carbon <a title="App\User" href="../classes/App_User/pli_expires.xhtml">pli_expires</a>()
+                    </li><li>public Carbon <a title="App\User" href="../classes/App_User/yearsService.xhtml">yearsService</a>()
+                    </li><li>public static string <a title="App\User" href="../classes/App_User/generateQR.xhtml">generateQR</a>()
+                    </li><li>public static string <a title="App\User" href="../classes/App_User/generateID.xhtml">generateID</a>()
+                    </li><li>public array <a title="App\User" href="../classes/App_User/course_runs.xhtml">course_runs</a>()
+                    </li><li>public array <a title="App\User" href="../classes/App_User/clubs.xhtml">clubs</a>()
+                    </li><li>public bool <a title="App\User" href="../classes/App_User/isAdminOf.xhtml">isAdminOf</a>()
+                    </li><li>public array <a title="App\User" href="../classes/App_User/partsRun.xhtml">partsRun</a>()
+                    </li><li>public array <a title="App\User" href="../classes/App_User/parts_interested.xhtml">parts_interested</a>()
+                    </li></ul>
+
+            }<br/></div>
+        <h2 id="hierarchy">Hierarchy</h2>
+        <div class="styled">
+          <h4>Extends</h4>
+          <ul>
+            <li>Illuminate\Foundation\Auth\User</li>
+          </ul>
+          <h4>Uses</h4>
+          <ul>
+            <li>Illuminate\Notifications\Notifiable</li>
+            <li>Spatie\Permission\Traits\HasRoles</li>
+            <li>Dialect\Gdpr\Portable</li>
+            <li>Glorand\Model\Settings\Traits\HasSettingsField</li>
+            <li>Rennokki\Rating\Traits\CanRate</li>
+            <li>Qirolab\Laravel\Reactions\Traits\Reacts</li>
+            <li>OwenIt\Auditing\Auditable</li>
+          </ul>
+          <h4>Implements</h4>
+          <ul>
+            <li>Illuminate\Contracts\Auth\MustVerifyEmail</li>
+            <li>Rennokki\Rating\Contracts\Rater</li>
+            <li>OwenIt\Auditing\Contracts\Auditable</li>
+            <li>Qirolab\Laravel\Reactions\Contracts\ReactsInterface</li>
+          </ul>
+        </div>
+        <h2 id="constants">Constants</h2>
+        <table class="styled">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td id="CREATED_AT">CREATED_AT</td>
+              <td>'created_on'</td>
+            </tr>
+            <tr>
+              <td id="UPDATED_AT">UPDATED_AT</td>
+              <td>'last_updated'</td>
+            </tr>
+          </tbody>
+        </table>
+        <h2 id="members">Members</h2>
+        <div class="styled members">
+          <h4>protected</h4>
+          <ul class="members">
+            <li id="auditExclude"><strong>$auditExclude</strong>
+                —
+                array<br/><span class="indent">Attributes to exclude from the Audit.</span></li>
+            <li id="casts"><strong>$casts</strong>
+                —
+                array<br/><span class="indent">The attributes that should be cast to native types.</span></li>
+            <li id="gdprHidden"><strong>$gdprHidden</strong>
+                —
+                array<br/><span class="indent">The attributes that should be hidden for the downloadable data.</span></li>
+            <li id="gdprWith"><strong>$gdprWith</strong>
+                —
+                array<br/><span class="indent">The relations to include in the downloadable data.</span></li>
+            <li id="guarded">
+              <strong>$guarded</strong>
+            </li>
+            <li id="hidden"><strong>$hidden</strong>
+                —
+                array<br/><span class="indent">The attributes that should be hidden for arrays.</span></li>
+            <li id="table">
+              <strong>$table</strong>
+            </li>
+          </ul>
+        </div>
+        <h2 id="methods">Methods</h2>
+        <div class="styled">
+          <h4>public</h4>
+          <ul>
+            <li id="achievements"><a title="App\User" href="../classes/App_User/achievements.xhtml">achievements()</a>
+                — Get all the user's Achievements</li>
+            <li id="attended_events"><a title="App\User" href="../classes/App_User/attended_events.xhtml">attended_events()</a>
+                — Get list of all events user has attended</li>
+            <li id="charity"><a title="App\User" href="../classes/App_User/charity.xhtml">charity()</a>
+                — Get total of charity raised</li>
+            <li id="clubs"><a title="App\User" href="../classes/App_User/clubs.xhtml">clubs()</a>
+                — What clubs is user a member of</li>
+            <li id="course_runs"><a title="App\User" href="../classes/App_User/course_runs.xhtml">course_runs()</a>
+                — Get CourseRuns for user</li>
+            <li id="droids"><a title="App\User" href="../classes/App_User/droids.xhtml">droids()</a>
+                — Get all the user's Droids</li>
+            <li id="event"><a title="App\User" href="../classes/App_User/event.xhtml">event()</a>
+                — Get status of event</li>
+            <li id="events"><a title="App\User" href="../classes/App_User/events.xhtml">events()</a>
+                — Get all the user's Events</li>
+            <li id="expiringPLI"><a title="App\User" href="../classes/App_User/expiringPLI.xhtml">expiringPLI()</a>
+                — Is the users PLI expiring</li>
+            <li id="generateID"><a title="App\User" href="../classes/App_User/generateID.xhtml">generateID()</a>
+                — Generate unique badge ID</li>
+            <li id="generateQR"><a title="App\User" href="../classes/App_User/generateQR.xhtml">generateQR()</a>
+                — Generate a QR for user and store image</li>
+            <li id="hasAchievement"><a title="App\User" href="../classes/App_User/hasAchievement.xhtml">hasAchievement()</a>
+                — Has the user got an Achievement</li>
+            <li id="hasDroid"><a title="App\User" href="../classes/App_User/hasDroid.xhtml">hasDroid()</a>
+                — Does a droid belong to this user</li>
+            <li id="isAdminOf"><a title="App\User" href="../classes/App_User/isAdminOf.xhtml">isAdminOf()</a>
+                — Is user an admin of a club</li>
+            <li id="partsRun"><a title="App\User" href="../classes/App_User/partsRun.xhtml">partsRun()</a>
+                — Part runs user is organiser of</li>
+            <li id="parts_interested"><a title="App\User" href="../classes/App_User/parts_interested.xhtml">parts_interested()</a>
+                — Part runs user is interested in</li>
+            <li id="pli_expires"><a title="App\User" href="../classes/App_User/pli_expires.xhtml">pli_expires()</a>
+                — When does the PLI expire</li>
+            <li id="validPLI"><a title="App\User" href="../classes/App_User/validPLI.xhtml">validPLI()</a>
+                — Does user have a valid PLI</li>
+            <li id="yearsService"><a title="App\User" href="../classes/App_User/yearsService.xhtml">yearsService()</a>
+                — How many years has user been a member</li>
+          </ul>
+        </div>
+      </section>
+    </div>
+    <footer>
+      <span>Generated using phpDox 0.12.0-dev - Copyright (C) 2010 - 2022 by Arne Blankerts and Contributors</span>
+    </footer>
+  </body>
+</html>

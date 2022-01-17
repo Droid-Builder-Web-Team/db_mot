@@ -12,7 +12,7 @@ class RedirectCrawlers
      * Handle an incoming request.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  \Closure $next
+     * @param  \Closure                 $next
      * @return mixed
      */
     public function handle($request, Closure $next)
@@ -28,11 +28,11 @@ class RedirectCrawlers
 
         if (in_array($userAgent, $crawlers)) {
             switch (Route::currentRouteName()) {
-                case "event.show":
-                    list($id) = sscanf($request->path(), 'event/%d');
+            case "event.show":
+                list($id) = sscanf($request->path(), 'event/%d');
                     
-                    $event = Event::where('id', $id)->first();
-                    return view('event.facebook', compact('event'));
+                $event = Event::where('id', $id)->first();
+                return view('event.facebook', compact('event'));
             }
         }
         return $next($request);

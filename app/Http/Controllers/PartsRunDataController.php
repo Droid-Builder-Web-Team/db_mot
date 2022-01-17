@@ -28,9 +28,11 @@ class PartsRunDataController extends Controller
             ->orderBy('updated_at', 'desc')
             ->get();
 
-        return view('parts-run.list', [
+        return view(
+            'parts-run.list', [
             'partsRunData'=> $partsRunData,
-        ]);
+            ]
+        );
     }
 
     /**
@@ -40,32 +42,36 @@ class PartsRunDataController extends Controller
      */
     public function create()
     {
-        if (!auth()->user()->can('Create Partrun'))
+        if (!auth()->user()->can('Create Partrun')) {
               abort(403);
+        }
         $clubs = Club::all();
         $runners = User::permission('Edit Partrun')->get();
 
-        return view('parts-run.create', [
+        return view(
+            'parts-run.create', [
             'clubs' => $clubs,
             'runners' => $runners,
-        ]);
+            ]
+        );
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        if (!auth()->user()->can('Create Partrun'))
+        if (!auth()->user()->can('Create Partrun')) {
             abort(403);
+        }
 
         $email = User::find($request->user_id)->email;
         $location = User::find($request->user_id)->county;
 
-/*
+        /*
         // Check image - RH
         if ($request->hasFile('image')) {
             $request->validate([
@@ -93,22 +99,26 @@ class PartsRunDataController extends Controller
             $partsRunInstructionUrl = $request->validate('instructions_url');
         }
 
-*/
+        */
         // Parts Run Data - RH
-        $partsRunData = app(PartsRunData::class)->create([
-          'club_id' => $request->club_id,
-          'bc_rep_id' => Auth::user()->id,
-          'user_id' => $request->user_id,
-          'status' => "Initial",
-        ]);
+        $partsRunData = app(PartsRunData::class)->create(
+            [
+            'club_id' => $request->club_id,
+            'bc_rep_id' => Auth::user()->id,
+            'user_id' => $request->user_id,
+            'status' => "Initial",
+            ]
+        );
         $partsRunData->save();
 
         // Parts run data. To be created last - RH
-        $partsRunAd = app(PartsRunAd::class)->create([
+        $partsRunAd = app(PartsRunAd::class)->create(
+            [
             'parts_run_data_id' => $partsRunData->id,
             'contact_email' => $email,
             'location' => $location,
-        ]);
+            ]
+        );
 
         $partsRunAd->save();
 
@@ -118,7 +128,7 @@ class PartsRunDataController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\PartsRunData  $partsRunData
+     * @param  \App\PartsRunData $partsRunData
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -132,23 +142,26 @@ class PartsRunDataController extends Controller
             $shippingCostsArray = explode(",", $shippingCosts->partsRunAd->shipping_costs);
         };
 
-        return view('parts-run.show', [
+        return view(
+            'parts-run.show', [
             'data' => $partsRunData[0],
             'includesArray' => $includesArray,
             'shippingCostsArray' => $shippingCostsArray
-        ]);
+            ]
+        );
     }
 
     /**
      * Show the form for editing the specified resource.z
      *
-     * @param  \App\PartsRunData  $partsRunData
+     * @param  \App\PartsRunData $partsRunData
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        if (!auth()->user()->can('Edit Partrun'))
+        if (!auth()->user()->can('Edit Partrun')) {
             abort(403);
+        }
         $clubs = Club::all();
         $partsRunData = PartsRunData::where('id', $id)->get();
 
@@ -162,19 +175,21 @@ class PartsRunDataController extends Controller
             $shipping = implode(",", $shippingCostsArray); // Implode to return as a string when displaying update form - RH
         };
 
-        return view('parts-run.edit', [
+        return view(
+            'parts-run.edit', [
             'partsRunData' => $partsRunData,
             'includes' => $includes,
             'shipping' => $shipping,
             'clubs' => $clubs
-        ]);
+            ]
+        );
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\PartsRunData  $partsRunData
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\PartsRunData        $partsRunData
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -183,31 +198,35 @@ class PartsRunDataController extends Controller
         $partsRunData = app(PartsRunData::class)->find($id);
 
         // Only people with Edit Partrun can edit this page
-        if (!auth()->user()->can('Edit Partrun'))
+        if (!auth()->user()->can('Edit Partrun')) {
             abort(403);
+        }
 
-        if (!auth()->user()->id == $partsRunData->user_id || !auth()->user()->can('Create Partrun'))
-          abort(403);
+        if (!auth()->user()->id == $partsRunData->user_id || !auth()->user()->can('Create Partrun')) {
+            abort(403);
+        }
 
         $data = $request->except(['_method', '_token']);
 
-        if ($partsRunData->status != $request->status)
-        {
-          foreach($partsRunData->is_interested as $user)
-          {
-            $user->notify(new PartsRunUpdated($partsRunData));
-          }
-          $bc_rep = User::find($partsRunData->bc_rep_id)->first();
-          $bc_rep->notify(new PartsRunUpdated($partsRunData));
+        if ($partsRunData->status != $request->status) {
+            foreach($partsRunData->is_interested as $user)
+            {
+                $user->notify(new PartsRunUpdated($partsRunData));
+            }
+            $bc_rep = User::find($partsRunData->bc_rep_id)->first();
+            $bc_rep->notify(new PartsRunUpdated($partsRunData));
         }
 
 
-        $partsRunData->update([
+        $partsRunData->update(
+            [
             'status' => $request->status,
             'open' => $request->open
-        ]);
+            ]
+        );
 
-        $partsRunData->partsRunAd()->update([
+        $partsRunData->partsRunAd()->update(
+            [
             'title' => $request->title,
             'description' => $request->description,
             'history' => $request->history,
@@ -218,7 +237,8 @@ class PartsRunDataController extends Controller
             'purchase_url' => $request->purchase_url,
             'contact_email' => $request->contact_email,
             'quantity' => $request->quantity
-        ]);
+            ]
+        );
 
         return redirect()->route('parts-run.index');
     }
@@ -226,7 +246,7 @@ class PartsRunDataController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\PartsRunData  $partsRunData
+     * @param  \App\PartsRunData $partsRunData
      * @return \Illuminate\Http\Response
      */
     public function destroy(PartsRunData $partsRunData)
@@ -243,10 +263,9 @@ class PartsRunDataController extends Controller
     public function interested(Request $request, PartsRunData $partsrun)
     {
 
-        if (!$partsrun->partsRunAd->quantity < $partsrun->is_interested->count() && $request->interest == 'interested')
-        {
-          toastr()->error('Part Run Full');
-          return back();
+        if (!$partsrun->partsRunAd->quantity < $partsrun->is_interested->count() && $request->interest == 'interested') {
+            toastr()->error('Part Run Full');
+            return back();
         }
         $user = auth()->user();
         $hasEntry = $user->parts_interested()->where('parts_run_data_id', $partsrun->id)->exists();
@@ -254,10 +273,11 @@ class PartsRunDataController extends Controller
           'status' => $request->interest,
           'quantity' => $request->quantity
         ];
-        if ($hasEntry)
+        if ($hasEntry) {
             $result = $partsrun->interested()->updateExistingPivot($user, $attributes);
-        else
+        } else {
             $result = $partsrun->interested()->save($user, $attributes);
+        }
         toastr()->success('Interest registered for Parts Run');
         return back();
     }
@@ -266,14 +286,13 @@ class PartsRunDataController extends Controller
     {
         $status_array = array('paid','shipped');
 
-        if (in_array($request->status, $status_array))
-        {
-          $user = User::find($request->user_id);
-          $attributes = [
+        if (in_array($request->status, $status_array)) {
+            $user = User::find($request->user_id);
+            $attributes = [
             'status' => $request->status,
-          ];
-          $result = $partsrun->interested()->updateExistingPivot($user, $attributes);
-          toastr()->success('Status Updated');
+            ];
+            $result = $partsrun->interested()->updateExistingPivot($user, $attributes);
+            toastr()->success('Status Updated');
 
         }
         return back();
@@ -281,26 +300,28 @@ class PartsRunDataController extends Controller
 
     public function export($id)
     {
-      if (!auth()->user()->can('Edit Partrun'))
-        abort(403);
+        if (!auth()->user()->can('Edit Partrun')) {
+            abort(403);
+        }
 
-      $partsRunData = app(PartsRunData::class)->find($id);
-      if (auth()->user()->id != $partsRunData->user_id)
-        abort(403);
+        $partsRunData = app(PartsRunData::class)->find($id);
+        if (auth()->user()->id != $partsRunData->user_id) {
+            abort(403);
+        }
 
-      $fileName = 'interest.csv';
+        $fileName = 'interest.csv';
 
-      $headers = array(
+        $headers = array(
             "Content-type"        => "text/csv",
             "Content-Disposition" => "attachment; filename=$fileName",
             "Pragma"              => "no-cache",
             "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
             "Expires"             => "0"
-      );
+        );
 
-      $columns = array('Forename', 'Surname', 'email', 'Quantity', 'Status', 'Date Added');
+        $columns = array('Forename', 'Surname', 'email', 'Quantity', 'Status', 'Date Added');
 
-      $callback = function() use($partsRunData, $columns) {
+        $callback = function () use ($partsRunData, $columns) {
             $file = fopen('php://output', 'w');
             fputcsv($file, $columns);
 

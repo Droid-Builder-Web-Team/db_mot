@@ -11,59 +11,58 @@ class CommentController extends Controller
 {
     public function store(Request $request)
     {
-      $model = app($request->model)::find($request->id);
+        $model = app($request->model)::find($request->id);
 
-      $request->validate([
-          'body' => 'required',
-      ]);
-      $comment = new Comment;
-      $comment->body = $request->body;
-      $comment->user_id = auth()->user()->id;
+        $request->validate(
+            [
+            'body' => 'required',
+            ]
+        );
+        $comment = new Comment;
+        $comment->body = $request->body;
+        $comment->user_id = auth()->user()->id;
 
-      $result = $model->comments()->save($comment);
+        $result = $model->comments()->save($comment);
 
-      if ($request->broadcast == 'on')
-      {
-        switch ($request->model) {
-          case "App\Event":
-            $permission = "Edit Events";
-            break;
-          case "App\PartsRunData":
-            $permission = "Edit Partrun";
-            break;
-          default:
-            $permission = "";
-            break;
-        }
-
-        if ($permission != "")
-        {
-          if (auth()->user()->can($permission))
-          {
-            foreach($model->users as $user)
-            {
-              switch ($request->model) {
-                case "App\Event":
-                  $user->notify(new CommentBroadcast($result));
-                  break;
-                case "App\PartsRunData":
-                  $user->notify(new CommentBroadcast($result));
-                  break;
-                default:
-                  echo "error";
-                  break;
-              }
+        if ($request->broadcast == 'on') {
+            switch ($request->model) {
+            case "App\Event":
+                $permission = "Edit Events";
+                break;
+            case "App\PartsRunData":
+                $permission = "Edit Partrun";
+                break;
+            default:
+                $permission = "";
+                break;
             }
-            $result->broadcast = true;
-            $result->save();
-          }
+
+            if ($permission != "") {
+                if (auth()->user()->can($permission)) {
+                    foreach($model->users as $user)
+                    {
+                        switch ($request->model) {
+                        case "App\Event":
+                            $user->notify(new CommentBroadcast($result));
+                            break;
+                        case "App\PartsRunData":
+                            $user->notify(new CommentBroadcast($result));
+                            break;
+                        default:
+                              echo "error";
+                            break;
+                        }
+                    }
+                    $result->broadcast = true;
+                    $result->save();
+                }
+            }
+
         }
 
-      }
 
-
-      toastr()->success('Comment Added');
-      return back();
+        toastr()->success('Comment Added');
+        return back();
     }
 
     public function delete($id)
@@ -87,9 +86,11 @@ class CommentController extends Controller
     {
         $comment = Comment::find($request->id);
         $comment->toggleReaction($request->reaction);
-        return response()->json([
+        return response()->json(
+            [
             'message' => 'Liked',
-        ]);
+            ]
+        );
     }
 
 }

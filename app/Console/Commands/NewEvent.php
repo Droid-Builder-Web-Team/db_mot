@@ -49,8 +49,7 @@ class NewEvent extends Command
             $location = Location::find($event->location_id);
             foreach($users as $user)
             {
-                if($user->postcode != "")
-                {
+                if($user->postcode != "") {
                     $distance = ($user->settings()->get('max_event_distance'))*1609.344;
                     $origin = $user->postcode;
                     $destination = $location->postcode;

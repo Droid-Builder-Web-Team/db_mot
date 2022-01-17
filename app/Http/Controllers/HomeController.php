@@ -10,11 +10,11 @@ use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
-  public function __construct()
-  {
-    $this->middleware('auth');
-    $this->middleware('verified');
-  }
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('verified');
+    }
 
     /**
      * Show the application dashboard.
@@ -24,9 +24,9 @@ class HomeController extends Controller
     public function index()
     {
         if (Auth::check()) {
-          return redirect('user/'.auth()->user()->id);
+            return redirect('user/'.auth()->user()->id);
         } else {
-          return view('home');
+            return view('home');
         }
     }
 }

@@ -14,26 +14,28 @@ class VenueContactDataTable extends DataTable
     /**
      * Build DataTable class.
      *
-     * @param mixed $query Results from query() method.
+     * @param  mixed $query Results from query() method.
      * @return \Yajra\DataTables\DataTableAbstract
      */
     public function dataTable($query)
     {
-      return datatables()
-          ->eloquent($query)
-          ->addColumn('action', '')
-          ->editColumn('action', function($row) {
-            $crudRoutePart = "venue-contacts";
-            $parts = array( 'view', 'edit', 'delete');
-            return view('partials.datatablesActions', compact('row', 'crudRoutePart', 'parts'));
-          })
+        return datatables()
+            ->eloquent($query)
+            ->addColumn('action', '')
+            ->editColumn(
+                'action', function ($row) {
+                    $crudRoutePart = "venue-contacts";
+                    $parts = array( 'view', 'edit', 'delete');
+                    return view('partials.datatablesActions', compact('row', 'crudRoutePart', 'parts'));
+                }
+            )
           ->rawColumns(['action', 'map']);
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param \App\VenueContact $model
+     * @param  \App\VenueContact $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function query(VenueContact $model)
@@ -49,18 +51,18 @@ class VenueContactDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->setTableId('venue-contact-table')
-                    ->columns($this->getColumns())
-                    ->minifiedAjax()
-                    ->dom('Bfrtip')
-                    ->lengthMenu([15,25,50])
-                    ->orderBy(1)
-                    ->buttons(
-                        Button::make('create'),
-                        Button::make('export'),
-                        Button::make('print'),
-                        Button::make('reload')
-                    );
+            ->setTableId('venue-contact-table')
+            ->columns($this->getColumns())
+            ->minifiedAjax()
+            ->dom('Bfrtip')
+            ->lengthMenu([15,25,50])
+            ->orderBy(1)
+            ->buttons(
+                Button::make('create'),
+                Button::make('export'),
+                Button::make('print'),
+                Button::make('reload')
+            );
     }
 
     /**
@@ -77,10 +79,10 @@ class VenueContactDataTable extends DataTable
             Column::make('contact_number'),
             Column::make('notes'),
             Column::computed('action')
-                  ->exportable(false)
-                  ->printable(false)
-                  ->width(85)
-                  ->addClass('text-center'),
+                ->exportable(false)
+                ->printable(false)
+                ->width(85)
+                ->addClass('text-center'),
         ];
     }
 
