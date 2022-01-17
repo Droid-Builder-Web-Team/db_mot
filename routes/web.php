@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Routes for web gate
  * php version 7.4
@@ -9,6 +10,7 @@
  * @license  https://opensource.org/licenses/MIT MIT License
  * @link     https://portal.droidbuilders.uk/
  */
+
 use App\VenueContact;
 use Illuminate\Support\Facades\Route;
 
@@ -92,9 +94,9 @@ Route::group(
         Route::get('notifications', 'UserNotificationsController@index')->name('notifications');
         Route::get('notifications/read/{id}', 'UserNotificationsController@read')->name('notifications.read');
         Route::get('droid_image/{uid}/{view}/{size?}', 'DroidController@displayDroidImage')
-              ->name('image.displayDroidImage');
+            ->name('image.displayDroidImage');
         Route::get('mug_shot/{uid}/{size?}', 'UserController@displayMugShot')
-              ->name('image.displayMugShot');
+            ->name('image.displayMugShot');
         Route::get('/images/update', 'ImageController@update');
         Route::resource('runs', 'CourseRunsController', ['only' => ['index', 'show']]);
         Route::resource('achievements', 'AchievementController');
@@ -116,8 +118,9 @@ Route::group(
 
         Route::resource('/parts-run', 'PartsRunDataController');
         Route::get('parts-run/image/{run_id}/{number?}/{size?}', 'PartsRunImageController@show')
-                    ->name('image.displayPartsRunImage');
-        Route::get('/request-a-part-run', 'PartsRunDataController@requestPartsRun')->name('request');
+            ->name('image.displayPartsRunImage');
+        Route::get('/request-a-part-run', 'PartsRunDataController@requestPartsRun')
+            ->name('request');
         Route::get(
             '/parts-run-info', function () {
                 return view('parts-run.info');
@@ -148,6 +151,7 @@ Route::post('ipn/notify', 'PaypalController@postNotify');
 
 Route::get('/topps', 'ToppsController@index')->name('topps');
 Route::get('topps_image/{uid}/{view}/{size?}', 'ToppsController@displayToppsImage')
-              ->name('image.displayToppsImage');
-Route::get('events/image/show/{event_id}', 'EventApiController@showimage')->name('events.showimage');
+    ->name('image.displayToppsImage');
+Route::get('events/image/show/{event_id}', 'EventApiController@showimage')
+    ->name('events.showimage');
 

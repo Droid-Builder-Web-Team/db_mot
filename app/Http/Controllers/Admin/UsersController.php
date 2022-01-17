@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Controller for Admin editing of Users
  * php version 7.4
@@ -9,6 +10,7 @@
  * @license  https://opensource.org/licenses/MIT MIT License
  * @link     https://portal.droidbuilders.uk/
  */
+
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
@@ -108,10 +110,11 @@ class UsersController extends Controller
         );
 
         if ($request['postcode'] != "") {
-            $address = str_replace(' ', '+', $request['postcode']).'+'.
+            $address = str_replace(' ', '+', $request['postcode']) . '+'.
                 str_replace(' ', '+', $request['country']);
             $url = "https://maps.google.com/maps/api/geocode/json?key="
-                .config('gmap.google_api_key')."&address=".$address."&sensor=false";
+                . config('gmap.google_api_key') . "&address=" . $address .
+                "&sensor=false";
             $geocode=file_get_contents($url);
             $output= json_decode($geocode);
             $request['latitude']
@@ -164,7 +167,6 @@ class UsersController extends Controller
 
         file_put_contents($file, $image_base64);
 
-        return response()->json(['success'=>'success']);
+        return response()->json(['success' => 'success']);
     }
-
 }

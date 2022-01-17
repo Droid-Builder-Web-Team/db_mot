@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Controller for Admin editing of Users
  * php version 7.4
@@ -9,6 +10,7 @@
  * @license  https://opensource.org/licenses/MIT MIT License
  * @link     https://portal.droidbuilders.uk/
  */
+
 namespace App\DataTables;
 
 use App\User;
@@ -32,7 +34,7 @@ class UsersDataTable extends DataTable
     /**
      * Build DataTable class.
      *
-     * @param \Illuminate\Http\Requestmixed $query Results from query() method.
+     * @param \Illuminate\Http\Request $query Results from query() method.
      *
      * @return \Yajra\DataTables\DataTableAbstract
      */
@@ -60,7 +62,7 @@ class UsersDataTable extends DataTable
                     foreach ($user->roles as $role) {
                         $roles
                             .= "<span class=\"badge badge-info\">".
-                                $role->name."</span>";
+                                $role->name . "</span>";
                     }
                     return $roles;
                 }
