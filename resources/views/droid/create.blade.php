@@ -9,7 +9,7 @@
                         <h2>Add New Droid</h2>
                     </div>
                     <div class="pull-right">
-                        <a class="btn btn-primary" href="{{ route('user.show', auth()->user()->id) }}">Back</a>
+                        <a class="btn btn-primary" href="{{ route('droid.index') }}">Back</a>
                     </div>
                 </div>
             </div>
@@ -26,6 +26,7 @@
                     </ul>
                 </div>
             @endif
+
             <form action="{{ route('droid.store') }}" method="POST">
                 @csrf
 
@@ -33,13 +34,13 @@
                     <div class="col-xs-9 col-sm-9 col-md-9">
                         <div class="form-group">
                             <strong>Droid Name:</strong>
-                            <input type="text" name="name" class="form-control" placeholder="Name" value='{{ old('name') }}'>
+                            <input type="text" name="name" class="form-control" placeholder="Name" value='{{ old('name') }}' required>
                         </div>
                     </div>
                     <div class="col-xs-3 col-sm-3 col-md-3">
                         <div class="form-group">
                             <strong>Club</strong><br>
-                            <select name=club_id>
+                            <select class="form-control" name=club_id>
                                 @foreach ($clubs as $club)
                                     <option value="{{ $club->id }}">{{ $club->name }}</option>
                                 @endforeach
@@ -121,9 +122,7 @@
                             <input type="text" name="weight" class="form-control" placeholder="" value='{{ old('weight') }}'>
                         </div>
                     </div>
-                </div>
-                <div class="form-row">
-                    <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="col-xs-12 col-sm-4 col-md-4">
                         <div class="form-group">
                             <strong>Build Log:</strong>
                             <input type="text" name="build_log" class="form-control" value='{{ old('build_log') }}'>

@@ -12,7 +12,7 @@
     "devDependencies": {
         "axios": "^0.21",
         "bootstrap": "^4.6.0",
-        "cross-env": "^7.0",
+        "cross-env": "^7.0.3",
         "jquery": "^3.6",
         "lodash": "^4.17.20",
         "node-forge": ">=0.10.0",

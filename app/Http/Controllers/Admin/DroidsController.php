@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\DataTables\DroidsDataTable;
-use App\Droid;
-use App\User;
 use App\Club;
+use App\User;
+use App\Droid;
 use App\Comment;
 use Illuminate\Http\Request;
+use App\DataTables\DroidsDataTable;
+use App\Http\Controllers\Controller;
+use Validator;
 
 class DroidsController extends Controller
 {
@@ -53,15 +54,31 @@ class DroidsController extends Controller
      */
     public function store(Request $request)
     {
-
+        
         if (!auth()->user()->can('Edit Droids')) {
               abort(403);
         }
-        $request->validate(
-            [
-            'name' => 'required'
-            ]
-        );
+
+        $validatedData = Validator::make($request->all(), [
+            'name' => 'required',
+            'style' => 'nullable|max:50',
+            'transmitter_type' => 'nullable|max:255',
+            'radio_controlled' => 'nullable',
+            'sound_system' => 'nullable|max:255',
+            'material' => 'nullable|max:255',
+            'battery' => 'nullable|max:255',
+            'drive_type' => 'nullable|max:255',
+            'drive_voltage' => 'nullable|max:255',
+            'value' => 'nullable|numeric',
+            'weight' => 'nullable|numeric',
+            'build_log' => 'nullable|url',
+        ]);
+
+        if($validatedData->fails()) {
+            return redirect('droid/create')
+                        ->withErrors($validatedData)
+                        ->withInput();
+        }
 
         try {
             $droid = Droid::create($request->except('user_id'));
@@ -118,11 +135,28 @@ class DroidsController extends Controller
         if (!auth()->user()->can('Edit Droids')) {
               abort(403);
         }
-        $request->validate(
-            [
+
+        $validatedData = Validator::make($request->all(), [
             'name' => 'required',
-            ]
-        );
+            'style' => 'nullable|max:50',
+            'transmitter_type' => 'nullable|max:255',
+            'radio_controlled' => 'nullable',
+            'sound_system' => 'nullable|max:255',
+            'material' => 'nullable|max:255',
+            'battery' => 'nullable|max:255',
+            'drive_type' => 'nullable|max:255',
+            'drive_voltage' => 'nullable|max:255',
+            'value' => 'nullable|numeric',
+            'weight' => 'nullable|numeric',
+            'build_log' => 'nullable|url',
+        ]);
+
+        if($validatedData->fails()) {
+            return redirect()
+                        ->back()
+                        ->withErrors($validatedData)
+                        ->withInput();
+        }
 
         $droid->update($request->all());
 

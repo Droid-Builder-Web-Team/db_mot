@@ -53,7 +53,7 @@
 
                     <td>{{ $data->interest_quantity() }} /
                       @if ($data->partsRunAd->quantity == 0)
-                        unlimited
+                        ∞
                       @else
                         {{ $data->partsRunAd->quantity }}
                       @endif

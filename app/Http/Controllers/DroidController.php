@@ -9,7 +9,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Response;
-use Illuminate\Validation\Validator;
+use Validator;
 use PDF;
 
 class DroidController extends Controller
@@ -40,13 +40,34 @@ class DroidController extends Controller
     public function store(Request $request)
     {
 
-        $validatedData = $request->validate(
-            [
+        // $validatedData = $request->validate(
+        //     [
+        //     'name' => 'required',
+        //     'build_log' => 'url|nullable',
+        //     'weight' => 'numeric|nullable'
+        //     ]
+        // );
+
+        $validatedData = Validator::make($request->all(), [
             'name' => 'required',
-            'build_log' => 'url|nullable',
-            'weight' => 'numeric|nullable'
-            ]
-        );
+            'style' => 'nullable|max:50',
+            'transmitter_type' => 'nullable|max:255',
+            'radio_controlled' => 'nullable',
+            'sound_system' => 'nullable|max:255',
+            'material' => 'nullable|max:255',
+            'battery' => 'nullable|max:255',
+            'drive_type' => 'nullable|max:255',
+            'drive_voltage' => 'nullable|max:255',
+            'value' => 'nullable|numeric',
+            'weight' => 'nullable|numeric',
+            'build_log' => 'nullable|url',
+        ]);
+
+        if($validatedData->fails()) {
+            return redirect('droid/create')
+                        ->withErrors($validatedData)
+                        ->withInput();
+        }
 
         try {
             $droid = Droid::create($request->all());
@@ -63,7 +84,6 @@ class DroidController extends Controller
         }
 
         return redirect()->route('user.show', auth()->user()->id);
-
     }
 
     /**

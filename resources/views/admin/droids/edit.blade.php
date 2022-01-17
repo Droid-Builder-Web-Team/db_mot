@@ -5,11 +5,11 @@
         <div class="card-header">
             <div class="row">
                 <div class="col-lg-12 margin-tb">
-                    <div class="pull-right pb-3">
-                        <a class="btn btn-mot-invert" style="width:auto; color:white;" href="{{ route('droid.show', $droid->id) }}">Back</a>
-                    </div>
                     <div class="pull-left">
                         <h2>Edit Droid</h2>
+                    </div>
+                    <div class="pull-right">
+                        <a class="btn btn-primary" href="{{ route('droid.show', $droid->id) }}">Back</a>
                     </div>
                 </div>
             </div>
@@ -28,7 +28,7 @@
                         </ul>
                     </div>
                 @endif
-                <div class="form-row">
+                <div class="row">
                     <div class="col-xs-9 col-sm-9 col-md-9">
                         <div class="form-group">
                             <strong>Droid Name:</strong>
@@ -38,7 +38,7 @@
                     <div class="col-xs-3 col-sm-3 col-md-3">
                         <div class="form-group">
                             <strong>Club:</strong><br>
-                            <select class="js-example-basic-single" name=club_id>
+                            <select class="form-control" name=club_id>
                                 @foreach ($clubs as $club)
                                     <option value="{{ $club->id }}" @if ($droid->club_id == $club->id) selected @endif>{{ $club->name }}</option>
                                 @endforeach
@@ -46,7 +46,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-row">
+                <div class="row">
                     <div class="col-xs-9 col-sm-9 col-md-9">
                         <div class="form-group">
                             <strong>Style:</strong> (eg, ANH, Custom, etc.)
@@ -54,7 +54,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-row">
+                <div class="row">
                     <div class="col-xs-9 col-sm-9 col-md-9">
                         <div class="form-group">
                             <strong>Control System:</strong> (eg, Padawan, Shadow, Custom)
@@ -70,7 +70,8 @@
                             </select>
                         </div>
                     </div>
-                    <div class="form-row">
+                </div>
+                    <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12">
                             <div class="form-group">
                                 <strong>Sound System:</strong>
@@ -78,7 +79,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-row">
+                    <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12">
                             <div class="form-group">
                                 <strong>Build Material:</strong>
@@ -86,7 +87,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-row">
+                    <div class="row">
                         <div class="col-xs-4 col-sm-4 col-md-4">
                             <div class="form-group">
                                 <strong>Battery Type:</strong> (eg, LiPo, LiFePo, SLA.)
@@ -106,7 +107,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-row">
+                    <div class="row">
                         <div class="col-xs-4 col-sm-4 col-md-4">
                             <div class="form-group">
                                 <strong>Approx Value:</strong>
@@ -119,55 +120,58 @@
                                 <input type="text" name="weight" class="form-control" value="{{ $droid->weight }}">
                             </div>
                         </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="col-xs-12 col-sm-4 col-md-4">
                             <div class="form-group">
                                 <strong>Build Log:</strong>
                                 <input type="text" name="build_log" class="form-control" value="{{ $droid->build_log }}">
                             </div>
                         </div>
                     </div>
-                    <div class="form-row">
-                        <div class="col-md-1 mb-3">
+
+                    <div class="row">
+                        <div class="col-12 col-md-4 mb-3 text-center">
                             {{ Form::hidden('active', 'off') }}
-                            <label>Active</label>
+                            <label><strong>Active</strong></label>
                             <input type="checkbox" name="active" {{ $droid->active == 'on' ? 'checked' : '' }} class="form-control">
                         </div>
                         @if ($droid->club->hasOption('topps'))
-                            <div class="col-md-1 mb-3">
-                                <label>Topps ID</label>
+                            <div class="col-12 col-md-4 mb-3 text-center">
+                                <label><strong>Topps ID</strong></label>
                                 <input type="text" name="topps_id" class="form-control" value="{{ $droid->topps_id }}">
                             </div>
                         @endif
                         @if ($droid->club->hasOption('tier_two'))
                             {{ Form::hidden('tier_two', 'No') }}
-                            <div class="col-md-1 mb-3">
-                                <label>Tier 2?</label>
+                            <div class="col-12 col-md-4 mb-3 text-center">
+                                <label><strong>Tier 2?</strong></label>
                                 <input type="checkbox" name="tier_two" {{ $droid->tier_two == 'Yes' ? 'checked="Yes"' : 'value=Yes' }} class="form-control">
                             </div>
                         @endif
                     </div>
 
-                    <div class="form-row">
-                        <div class="col-md-4 mb-3">
-                            <label>Created On: </label>
-                            {{ $droid->date_added }}
+                    <div class="row text-center">
+                        <div class="col-md-6 mb-3">
+                            <label><strong>Created On: </strong></label>
+                            <div class="timestamp">
+                                {{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $droid->date_added)->format('d-M-Y'); }}
+                            </div>
                         </div>
-                        <div class="col-md-4 mb-3">
-                            <label>Updated On: </label>
-                            {{ $droid->last_updated }}
+                        <div class="col-md-6 mb-3">
+                            <label><strong>Updated On: </strong></label>
+                            <div class="timestamp">
+                                {{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $droid->last_updated)->format('d-M-Y'); }}
+                            </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-6 col-sm-6 col-md-6">
-                            Builders Notes
+                            <label><strong>Builders Notes</strong></label>
                             <div class="form-group">
                                 <textarea type="text" class="form-control" name="notes">{!! nl2br(e($droid->notes)) !!}</textarea>
                             </div>
                         </div>
                         <div class="col-xs-6 col-sm-6 col-md-6">
-                            Back Story
+                            <label><strong>Back Story</strong></label>
                             <div class="form-group">
                                 <textarea type="text" class="form-control" name="back_story">{!! nl2br(e($droid->back_story)) !!}</textarea>
                             </div>

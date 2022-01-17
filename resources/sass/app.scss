@@ -3,6 +3,7 @@
 
 // Variables
 @import 'variables';
+@import 'responsive';
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
@@ -164,3 +165,114 @@ a.btn-header-secondary:focus {
     font-family: -apple-system, BlinkMacSystemFont, segoe ui, Roboto, helvetica neue, Arial, noto sans, sans-serif, apple color emoji, segoe ui emoji, segoe ui symbol, noto color emoji;
     color: #000;
 }
+
+// Admin
+  // Memebers Index Table
+  .dataTables_wrapper {
+    .dt-buttons {
+      .dt-button {
+        width: fit-content;
+        padding: 10px 20px;
+        background: transparent;
+        color: $white;
+        transition: 0.5s all;
+      }
+
+      .buttons-export:hover {
+        background: $white;
+        color: $black;
+      }
+
+      .buttons-print:hover {
+        background: #1b5c9e;
+        color: $white;
+      }
+
+      .buttons-reload:hover {
+        background: green;
+        color: $white;
+      }
+    }
+
+    .dataTables_filter {
+      float: right;
+
+      input {
+        margin-left: 0.5rem;
+        background: transparent;
+        border: 1px solid $white;
+        border-radius: 5px;
+        color: $white;
+      }
+    }
+  }
+
+  #users-table {
+    .badge {
+      margin-right: 0.5rem
+    }
+
+    .buttons {
+      width: 100%;
+
+      a {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 0.5rem;
+      }
+
+      form {
+        width: 100%;
+      }
+
+      .btn-view {
+        text-decoration: none;
+        transition: 0.5s all;
+
+        &:hover {
+          text-decoration: none;
+          background: $white;
+          border-color: $white;
+          
+          i {
+            color: $black;
+          }
+        }
+      }
+
+      .btn-edit {
+        text-decoration: none;
+        transition: 0.5s all;
+
+        &:hover {
+          text-decoration: none;
+          background: #1b5c9e
+        }
+      }
+
+      form {
+        text-decoration: none;
+        transition: 0.5s all;
+
+        &:hover {
+          text-decoration: none;
+          background: #d16767;
+        }
+      }
+    }
+  }
+
+  .dataTables_paginate {
+    margin-top: 1rem;
+
+    a {
+      color: $white;
+      margin: 0 1rem
+    }
+
+    span a {
+      margin: 0.75rem 0;
+      padding: 0.25rem;
+      color: $white !important; 
+    }
+  }

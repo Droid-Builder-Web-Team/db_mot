@@ -1,1 +1,59 @@
-.c-sidebar-brand{font-family:Michroma,sans-serif!important}.c-sidebar-nav-link .fab,.c-sidebar-nav-link .fas{margin-right:16px}.c-sidebar-nav-item{line-height:1}.sideFooter{padding:8px}#facebookLi:hover{background:#3b5998}#facebookLi:hover a:hover{color:#fff!important}#discordLi:hover{background:#7289da}#discordLi:hover a:hover{color:#fff!important}#youtubeLi:hover{background:red}#youtubeLi:hover a:hover{color:#fff!important}.social-icons{align-items:center;display:flex;flex-direction:row!important;justify-content:center}.social-icons a{color:#fff;padding:16px}.social-icons li{border:none!important;border-radius:0!important}
+.c-sidebar-brand {
+  font-family: "Michroma", sans-serif !important;
+}
+
+.c-sidebar-nav-link .fas,
+.c-sidebar-nav-link .fab {
+  margin-right: 16px;
+}
+
+.c-sidebar-nav-item {
+  line-height: 1;
+}
+
+.sideFooter {
+  padding: 8px;
+}
+
+#facebookLi:hover {
+  background: #3b5998;
+}
+#facebookLi:hover a:hover {
+  color: #FFF !important;
+}
+
+#discordLi:hover {
+  background: #7289da;
+}
+#discordLi:hover a:hover {
+  color: #FFF !important;
+}
+
+#youtubeLi:hover {
+  background: #ff0000;
+}
+#youtubeLi:hover a:hover {
+  color: #FFF !important;
+}
+
+#youtubeLi:hover {
+  background: #ff0000;
+}
+#youtubeLi:hover a:hover {
+  color: #FFF !important;
+}
+
+.social-icons {
+  display: flex;
+  flex-direction: row !important;
+  align-items: center;
+  justify-content: center;
+}
+.social-icons a {
+  padding: 16px;
+  color: #ffffff;
+}
+.social-icons li {
+  border: none !important;
+  border-radius: 0 !important;
+}

@@ -1,0 +1,9 @@
+name: db-portal
+recipe: laravel
+config:
+  webroot: public
+services:
+  myservice:
+    type: phpmyadmin
+    config:
+      config: config/config.user.inc.php

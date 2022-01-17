@@ -117,6 +117,8 @@ class PartsRunDataController extends Controller
             'parts_run_data_id' => $partsRunData->id,
             'contact_email' => $email,
             'location' => $location,
+            'purchase_url' => 'https://astromech.net',
+            'price' => '0.00'
             ]
         );
 

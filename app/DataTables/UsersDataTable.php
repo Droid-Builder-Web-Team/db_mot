@@ -133,8 +133,8 @@ class UsersDataTable extends DataTable
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
-                ->width(85)
-                ->addClass('text-center'),
+                ->width(100)
+                ->addClass('buttons text-center'),
         ];
     }
 

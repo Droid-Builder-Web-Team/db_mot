@@ -1,3 +1,19 @@
+@media only screen and (max-width: 767px) {
+    .dataTables_wrapper {
+        .dt-buttons {
+            float: none;
+            margin-bottom: 1rem;
+        }
+
+        .dataTables_filter {
+            float: none !important;
+            margin-bottom: 1rem;
+        }
+    }
+}
+
+
+
 @media only screen and (max-width: 400px) {
     .oauth-buttons a {
         margin-left: 0.5rem;
