@@ -34,8 +34,8 @@ jobs:
         with:
           php-version: "7.4"
           coverage: none
-          tools: composer phpcs
-          extensions: exif gd zip
+          tools: composer, phpcs
+          extensions: exif, gd, zip
 
       - name: Install PHP dependencies
         run: |
