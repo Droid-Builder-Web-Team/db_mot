@@ -21,6 +21,11 @@ class SocialController extends Controller
 
         $getInfo = Socialite::driver($provider)->user();
 
+        if ($getInfo->email == null){
+            toastr()->error('You must have an email registered with the account');
+            return redirect()->to('/login');
+        }
+
         $user = $this->createUser($getInfo, $provider);
 
         if ($user->active == "on") {
@@ -55,7 +60,7 @@ class SocialController extends Controller
             $qr = User::generateQR($id, $user->id);
             $admins = User::whereHas(
                 "roles", function ($q) {
-                    $q->where("name", "Super Admin"); 
+                    $q->where("name", "Super Admin");
                 }
             )->get();
             foreach($admins as $admin)
