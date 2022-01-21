@@ -56,14 +56,18 @@
             <a href="#methods">Methods</a>
           </li>
           <li>
-            <a href="../source/Http/Controllers/UserController.php.xhtml#line13">Source</a>
+            <a href="../source/Http/Controllers/UserController.php.xhtml#line31">Source</a>
           </li>
         </ul>
       </nav>
       <section>
         <h1 id="introduction"><small>App\Http\Controllers\</small>UserController</h1>
-        <h4/>
+        <h4>User Controller</h4>
         <p/>
+        <ul>
+          <li>Author: Darren Poulson &lt;darren.poulson@gmail.com&gt;</li>
+          <li>License: https://opensource.org/licenses/MIT MIT License</li>
+        </ul>
         <h2 id="synopsis">Synopsis</h2>
         <div class="synopsis">class UserController
                 extends <a title="App\Http\Controllers\Controller" href="../classes/App_Http_Controllers_Controller.xhtml">Controller</a>
@@ -73,12 +77,13 @@
                     </li><li>public Response <a title="App\Http\Controllers\UserController" href="../classes/App_Http_Controllers_UserController/edit.xhtml">edit</a>()
                     </li><li>public Response <a title="App\Http\Controllers\UserController" href="../classes/App_Http_Controllers_UserController/update.xhtml">update</a>()
                     </li><li>public Response <a title="App\Http\Controllers\UserController" href="../classes/App_Http_Controllers_UserController/destroy.xhtml">destroy</a>()
-                    </li><li>public void <a title="App\Http\Controllers\UserController" href="../classes/App_Http_Controllers_UserController/id.xhtml">id</a>()
+                    </li><li>public view <a title="App\Http\Controllers\UserController" href="../classes/App_Http_Controllers_UserController/id.xhtml">id</a>()
                     </li><li>public void <a title="App\Http\Controllers\UserController" href="../classes/App_Http_Controllers_UserController/displayMugShot.xhtml">displayMugShot</a>()
                     </li><li>public void <a title="App\Http\Controllers\UserController" href="../classes/App_Http_Controllers_UserController/displayQRCode.xhtml">displayQRCode</a>()
                     </li><li>public void <a title="App\Http\Controllers\UserController" href="../classes/App_Http_Controllers_UserController/downloadPDF.xhtml">downloadPDF</a>()
                     </li><li>public void <a title="App\Http\Controllers\UserController" href="../classes/App_Http_Controllers_UserController/edit_settings.xhtml">edit_settings</a>()
                     </li><li>public void <a title="App\Http\Controllers\UserController" href="../classes/App_Http_Controllers_UserController/update_settings.xhtml">update_settings</a>()
+                    </li><li>public void <a title="App\Http\Controllers\UserController" href="../classes/App_Http_Controllers_UserController/requestId.xhtml">requestId</a>()
                     </li></ul>
 
             }<br/></div>
@@ -95,37 +100,32 @@
         <div class="styled">
           <h4>public</h4>
           <ul>
-            <li id="__construct">
-              <a title="App\Http\Controllers\UserController" href="../classes/App_Http_Controllers_UserController/__construct.xhtml">__construct()</a>
-            </li>
+            <li id="__construct"><a title="App\Http\Controllers\UserController" href="../classes/App_Http_Controllers_UserController/__construct.xhtml">__construct()</a>
+                — __construct</li>
             <li id="destroy"><a title="App\Http\Controllers\UserController" href="../classes/App_Http_Controllers_UserController/destroy.xhtml">destroy()</a>
                 — Remove the specified resource from storage.</li>
-            <li id="displayMugShot">
-              <a title="App\Http\Controllers\UserController" href="../classes/App_Http_Controllers_UserController/displayMugShot.xhtml">displayMugShot()</a>
-            </li>
-            <li id="displayQRCode">
-              <a title="App\Http\Controllers\UserController" href="../classes/App_Http_Controllers_UserController/displayQRCode.xhtml">displayQRCode()</a>
-            </li>
-            <li id="downloadPDF">
-              <a title="App\Http\Controllers\UserController" href="../classes/App_Http_Controllers_UserController/downloadPDF.xhtml">downloadPDF()</a>
-            </li>
+            <li id="displayMugShot"><a title="App\Http\Controllers\UserController" href="../classes/App_Http_Controllers_UserController/displayMugShot.xhtml">displayMugShot()</a>
+                — Display the users mugshot</li>
+            <li id="displayQRCode"><a title="App\Http\Controllers\UserController" href="../classes/App_Http_Controllers_UserController/displayQRCode.xhtml">displayQRCode()</a>
+                — Display the QR code image of user</li>
+            <li id="downloadPDF"><a title="App\Http\Controllers\UserController" href="../classes/App_Http_Controllers_UserController/downloadPDF.xhtml">downloadPDF()</a>
+                — Download cover sheet PDF</li>
             <li id="edit"><a title="App\Http\Controllers\UserController" href="../classes/App_Http_Controllers_UserController/edit.xhtml">edit()</a>
                 — Show the form for editing the specified resource.</li>
-            <li id="edit_settings">
-              <a title="App\Http\Controllers\UserController" href="../classes/App_Http_Controllers_UserController/edit_settings.xhtml">edit_settings()</a>
-            </li>
-            <li id="id">
-              <a title="App\Http\Controllers\UserController" href="../classes/App_Http_Controllers_UserController/id.xhtml">id()</a>
-            </li>
+            <li id="edit_settings"><a title="App\Http\Controllers\UserController" href="../classes/App_Http_Controllers_UserController/edit_settings.xhtml">edit_settings()</a>
+                — Show the edit settings page for user</li>
+            <li id="id"><a title="App\Http\Controllers\UserController" href="../classes/App_Http_Controllers_UserController/id.xhtml">id()</a>
+                — Show the User's ID badge</li>
             <li id="index"><a title="App\Http\Controllers\UserController" href="../classes/App_Http_Controllers_UserController/index.xhtml">index()</a>
                 — Display a listing of the resource.</li>
+            <li id="requestId"><a title="App\Http\Controllers\UserController" href="../classes/App_Http_Controllers_UserController/requestId.xhtml">requestId()</a>
+                — Request a new ID badge</li>
             <li id="show"><a title="App\Http\Controllers\UserController" href="../classes/App_Http_Controllers_UserController/show.xhtml">show()</a>
                 — Display the specified resource.</li>
             <li id="update"><a title="App\Http\Controllers\UserController" href="../classes/App_Http_Controllers_UserController/update.xhtml">update()</a>
                 — Update the specified resource in storage.</li>
-            <li id="update_settings">
-              <a title="App\Http\Controllers\UserController" href="../classes/App_Http_Controllers_UserController/update_settings.xhtml">update_settings()</a>
-            </li>
+            <li id="update_settings"><a title="App\Http\Controllers\UserController" href="../classes/App_Http_Controllers_UserController/update_settings.xhtml">update_settings()</a>
+                — Update user settings in database</li>
           </ul>
         </div>
       </section>
