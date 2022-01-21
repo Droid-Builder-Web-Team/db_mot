@@ -1,7 +1,7 @@
 <?php
 
 /**
- * MOT Notification
+ * First MOT Notification
  * php version 7.4
  *
  * @category Notification
@@ -10,6 +10,7 @@
  * @license  https://opensource.org/licenses/MIT MIT License
  * @link     https://portal.droidbuilders.uk/
  */
+
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
@@ -19,7 +20,7 @@ use Illuminate\Notifications\Notification;
 use App\MOT;
 
 /**
- * MOT Added
+ * First MOT message
  *
  * @category Class
  * @package  Notifications
@@ -27,8 +28,9 @@ use App\MOT;
  * @license  https://opensource.org/licenses/MIT MIT License
  * @link     https://portal.droidbuilders.uk/
  */
-class MOTAdded extends Notification
+class FirstMOT extends Notification
 {
+
     use Queueable;
     protected $mot;
     protected $title;
@@ -39,15 +41,15 @@ class MOTAdded extends Notification
     /**
      * Create a new notification instance.
      *
-     * @param \App\MOT $mot MOT Model
+     * @param \App\MOT $mot MOT model
      *
      * @return void
      */
     public function __construct(MOT $mot)
     {
         $this->mot = $mot;
-        $this->title = "An MOT has been added.";
-        $this->text = "An MOT for one of your droids has been added.";
+        $this->title = "Congratulations on your First MOT.";
+        $this->text = "Your first ever MOT has been added";
         $this->link = route('mot.show', $this->mot->id);
         $this->icon = "robot";
     }
@@ -74,12 +76,10 @@ class MOTAdded extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)
-            ->line($this->title)
-            ->action('View MOT', $this->link)
-            ->line($this->text);
+        return (new MailMessage)->view(
+            'emails.firstmot', ['mot'  => $this->mot ]
+        );
     }
-
     /**
      * Get the array representation of the notification.
      *
@@ -90,11 +90,11 @@ class MOTAdded extends Notification
     public function toArray($notifiable)
     {
         return [
-          'id' => $this->mot->id,
-          'title' => $this->title,
-          'link' => $this->link,
-          'text' => $this->text,
-          'icon' => $this->icon
-        ];
+            'id' => $this->mot->id,
+            'title' => $this->title,
+            'link' => $this->link,
+            'text' => $this->text,
+            'icon' => $this->icon
+          ];
     }
 }

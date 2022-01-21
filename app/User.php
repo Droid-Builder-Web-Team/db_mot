@@ -361,4 +361,22 @@ class User extends Authenticatable implements MustVerifyEmail,
         return $this->belongsToMany(PartsRunData::class, 'members_parts')
             ->withPivot('status', 'quantity');
     }
+
+    /**
+     * Does the user have any mots
+     *
+     * @return bool
+     */
+    public function firstMot()
+    {
+        $count = 0;
+        foreach ($this->droids as $droid) {
+            $count += $droid->mot()->count();
+        }
+        if ($count == 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * User Controller
+ * php version 7.4
+ *
+ * @category Controller
+ * @package  Controllers
+ * @author   Darren Poulson <darren.poulson@gmail.com>
+ * @license  https://opensource.org/licenses/MIT MIT License
+ * @link     https://portal.droidbuilders.uk/
+ */
 namespace App\Http\Controllers;
 
 use App\User;
@@ -9,15 +19,29 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Response;
 use PDF;
 
-
+/**
+ * User Controller
+ *
+ * @category Class
+ * @package  Models
+ * @author   Darren Poulson <darren.poulson@gmail.com>
+ * @license  https://opensource.org/licenses/MIT MIT License
+ * @link     https://portal.droidbuilders.uk/
+ */
 class UserController extends Controller
 {
 
+    /**
+     * __construct
+     *
+     * @return void
+     */
     public function __construct()
     {
         $this->middleware('auth');
         $this->middleware('verified');
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -31,12 +55,15 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\User $user
+     * @param \App\User $user User Model
+     *
      * @return \Illuminate\Http\Response
      */
     public function show(User $user)
     {
-        if ($user->id !== auth()->user()->id && auth()->user()->cannot('View Members')) {
+        if ($user->id !== auth()->user()->id
+            && auth()->user()->cannot('View Members')
+        ) {
             abort(403);
         }
         $achievements = Achievement::all();
@@ -46,12 +73,15 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\User $user
+     * @param \App\User $user User Model
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit(User $user)
     {
-        if ($user->id !== auth()->user()->id && auth()->user()->cannot('Edit Members')) {
+        if ($user->id !== auth()->user()->id
+            && auth()->user()->cannot('Edit Members')
+        ) {
             abort(403);
         }
         return view('user.edit')->with('user', $user);
@@ -60,13 +90,16 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  \App\User                $user
+     * @param \Illuminate\Http\Request $request HTTP Request
+     * @param \App\User                $user    User Model
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, User $user)
     {
-        if ($user->id !== auth()->user()->id && auth()->user()->cannot('Edit Members')) {
+        if ($user->id !== auth()->user()->id
+            && auth()->user()->cannot('Edit Members')
+        ) {
             abort(403);
         }
         $request->validate(
@@ -77,12 +110,16 @@ class UserController extends Controller
         );
 
         if ($request['postcode'] != "") {
-            $address = str_replace(' ', '+', $request['postcode']).'+'.str_replace(' ', '+', $request['country']);
-            $url = "https://maps.google.com/maps/api/geocode/json?key=".config('gmap.google_api_key')."&address=".$address."&sensor=false";
+            $address = str_replace(' ', '+', $request['postcode']).'+'
+                . str_replace(' ', '+', $request['country']);
+            $url = "https://maps.google.com/maps/api/geocode/json?key="
+                . config('gmap.google_api_key')."&address=".$address."&sensor=false";
             $geocode=file_get_contents($url);
             $output= json_decode($geocode);
-            $request['latitude'] = strval($output->results[0]->geometry->location->lat);
-            $request['longitude'] = strval($output->results[0]->geometry->location->lng);
+            $request['latitude']
+                = strval($output->results[0]->geometry->location->lat);
+            $request['longitude']
+                = strval($output->results[0]->geometry->location->lng);
         } else {
             $request['latitude'] = "";
             $request['longitude'] = "";
@@ -101,16 +138,26 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\User $user
+     * @param \App\User $user User Model
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy(User $user)
     {
-        if ($user->id !== auth()->user()->id && auth()->user()->cannot('Edit Members')) {
+        if ($user->id !== auth()->user()->id
+            && auth()->user()->cannot('Edit Members')
+        ) {
             abort(403);
         }
     }
 
+    /**
+     * Show the User's ID badge
+     *
+     * @param string $id Unique ID string
+     *
+     * @return view
+     */
     public function id(Request $id)
     {
         $user = User::where('badge_id', $id->id)->first();
@@ -121,6 +168,14 @@ class UserController extends Controller
         return view('user.id', compact('badge_data'));
     }
 
+    /**
+     * Display the users mugshot
+     *
+     * @param int $uid  ID of User
+     * @param int $size Size of image
+     *
+     * @return void
+     */
     public function displayMugShot($uid, $size = '')
     {
         if ($size != "") {
@@ -144,6 +199,13 @@ class UserController extends Controller
         return $response;
     }
 
+    /**
+     * Display the QR code image of user
+     *
+     * @param int $uid ID of user
+     *
+     * @return void
+     */
     public function displayQRCode($uid)
     {
         $path = 'members/'.$uid.'/qr_code.png';
@@ -158,6 +220,13 @@ class UserController extends Controller
         return $response;
     }
 
+    /**
+     * Download cover sheet PDF
+     *
+     * @param int $id ID of user
+     *
+     * @return void
+     */
     public function downloadPDF($id)
     {
         $user = User::find($id);
@@ -167,24 +236,51 @@ class UserController extends Controller
         return $pdf->download('cover_note.pdf');
     }
 
+    /**
+     * Show the edit settings page for user
+     *
+     * @param \App\User $user User Model
+     *
+     * @return void
+     */
     public function edit_settings(User $user)
     {
         $settings = $user->settings()->all();
         return view('settings.edit', compact('settings'));
     }
 
+    /**
+     * Update user settings in database
+     *
+     * @param \Illuminate\Http\Request $request HTTP Request
+     * @param \App\User                $user    User Model
+     *
+     * @return void
+     */
     public function update_settings(Request $request, User $user)
     {
 
-        foreach($request->input('notifications') as $notification => $value)
-        {
+        foreach ($request->input('notifications') as $notification => $value) {
             $user->settings()->update('notifications.'.$notification, $value);
         }
-        $user->settings()->update('max_event_distance', $request->input('max_event_distance'));
+        $user->settings()
+            ->update('max_event_distance', $request->input('max_event_distance'));
         $user->settings()->update('date_format', $request->input('date_format'));
         $user->settings()->update('time_format', $request->input('time_format'));
         $user->settings()->update('timezone', $request->input('timezone'));
         toastr()->success('User settings updated successfully');
         return redirect()->route('settings.edit', auth()->user()->id);
+    }
+
+    /**
+     * Request a new ID badge
+     *
+     * @return void
+     */
+    public function requestId()
+    {
+
+
+
     }
 }

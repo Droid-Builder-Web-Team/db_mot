@@ -101,6 +101,7 @@ class SocialController extends Controller
                 'email_verified_at'   => now(),
                 'email'               => $getInfo->email,
                 'badge_id'            => $id,
+                'active'              => 'on',
                 ]
             );
             $qr = User::generateQR($id, $user->id);

@@ -1,5 +1,16 @@
 <?php
 
+/**
+ * Create MOT
+ * php version 7.4
+ *
+ * @category Controller
+ * @package  Controllers
+ * @author   Darren Poulson <darren.poulson@gmail.com>
+ * @license  https://opensource.org/licenses/MIT MIT License
+ * @link     https://portal.droidbuilders.uk/
+ */
+
 namespace App\Http\Controllers\Admin;
 
 use App\Comment;
@@ -8,20 +19,38 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\MOTStoreRequest;
 use App\MOT;
 use App\Notifications\MOTAdded;
+use App\Notifications\FirstMOT;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+/**
+ * MOT Controller
+ *
+ * @category Class
+ * @package  Controllers
+ * @author   Darren Poulson <darren.poulson@gmail.com>
+ * @license  https://opensource.org/licenses/MIT MIT License
+ * @link     https://portal.droidbuilders.uk/
+ */
 class MOTController extends Controller
 {
 
+    /**
+     * __construct
+     *
+     * @return void
+     */
     public function __construct()
     {
         $this->middleware('auth');
         $this->middleware('permission:Add MOT');
 
     }
+
     /**
      * Show the form for creating a new resource.
+     *
+     * @param integer $droid_id Id of droid having MOT
      *
      * @return \Illuminate\Http\Response
      */
@@ -43,7 +72,8 @@ class MOTController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \App\Requests\MOTStoreRequest $request Store request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(MOTStoreRequest $request)
@@ -66,8 +96,7 @@ class MOTController extends Controller
                     ->where('club_id', $request->club_id)
                     ->get();
 
-                foreach ($lines as $line)
-                {
+                foreach ($lines as $line) {
                     DB::table('mot_details')->insert(
                         [
                         'mot_uid' => $mot->id,
@@ -79,33 +108,26 @@ class MOTController extends Controller
 
                 return $mot;
 
-            
-                /*
-                if ($mot->approved == "Yes") {
-                $url = "https://graph.facebook.com/v8.0/".config('fb.fbgroup')."/feed";
-                $message = "Congratulations to our latest member to have their droid pass its first MOT\r\n";
-
-                $data['message'] = $message;
-                $data['access_token'] = config('fb.fb_access_token');
-                $ch = curl_init();
-                curl_setopt($ch, CURLOPT_URL, $url);
-                curl_setopt($ch, CURLOPT_POST, 1);
-                curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-                $return = curl_exec($ch);
-                curl_close($ch);
-                dd($return);
-
-                }
-                */
             }
         );
 
         // Notify owners
+
+
         $droid = Droid::find($request->droid_id);
-        foreach ($droid->users as $user)
-        {
-            $user->notify(new MOTAdded($mot));
+        foreach ($droid->users as $user) {
+            if ($user->firstMot()) {
+                $user->notify(new FirstMOT($mot));
+                $id = DB::table('id_list')->insert(
+                    [
+                        'user_id' => $user->id,
+                        'reissue' => false,
+                        'paid' => false
+                    ]
+                );
+            } else {
+                $user->notify(new MOTAdded($mot));
+            }
         }
 
         toastr()->success('MOT added successfully');
@@ -113,6 +135,14 @@ class MOTController extends Controller
         return redirect()->route('droid.show', $request->droid_id);
     }
 
+    /**
+     * Add comment to MOT
+     *
+     * @param \Illuminate\Http\Request $request HTTP Request
+     * @param \App\MOT                 $mot     MOT model
+     *
+     * @return void
+     */
     public function comment(Request $request, MOT $mot)
     {
 

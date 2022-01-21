@@ -111,6 +111,24 @@
   </div>
 </div>
 
+<div class="row">
+    <div class="col-md-6 text-center">
+        <div class="card border-primary">
+          <div class="card-header title text-center">ID Badges Needed</div>
+            <div class="card-body">
+                <span class="float-center">
+                    <h2 style="color:#000000;">{{ $badges->count() }}</h2>
+                </span>
+                <span class="float-right">
+                    <a target="_blank" href="{{ route('admin.badges.download', 'false') }}" class="btn-sm btn-link">Download</a>
+                    <a target="_blank" href="{{ route('admin.badges.download', 'true') }}" class="btn-sm btn-link">Download and Clear</a>
+                </span>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
+
   <div class="row">
     <div class="col-md-12 text-center">
     <div class="card border-primary">
