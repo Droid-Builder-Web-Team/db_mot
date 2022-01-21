@@ -15,7 +15,8 @@ class CreateIdListTable extends Migration
     {
         Schema::create('id_list', function (Blueprint $table) {
             $table->id();
-            $table->timestamps()->default('CURRENT_TIMESTAMP');;
+            $table->timestamp('created_at');
+            $table->timestamp('updated_at');
             $table->integer('user_id');
             $table->boolean('reissue');
             $table->boolean('paid');
