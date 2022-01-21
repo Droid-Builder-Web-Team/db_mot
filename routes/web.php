@@ -56,9 +56,11 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(
         Route::resource('/motdesign', 'MOTDesignController', ['only' => ['edit', 'update']]);
         Route::get('audits', 'AuditController@index')->name('audits.index');
         Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index')->name('logs.index');
-        Route::resource('/venue-contacts', 'VenueContactController', ['except' => ['show']]);
+        Route::resource('/contacts', 'ContactController');
+        Route::post('/contacts/link', 'ContactController@link')->name('contacts.link');
         Route::get('/api/bcreps/{club_id}', 'ApiController@list_bcreps');
         Route::resource('/map', 'MapsController', ['only' => ['index']]);
+        Route::get('/badges/{keep}', 'BadgeController@download')->name('badges.download');
     }
 );
 

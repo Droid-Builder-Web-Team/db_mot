@@ -18,6 +18,11 @@
                 {{ $location->county }}<br>
                 {{ $location->country }}<br>
                 {{ $location->postcode }}<br>
+                <br>
+
+                @can('Edit Events')
+                    @include('partials.show_contacts', ['contacts' => $location->contacts])
+                @endcan
               </div>
               <div class="col-md-4">
                 @if($location->name == "Online" || $location->name == "No Location")
@@ -58,6 +63,11 @@
                 </select>
                 <button type="submit">Rate Location</button>
               </form>
+              @can('Edit Events')
+              <a class="btn btn-edit" style="width:auto;" href="{{ route('admin.locations.edit',$location->id) }}">Edit</a>
+              <button type="button" class="btn btn-primary m-2" data-toggle="modal" data-target="#addContactModal">Add Contact</button>
+
+            @endcan
             </div>
           </div>
         </div>
@@ -155,4 +165,8 @@
       </div>
     </div>
    </div>
+
+    @can('Edit Events')
+        @include('partials.add_contact', ['model_id' => $location->id, 'model_type' => 'App\Location'])
+    @endcan
 @endsection

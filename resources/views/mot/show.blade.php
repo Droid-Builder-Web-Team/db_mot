@@ -10,7 +10,11 @@
   <div class="col-md-4 mb-1">
     <table>
       <tr><th>Droid:</th><td>{{$mot->droid->name}}</td></tr>
-      <tr><th>Owner:</th><td></td></tr>
+      <tr><th>Owner:</th><td>
+          @foreach($mot->droid->users as $user)
+            <a href="{{ route('user.show',$user->id) }}">{{ $user->forename }} {{ $user->surname }}</a><br>
+          @endforeach
+      </td></tr>
       <tr><th>Date:</th><td>{{ $mot->date }}</td></tr>
       <tr><th>Location:</th><td>{{ $mot->location }}</td></tr>
       <tr><th>Officer:</th><td>{{ $mot->officer() }}</td></tr>

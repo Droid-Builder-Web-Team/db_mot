@@ -1,20 +1,41 @@
 <?php
 
+/**
+ * DataTable for Contacts
+ * php version 7.4
+ *
+ * @category DataTable
+ * @package  DataTables
+ * @author   Darren Poulson <darren.poulson@gmail.com>
+ * @license  https://opensource.org/licenses/MIT MIT License
+ * @link     https://portal.droidbuilders.uk/
+ */
+
 namespace App\DataTables;
 
-use App\VenueContact;
+use App\Contact;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class VenueContactDataTable extends DataTable
+/**
+ * ContactDataTable
+ *
+ * @category Class
+ * @package  DataTables
+ * @author   Darren Poulson <darren.poulson@gmail.com>
+ * @license  https://opensource.org/licenses/MIT MIT License
+ * @link     https://portal.droidbuilders.uk/
+ */
+class ContactDataTable extends DataTable
 {
     /**
      * Build DataTable class.
      *
-     * @param  mixed $query Results from query() method.
+     * @param mixed $query Results from query() method.
+     *
      * @return \Yajra\DataTables\DataTableAbstract
      */
     public function dataTable($query)
@@ -24,9 +45,16 @@ class VenueContactDataTable extends DataTable
             ->addColumn('action', '')
             ->editColumn(
                 'action', function ($row) {
-                    $crudRoutePart = "venue-contacts";
-                    $parts = array( 'view', 'edit', 'delete');
-                    return view('partials.datatablesActions', compact('row', 'crudRoutePart', 'parts'));
+                    $crudRoutePart = "contact";
+                    $parts = array( 'edit', 'delete');
+                    return view(
+                        'partials.datatablesActions',
+                        compact(
+                            'row',
+                            'crudRoutePart',
+                            'parts'
+                        )
+                    );
                 }
             )
           ->rawColumns(['action', 'map']);
@@ -35,10 +63,11 @@ class VenueContactDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param  \App\VenueContact $model
+     * @param \App\Contact $model Contact model
+     *
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(VenueContact $model)
+    public function query(Contact $model)
     {
         return $model->newQuery();
     }
@@ -51,7 +80,7 @@ class VenueContactDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-            ->setTableId('venue-contact-table')
+            ->setTableId('contact-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->dom('Bfrtip')
@@ -73,10 +102,9 @@ class VenueContactDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('locations_id'),
-            Column::make('contact_name'),
-            Column::make('contact_email'),
-            Column::make('contact_number'),
+            Column::make('name'),
+            Column::make('email'),
+            Column::make('phone'),
             Column::make('notes'),
             Column::computed('action')
                 ->exportable(false)

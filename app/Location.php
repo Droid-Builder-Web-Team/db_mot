@@ -65,6 +65,17 @@ class Location extends Model implements Rateable, Auditable
     }
 
     /**
+     * Get contacts for this location
+     *
+     * @return array of App\Contact
+     */
+    public function contacts()
+    {
+        return $this->morphToMany('App\Contact', 'contactable')
+            ->orderBy('created_at');
+    }
+
+    /**
      * Does the location have a Rating
      *
      * @return void

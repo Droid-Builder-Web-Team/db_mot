@@ -1,5 +1,16 @@
 <?php
 
+/**
+ * Event Controller
+ * php version 7.4
+ *
+ * @category Controller
+ * @package  Controllers
+ * @author   Darren Poulson <darren.poulson@gmail.com>
+ * @license  https://opensource.org/licenses/MIT MIT License
+ * @link     https://portal.droidbuilders.uk/
+ */
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -8,14 +19,29 @@ use App\Event;
 use App\User;
 use App\Location;
 use App\Comment;
+use App\Contact;
 use DateTime;
 use App\Notifications\EventUpdated;
 use Spatie\CalendarLinks\Link;
 use Acaronlex\LaravelCalendar\Calendar;
 
+/**
+ * EventController
+ *
+ * @category Class
+ * @package  Controllers
+ * @author   Darren Poulson <darren.poulson@gmail.com>
+ * @license  https://opensource.org/licenses/MIT MIT License
+ * @link     https://portal.droidbuilders.uk/
+ */
 class EventController extends Controller
 {
 
+    /**
+     * __construct
+     *
+     * @return void
+     */
     public function __construct()
     {
         $this->middleware('auth');
@@ -29,7 +55,7 @@ class EventController extends Controller
      */
     public function index()
     {
-        if(auth()->user()->accepted_coc == 0) {
+        if (auth()->user()->accepted_coc == 0) {
             return redirect('codeofconduct');
         }
 
@@ -38,10 +64,12 @@ class EventController extends Controller
 
         $calevents = [];
 
-        foreach($events as $event){
-            $title = $event->name.' - ('.$event->location->name.' - '.$event->location->town.')';
+        foreach ($events as $event) {
+            $title = $event->name . ' - ('
+                . $event->location->name . ' - '
+                . $event->location->town . ')';
             $background = "lightgrey";
-            if(Auth()->user()->event($event->id)) {
+            if (Auth()->user()->event($event->id)) {
                 $background = "green";
             }
             $calevents[] = Calendar::event(
@@ -114,13 +142,15 @@ class EventController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param int $id ID of event to show
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
         $event = Event::where('id', $id)->first();
-        if($event == null) {
+        $contacts = Contact::all();
+        if ($event == null) {
             toastr()->error('No such event');
             return redirect('/event');
         } else {
@@ -131,17 +161,19 @@ class EventController extends Controller
                 $date,
                 true
             )
-                            ->description($event->description)
-                            ->address($event->location->name.','.$event->location->postcode);
-            return view('event.show', compact('event', 'link'));
+                    ->description($event->description)
+                    ->address($event->location->name.','.$event->location->postcode);
+
+            return view('event.show', compact('event', 'link', 'contacts'));
         }
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  \App\Event               $event
+     * @param \Illuminate\Http\Request $request Data to update
+     * @param \App\Event               $event   Event to update
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Event $event)
@@ -163,6 +195,11 @@ class EventController extends Controller
         return back();
     }
 
+    /**
+     * Show past events
+     *
+     * @return view
+     */
     public function past()
     {
         $events = Event::whereDate('date', '<=', Carbon::now())
@@ -171,6 +208,11 @@ class EventController extends Controller
         return view('event.past', compact('events'));
     }
 
+    /**
+     * Show events on a map
+     *
+     * @return view
+     */
     public function map()
     {
         $key = config('gmap.google_api_key');
@@ -178,12 +220,16 @@ class EventController extends Controller
 
         $eventlist = [];
         $index = 0;
-        foreach($events as $event) {
+        foreach ($events as $event) {
             $entry = array();
             $entry['id'] = $index;
             $entry['uid'] = $event->id;
-            $entry['title'] = $event->name.' - ('.$event->location->name.' - '.$event->location->town.')';
-            $entry['url'] = "<a href=".route('event.show', ['event' => $event->id]).">".$entry['title']."</a>";
+            $entry['title'] = $event->name . ' - ('
+                . $event->location->name . ' - '
+                . $event->location->town . ')';
+            $entry['url'] = "<a href=".route(
+                'event.show', ['event' => $event->id]
+            ).">".$entry['title']."</a>";
             $entry['extra'] = $event->date;
             $entry['position'] = array(
                 "lat" => floatval($event->location->latitude),
