@@ -246,7 +246,7 @@
         className: 'buttons-reload',
 
         text: function (dt) {
-            return '<i class="fa fa-refresh"></i> ' + dt.i18n('buttons.reload', 'Reload');
+            return '<i class="fa fa-redo"></i> ' + dt.i18n('buttons.reload', 'Reload');
         },
 
         action: function (e, dt, button, config) {
