@@ -212,7 +212,7 @@
             @endif
             @if(auth()->user()->id == $data->user_id || auth()->user()->id == $data->bc_rep_id)
               @if ($data->status == "Active")
-                <a href="{{ route('parts-run.status_update',[$data->id, 'status' => 'paid', 'user_id' => $user->id]) }}"><i class="fas fa-dollar-sign"></i></a>
+                <a href="{{ route('parts-run.status_update',[$data->id, 'status' => 'paid', 'user_id' => $user->id]) }}"><i class="fas fa-pound-sign"></i></a>
               @endif
             @endif
         </li>
@@ -232,7 +232,8 @@
           @endif
           @if(auth()->user()->id == $data->user_id || auth()->user()->id == $data->bc_rep_id)
             @if ($data->status == "Active")
-              <a href="{{ route('parts-run.status_update',[$data->id, 'status' => 'shipped', 'user_id' => $user->id]) }}"><i class="fas fa-truck"></i></a>
+            <i class="fas fa-truck"data-toggle="modal" data-target="#shipModal"></i>
+
             @endif
           @endif
       </li>
@@ -338,6 +339,40 @@
 
   </div>
 </div>
+
+
+<div class="modal fade" id="shipModal" tabindex="-1" role="dialog" aria-labelledby="shipModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="shipModalLabel">Shipping</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-
+                                label="Close" id=close-button>
+									<span aria-hidden="true">&times;</span>
+								</button>
+						</div>
+                        <div>
+                            <form action="{{ route('parts-run.status_update',[$data->id, 'status' => 'shipped', 'user_id' => $user->id]) }}" method="POST">
+                                @csrf
+                                Shipper:
+                                <select class="form-control" name="shipper">
+                                    <option value="none">None</option>
+                                    <option value="Royal Mail">Royal Mail</option>
+                                    <option value="Parcel Force">Parcel Force</option>
+                                    <option value="DPD">DPD</option>
+                                    <option value="Hermes">Hermes</option>
+                                </select>
+                                Tracking Number: <input type="text" size=20 name="tracking">
+                                <input type="hidden" name="user_id" value="{{ $user->id }}">
+                        </div>
+						<div class="modal-footer">
+							<input type="submit" class="btn btn-primary" value="Shipped">
+						</div>
+					</div>
+				</div>
+			</div>
+
+
 <script>
     $(document).on('click', '[data-toggle="lightbox"]', function (event) {
         $(this).ekkoLightbox();
