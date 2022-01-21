@@ -53,27 +53,104 @@ class BadgeController extends Controller
      */
     public function download($clear)
     {
-        $badges = DB::table('id_list')
-            ->where('paid', true)->get();
+        $users = DB::table('id_list')
+            ->select('user_id', 'reissue', 'paid')
+            ->distinct('user_id')->get();
 
         $zip = new ZipArchive();
-        $zip_file = "/storage/test.zip";
+        $zip_file = "test.zip";
         $zip->open($zip_file, \ZipArchive::CREATE | \ZipArchive::OVERWRITE);
-        foreach ($badges as $badge) {
-            $user = User::find($badge->user_id);
-            $dir = $user->forename . '_' . $user->surname;
-            $zip->addEmptyDir($dir);
-            $zip->addFromString(
-                Storage::get('members/1/mug_shot.jpg'), $dir . "mug_shot.jpg"
-            );
+        foreach ($users as $userid) {
+            $user = User::find($userid->user_id);
+            if ($user->validPLI() || ($userid->reissue && $userid->paid)) {
+                $dir = $user->forename . '_' . $user->surname;
+                $zip->addEmptyDir($dir);
 
+                // Get QR code image
+                $path = 'members/'.$user->id.'/qr_code.png';
+                $qr_extension = 'png';
+                if (!Storage::exists($path)) {
+                    $path = 'members/'.$user->id.'/qr_code.jpg';
+                    $qr_extension = 'jpg';
+                }
+                $qrcode = Storage::get($path);
+
+                // Get Mug Shot image
+                $path = 'members/'.$user->id.'/mug_shot.png';
+                $mug_extension = 'png';
+                if (!Storage::exists($path)) {
+                    $path = 'members/'.$user->id.'/mug_shot.jpg';
+                    $mug_extension = 'jpg';
+                }
+                if (!Storage::exists($path)) {
+                    $path = getcwd().'/img/blank_mug_shot.jpg';
+                    $mugshot = file_get_contents($path);
+                    $mug_extension = "jpg";
+                } else {
+                    $mugshot = Storage::get($path);
+                }
+
+                // Add to zip file
+                $zip->addFromString(
+                    $dir . '/qr_code' . '.' .  $qr_extension,
+                    $qrcode
+                );
+                $zip->addFromString(
+                    $dir . '/mug_shot' . '.' .  $mug_extension,
+                    $mugshot . '.' .  $mug_extension
+                );
+
+                if ($userid->reissue) {
+                    $zip->addFromString(
+                        $dir . '/reissue.txt',
+                        'This is a reissue due to lost card or updating picture.'
+                    );
+                }
+
+                $droids = DB::table('id_list')
+                    ->where('user_id', $userid->user_id)
+                    ->get();
+
+                foreach ($droids as $droid) {
+                    // Get Mug Shot image
+                    $path = 'droids/'.$droid->droid_id.'/photo_front.png';
+                    $droid_extension = 'png';
+                    if (!Storage::exists($path)) {
+                        $path = 'droids/'.$droid->droid_id.'/photo_front.jpg';
+                        $droid_extension = 'jpg';
+                    }
+                    if (!Storage::exists($path)) {
+                        $path = getcwd().'/img/blank_photo_front.jpg';
+                        $droid_image = file_get_contents($path);
+                        $droid_extension = "jpg";
+                    } else {
+                        $droid_image = Storage::get($path);
+                    }
+
+                    $zip->addFromString(
+                        $dir . '/droid_' . $droid->droid_id . '.' .  $droid_extension,
+                        $droid_image . '.' .  $droid_extension
+                    );
+
+                    if ($clear == "true") {
+                        DB::table('id_list')
+                            ->where(
+                                [
+                                    [  'user_id', $userid->user_id ],
+                                    [ 'droid_id', $droid->droid_id ]
+                                ]
+                            )->delete();
+                    }
+                }
+
+            }
 
         }
-        //$zip->close();
-        $response = Response::make($zip_file, 200);
-        $response->header("Content-Type", "application/zip");
 
-        return $response;
+        $headers = array(
+            'Content-Type' => 'application/zip',
+        );
+        return response()->download($zip_file, 'id_badges.zip', $headers);
 
     }
 }

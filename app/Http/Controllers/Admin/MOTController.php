@@ -118,6 +118,11 @@ class MOTController extends Controller
         foreach ($droid->users as $user) {
             if ($user->firstMot()) {
                 $user->notify(new FirstMOT($mot));
+            } else {
+                $user->notify(new MOTAdded($mot));
+            }
+
+            if ($request->mot_type == "Initial") {
                 $id = DB::table('id_list')->insert(
                     [
                         'user_id' => $user->id,
@@ -125,8 +130,6 @@ class MOTController extends Controller
                         'paid' => false
                     ]
                 );
-            } else {
-                $user->notify(new MOTAdded($mot));
             }
         }
 
