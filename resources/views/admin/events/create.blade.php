@@ -45,7 +45,7 @@
                         <a class="btn btn-info" href={{ route('admin.locations.create') }}>New Location</a>
                     </div>
                 </div>
-                
+
                 <div class="form-group row d-flex justify-content-center align-items-center">
                     <div class="col-sm-2">
                         <label for="date"><strong>Parking Details</strong></label>
@@ -56,7 +56,7 @@
                     </div>
                 </div>
 
-                
+
 
                 <div class="form-group row d-flex justify-content-center align-items-center">
                     <div class="col-sm-2">
@@ -73,8 +73,16 @@
                         <label for="date"><strong>Date</strong></label>
                     </div>
 
-                    <div class="col-sm-10">
+                    <div class="col-sm-5">
                         <input type="date" name="date" class="form-control" placeholder="Date">
+                    </div>
+
+                    <div class="col-sm-1">
+                        <label for="days"><strong>Days</strong></label>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <input type="number" name="days" value="1" class="form-control" placeholder="Number of Days" required>
                     </div>
                 </div>
 
