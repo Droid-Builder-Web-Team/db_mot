@@ -95,6 +95,11 @@
                   </div>
                 @endif
                 <br>
+
+                @can('Edit Events')
+                    @include('partials.show_contacts', ['contacts' => $event->contacts])
+                @endcan
+
                 @if(!$event->isFuture())
                   <strong>Charity Raised:</strong>
                   £{{ $event->charity_raised }}
@@ -153,8 +158,8 @@
             @can('Edit Events')
               <a class="btn btn-edit" style="width:auto;" href="{{ route('admin.events.edit',$event->id) }}">Edit</a>
               <a class="btn btn-edit" style="width:auto;" href="{{ route('admin.events.addimage',[ 'event_id' => $event->id]) }}">Add Image</a>
-              <span id="export" class="btn btn-info" onclick="shareToFacebook(event.target);">Share to Facebook
-              </span>
+              <span id="export" class="btn btn-info" onclick="shareToFacebook(event.target);">Share to Facebook</span>
+              <button type="button" class="btn btn-primary m-2" data-toggle="modal" data-target="#addContactModal">Add Contact</button>
 
             @endcan
 
@@ -385,4 +390,7 @@
 
 </div>
 
+@can('Edit Events')
+    @include('partials.add_contact', ['model_id' => $event->id, 'model_type' => 'App\Event'])
+@endcan
 @endsection

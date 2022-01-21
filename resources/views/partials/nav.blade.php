@@ -147,10 +147,10 @@
                     </a>
                 </li>
                 <li class="c-sidebar-nav-item">
-                    <a class="c-sidebar-nav-link" href="{{ route('admin.venue-contacts.index') }}">
+                    <a class="c-sidebar-nav-link" href="{{ route('admin.contacts.index') }}">
                         <svg class="c-sidebar-nav-icon">
                             <i class="fas fa-user fa-fw"></i>
-                        </svg><span class="ml-1">Venue Contacts</span>
+                        </svg><span class="ml-1">Contacts</span>
                     </a>
                 </li>
             @endcan

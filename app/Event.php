@@ -110,6 +110,17 @@ class Event extends Model implements \Acaronlex\LaravelCalendar\Event, Auditable
     }
 
     /**
+     * Get contacts for this event
+     *
+     * @return array of App\Contact
+     */
+    public function contacts()
+    {
+        return $this->morphToMany('App\Contact', 'contactable')
+            ->orderBy('created_at');
+    }
+
+    /**
      * Is the event in the future
      *
      * @return bool
