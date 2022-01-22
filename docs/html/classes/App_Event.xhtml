@@ -59,6 +59,9 @@
             <a href="#methods">Methods</a>
           </li>
           <li>
+            <a href="#history">History</a>
+          </li>
+          <li>
             <a href="../source/Event.php.xhtml#line30">Source</a>
           </li>
         </ul>
@@ -85,6 +88,7 @@
                     </li><li>public array <a title="App\Event" href="../classes/App_Event/attended.xhtml">attended</a>()
                     </li><li>public Location <a title="App\Event" href="../classes/App_Event/location.xhtml">location</a>()
                     </li><li>public array <a title="App\Event" href="../classes/App_Event/comments.xhtml">comments</a>()
+                    </li><li>public array <a title="App\Event" href="../classes/App_Event/contacts.xhtml">contacts</a>()
                     </li><li>public bool <a title="App\Event" href="../classes/App_Event/isFuture.xhtml">isFuture</a>()
                     </li><li>public true <a title="App\Event" href="../classes/App_Event/isAllDay.xhtml">isAllDay</a>()
                     </li><li>public DateTime <a title="App\Event" href="../classes/App_Event/getStart.xhtml">getStart</a>()
@@ -138,6 +142,8 @@
                 — Are WIP droids welcome at the event</li>
             <li id="comments"><a title="App\Event" href="../classes/App_Event/comments.xhtml">comments()</a>
                 — Get comments written on this event</li>
+            <li id="contacts"><a title="App\Event" href="../classes/App_Event/contacts.xhtml">contacts()</a>
+                — Get contacts for this event</li>
             <li id="createdEventNotification"><a title="App\Event" href="../classes/App_Event/createdEventNotification.xhtml">createdEventNotification()</a>
                 — Notify discord an event has been created</li>
             <li id="deletedEventNotification"><a title="App\Event" href="../classes/App_Event/deletedEventNotification.xhtml">deletedEventNotification()</a>
@@ -172,6 +178,172 @@
                 — Get list of users registered against an event</li>
           </ul>
         </div>
+        <h2 id="history">History</h2>
+        <ul class="styled history">
+          <li>
+            <h3>2022-01-21T21:25:48+00:00 (commit #<span title="4c453e94484baa177329542b557b329cbea9fd5d">4c453e9</span>)</h3>
+            <div>
+              <p>
+                        Author: dpoulson (darren.poulson@gmail.com) /
+                        Commiter: dpoulson (darren.poulson@gmail.com)
+                    </p>
+              <pre class="wrapped">Basic contact update for locations and events</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2022-01-17T19:37:57+00:00 (commit #<span title="f56f6b1a843f45d88e7fe0a09849eaa683a46808">f56f6b1</span>)</h3>
+            <div>
+              <p>
+                        Author: dpoulson (darren.poulson@gmail.com) /
+                        Commiter: dpoulson (darren.poulson@gmail.com)
+                    </p>
+              <pre class="wrapped">Some lint cleanup and added new permission of Create Partrun</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2022-01-17T02:12:46+00:00 (commit #<span title="c6754c1f402310fb7063d84dc6ea2174c9a71a4f">c6754c1</span>)</h3>
+            <div>
+              <p>
+                        Author: dpoulson (darren.poulson@gmail.com) /
+                        Commiter: dpoulson (darren.poulson@gmail.com)
+                    </p>
+              <pre class="wrapped">Tidied up code to pass linter, and generate documentation</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2021-12-09T12:04:56+00:00 (commit #<span title="680eaca01d62eaaccf308e545ed49aaff0499298">680eaca</span>)</h3>
+            <div>
+              <p>
+                        Author: dpoulson (darren.poulson@gmail.com) /
+                        Commiter: dpoulson (darren.poulson@gmail.com)
+                    </p>
+              <pre class="wrapped">Comments weren't ordered by date. They are now.</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2021-10-26T22:56:31+00:00 (commit #<span title="f293efbbecbcd8919fff48b312440d9afdf8dccd">f293efb</span>)</h3>
+            <div>
+              <p>
+                        Author: Rob Howdle (robhowdle94@gmail.com) /
+                        Commiter: Rob Howdle (robhowdle94@gmail.com)
+                    </p>
+              <pre class="wrapped">Desktop Users Pages Styling Works
+Added Box for users charity raising
+Added migration for event parking details</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2021-08-22T10:28:14+00:00 (commit #<span title="3b1f409d2b9c4cba404e4bc1be90d758b8ef281d">3b1f409</span>)</h3>
+            <div>
+              <p>
+                        Author: dpoulson (darren.poulson@gmail.com) /
+                        Commiter: dpoulson (darren.poulson@gmail.com)
+                    </p>
+              <pre class="wrapped">Can now mark events as no WIP droids.</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2021-07-29T23:08:54+00:00 (commit #<span title="8ae8328372b705998ceda1eef6e597069cba3ac2">8ae8328</span>)</h3>
+            <div>
+              <p>
+                        Author: dpoulson (darren.poulson@gmail.com) /
+                        Commiter: dpoulson (darren.poulson@gmail.com)
+                    </p>
+              <pre class="wrapped">Allow uploading of an image to an event</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2021-07-28T14:27:19+00:00 (commit #<span title="3ef97331561d694743b69493849a6d5f7d230e59">3ef9733</span>)</h3>
+            <div>
+              <p>
+                        Author: dpoulson (darren.poulson@gmail.com) /
+                        Commiter: dpoulson (darren.poulson@gmail.com)
+                    </p>
+              <pre class="wrapped">Start of UI to edit MOT, and fixed discord event webhooks.</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2021-07-13T23:09:12+00:00 (commit #<span title="8a37a9db9f9aab1267ba9049cebc4ca69109d5f9">8a37a9d</span>)</h3>
+            <div>
+              <p>
+                        Author: Rob Howdle (robhowdle94@gmail.com) /
+                        Commiter: Rob Howdle (robhowdle94@gmail.com)
+                    </p>
+              <pre class="wrapped">Added URL to env for discord hook
+changed url to routes for links to event</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2021-07-13T22:41:47+00:00 (commit #<span title="609a63db5053d512e59641fcd995dd440bb2eeba">609a63d</span>)</h3>
+            <div>
+              <p>
+                        Author: Rob Howdle (robhowdle94@gmail.com) /
+                        Commiter: Rob Howdle (robhowdle94@gmail.com)
+                    </p>
+              <pre class="wrapped">Dashboard Responsive Fixes</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2021-07-13T21:42:45+00:00 (commit #<span title="1a049dbe0926e5196fe17db550b8bee48868790c">1a049db</span>)</h3>
+            <div>
+              <p>
+                        Author: Rob Howdle (robhowdle94@gmail.com) /
+                        Commiter: Rob Howdle (robhowdle94@gmail.com)
+                    </p>
+              <pre class="wrapped">Added notifications for events creation, update and delete to trigger Discord Notifications</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2021-05-24T22:38:21+00:00 (commit #<span title="06a214d8e68a10854ab0e9a03efe95585d297426">06a214d</span>)</h3>
+            <div>
+              <p>
+                        Author: dpoulson (darren.poulson@gmail.com) /
+                        Commiter: dpoulson (darren.poulson@gmail.com)
+                    </p>
+              <pre class="wrapped">Added audit log for most models.</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2021-03-20T03:13:43+00:00 (commit #<span title="74af688c3e5dcea0c10c152bcff110ed792e4b8c">74af688</span>)</h3>
+            <div>
+              <p>
+                        Author: dpoulson (darren.poulson@gmail.com) /
+                        Commiter: dpoulson (darren.poulson@gmail.com)
+                    </p>
+              <pre class="wrapped">Events can now be marked as public. Any public events with droids attending can be read via an API. Charity totals per year can also be read.</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2021-03-20T00:50:02+00:00 (commit #<span title="65283dc6c90f17c48cd9039ba8ad99912c4e51d6">65283dc</span>)</h3>
+            <div>
+              <p>
+                        Author: dpoulson (darren.poulson@gmail.com) /
+                        Commiter: dpoulson (darren.poulson@gmail.com)
+                    </p>
+              <pre class="wrapped">Admins can now see if people have cancelled going to an event.</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2021-03-20T00:07:35+00:00 (commit #<span title="cb81ab2391e3ed6efec9cddb046c71dcce05ffa8">cb81ab2</span>)</h3>
+            <div>
+              <p>
+                        Author: dpoulson (darren.poulson@gmail.com) /
+                        Commiter: dpoulson (darren.poulson@gmail.com)
+                    </p>
+              <pre class="wrapped">Events can now specify if MOTs can be done. Also has an event URL field.</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2021-03-13T00:03:07+00:00 (commit #<span title="c0efc014c88ebbbc52bc043b7493c5d5878bac44">c0efc01</span>)</h3>
+            <div>
+              <p>
+                        Author: dpoulson (darren.poulson@gmail.com) /
+                        Commiter: dpoulson (darren.poulson@gmail.com)
+                    </p>
+              <pre class="wrapped">Calendar updates for upcoming events.</pre>
+            </div>
+          </li>
+        </ul>
       </section>
     </div>
     <footer>

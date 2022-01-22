@@ -53,7 +53,13 @@
             <a href="#hierarchy">Hierarchy</a>
           </li>
           <li>
+            <a href="#violations">Violations</a>
+          </li>
+          <li>
             <a href="#methods">Methods</a>
+          </li>
+          <li>
+            <a href="#history">History</a>
           </li>
           <li>
             <a href="../source/Http/Controllers/ImageController.php.xhtml#line10">Source</a>
@@ -84,6 +90,92 @@
             </li>
           </ul>
         </div>
+        <h2 id="violations">Violations</h2>
+        <div class="styled">
+          <h3>Checkstyle</h3>
+          <table class="styled">
+            <thead>
+              <tr>
+                <th>Line</th>
+                <th>Column</th>
+                <th>Severity</th>
+                <th>Message</th>
+              </tr>
+            </thead>
+            <tr>
+              <td class="line">13</td>
+              <td>12</td>
+              <td>
+                <span title="PEAR.Commenting.FunctionComment.Missing">error</span>
+              </td>
+              <td>Missing doc comment for function __construct()</td>
+            </tr>
+            <tr>
+              <td class="line">19</td>
+              <td>12</td>
+              <td>
+                <span title="PEAR.Commenting.FunctionComment.Missing">error</span>
+              </td>
+              <td>Missing doc comment for function index()</td>
+            </tr>
+            <tr>
+              <td class="line">24</td>
+              <td>12</td>
+              <td>
+                <span title="PEAR.Commenting.FunctionComment.Missing">error</span>
+              </td>
+              <td>Missing doc comment for function upload()</td>
+            </tr>
+            <tr>
+              <td class="line">40</td>
+              <td>98</td>
+              <td>
+                <span title="Generic.Files.LineLength.TooLong">warning</span>
+              </td>
+              <td>Line exceeds 85 characters; contains 98 characters</td>
+            </tr>
+            <tr>
+              <td class="line">83</td>
+              <td>12</td>
+              <td>
+                <span title="PEAR.Commenting.FunctionComment.Missing">error</span>
+              </td>
+              <td>Missing doc comment for function destroy()</td>
+            </tr>
+            <tr>
+              <td class="line">99</td>
+              <td>98</td>
+              <td>
+                <span title="Generic.Files.LineLength.TooLong">warning</span>
+              </td>
+              <td>Line exceeds 85 characters; contains 98 characters</td>
+            </tr>
+            <tr>
+              <td class="line">121</td>
+              <td>12</td>
+              <td>
+                <span title="PEAR.Commenting.FunctionComment.Missing">error</span>
+              </td>
+              <td>Missing doc comment for function update()</td>
+            </tr>
+            <tr>
+              <td class="line">132</td>
+              <td>9</td>
+              <td>
+                <span title="PEAR.ControlStructures.ControlSignature.Found">error</span>
+              </td>
+              <td>Expected "foreach (...) {\n"; found "foreach(...)\n        {\n"</td>
+            </tr>
+            <tr>
+              <td class="line">135</td>
+              <td>13</td>
+              <td>
+                <span title="PEAR.ControlStructures.ControlSignature.Found">error</span>
+              </td>
+              <td>Expected "foreach (...) {\n"; found "foreach(...)\n              {\n"</td>
+            </tr>
+          </table>
+        </div>
         <h2 id="methods">Methods</h2>
         <div class="styled">
           <h4>public</h4>
@@ -105,6 +197,99 @@
             </li>
           </ul>
         </div>
+        <h2 id="history">History</h2>
+        <ul class="styled history">
+          <li>
+            <h3>2022-01-17T02:12:46+00:00 (commit #<span title="c6754c1f402310fb7063d84dc6ea2174c9a71a4f">c6754c1</span>)</h3>
+            <div>
+              <p>
+                        Author: dpoulson (darren.poulson@gmail.com) /
+                        Commiter: dpoulson (darren.poulson@gmail.com)
+                    </p>
+              <pre class="wrapped">Tidied up code to pass linter, and generate documentation</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2021-07-13T01:23:30+00:00 (commit #<span title="841dd394fcbc896cd36517bbc0aa3328ea416dfc">841dd39</span>)</h3>
+            <div>
+              <p>
+                        Author: dpoulson (darren.poulson@gmail.com) /
+                        Commiter: dpoulson (darren.poulson@gmail.com)
+                    </p>
+              <pre class="wrapped">Removed hard coded disk('local') for image saving</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2020-10-12T23:33:35+00:00 (commit #<span title="1bfdf1252a0c012621934d1de5cba644890a79a1">1bfdf12</span>)</h3>
+            <div>
+              <p>
+                        Author: dpoulson (darren.poulson@gmail.com) /
+                        Commiter: dpoulson (darren.poulson@gmail.com)
+                    </p>
+              <pre class="wrapped">A few bug fixes</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2020-09-28T01:31:58+00:00 (commit #<span title="5a582a7720b3b1a3209c725cff52e960bea78607">5a582a7</span>)</h3>
+            <div>
+              <p>
+                        Author: dpoulson (darren.poulson@gmail.com) /
+                        Commiter: dpoulson (darren.poulson@gmail.com)
+                    </p>
+              <pre class="wrapped">A few fixes, and image updater.</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2020-09-22T23:27:19+00:00 (commit #<span title="6ca7d519b5cdd448ac78b72220b8144972498a5a">6ca7d51</span>)</h3>
+            <div>
+              <p>
+                        Author: dpoulson (darren.poulson@gmail.com) /
+                        Commiter: dpoulson (darren.poulson@gmail.com)
+                    </p>
+              <pre class="wrapped">Fixed some bugs (droid image delete, and cache on uploading new image)</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2020-09-08T01:20:23+00:00 (commit #<span title="26958165b4f9f0f307ec28415e14492883262b18">2695816</span>)</h3>
+            <div>
+              <p>
+                        Author: dpoulson (darren.poulson@gmail.com) /
+                        Commiter: dpoulson (darren.poulson@gmail.com)
+                    </p>
+              <pre class="wrapped">More updates for Toastr responses in most of the user level functions</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2020-09-04T21:21:14+00:00 (commit #<span title="53fed3587dc9a85f3ad99dbc227886993b553496">53fed35</span>)</h3>
+            <div>
+              <p>
+                        Author: dpoulson (darren.poulson@gmail.com) /
+                        Commiter: dpoulson (darren.poulson@gmail.com)
+                    </p>
+              <pre class="wrapped">Checking all the permissions</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2020-09-02T03:57:45+00:00 (commit #<span title="b68e18a67fa25e53d823f7e5505ec2b6d2f4d48b">b68e18a</span>)</h3>
+            <div>
+              <p>
+                        Author: dpoulson (darren.poulson@gmail.com) /
+                        Commiter: dpoulson (darren.poulson@gmail.com)
+                    </p>
+              <pre class="wrapped">Some more work on image uploads. Now 480 and 240 width images are also saved</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2020-09-02T01:22:07+00:00 (commit #<span title="097e04db32fdc97b29c47f6b04db4ae9ce876693">097e04d</span>)</h3>
+            <div>
+              <p>
+                        Author: dpoulson (darren.poulson@gmail.com) /
+                        Commiter: dpoulson (darren.poulson@gmail.com)
+                    </p>
+              <pre class="wrapped">Working on image uploads</pre>
+            </div>
+          </li>
+        </ul>
       </section>
     </div>
     <footer>

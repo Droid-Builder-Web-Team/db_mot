@@ -53,6 +53,9 @@
             <a href="#hierarchy">Hierarchy</a>
           </li>
           <li>
+            <a href="#violations">Violations</a>
+          </li>
+          <li>
             <a href="#constants">Constants</a>
           </li>
           <li>
@@ -60,6 +63,9 @@
           </li>
           <li>
             <a href="#methods">Methods</a>
+          </li>
+          <li>
+            <a href="#history">History</a>
           </li>
           <li>
             <a href="../source/User.php.xhtml#line46">Source</a>
@@ -139,6 +145,52 @@
             <li>OwenIt\Auditing\Contracts\Auditable</li>
             <li>Qirolab\Laravel\Reactions\Contracts\ReactsInterface</li>
           </ul>
+        </div>
+        <h2 id="violations">Violations</h2>
+        <div class="styled">
+          <h3>Checkstyle</h3>
+          <table class="styled">
+            <thead>
+              <tr>
+                <th>Line</th>
+                <th>Column</th>
+                <th>Severity</th>
+                <th>Message</th>
+              </tr>
+            </thead>
+            <tr>
+              <td class="line">180</td>
+              <td>12</td>
+              <td>
+                <span title="PEAR.NamingConventions.ValidFunctionName.ScopeNotCamelCaps">error</span>
+              </td>
+              <td>Public method name "User::attended_events" is not in camel caps format</td>
+            </tr>
+            <tr>
+              <td class="line">252</td>
+              <td>12</td>
+              <td>
+                <span title="PEAR.NamingConventions.ValidFunctionName.ScopeNotCamelCaps">error</span>
+              </td>
+              <td>Public method name "User::pli_expires" is not in camel caps format</td>
+            </tr>
+            <tr>
+              <td class="line">316</td>
+              <td>12</td>
+              <td>
+                <span title="PEAR.NamingConventions.ValidFunctionName.ScopeNotCamelCaps">error</span>
+              </td>
+              <td>Public method name "User::course_runs" is not in camel caps format</td>
+            </tr>
+            <tr>
+              <td class="line">359</td>
+              <td>12</td>
+              <td>
+                <span title="PEAR.NamingConventions.ValidFunctionName.ScopeNotCamelCaps">error</span>
+              </td>
+              <td>Public method name "User::parts_interested" is not in camel caps format</td>
+            </tr>
+          </table>
         </div>
         <h2 id="constants">Constants</h2>
         <table class="styled">
@@ -232,6 +284,171 @@
                 — How many years has user been a member</li>
           </ul>
         </div>
+        <h2 id="history">History</h2>
+        <ul class="styled history">
+          <li>
+            <h3>2022-01-21T02:06:51+00:00 (commit #<span title="361402a0207377b76b686bc9e80be98689380e52">361402a</span>)</h3>
+            <div>
+              <p>
+                        Author: dpoulson (darren.poulson@gmail.com) /
+                        Commiter: dpoulson (darren.poulson@gmail.com)
+                    </p>
+              <pre class="wrapped">Some socialite tweaks and a start on creating an downloadable option for creating ID badges</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2022-01-17T02:12:46+00:00 (commit #<span title="c6754c1f402310fb7063d84dc6ea2174c9a71a4f">c6754c1</span>)</h3>
+            <div>
+              <p>
+                        Author: dpoulson (darren.poulson@gmail.com) /
+                        Commiter: dpoulson (darren.poulson@gmail.com)
+                    </p>
+              <pre class="wrapped">Tidied up code to pass linter, and generate documentation</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2021-12-07T15:45:10+00:00 (commit #<span title="70603358ffc0871e6c1e9ebffd81317c551ef76d">7060335</span>)</h3>
+            <div>
+              <p>
+                        Author: dpoulson (darren.poulson@gmail.com) /
+                        Commiter: dpoulson (darren.poulson@gmail.com)
+                    </p>
+              <pre class="wrapped">Broke comments for Location and Event to its own Controller</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2021-11-22T18:16:50+00:00 (commit #<span title="17d2b6f4ccc62b16ca8d37ca045ef055ee3b7a99">17d2b6f</span>)</h3>
+            <div>
+              <p>
+                        Author: dpoulson (darren.poulson@gmail.com) /
+                        Commiter: dpoulson (darren.poulson@gmail.com)
+                    </p>
+              <pre class="wrapped">Can register interest with quantity, and active runs can progress through 'paid; and 'shipped'</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2021-11-20T02:44:36+00:00 (commit #<span title="41a718400b522e89ba70439f82426ac141ac9a12">41a7184</span>)</h3>
+            <div>
+              <p>
+                        Author: dpoulson (darren.poulson@gmail.com) /
+                        Commiter: dpoulson (darren.poulson@gmail.com)
+                    </p>
+              <pre class="wrapped">Registering interest on part runs now works. Along with a quantity limit (with 0 as continuous)</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2021-10-26T22:56:31+00:00 (commit #<span title="f293efbbecbcd8919fff48b312440d9afdf8dccd">f293efb</span>)</h3>
+            <div>
+              <p>
+                        Author: Rob Howdle (robhowdle94@gmail.com) /
+                        Commiter: Rob Howdle (robhowdle94@gmail.com)
+                    </p>
+              <pre class="wrapped">Desktop Users Pages Styling Works
+Added Box for users charity raising
+Added migration for event parking details</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2021-08-26T22:35:36+00:00 (commit #<span title="0cb396ed4774bdca7586ecdf9a0b0389f10d6b5f">0cb396e</span>)</h3>
+            <div>
+              <p>
+                        Author: dpoulson (darren.poulson@gmail.com) /
+                        Commiter: dpoulson (darren.poulson@gmail.com)
+                    </p>
+              <pre class="wrapped">Events user is registered with now have a green icon next to them.</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2021-07-29T10:22:18+00:00 (commit #<span title="30fa9000d911c44ebe6310e6bad42fe0684b0149">30fa900</span>)</h3>
+            <div>
+              <p>
+                        Author: dpoulson (darren.poulson@gmail.com) /
+                        Commiter: dpoulson (darren.poulson@gmail.com)
+                    </p>
+              <pre class="wrapped">Fixed bug in event, was showing the wrong pli_expired status. Also on admin members table, now also detects if never had pli.</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2021-07-28T16:14:13+00:00 (commit #<span title="cf69cfbee40512245b09c85dbf27c41a2c0b5e52">cf69cfb</span>)</h3>
+            <div>
+              <p>
+                        Author: dpoulson (darren.poulson@gmail.com) /
+                        Commiter: dpoulson (darren.poulson@gmail.com)
+                    </p>
+              <pre class="wrapped">Creating part run now uses club and bc rep roll. BC rep dropdown populated by selection of club.</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2021-07-13T01:23:30+00:00 (commit #<span title="841dd394fcbc896cd36517bbc0aa3328ea416dfc">841dd39</span>)</h3>
+            <div>
+              <p>
+                        Author: dpoulson (darren.poulson@gmail.com) /
+                        Commiter: dpoulson (darren.poulson@gmail.com)
+                    </p>
+              <pre class="wrapped">Removed hard coded disk('local') for image saving</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2021-07-01T18:25:53+00:00 (commit #<span title="b6bfd8c0f44b4ac44d547af7111d8e07b9630c83">b6bfd8c</span>)</h3>
+            <div>
+              <p>
+                        Author: Rob Howdle (robhowdle94@gmail.com) /
+                        Commiter: Rob Howdle (robhowdle94@gmail.com)
+                    </p>
+              <pre class="wrapped">Model Relationships Complete</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2021-05-26T22:55:04+00:00 (commit #<span title="23a0863701ea005a969132c00423c428384b7b1f">23a0863</span>)</h3>
+            <div>
+              <p>
+                        Author: dpoulson (darren.poulson@gmail.com) /
+                        Commiter: dpoulson (darren.poulson@gmail.com)
+                    </p>
+              <pre class="wrapped">Initial work to allow MOT officers access to only their club droids.</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2021-05-26T10:16:23+00:00 (commit #<span title="0a850f5ccb845fb0f6622d218ed8cad224fd9b6e">0a850f5</span>)</h3>
+            <div>
+              <p>
+                        Author: dpoulson (darren.poulson@gmail.com) /
+                        Commiter: dpoulson (darren.poulson@gmail.com)
+                    </p>
+              <pre class="wrapped">Some more cleanup for audit viewer, and some more fields to exclude.</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2021-05-25T20:50:38+00:00 (commit #<span title="71826b202b73406dedd70f1cf51c99255a83402e">71826b2</span>)</h3>
+            <div>
+              <p>
+                        Author: dpoulson (darren.poulson@gmail.com) /
+                        Commiter: dpoulson (darren.poulson@gmail.com)
+                    </p>
+              <pre class="wrapped">Removed last_login from audit to cut down on database size, and  it causes issues  with socialite.</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2021-05-24T22:38:21+00:00 (commit #<span title="06a214d8e68a10854ab0e9a03efe95585d297426">06a214d</span>)</h3>
+            <div>
+              <p>
+                        Author: dpoulson (darren.poulson@gmail.com) /
+                        Commiter: dpoulson (darren.poulson@gmail.com)
+                    </p>
+              <pre class="wrapped">Added audit log for most models.</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2021-03-17T04:08:33+00:00 (commit #<span title="8757cee9e2bdccd7da291bddbad80020c39acec3">8757cee</span>)</h3>
+            <div>
+              <p>
+                        Author: dpoulson (darren.poulson@gmail.com) /
+                        Commiter: dpoulson (darren.poulson@gmail.com)
+                    </p>
+              <pre class="wrapped">Let users view all achievements available.</pre>
+            </div>
+          </li>
+        </ul>
       </section>
     </div>
     <footer>

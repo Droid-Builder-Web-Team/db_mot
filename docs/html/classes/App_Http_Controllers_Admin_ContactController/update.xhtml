@@ -2,7 +2,7 @@
 <!DOCTYPE html SYSTEM "about:legacy-compat">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
-    <title>phpDox - App\DataTables\VenueContactDataTable::query</title>
+    <title>phpDox - App\Http\Controllers\Admin\ContactController::update</title>
     <link rel="stylesheet" type="text/css" href="../../css/style.css" media="screen"/>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
   </head>
@@ -36,12 +36,12 @@
             <a href="../../classes.xhtml">Classes</a>
           </li>
           <li class="separator">
-            <a href="../../classes.xhtml#App_DataTables">App\DataTables</a>
+            <a href="../../classes.xhtml#App_Http_Controllers_Admin">App\Http\Controllers\Admin</a>
           </li>
           <li class="separator">
-            <a title="App\DataTables\VenueContactDataTable" href="../../classes/App_DataTables_VenueContactDataTable.xhtml">VenueContactDataTable</a>
+            <a title="App\Http\Controllers\Admin\ContactController" href="../../classes/App_Http_Controllers_Admin_ContactController.xhtml">ContactController</a>
           </li>
-          <li class="separator">query</li>
+          <li class="separator">update</li>
         </ul>
       </div>
       <nav class="box">
@@ -59,31 +59,37 @@
             <a href="#return">Return</a>
           </li>
           <li>
-            <a href="../../source/DataTables/VenueContactDataTable.php.xhtml#line41">Source</a>
+            <a href="../../source/Http/Controllers/Admin/ContactController.php.xhtml#line127">Source</a>
           </li>
         </ul>
       </nav>
       <section>
-        <h1><small>App\DataTables\VenueContactDataTable::</small>query</h1>
-        <h4>Get query source of dataTable.</h4>
+        <h1><small>App\Http\Controllers\Admin\ContactController::</small>update</h1>
+        <h4>Update the specified resource in storage.</h4>
         <p/>
         <ul/>
         <h2 id="signature">Signature</h2>
         <div class="styled synopsis">
-          <code>public function query(<a title="App\VenueContact" href="../../classes/App_VenueContact.xhtml">VenueContact</a>
-        $model )
+          <code>public function update(<a title="Illuminate\Http\Request" href="../../classes/Illuminate_Http_Request.xhtml">Request</a>
+        $request,
+            <a title="App\Contact" href="../../classes/App_Contact.xhtml">Contact</a>
+        $contact )
             </code>
         </div>
         <h2 id="parameterlist">Parameters</h2>
         <dl class="styled">
-          <dt><code>$model</code>
+          <dt><code>$request</code>
                 —
-                <a title="\App\VenueContact" href="../../classes/_App_VenueContact.xhtml">\App\VenueContact</a></dt>
-          <dd><br/><br/><br/>      </dd>
+                <a title="\Illuminate\Http\Request" href="../../classes/_Illuminate_Http_Request.xhtml">\Illuminate\Http\Request</a></dt>
+          <dd>Data to update<br/><br/><br/>      </dd>
+          <dt><code>$contact</code>
+                —
+                <a title="\App\Contact" href="../../classes/_App_Contact.xhtml">\App\Contact</a></dt>
+          <dd>Contact to update<br/><br/><br/>      </dd>
         </dl>
         <h2 id="return">Returns</h2>
         <dl class="styled">
-          <dt>Builder</dt>
+          <dt>Response</dt>
           <dd><br/>
         </dd>
         </dl>

@@ -249,6 +249,7 @@
           @if($user->pivot->quantity != 1)
            ({{$user->pivot->quantity}})
           @endif
+          <i class="fas fa-box"></i>
       </li>
       @endif
     @endforeach
