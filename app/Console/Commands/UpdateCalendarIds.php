@@ -40,7 +40,7 @@ class UpdateCalendarIds extends Command
     {
         $users = User::all();
         foreach ($users as $user) {
-            if ($user->calendar_id == "") {
+            if ($user->calendar_id == "none") {
                 $user->calendar_id = $user->generateID(60);
                 $user->save();
             }
