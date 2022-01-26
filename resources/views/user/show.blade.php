@@ -290,7 +290,7 @@
             </div>
         </div>
     </div>
-    
+
     {{-- User Achievements --}}
     <div class="row">
         <div class="col-12">
@@ -356,6 +356,9 @@
         <div class="col-12">
             <div class="card">
                 <div class="text-center card-header">
+                    <span class="float-right">
+                        <a class="btn btn-cover" style="color:white;" href="/ical/{{ $user->calendar_id }}" target="_blank">iCal</a>
+                    </span>
                     <h4 class="text-center title">Events</h4>
                 </div>
                 <div class="text-center card-body">
