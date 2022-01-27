@@ -173,6 +173,18 @@ class User extends Authenticatable implements MustVerifyEmail,
     }
 
     /**
+     * Events user is going to
+     *
+     * @return array of App\Event
+     */
+    public function goingTo()
+    {
+        return $this->belongsToMany(Event::class, 'members_events')
+            ->wherePivot('status', "yes")
+            ->OrderBy('date', 'desc');
+    }
+
+    /**
      * Get list of all events user has attended
      *
      * @return array of App\Event
