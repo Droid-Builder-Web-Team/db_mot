@@ -92,7 +92,7 @@ class SocialController extends Controller
 
         if (!$user) {
             $id = User::generateID(60);
-            $qr = User::generateQR($id, 90);
+            $cal = User::generateID(60);
             list($forename, $surname) = explode(" ", $getInfo->name);
             $user = User::create(
                 [
@@ -101,6 +101,7 @@ class SocialController extends Controller
                 'email_verified_at'   => now(),
                 'email'               => $getInfo->email,
                 'badge_id'            => $id,
+                'calendar_id'         => $cal,
                 'active'              => 'on',
                 ]
             );
