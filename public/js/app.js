@@ -22231,6 +22231,22 @@ app.use(_fawmi_vue_google_maps__WEBPACK_IMPORTED_MODULE_2__["default"], {
   }
 }).mount('#app');
 
+(function ($) {
+  "use strict";
+
+  var fullHeight = function fullHeight() {
+    $('.js-fullheight').css('height', $(window).height());
+    $(window).resize(function () {
+      $('.js-fullheight').css('height', $(window).height());
+    });
+  };
+
+  fullHeight();
+  $('#sidebarCollapse').on('click', function () {
+    $('#sidebar').toggleClass('active');
+  });
+})(jQuery);
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":

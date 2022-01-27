@@ -1,12 +1,15 @@
-// Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
-
 // Variables
 @import 'variables';
+
 @import 'responsive';
+// Global
+@import 'global';
+@import 'sidebar';
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+
 
 @media only screen and (max-width: 400px) {
   .oauth-buttons a {
@@ -40,12 +43,12 @@ body {
   letter-spacing: 0.7px;
 }
 
-.far.fa-question-circle.fa-2x,
-.fab.fa-facebook,
-.fab.fa-discord,
-.fab.fa-youtube {
-  color: #fff;
-}
+// .far.fa-question-circle.fa-2x,
+// .fab.fa-facebook,
+// .fab.fa-discord,
+// .fab.fa-youtube {
+//   color: #fff;
+// }
 
 /* Global CSS */
 .c-sidebar-nav-link,
@@ -276,3 +279,14 @@ a.btn-header-secondary:focus {
       color: $white !important; 
     }
   }
+
+
+  /*
+    New Styling Methods - RH$primaryColor: #181924;
+  */
+
+.white-link {
+  color: $white !important;
+  text-decoration: none;
+}
+

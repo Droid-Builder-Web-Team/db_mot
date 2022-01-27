@@ -1,5 +1,5 @@
-      <li class="c-header-nav-item dropdown mx-2">
-        <a class="c-header-nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+      <li class="nav-item dropdown">
+        <a class="header-nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
           <i class="far fa-bell fa-2x"></i><span class="badge badge-primary badge-pill">
             {{ Auth::user()->unreadNotifications->count() }}
           </span>

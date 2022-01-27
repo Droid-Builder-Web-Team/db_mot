@@ -2,6 +2,78 @@
 
 .btn {
     box-shadow: none !important;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.125rem;
+}
+
+.btn-create {
+    text-transform: uppercase;
+    border: 1px solid $cyan;
+    background: transparent;
+    padding: 5px 40px;
+    transition: 0.5s all;
+    color: $secondaryColor;
+    
+    p {
+        margin: 0;
+    }
+
+    &:hover {
+        background: $cyan;
+        color: $secondaryColor;
+    }
+}
+
+.btn-view {
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 0.75rem;
+    border: 1px solid $white;
+    background: transparent;
+    padding: 10px 20px;
+    transition: 0.5s all;
+    color: $secondaryColor;
+    
+    i {
+        color: $white;
+    }
+
+    &:hover {
+        background: $white;
+
+        i {
+            color: $primaryColor;
+        }
+    }
+}
+
+.btn-edit {
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 0.75rem;
+    border: 1px solid $editButton;
+    background: transparent;
+    padding: 10px 20px;
+    transition: 0.5s all;
+    color: $secondaryColor;
+    
+    i {
+        color: $white;
+    }
+
+    &:hover {
+        background: $editButton;
+
+        i {
+            color: $secondaryColor;
+        }
+    }
 }
 
 .btn-mot {
@@ -11,7 +83,6 @@
     color: #000;
     display: inline-block;
     box-shadow: none;
-    font-family: "Michroma", sans-serif;
 
     &.btn-mot--light {
         background: $cardBg;
@@ -33,20 +104,7 @@
     text-transform: uppercase;
     border: 1px solid #fff;
 }
-.btn-view {
-    text-transform: uppercase;
-    width: 100%;
-    border: 1px solid $white;
-    
-    .fas.fa-eye {
-        color: $white;
-    }
-}
-.btn-edit {
-    text-transform: uppercase;
-    width: 100%;
-    border: 1px solid #2586e7 !important;
-}
+
 .btn-kill {
     text-transform: uppercase;
     width: 100%;
@@ -83,12 +141,7 @@
     text-transform: uppercase;
     color: #696969;
 }
-.btn-view:hover {
-    border: 1px solid #3b2fa4;
-}
-.btn-edit:hover {
-    border: 1px solid #1b5c9e;
-}
+
 .btn-kill:hover {
     border: 1px solid #854242;
 }

@@ -273,41 +273,41 @@
         Comments
       </div>
       <div class="card-body">
-@foreach($data->comments as $comment)
-        <div class="card border-primary">
-          <div class="card-header">
-            <strong>{{ $comment->user->forename ?? "Deactivated"}} {{ $comment->user->surname ?? "User"}}</strong>
-            @if ($comment->user != NULL)
-              @if ($comment->user->can('Edit Partsrun'))
-                <i class="fas fa-user-shield"></i>
+        @foreach($data->comments as $comment)
+          <div class="card border-primary">
+            <div class="card-header">
+              <strong>{{ $comment->user->forename ?? "Deactivated"}} {{ $comment->user->surname ?? "User"}}</strong>
+              @if ($comment->user != NULL)
+                @if ($comment->user->can('Edit Partsrun'))
+                  <i class="fas fa-user-shield"></i>
+                @endif
               @endif
-            @endif
-            <span class="float-right">
-              @if ($comment->broadcast)
-                <i class="fas fa-bullhorn"></i>
-              @endif
-              {{ Carbon\Carbon::parse($comment->created_at, Auth::user()->settings()->get('timezone'))->isoFormat(Auth::user()->settings()->get('date_format').' - '.Auth::user()->settings()->get('time_format')) }}
-            </span>
+              <span class="float-right">
+                @if ($comment->broadcast)
+                  <i class="fas fa-bullhorn"></i>
+                @endif
+                {{ Carbon\Carbon::parse($comment->created_at, Auth::user()->settings()->get('timezone'))->isoFormat(Auth::user()->settings()->get('date_format').' - '.Auth::user()->settings()->get('time_format')) }}
+              </span>
+            </div>
+            <div class="card-body">
+              {!! nl2br(e($comment->body)) !!}
+              @can('Edit Partrun')
+              <span class="float-right">
+                <a href="{{ route('comment.delete', $comment->id )}}" class="btn-sm btn-danger">Delete</a>
+              </span>
+              @endcan
+              <span class="float-right">
+                <reaction-component
+                      :comment="{{ $comment->id }}"
+                      :summary='@json($comment->reactionSummary())'
+                      @auth
+                      :reacted='@json($comment->reacted())'
+                      @endauth
+                />
+              </span>
+            </div>
           </div>
-          <div class="card-body">
-            {!! nl2br(e($comment->body)) !!}
-            @can('Edit Partrun')
-            <span class="float-right">
-              <a href="{{ route('comment.delete', $comment->id )}}" class="btn-sm btn-danger">Delete</a>
-            </span>
-            @endcan
-            <span class="float-right">
-              <reaction-component
-                    :comment="{{ $comment->id }}"
-                    :summary='@json($comment->reactionSummary())'
-                    @auth
-                    :reacted='@json($comment->reacted())'
-                    @endauth
-              />
-            </span>
-          </div>
-        </div>
-@endforeach
+        @endforeach
         <div class="card border-primary">
           <div class="card-header">
             <strong>Add Comment</strong>

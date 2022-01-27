@@ -1,22 +1,43 @@
-@media only screen and (max-width: 767px) {
-    .dataTables_wrapper {
-        .dt-buttons {
-            float: none;
-            margin-bottom: 1rem;
-        }
+// @media only screen and (max-width: 1920px){}
+// @media only screen and (max-width: 1680px){}
+// @media only screen and (max-width: 1366px){}
+// @media only screen and (max-width: 1199px){}
+@media only screen and (max-width: 991px){
+    .status-box {
+        display: block;
+    }
 
-        .dataTables_filter {
-            float: none !important;
-            margin-bottom: 1rem;
-        }
+    .pr-circle {
+        margin: 0 auto 0.5rem;
     }
 }
 
+@media only screen and (max-width: 767px){
+    #sidebar {
+        min-width: 80px;
+        max-width: 80px;
+        text-align: center;
+        margin-left: -80px !important;
+        &.active{
+            margin-left: 0 !important;
+        }
 
+        ul{
+            li{
+                a{
+                    span{
+                            display: block
+                    }
+                }
+            }
+          }
+    }
 
-@media only screen and (max-width: 400px) {
-    .oauth-buttons a {
-        margin-left: 0.5rem;
-        margin-right: 0.5rem;
+    #sidebarCollapse{
+        span{
+            display: none;
+        }
     }
 }
+// @media only screen and (max-width: 575px){}
+// @media only screen and (max-width: 360px){}

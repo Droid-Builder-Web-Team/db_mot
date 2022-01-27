@@ -1,21 +1,394 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito);
+@import url(https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800;900&display=swap);
 @charset "UTF-8";
+@media only screen and (max-width: 991px) {
+  .status-box {
+    display: block;
+  }
+
+  .pr-circle {
+    margin: 0 auto 0.5rem;
+  }
+}
 @media only screen and (max-width: 767px) {
-  .dataTables_wrapper .dt-buttons {
-    float: none;
-    margin-bottom: 1rem;
+  #sidebar {
+    min-width: 80px;
+    max-width: 80px;
+    text-align: center;
+    margin-left: -80px !important;
   }
-  .dataTables_wrapper .dataTables_filter {
-    float: none !important;
-    margin-bottom: 1rem;
+  #sidebar.active {
+    margin-left: 0 !important;
+  }
+  #sidebar ul li a span {
+    display: block;
+  }
+
+  #sidebarCollapse span {
+    display: none;
   }
 }
-@media only screen and (max-width: 400px) {
-  .oauth-buttons a {
-    margin-left: 0.5rem;
-    margin-right: 0.5rem;
-  }
+/** Font Sizes */
+.db-dark-theme {
+  background: #181924;
+  color: #fff;
 }
+
+.db-sidebar.wrapper {
+  background: #2a2b36;
+  color: #fff;
+}
+
+.db-wrapper {
+  width: 100%;
+  background: #181924;
+}
+
+.db-header {
+  width: 100%;
+  background: #2a2b36;
+  color: #fff;
+  min-height: 56px;
+  display: flex;
+}
+
+.padding-container {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.pt {
+  padding-top: 2rem;
+}
+
+.pb {
+  padding-bottom: 2rem;
+}
+
+.bg-image {
+  background: url(/images/BGimage.png);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.c-wrapper {
+  display: none !important;
+}
+
+h1 {
+  font-family: "Nunito", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  font-size: calc((70 / 16) * 1rem);
+  letter-spacing: calc((50 / 1000) * 1rem);
+}
+
+h2 {
+  font-family: "Nunito", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: calc((50 / 16) * 1rem);
+  letter-spacing: calc((50 / 1000) * 1rem);
+}
+
+h3 {
+  font-family: "Nunito", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: calc((44 / 16) * 1rem);
+  letter-spacing: calc((50 / 1000) * 1rem);
+}
+
+h4 {
+  font-family: "Nunito", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: calc((34 / 16) * 1rem);
+  letter-spacing: calc((50 / 1000) * 1rem);
+}
+
+h5 {
+  font-family: "Nunito", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: calc((20 / 16) * 1rem);
+  letter-spacing: calc((50 / 1000) * 1rem);
+}
+
+h6 {
+  font-family: "Nunito", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+  font-size: calc((18 / 16) * 1rem);
+  letter-spacing: calc((50 / 1000) * 1rem);
+}
+
+li {
+  font-family: "Nunito", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+  font-size: calc((16 / 16) * 1rem);
+  letter-spacing: calc((50 / 1000) * 1rem);
+}
+
+p {
+  font-family: "Nunito", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+  font-size: calc((18 / 16) * 1rem);
+  letter-spacing: calc((50 / 1000) * 1rem);
+}
+
+img {
+  max-width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+}
+
+.db-mt-1 {
+  margin-top: 1rem;
+}
+
+.db-mt-2 {
+  margin-top: 2rem;
+}
+
+.db-mt-3 {
+  margin-top: 3rem;
+}
+
+.db-mt-4 {
+  margin-top: 4rem;
+}
+
+.db-mb-1 {
+  margin-bottom: 1rem;
+}
+
+.db-mb-2 {
+  margin-bottom: 2rem;
+}
+
+.db-mb-3 {
+  margin-bottom: 3rem;
+}
+
+.db-mb-4 {
+  margin-bottom: 4rem;
+}
+
+.build-section {
+  background: transparent;
+  border: 2px solid #fff;
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+}
+
+.db-navbar {
+  background: #2a2b36;
+  color: #fff;
+  padding: 2rem 4rem;
+}
+
+.navbar-btn {
+  box-shadow: none;
+  outline: none !important;
+  border: none;
+}
+
+.line {
+  width: 100%;
+  height: 1px;
+  border-bottom: 1px dashed #ddd;
+  margin: 40px 0;
+}
+
+#sidebar {
+  min-width: 270px;
+  max-width: 270px;
+  height: 100vh;
+  background: #2a2b36;
+  color: #fff;
+  transition: all 0.3s;
+  overflow-y: scroll;
+}
+#sidebar .logo {
+  padding: 0.5rem 1rem;
+}
+#sidebar .large-menu-title {
+  display: block;
+}
+#sidebar .small-menu-title {
+  display: none;
+}
+#sidebar.active {
+  min-width: 150px;
+  max-width: 150px;
+  text-align: center;
+}
+#sidebar.active .large-menu-title {
+  display: none;
+}
+#sidebar.active .small-menu-title {
+  display: block;
+}
+#sidebar.active ul.sidebar-nav li.sidebar-nav-title {
+  padding: 0 0.5rem;
+}
+#sidebar.active ul.sidebar-nav li.sidebar-nav-title:after {
+  right: 5%;
+}
+#sidebar.active ul.sidebar-nav li.sidebar-nav-item a.sidebar-nav-link {
+  display: block;
+  padding: 1rem 0;
+  width: 100%;
+  text-align: center;
+  margin: 0;
+}
+#sidebar.active ul.sidebar-nav li.sidebar-nav-item a.sidebar-nav-link span {
+  margin: 0 auto;
+  display: block;
+}
+#sidebar.active .logo {
+  padding: 10px 0;
+  transition: 0.5s all;
+}
+#sidebar.active .footer {
+  display: none;
+  transition: 0.5s all;
+  padding: 0 0.5rem;
+}
+#sidebar .footer {
+  padding: 0 1rem;
+}
+#sidebar ul.sidebar-nav {
+  padding: 0;
+}
+#sidebar ul.sidebar-nav li.sidebar-nav-title {
+  padding: 0 1.5rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  transition: 0.5s all;
+  position: relative;
+}
+#sidebar ul.sidebar-nav li.sidebar-nav-title:after {
+  content: "\f078";
+  font-family: Font Awesome;
+  color: #fff;
+  background: red;
+  font-size: 1rem;
+  margin-left: 0.5rem;
+  position: absolute;
+  right: 10%;
+}
+#sidebar ul.sidebar-nav li.sidebar-nav-title:hover {
+  text-decoration: underline;
+}
+#sidebar ul.sidebar-nav li.sidebar-nav-item a.sidebar-nav-link {
+  padding: 20px 30px;
+  display: block;
+  text-decoration: none;
+  color: #fff;
+  background: transparent;
+  transition: 0.5s all;
+}
+#sidebar ul.sidebar-nav li.sidebar-nav-item a.sidebar-nav-link span {
+  font-size: 1rem;
+}
+#sidebar ul.sidebar-nav li.sidebar-nav-item a.sidebar-nav-link:hover {
+  background: #5d86db;
+}
+#sidebar ul.sidebar-nav .divider {
+  width: 80%;
+  background: #fff;
+  height: 2px;
+  display: flex;
+  margin: 1rem auto;
+}
+#sidebar .social-icons {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+#sidebar .social-icons .social-list-item {
+  width: 100%;
+}
+#sidebar .social-icons .social-list-item a {
+  transition: 0.5s all;
+}
+#sidebar .social-icons .social-list-item .facebook:hover {
+  color: #4267B2;
+}
+#sidebar .social-icons .social-list-item .dribble:hover {
+  color: #7289da;
+}
+#sidebar .social-icons .social-list-item .youtube:hover {
+  color: #FF0000;
+}
+
+a[data-toggle=collapse] {
+  position: relative;
+}
+
+.dropdown-toggle::after {
+  display: block;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+}
+
+ul.top-nav {
+  padding: 0.5rem 0;
+}
+ul.top-nav li.nav-item {
+  padding: 0 1rem;
+}
+ul.top-nav li.nav-item a {
+  transition: 0.5s all;
+}
+ul.top-nav li.nav-item a i {
+  font-size: 1.5rem;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 1rem auto 2rem;
+}
+
+.table-responsive table {
+  background: transparent;
+  color: #fff;
+}
+.table-responsive table th {
+  vertical-align: middle;
+  padding: 0.75rem;
+}
+.table-responsive table tbody tr {
+  transition: 0.5s all;
+}
+.table-responsive table tbody tr:hover {
+  background: transparent;
+  color: #fff;
+  opacity: 0.75;
+}
+.table-responsive table .action-buttons {
+  justify-content: center;
+  text-align: center;
+}
+.table-responsive table .action-buttons a:not(:first-of-type) {
+  margin-left: 2rem;
+}
+
 /*!
  * Bootstrap v4.6.1 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors
@@ -10067,13 +10440,6 @@ body {
   letter-spacing: 0.7px;
 }
 
-.far.fa-question-circle.fa-2x,
-.fab.fa-facebook,
-.fab.fa-discord,
-.fab.fa-youtube {
-  color: #fff;
-}
-
 /* Global CSS */
 .c-sidebar-nav-link,
 .c-sidebar-nav-item:hover {
@@ -10282,4 +10648,12 @@ a.btn-header-secondary:focus {
   margin: 0.75rem 0;
   padding: 0.25rem;
   color: #fff !important;
+}
+
+/*
+  New Styling Methods - RH$primaryColor: #181924;
+*/
+.white-link {
+  color: #fff !important;
+  text-decoration: none;
 }

@@ -1,5 +1,69 @@
 .btn {
   box-shadow: none !important;
+  font-family: "Nunito", sans-serif;
+  font-size: 1.125rem;
+}
+
+.btn-create {
+  text-transform: uppercase;
+  border: 1px solid #6cb2eb;
+  background: transparent;
+  padding: 5px 40px;
+  transition: 0.5s all;
+  color: #fff;
+}
+.btn-create p {
+  margin: 0;
+}
+.btn-create:hover {
+  background: #6cb2eb;
+  color: #fff;
+}
+
+.btn-view {
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 0.75rem;
+  border: 1px solid #fff;
+  background: transparent;
+  padding: 10px 20px;
+  transition: 0.5s all;
+  color: #fff;
+}
+.btn-view i {
+  color: #fff;
+}
+.btn-view:hover {
+  background: #fff;
+}
+.btn-view:hover i {
+  color: #181924;
+}
+
+.btn-edit {
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 0.75rem;
+  border: 1px solid #2586e7;
+  background: transparent;
+  padding: 10px 20px;
+  transition: 0.5s all;
+  color: #fff;
+}
+.btn-edit i {
+  color: #fff;
+}
+.btn-edit:hover {
+  background: #2586e7;
+}
+.btn-edit:hover i {
+  color: #fff;
 }
 
 .btn-mot {
@@ -9,7 +73,6 @@
   color: #000;
   display: inline-block;
   box-shadow: none;
-  font-family: "Michroma", sans-serif;
 }
 .btn-mot.btn-mot--light {
   background: #eee;
@@ -28,21 +91,6 @@
 .btn-mot-invert {
   text-transform: uppercase;
   border: 1px solid #fff;
-}
-
-.btn-view {
-  text-transform: uppercase;
-  width: 100%;
-  border: 1px solid #fff;
-}
-.btn-view .fas.fa-eye {
-  color: #fff;
-}
-
-.btn-edit {
-  text-transform: uppercase;
-  width: 100%;
-  border: 1px solid #2586e7 !important;
 }
 
 .btn-kill {
@@ -83,14 +131,6 @@
 .btn-mot-invert:hover {
   text-transform: uppercase;
   color: #696969;
-}
-
-.btn-view:hover {
-  border: 1px solid #3b2fa4;
-}
-
-.btn-edit:hover {
-  border: 1px solid #1b5c9e;
 }
 
 .btn-kill:hover {

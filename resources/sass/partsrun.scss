@@ -27,35 +27,35 @@
   background: #000000;
 }
 
-.pr-active {
-  width: 20px;
-  height: 20px;
+.pr-circle {
+  width: 15px;
+  height: 15px;
+  border-radius: 50px;
+}
+
+.active {
   background: green;
-  border-radius: 50px;
 }
 
-.pr-interest {
-  width: 20px;
-  height: 20px;
+.interest {
   background: orange;
-  border-radius: 50px;
 }
 
-.pr-inactive {
-  width: 20px;
-  height: 20px;
+.inactive {
   background: red;
-  border-radius: 50px;
 }
 
 .status-box {
   width: 100%;
   display: flex;
+  align-items: center;
   justify-content: center;
+  font-weight: 100;
 }
-.status-box .pr-active,
-.status-box .pr-interest,
-.status-box .pr-inactive {
+
+.status-box .pr-circle .active,
+.status-box .pr-circle .interest,
+.status-box .pr-circle .inactive {
   float: left;
 }
 .status-box p {

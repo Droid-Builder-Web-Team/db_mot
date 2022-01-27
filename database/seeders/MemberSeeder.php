@@ -15,20 +15,30 @@ class MemberSeeder extends Seeder
      */
     public function run()
     {
+        // $user = DB::table('members')->insert([
+        //     'forename' => 'Admin',
+        //     'surname' => 'Istrator',
+        //     'username' => 'Administrator',
+        //     'email' => 'droidbuilderwebteam@gmail.com',
+        //     'password' => Hash::make('Password1'),
+        //     'email_verified_at' => Carbon::now(),
+        //     'gdpr_accepted' => 1
+        // ]);
+
+        // $adminRole = DB::table('model_has_roles')->insert([
+        //     'role_id' => 6,
+        //     'model_type' => 'App\User',
+        //     'model_id' => 1
+        // ]);
+
         $user = DB::table('members')->insert([
-            'forename' => 'Admin',
-            'surname' => 'Istrator',
-            'username' => 'Administrator',
-            'email' => 'droidbuilderwebteam@gmail.com',
+            'forename' => 'Stan',
+            'surname' => 'Dard',
+            'username' => 'Standrd',
+            'email' => 'droidbuilderwebteam1@gmail.com',
             'password' => Hash::make('Password1'),
             'email_verified_at' => Carbon::now(),
             'gdpr_accepted' => 1
-        ]);
-
-        $adminRole = DB::table('model_has_roles')->insert([
-            'role_id' => 6,
-            'model_type' => 'App\User',
-            'model_id' => 1
         ]);
     }
 }

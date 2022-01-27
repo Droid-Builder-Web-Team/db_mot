@@ -1,0 +1,459 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800;900&display=swap');
+
+/** Font Sizes */
+@mixin styleText($style: '', $number: 16, $unit: 'rem', $important: false) {
+    @if $style=='' {
+        $style: 'font-size';
+    }
+
+    @else {
+        $style: 'letter-spacing';
+    }
+
+    @if $important {
+        $important: '!important';
+    }
+
+    @else {
+        $important: '';
+    }
+
+    @if $unit=='px' {
+        @if $style=='font-size' {
+            #{$style}: #{$number}px #{$important};
+        }
+
+        @else {
+            #{$style}: calc((#{$number} / 1000) * 1px) #{$important};
+        }
+    }
+
+    @else {
+        @if $style=='font-size' {
+            #{$style}: calc((#{$number} / 16) * 1#{$unit}) #{$important};
+        }
+
+        @else {
+            #{$style}: calc((#{$number} / 1000) * 1#{$unit}) #{$important};
+        }
+    }
+}
+
+.db-dark-theme {
+    background: $primaryColor;
+    color: $secondaryColor;
+}
+
+.db-sidebar.wrapper {
+    background: $sidebarBackground;
+    color: $secondaryColor;
+}
+
+.db-wrapper {
+    width: 100%;
+    background: $primaryColor;
+}
+
+.db-header {
+    width: 100%;
+    background: $sidebarBackground;
+    color: $secondaryColor;
+    min-height: 56px;
+    display: flex;
+}
+
+.padding-container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+.pt {
+    padding-top: 2rem;
+}
+
+.pb {
+    padding-bottom: 2rem;
+}
+
+.bg-image {
+    background: $headerBG;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.c-wrapper {
+    display: none !important;
+}
+
+h1 {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 600;
+    font-style: normal;
+
+    @include styleText('', 70, 'rem');
+    @include styleText('ls', 50, 'rem');
+}
+
+h2 {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+
+    @include styleText('', 50, 'rem');
+    @include styleText('ls', 50, 'rem');
+}
+
+h3 {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 500;
+    font-style: normal;
+
+    @include styleText('', 44, 'rem');
+    @include styleText('ls', 50, 'rem');
+}
+
+h4 {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 500;
+    font-style: normal;
+
+    @include styleText('', 34, 'rem');
+    @include styleText('ls', 50, 'rem');
+}
+
+h5 {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+
+    @include styleText('', 20, 'rem');
+    @include styleText('ls', 50, 'rem');
+}
+
+h6 {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 300;
+    font-style: normal;
+
+    @include styleText('', 18, 'rem');
+    @include styleText('ls', 50, 'rem');
+}
+
+li {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 300;
+    font-style: normal;
+
+    @include styleText('', 16, 'rem');
+    @include styleText('ls', 50, 'rem');
+}
+
+p {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 300;
+    font-style: normal;
+
+    @include styleText('', 18, 'rem');
+    @include styleText('ls', 50, 'rem');
+}
+
+img {
+    max-width: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+// Custom Margin
+.db-mt-1 {
+    margin-top: 1rem;
+}
+
+.db-mt-2 {
+    margin-top: 2rem;
+}
+
+.db-mt-3 {
+    margin-top: 3rem;
+}
+
+.db-mt-4 {
+    margin-top: 4rem;
+}
+.db-mb-1 {
+    margin-bottom: 1rem;
+}
+
+.db-mb-2 {
+    margin-bottom: 2rem;
+}
+
+.db-mb-3 {
+    margin-bottom: 3rem;
+}
+
+.db-mb-4 {
+    margin-bottom: 4rem;
+}
+
+// Sidebar
+
+.build-section {
+    background: transparent;
+    border: 2px solid $secondaryColor;
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+}
+
+.db-navbar {
+    background: $sidebarBackground;
+    color: $secondaryColor;
+    padding: 2rem 4rem;
+}
+
+.navbar-btn {
+    box-shadow: none;
+    outline: none !important;
+    border: none;
+}
+
+.line {
+    width: 100%;
+    height: 1px;
+    border-bottom: 1px dashed #ddd;
+    margin: 40px 0;
+}
+
+#sidebar {
+    min-width: 270px;
+    max-width: 270px;
+    height: 100vh;
+    background: $sidebarBackground;
+    color: $secondaryColor;
+    transition: all 0.3s;
+    overflow-y: scroll;
+
+    .logo {
+        padding: 0.5rem 1rem;
+    }
+
+    .large-menu-title {
+        display: block;
+    }
+
+    .small-menu-title {
+        display: none;
+    }
+
+    &.active {
+        min-width: 150px;
+        max-width: 150px;
+        text-align: center;
+
+        .large-menu-title {
+            display: none;
+        }
+
+        .small-menu-title {
+            display: block;
+        }
+
+        ul.sidebar-nav {
+            li.sidebar-nav-title {
+                padding: 0 0.5rem;
+
+                &:after {
+                    right: 5%;
+                }
+            }
+
+            li.sidebar-nav-item {
+                a.sidebar-nav-link {
+                    display: block;
+                    padding: 1rem 0;
+                    width: 100%;
+                    text-align: center;
+                    margin: 0;
+
+                    span {
+                        margin: 0 auto;
+                        display: block;
+                    }
+                }
+            }
+        }
+
+        .logo {
+            padding: 10px 0;
+            transition: 0.5s all;
+        }
+
+        .footer {
+            display: none;
+            transition: 0.5s all;
+            padding: 0 0.5rem;
+        }
+    }
+
+
+    .footer {
+        padding: 0 1rem;
+    }
+
+    ul.sidebar-nav {
+        padding: 0;
+
+        li.sidebar-nav-title {
+            padding: 0 1.5rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            transition: 0.5s all;
+            position: relative;
+
+            &:after {
+                content: '\f078';
+                font-family: Font Awesome;
+                color: $secondaryColor;
+                background: red;
+                font-size: 1rem;
+                margin-left: 0.5rem;
+                position: absolute;
+                right: 10%;
+            }
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+
+        li.sidebar-nav-item {
+            a.sidebar-nav-link {
+                padding: 20px 30px;
+                display: block;
+                text-decoration: none;
+                color: $secondaryColor;
+                background: transparent;
+                transition: 0.5s all;
+
+                span {
+                    font-size: 1rem;
+                }
+
+                &:hover {
+                    background: #5d86db;
+                    // background: radial-gradient(circle, #75a6d7 0%, #5d86db 20%, #46659d 40%, #233454 60%, #131c2d 80%, #010203 100%);                  
+                }
+            }
+        }
+
+        .divider {
+            width: 80%;
+            background: $secondaryColor;
+            height: 2px;
+            display: flex;
+            margin: 1rem auto;
+        }
+    }
+
+    .social-icons {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        width: 100%;
+        justify-content: center;
+
+        .social-list-item {
+            width: 100%;
+
+            a {
+                transition: 0.5s all;
+            }
+
+            .facebook:hover {
+                color: $facebook;
+            }
+
+            .dribble:hover {
+                color: $dribble;
+            }
+
+            .youtube:hover {
+                color: $youtube;
+            }
+        }
+    }
+}
+
+
+a[data-toggle="collapse"] {
+    position: relative;
+}
+
+.dropdown-toggle::after {
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+}
+
+ul.top-nav {
+    padding: 0.5rem 0;
+
+    li.nav-item {
+        padding: 0 1rem;
+
+        a {
+           transition: 0.5s all;
+        
+           i {
+                font-size: 1.5rem;
+            }
+        }
+    }
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 1rem auto 2rem;
+}
+
+// Tables
+.table-responsive {
+    table {
+        background: transparent;
+        color: $secondaryColor;
+    
+        th {
+            vertical-align: middle;
+            padding: 0.75rem;
+        }
+
+        tbody {
+            tr {
+                transition: 0.5s all;
+            }
+        
+            tr:hover {
+                background: transparent;
+                color: $secondaryColor;
+                opacity: 0.75;
+            }
+        }
+    
+        .action-buttons {
+            justify-content: center;
+            text-align: center;
+    
+            a:not(:first-of-type) {
+                margin-left: 2rem;
+            }
+        }
+    }
+}

@@ -25,12 +25,23 @@ class PartsRunDataController extends Controller
     {
         $partsRunData = app(PartsRunData::class)
             ->with(['partsRunAd'])
+            ->where('status', '=', 'Active')
+            ->orWhere('status', '=', 'Initial')
+            ->orWhere('status', '=', 'Gathering_Interest')
             ->orderBy('updated_at', 'desc')
             ->get();
 
+        $yourPartsRunData = app(PartsRunData::class)
+            ->with(['partsRunAd'])
+            ->orderBy('updated_at', 'desc')
+            ->get();
+
+        // dd($partsRunData);
+
         return view(
             'parts-run.list', [
-            'partsRunData'=> $partsRunData,
+                'yourPartsRunData'=> $yourPartsRunData,
+                'partsRunData'=> $partsRunData,
             ]
         );
     }
@@ -213,10 +224,12 @@ class PartsRunDataController extends Controller
         if ($partsRunData->status != $request->status) {
             foreach($partsRunData->is_interested as $user)
             {
-                $user->notify(new PartsRunUpdated($partsRunData));
+                // Uncomment below
+                // $user->notify(new PartsRunUpdated($partsRunData));
             }
             $bc_rep = User::find($partsRunData->bc_rep_id)->first();
-            $bc_rep->notify(new PartsRunUpdated($partsRunData));
+            // Uncomment Below
+            // $bc_rep->notify(new PartsRunUpdated($partsRunData));
         }
 
 
@@ -342,5 +355,20 @@ class PartsRunDataController extends Controller
         };
 
         return response()->stream($callback, 200, $headers);
+    }
+
+    public function noneActiveRuns()
+    {
+        $inactivePartsRunData = app(PartsRunData::class)
+            ->with(['partsRunAd'])
+            ->where('status', '=', 'Inactive')
+            ->orderBy('updated_at', 'desc')
+            ->get();
+
+        return view(
+            'parts-run.none-active-runs', [
+                'inactivePartsRunData'=> $inactivePartsRunData,
+            ]
+        );
     }
 }

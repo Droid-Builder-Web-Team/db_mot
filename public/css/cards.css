@@ -50,3 +50,9 @@
   display: flex;
   justify-content: center;
 }
+
+.c-dark-theme .card .card-header.build-section {
+  background-image: none;
+  width: 100%;
+  background: transparent;
+}

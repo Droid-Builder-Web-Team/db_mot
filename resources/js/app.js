@@ -19,3 +19,24 @@ app.use(VueGoogleMaps, {
         key: 'AIzaSyCOE-y6rIHLsG6ONcNib1pfv0eq3xTWRok',
     }
 }).mount('#app');
+
+(function($) {
+
+	"use strict";
+
+	var fullHeight = function() {
+
+		$('.js-fullheight').css('height', $(window).height());
+		$(window).resize(function(){
+			$('.js-fullheight').css('height', $(window).height());
+		});
+
+	};
+	fullHeight();
+
+	$('#sidebarCollapse').on('click', function () {
+      $('#sidebar').toggleClass('active');
+  });
+
+})(jQuery);
+

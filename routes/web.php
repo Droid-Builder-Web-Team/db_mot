@@ -117,7 +117,7 @@ Route::group(
         )->name('about');
 
         // Parts Runs Extension
-
+        Route::get('parts-run/none-active-run', 'PartsRunDataController@noneActiveRuns')->name('parts-run.none-active-run');
         Route::resource('/parts-run', 'PartsRunDataController');
         Route::get('parts-run/image/{run_id}/{number?}/{size?}', 'PartsRunImageController@show')
             ->name('image.displayPartsRunImage');
