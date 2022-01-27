@@ -94,11 +94,13 @@ class UsersController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        if (in_array('Super Admin', $request->roles)
-            && !auth()->user()->hasRole('Super Admin')
-        ) {
-            toastr()->error('Cannot grant Super Admin role');
-            return back();
+        if ($request->roles != "") {
+            if (in_array('Super Admin', $request->roles)
+                && !auth()->user()->hasRole('Super Admin')
+            ) {
+                toastr()->error('Cannot grant Super Admin role');
+                return back();
+            }
         }
         if (auth()->user()->can('Edit Permissions')) {
             $user->syncRoles($request->roles);
