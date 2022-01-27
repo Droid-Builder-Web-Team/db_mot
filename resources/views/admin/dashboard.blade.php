@@ -40,13 +40,10 @@
     <div class="card border-primary">
       <div class="card-header title text-center">ID Badges Needed</div>
         <div class="card-body">
-            <span class="float-left">
-                <h2 style="color:#000000;">{{ $badges->count() }}</h2>
-            </span>
-            <span class="float-right">
+                <h2 style="color:#000000;">{{ $badges->count() }}&nbsp; &nbsp;
                 <a target="_blank" href="{{ route('admin.badges.download', 'false') }}" class="btn-sm btn-link">Download</a>
                 <a target="_blank" href="{{ route('admin.badges.download', 'true') }}" class="btn-sm btn-link">Download and Clear</a>
-            </span>
+                </h2>
         </div>
       </div>
     </div>

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddCalendarIdToMembersTable extends Migration
+class AddQuantityToEventsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddCalendarIdToMembersTable extends Migration
      */
     public function up()
     {
-        Schema::table('members', function (Blueprint $table) {
-            $table->text('calendar_id');
+        Schema::table('events', function (Blueprint $table) {
+            $table->integer('quantity')->default(0);
         });
     }
 
@@ -25,7 +25,7 @@ class AddCalendarIdToMembersTable extends Migration
      */
     public function down()
     {
-        Schema::table('members', function (Blueprint $table) {
+        Schema::table('events', function (Blueprint $table) {
             //
         });
     }

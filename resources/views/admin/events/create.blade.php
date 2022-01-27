@@ -73,7 +73,7 @@
                         <label for="date"><strong>Date</strong></label>
                     </div>
 
-                    <div class="col-sm-5">
+                    <div class="col-sm-4">
                         <input type="date" name="date" class="form-control" placeholder="Date">
                     </div>
 
@@ -81,8 +81,16 @@
                         <label for="days"><strong>Days</strong></label>
                     </div>
 
-                    <div class="col-sm-4">
+                    <div class="col-sm-2">
                         <input type="number" name="days" value="1" class="form-control" placeholder="Number of Days" required>
+                    </div>
+
+                    <div class="col-sm-1">
+                        <label for="quantity"><strong>Droid Limit</strong><br>(0 = no limit)</label>
+                    </div>
+
+                    <div class="col-sm-2">
+                        <input type="number" name="quantity" value="0" class="form-control" placeholder="Droid Limit" required>
                     </div>
                 </div>
 
@@ -102,7 +110,7 @@
                         <div class="form-check">
                             {{ Form::hidden('public', '0') }}
                             <input type="checkbox" id="public" name="public" class="form-check-input" value="1">
-                            <label class="form-check-label" for="public">Display publicly</label>
+                            <label class="form-check-label" for="public">Display publicly on droidbuilders.uk if anyone is attending</label>
                         </div>
 
                         <div class="form-check">
