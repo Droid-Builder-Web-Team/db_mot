@@ -94,6 +94,12 @@
                     <p>{{ $event->parking_details }}</p>
                   </div>
                 @endif
+
+                @if($event->quantity != 0)
+                  <div class="droid_limit">
+                      <p>Attendee Limit: {{ $event->quantity }}</p>
+                  </div>
+                @endif
                 <br>
 
                 @can('Edit Events')
@@ -331,56 +337,60 @@
         <div class="card">
           <div class="card-header">Register Interest</div>
           <div class="card-body">
-            <div class="form-group">
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="going" id="not_going" value="no" {{ $user_status == 'no' ? 'checked' : '' }}>
-                <label class="form-check-label" for="not_going">
-                  Not Going
-                </label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="going" id="is_going" value="yes" {{ $user_status == 'yes' ? 'checked' : '' }}>
-                <label class="form-check-label" for="is_going">
-                  Going
-                </label>
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="spotter" id="with_droid" value="no" {{ $user_spotter == 'no' ? 'checked' : '' }}>
-                <label class="form-check-label" for="with_droid">
-                  With Droid
-                </label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="spotter" id="no_droid" value="yes" {{ $user_spotter == 'yes' ? 'checked' : '' }}>
-                <label class="form-check-label" for="no_droid">
-                  Spotter
-                </label>
-              </div>
-            </div>
-            @if ($event->canMOT())
-            <div class="form-group">
-              <div class="form-check form-check-inline">
-                {{Form::hidden('mot_required','0')}}
-                <input type="checkbox" id="mot_required" name="mot_required" {{ $user_mot ? 'checked=1 value=1' : 'value=1' }} class="form-check-input">
-                <label class="form-check-label" for="mot_required">Request MOT at event</label>
-              </div>
-            </div>
-            @else
-              <div class="form-group">
-                {{Form::hidden('mot_required','0')}}
-                MOT are not available at this event
-              </div>
-            @endif
-            @if (!$event->canWIP())
-              <div class="form-group">
-                Only completed droids at this event please.
-              </div>
-            @endif
-            <div class="form-group">
-                <button type="submit" class="btn btn-mot">Submit</button>
-            </div>
+              @if($user_status == "no" && $event->isFull())
+                Event is full
+              @else
+                <div class="form-group">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="going" id="not_going" value="no" {{ $user_status == 'no' ? 'checked' : '' }}>
+                    <label class="form-check-label" for="not_going">
+                    Not Going
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="going" id="is_going" value="yes" {{ $user_status == 'yes' ? 'checked' : '' }}>
+                    <label class="form-check-label" for="is_going">
+                    Going
+                    </label>
+                </div>
+                </div>
+                <div class="form-group">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="spotter" id="with_droid" value="no" {{ $user_spotter == 'no' ? 'checked' : '' }}>
+                    <label class="form-check-label" for="with_droid">
+                    With Droid
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="spotter" id="no_droid" value="yes" {{ $user_spotter == 'yes' ? 'checked' : '' }}>
+                    <label class="form-check-label" for="no_droid">
+                    Spotter
+                    </label>
+                </div>
+                </div>
+                @if ($event->canMOT())
+                <div class="form-group">
+                <div class="form-check form-check-inline">
+                    {{Form::hidden('mot_required','0')}}
+                    <input type="checkbox" id="mot_required" name="mot_required" {{ $user_mot ? 'checked=1 value=1' : 'value=1' }} class="form-check-input">
+                    <label class="form-check-label" for="mot_required">Request MOT at event</label>
+                </div>
+                </div>
+                @else
+                <div class="form-group">
+                    {{Form::hidden('mot_required','0')}}
+                    MOT are not available at this event
+                </div>
+                @endif
+                @if (!$event->canWIP())
+                <div class="form-group">
+                    Only completed droids at this event please.
+                </div>
+                @endif
+                <div class="form-group">
+                    <button type="submit" class="btn btn-mot">Submit</button>
+                </div>
+              @endif
           </div>
         </div>
       </form>

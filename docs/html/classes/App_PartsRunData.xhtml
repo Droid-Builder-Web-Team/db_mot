@@ -53,10 +53,16 @@
             <a href="#hierarchy">Hierarchy</a>
           </li>
           <li>
+            <a href="#violations">Violations</a>
+          </li>
+          <li>
             <a href="#members">Members</a>
           </li>
           <li>
             <a href="#methods">Methods</a>
+          </li>
+          <li>
+            <a href="#history">History</a>
           </li>
           <li>
             <a href="../source/PartsRunData.php.xhtml#line34">Source</a>
@@ -109,6 +115,36 @@
             <li>OwenIt\Auditing\Contracts\Auditable</li>
           </ul>
         </div>
+        <h2 id="violations">Violations</h2>
+        <div class="styled">
+          <h3>Checkstyle</h3>
+          <table class="styled">
+            <thead>
+              <tr>
+                <th>Line</th>
+                <th>Column</th>
+                <th>Severity</th>
+                <th>Message</th>
+              </tr>
+            </thead>
+            <tr>
+              <td class="line">125</td>
+              <td>12</td>
+              <td>
+                <span title="PEAR.NamingConventions.ValidFunctionName.ScopeNotCamelCaps">error</span>
+              </td>
+              <td>Public method name "PartsRunData::is_interested" is not in camel caps format</td>
+            </tr>
+            <tr>
+              <td class="line">148</td>
+              <td>12</td>
+              <td>
+                <span title="PEAR.NamingConventions.ValidFunctionName.ScopeNotCamelCaps">error</span>
+              </td>
+              <td>Public method name "PartsRunData::interest_quantity" is not in camel caps format</td>
+            </tr>
+          </table>
+        </div>
         <h2 id="members">Members</h2>
         <div class="styled members">
           <h4>protected</h4>
@@ -147,6 +183,170 @@
                 — Get list of members who have registered interest at any point</li>
           </ul>
         </div>
+        <h2 id="history">History</h2>
+        <ul class="styled history">
+          <li>
+            <h3>2022-01-17T02:12:46+00:00 (commit #<span title="c6754c1f402310fb7063d84dc6ea2174c9a71a4f">c6754c1</span>)</h3>
+            <div>
+              <p>
+                        Author: dpoulson (darren.poulson@gmail.com) /
+                        Commiter: dpoulson (darren.poulson@gmail.com)
+                    </p>
+              <pre class="wrapped">Tidied up code to pass linter, and generate documentation</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2021-12-22T21:50:52+00:00 (commit #<span title="9002fb4cbfe2ada3fa66be6e2623c9d89ac03489">9002fb4</span>)</h3>
+            <div>
+              <p>
+                        Author: dpoulson (darren.poulson@gmail.com) /
+                        Commiter: dpoulson (darren.poulson@gmail.com)
+                    </p>
+              <pre class="wrapped">Fixed and updated broadcast comments, and moved the last of the comments over to CommentController</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2021-11-23T01:56:26+00:00 (commit #<span title="c38f6246aa51f83c929a2a0be196833e1a3a6349">c38f624</span>)</h3>
+            <div>
+              <p>
+                        Author: dpoulson (darren.poulson@gmail.com) /
+                        Commiter: dpoulson (darren.poulson@gmail.com)
+                    </p>
+              <pre class="wrapped">WYSIWYG editor with image capability for description. A few bug fixes.</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2021-11-22T18:16:50+00:00 (commit #<span title="17d2b6f4ccc62b16ca8d37ca045ef055ee3b7a99">17d2b6f</span>)</h3>
+            <div>
+              <p>
+                        Author: dpoulson (darren.poulson@gmail.com) /
+                        Commiter: dpoulson (darren.poulson@gmail.com)
+                    </p>
+              <pre class="wrapped">Can register interest with quantity, and active runs can progress through 'paid; and 'shipped'</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2021-11-20T23:53:35+00:00 (commit #<span title="82f4e9840babd0db6de3c4a5780e77598f88aeff">82f4e98</span>)</h3>
+            <div>
+              <p>
+                        Author: dpoulson (darren.poulson@gmail.com) /
+                        Commiter: dpoulson (darren.poulson@gmail.com)
+                    </p>
+              <pre class="wrapped">Parts run status change sends notifications. Bunch of other updates too.</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2021-11-20T02:44:36+00:00 (commit #<span title="41a718400b522e89ba70439f82426ac141ac9a12">41a7184</span>)</h3>
+            <div>
+              <p>
+                        Author: dpoulson (darren.poulson@gmail.com) /
+                        Commiter: dpoulson (darren.poulson@gmail.com)
+                    </p>
+              <pre class="wrapped">Registering interest on part runs now works. Along with a quantity limit (with 0 as continuous)</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2021-11-19T15:00:17+00:00 (commit #<span title="f9948d343328932bf8e2bff726c5b8dc2cca0845">f9948d3</span>)</h3>
+            <div>
+              <p>
+                        Author: dpoulson (darren.poulson@gmail.com) /
+                        Commiter: dpoulson (darren.poulson@gmail.com)
+                    </p>
+              <pre class="wrapped">Added comment ability to part runs.</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2021-08-04T20:53:07+00:00 (commit #<span title="e3c8f6d1030ab35b987b4032cf98206db50a91dd">e3c8f6d</span>)</h3>
+            <div>
+              <p>
+                        Author: Rob Howdle (robhowdle94@gmail.com) /
+                        Commiter: Rob Howdle (robhowdle94@gmail.com)
+                    </p>
+              <pre class="wrapped">Images and Instructions Work</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2021-07-29T21:28:06+00:00 (commit #<span title="e7d83ca818bfb409bb4066f591ea076ab43d40b1">e7d83ca</span>)</h3>
+            <div>
+              <p>
+                        Author: dpoulson (darren.poulson@gmail.com) /
+                        Commiter: dpoulson (darren.poulson@gmail.com)
+                    </p>
+              <pre class="wrapped">Image upload and display now works.</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2021-07-28T16:30:25+00:00 (commit #<span title="78bd36ca10f586fb6182d5bfd34f82cb64a415ef">78bd36c</span>)</h3>
+            <div>
+              <p>
+                        Author: dpoulson (darren.poulson@gmail.com) /
+                        Commiter: dpoulson (darren.poulson@gmail.com)
+                    </p>
+              <pre class="wrapped">BC Rep shows when viewing run</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2021-07-28T16:22:05+00:00 (commit #<span title="98cc2f5c277b4b820c497fc36dfc2d02b796873a">98cc2f5</span>)</h3>
+            <div>
+              <p>
+                        Author: dpoulson (darren.poulson@gmail.com) /
+                        Commiter: dpoulson (darren.poulson@gmail.com)
+                    </p>
+              <pre class="wrapped">Fixed droidtype-&gt;club issue in part run list.</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2021-07-28T15:14:50+00:00 (commit #<span title="4ec073910de46bbe64524e1522547e3195a75bd9">4ec0739</span>)</h3>
+            <div>
+              <p>
+                        Author: Rob Howdle (robhowdle94@gmail.com) /
+                        Commiter: Rob Howdle (robhowdle94@gmail.com)
+                    </p>
+              <pre class="wrapped">parts run workings</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2021-07-20T21:12:54+00:00 (commit #<span title="2c2e9385e71664be6915ddd4e10ec32d49264ccb">2c2e938</span>)</h3>
+            <div>
+              <p>
+                        Author: Rob Howdle (robhowdle94@gmail.com) /
+                        Commiter: Rob Howdle (robhowdle94@gmail.com)
+                    </p>
+              <pre class="wrapped">File Upload Problems</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2021-07-01T23:27:46+00:00 (commit #<span title="2bba003763c8e3bb49c301d73999b37ff9e0e36b">2bba003</span>)</h3>
+            <div>
+              <p>
+                        Author: Rob Howdle (robhowdle94@gmail.com) /
+                        Commiter: Rob Howdle (robhowdle94@gmail.com)
+                    </p>
+              <pre class="wrapped">List table of current Part Runs Complete - ToDo - Pagination
+Show Page for individual Part Run - ToDo - Design Work</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2021-07-01T18:25:53+00:00 (commit #<span title="b6bfd8c0f44b4ac44d547af7111d8e07b9630c83">b6bfd8c</span>)</h3>
+            <div>
+              <p>
+                        Author: Rob Howdle (robhowdle94@gmail.com) /
+                        Commiter: Rob Howdle (robhowdle94@gmail.com)
+                    </p>
+              <pre class="wrapped">Model Relationships Complete</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2021-06-30T23:10:48+00:00 (commit #<span title="06c8fc07d4de3f57161f7eb81103f62c6919d57b">06c8fc0</span>)</h3>
+            <div>
+              <p>
+                        Author: Rob Howdle (robhowdle94@gmail.com) /
+                        Commiter: Rob Howdle (robhowdle94@gmail.com)
+                    </p>
+              <pre class="wrapped">Updated and Completed Migrations</pre>
+            </div>
+          </li>
+        </ul>
       </section>
     </div>
     <footer>

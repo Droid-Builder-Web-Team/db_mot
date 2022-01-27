@@ -215,6 +215,20 @@ class Event extends Model implements \Acaronlex\LaravelCalendar\Event, Auditable
     }
 
     /**
+     * Check if event is Full
+     *
+     * @return bool
+     */
+    public function isFull()
+    {
+        if ($this->going()->count() >= $this->quantity && $this->quantity != 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * Is there an image stored for this event
      *
      * @return bool

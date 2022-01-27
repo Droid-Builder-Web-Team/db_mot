@@ -1,5 +1,16 @@
 <?php
 
+/**
+ * Register Controller
+ * php version 7.4
+ *
+ * @category Controller
+ * @package  Controllers
+ * @author   Darren Poulson <darren.poulson@gmail.com>
+ * @license  https://opensource.org/licenses/MIT MIT License
+ * @link     https://portal.droidbuilders.uk/
+ */
+
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
@@ -11,6 +22,15 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
 use App\Notifications\NewUser;
 
+/**
+ * RegisterController
+ *
+ * @category Class
+ * @package  Controllers
+ * @author   Darren Poulson <darren.poulson@gmail.com>
+ * @license  https://opensource.org/licenses/MIT MIT License
+ * @link     https://portal.droidbuilders.uk/
+ */
 class RegisterController extends Controller
 {
     /*
@@ -46,7 +66,8 @@ class RegisterController extends Controller
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array $data
+     * @param array $data Data to be validated
+     *
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
@@ -64,7 +85,8 @@ class RegisterController extends Controller
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array $data
+     * @param array $data Data passed from registration
+     *
      * @return \App\User
      */
     protected function create(array $data)
@@ -91,31 +113,32 @@ class RegisterController extends Controller
                 return back()->withErrors(['captcha' => 'ReCaptcha Error']);
         }
         if ($resultJson->score > 0.3) {
-                //Validation was successful, add your form submission logic here
-                $id = User::generateID(60);
-                $qr = User::generateQR($id, 90);
-                $user = User::create(
-                    [
-                    'forename' => $data['forename'],
-                    'surname' => $data['surname'],
-                    'email' => $data['email'],
-                    'password' => Hash::make($data['password']),
-                    'badge_id' => $id,
-                    'active' => 'on'
-                    ]
-                );
-                $qr = User::generateQR($id, $user->id);
-                $admins = User::whereHas(
-                    "roles", function ($q) {
-                        $q->where("name", "Super Admin"); 
-                    }
-                )->get();
-            foreach($admins as $admin)
-                {
+            //Validation was successful, add your form submission logic here
+            $id = User::generateID(60);
+            //$qr = User::generateQR($id, 90);
+            $cal = User::generateID(60);
+            $user = User::create(
+                [
+                'forename' => $data['forename'],
+                'surname' => $data['surname'],
+                'email' => $data['email'],
+                'password' => Hash::make($data['password']),
+                'badge_id' => $id,
+                'calendar_id' => $cal,
+                'active' => 'on'
+                ]
+            );
+            $qr = User::generateQR($id, $user->id);
+            $admins = User::whereHas(
+                "roles", function ($q) {
+                    $q->where("name", "Super Admin");
+                }
+            )->get();
+            foreach ($admins as $admin) {
                 $admin->notify(new NewUser($user));
             }
-                Mail::to($user)->send(new \App\Mail\WelcomeUser($user));
-                return $user;
+            Mail::to($user)->send(new \App\Mail\WelcomeUser($user));
+            return $user;
 
         } else {
                 return back()->withErrors(['captcha' => 'ReCaptcha Error']);

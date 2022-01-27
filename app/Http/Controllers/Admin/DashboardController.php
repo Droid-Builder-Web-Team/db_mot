@@ -1,5 +1,16 @@
 <?php
 
+
+/**
+ * Dashboard Controller
+ * php version 7.4
+ *
+ * @category Controller
+ * @package  Controllers
+ * @author   Darren Poulson <darren.poulson@gmail.com>
+ * @license  https://opensource.org/licenses/MIT MIT License
+ * @link     https://portal.droidbuilders.uk/
+ */
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
@@ -11,6 +22,15 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Toastr;
 
+/**
+ * DashboardController
+ *
+ * @category Class
+ * @package  Controllers
+ * @author   Darren Poulson <darren.poulson@gmail.com>
+ * @license  https://opensource.org/licenses/MIT MIT License
+ * @link     https://portal.droidbuilders.uk/
+ */
 class DashboardController extends Controller
 {
     /**
@@ -39,9 +59,11 @@ class DashboardController extends Controller
         $events = Event::whereDate('date', '>=', Carbon::now())
             ->orderBy('date', 'asc')
             ->get();
+        $active = User::whereDate('last_activity', '>', Carbon::today()->subDays(60))
+            ->count();
         return view(
             'admin.dashboard', compact(
-                'users', 'droids', 'events', 'badges'
+                'users', 'droids', 'events', 'badges', 'active'
             )
         );
     }

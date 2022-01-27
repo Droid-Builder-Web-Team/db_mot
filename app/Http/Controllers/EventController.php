@@ -188,10 +188,13 @@ class EventController extends Controller
         ];
         if ($hasEntry) {
             $result = $event->users()->updateExistingPivot($user, $attributes);
+            toastr()->success('Interest updated for Event');
+        } elseif ($event->isFull()) {
+            toastr()->error('Sorry, event is full');
         } else {
             $result = $event->users()->save($user, $attributes);
+            toastr()->success('Interest registered for Event');
         }
-        toastr()->success('Interest registered for Event');
         return back();
     }
 

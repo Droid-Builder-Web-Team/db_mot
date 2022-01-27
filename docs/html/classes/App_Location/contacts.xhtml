@@ -2,7 +2,7 @@
 <!DOCTYPE html SYSTEM "about:legacy-compat">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
-    <title>phpDox - App\Http\Controllers\Admin\VenueContactController::destroy</title>
+    <title>phpDox - App\Location::contacts</title>
     <link rel="stylesheet" type="text/css" href="../../css/style.css" media="screen"/>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
   </head>
@@ -36,12 +36,12 @@
             <a href="../../classes.xhtml">Classes</a>
           </li>
           <li class="separator">
-            <a href="../../classes.xhtml#App_Http_Controllers_Admin">App\Http\Controllers\Admin</a>
+            <a href="../../classes.xhtml#App">App</a>
           </li>
           <li class="separator">
-            <a title="App\Http\Controllers\Admin\VenueContactController" href="../../classes/App_Http_Controllers_Admin_VenueContactController.xhtml">VenueContactController</a>
+            <a title="App\Location" href="../../classes/App_Location.xhtml">Location</a>
           </li>
-          <li class="separator">destroy</li>
+          <li class="separator">contacts</li>
         </ul>
       </div>
       <nav class="box">
@@ -53,39 +53,27 @@
             <a href="#synopsis">Synopsis</a>
           </li>
           <li>
-            <a href="#parameter">Parameter</a>
-          </li>
-          <li>
             <a href="#return">Return</a>
           </li>
           <li>
-            <a href="../../source/Http/Controllers/Admin/VenueContactController.php.xhtml#line116">Source</a>
+            <a href="../../source/Location.php.xhtml#line72">Source</a>
           </li>
         </ul>
       </nav>
       <section>
-        <h1><small>App\Http\Controllers\Admin\VenueContactController::</small>destroy</h1>
-        <h4>Remove the specified resource from storage.</h4>
+        <h1><small>App\Location::</small>contacts</h1>
+        <h4>Get contacts for this location</h4>
         <p/>
         <ul/>
         <h2 id="signature">Signature</h2>
         <div class="styled synopsis">
-          <code>public function destroy(<a title="App\VenueContact" href="../../classes/App_VenueContact.xhtml">VenueContact</a>
-        $venueContact )
+          <code>public function contacts()
             </code>
         </div>
-        <h2 id="parameterlist">Parameters</h2>
-        <dl class="styled">
-          <dt><code>$venueContact</code>
-                —
-                <a title="" href="../../classes/.xhtml"/></dt>
-          <dd/>
-        </dl>
         <h2 id="return">Returns</h2>
         <dl class="styled">
-          <dt>Response</dt>
-          <dd><br/>
-        </dd>
+          <dt>array</dt>
+          <dd>of App\Contact</dd>
         </dl>
       </section>
     </div>

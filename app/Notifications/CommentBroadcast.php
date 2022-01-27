@@ -1,5 +1,17 @@
 <?php
 
+
+/**
+ * Comment notification
+ * php version 7.4
+ *
+ * @category Notification
+ * @package  Notifications
+ * @author   Darren Poulson <darren.poulson@gmail.com>
+ * @license  https://opensource.org/licenses/MIT MIT License
+ * @link     https://portal.droidbuilders.uk/
+ */
+
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
@@ -10,6 +22,15 @@ use App\Comment;
 use App\Event;
 use App\PartsRunData;
 
+/**
+ * CommentBroadcast
+ *
+ * @category Class
+ * @package  Notifications
+ * @author   Darren Poulson <darren.poulson@gmail.com>
+ * @license  https://opensource.org/licenses/MIT MIT License
+ * @link     https://portal.droidbuilders.uk/
+ */
 class CommentBroadcast extends Notification
 {
     use Queueable;
@@ -22,6 +43,8 @@ class CommentBroadcast extends Notification
 
     /**
      * Create a new notification instance.
+     *
+     * @param $comment App\Comment Comment model
      *
      * @return void
      */
@@ -54,34 +77,39 @@ class CommentBroadcast extends Notification
     /**
      * Get the notification's delivery channels.
      *
-     * @param mixed $notifiable
+     * @param mixed $notifiable Notifiable object
      *
      * @return array
      */
     public function via($notifiable)
     {
-        return $notifiable->settings()->get('notifications.broadcast') == 'on' ? ['mail', 'database'] : ['database'];
+        return $notifiable->settings()
+            ->get('notifications.broadcast') ==
+                'on' ? ['mail', 'database'] : ['database'];
     }
 
     /**
      * Get the mail representation of the notification.
      *
-     * @param mixed $notifiable
+     * @param mixed $notifiable Notifiable object
      *
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
     public function toMail($notifiable)
     {
         return (new MailMessage)
+            ->greeting("Hi, " . $notifiable->forename)
             ->line($this->title)
             ->action('View on Portal', $this->link)
-            ->line($this->text);
+            ->line($this->text)
+            ->line("Comment Reads:")
+            ->line($this->comment->body);
     }
 
     /**
      * Get the array representation of the notification.
      *
-     * @param mixed $notifiable
+     * @param mixed $notifiable Notifiable object
      *
      * @return array
      */

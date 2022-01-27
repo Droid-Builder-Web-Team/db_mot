@@ -53,7 +53,13 @@
             <a href="#hierarchy">Hierarchy</a>
           </li>
           <li>
+            <a href="#violations">Violations</a>
+          </li>
+          <li>
             <a href="#methods">Methods</a>
+          </li>
+          <li>
+            <a href="#history">History</a>
           </li>
           <li>
             <a href="../source/Http/Controllers/UserController.php.xhtml#line31">Source</a>
@@ -96,6 +102,36 @@
             </li>
           </ul>
         </div>
+        <h2 id="violations">Violations</h2>
+        <div class="styled">
+          <h3>Checkstyle</h3>
+          <table class="styled">
+            <thead>
+              <tr>
+                <th>Line</th>
+                <th>Column</th>
+                <th>Severity</th>
+                <th>Message</th>
+              </tr>
+            </thead>
+            <tr>
+              <td class="line">246</td>
+              <td>12</td>
+              <td>
+                <span title="PEAR.NamingConventions.ValidFunctionName.ScopeNotCamelCaps">error</span>
+              </td>
+              <td>Public method name "UserController::edit_settings" is not in camel caps format</td>
+            </tr>
+            <tr>
+              <td class="line">260</td>
+              <td>12</td>
+              <td>
+                <span title="PEAR.NamingConventions.ValidFunctionName.ScopeNotCamelCaps">error</span>
+              </td>
+              <td>Public method name "UserController::update_settings" is not in camel caps format</td>
+            </tr>
+          </table>
+        </div>
         <h2 id="methods">Methods</h2>
         <div class="styled">
           <h4>public</h4>
@@ -128,6 +164,169 @@
                 — Update user settings in database</li>
           </ul>
         </div>
+        <h2 id="history">History</h2>
+        <ul class="styled history">
+          <li>
+            <h3>2022-01-21T02:06:51+00:00 (commit #<span title="361402a0207377b76b686bc9e80be98689380e52">361402a</span>)</h3>
+            <div>
+              <p>
+                        Author: dpoulson (darren.poulson@gmail.com) /
+                        Commiter: dpoulson (darren.poulson@gmail.com)
+                    </p>
+              <pre class="wrapped">Some socialite tweaks and a start on creating an downloadable option for creating ID badges</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2022-01-17T02:12:46+00:00 (commit #<span title="c6754c1f402310fb7063d84dc6ea2174c9a71a4f">c6754c1</span>)</h3>
+            <div>
+              <p>
+                        Author: dpoulson (darren.poulson@gmail.com) /
+                        Commiter: dpoulson (darren.poulson@gmail.com)
+                    </p>
+              <pre class="wrapped">Tidied up code to pass linter, and generate documentation</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2022-01-16T22:55:41+00:00 (commit #<span title="27ca47e1131d511ed925e4214bb29a9a9380afb7">27ca47e</span>)</h3>
+            <div>
+              <p>
+                        Author: dpoulson (darren.poulson@gmail.com) /
+                        Commiter: dpoulson (darren.poulson@gmail.com)
+                    </p>
+              <pre class="wrapped">Added country to users and updated README</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2022-01-12T12:07:12+00:00 (commit #<span title="1a2348c8407d01790bb6debd0374ff70826a13ce">1a2348c</span>)</h3>
+            <div>
+              <p>
+                        Author: dpoulson (darren.poulson@gmail.com) /
+                        Commiter: dpoulson (darren.poulson@gmail.com)
+                    </p>
+              <pre class="wrapped">Added map component and set up members map and events map</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2021-07-16T00:56:09+00:00 (commit #<span title="17e600d1daedfcd2e15f2f7ee5ce7ef649cc7b89">17e600d</span>)</h3>
+            <div>
+              <p>
+                        Author: dpoulson (darren.poulson@gmail.com) /
+                        Commiter: dpoulson (darren.poulson@gmail.com)
+                    </p>
+              <pre class="wrapped">Allow user to change date format.</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2021-07-13T23:23:51+00:00 (commit #<span title="b8fe2722159f709df52b8e4beed51715768ad367">b8fe272</span>)</h3>
+            <div>
+              <p>
+                        Author: Rob Howdle (robhowdle94@gmail.com) /
+                        Commiter: Rob Howdle (robhowdle94@gmail.com)
+                    </p>
+              <pre class="wrapped">Restored User Controller :154</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2021-07-13T21:42:45+00:00 (commit #<span title="1a049dbe0926e5196fe17db550b8bee48868790c">1a049db</span>)</h3>
+            <div>
+              <p>
+                        Author: Rob Howdle (robhowdle94@gmail.com) /
+                        Commiter: Rob Howdle (robhowdle94@gmail.com)
+                    </p>
+              <pre class="wrapped">Added notifications for events creation, update and delete to trigger Discord Notifications</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2020-10-11T01:59:47+00:00 (commit #<span title="1f5e421b5762130c685c7f9872e67c938b465638">1f5e421</span>)</h3>
+            <div>
+              <p>
+                        Author: dpoulson (darren.poulson@gmail.com) /
+                        Commiter: dpoulson (darren.poulson@gmail.com)
+                    </p>
+              <pre class="wrapped">Achievements can be added to a user (Issue #18)</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2020-10-10T03:12:38+00:00 (commit #<span title="af1d4ac6b098bac446bdee781164e75b765ba900">af1d4ac</span>)</h3>
+            <div>
+              <p>
+                        Author: dpoulson (darren.poulson@gmail.com) /
+                        Commiter: dpoulson (darren.poulson@gmail.com)
+                    </p>
+              <pre class="wrapped">Added some modules, implemented issue #91, and added distance from event preference</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2020-10-03T00:16:18+00:00 (commit #<span title="ef37c655dfe60f848872a5416d3415e3db6e1db1">ef37c65</span>)</h3>
+            <div>
+              <p>
+                        Author: dpoulson (darren.poulson@gmail.com) /
+                        Commiter: dpoulson (darren.poulson@gmail.com)
+                    </p>
+              <pre class="wrapped">User settings added.</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2020-09-15T23:33:27+00:00 (commit #<span title="c981866cf00050858262faf268648b60bcb4bbe4">c981866</span>)</h3>
+            <div>
+              <p>
+                        Author: dpoulson (darren.poulson@gmail.com) /
+                        Commiter: dpoulson (darren.poulson@gmail.com)
+                    </p>
+              <pre class="wrapped">A whole bunch of UI changes</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2020-09-08T01:20:23+00:00 (commit #<span title="26958165b4f9f0f307ec28415e14492883262b18">2695816</span>)</h3>
+            <div>
+              <p>
+                        Author: dpoulson (darren.poulson@gmail.com) /
+                        Commiter: dpoulson (darren.poulson@gmail.com)
+                    </p>
+              <pre class="wrapped">More updates for Toastr responses in most of the user level functions</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2020-09-05T23:40:36+00:00 (commit #<span title="d7b9717f0621b47b53fffe871a3d2114e5dedc90">d7b9717</span>)</h3>
+            <div>
+              <p>
+                        Author: dpoulson (darren.poulson@gmail.com) /
+                        Commiter: dpoulson (darren.poulson@gmail.com)
+                    </p>
+              <pre class="wrapped">Basic cover note support</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2020-09-04T21:58:08+00:00 (commit #<span title="2b8236a9952d2c81519b2835bb43ed0724546503">2b8236a</span>)</h3>
+            <div>
+              <p>
+                        Author: dpoulson (darren.poulson@gmail.com) /
+                        Commiter: dpoulson (darren.poulson@gmail.com)
+                    </p>
+              <pre class="wrapped">Badge ID and QR code generated on register.</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2020-09-04T21:21:14+00:00 (commit #<span title="53fed3587dc9a85f3ad99dbc227886993b553496">53fed35</span>)</h3>
+            <div>
+              <p>
+                        Author: dpoulson (darren.poulson@gmail.com) /
+                        Commiter: dpoulson (darren.poulson@gmail.com)
+                    </p>
+              <pre class="wrapped">Checking all the permissions</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2020-09-03T15:44:18+00:00 (commit #<span title="1d91d074612f3a07d82c0f6c9f49e466c9b61341">1d91d07</span>)</h3>
+            <div>
+              <p>
+                        Author: dpoulson (darren.poulson@gmail.com) /
+                        Commiter: dpoulson (darren.poulson@gmail.com)
+                    </p>
+              <pre class="wrapped">Bitten the bullet and moved keys and uids to a more standard laravel format for ease going forward.</pre>
+            </div>
+          </li>
+        </ul>
       </section>
     </div>
     <footer>

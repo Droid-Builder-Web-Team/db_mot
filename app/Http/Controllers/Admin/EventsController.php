@@ -1,5 +1,16 @@
 <?php
 
+/**
+ * Event Controller
+ * php version 7.4
+ *
+ * @category Controller
+ * @package  Controllers
+ * @author   Darren Poulson <darren.poulson@gmail.com>
+ * @license  https://opensource.org/licenses/MIT MIT License
+ * @link     https://portal.droidbuilders.uk/
+ */
+
 namespace App\Http\Controllers\Admin;
 
 use App\Event;
@@ -16,10 +27,23 @@ use App\Notifications\EventCancelled;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Response;
 
-
+/**
+ * EventController
+ *
+ * @category Class
+ * @package  Controllers
+ * @author   Darren Poulson <darren.poulson@gmail.com>
+ * @license  https://opensource.org/licenses/MIT MIT License
+ * @link     https://portal.droidbuilders.uk/
+ */
 class EventsController extends Controller
 {
 
+    /**
+     * __construct
+     *
+     * @return void
+     */
     public function __construct()
     {
         $this->middleware('auth');
@@ -28,6 +52,8 @@ class EventsController extends Controller
 
     /**
      * Display a listing of the resource.
+     *
+     * @param EventsDataTable $dataTable Datatable for Events
      *
      * @return \Illuminate\Http\Response
      */
@@ -51,11 +77,13 @@ class EventsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request Request Data
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
+
         $request->validate(
             [
             'name' => 'required',
@@ -63,6 +91,7 @@ class EventsController extends Controller
             'date' => 'required'
             ]
         );
+
 
         if ($request['url'] != "") {
             if (!str_starts_with($request['url'], 'http')) {
@@ -80,9 +109,21 @@ class EventsController extends Controller
             $success = 1;
         } catch (\Illuminate\Database\QueryException $exception) {
             toastr()->error('Failed to create Event ');
+            return back();
         }
 
         $newevent->createdEventNotification($newevent);
+
+        if ($request->days != 1) {
+            for ($x = 1; $x <= $request->days - 1; $x++) {
+                $event['date'] = date(
+                    'Y-m-d', strtotime(
+                        $request->date. ' + ' . $x . ' days'
+                    )
+                );
+                $newevent = Event::create($event);
+            }
+        }
 
         return redirect()->route('admin.events.index');
     }
@@ -91,20 +132,26 @@ class EventsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Event $event
+     * @param \App\Event $event Event model to edit
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit(Event $event)
     {
         $locations = Location::all();
-        return view('admin.events.edit', compact('locations'))->with('event', $event);
+        return view(
+            'admin.events.edit', compact(
+                'locations'
+            )
+        )->with('event', $event);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  \App\Event               $event
+     * @param \Illuminate\Http\Request $request Request data
+     * @param \App\Event               $event   Event to update
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Event $event)
@@ -134,9 +181,8 @@ class EventsController extends Controller
             );
         }
 
-        if($event->isFuture()) {
-            foreach($event->users as $user)
-            {
+        if ($event->isFuture()) {
+            foreach ($event->users as $user) {
                 $user->notify(new EventChanged($event));
             }
             // Only notify discord if its a future event.
@@ -151,7 +197,8 @@ class EventsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Event $event
+     * @param \App\Event $event Event to delete
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy(Event $event)
@@ -170,6 +217,14 @@ class EventsController extends Controller
         return redirect()->route('admin.events.index');
     }
 
+    /**
+     * Confirm attendance
+     *
+     * @param int $event_id Event ID
+     * @param int $user_id  User ID
+     *
+     * @return void
+     */
     public function confirm($event_id, $user_id)
     {
         $user = User::find($user_id);
@@ -177,6 +232,14 @@ class EventsController extends Controller
         return back();
     }
 
+    /**
+     * Deny
+     *
+     * @param int $event_id Event ID
+     * @param int $user_id  User ID
+     *
+     * @return void
+     */
     public function deny($event_id, $user_id)
     {
         $user = User::find($user_id);
@@ -184,28 +247,51 @@ class EventsController extends Controller
         return back();
     }
 
+    /**
+     * Add image
+     *
+     * @param int $event_id Event ID
+     *
+     * @return void
+     */
     public function addimage($event_id)
     {
         $event = Event::find($event_id);
         return view('admin.events.addimage', compact('event'));
     }
 
+    /**
+     * Store an image
+     *
+     * @param \Illuminate\Http\Request $request Image to store
+     *
+     * @return void
+     */
     public function storeimage(Request $request)
     {
         // Check image
         if ($request->hasFile('image')) {
             $request->validate(
                 [
-                'image' => 'mimes:jpeg,bmp,png' // Only allow .jpg, .bmp and .png file types.
+                'image' => 'mimes:jpeg,bmp,png'
                 ]
             );
         }
 
-        $eventImage = $request->image->storeAs('events/'.$request->event_id.'/', 'event_image.jpg');
+        $eventImage = $request->image->storeAs(
+            'events/'.$request->event_id.'/', 'event_image.jpg'
+        );
 
         return redirect()->route('event.show', $request->event_id);
     }
 
+    /**
+     * Export
+     *
+     * @param int $id Event ID
+     *
+     * @return void
+     */
     public function export($id)
     {
         if (!auth()->user()->can('Edit Events')) {
@@ -224,20 +310,34 @@ class EventsController extends Controller
             "Expires"             => "0"
         );
 
-        $columns = array('Forename', 'Surname', 'Status', 'Spotter', 'MOT Requested');
+        $columns = array(
+            'Forename',
+            'Surname',
+            'Status',
+            'Spotter',
+            'MOT Requested'
+        );
 
         $callback = function () use ($event, $columns) {
             $file = fopen('php://output', 'w');
             fputcsv($file, $columns);
 
             foreach ($event->users as $user) {
-                $row['Forename']  = $user->forename;
-                $row['Surname']    = $user->surname;
-                $row['Status']  = $user->pivot->status;
-                $row['Spotter'] = $user->pivot->spotter;
+                $row['Forename']      = $user->forename;
+                $row['Surname']       = $user->surname;
+                $row['Status']        = $user->pivot->status;
+                $row['Spotter']       = $user->pivot->spotter;
                 $row['MOT Requested'] = $user->pivot->mot_required;
 
-                fputcsv($file, array($row['Forename'], $row['Surname'], $row['Status'], $row['Spotter'], $row['MOT Requested']));
+                fputcsv(
+                    $file, array(
+                        $row['Forename'],
+                        $row['Surname'],
+                        $row['Status'],
+                        $row['Spotter'],
+                        $row['MOT Requested']
+                        )
+                );
             }
 
             fclose($file);
