@@ -371,11 +371,22 @@
                                 <th>Charity Raised</th>
                                 <th></th>
                             </tr>
+                            <tr><th colspan=5>Upcoming</th></tr>
+                            @foreach ($user->goingTo as $event)
+                                <tr>
+                                    <td>{{ \Carbon\Carbon::parse($event->date)->isoFormat($user->settings()->get('date_format')) }}</td>
+                                    <td>{{ $event->name }}</td>
+                                    <td><a class="btn-sml btn-transparent-outline-view-event" href="{{ route('location.show', $event->location->id) }}">{{ $event->location->name }}</a></td>
+                                    <td>-</td>
+                                    <td><a class="btn-outline-icon-view" href="{{ route('event.show', $event->id) }}"><i class="fas fa-eye"></a></td>
+                                </tr>
+                            @endforeach
+                            <tr><th colspan=5>Attended</th></tr>
                             @foreach ($user->attended_events as $event)
                                 <tr>
                                     <td>{{ \Carbon\Carbon::parse($event->date)->isoFormat($user->settings()->get('date_format')) }}</td>
                                     <td>{{ $event->name }}</td>
-                                    <td><a class="btn btn-transparent-outline-view-event" href="{{ route('location.show', $event->location->id) }}">{{ $event->location->name }}</a></td>
+                                    <td><a class="btn-sml btn-transparent-outline-view-event" href="{{ route('location.show', $event->location->id) }}">{{ $event->location->name }}</a></td>
                                     <td>£­{{ $event->charity_raised }}</td>
                                     <td><a class="btn-outline-icon-view" href="{{ route('event.show', $event->id) }}"><i class="fas fa-eye"></a></td>
                                 </tr>
