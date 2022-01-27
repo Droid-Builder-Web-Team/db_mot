@@ -327,6 +327,7 @@
                         </form>
                     </div>
                     @endcan
+                    @if($user->achievements->count() != 0)
                     <div class="table-responsive">
                         <table class="table text-center table-striped table-sm table-hover table-dark">
                             <tr>
@@ -346,12 +347,19 @@
                     <span class="float-right">
                         <a class="btn btn-transparent-outline-blue" href="{{ route('achievements.index') }}">View All</a>
                     </span>
+                    @else
+                    <span class="float-center">
+                        Achievements can be gained for certain actions. Click the button below to find out more<br>
+                        <a class="btn btn-transparent-outline-blue" href="{{ route('achievements.index') }}">View All</a>
+                    </span>
+                    @endif
                 </div>
             </div>
         </div>
     </div>
 
     {{-- User Events --}}
+    @if($user->events->count() != 0)
     <div class="row d-flex justify-content-center">
         <div class="col-12">
             <div class="card">
@@ -397,6 +405,7 @@
             </div>
         </div>
     </div>
+    @endif
 
     {{-- Driving Course --}}
     @if($user->course_runs->count() != 0)
