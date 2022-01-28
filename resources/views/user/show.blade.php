@@ -31,7 +31,7 @@
                         @if ($uses_pli)
                             @if ($user->validPLI())
                                 <span class="float-right">
-                                    <a class="btn btn-cover" style="color:white;" href="{{ action('UserController@downloadPDF', $user->id) }}" target="_blank">Cover Note</a>
+                                    <a class="btn btn-view" style="color:white;" href="{{ action('UserController@downloadPDF', $user->id) }}" target="_blank">Cover Note</a>
                                 </span>
                             @else
                                 <span class="float-right badge badge-danger">
@@ -103,9 +103,9 @@
                     <div class="row">
                         <div class="text-center edit-button">
                             @can('Edit Members')
-                                <a class="btn btn-transparent-outline-blue" href="{{ route('admin.users.edit', $user->id) }}">Edit</a>
+                                <a class="btn btn-edit" href="{{ route('admin.users.edit', $user->id) }}">Edit</a>
                             @else
-                                <a class="btn btn-transparent-outline-blue" href="{{ route('user.edit', $user->id) }}">Edit</a>
+                                <a class="btn btn-edit" href="{{ route('user.edit', $user->id) }}">Edit</a>
                             @endcan
                         </div>
                     </div>
@@ -201,7 +201,7 @@
                                     <input type="hidden" name="user" value="{{ $user->id }}">
                                     <input type="hidden" name="droid" value=0>
                                     <input type="hidden" name="photo_name" value="mug_shot">
-                                    <button type="submit" class="btn btn-transparent-outline-blue">Change</button>
+                                    <button type="submit" class="btn btn-edit">Change</button>
                                 </form>
                             @endif
                         </div>
@@ -322,7 +322,7 @@
                                 <input type="date" class="form-control" name="date" value="@php echo date('Y-m-d'); @endphp">
                             </div>
                             <div class="col">
-                                <button type="submit" class=" btn-sm w-100 btn btn-transparent-outline-blue">Award</button>
+                                <button type="submit" class=" btn-sm w-100 btn btn-edit">Award</button>
                             </div>
                         </div>
                     </form>
@@ -346,12 +346,12 @@
                     </table>
                 </div>
                 <span class="float-right">
-                    <a class="btn btn-transparent-outline-blue" href="{{ route('achievements.index') }}">View All</a>
+                    <a class="btn btn-view" href="{{ route('achievements.index') }}">View All</a>
                 </span>
                 @else
                 <span class="float-center">
                     Achievements can be gained for certain actions. Click the button below to find out more<br>
-                    <a class="btn btn-transparent-outline-blue" href="{{ route('achievements.index') }}">View All</a>
+                    <a class="btn btn-view" href="{{ route('achievements.index') }}">View All</a>
                 </span>
                 @endif
             </div>
@@ -365,7 +365,7 @@
         <div class="container-fluid">
             <div class="row">
                 <span class="float-right">
-                    <a class="btn btn-cover" style="color:white;" href="/ical/{{ $user->calendar_id }}" target="_blank">iCal</a>
+                    <a class="btn btn-view" style="color:white;" href="/ical/{{ $user->calendar_id }}" target="_blank">iCal</a>
                 </span>
                 <h4 class="text-uppercase db-mb-1 d-flex align-items-center justify-content-center">Events</h4>
             </div>
@@ -385,9 +385,9 @@
                             <tr>
                                 <td>{{ \Carbon\Carbon::parse($event->date)->isoFormat($user->settings()->get('date_format')) }}</td>
                                 <td>{{ $event->name }}</td>
-                                <td><a class="btn-sml btn-transparent-outline-view-event" href="{{ route('location.show', $event->location->id) }}">{{ $event->location->name }}</a></td>
+                                <td><a class="btn-view btn-sml" href="{{ route('location.show', $event->location->id) }}">{{ $event->location->name }}</a></td>
                                 <td>-</td>
-                                <td><a class="btn-outline-icon-view" href="{{ route('event.show', $event->id) }}"><i class="fas fa-eye"></a></td>
+                                <td><a class="btn-view" href="{{ route('event.show', $event->id) }}"><i class="fas fa-eye"></a></td>
                             </tr>
                         @endforeach
                         <tr><th colspan=5>Attended</th></tr>
@@ -395,9 +395,9 @@
                             <tr>
                                 <td>{{ \Carbon\Carbon::parse($event->date)->isoFormat($user->settings()->get('date_format')) }}</td>
                                 <td>{{ $event->name }}</td>
-                                <td><a class="btn-sml btn-transparent-outline-view-event" href="{{ route('location.show', $event->location->id) }}">{{ $event->location->name }}</a></td>
+                                <td><a class="btn-sml btn-view" href="{{ route('location.show', $event->location->id) }}">{{ $event->location->name }}</a></td>
                                 <td>£­{{ $event->charity_raised }}</td>
-                                <td><a class="btn-outline-icon-view" href="{{ route('event.show', $event->id) }}"><i class="fas fa-eye"></a></td>
+                                <td><a class="btn-view" href="{{ route('event.show', $event->id) }}"><i class="fas fa-eye"></a></td>
                             </tr>
                         @endforeach
                     </table>
