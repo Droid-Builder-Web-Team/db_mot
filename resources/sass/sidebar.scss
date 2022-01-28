@@ -1,65 +1,164 @@
 @import "variables";
 
-// .c-sidebar-brand {
-//     font-family: "Michroma", sans-serif !important;
-// }
+#sidebar {
+    min-width: 270px;
+    max-width: 270px;
+    height: 100vh;
+    background: $sidebarBackground;
+    color: $secondaryColor;
+    transition: all 0.3s;
+    overflow-y: scroll;
 
-// .c-sidebar-nav-link {
-//     .fas,
-//     .fab {
-//         margin-right: 16px;
-//     }
-// }
+    .logo {
+        padding: 0.5rem 1rem;
+    }
 
-// .c-sidebar-nav-item {
-//     line-height: 1.0;
-// }
+    .large-menu-title {
+        display: block;
+    }
 
-// .sideFooter {
-//     padding: 8px;
-// }
+    .small-menu-title {
+        display: none;
+    }
 
-// #facebookLi:hover {
-//     background: #3b5998;
-//     a:hover {
-//         color: #FFF !important;
-//     }
-// }
+    &.active {
+        min-width: 150px;
+        max-width: 150px;
+        text-align: center;
 
-// #discordLi:hover {
-//     background: #7289da;
-//     a:hover {
-//         color: #FFF !important;
-//     }
-// }
+        .large-menu-title {
+            display: none;
+        }
 
-// #youtubeLi:hover {
-//     background: #ff0000;
-//     a:hover {
-//         color: #FFF !important;
-//     }
-// }
+        .small-menu-title {
+            display: block;
+        }
 
-// #youtubeLi:hover {
-//   background: #ff0000;
-//   a:hover {
-//     color: #FFF !important;
-//   }
-// }
+        ul.sidebar-nav {
+            li.sidebar-nav-title {
+                padding: 0 0.5rem;
 
-// .social-icons {
-//     display: flex;
-//     flex-direction: row !important;
-//     align-items: center;
-//     justify-content: center;
+                &:after {
+                    display: none;
+                }
+            }
 
-//     a {
-//         padding: 16px;
-//         color: #ffffff;
-//     }
+            li.sidebar-nav-item {
+                a.sidebar-nav-link {
+                    display: block;
+                    padding: 1rem 0;
+                    width: 100%;
+                    text-align: center;
+                    margin: 0;
 
-//     li {
-//         border: none !important;
-//         border-radius: 0 !important;
-//     }
-// }
+                    span {
+                        margin: 0 auto;
+                        display: block;
+                    }
+                }
+            }
+        }
+
+        .logo {
+            padding: 10px 0;
+            transition: 0.5s all;
+        }
+
+        .footer {
+            display: none;
+            transition: 0.5s all;
+            padding: 0 0.5rem;
+        }
+    }
+
+
+    .footer {
+        padding: 0 1rem;
+    }
+
+    ul.sidebar-nav {
+        padding: 0;
+
+        li.sidebar-nav-title {
+            padding: 0 1.5rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            transition: 0.5s all;
+            position: relative;
+
+            &::after {
+                content: '\f078';
+                font-family: 'Font Awesome 5 Free', sans-serif;
+                color: $secondaryColor;
+                font-weight: 900;
+                font-size: 1rem;
+                margin-left: 0.5rem;
+                position: absolute;
+                right: 10%;
+            }
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+
+        li.sidebar-nav-item {
+            a.sidebar-nav-link {
+                padding: 20px 30px;
+                display: block;
+                text-decoration: none;
+                color: $secondaryColor;
+                background: transparent;
+                transition: 0.5s all;
+
+                span {
+                    font-size: 1rem;
+                }
+
+                &:hover {
+                    background: #5d86db;
+                    // background: radial-gradient(circle, #75a6d7 0%, #5d86db 20%, #46659d 40%, #233454 60%, #131c2d 80%, #010203 100%);                  
+                }
+            }
+        }
+
+        .divider {
+            width: 80%;
+            background: $secondaryColor;
+            height: 2px;
+            display: flex;
+            margin: 1rem auto;
+        }
+    }
+
+    .social-icons {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        width: 100%;
+        justify-content: center;
+
+        .social-list-item {
+            width: 100%;
+
+            a {
+                transition: 0.5s all;
+            }
+
+            .facebook:hover {
+                color: $facebook;
+            }
+
+            .dribble:hover {
+                color: $dribble;
+            }
+
+            .youtube:hover {
+                color: $youtube;
+            }
+        }
+    }
+}
+
+

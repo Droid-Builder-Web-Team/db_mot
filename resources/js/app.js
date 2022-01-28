@@ -39,3 +39,8 @@ app.use(VueGoogleMaps, {
   });
 
 })(jQuery);
+
+// Navbar Magic
+$('#menu-toggle').click( function () {
+	$('#wrapper').toggleClass('wide');
+});

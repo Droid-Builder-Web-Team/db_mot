@@ -14,32 +14,33 @@
                     </li>
                 @endif
             @else
-                {{-- Club Functions --}}
-                <li class="sidebar-nav-title" data-toggle="collapse" data-target="#club-functions">Club Functions</li>
-                    <div class="nav-group collapse" id="club-functions">
-                        <li class="sidebar-nav-item">
-                            <a class="sidebar-nav-link" href="{{ route('user.show', Auth::user()->id) }}">
-                                <span class="fas fa-user-circle fa-fw"></span>
-                                 Profile
-                            </a>
-                        </li>
-                        <li class="sidebar-nav-item">
-                            <a class="sidebar-nav-link" href="{{ route('event.index') }}">
-                                <span class="fas fa-calendar fa-fw"></span>
-                                Upcoming Events
-                            </a>
-                        </li>
+            {{-- Club Functions --}}
+            <li class="sidebar-nav-title" data-toggle="collapse" data-target="#club-functions">Club Functions</li>
+            <div class="nav-group collapse" id="club-functions">
+                <li class="sidebar-nav-item">
+                    <a class="sidebar-nav-link" href="{{ route('user.show', Auth::user()->id) }}">
+                        <span class="fas fa-user-circle fa-fw"></span>
+                            Profile
+                    </a>
+                </li>
+                <li class="sidebar-nav-item">
+                    <a class="sidebar-nav-link" href="{{ route('event.index') }}">
+                        <span class="fas fa-calendar fa-fw"></span>
+                        Upcoming Events
+                    </a>
+                </li>
 
-                        @if(config('features.partrun', FALSE))
-                            <li class="sidebar-nav-item">
-                                <a class="sidebar-nav-link" href="{{ route('parts-run.index') }}">
-                                    <span class="fas fa-wrench fa-fw"></span>
-                                    Part Runs
-                                </a>
-                            </li>
-                        @endif
-                    </div>
-                <div class="divider"></div>
+                @if(config('features.partrun', FALSE))
+                    <li class="sidebar-nav-item">
+                        <a class="sidebar-nav-link" href="{{ route('parts-run.index') }}">
+                            <span class="fas fa-wrench fa-fw"></span>
+                            Part Runs
+                        </a>
+                    </li>
+                @endif
+            </div>
+
+            <div class="divider"></div>
                 
                 {{-- Info --}}
                 <li class="sidebar-nav-title" data-toggle="collapse" data-target="#info">Info</li>
@@ -204,16 +205,11 @@
 
     <!-- Page Content  -->
     <div class="db-wrapper" id="content">
-        <nav class="db-navbar navbar navbar-expand-lg">
+        <nav class="db-navbar navbar navbar-expand">
             <div class="container-fluid">
                 <button type="button" id="sidebarCollapse" class="btn btn-primary">
                     <i class="fa fa-bars"></i>
                     <span class="sr-only">Toggle Menu</span>
-                </button>
-                <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse"
-                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <i class="fa fa-bars"></i>
                 </button>
 
                 {{-- Top Navigation --}}

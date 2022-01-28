@@ -1,5 +1,10 @@
 @import url(https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800;900&display=swap);
 @charset "UTF-8";
+@media only screen and (max-width: 1199px) {
+  .form-wrapper .form-section.purchase-contact {
+    display: block;
+  }
+}
 @media only screen and (max-width: 991px) {
   .status-box {
     display: block;
@@ -11,16 +16,12 @@
 }
 @media only screen and (max-width: 767px) {
   #sidebar {
-    min-width: 80px;
-    max-width: 80px;
     text-align: center;
-    margin-left: -80px !important;
+    min-width: 270px;
+    max-width: 270px;
   }
   #sidebar.active {
-    margin-left: 0 !important;
-  }
-  #sidebar ul li a span {
-    display: block;
+    margin-left: -150px;
   }
 
   #sidebarCollapse span {
@@ -73,6 +74,18 @@
 
 .c-wrapper {
   display: none !important;
+}
+
+a.p-link {
+  color: #fff;
+  text-decoration: none;
+  transition: 0.5s all;
+  border-bottom: 1px solid transparent;
+}
+a.p-link:hover {
+  color: #fff;
+  text-decoration: none;
+  border-color: #fff;
 }
 
 h1 {
@@ -200,9 +213,10 @@ img {
 }
 
 .divider {
-  width: 85%;
+  width: 95%;
   background: #fff;
   height: 1px;
+  margin: 0 auto;
 }
 
 .build-section {
@@ -211,6 +225,12 @@ img {
   padding: 2rem;
   display: flex;
   align-items: center;
+}
+.build-section .buttons.icon-text .btn-edit i,
+.build-section .buttons.icon-text .btn-delete i,
+.build-section .buttons.icon-text .btn-view i,
+.build-section .buttons.icon-text .btn-create i {
+  margin-right: 1rem;
 }
 
 .db-navbar {
@@ -230,6 +250,137 @@ img {
   height: 1px;
   border-bottom: 1px dashed #ddd;
   margin: 40px 0;
+}
+
+.image-wrapper {
+  position: relative;
+  padding-bottom: 70%;
+}
+.image-wrapper img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+}
+
+.comment-card {
+  background: transparent;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+}
+.comment-card .comment {
+  width: 100%;
+  margin: 1rem 0;
+  border: 2px solid #7eb6da;
+}
+.comment-card .comment .comment-header {
+  width: 100%;
+  padding: 1rem;
+  justify-content: space-around;
+}
+.comment-card .comment .comment-header i {
+  margin-left: 0.5rem;
+}
+.comment-card .comment .comment-header h5 {
+  margin-bottom: 0;
+}
+.comment-card .comment .comment-body {
+  width: 100%;
+  padding: 1rem;
+  position: relative;
+}
+.comment-card .comment .comment-body .reactions {
+  position: absolute;
+  right: 1rem;
+  bottom: 3rem;
+}
+.comment-card .comment .comment-body textarea {
+  background: transparent;
+  border: 2px solid #fff;
+  color: #fff;
+}
+
+a[data-toggle=collapse] {
+  position: relative;
+}
+
+.dropdown-toggle::after {
+  display: block;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+}
+
+ul.top-nav {
+  padding: 0.5rem 0;
+}
+ul.top-nav li.nav-item {
+  padding: 0 1rem;
+}
+ul.top-nav li.nav-item a {
+  transition: 0.5s all;
+}
+ul.top-nav li.nav-item a i {
+  font-size: 1.5rem;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 1rem auto 2rem;
+}
+.buttons a:nth-child(2) {
+  margin-left: 1rem;
+}
+.buttons a:nth-child(3) {
+  margin-left: 1rem;
+}
+
+.table-responsive table {
+  background: transparent;
+  color: #fff;
+}
+.table-responsive table th {
+  vertical-align: middle;
+  padding: 0.75rem;
+}
+.table-responsive table tbody tr {
+  transition: 0.5s all;
+}
+.table-responsive table tbody tr:hover {
+  background: transparent;
+  color: #fff;
+  opacity: 0.75;
+}
+.table-responsive table .action-buttons {
+  justify-content: center;
+  text-align: center;
+}
+.table-responsive table .action-buttons a:not(:first-of-type) {
+  margin-left: 2rem;
+}
+
+.form-wrapper {
+  width: 100%;
+}
+.form-wrapper .form-section {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.form-wrapper .form-section .transaction-notice span {
+  font-weight: 700;
 }
 
 #sidebar {
@@ -265,7 +416,7 @@ img {
   padding: 0 0.5rem;
 }
 #sidebar.active ul.sidebar-nav li.sidebar-nav-title:after {
-  right: 5%;
+  display: none;
 }
 #sidebar.active ul.sidebar-nav li.sidebar-nav-item a.sidebar-nav-link {
   display: block;
@@ -302,8 +453,9 @@ img {
 }
 #sidebar ul.sidebar-nav li.sidebar-nav-title::after {
   content: "\f078";
-  font-family: "Font Awesome 5 Pro", sans-serif;
+  font-family: "Font Awesome 5 Free", sans-serif;
   color: #fff;
+  font-weight: 900;
   font-size: 1rem;
   margin-left: 0.5rem;
   position: absolute;
@@ -355,79 +507,6 @@ img {
 }
 #sidebar .social-icons .social-list-item .youtube:hover {
   color: #FF0000;
-}
-
-a[data-toggle=collapse] {
-  position: relative;
-}
-
-.dropdown-toggle::after {
-  display: block;
-  position: absolute;
-  top: 50%;
-  right: 0;
-  transform: translateY(-50%);
-}
-
-ul.top-nav {
-  padding: 0.5rem 0;
-}
-ul.top-nav li.nav-item {
-  padding: 0 1rem;
-}
-ul.top-nav li.nav-item a {
-  transition: 0.5s all;
-}
-ul.top-nav li.nav-item a i {
-  font-size: 1.5rem;
-}
-
-.buttons {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  margin: 1rem auto 2rem;
-}
-.buttons a:nth-child(2) {
-  margin-left: 1rem;
-}
-
-.table-responsive table {
-  background: transparent;
-  color: #fff;
-}
-.table-responsive table th {
-  vertical-align: middle;
-  padding: 0.75rem;
-}
-.table-responsive table tbody tr {
-  transition: 0.5s all;
-}
-.table-responsive table tbody tr:hover {
-  background: transparent;
-  color: #fff;
-  opacity: 0.75;
-}
-.table-responsive table .action-buttons {
-  justify-content: center;
-  text-align: center;
-}
-.table-responsive table .action-buttons a:not(:first-of-type) {
-  margin-left: 2rem;
-}
-
-.form-wrapper {
-  width: 100%;
-}
-.form-wrapper .form-section {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-}
-.form-wrapper .form-section .transaction-notice span {
-  font-weight: 700;
 }
 
 /*!
@@ -10449,6 +10528,14 @@ h3 {
     border-color: #dee2e6;
   }
 }
+.part-run-image {
+  margin: 0 auto 2rem;
+}
+
+.purchase-contact .btn-purchase i {
+  margin-right: 1rem;
+}
+
 @media only screen and (max-width: 400px) {
   .oauth-buttons a {
     margin-left: 0.5rem;

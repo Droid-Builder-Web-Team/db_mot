@@ -2,6 +2,7 @@
 @import 'variables';
 
 @import 'responsive';
+
 // Global
 @import 'global';
 @import 'sidebar';
@@ -9,8 +10,23 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
+// Parts Run
+.part-run-image {
+  margin: 0 auto 2rem;
+}
+
+.purchase-contact {
+ .btn-purchase {
+  i {
+    margin-right: 1rem;
+  }
+ } 
+}
 
 
+
+
+// Old Styling
 @media only screen and (max-width: 400px) {
   .oauth-buttons a {
     margin-left: 0.5rem;

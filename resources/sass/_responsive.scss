@@ -1,8 +1,13 @@
 // @media only screen and (max-width: 1920px){}
 // @media only screen and (max-width: 1680px){}
 // @media only screen and (max-width: 1366px){}
-// @media only screen and (max-width: 1199px){}
-@media only screen and (max-width: 991px){
+@media only screen and (max-width: 1199px){
+    .form-wrapper .form-section.purchase-contact {
+        display: block;
+    }
+}
+
+@media only screen and (max-width: 991px) {
     .status-box {
         display: block;
     }
@@ -12,25 +17,16 @@
     }
 }
 
-@media only screen and (max-width: 767px){
+@media only screen and (max-width: 767px) {
     #sidebar {
-        min-width: 80px;
-        max-width: 80px;
         text-align: center;
-        margin-left: -80px !important;
-        &.active{
-            margin-left: 0 !important;
-        }
+        min-width: 270px;
+        max-width: 270px;
 
-        ul{
-            li{
-                a{
-                    span{
-                            display: block
-                    }
-                }
-            }
-          }
+        &.active {
+            margin-left: -150px;
+
+        }
     }
 
     #sidebarCollapse{
