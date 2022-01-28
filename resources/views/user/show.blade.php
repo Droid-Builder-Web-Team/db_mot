@@ -327,6 +327,7 @@
                         </form>
                     </div>
                     @endcan
+                    @if($user->achievements->count() != 0)
                     <div class="table-responsive">
                         <table class="table text-center table-striped table-sm table-hover table-dark">
                             <tr>
@@ -346,12 +347,19 @@
                     <span class="float-right">
                         <a class="btn btn-transparent-outline-blue" href="{{ route('achievements.index') }}">View All</a>
                     </span>
+                    @else
+                    <span class="float-center">
+                        Achievements can be gained for certain actions. Click the button below to find out more<br>
+                        <a class="btn btn-transparent-outline-blue" href="{{ route('achievements.index') }}">View All</a>
+                    </span>
+                    @endif
                 </div>
             </div>
         </div>
     </div>
 
     {{-- User Events --}}
+    @if($user->events->count() != 0)
     <div class="row d-flex justify-content-center">
         <div class="col-12">
             <div class="card">
@@ -371,11 +379,22 @@
                                 <th>Charity Raised</th>
                                 <th></th>
                             </tr>
+                            <tr><th colspan=5>Upcoming</th></tr>
+                            @foreach ($user->goingTo as $event)
+                                <tr>
+                                    <td>{{ \Carbon\Carbon::parse($event->date)->isoFormat($user->settings()->get('date_format')) }}</td>
+                                    <td>{{ $event->name }}</td>
+                                    <td><a class="btn-sml btn-transparent-outline-view-event" href="{{ route('location.show', $event->location->id) }}">{{ $event->location->name }}</a></td>
+                                    <td>-</td>
+                                    <td><a class="btn-outline-icon-view" href="{{ route('event.show', $event->id) }}"><i class="fas fa-eye"></a></td>
+                                </tr>
+                            @endforeach
+                            <tr><th colspan=5>Attended</th></tr>
                             @foreach ($user->attended_events as $event)
                                 <tr>
                                     <td>{{ \Carbon\Carbon::parse($event->date)->isoFormat($user->settings()->get('date_format')) }}</td>
                                     <td>{{ $event->name }}</td>
-                                    <td><a class="btn btn-transparent-outline-view-event" href="{{ route('location.show', $event->location->id) }}">{{ $event->location->name }}</a></td>
+                                    <td><a class="btn-sml btn-transparent-outline-view-event" href="{{ route('location.show', $event->location->id) }}">{{ $event->location->name }}</a></td>
                                     <td>£­{{ $event->charity_raised }}</td>
                                     <td><a class="btn-outline-icon-view" href="{{ route('event.show', $event->id) }}"><i class="fas fa-eye"></a></td>
                                 </tr>
@@ -386,8 +405,10 @@
             </div>
         </div>
     </div>
+    @endif
 
     {{-- Driving Course --}}
+    @if($user->course_runs->count() != 0)
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -426,6 +447,6 @@
                 </div>
             </div>
         </div>
-    </div>
+        @endif
 
     @endsection
