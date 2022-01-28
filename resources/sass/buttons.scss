@@ -6,6 +6,10 @@
     font-size: 1.125rem;
 }
 
+.nm::before {
+    margin: 0 !important;
+}
+
 .btn-create {
     text-transform: uppercase;
     border: 1px solid $cyan;
@@ -36,10 +40,17 @@
     padding: 10px 20px;
     transition: 0.5s all;
     color: $secondaryColor;
+
+    &::before {
+        content: "\f06e";
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        color: $white;
+        margin-right: 1rem;
+    }
     
     i {
         color: $white;
-        margin-right: 1rem;
     }
 
     &:hover {
@@ -63,10 +74,17 @@
     padding: 10px 20px;
     transition: 0.5s all;
     color: $secondaryColor;
+
+    &::before {
+        content: "\f044";
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        color: $white;
+        margin-right: 1rem;
+    }
     
     i {
         color: $white;
-        margin-right: 1rem;
     }
 
     &:hover {
@@ -93,12 +111,15 @@
     color: $secondaryColor;
 
     &::before {
-        //
+        content: "\f2ed";
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        color: $white;
+        margin-right: 1rem;
     }
     
     i {
         color: $white;
-        margin-right: 1rem;
     }
 
     &:hover {
@@ -120,16 +141,16 @@
     font-size: 0.75rem;
     border: 1px solid $red;
     background: transparent;
-    padding: 5px 20px;
+    padding: 10px 20px;
     transition: 0.5s all;
     color: $secondaryColor;
 
     &::before {
         content: "\f053";
-        font-family: "Font Awesome 5 Pro", sans-serif;
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
         color: $white;
-        margin-right: 0.5rem;
-        font-size: 1rem;
+        margin-right: 1rem;
     }
     
     i {
@@ -162,7 +183,6 @@
     
     i {
         color: $white;
-        margin-right: 1rem;
     }
 
     &:hover {
@@ -171,6 +191,35 @@
 
         i {
             color: $secondaryColor;
+        }
+    }
+}
+
+.btn-submit {
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 0.75rem;
+    border: 1px solid $white;
+    background: transparent;
+    padding: 10px 20px;
+    transition: 0.5s all;
+    color: $secondaryColor;
+    width: fit-content;
+    margin: auto;
+    
+    i {
+        color: $white;
+    }
+
+    &:hover {
+        background: $white;
+        color: $primaryColor;
+
+        i {
+            color: $primaryColor;
         }
     }
 }

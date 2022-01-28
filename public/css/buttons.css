@@ -4,6 +4,10 @@
   font-size: 1.125rem;
 }
 
+.nm::before {
+  margin: 0 !important;
+}
+
 .btn-create {
   text-transform: uppercase;
   border: 1px solid #6cb2eb;
@@ -33,9 +37,15 @@
   transition: 0.5s all;
   color: #fff;
 }
-.btn-view i {
+.btn-view::before {
+  content: "\f06e";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
   color: #fff;
   margin-right: 1rem;
+}
+.btn-view i {
+  color: #fff;
 }
 .btn-view:hover {
   background: #fff;
@@ -57,9 +67,15 @@
   transition: 0.5s all;
   color: #fff;
 }
-.btn-edit i {
+.btn-edit::before {
+  content: "\f044";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
   color: #fff;
   margin-right: 1rem;
+}
+.btn-edit i {
+  color: #fff;
 }
 .btn-edit:hover {
   background: #2586e7;
@@ -82,9 +98,15 @@
   transition: 0.5s all;
   color: #fff;
 }
-.btn-delete i {
+.btn-delete::before {
+  content: "\f2ed";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
   color: #fff;
   margin-right: 1rem;
+}
+.btn-delete i {
+  color: #fff;
 }
 .btn-delete:hover {
   background: #e3342f;
@@ -103,16 +125,16 @@
   font-size: 0.75rem;
   border: 1px solid #e3342f;
   background: transparent;
-  padding: 5px 20px;
+  padding: 10px 20px;
   transition: 0.5s all;
   color: #fff;
 }
 .btn-back::before {
   content: "\f053";
-  font-family: "Font Awesome 5 Pro", sans-serif;
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
   color: #fff;
-  margin-right: 0.5rem;
-  font-size: 1rem;
+  margin-right: 1rem;
 }
 .btn-back i {
   color: #fff;
@@ -143,7 +165,6 @@
 }
 .btn-purchase i {
   color: #fff;
-  margin-right: 1rem;
 }
 .btn-purchase:hover {
   background: #38c172;
@@ -151,6 +172,34 @@
 }
 .btn-purchase:hover i {
   color: #fff;
+}
+
+.btn-submit {
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 0.75rem;
+  border: 1px solid #fff;
+  background: transparent;
+  padding: 10px 20px;
+  transition: 0.5s all;
+  color: #fff;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: auto;
+}
+.btn-submit i {
+  color: #fff;
+}
+.btn-submit:hover {
+  background: #fff;
+  color: #181924;
+}
+.btn-submit:hover i {
+  color: #181924;
 }
 
 .btn-mot {

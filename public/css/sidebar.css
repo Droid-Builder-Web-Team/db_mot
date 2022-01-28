@@ -1,1 +1,125 @@
-
+#sidebar {
+  min-width: 270px;
+  max-width: 270px;
+  height: 100vh;
+  background: #2a2b36;
+  color: #fff;
+  transition: all 0.3s;
+  overflow-y: scroll;
+}
+#sidebar .logo {
+  padding: 0.5rem 1rem;
+}
+#sidebar .large-menu-title {
+  display: block;
+}
+#sidebar .small-menu-title {
+  display: none;
+}
+#sidebar.active {
+  min-width: 150px;
+  max-width: 150px;
+  text-align: center;
+}
+#sidebar.active .large-menu-title {
+  display: none;
+}
+#sidebar.active .small-menu-title {
+  display: block;
+}
+#sidebar.active ul.sidebar-nav li.sidebar-nav-title {
+  padding: 0 0.5rem;
+}
+#sidebar.active ul.sidebar-nav li.sidebar-nav-title:after {
+  display: none;
+}
+#sidebar.active ul.sidebar-nav li.sidebar-nav-item a.sidebar-nav-link {
+  display: block;
+  padding: 1rem 0;
+  width: 100%;
+  text-align: center;
+  margin: 0;
+}
+#sidebar.active ul.sidebar-nav li.sidebar-nav-item a.sidebar-nav-link span {
+  margin: 0 auto;
+  display: block;
+}
+#sidebar.active .logo {
+  padding: 10px 0;
+  transition: 0.5s all;
+}
+#sidebar.active .footer {
+  display: none;
+  transition: 0.5s all;
+  padding: 0 0.5rem;
+}
+#sidebar .footer {
+  padding: 0 1rem;
+}
+#sidebar ul.sidebar-nav {
+  padding: 0;
+}
+#sidebar ul.sidebar-nav li.sidebar-nav-title {
+  padding: 0 1.5rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  transition: 0.5s all;
+  position: relative;
+}
+#sidebar ul.sidebar-nav li.sidebar-nav-title::after {
+  content: "\f078";
+  font-family: "Font Awesome 5 Free", sans-serif;
+  color: #fff;
+  font-weight: 900;
+  font-size: 1rem;
+  margin-left: 0.5rem;
+  position: absolute;
+  right: 10%;
+}
+#sidebar ul.sidebar-nav li.sidebar-nav-title:hover {
+  text-decoration: underline;
+}
+#sidebar ul.sidebar-nav li.sidebar-nav-item a.sidebar-nav-link {
+  padding: 20px 30px;
+  display: block;
+  text-decoration: none;
+  color: #fff;
+  background: transparent;
+  transition: 0.5s all;
+}
+#sidebar ul.sidebar-nav li.sidebar-nav-item a.sidebar-nav-link span {
+  font-size: 1rem;
+}
+#sidebar ul.sidebar-nav li.sidebar-nav-item a.sidebar-nav-link:hover {
+  background: #5d86db;
+}
+#sidebar ul.sidebar-nav .divider {
+  width: 80%;
+  background: #fff;
+  height: 2px;
+  display: flex;
+  margin: 1rem auto;
+}
+#sidebar .social-icons {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+#sidebar .social-icons .social-list-item {
+  width: 100%;
+}
+#sidebar .social-icons .social-list-item a {
+  transition: 0.5s all;
+}
+#sidebar .social-icons .social-list-item .facebook:hover {
+  color: #4267B2;
+}
+#sidebar .social-icons .social-list-item .dribble:hover {
+  color: #7289da;
+}
+#sidebar .social-icons .social-list-item .youtube:hover {
+  color: #FF0000;
+}

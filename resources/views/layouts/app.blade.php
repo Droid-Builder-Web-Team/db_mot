@@ -37,15 +37,15 @@
 
 <body class="db-dark-theme">
     @include('partials.sidebar')
-    <div class="db-wrapper">
+    {{-- <div class="db-wrapper">
         @yield('scripts')
-    </div>
+    </div> --}}
     <!-- Optional JavaScript -->
     <!-- Popper.js first, then CoreUI JS -->
     {{-- <script src="https://unpkg.com/@popperjs/core@2"></script> --}}
     {{-- <script src="https://unpkg.com/@coreui/coreui@3.0.0/dist/js/coreui.min.js"></script> --}}
-    @stack('scripts')
-    @toastr_render
+    {{-- @stack('scripts')
+    @toastr_render --}}
 </body>
 
 </html>

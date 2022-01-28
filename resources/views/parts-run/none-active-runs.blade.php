@@ -35,13 +35,9 @@
 
                     <td>
                       <div class="d-flex action-buttons">
-                        <a class="btn btn-view" href={{ route('parts-run.show', $data->id) }}>
-                          <i class="fas fa-eye"></i>
-                        </a>
+                        <a class="btn btn-view nm" href={{ route('parts-run.show', $data->id) }}></a>
                           @if(Gate::check('Edit Partrun') && (Auth()->user()->id == $data->user_id || Auth()->user()->id == $data->bc_rep_id))
-                            <a class="btn btn-edit" href={{ route('parts-run.edit', $data->id) }}>
-                              <i class="fas fa-edit"></i>
-                            </a>
+                            <a class="btn btn-edit nm" href={{ route('parts-run.edit', $data->id) }}></a>
                           @endif
                       </div>
                     </td>

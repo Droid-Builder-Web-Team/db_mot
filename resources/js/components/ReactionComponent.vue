@@ -1,17 +1,14 @@
 <template>
-  <div class="mt-3 d-flex">
-    <div
-      class="px-1"
-      v-for="(count, reaction) in reactions_summary"
-      :key="reaction"
-      v-show="count"
-    >
-      <img style="width: 20px" :src="image(reaction)" />
-      <span class="px-1">{{ count }}</span>
-    </div>
+  <div
+    v-for="(count, reaction) in reactions_summary"
+    :key="reaction"
+    v-show="count"
+  >
+    <img style="width: 20px" :src="image(reaction)" />
+    <span class="px-1">{{ count }}</span>
   </div>
 
-  <div class="border-top position-relative">
+  <div class="position-relative">
     <div
       class="bg-white border rounded shadow-sm position-absolute"
       style="bottom: 40px"
