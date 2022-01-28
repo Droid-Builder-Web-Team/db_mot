@@ -39,6 +39,7 @@
     
     i {
         color: $white;
+        margin-right: 1rem;
     }
 
     &:hover {
@@ -65,16 +66,116 @@
     
     i {
         color: $white;
+        margin-right: 1rem;
     }
 
     &:hover {
         background: $editButton;
+        color: $secondaryColor;
 
         i {
             color: $secondaryColor;
         }
     }
 }
+
+.btn-delete {
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 0.75rem;
+    border: 1px solid $red;
+    background: transparent;
+    padding: 10px 20px;
+    transition: 0.5s all;
+    color: $secondaryColor;
+
+    &::before {
+        //
+    }
+    
+    i {
+        color: $white;
+        margin-right: 1rem;
+    }
+
+    &:hover {
+        background: $red;
+        color: $secondaryColor;
+
+        i {
+            color: $secondaryColor;
+        }
+    }
+}
+
+.btn-back {
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 0.75rem;
+    border: 1px solid $red;
+    background: transparent;
+    padding: 5px 20px;
+    transition: 0.5s all;
+    color: $secondaryColor;
+
+    &::before {
+        content: "\f053";
+        font-family: "Font Awesome 5 Pro", sans-serif;
+        color: $white;
+        margin-right: 0.5rem;
+        font-size: 1rem;
+    }
+    
+    i {
+        color: $white;
+    }
+
+    &:hover {
+        background: $red;
+        color: $secondaryColor;
+
+        i {
+            color: $secondaryColor;
+        }
+    }
+}
+
+.btn-purchase {
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 0.75rem;
+    border: 1px solid $green;
+    background: transparent;
+    padding: 10px 20px;
+    transition: 0.5s all;
+    color: $secondaryColor;
+    width: fit-content;
+    
+    i {
+        color: $white;
+        margin-right: 1rem;
+    }
+
+    &:hover {
+        background: $green;
+        color: $secondaryColor;
+
+        i {
+            color: $secondaryColor;
+        }
+    }
+}
+
+// Old Styling
 
 .btn-mot {
     text-transform: uppercase;

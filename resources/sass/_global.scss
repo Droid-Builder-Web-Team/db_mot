@@ -181,6 +181,7 @@ img {
 .db-mt-4 {
     margin-top: 4rem;
 }
+
 .db-mb-1 {
     margin-bottom: 1rem;
 }
@@ -196,6 +197,32 @@ img {
 .db-mb-4 {
     margin-bottom: 4rem;
 }
+
+.db-my-1 {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.db-my-2 {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.db-my-3 {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+}
+
+.db-my-4 {
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+}
+
+.divider {
+    width: 85%;
+    background: $white;
+    height: 1px;
+  }
 
 // Sidebar
 
@@ -312,11 +339,10 @@ img {
             transition: 0.5s all;
             position: relative;
 
-            &:after {
+            &::after {
                 content: '\f078';
-                font-family: Font Awesome;
+                font-family: 'Font Awesome 5 Pro', sans-serif;
                 color: $secondaryColor;
-                background: red;
                 font-size: 1rem;
                 margin-left: 0.5rem;
                 position: absolute;
@@ -422,6 +448,10 @@ ul.top-nav {
     align-items: center;
     width: 100%;
     margin: 1rem auto 2rem;
+
+    a:nth-child(2) {
+        margin-left: 1rem;
+    }
 }
 
 // Tables
@@ -453,6 +483,25 @@ ul.top-nav {
     
             a:not(:first-of-type) {
                 margin-left: 2rem;
+            }
+        }
+    }
+}
+
+// Forms
+// View Form
+.form-wrapper {
+    width: 100%;
+
+    .form-section {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+
+        .transaction-notice {
+            span {
+                font-weight: 700;
             }
         }
     }

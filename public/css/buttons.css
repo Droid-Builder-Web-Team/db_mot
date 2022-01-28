@@ -35,6 +35,7 @@
 }
 .btn-view i {
   color: #fff;
+  margin-right: 1rem;
 }
 .btn-view:hover {
   background: #fff;
@@ -58,11 +59,97 @@
 }
 .btn-edit i {
   color: #fff;
+  margin-right: 1rem;
 }
 .btn-edit:hover {
   background: #2586e7;
+  color: #fff;
 }
 .btn-edit:hover i {
+  color: #fff;
+}
+
+.btn-delete {
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 0.75rem;
+  border: 1px solid #e3342f;
+  background: transparent;
+  padding: 10px 20px;
+  transition: 0.5s all;
+  color: #fff;
+}
+.btn-delete i {
+  color: #fff;
+  margin-right: 1rem;
+}
+.btn-delete:hover {
+  background: #e3342f;
+  color: #fff;
+}
+.btn-delete:hover i {
+  color: #fff;
+}
+
+.btn-back {
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 0.75rem;
+  border: 1px solid #e3342f;
+  background: transparent;
+  padding: 5px 20px;
+  transition: 0.5s all;
+  color: #fff;
+}
+.btn-back::before {
+  content: "\f053";
+  font-family: "Font Awesome 5 Pro", sans-serif;
+  color: #fff;
+  margin-right: 0.5rem;
+  font-size: 1rem;
+}
+.btn-back i {
+  color: #fff;
+}
+.btn-back:hover {
+  background: #e3342f;
+  color: #fff;
+}
+.btn-back:hover i {
+  color: #fff;
+}
+
+.btn-purchase {
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 0.75rem;
+  border: 1px solid #38c172;
+  background: transparent;
+  padding: 10px 20px;
+  transition: 0.5s all;
+  color: #fff;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+.btn-purchase i {
+  color: #fff;
+  margin-right: 1rem;
+}
+.btn-purchase:hover {
+  background: #38c172;
+  color: #fff;
+}
+.btn-purchase:hover i {
   color: #fff;
 }
 

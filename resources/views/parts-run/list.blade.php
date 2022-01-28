@@ -1,9 +1,5 @@
 @extends('layouts.app')
 @section('content')
-  <div class="build-section text-center page-heading-text d-flex flex-column db-mb-2">
-    <h4>Curious about old/ inactive runs? <a class="white-link" href="{{ route('parts-run.none-active-run') }}">Click Here</a> to view them.</h4>
-  </div>
-
   @can('Create Partrun')
   <div class="build-section">
     <div class="container-fluid">
@@ -19,7 +15,7 @@
           </div>
 
         {{-- Table --}}
-        <div class="table-responsive ">
+        <div class="table-responsive">
           <table class="table text-center table-hover">
               <thead>
                   <tr>
@@ -44,7 +40,7 @@
   
   
                             @elseif($yourData->status == "Gathering_Interest")
-                              <div class="pr-circle interest"></div>&nbsp {{ $yourData->status }}
+                              <div class="pr-circle interest"></div>&nbsp Gathering Interest
   
                             @else
                               <div class="pr-circle inactive"></div>&nbsp {{ $yourData->status }}
@@ -102,7 +98,7 @@
               </thead>
               <tbody>
                   @foreach($partsRunData as $data)
-                    @if($data->user->id == Auth()->user()->id)
+                    @if($data->user->id == Auth()->user()->id || Auth::user()->hasRole('BC Rep'))
                     <tr>
                         <td>{{ $data->partsRunAd->title }}</td>
                         <td>{{ $data->club->name }}</td>
@@ -111,13 +107,12 @@
                           <div class="status-box">
                           @if($data->status == "Active")
                               <div class="pr-circle active"></div>&nbsp {{ $data->status }}
-  
-  
-                            @elseif($data->status == "Gathering_Interest")
-                              <div class="pr-circle interest"></div>&nbsp {{ $data->status }}
-  
-                            @else
+                          @elseif($data->status == "Gathering_Interest")
+                              <div class="pr-circle interest"></div>&nbsp Gathering Interest
+                          @elseif($data->status == "Initial")
                               <div class="pr-circle inactive"></div>&nbsp {{ $data->status }}
+                          @else
+                              <div class="pr-circle inactive"></div>&nbsp  $data->status }}
                           </div>
                           @endif
                         </th>
@@ -142,12 +137,55 @@
                           </div>
                         </td>
                     </tr>
+                    @else
+                      @if($data->status != "Initial")
+                      <tr>
+                        <td>{{ $data->partsRunAd->title }}</td>
+                        <td>{{ $data->club->name }}</td>
+
+                        <th class="status-class">
+                          <div class="status-box">
+                          @if($data->status == "Active")
+                              <div class="pr-circle active"></div>&nbsp {{ $data->status }}
+                          @elseif($data->status == "Gathering_Interest")
+                              <div class="pr-circle interest"></div>&nbsp Gathering Interest
+                          @else
+                              <div class="pr-circle inactive"></div>&nbsp {{ $data->status }}
+                          </div>
+                          @endif
+                        </th>
+
+                        <td>{{ $data->interest_quantity() }} /
+                          @if ($data->partsRunAd->quantity == 0)
+                            ∞
+                          @else
+                            {{ $data->partsRunAd->quantity }}
+                          @endif
+                        </td>
+                        <td>
+                          <div class="d-flex action-buttons">
+                            <a class="btn btn-view" href={{ route('parts-run.show', $data->id) }}>
+                              <i class="fas fa-eye"></i>
+                            </a>
+                              @if(Gate::check('Edit Partrun') && (Auth()->user()->id == $data->user_id || Auth()->user()->id == $data->bc_rep_id))
+                                <a class="btn btn-edit" href={{ route('parts-run.edit', $data->id) }}>
+                                  <i class="fas fa-edit"></i>
+                                </a>
+                              @endif
+                          </div>
+                        </td>
+                    </tr>
                     @endif
-                  @endforeach
+                  @endif
+                @endforeach
               </tbody>
           </table>
         </div>        
       </div>
     </div>
+  </div>
+
+  <div class="build-section text-center page-heading-text d-flex flex-column db-mt-2">
+    <h4>Curious about old/ inactive runs? <a class="white-link" href="{{ route('parts-run.none-active-run') }}">Click Here</a> to view them.</h4>
   </div>
 @endsection

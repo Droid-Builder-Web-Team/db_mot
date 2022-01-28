@@ -39,4 +39,3 @@ app.use(VueGoogleMaps, {
   });
 
 })(jQuery);
-

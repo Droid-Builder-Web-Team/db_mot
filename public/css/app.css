@@ -179,6 +179,32 @@ img {
   margin-bottom: 4rem;
 }
 
+.db-my-1 {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.db-my-2 {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.db-my-3 {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+
+.db-my-4 {
+  margin-top: 4rem;
+  margin-bottom: 4rem;
+}
+
+.divider {
+  width: 85%;
+  background: #fff;
+  height: 1px;
+}
+
 .build-section {
   background: transparent;
   border: 2px solid #fff;
@@ -274,11 +300,10 @@ img {
   transition: 0.5s all;
   position: relative;
 }
-#sidebar ul.sidebar-nav li.sidebar-nav-title:after {
+#sidebar ul.sidebar-nav li.sidebar-nav-title::after {
   content: "\f078";
-  font-family: Font Awesome;
+  font-family: "Font Awesome 5 Pro", sans-serif;
   color: #fff;
-  background: red;
   font-size: 1rem;
   margin-left: 0.5rem;
   position: absolute;
@@ -364,6 +389,9 @@ ul.top-nav li.nav-item a i {
   width: 100%;
   margin: 1rem auto 2rem;
 }
+.buttons a:nth-child(2) {
+  margin-left: 1rem;
+}
 
 .table-responsive table {
   background: transparent;
@@ -387,6 +415,19 @@ ul.top-nav li.nav-item a i {
 }
 .table-responsive table .action-buttons a:not(:first-of-type) {
   margin-left: 2rem;
+}
+
+.form-wrapper {
+  width: 100%;
+}
+.form-wrapper .form-section {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.form-wrapper .form-section .transaction-notice span {
+  font-weight: 700;
 }
 
 /*!
@@ -10493,11 +10534,6 @@ body {
 }
 
 /* General */
-.divider {
-  width: 75%;
-  background: white;
-}
-
 .sub {
   padding: 0.5%;
 }

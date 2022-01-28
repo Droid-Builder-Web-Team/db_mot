@@ -36,8 +36,6 @@ class PartsRunDataController extends Controller
             ->orderBy('updated_at', 'desc')
             ->get();
 
-        // dd($partsRunData);
-
         return view(
             'parts-run.list', [
                 'yourPartsRunData'=> $yourPartsRunData,
