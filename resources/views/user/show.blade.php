@@ -187,23 +187,27 @@
                         {{-- User Image --}}
                 <div class="col-md-3">
                     <div class="row">
-                        <h4 class="text-uppercase db-mb-1 d-flex align-items-center justify-content-center">ID Card Photo</h4>
+                        <div class="col-12">
+                            <h4 class="text-uppercase db-mb-1 d-flex align-items-center justify-content-center">ID Card Photo</h4>
+                        </div>
                     </div>
                     <div class="row">
-                        <div class="id-photo-wrapper">
-                            <img src="{{ route('image.displayMugShot', [$user->id, '240']) }}" alt="mug_shot" class="img-fluid">
-                        </div>
+                        <div class="col-12">
+                            <div class="id-photo-wrapperjustify-content-center">
+                                <img src="{{ route('image.displayMugShot', [$user->id, '240']) }}" alt="mug_shot" class="img-fluid">
+                            </div>
 
-                        <div class="id-photo-button mt-2 d-flex justify-content-center">
-                            @if (Auth::user()->can('Edit Members') || Auth::user()->id == $user->id)
-                                <form action="{{ route('image') }}" method="GET">
-                                    @csrf
-                                    <input type="hidden" name="user" value="{{ $user->id }}">
-                                    <input type="hidden" name="droid" value=0>
-                                    <input type="hidden" name="photo_name" value="mug_shot">
-                                    <button type="submit" class="btn btn-edit">Change</button>
-                                </form>
-                            @endif
+                            <div class="id-photo-button mt-2 d-flex justify-content-center">
+                                @if (Auth::user()->can('Edit Members') || Auth::user()->id == $user->id)
+                                    <form action="{{ route('image') }}" method="GET">
+                                        @csrf
+                                        <input type="hidden" name="user" value="{{ $user->id }}">
+                                        <input type="hidden" name="droid" value=0>
+                                        <input type="hidden" name="photo_name" value="mug_shot">
+                                        <button type="submit" class="btn btn-edit">Change</button>
+                                    </form>
+                                @endif
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -175,75 +175,77 @@
                 <div class="col-md-12">
                     <div class="row">
                         <div class="col-12">
-                        <h4 class="text-uppercase db-mb-1 d-flex align-items-center justify-content-center">Comments</h4>
+                            <h4 class="text-uppercase db-mb-1 d-flex align-items-center justify-content-center">Comments</h4>
                         </div>
-                        @foreach($event->comments as $comment)
-                            <div class="build-section db-mt-2">
-                                <div class="container-fluid">
-                                    <div class="row">
-                                        <strong>{{ $comment->user->forename ?? "Deactivated"}} {{ $comment->user->surname ?? "User"}}</strong>
-                                        @if ($comment->user != NULL)
-                                            @if ($comment->user->can('Edit Events'))
-                                                <i class="fas fa-user-shield"></i>
+                        <div class="col-12">
+                            @foreach($event->comments as $comment)
+                                <div class="build-section db-mt-2">
+                                    <div class="container-fluid">
+                                        <div class="row">
+                                            <strong>{{ $comment->user->forename ?? "Deactivated"}} {{ $comment->user->surname ?? "User"}}</strong>
+                                            @if ($comment->user != NULL)
+                                                @if ($comment->user->can('Edit Events'))
+                                                    <i class="fas fa-user-shield"></i>
+                                                @endif
                                             @endif
-                                        @endif
-                                        <span class="float-right">
-                                            @if ($comment->broadcast)
-                                                <i class="fas fa-bullhorn"></i>
-                                            @endif
-                                            {{ Carbon\Carbon::parse($comment->created_at, Auth::user()->settings()->get('timezone'))->isoFormat(Auth::user()->settings()->get('date_format').' - '.Auth::user()->settings()->get('time_format')) }}
-                                        </span>
-                                    </div>
-                                    <div class="row">
-                                        {!! nl2br(e($comment->body)) !!}
-                                        @can('Edit Events')
                                             <span class="float-right">
-                                                <a href="{{ route('comment.delete', $comment->id )}}" class="btn-sm btn-danger">Delete</a>
+                                                @if ($comment->broadcast)
+                                                    <i class="fas fa-bullhorn"></i>
+                                                @endif
+                                                {{ Carbon\Carbon::parse($comment->created_at, Auth::user()->settings()->get('timezone'))->isoFormat(Auth::user()->settings()->get('date_format').' - '.Auth::user()->settings()->get('time_format')) }}
                                             </span>
-                                        @endcan
-                                        <span class="float-right">
-                                            <reaction-component
-                                                :comment="{{ $comment->id }}"
-                                                :summary='@json($comment->reactionSummary())'
-                                                @auth
-                                                :reacted='@json($comment->reacted())'
-                                                @endauth
-                                            />
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
-
-{{-- Add Comment --}}
-                        @if($event->isFuture())
-                            <div class="build-section db-mt-2">
-                                <div class="container-fluid">
-                                    <div class="col-12">
-                                        <h4 class="text-uppercase db-mb-1 d-flex align-items-center justify-content-center">Add Comment</h4>
-                                    </div>
-
-                                    <div class="col-12">
-                                        <form action="{{ route('comment.add', ['id' => $event->id] ) }}" method="POST">
-                                            @csrf
-                                            <input type="hidden" name="model" value="App\Event">
-                                        <div class="form-group">
-                                            <textarea type="text" class="form-control" name="body"></textarea>
                                         </div>
-                                        <input type="submit" class="btn-sm btn-comment" name="comment" value="Add Comment"
-                                                    onclick="this.disabled=true;this.form.submit();">
-                                        @can('Edit Events')
-                                            <div class="form-check float-right">
-                                            <input class="form-check-input" type="checkbox" name="broadcast" id="broadcast">
-                                            <label class="form-check-label" for="broadcast">Broadcast</label>
-                                            </div>
-                                        @endcan
-                                        </form>
+                                        <div class="row">
+                                            {!! nl2br(e($comment->body)) !!}
+                                            @can('Edit Events')
+                                                <span class="float-right">
+                                                    <a href="{{ route('comment.delete', $comment->id )}}" class="btn-sm btn-danger">Delete</a>
+                                                </span>
+                                            @endcan
+                                            <span class="float-right">
+                                                <reaction-component
+                                                    :comment="{{ $comment->id }}"
+                                                    :summary='@json($comment->reactionSummary())'
+                                                    @auth
+                                                    :reacted='@json($comment->reacted())'
+                                                    @endauth
+                                                />
+                                            </span>
+                                        </div>
                                     </div>
-
                                 </div>
-                            </div>
-                        @endif
+                            @endforeach
+
+    {{-- Add Comment --}}
+                            @if($event->isFuture())
+                                <div class="build-section db-mt-2">
+                                    <div class="container-fluid">
+                                        <div class="col-12">
+                                            <h4 class="text-uppercase db-mb-1 d-flex align-items-center justify-content-center">Add Comment</h4>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <form action="{{ route('comment.add', ['id' => $event->id] ) }}" method="POST">
+                                                @csrf
+                                                <input type="hidden" name="model" value="App\Event">
+                                            <div class="form-group">
+                                                <textarea type="text" class="form-control" name="body"></textarea>
+                                            </div>
+                                            <input type="submit" class="btn-sm btn-comment" name="comment" value="Add Comment"
+                                                        onclick="this.disabled=true;this.form.submit();">
+                                            @can('Edit Events')
+                                                <div class="form-check float-right">
+                                                <input class="form-check-input" type="checkbox" name="broadcast" id="broadcast">
+                                                <label class="form-check-label" for="broadcast">Broadcast</label>
+                                                </div>
+                                            @endcan
+                                            </form>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            @endif
+                        </div>
                     </div>
                 </div>
             </div>
