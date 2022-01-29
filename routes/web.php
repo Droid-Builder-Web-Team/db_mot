@@ -58,6 +58,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(
         Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index')->name('logs.index');
         Route::resource('/contacts', 'ContactController');
         Route::post('/contacts/link', 'ContactController@link')->name('contacts.link');
+        Route::post('/contacts/unlink', 'ContactController@unlink')->name('contacts.unlink');
         Route::get('/api/bcreps/{club_id}', 'ApiController@list_bcreps');
         Route::resource('/map', 'MapsController', ['only' => ['index']]);
         Route::get('/badges/{keep}', 'BadgeController@download')->name('badges.download');
@@ -87,7 +88,6 @@ Route::group(
         Route::get('event/map', 'EventController@map')->name('event.map');
         Route::resource('location', 'LocationController', ['only' => ['show']]);
         Route::post('/location/{location}/rating', 'LocationController@store')->name('location.rating');
-        Route::resource('/venue-contact', 'VenueContactController', ['only' => ['show']]);
         Route::get('image', 'ImageController@index')->name('image');
         Route::post('image/upload', 'ImageController@upload');
         Route::get('image/destroy', 'ImageController@destroy');

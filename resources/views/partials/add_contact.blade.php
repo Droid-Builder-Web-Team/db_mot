@@ -9,9 +9,9 @@
 									<span aria-hidden="true">&times;</span>
 								</button>
 						</div>
-                        <div>
-                            <form action="{{ route('admin.contacts.link') }}" method="POST">
-                                @csrf
+                        <form action="{{ route('admin.contacts.link') }}" method="POST">
+                            @csrf
+                            <div>
                                 <select class="form-control" name="contact_id">
                                     @foreach($contacts as $contact)
                                         <option value="{{ $contact->id }}">{{ $contact->name }}</option>
@@ -19,11 +19,12 @@
                                 </select>
                                 <input type="hidden" name="model_id" value="{{ $model_id }}">
                                 <input type="hidden" name="model_type" value="{{ $model_type }}">
-                        </div>
-						<div class="modal-footer">
-							<input type="submit" class="btn btn-primary" value="Link Contact">
-                            <a class="btn btn-info" href="{{ route('admin.contacts.create') }}">Create New Contact</a>
-						</div>
+                            </div>
+						    <div class="modal-footer">
+							    <input type="submit" class="btn btn-primary" value="Link Contact">
+                                <a class="btn btn-info" href="{{ route('admin.contacts.create') }}">Create New Contact</a>
+						    </div>
+                        </form>
 					</div>
 				</div>
 			</div>
