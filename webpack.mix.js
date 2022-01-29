@@ -19,4 +19,5 @@ mix.sass('resources/sass/app.scss', 'public/css')
     .sass('resources/sass/sidebar.scss', 'public/css')
     .sass('resources/sass/partsrun.scss', 'public/css')
     .sass('resources/sass/modals.scss', 'public/css')
+    .sass('resources/sass/events.scss', 'public/css')
     .sass('resources/sass/buttons.scss', 'public/css').version();
