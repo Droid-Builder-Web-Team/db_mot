@@ -255,7 +255,7 @@ class PartsRunDataController extends Controller
             ]
         );
 
-        return redirect()->route('parts-run.index');
+        return redirect()->route('parts-run.show', $partsRunData->id);
     }
 
     /**

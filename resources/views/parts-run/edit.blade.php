@@ -114,23 +114,6 @@
                     </div>
 
                     <div class="form-group row">
-                        <div class="col-md-6 col-12">
-                            <label for="text" class="col-4 col-form-label">Instructions</label>
-                            <div class="col-12">
-                                <input type="file" name="instructions" class="form-control-file" id="exampleFormControlFile1">
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-12">
-                            <label for="text1" class="col-4 col-form-label">Image</label>
-                            <div class="col-12">
-                                <input type="file" name="image" class="form-control-file" id="exampleFormControlFile1">
-                            </div>
-                            <div class="image-preview mt-3" style="width: 400px; height: 400px;">
-                                <img src="{{ route('image.displayPartsRunImage', $data->id) }}" class="img-fluid">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row">
                         <div class="col-xs-12 col-sm-12 col-md-12 text-center mt-3">
                             <button type="submit" style="width:auto;" class="btn btn-mot">Submit</button>
                         </div>
@@ -151,7 +134,8 @@
   'alignright alignjustify | bullist numlist outdent indent | ' +
   'removeformat | table | link image media | hr code ',
         toolbar_mode: 'floating',
-        image_caption: true
+        image_caption: true,
+        invalid_elements: "span"
     });
 </script>
 @endsection

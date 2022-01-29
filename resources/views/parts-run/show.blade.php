@@ -7,25 +7,23 @@
         }
     </script>
 
-<script>
-    $(document).ready(function(){
-    $('#shipModal').on('show.bs.modal', function (event) {
-         var button = $(event.relatedTarget) // Button that triggered the modal
-         console.log(button.data());
-         var user_id = button.data('userid') // Extract info from data-* attributes
-         console.log("User ID: " + user_id);
-         // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-         // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-         var modal = $(this)
-         modal.find('#user_id').val(user_id)
-     })
-    })
- </script>
+    <script>
+        $(document).ready(function(){
+            $('#shipModal').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget) // Button that triggered the modal
+                console.log(button.data());
+                var user_id = button.data('userid') // Extract info from data-* attributes
+                console.log("User ID: " + user_id);
+                // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+                // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+                var modal = $(this)
+                modal.find('#user_id').val(user_id)
+            })
+        })
+    </script>
 @endsection
 
 @section('content')
-
-
 
     <div class="build-section text-center page-heading-text d-flex flex-column" id="app">
         <div class="container-fluid">
@@ -96,7 +94,7 @@
                                     </div>
 
                                     <div class="form-section text-center text-sm-left db-my-1">
-                                        <div class="col-12 text-center">
+                                        <div class="col-12 text-left">
                                             <p class="description-text"><strong>Description:</strong></p>
                                             <p>{!! $data->partsRunAd->description !!}</p>
                                         </div>
@@ -170,7 +168,7 @@
                                             @endif
                                         </div>
 
-                                        <div class="col-12 col-xl-6 equal">
+                                        <div class="col-12 col-xl-6 equal db-my-1">
                                             <p class="droid"><strong>Contact Email: </strong></p>
                                             <p>
                                                 <a class="p-link" href="mailto:{{ $data->partsRunAd->contact_email }}">
@@ -180,24 +178,27 @@
                                         </div>
                                     </div>
 
-                                    <div class="form-section text-center db-my-1">
-                                        <div class="col-12">
-                                            <p class="history-text"><strong>History:</strong></p>
-                                            <p>{{ $data->partsRunAd->history }}</p>
+                                    @if ($data->partsRunAd->history != "")
+                                        <div class="form-section text-center db-my-1">
+                                            <div class="col-12">
+                                                <p class="history-text"><strong>History:</strong></p>
+                                                <p>{{ $data->partsRunAd->history }}</p>
+                                            </div>
                                         </div>
-                                    </div>
+                                    @endif
 
                                 </div>
                             </div>
 
                             {{-- Parts Run Main Image --}}
+                            @if($data->images->count() != 0)
                             <div class="col-12 col-sm-6 order-1 part-run-image">
                                 <div class="image-wrapper">
                                     {{-- Run IF Statement, if has no image, use dummy placeholder - please keep baby yoda!! --}}
-                                    <img src="https://snipdaily.com/wp-content/uploads/2020/01/baby-yoda-disneyplus-1024x574.jpg"
-                                        width=500 height=500>
+                                    <img src="{{ route('image.displayPartsRunImage', $data->id) }}" class="img-fluid">
                                 </div>
                             </div>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -207,87 +208,92 @@
                             <div class="col-12">
                                 <h5 class="col-12 text-center db-mb-1">Interest:</h5>
                             </div>
-                            <ul>
-                                @foreach($data->interested as $user)
-                                    @if($user->pivot->status == 'interested')
-                                        <li>
-                                            @can('View Members')
-                                                <a class="p-link" href="{{ route('user.show', $user->id) }}">{{ $user->forename ?? "Deactivated"}} {{ $user->surname ?? "User"}}</a>
-                                            @else
-                                                {{ $user->forename ?? "Deactivated"}} {{ $user->surname ?? "User"}}
-                                            @endcan
-                                            @if($user->pivot->quantity != 1)
-                                                ({{$user->pivot->quantity}})
-                                            @endif
-                                            @if(auth()->user()->id == $data->user_id || Auth::user()->hasRole('BC Rep'))
-                                                @if ($data->status == "Active")
-                                                <form action="{{ route('parts-run.status_update') }}" method="POST">
-                                                    @csrf
-                                                    <input type="hidden" name="user_id" id="user_id" value="{{ $user->id }}">
-                                                    <input type="hidden" name="run_id" value="{{ $data->id }}">
-                                                    <input type="hidden" name="status" value="paid">
-                                                    <button type="submit"><i class="fas fa-pound-sign"></i></button>
-                                                </form>
-
+                            <div class="col-12 form-section text-sm-left db-my-1">
+                                <ul>
+                                    @foreach($data->interested as $user)
+                                        @if($user->pivot->status == 'interested')
+                                            <li>
+                                                @can('View Members')
+                                                    <a class="p-link" href="{{ route('user.show', $user->id) }}">{{ $user->forename ?? "Deactivated"}} {{ $user->surname ?? "User"}}</a>
+                                                @else
+                                                    {{ $user->forename ?? "Deactivated"}} {{ $user->surname ?? "User"}}
+                                                @endcan
+                                                @if($user->pivot->quantity != 1)
+                                                    ({{$user->pivot->quantity}})
                                                 @endif
-                                            @endif
-                                        </li>
-                                    @endif
-                                @endforeach
-                            </ul>
+                                                @if(auth()->user()->id == $data->user_id || Auth::user()->hasRole('BC Rep'))
+                                                    @if ($data->status == "Active")
+                                                        <form action="{{ route('parts-run.status_update') }}" method="POST">
+                                                            @csrf
+                                                            <input type="hidden" name="user_id" id="user_id" value="{{ $user->id }}">
+                                                            <input type="hidden" name="run_id" value="{{ $data->id }}">
+                                                            <input type="hidden" name="status" value="paid">
+                                                            <button type="submit"><i class="fas fa-pound-sign"></i></button>
+                                                        </form>
+                                                    @endif
+                                                @endif
+                                            </li>
+                                        @endif
+                                    @endforeach
+                                </ul>
+                            </div>
 
                             @if ($data->status == "Active")
                                 <div>
                                     <h5 class="col-12 text-center db-mb-1">Paid</h5>
                                 </div>
-                                <ul>
-                                    @foreach($data->interested as $user)
-                                        @if($user->pivot->status == 'paid')
-                                            <li>
-                                                @can('View Members')
-                                                    <a class="p-link" href="{{ route('user.show', $user->id) }}">{{ $user->forename ?? "Deactivated"}} {{ $user->surname ?? "User"}}</a>
-                                                @else
-                                                    {{ $user->forename ?? "Deactivated"}} {{ $user->surname ?? "User"}}
-                                                @endcan
-                                                @if($user->pivot->quantity != 1)
-                                                    ({{$user->pivot->quantity}})
-                                                @endif
-                                                @if(auth()->user()->id == $data->user_id || auth()->user()->id == $data->bc_rep_id)
-                                                    @if ($data->status == "Active")
-                                                        <button type="button" class="fas fa-truck" data-toggle="modal" data-userid="{{ $user->id }}" data-target="#shipModal"></button>
+                                <div class="col-12 form-section text-sm-left db-my-1">
+                                    <ul>
+                                        @foreach($data->interested as $user)
+                                            @if($user->pivot->status == 'paid')
+                                                <li>
+                                                    @can('View Members')
+                                                        <a class="p-link" href="{{ route('user.show', $user->id) }}">{{ $user->forename ?? "Deactivated"}} {{ $user->surname ?? "User"}}</a>
+                                                    @else
+                                                        {{ $user->forename ?? "Deactivated"}} {{ $user->surname ?? "User"}}
+                                                    @endcan
+                                                    @if($user->pivot->quantity != 1)
+                                                        ({{$user->pivot->quantity}})
                                                     @endif
-                                                @endif
-                                            </li>
-                                        @endif
-                                    @endforeach
-                                </ul>
+                                                    @if(auth()->user()->id == $data->user_id || auth()->user()->id == $data->bc_rep_id)
+                                                        @if ($data->status == "Active")
+                                                            <button type="button" class="fas fa-truck" data-toggle="modal" data-userid="{{ $user->id }}" data-target="#shipModal"></button>
+                                                        @endif
+                                                    @endif
+                                                </li>
+                                            @endif
+                                        @endforeach
+                                    </ul>
+                                </div>
                                 <div>
                                     <h5 class="col-12 text-center db-mb-1">Shipped</h5>
                                 </div>
-                                <ul>
-                                    @foreach($data->interested as $user)
-                                        @if($user->pivot->status == 'shipped')
-                                            <li>
-                                                @can('View Members')
-                                                    <a class="p-link" href="{{ route('user.show', $user->id) }}">{{ $user->forename ?? "Deactivated"}} {{ $user->surname ?? "User"}}</a>
-                                                @else
-                                                    {{ $user->forename ?? "Deactivated"}} {{ $user->surname ?? "User"}}
-                                                @endcan
-                                                @if($user->pivot->quantity != 1)
-                                                    ({{$user->pivot->quantity}})
-                                                @endif
-                                                <i class="fas fa-box"></i>
-                                                @if(auth()->user()->id == $data->user_id || auth()->user()->id == $data->bc_rep_id || auth()->user()->id == $user->id)
-                                                    @if($user->pivot->tracking != "" )
-                                                        {{ $user->pivot->tracking }} ({{$user->pivot->shipper}})
+                                <div class="col-12 form-section text-sm-left db-my-1">
+                                    <ul>
+                                        @foreach($data->interested as $user)
+                                            @if($user->pivot->status == 'shipped')
+                                                <li>
+                                                    @can('View Members')
+                                                        <a class="p-link" href="{{ route('user.show', $user->id) }}">{{ $user->forename ?? "Deactivated"}} {{ $user->surname ?? "User"}}</a>
                                                     @else
-                                                        No tracking
+                                                        {{ $user->forename ?? "Deactivated"}} {{ $user->surname ?? "User"}}
+                                                    @endcan
+                                                    @if($user->pivot->quantity != 1)
+                                                        ({{$user->pivot->quantity}})
                                                     @endif
-                                                @endif
-                                            </li>
-                                        @endif
-                                    @endforeach
-                                </ul>
+                                                    &nbsp;<i class="fas fa-box"></i>&nbsp;
+                                                    @if(auth()->user()->id == $data->user_id || auth()->user()->id == $data->bc_rep_id || auth()->user()->id == $user->id)
+                                                        @if($user->pivot->tracking != "" )
+                                                            {!! $data->trackingUrl($user->pivot->tracking, $user->pivot->shipper) !!}
+                                                        @else
+                                                            No tracking
+                                                        @endif
+                                                    @endif
+                                                </li>
+                                            @endif
+                                        @endforeach
+                                    </ul>
+                                </div>
                             @endif
                             @if(Gate::check('Edit Partrun') && (Auth()->user()->id == $data->user_id || Auth()->user()->id == $data->bc_rep_id))
                                 <span id="export" class="btn btn-primary" data-href={{ route('parts-run.export', $data->id) }} onclick="exportTasks(event.target);">Download list as CSV
