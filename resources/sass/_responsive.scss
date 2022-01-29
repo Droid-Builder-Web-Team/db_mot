@@ -8,6 +8,14 @@
 }
 
 @media only screen and (max-width: 991px) {
+    .form-wrapper .form-section {
+        display: block !important;
+    }
+
+    .buttons {
+        margin: 1rem auto;
+    }
+
     .status-box {
         display: block;
     }
@@ -35,5 +43,23 @@
         }
     }
 }
-// @media only screen and (max-width: 575px){}
+@media only screen and (max-width: 575px){
+    .padding-container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .pt {
+        padding-top: 1rem;
+    }
+
+    .pb {
+        padding-bottom: 1rem;
+    }
+
+    .build-section {
+        padding: 1rem;
+    }
+}
+
 // @media only screen and (max-width: 360px){}

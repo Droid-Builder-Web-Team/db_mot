@@ -23,6 +23,20 @@
  } 
 }
 
+// About Page
+ul.links {
+  list-style-type: none;
+  padding-left: 0;
+
+  li {
+    padding: 0.5rem;
+
+    i {
+      margin-right: 1rem;
+    }
+  }
+}
+
 
 
 
@@ -35,10 +49,6 @@
 }
 body {
   font-family: -apple-system, BlinkMacSystemFont, segoe ui, Roboto, helvetica neue, Arial, noto sans, sans-serif, apple color emoji, segoe ui emoji, segoe ui symbol, noto color emoji;
-}
-
-.padding-container {
-  padding: 2rem 2rem;
 }
 
 .c-dark-theme a {

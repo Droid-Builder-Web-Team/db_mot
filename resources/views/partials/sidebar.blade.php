@@ -1,7 +1,9 @@
 <div class="db-sidebar wrapper d-flex align-items-stretch">
-    <nav id="sidebar" class="">
-        <h4 class="large-menu-title logo">{{ config('app.name', 'Laravel') }}</h4>
-        <h4 class="small-menu-title logo">DB Portal</h4>
+    <nav id="sidebar">
+        <a class="p-link" href="{{ route('about') }}">
+            <h4 class="large-menu-title logo">{{ config('app.name', 'Laravel') }}</h4>
+            <h4 class="small-menu-title logo">DB Portal</h4>
+        </a>
 
         <ul class="sidebar-nav">
             @guest

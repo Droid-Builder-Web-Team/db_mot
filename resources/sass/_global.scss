@@ -294,6 +294,25 @@ img {
     }
 }
 
+.image-wrapper.landscape {
+    position: relative;
+    padding-bottom: 18%;
+
+    img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+    }
+}
+
+.header-image img {
+    object-fit: contain !important;
+}
+
 .comment-card {
     background: transparent;
     position: relative;
