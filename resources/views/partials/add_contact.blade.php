@@ -1,8 +1,8 @@
 <div class="modal fade" id="addContactModal" tabindex="-1" role="dialog" aria-
             labelledby="addContactModalLabel" aria-hidden="true">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
+				<div class="modal-dialog db-wrapper" role="document">
+					<div class="modal-content db-mt-1">
+						<div class="modal-header db-mt-1">
 							<h5 class="modal-title" id="addContactModalLabel">Add contact</h5>
 								<button type="button" class="close" data-dismiss="modal" aria-
                                 label="Close" id=close-button>
@@ -11,7 +11,7 @@
 						</div>
                         <form action="{{ route('admin.contacts.link') }}" method="POST">
                             @csrf
-                            <div>
+                            <div class="build-section db-mx-1">
                                 <select class="form-control" name="contact_id">
                                     @foreach($contacts as $contact)
                                         <option value="{{ $contact->id }}">{{ $contact->name }}</option>

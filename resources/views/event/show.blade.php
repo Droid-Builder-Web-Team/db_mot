@@ -61,7 +61,7 @@
 @endphp
 
 
-<div class="build-section text-center page-heading-text d-flex flex-column db-mt-2" id="app">
+<div class="build-section text-center page-heading-text d-flex flex-column" id="app">
     <div class="container-fluid">
 
 
