@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Model for Achievements
+ * Model for Users
  * php version 7.4
  *
  * @category Model
@@ -35,7 +35,7 @@ use Qirolab\Laravel\Reactions\Traits\Reacts;
 use Qirolab\Laravel\Reactions\Contracts\ReactsInterface;
 
 /**
- * Achievements
+ * User
  *
  * @category Class
  * @package  Models

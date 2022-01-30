@@ -204,9 +204,15 @@ class PartsRunData extends Model implements Auditable
             $url = "";
             $display = $id;
         }
+<<<<<<< HEAD
 
         return $display;
 
     }
+=======
+>>>>>>> caa598c... Added stats
 
+        return $display;
+
+    }
 }
