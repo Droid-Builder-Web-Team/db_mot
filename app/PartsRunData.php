@@ -126,6 +126,8 @@ class PartsRunData extends Model implements Auditable
     {
         return $this->belongsToMany(User::class, 'members_parts')
             ->wherePivot('status', 'interested')
+            ->orWherePivot('status', 'paid')
+            ->orWherePivot('status', 'shipped')
             ->withPivot('status', 'quantity', 'tracking', 'shipper');
     }
 
