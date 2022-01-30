@@ -166,8 +166,23 @@ class ContactController extends Controller
      */
     public function link(Request $request)
     {
-        $event = app($request->model_type)::find($request->model_id);
-        $event->contacts()->attach($request->contact_id);
+        $model = app($request->model_type)::find($request->model_id);
+        $model->contacts()->attach($request->contact_id);
+
+        return back();
+    }
+
+    /**
+     * Unlink a contact from a model
+     *
+     * @param \Illuminate\Http\Request $request HTTP Request
+     *
+     * @return view
+     */
+    public function unlink(Request $request)
+    {
+        $model = app($request->model_type)::find($request->model_id);
+        $model->contacts()->detach($request->contact_id);
 
         return back();
     }

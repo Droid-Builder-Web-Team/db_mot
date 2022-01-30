@@ -7,6 +7,21 @@
       window.location.href = _url;
    }
 </script>
+
+<script>
+    $(document).ready(function(){
+        $('#shipModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget) // Button that triggered the modal
+            console.log(button.data());
+            var user_id = button.data('userid') // Extract info from data-* attributes
+            console.log("User ID: " + user_id);
+            // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+            // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+            var modal = $(this)
+            modal.find('#user_id').val(user_id)
+        })
+    })
+</script>
 @endsection
 
 @section('content')
@@ -203,55 +218,79 @@
     <div class="card-body">
       <h3>Interest</h3>
       <ul>
-      @foreach($data->interested as $user)
+        @foreach($data->interested as $user)
         @if($user->pivot->status == 'interested')
-        <li>
-            {{ $user->forename ?? "Deactivated"}} {{ $user->surname ?? "User"}}
-            @if($user->pivot->quantity != 1)
-             ({{$user->pivot->quantity}})
-            @endif
-            @if(auth()->user()->id == $data->user_id || auth()->user()->id == $data->bc_rep_id)
-              @if ($data->status == "Active")
-                <a href="{{ route('parts-run.status_update',[$data->id, 'status' => 'paid', 'user_id' => $user->id]) }}"><i class="fas fa-pound-sign"></i></a>
-              @endif
-            @endif
-        </li>
+            <li>
+                @can('View Members')
+                    <a class="p-link" href="{{ route('user.show', $user->id) }}">{{ $user->forename ?? "Deactivated"}} {{ $user->surname ?? "User"}}</a>
+                @else
+                    {{ $user->forename ?? "Deactivated"}} {{ $user->surname ?? "User"}}
+                @endcan
+                @if($user->pivot->quantity != 1)
+                    ({{$user->pivot->quantity}})
+                @endif
+                @if(auth()->user()->id == $data->user_id || Auth::user()->hasRole('BC Rep'))
+                    @if ($data->status == "Active")
+                        <form action="{{ route('parts-run.status_update') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="user_id" id="user_id" value="{{ $user->id }}">
+                            <input type="hidden" name="run_id" value="{{ $data->id }}">
+                            <input type="hidden" name="status" value="paid">
+                            <button type="submit"><i class="fas fa-pound-sign"></i></button>
+                        </form>
+                    @endif
+                @endif
+            </li>
         @endif
-      @endforeach
+    @endforeach
     </ul>
 
     @if ($data->status == "Active")
     <h3>Paid</h3>
     <ul>
-    @foreach($data->interested as $user)
-      @if($user->pivot->status == 'paid')
-      <li>
-          {{ $user->forename ?? "Deactivated"}} {{ $user->surname ?? "User"}}
-          @if($user->pivot->quantity != 1)
-           ({{$user->pivot->quantity}})
-          @endif
-          @if(auth()->user()->id == $data->user_id || auth()->user()->id == $data->bc_rep_id)
-            @if ($data->status == "Active")
-            <i class="fas fa-truck"data-toggle="modal" data-target="#shipModal"></i>
-
-            @endif
-          @endif
-      </li>
-      @endif
+        @foreach($data->interested as $user)
+        @if($user->pivot->status == 'paid')
+            <li>
+                @can('View Members')
+                    <a class="p-link" href="{{ route('user.show', $user->id) }}">{{ $user->forename ?? "Deactivated"}} {{ $user->surname ?? "User"}}</a>
+                @else
+                    {{ $user->forename ?? "Deactivated"}} {{ $user->surname ?? "User"}}
+                @endcan
+                @if($user->pivot->quantity != 1)
+                    ({{$user->pivot->quantity}})
+                @endif
+                @if(auth()->user()->id == $data->user_id || auth()->user()->id == $data->bc_rep_id)
+                    @if ($data->status == "Active")
+                        <button type="button" class="fas fa-truck" data-toggle="modal" data-userid="{{ $user->id }}" data-target="#shipModal"></button>
+                    @endif
+                @endif
+            </li>
+        @endif
     @endforeach
     </ul>
     <h3>Shipped</h3>
     <ul>
-    @foreach($data->interested as $user)
-      @if($user->pivot->status == 'shipped')
-      <li>
-          {{ $user->forename ?? "Deactivated"}} {{ $user->surname ?? "User"}}
-          @if($user->pivot->quantity != 1)
-           ({{$user->pivot->quantity}})
-          @endif
-          <i class="fas fa-box"></i>
-      </li>
-      @endif
+        @foreach($data->interested as $user)
+        @if($user->pivot->status == 'shipped')
+            <li>
+                @can('View Members')
+                    <a class="p-link" href="{{ route('user.show', $user->id) }}">{{ $user->forename ?? "Deactivated"}} {{ $user->surname ?? "User"}}</a>
+                @else
+                    {{ $user->forename ?? "Deactivated"}} {{ $user->surname ?? "User"}}
+                @endcan
+                @if($user->pivot->quantity != 1)
+                    ({{$user->pivot->quantity}})
+                @endif
+                &nbsp;<i class="fas fa-box"></i>&nbsp;
+                @if(auth()->user()->id == $data->user_id || auth()->user()->id == $data->bc_rep_id || auth()->user()->id == $user->id)
+                    @if($user->pivot->tracking != "" )
+                        {!! $data->trackingUrl($user->pivot->tracking, $user->pivot->shipper) !!}
+                    @else
+                        No tracking
+                    @endif
+                @endif
+            </li>
+        @endif
     @endforeach
   </ul>
 
@@ -268,77 +307,7 @@
 
 
 </div>
-<div class="row">
-  <div class="col-md-9">
-    <div class="card">
-      <div class="card-header">
-        Comments
-      </div>
-      <div class="card-body">
-@foreach($data->comments as $comment)
-        <div class="card border-primary">
-          <div class="card-header">
-            <strong>{{ $comment->user->forename ?? "Deactivated"}} {{ $comment->user->surname ?? "User"}}</strong>
-            @if ($comment->user != NULL)
-              @if ($comment->user->can('Edit Partsrun'))
-                <i class="fas fa-user-shield"></i>
-              @endif
-            @endif
-            <span class="float-right">
-              @if ($comment->broadcast)
-                <i class="fas fa-bullhorn"></i>
-              @endif
-              {{ Carbon\Carbon::parse($comment->created_at, Auth::user()->settings()->get('timezone'))->isoFormat(Auth::user()->settings()->get('date_format').' - '.Auth::user()->settings()->get('time_format')) }}
-            </span>
-          </div>
-          <div class="card-body">
-            {!! nl2br(e($comment->body)) !!}
-            @can('Edit Partrun')
-            <span class="float-right">
-              <a href="{{ route('comment.delete', $comment->id )}}" class="btn-sm btn-danger">Delete</a>
-            </span>
-            @endcan
-            <span class="float-right">
-              <reaction-component
-                    :comment="{{ $comment->id }}"
-                    :summary='@json($comment->reactionSummary())'
-                    @auth
-                    :reacted='@json($comment->reacted())'
-                    @endauth
-              />
-            </span>
-          </div>
-        </div>
-@endforeach
-        <div class="card border-primary">
-          <div class="card-header">
-            <strong>Add Comment</strong>
-          </div>
-          <div class="card-body">
-            <form action="{{ route('comment.add', [ 'id' => $data->id]) }}" method="POST">
-                @csrf
-                <input type="hidden" name="model" value="App\PartsRunData">
-              <div class="form-group">
-                <textarea type="text" class="form-control" name="body"></textarea>
-              </div>
-              <input type="submit" class="btn-sm btn-comment" name="comment" value="Add Comment"
-                    onclick="this.disabled=true;this.form.submit();">
-              @can('Edit Partrun')
-                <div class="form-check float-right">
-                  <input class="form-check-input" type="checkbox" name="broadcast" id="broadcast">
-                  <label class="form-check-label" for="broadcast">Broadcast</label>
-                </div>
-              @endcan
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-
-  </div>
+@include('partials.comments', ['comments' => $data->comments, 'permission' => 'Edit Partrun', 'model_type' => 'App\PartsRunData', 'model_id' => $data->id])
 </div>
 
 
@@ -353,7 +322,7 @@
 								</button>
 						</div>
                         <div>
-                            <form action="{{ route('parts-run.status_update',[$data->id, 'status' => 'shipped', 'user_id' => $user->id]) }}" method="POST">
+                            <form action="{{ route('parts-run.status_update') }}" method="POST">
                                 @csrf
                                 Shipper:
                                 <select class="form-control" name="shipper">
@@ -364,7 +333,9 @@
                                     <option value="Hermes">Hermes</option>
                                 </select>
                                 Tracking Number: <input type="text" size=20 name="tracking">
-                                <input type="hidden" name="user_id" value="{{ $user->id }}">
+                                <input type="hidden" name="user_id" id="user_id" value="">
+                                <input type="hidden" name="run_id" value="{{ $data->id }}">
+                                <input type="hidden" name="status" value="shipped">
                         </div>
 						<div class="modal-footer">
 							<input type="submit" class="btn btn-primary" value="Shipped">

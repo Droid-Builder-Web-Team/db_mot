@@ -103,7 +103,7 @@
                 <br>
 
                 @can('Edit Events')
-                    @include('partials.show_contacts', ['contacts' => $event->contacts])
+                    @include('partials.show_contacts', ['contacts' => $event->contacts, 'model_type' => 'App\Event', 'model_id' => $event->id])
                 @endcan
 
                 @if(!$event->isFuture())
@@ -254,150 +254,78 @@
             @endif
           </div>
         </div>
-      </div>
-    </div>
-<div id='app'>
-    <div class="row">
-      <div class="col-md-8">
-        <div class="card">
-          <div class="card-header">
-            Comments
-          </div>
-          <div class="card-body">
-@foreach($event->comments as $comment)
-            <div class="card border-primary">
-              <div class="card-header">
-                <strong>{{ $comment->user->forename ?? "Deactivated"}} {{ $comment->user->surname ?? "User"}}</strong>
-                @if ($comment->user != NULL)
-                  @if ($comment->user->can('Edit Events'))
-                    <i class="fas fa-user-shield"></i>
-                  @endif
-                @endif
-                <span class="float-right">
-                  @if ($comment->broadcast)
-                    <i class="fas fa-bullhorn"></i>
-                  @endif
-                  {{ Carbon\Carbon::parse($comment->created_at, Auth::user()->settings()->get('timezone'))->isoFormat(Auth::user()->settings()->get('date_format').' - '.Auth::user()->settings()->get('time_format')) }}
-                </span>
-              </div>
-              <div class="card-body">
-                {!! nl2br(e($comment->body)) !!}
-                @can('Edit Events')
-                <span class="float-right">
-                  <a href="{{ route('comment.delete', $comment->id )}}" class="btn-sm btn-danger">Delete</a>
-                </span>
-                @endcan
-                <span class="float-right">
-                  <reaction-component
-                        :comment="{{ $comment->id }}"
-                        :summary='@json($comment->reactionSummary())'
-                        @auth
-                        :reacted='@json($comment->reacted())'
-                        @endauth
-                  />
-                </span>
-              </div>
-            </div>
-@endforeach
-@if($event->isFuture())
-            <div class="card border-primary">
-              <div class="card-header">
-                <strong>Add Comment</strong>
-              </div>
-              <div class="card-body">
-                <form action="{{ route('comment.add', ['id' => $event->id] ) }}" method="POST">
-                    @csrf
-                    <input type="hidden" name="model" value="App\Event">
-                  <div class="form-group">
-                    <textarea type="text" class="form-control" name="body"></textarea>
-                  </div>
-                  <input type="submit" class="btn-sm btn-comment" name="comment" value="Add Comment"
-                            onclick="this.disabled=true;this.form.submit();">
-                  @can('Edit Events')
-                    <div class="form-check float-right">
-                      <input class="form-check-input" type="checkbox" name="broadcast" id="broadcast">
-                      <label class="form-check-label" for="broadcast">Broadcast</label>
-                    </div>
-                  @endcan
-                </form>
-              </div>
-            </div>
-@endif
-          </div>
-        </div>
-      </div>
 
 
       @if($event->isFuture())
-      <div class="col-md-4">
-        <form action="{{ route('event.update',$event->id) }}" method="POST">
-                  @csrf
-            @method('PUT')
-            <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-        <div class="card">
-          <div class="card-header">Register Interest</div>
-          <div class="card-body">
-              @if($user_status == "no" && $event->isFull())
-                Event is full
-              @else
-                <div class="form-group">
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="going" id="not_going" value="no" {{ $user_status == 'no' ? 'checked' : '' }}>
-                    <label class="form-check-label" for="not_going">
-                    Not Going
-                    </label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="going" id="is_going" value="yes" {{ $user_status == 'yes' ? 'checked' : '' }}>
-                    <label class="form-check-label" for="is_going">
-                    Going
-                    </label>
-                </div>
-                </div>
-                <div class="form-group">
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="spotter" id="with_droid" value="no" {{ $user_spotter == 'no' ? 'checked' : '' }}>
-                    <label class="form-check-label" for="with_droid">
-                    With Droid
-                    </label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="spotter" id="no_droid" value="yes" {{ $user_spotter == 'yes' ? 'checked' : '' }}>
-                    <label class="form-check-label" for="no_droid">
-                    Spotter
-                    </label>
-                </div>
-                </div>
-                @if ($event->canMOT())
-                <div class="form-group">
-                <div class="form-check form-check-inline">
-                    {{Form::hidden('mot_required','0')}}
-                    <input type="checkbox" id="mot_required" name="mot_required" {{ $user_mot ? 'checked=1 value=1' : 'value=1' }} class="form-check-input">
-                    <label class="form-check-label" for="mot_required">Request MOT at event</label>
-                </div>
-                </div>
-                @else
-                <div class="form-group">
-                    {{Form::hidden('mot_required','0')}}
-                    MOT are not available at this event
-                </div>
-                @endif
-                @if (!$event->canWIP())
-                <div class="form-group">
-                    Only completed droids at this event please.
-                </div>
-                @endif
-                <div class="form-group">
-                    <button type="submit" class="btn btn-mot">Submit</button>
-                </div>
-              @endif
-          </div>
-        </div>
-      </form>
+      <form action="{{ route('event.update',$event->id) }}" method="POST">
+        @csrf
+  @method('PUT')
+  <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+<div class="card">
+<div class="card-header">Register Interest</div>
+<div class="card-body">
+    @if($user_status == "no" && $event->isFull())
+      Event is full
+    @else
+      <div class="form-group">
+      <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="going" id="not_going" value="no" {{ $user_status == 'no' ? 'checked' : '' }}>
+          <label class="form-check-label" for="not_going">
+          Not Going
+          </label>
+      </div>
+      <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="going" id="is_going" value="yes" {{ $user_status == 'yes' ? 'checked' : '' }}>
+          <label class="form-check-label" for="is_going">
+          Going
+          </label>
+      </div>
+      </div>
+      <div class="form-group">
+      <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="spotter" id="with_droid" value="no" {{ $user_spotter == 'no' ? 'checked' : '' }}>
+          <label class="form-check-label" for="with_droid">
+          With Droid
+          </label>
+      </div>
+      <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="spotter" id="no_droid" value="yes" {{ $user_spotter == 'yes' ? 'checked' : '' }}>
+          <label class="form-check-label" for="no_droid">
+          Spotter
+          </label>
+      </div>
+      </div>
+      @if ($event->canMOT())
+      <div class="form-group">
+      <div class="form-check form-check-inline">
+          {{Form::hidden('mot_required','0')}}
+          <input type="checkbox" id="mot_required" name="mot_required" {{ $user_mot ? 'checked=1 value=1' : 'value=1' }} class="form-check-input">
+          <label class="form-check-label" for="mot_required">Request MOT at event</label>
+      </div>
+      </div>
+      @else
+      <div class="form-group">
+          {{Form::hidden('mot_required','0')}}
+          MOT are not available at this event
       </div>
       @endif
+      @if (!$event->canWIP())
+      <div class="form-group">
+          Only completed droids at this event please.
+      </div>
+      @endif
+      <div class="form-group">
+          <button type="submit" class="btn btn-mot">Submit</button>
+      </div>
+    @endif
+</div>
+</div>
+</form>
+@endif
+</div>
     </div>
-
+<div id='app'>
+    @include('partials.comments', ['comments' => $event->comments, 'permission' => 'Edit Events', 'model_type' => 'App\Event', 'model_id' => $event->id])
 </div>
 
 @can('Edit Events')

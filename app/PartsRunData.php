@@ -114,7 +114,7 @@ class PartsRunData extends Model implements Auditable
     public function interested()
     {
         return $this->belongsToMany(User::class, 'members_parts')
-            ->withPivot('status', 'quantity');
+            ->withPivot('status', 'quantity', 'tracking', 'shipper');
     }
 
     /**
@@ -126,7 +126,7 @@ class PartsRunData extends Model implements Auditable
     {
         return $this->belongsToMany(User::class, 'members_parts')
             ->wherePivot('status', 'interested')
-            ->withPivot('status', 'quantity');
+            ->withPivot('status', 'quantity', 'tracking', 'shipper');
     }
 
     /**
@@ -153,4 +153,6 @@ class PartsRunData extends Model implements Auditable
         }
         return $quantity;
     }
+
+
 }
