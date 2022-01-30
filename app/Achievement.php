@@ -42,7 +42,8 @@ class Achievement extends Model implements Auditable
      *
      * @return void
      */
-    public function users() {
+    public function users()
+    {
         return $this->belongsToMany(User::class, 'members_achievements')
             ->withPivot('notes', 'date_added');
     }

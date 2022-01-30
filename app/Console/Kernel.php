@@ -1,10 +1,29 @@
 <?php
 
+/**
+ * Console Kernel
+ * php version 7.4
+ *
+ * @category Kernel
+ * @package  Console
+ * @author   Darren Poulson <darren.poulson@gmail.com>
+ * @license  https://opensource.org/licenses/MIT MIT License
+ * @link     https://portal.droidbuilders.uk/
+ */
 namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
+/**
+ * Console Kernel
+ *
+ * @category Class
+ * @package  Console
+ * @author   Darren Poulson <darren.poulson@gmail.com>
+ * @license  https://opensource.org/licenses/MIT MIT License
+ * @link     https://portal.droidbuilders.uk/
+ */
 class Kernel extends ConsoleKernel
 {
     /**
@@ -19,7 +38,8 @@ class Kernel extends ConsoleKernel
     /**
      * Define the application's command schedule.
      *
-     * @param  \Illuminate\Console\Scheduling\Schedule $schedule
+     * @param \Illuminate\Console\Scheduling\Schedule $schedule Schedule
+     *
      * @return void
      */
     protected function schedule(Schedule $schedule)

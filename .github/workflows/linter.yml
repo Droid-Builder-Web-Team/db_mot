@@ -46,4 +46,4 @@ jobs:
         uses: wearerequired/lint-action@v1
         with:
           php_codesniffer: true
-          php_codesniffer_args: "-n --ignore=vendor,storage,public,docs,bootstrap,node_modules,resources,database,server.php"
+          php_codesniffer_args: "-n --ignore=vendor,storage,public,docs,bootstrap,node_modules,resources,database,test,config,server.php"
