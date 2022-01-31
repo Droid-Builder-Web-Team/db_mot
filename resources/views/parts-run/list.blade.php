@@ -23,7 +23,7 @@
             <thead>
                 <tr>
                     <th>Part</th>
-                    <th>Club</th>
+                    <th scope="col" class="d-none d-md-table-cell">Club</th>
                     <th>Status</th>
                     <th>Interest</th>
                     <th>Action</th>
@@ -34,19 +34,19 @@
                 @if($data->user->id == Auth()->user()->id)
                 <tr>
                     <td>{{ $data->partsRunAd->title }}</td>
-                    <td>{{ $data->club->name }}</td>
+                    <td scope="col" class="d-none d-md-table-cell">{{ $data->club->name }}</td>
 
                     <th class="status-class">
                       <div class="status-box d-flex align-items-center">
                        @if($data->status == "Active")
-                          <div class="pr-active"></div>&nbsp {{ $data->status }}
+                          <div class="pr-active"></div><div class="d-none d-sm-block">&nbsp {{ $data->status }}</div>
 
 
                         @elseif($data->status == "Gathering_Interest")
-                          <div class="pr-interest"></div>&nbsp {{ $data->status }}
+                          <div class="pr-interest"></div><div class="d-none d-sm-block">&nbsp Gathering Interest</div>
 
                         @else
-                          <div class="pr-inactive"></div>&nbsp {{ $data->status }}
+                          <div class="pr-inactive"></div><div class="d-none d-sm-block">&nbsp {{ $data->status }}</div>
                       </div>
                       @endif
                     </th>
@@ -60,9 +60,9 @@
                     </td>
                     <td>
                       <div class="d-flex">
-                        <a class="btn btn-view" href={{ route('parts-run.show', $data->id) }}>View</a>
+                        <a class="btn btn-view" href={{ route('parts-run.show', $data->id) }}><div class="d-block d-sm-none"><i class="fas fa-eye"></i></div><span class="d-none d-sm-block">View</span></a>
                         @if(Gate::check('Edit Partrun') && (Auth()->user()->id == $data->user_id || Auth()->user()->id == $data->bc_rep_id))
-                          <a class="btn btn-edit" href={{ route('parts-run.edit', $data->id) }}>Edit</a>
+                          <a class="btn btn-edit" href={{ route('parts-run.edit', $data->id) }}><div class="d-block d-sm-none"><i class="fas fa-edit"></i></div><span class="d-none d-sm-block">Edit</span></a>
                         @endif
                       </div>
                     </td>
@@ -92,40 +92,37 @@
             <thead>
                 <tr>
                     <th>Part</th>
-                    <th>Club</th>
-                    <th>Seller</th>
+                    <th scope="col" class="d-none d-md-table-cell">Club</th>
+                    <th scope="col" class="d-none d-sm-table-cell">Seller</th>
                     <th>Status</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($partsRunData as $data)
-                @if($data->status != "Initial")
+                @if($data->status != "Initial" && $data->status != "Inactive")
                 <tr>
                     <td>{{ $data->partsRunAd->title }}</td>
-                    <td>{{ $data->club->name }}</td>
-                    <td>{{ $data->user->forename }} {{ $data->user->surname }}</td>
+                    <td scope="col" class="d-none d-md-table-cell">{{ $data->club->name }}</td>
+                    <td scope="col" class="d-none d-sm-table-cell">{{ $data->user->forename }} {{ $data->user->surname }}</td>
 
                     <th class="status-class">
                       <div class="status-box d-flex align-items-center">
                        @if($data->status == "Active")
-                          <div class="pr-active"></div>&nbsp{{ $data->status }}
+                          <div class="pr-active"></div><div class="d-none d-sm-block">&nbsp{{ $data->status }}</div>
 
 
-                        @elseif($data->status == "Gathering_Interest")
-                          <div class="pr-interest"></div>&nbsp{{ $data->status }}
-
-                        @else
-                          <div class="pr-inactive"></div>&nbsp{{ $data->status }}
+                        @else($data->status == "Gathering_Interest")
+                          <div class="pr-interest"></div><div class="d-none d-sm-block">&nbsp Gathering Interest</div>
                       </div>
                       @endif
                     </th>
 
                     <td>
                       <div class="d-flex">
-                        <a class="btn btn-view" href={{ route('parts-run.show', $data->id) }}>View</a>
+                        <a class="btn btn-view" href={{ route('parts-run.show', $data->id) }}><div class="d-block d-sm-none"><i class="fas fa-eye"></i></div><span class="d-none d-sm-block">View</span></a>
                         @if(Gate::check('Edit Partrun') && (Auth()->user()->id == $data->user_id || Auth()->user()->id == $data->bc_rep_id))
-                          <a class="btn btn-edit" href={{ route('parts-run.edit', $data->id) }}>Edit</a>
+                          <a class="btn btn-edit" href={{ route('parts-run.edit', $data->id) }}><div class="d-block d-sm-none"><i class="fas fa-edit"></i></div><span class="d-none d-sm-block">Edit</span></a>
                         @endif
                       </div>
                     </td>

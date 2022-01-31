@@ -46,9 +46,8 @@
                 <div class="text-center row">
                     <div class="col-12">
                         <a class="btn btn-primary" href={{ route('parts-run.edit', $data->id) }}>Edit Run</a>
-                        @can('Create Partrun')
-                          <a class="btn btn-danger" href={{ route('parts-run.destroy', $data->id) }}>Delete Run</a>
-                        @endcan
+                        <a class="btn btn-info" href={{ route('parts-run.edit', $data->id) }}>Add Image</a>
+                        <a class="btn btn-secondary" href={{ route('parts-run.edit', $data->id) }}>Add Instructions</a>
                     </div>
                 </div>
                 @endif
@@ -236,7 +235,7 @@
                             <input type="hidden" name="user_id" id="user_id" value="{{ $user->id }}">
                             <input type="hidden" name="run_id" value="{{ $data->id }}">
                             <input type="hidden" name="status" value="paid">
-                            <button type="submit"><i class="fas fa-pound-sign"></i></button>
+                            <button type="submit" class="btn" data-toggle="modal" data-userid="{{ $user->id }}" data-target="#shipModal"><i class="fas fa-pound-sign"></i></button>
                         </form>
                     @endif
                 @endif
@@ -261,7 +260,7 @@
                 @endif
                 @if(auth()->user()->id == $data->user_id || auth()->user()->id == $data->bc_rep_id)
                     @if ($data->status == "Active")
-                        <button type="button" class="fas fa-truck" data-toggle="modal" data-userid="{{ $user->id }}" data-target="#shipModal"></button>
+                        <button type="submit" class="btn" data-toggle="modal" data-userid="{{ $user->id }}" data-target="#shipModal"><i class="fas fa-truck"></i></button>
                     @endif
                 @endif
             </li>

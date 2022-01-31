@@ -20,9 +20,9 @@
     @endforeach
 
     {{-- User Information --}}
-    <div class="row mb-4">
+    <div class="row">
         {{-- User Details --}}
-        <div class="col-12 col-xl-6">
+        <div class="col-12 col-xl-6 mb-4">
             <div class="user card">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <span class="float-left">
@@ -111,7 +111,7 @@
         </div>
 
         {{-- User Stats --}}
-        <div class="col-md-6 col-sm-12 col-lg-6 col-xl-3">
+        <div class="col-md-6 col-sm-12 col-lg-6 col-xl-3 mb-4">
             <div class="card card-mot-info">
                 <div class="p-3 card-body d-flex align-items-center">
                     <div class="p-3 bg-gradient-info mfe-3">
@@ -184,7 +184,7 @@
         </div>
 
         {{-- User Image --}}
-        <div class="col-md-6 col-lg-6 col-xl-3">
+        <div class="col-md-6 col-lg-6 col-xl-3 mb-4">
             <div class="user card">
                 <div class="card-header">
                     <h4>ID Card Photo</h4>
