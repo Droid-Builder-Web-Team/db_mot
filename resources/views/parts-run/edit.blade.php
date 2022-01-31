@@ -56,7 +56,7 @@
                         </div>
 
                         <div class="col-md-6 col-12">
-                            <label for="shipping_costs" class="col-4 col-form-label">Shipping Costs</label>
+                            <label for="shipping_costs" class="col-4 col-form-label">Shipping Costs (UK)</label>
                             <div class="col-12">
                                 <input type="text" name="shipping_costs" value="{{ $data->partsRunAd->shipping_costs }}" class="form-control">
                             </div>
@@ -91,10 +91,17 @@
 
                     <div class="form-group row">
                         <div class="col-md-6 col-12">
-                          <label for="quantity" class="col-6 col-form-label">Quantity (Enter 0 for a continuous run/no limit)</label>
-                          <div class="col-12">
-                          <input size=10 type="number" name="quantity" value="{{ $data->partsRunAd->quantity }}" class="form-control" placeholder="Quantity" required>
-                          </div>
+                            <label for="quantity" class="col-6 col-form-label">Quantity (Enter 0 for a continuous run/no limit)</label>
+                            <div class="col-12">
+                                <input size=10 type="number" name="quantity" value="{{ $data->partsRunAd->quantity }}" class="form-control" placeholder="Quantity" required>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-12">
+                            <label for="email" class="col-4 col-form-label">Email</label>
+                            <div class="col-12">
+                                <input type="text" name="contact_email" value="{{ $data->partsRunAd->contact_email }}" class="form-control">
+                            </div>
                         </div>
                     </div>
 
@@ -105,13 +112,24 @@
                                 <input type="text" name="purchase_url" value="{{ $data->partsRunAd->purchase_url }}" class="form-control">
                             </div>
                         </div>
+
                         <div class="col-md-6 col-12">
-                            <label for="email" class="col-4 col-form-label">Email</label>
+                            <label for="purchase_url_type" class="col-4 col-form-label">Purchase URL Type</label>
                             <div class="col-12">
-                                <input type="text" name="contact_email" value="{{ $data->partsRunAd->contact_email }}" class="form-control">
+                                <select class="form-control" name="purchase_url_type">
+                                    @foreach($data->partsRunAd->purchaseTypes() as $key => $value)
+                                        <option value="{{ $key }}"
+                                            @if($key == $data->partsRunAd->purchase_url_type)
+                                                selected
+                                            @endif
+                                        >{{ $value }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                     </div>
+
+
 
                     <div class="form-group row">
                         <div class="col-xs-12 col-sm-12 col-md-12 text-center mt-3">

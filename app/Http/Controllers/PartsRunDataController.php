@@ -237,6 +237,7 @@ class PartsRunDataController extends Controller
             'location' => $request->location,
             'shipping_costs' => $request->shipping_costs,
             'purchase_url' => $request->purchase_url,
+            'purchase_url_type' => $request->purchase_url_type,
             'contact_email' => $request->contact_email,
             'quantity' => $request->quantity
             ]

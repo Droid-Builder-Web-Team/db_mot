@@ -47,6 +47,7 @@ class PartsRunAd extends Model implements Auditable
         'location',
         'shipping_costs',
         'purchase_url',
+        'purchase_url_type',
         'contact_email'
     ];
 
@@ -58,5 +59,20 @@ class PartsRunAd extends Model implements Auditable
     public function partsRunData()
     {
         return $this->belongsTo(PartsRunData::class, 'parts_run_data_id');
+    }
+
+    /**
+     * Return list of valid purchase url types
+     *
+     * @return array
+     */
+    public function purchaseTypes()
+    {
+        return [
+            'email' => 'Email',
+            'paypalme' => 'Paypal.me Link',
+            'website' => 'Website',
+            'other' => 'Other'
+        ];
     }
 }
