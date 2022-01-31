@@ -181,6 +181,7 @@ class User extends Authenticatable implements MustVerifyEmail,
     {
         return $this->belongsToMany(Event::class, 'members_events')
             ->wherePivot('status', "yes")
+            ->whereDate('date', '>', Carbon::now())
             ->OrderBy('date', 'desc');
     }
 
