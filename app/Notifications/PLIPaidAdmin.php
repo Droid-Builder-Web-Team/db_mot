@@ -8,7 +8,7 @@ use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use App\User;
 
-class PLIPaid extends Notification
+class PLIPaidAdmin extends Notification
 {
     use Queueable;
     protected $user;
