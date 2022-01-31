@@ -224,6 +224,34 @@
     }
 }
 
+.btn-paid {
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 0.75rem;
+    border: 1px solid $green;
+    background: transparent;
+    padding: 7px 20px;
+    transition: 0.5s all;
+    color: $secondaryColor;
+    width: fit-content;
+    
+    i {
+        color: $white;
+    }
+
+    &:hover {
+        background: $green;
+        color: $secondaryColor;
+
+        i {
+            color: $secondaryColor;
+        }
+    }
+}
+
 // Old Styling
 
 .btn-mot {

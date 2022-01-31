@@ -5,6 +5,12 @@
     .form-wrapper .form-section.purchase-contact {
         display: block;
     }
+
+    .table .status-class {
+        .status-box span {
+            display: none;
+        }
+    }
 }
 
 @media only screen and (max-width: 991px) {

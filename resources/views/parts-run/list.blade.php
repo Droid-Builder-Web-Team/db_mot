@@ -20,7 +20,7 @@
               <thead>
                   <tr>
                       <th>Part</th>
-                      <th>Club</th>
+                      <th class="d-none d-lg-table-cell">Club</th>
                       <th>Status</th>
                       <th>Interest</th>
                       <th>Action</th>
@@ -31,19 +31,18 @@
                     @if($yourData->user->id == Auth()->user()->id)
                     <tr>
                         <td>{{ $yourData->partsRunAd->title }}</td>
-                        <td>{{ $yourData->club->name }}</td>
+                        <td class="d-none d-lg-table-cell">{{ $yourData->club->name }}</td>
   
                         <th class="status-class">
                           <div class="status-box">
                           @if($yourData->status == "Active")
-                              <div class="pr-circle active"></div>&nbsp {{ $yourData->status }}
-  
+                              <div class="pr-circle active"></div><span>&nbsp {{ $yourData->status }}</span>
   
                             @elseif($yourData->status == "Gathering_Interest")
-                              <div class="pr-circle interest"></div>&nbsp Gathering Interest
+                              <div class="pr-circle interest"></div><span>&nbsp Gathering Interest</span>
   
                             @else
-                              <div class="pr-circle inactive"></div>&nbsp {{ $yourData->status }}
+                              <div class="pr-circle inactive"></div><span>&nbsp {{ $yourData->status }}</span>
                           </div>
                           @endif
                         </th>
@@ -86,7 +85,7 @@
               <thead>
                   <tr>
                       <th>Part</th>
-                      <th>Club</th>
+                      <th class="d-none d-lg-table-cell">Club</th>
                       <th>Status</th>
                       <th>Interest</th>
                       <th>Action</th>
@@ -97,18 +96,18 @@
                     @if($data->user->id == Auth()->user()->id || Auth::user()->hasRole('BC Rep'))
                     <tr>
                         <td>{{ $data->partsRunAd->title }}</td>
-                        <td>{{ $data->club->name }}</td>
+                        <td class="d-none d-lg-table-cell">{{ $data->club->name }}</td>
   
                         <th class="status-class">
                           <div class="status-box">
                           @if($data->status == "Active")
-                              <div class="pr-circle active"></div>&nbsp {{ $data->status }}
+                              <div class="pr-circle active"></div><span>&nbsp {{ $data->status }}</span>
                           @elseif($data->status == "Gathering_Interest")
-                              <div class="pr-circle interest"></div>&nbsp Gathering Interest
+                              <div class="pr-circle interest"></div><span>&nbsp Gathering Interest</span>
                           @elseif($data->status == "Initial")
-                              <div class="pr-circle inactive"></div>&nbsp {{ $data->status }}
+                              <div class="pr-circle inactive"></div><span>&nbsp {{ $data->status }}</span>
                           @else
-                              <div class="pr-circle inactive"></div>&nbsp  $data->status }}
+                              <div class="pr-circle inactive"></div><span>&nbsp  $data->status }}</span>
                           </div>
                           @endif
                         </th>
@@ -138,11 +137,11 @@
                         <th class="status-class">
                           <div class="status-box">
                           @if($data->status == "Active")
-                              <div class="pr-circle active"></div>&nbsp {{ $data->status }}
+                              <div class="pr-circle active"></div><span>&nbsp {{ $data->status }}</span>
                           @elseif($data->status == "Gathering_Interest")
-                              <div class="pr-circle interest"></div>&nbsp Gathering Interest
+                              <div class="pr-circle interest"></div><span>&nbsp Gathering Interest</span>
                           @else
-                              <div class="pr-circle inactive"></div>&nbsp {{ $data->status }}
+                              <div class="pr-circle inactive"></div><span>&nbsp {{ $data->status }}</span>
                           </div>
                           @endif
                         </th>

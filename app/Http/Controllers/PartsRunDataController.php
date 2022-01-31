@@ -225,18 +225,18 @@ class PartsRunDataController extends Controller
         if ($partsRunData->status != $request->status) {
             foreach ($partsRunData->is_interested as $user) {
 
-                $user->notify(new PartsRunUpdated($partsRunData));
+                // $user->notify(new PartsRunUpdated($partsRunData));
             }
             $bc_rep = User::find($partsRunData->bc_rep_id)->first();
 
-            $bc_rep->notify(new PartsRunUpdated($partsRunData));
+            // $bc_rep->notify(new PartsRunUpdated($partsRunData));
         }
 
 
         $partsRunData->update(
             [
-            'status' => $request->status,
-            'open' => $request->open
+                'status' => $request->status,
+                'open' => $request->open
             ]
         );
 

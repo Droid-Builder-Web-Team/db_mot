@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Model for Achievements
+ * Model for Stats
  * php version 7.4
  *
  * @category Model
@@ -13,12 +13,11 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use OwenIt\Auditing\Contracts\Auditable;
-use App\User;
 
 /**
- * Achievements
+ * Stat
  *
  * @category Class
  * @package  Models
@@ -26,24 +25,12 @@ use App\User;
  * @license  https://opensource.org/licenses/MIT MIT License
  * @link     https://portal.droidbuilders.uk/
  */
-class Achievement extends Model implements Auditable
+class Stat extends Model
 {
-    use \OwenIt\Auditing\Auditable;
-
-    const CREATED_AT = 'date_created';
-    const UPDATED_AT = 'date_updated';
+    use HasFactory;
 
     protected $guarded = [
 
     ];
 
-    /**
-     * Users with achievements
-     *
-     * @return void
-     */
-    public function users() {
-        return $this->belongsToMany(User::class, 'members_achievements')
-            ->withPivot('notes', 'date_added');
-    }
 }

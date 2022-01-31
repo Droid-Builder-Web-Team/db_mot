@@ -208,5 +208,4 @@ class PartsRunData extends Model implements Auditable
         return $display;
 
     }
-
 }

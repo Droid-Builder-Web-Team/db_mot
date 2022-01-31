@@ -202,6 +202,33 @@
   color: #181924;
 }
 
+.btn-paid {
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 0.75rem;
+  border: 1px solid #38c172;
+  background: transparent;
+  padding: 7px 20px;
+  transition: 0.5s all;
+  color: #fff;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+.btn-paid i {
+  color: #fff;
+}
+.btn-paid:hover {
+  background: #38c172;
+  color: #fff;
+}
+.btn-paid:hover i {
+  color: #fff;
+}
+
 .btn-mot {
   text-transform: uppercase;
   width: 100%;

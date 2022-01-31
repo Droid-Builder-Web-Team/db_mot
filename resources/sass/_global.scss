@@ -87,11 +87,13 @@
     display: none !important;
 }
 
+a,
 a.p-link {
     color: $secondaryColor;
     text-decoration: none;
     transition: 0.5s all;
     border-bottom: 1px solid transparent;
+    width: fit-content;
 
     &:hover {
         color: $white;
@@ -246,6 +248,7 @@ img {
     padding: 2rem;
     display: flex;
     align-items: center;
+    justify-content: center;
 
     .buttons.icon-text {
         // Global CRUD Buttons with Icons
@@ -392,7 +395,7 @@ ul.top-nav {
     justify-content: center;
     align-items: center;
     width: 100%;
-    margin: 1rem auto 2rem;
+    margin: 1rem auto;
 
     a:nth-child(2) {
         margin-left: 1rem;
@@ -454,4 +457,31 @@ ul.top-nav {
             }
         }
     }
+}
+
+.form-section {
+    ul {
+        padding-left: 0;
+    }
+}
+
+// Modals
+.modal {
+    .modal-header {
+        display: block;
+
+        .close {
+            color: $secondaryColor;
+        }
+
+        .modal-title {
+            width: 100%;
+        }
+    
+        .small {
+            width: 100%;
+        }
+    }
+
+
 }

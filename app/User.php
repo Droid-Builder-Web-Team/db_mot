@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Model for Achievements
+ * Model for Users
  * php version 7.4
  *
  * @category Model
@@ -35,7 +35,7 @@ use Qirolab\Laravel\Reactions\Traits\Reacts;
 use Qirolab\Laravel\Reactions\Contracts\ReactsInterface;
 
 /**
- * Achievements
+ * User
  *
  * @category Class
  * @package  Models
@@ -181,6 +181,7 @@ class User extends Authenticatable implements MustVerifyEmail,
     {
         return $this->belongsToMany(Event::class, 'members_events')
             ->wherePivot('status', "yes")
+            ->whereDate('date', '>', Carbon::now())
             ->OrderBy('date', 'desc');
     }
 
