@@ -252,6 +252,19 @@
     }
 }
 
+.btn-accordion {
+    color: $secondaryColor;
+    border-bottom: 1px solid transparent;
+    transition: 0.5s all;
+    width: fit-content;
+    border-radius: 0;
+
+    &:hover {
+        opacity: 0.5;
+        color: $secondaryColor;
+    }
+}
+
 // Old Styling
 
 .btn-mot {

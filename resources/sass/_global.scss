@@ -406,6 +406,11 @@ ul.top-nav {
     }
 }
 
+ul.blank-ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
 // Tables
 .table-responsive {
     table {
@@ -482,6 +487,33 @@ ul.top-nav {
             width: 100%;
         }
     }
+}
 
+.db-card {
+    .db-card-header {
+        width: 100%;
+        text-align: left;
 
+        .db-card-title {
+            color: $secondaryColor;
+            font-weight: 700;
+
+            .btn-accordion {
+                text-transform: uppercase;
+            }
+        }
+    }
+
+    .collapse {
+        width: 100%;
+
+        .db-card-body {
+            width: 100%;
+            text-align: left;
+            color: $secondaryColor;
+            padding-left: 4rem;
+            display: flex;
+            align-items: center;
+        }
+    }
 }

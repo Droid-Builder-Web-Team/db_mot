@@ -69,7 +69,7 @@
                         </li>
                         @if(config('features.partrun', TRUE))
                             <li class="sidebar-nav-item">
-                                <a class="sidebar-nav-link" target="_blank" href="{{ route('partsRunInfo') }}">
+                                <a class="sidebar-nav-link" href="{{ route('partsRunInfo') }}">
                                     <span class="fas fa-list fa-fw"></span>
                                     Parts Runs
                                 </a>

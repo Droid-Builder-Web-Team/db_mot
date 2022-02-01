@@ -229,6 +229,20 @@
   color: #fff;
 }
 
+.btn-accordion {
+  color: #fff;
+  border-bottom: 1px solid transparent;
+  transition: 0.5s all;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  border-radius: 0;
+}
+.btn-accordion:hover {
+  opacity: 0.5;
+  color: #fff;
+}
+
 .btn-mot {
   text-transform: uppercase;
   width: 100%;

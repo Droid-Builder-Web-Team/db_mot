@@ -344,6 +344,11 @@ ul.top-nav li.nav-item a i {
   margin-left: 1rem;
 }
 
+ul.blank-ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
 .table-responsive table {
   background: transparent;
   color: #fff;
@@ -398,6 +403,29 @@ ul.top-nav li.nav-item a i {
   width: 100%;
 }
 
+.db-card .db-card-header {
+  width: 100%;
+  text-align: left;
+}
+.db-card .db-card-header .db-card-title {
+  color: #fff;
+  font-weight: 700;
+}
+.db-card .db-card-header .db-card-title .btn-accordion {
+  text-transform: uppercase;
+}
+.db-card .collapse {
+  width: 100%;
+}
+.db-card .collapse .db-card-body {
+  width: 100%;
+  text-align: left;
+  color: #fff;
+  padding-left: 4rem;
+  display: flex;
+  align-items: center;
+}
+
 #sidebar {
   min-width: 270px;
   max-width: 270px;
@@ -406,6 +434,14 @@ ul.top-nav li.nav-item a i {
   color: #fff;
   transition: all 0.3s;
   overflow-y: scroll;
+}
+#sidebar a {
+  width: 100%;
+  text-decoration: none;
+  border: none;
+}
+#sidebar a:hover {
+  text-decoration: none;
 }
 #sidebar .logo {
   padding: 0.5rem 1rem;

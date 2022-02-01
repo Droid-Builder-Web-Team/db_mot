@@ -33,7 +33,7 @@
               <a class="p-link" href="https://www.facebook.com/groups/droidbuildersuk" target="_blank">https://www.facebook.com/groups/droidbuildersuk</a>
             </li>
             <li><i class="fab fa-discord"></i>
-              <a class="p-link" href="https://discord.gg/4ZV9DmY" target="_blank">Droid Builder Discord Server</a>
+              <a class="p-link" href="https://discord.gg/4ZV9DmY" target="_blank">Droid Builders Discord Server</a>
             </li>
             <li>
               <i class="fas fa-shield-alt"></i>
