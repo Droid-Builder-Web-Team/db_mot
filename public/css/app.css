@@ -568,6 +568,15 @@ ul.blank-ul {
   .table .status-class .status-box span {
     display: none;
   }
+
+  .pli-box {
+    padding: 0.5rem;
+  }
+
+  .user-stats-box {
+    margin: 0.5rem;
+    padding: 0.5rem;
+  }
 }
 @media only screen and (max-width: 991px) {
   .form-wrapper .form-section {
@@ -585,6 +594,15 @@ ul.blank-ul {
   .pr-circle {
     margin: 0 auto 0.5rem;
   }
+
+  .user-stats-box {
+    margin: 0;
+    padding: 0;
+  }
+
+  .achievement-col-fields {
+    margin-bottom: 1rem;
+  }
 }
 @media only screen and (max-width: 767px) {
   #sidebar {
@@ -598,6 +616,23 @@ ul.blank-ul {
 
   #sidebarCollapse span {
     display: none;
+  }
+
+  .user-stats-box {
+    display: block !important;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  .user-stats-box .icon-wrapper {
+    margin: auto;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+  }
+  .user-stats-box .user-stat {
+    padding-left: 0 !important;
+    margin-top: 0.5rem;
   }
 }
 @media only screen and (max-width: 575px) {
@@ -657,6 +692,119 @@ ul.links li i {
   margin-right: 1rem;
 }
 
+.profile-title {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.profile-title .pli-box {
+  background: #e3342f;
+  border-radius: 25px;
+  padding: 0.75rem;
+}
+
+.user-table .buttons .btn-edit::before {
+  margin-right: 1rem;
+}
+
+.user-stats-box {
+  background: #fff;
+  padding: 1rem;
+  margin: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+.user-stats-box .icon-wrapper {
+  padding: 1rem;
+}
+.user-stats-box .icon-wrapper.blue {
+  background: #7eb6da;
+}
+.user-stats-box .icon-wrapper.purple {
+  background: #9561e2;
+}
+.user-stats-box .icon-wrapper.green {
+  background: #38c172;
+}
+.user-stats-box .icon-wrapper.orange {
+  background: #f6993f;
+}
+.user-stats-box .icon-wrapper.red {
+  background: #e3342f;
+}
+.user-stats-box .user-stat {
+  display: block;
+  width: 100%;
+  padding-left: 1rem;
+}
+
+.user-photo-col .id-photo-button .buttons button.btn-edit::before {
+  margin-right: 1rem;
+}
+
+.btn-standard.new-droid {
+  display: block;
+}
+.btn-standard.new-droid i {
+  font-size: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+.my-droid-card {
+  padding: 0.75rem;
+  border: 1px solid transparent;
+  transition: 0.5s all;
+}
+.my-droid-card:hover {
+  border-color: #7eb6da;
+}
+.my-droid-card .droid-body-text {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+}
+.my-droid-card .droid-body-text i {
+  font-size: 1.5rem;
+}
+.my-droid-card .droid-body-text .share,
+.my-droid-card .droid-body-text .delete {
+  max-width: 50px;
+  cursor: pointer;
+  transition: 0.5s all;
+}
+.my-droid-card .droid-body-text .share img,
+.my-droid-card .droid-body-text .delete img {
+  width: 100%;
+}
+.my-droid-card .droid-body-text .share:hover,
+.my-droid-card .droid-body-text .delete:hover {
+  opacity: 0.5;
+}
+
+.new-achievement .btn-edit i {
+  margin-right: 1rem;
+}
+
+.achievements .buttons .btn-view::before {
+  margin-right: 1rem;
+}
+
+.events .buttons .btn-view::before {
+  margin-right: 1rem;
+}
+
+.col-left {
+  justify-content: start;
+}
+
+.col-right {
+  justify-content: flex-end;
+}
+
 @media only screen and (max-width: 400px) {
   .oauth-buttons a {
     margin-left: 0.5rem;
@@ -673,10 +821,6 @@ body {
 
 .dropdown-item .fas {
   margin-right: 8px;
-}
-
-.fas.fa-plus {
-  font-size: 10rem;
 }
 
 .title {

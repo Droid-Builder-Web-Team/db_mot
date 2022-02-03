@@ -80,7 +80,7 @@
           <h4 class="text-uppercase db-mb-1 d-flex align-items-center justify-content-center">Active Part Runs</h4>
         </div>
         {{-- Table --}}
-        <div class="table-responsive ">
+        <div class="table-responsive">
           <table class="table text-center table-hover">
               <thead>
                   <tr>
@@ -156,11 +156,9 @@
                         <td>
                           <div class="d-flex action-buttons">
                             <a class="btn btn-view" href={{ route('parts-run.show', $data->id) }}>
-                              <i class="fas fa-eye"></i>
                             </a>
                               @if(Gate::check('Edit Partrun') && (Auth()->user()->id == $data->user_id || Auth()->user()->id == $data->bc_rep_id))
                                 <a class="btn btn-edit" href={{ route('parts-run.edit', $data->id) }}>
-                                  <i class="fas fa-edit"></i>
                                 </a>
                               @endif
                           </div>

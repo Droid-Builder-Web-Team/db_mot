@@ -46,7 +46,6 @@
         font-family: "Font Awesome 5 Free";
         font-weight: 900;
         color: $white;
-        margin-right: 1rem;
     }
     
     i {
@@ -80,7 +79,6 @@
         font-family: "Font Awesome 5 Free";
         font-weight: 900;
         color: $white;
-        margin-right: 1rem;
     }
     
     i {
@@ -262,6 +260,26 @@
     &:hover {
         opacity: 0.5;
         color: $secondaryColor;
+    }
+}
+
+.btn-standard {
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 0.75rem;
+    border: 1px solid $secondaryColor;
+    background: transparent;
+    padding: 7px 20px;
+    transition: 0.5s all;
+    color: $secondaryColor;
+    width: fit-content;
+
+    &:hover {
+        background: $secondaryColor;
+        color: $primaryColor;
     }
 }
 

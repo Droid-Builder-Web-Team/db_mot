@@ -16,16 +16,16 @@
             </div>
 
 
-            <div class="col-12">
+            <div class="col-12 db-my-2">
                 {!! $calendar->calendar() !!}
                 {!! $calendar->script() !!}
             </div>
 
 
-            <div class="col-12">
-                <a class="btn-sm btn-link" href="{{ route('codeofconduct') }}">Droid Builders UK - Event Code of Conduct</a>
-                <a class="btn-sm btn-link" href="{{ route('event.past') }}">Past Events</a>
-                <a class="btn-sm btn-link" href="{{ route('event.map') }}">View as Map</a>
+            <div class="col-12 buttons">
+                <a class="btn btn-standard" href="{{ route('codeofconduct') }}">Droid Builders UK - Event Code of Conduct</a>
+                <a class="btn btn-standard" href="{{ route('event.past') }}">Past Events</a>
+                <a class="btn btn-standard" href="{{ route('event.map') }}">View as Map</a>
             </div>
 
         </div>

@@ -42,7 +42,6 @@
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
   color: #fff;
-  margin-right: 1rem;
 }
 .btn-view i {
   color: #fff;
@@ -72,7 +71,6 @@
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
   color: #fff;
-  margin-right: 1rem;
 }
 .btn-edit i {
   color: #fff;
@@ -241,6 +239,27 @@
 .btn-accordion:hover {
   opacity: 0.5;
   color: #fff;
+}
+
+.btn-standard {
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 0.75rem;
+  border: 1px solid #fff;
+  background: transparent;
+  padding: 7px 20px;
+  transition: 0.5s all;
+  color: #fff;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+.btn-standard:hover {
+  background: #fff;
+  color: #181924;
 }
 
 .btn-mot {
