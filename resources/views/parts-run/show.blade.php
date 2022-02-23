@@ -42,7 +42,7 @@
                         <h6>Rep: {{ $data->bcRep->forename }} {{ $data->bcRep->surname }}</h6>
                     </div>
                 </div>
-                @if(Gate::check('Edit Partrun') && (Auth()->user()->id == $data->user_id || Auth()->user()->id == $data->bc_rep_id))
+                @if(Gate::check('Edit Partrun') && (Auth()->user()->id == $data->user_id || Auth()->user()->hasRole('BC Rep')))
                 <div class="text-center row">
                     <div class="col-12">
                         <a class="btn btn-primary" href={{ route('parts-run.edit', $data->id) }}>Edit Run</a>
@@ -123,29 +123,37 @@
                                 </div>
 
                             </div>
+
+
                             <div class="mb-4 row">
                                 <div class="purchase-email">
                                     <div class="col-12 col-md-6">
+
                                         @if($data->status == "Active")
-                                            @if($data->open == 1)
+                                            @if($data->open == 1 || Auth::user()->isInterestedIn($data->id))
                                                 <p><strong>Purchase Link:</strong></p>
                                                 <p>
                                                     @if($data->partsRunAd->purchase_url_type == "email")
-                                                        <a class="btn btn-primary" target=_default href="mailto:{{ $data->partsRunAd->purchase_url }}">Email Seller to Buy</a>
+                                                        <a class="btn btn-primary" id="buy_button" target=_default
+                                                            href="mailto:{{ $data->partsRunAd->purchase_url }}?subject=BUY: {{ $data->partsRunAd->title }}&body=I'm interested in purchasing from this run.">
+                                                            Email Seller to Buy</a>
                                                     @else
-                                                        <a class="btn btn-primary" target=_default href="{{ $data->partsRunAd->purchase_url }}">Buy Here</a>
+                                                        <a class="btn btn-primary" id="buy_button" target=_default href="{{ $data->partsRunAd->purchase_url }}">Buy Here</a>
                                                     @endif
                                                 </p>
                                                 Note: Purchases are between you and the person doing the run. This site does not handle any transactions.
+                                                <p><a class="btn btn-primary" id="cancel_button" href="{{ route('parts-run.interested',[$data->id, 'interest' => 'no', 'quantity' => 0]) }}">Remove Interest!</a></p>
                                             @else
-                                                Run is currently only open to those who registered interest. It will become an open run once those people have had a chance to purchase.
+                                                Run is currently only open to those who registered interest. It will become an open run once those people have had a chance to purchase if there are any left.
                                             @endif
+
+
                                         @elseif($data->status == "Gathering_Interest")
                                             <p><strong>Register Your Interest:</strong></p>
                                             @php
                                                 $status="no";
                                                 $quantity = 1;
-                                                $user = $data->is_interested->only([ Auth::user()->id ])->first();
+                                                $user = $data->isInterested->only([ Auth::user()->id ])->first();
                                                 if ($user != NULL) {
                                                     $status = $user->pivot->status;
                                                 }
@@ -153,22 +161,25 @@
                                             @if($status != 'no')
                                                 <p><a class="btn btn-primary" href="{{ route('parts-run.interested',[$data->id, 'interest' => 'no', 'quantity' => 0]) }}">Remove Interest!</a></p>
                                             @else
-                                                @if($data->partsRunAd->quantity == 0 || $data->partsRunAd->quantity > $data->interested->count())
-                                                    <form action="{{ route('parts-run.interested',$data->id) }}" method="GET">
-
-                                                        <input size=4 type=number value="1" name="quantity">
-                                                        <input type="hidden" name="interest" value="interested">
-                                                        <input class="btn btn-primary" type=submit value="Interested">
-                                                    </form>
-                                                    Note: Registering interest is not a commitment to buy, but please only do so if you think you will. This will give the person doing the run access to your email address.
-                                                @else
+                                                @if(!$data->partsRunAd->quantity == 0 && $data->partsRunAd->quantity < $data->interested->count())
                                                     <p>Interest List is Full</p>
+
                                                 @endif
+
+                                                <form action="{{ route('parts-run.interested',$data->id) }}" method="GET">
+
+                                                    <input size=4 type=number value="1" name="quantity">
+                                                    <input type="hidden" name="interest" value="interested">
+                                                    <input class="btn btn-primary" type=submit value="Interested">
+                                                </form>
+                                                    Note: Registering interest is not a commitment to buy, but please only do so if you think you will. This will give the person doing the run access to your email address.
                                             @endif
                                         @else
                                             <p>This run is inactive. Please wait for it to become active again.</p>
                                         @endif
                                     </div>
+
+
 
                                     <div class="col-12 col-md-6">
                                         <p class="droid"><strong>Contact Email: </strong></p>

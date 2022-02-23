@@ -212,7 +212,7 @@ class PartsRunDataController extends Controller
         $data = $request->except(['_method', '_token']);
 
         if ($partsRunData->status != $request->status) {
-            foreach ($partsRunData->is_interested as $user) {
+            foreach ($partsRunData->isInterested as $user) {
                 $user->notify(new PartsRunUpdated($partsRunData));
             }
             $bc_rep = User::find($partsRunData->bc_rep_id)->first();
@@ -284,14 +284,14 @@ class PartsRunDataController extends Controller
     public function interested(Request $request, PartsRunData $partsrun)
     {
 
-        if (!$partsrun->partsRunAd->quantity < $partsrun->is_interested->count()
+        if (!$partsrun->partsRunAd->quantity < $partsrun->isInterested->count()
             && $request->interest == 'interested'
         ) {
             toastr()->error('Part Run Full');
             return back();
         }
         $user = auth()->user();
-        $hasEntry = $user->parts_interested()
+        $hasEntry = $user->partsInterested()
             ->where('parts_run_data_id', $partsrun->id)->exists();
         $attributes = [
           'status' => $request->interest,

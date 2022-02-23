@@ -51,7 +51,7 @@
                       @endif
                     </th>
 
-                    <td>{{ $data->interest_quantity() }} /
+                    <td>{{ $data->interestQuantity() }} /
                       @if ($data->partsRunAd->quantity == 0)
                         unlimited
                       @else

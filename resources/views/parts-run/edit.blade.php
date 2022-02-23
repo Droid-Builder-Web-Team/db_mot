@@ -90,14 +90,21 @@
                     </div>
 
                     <div class="form-group row">
-                        <div class="col-md-6 col-12">
-                            <label for="quantity" class="col-6 col-form-label">Quantity (Enter 0 for a continuous run/no limit)</label>
+                        <div class="col-md-4 col-12">
+                            <label for="quantity" class="col-12 col-form-label">Quantity (0 = no limit)</label>
                             <div class="col-12">
-                                <input size=10 type="number" name="quantity" value="{{ $data->partsRunAd->quantity }}" class="form-control" placeholder="Quantity" required>
+                                <input size=5 type="number" name="quantity" value="{{ $data->partsRunAd->quantity }}" class="form-control" placeholder="Quantity" required>
                             </div>
                         </div>
 
-                        <div class="col-md-6 col-12">
+                        <div class="col-md-4 col-12">
+                            <label for="reserve" class="col-6 col-form-label">Reserve list size</label>
+                            <div class="col-12">
+                                <input size=5 type="number" name="reserve" value="{{ $data->partsRunAd->reserve }}" class="form-control" placeholder="Reserve" required>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 col-12">
                             <label for="email" class="col-4 col-form-label">Email</label>
                             <div class="col-12">
                                 <input type="text" name="contact_email" value="{{ $data->partsRunAd->contact_email }}" class="form-control">
@@ -152,7 +159,8 @@
   'alignright alignjustify | bullist numlist outdent indent | ' +
   'removeformat | table | link image media | hr code ',
         toolbar_mode: 'floating',
-        image_caption: true
+        image_caption: true,
+        content_style: 'img {max-width: 100%; height: auto;}'
     });
 </script>
 @endsection

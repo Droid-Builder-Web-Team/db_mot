@@ -26,6 +26,7 @@ use App\Event;
 use App\Achievement;
 use App\CourseRun;
 use App\Club;
+use App\PartsRunData;
 use Dialect\Gdpr\Portable;
 
 use Rennokki\Rating\Traits\CanRate;
@@ -369,10 +370,30 @@ class User extends Authenticatable implements MustVerifyEmail,
      *
      * @return array of App\PartsRunData
      */
-    public function parts_interested()
+    public function partsInterested()
     {
         return $this->belongsToMany(PartsRunData::class, 'members_parts')
+            ->wherePivot('status', 'interested')
             ->withPivot('status', 'quantity', 'tracking', 'shipper');
+    }
+
+    /**
+     * Is the user interested in the parts run?
+     *
+     * @param int $partsrunid Id of the part run
+     *
+     * @return bool
+     */
+    public function isInterestedIn(int $partsrunid)
+    {
+        $partruns = $this->partsInterested;
+        $status = false;
+        foreach ($partruns as $partrun) {
+            if ($partrun->id == $partsrunid) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**

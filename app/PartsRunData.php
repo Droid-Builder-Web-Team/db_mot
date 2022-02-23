@@ -118,16 +118,26 @@ class PartsRunData extends Model implements Auditable
     }
 
     /**
+     * Get list of members who have registered interest at any point with pivot
+     *
+     * @return array of App\User
+     */
+    public function isReserved()
+    {
+        return $this->belongsToMany(User::class, 'members_parts')
+            ->wherePivot('status', 'reserved')
+            ->withPivot('status', 'quantity', 'tracking', 'shipper');
+    }
+
+    /**
      * Get list of users currently interested
      *
      * @return array of App\User
      */
-    public function is_interested()
+    public function isInterested()
     {
         return $this->belongsToMany(User::class, 'members_parts')
-            ->wherePivot('status', 'interested')
-            ->orWherePivot('status', 'paid')
-            ->orWherePivot('status', 'shipped')
+            ->wherePivotIn('status', ['interested', 'paid', 'shipped'])
             ->withPivot('status', 'quantity', 'tracking', 'shipper');
     }
 
@@ -147,10 +157,10 @@ class PartsRunData extends Model implements Auditable
      *
      * @return int
      */
-    public function interest_quantity()
+    public function interestQuantity()
     {
         $quantity = 0;
-        foreach ($this->is_interested as $interest) {
+        foreach ($this->isInterested as $interest) {
             $quantity += $interest->pivot->quantity;
         }
         return $quantity;
