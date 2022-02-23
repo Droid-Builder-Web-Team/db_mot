@@ -131,10 +131,13 @@ class PartsRunDataController extends Controller
             $includesArray = explode(",", $include->partsRunAd->includes);
         };
 
-        foreach ($partsRunData as $shippingCosts) {
-            $shippingCostsArray = explode(
-                ",", $shippingCosts->partsRunAd->shipping_costs
-            );
+        $shippingCostsArray = array();
+        if ($partsRunData[0]->partsRunAd->shipping_costs != null) {
+            foreach ($partsRunData as $shippingCosts) {
+                $shippingCostsArray = explode(
+                    ",", $shippingCosts->partsRunAd->shipping_costs
+                );
+            };
         };
 
         return view(

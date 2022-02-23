@@ -86,17 +86,19 @@
                                     <div class="col-12 col-md-6">
                                         <p class="location"><strong>Location:</strong> {{ $data->partsRunAd->location }}</p>
                                     </div>
+                                    @if(count($shippingCostsArray) > 0)
                                     <div class="col-12 col-md-6">
                                         <div class="d-flex">
                                             <p class="pr-1 droid"><strong>Shipping Costs:</strong></p>
                                             <ul>
                                                 @foreach($shippingCostsArray as $s)
-                                                    <li>{{ $s }}</li>
+                                                    <li><?php echo '£' . number_format($s, 2); ?></li>
                                                 @endforeach
                                             </ul>
 
                                         </div>
                                     </div>
+                                    @endif
                                 </div>
                             </div>
 

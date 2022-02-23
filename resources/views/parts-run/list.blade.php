@@ -95,6 +95,9 @@
                     <th scope="col" class="d-none d-md-table-cell">Club</th>
                     <th scope="col" class="d-none d-sm-table-cell">Seller</th>
                     <th>Status</th>
+                    @role("Super Admin")
+                        <th scope="col" class="d-none d-md-table-cell">Quantity</th>
+                    @endrole
                     <th>Action</th>
                 </tr>
             </thead>
@@ -117,8 +120,16 @@
                       </div>
                       @endif
                     </th>
-
-                    <td>
+                    @role("Super Admin")
+                    <td>{{ $data->interestQuantity() }} /
+                        @if ($data->partsRunAd->quantity == 0)
+                          unlimited
+                        @else
+                          {{ $data->partsRunAd->quantity }}
+                        @endif
+                      </td>
+                        @endrole
+                        <td>
                       <div class="d-flex">
                         <a class="btn btn-view" href={{ route('parts-run.show', $data->id) }}><div class="d-block d-sm-none"><i class="fas fa-eye"></i></div><span class="d-none d-sm-block">View</span></a>
                         @if(Gate::check('Edit Partrun') && (Auth()->user()->id == $data->user_id || Auth()->user()->id == $data->bc_rep_id))
