@@ -45,10 +45,10 @@
     <div class="c-wrapper">
         <header class="c-header c-header-light c-header-fixed">
             <button class="c-header-toggler c-class-toggler d-lg-none mfe-auto" type="button" data-target="#sidebar" data-class="c-sidebar-show">
-                <i class="c-icon c-icon-lg cil-menu"></i>
+                <i class="fa fa-bars cil-menu"></i>
             </button>
             <button class="c-header-toggler c-class-toggler mfs-3 d-md-down-none" type="button" data-target="#sidebar" data-class="c-sidebar-lg-show" responsive="true">
-                <i class="c-icon c-icon-lg cil-menu"></i>
+                <i class="fa fa-bars cil-menu"></i>
             </button>
             <ul class="c-header-nav mfs-auto">
                 @guest
