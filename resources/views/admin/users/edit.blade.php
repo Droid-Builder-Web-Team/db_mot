@@ -143,7 +143,7 @@
 
         <div class="row form-group">
           <div class="col-12 text-center">
-            <button type="button" class="btn btn-submit">Submit</button>
+            <button type="submit" class="btn btn-submit">Submit</button>
           </div>
         </div>
       </form>

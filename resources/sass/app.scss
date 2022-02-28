@@ -65,7 +65,51 @@ ul.links {
   justify-content: space-between;
   align-items: center;
 
-  .pli-box {
+
+  .pli-box-blank {
+    border-radius: 25px;
+    background: transparent;
+    border: 1px solid $white;
+    padding: 0.75rem;
+    display: flex;
+    transition: 0.5s all;
+
+    .btn-view {
+      padding: 0;
+      border: none;
+
+      &::before {
+        display: none;
+      }
+
+      &:hover {
+        background: transparent;
+        color: $secondaryColor;
+      }
+    }
+
+    &::before {
+      content: "\f019";
+      font-family: "Font Awesome 5 Free";
+      font-weight: 900;
+      color: $white;
+      margin-right: 0.5rem;
+    }
+
+    &:hover {
+      background: $secondaryColor;
+
+      &::before {
+        color: $primaryColor;
+      }
+      
+      .btn-view {
+        color: $primaryColor;
+      }
+    }
+  }
+
+  .pli-box-red {
     background: $red;
     border-radius: 25px;
     padding: 0.75rem;
@@ -203,6 +247,29 @@ ul.links {
 
 .col-right {
   justify-content: flex-end;
+}
+
+// Droid View Page
+.droid-view-col {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.droid-image-col {
+  flex-direction: column;
+}
+
+.images-row {
+  justify-content: space-evenly;
+}
+
+.droid-card {
+  .btn-standard:hover {
+    i {
+      color: $secondaryColor;
+    }
+  }
 }
 
 // Old Styling

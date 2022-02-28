@@ -698,7 +698,42 @@ ul.links li i {
   justify-content: space-between;
   align-items: center;
 }
-.profile-title .pli-box {
+.profile-title .pli-box-blank {
+  border-radius: 25px;
+  background: transparent;
+  border: 1px solid #fff;
+  padding: 0.75rem;
+  display: flex;
+  transition: 0.5s all;
+}
+.profile-title .pli-box-blank .btn-view {
+  padding: 0;
+  border: none;
+}
+.profile-title .pli-box-blank .btn-view::before {
+  display: none;
+}
+.profile-title .pli-box-blank .btn-view:hover {
+  background: transparent;
+  color: #fff;
+}
+.profile-title .pli-box-blank::before {
+  content: "\f019";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  color: #fff;
+  margin-right: 0.5rem;
+}
+.profile-title .pli-box-blank:hover {
+  background: #fff;
+}
+.profile-title .pli-box-blank:hover::before {
+  color: #181924;
+}
+.profile-title .pli-box-blank:hover .btn-view {
+  color: #181924;
+}
+.profile-title .pli-box-red {
   background: #e3342f;
   border-radius: 25px;
   padding: 0.75rem;
@@ -803,6 +838,24 @@ ul.links li i {
 
 .col-right {
   justify-content: flex-end;
+}
+
+.droid-view-col {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.droid-image-col {
+  flex-direction: column;
+}
+
+.images-row {
+  justify-content: space-evenly;
+}
+
+.droid-card .btn-standard:hover i {
+  color: #fff;
 }
 
 @media only screen and (max-width: 400px) {

@@ -25,20 +25,21 @@
                     <div class="profile-title">
                         <h4>{{ $user->forename }} {{ $user->surname }}</h4>
 
-                        <div class="pli-box">
-                            @if ($uses_pli)
-                                @if($user->validPLI())
+                        @if ($uses_pli)
+                            @if($user->validPLI())
+                                <div class="pli-box-blank">
                                     <a href="{{ action('UserController@downloadPDF', $user->id) }}" class="btn btn-view" target="_blank">
-                                        <i class="fas fa-download"></i>
                                         Cover Note
                                     </a>
+                                </div>
                                 @else
+                                <div class="pli-box-red">
                                     <span class="no-pli">
                                         No Valid PLI
                                     </span>
-                                @endif
+                                </div>                                
                             @endif
-                        </div>
+                        @endif
                     </div>
 
                     {{-- User Table --}}
