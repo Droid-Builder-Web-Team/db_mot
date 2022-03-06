@@ -215,6 +215,18 @@ img {
   color: #fff;
   padding: 2rem 4rem;
 }
+.db-navbar button {
+  background: transparent;
+  border: 1px solid #3490dc;
+  transition: 0.5s all;
+}
+.db-navbar button i {
+  margin-right: 0;
+  color: #fff;
+}
+.db-navbar button:hover {
+  background: #3490dc;
+}
 
 .navbar-btn {
   box-shadow: none;
@@ -553,7 +565,7 @@ ul.blank-ul {
 #sidebar .social-icons .social-list-item .facebook:hover {
   color: #4267B2;
 }
-#sidebar .social-icons .social-list-item .dribble:hover {
+#sidebar .social-icons .social-list-item .discord:hover {
   color: #7289da;
 }
 #sidebar .social-icons .social-list-item .youtube:hover {
@@ -856,6 +868,10 @@ ul.links li i {
 
 .droid-card .btn-standard:hover i {
   color: #fff;
+}
+
+.notes-box {
+  border: 1px solid #fff;
 }
 
 @media only screen and (max-width: 400px) {

@@ -6,6 +6,7 @@
       <div class="row">
         <div class="col-12">
           <h4 class="text-uppercase db-mb-1 d-flex align-items-center justify-content-center">Your Part Runs</h4>
+          <small id="nameHelp" class="form-text text-muted text-center">Part Runs where you are the seller</small>
         </div>
         
           <div class="col-12">

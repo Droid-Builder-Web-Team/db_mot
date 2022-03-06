@@ -3,6 +3,9 @@
   font-family: "Nunito", sans-serif;
   font-size: 1.125rem;
 }
+.btn i {
+  margin-right: 0.5rem;
+}
 
 .nm::before {
   margin: 0 !important;
@@ -41,7 +44,6 @@
   content: "\f06e";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
-  color: #fff;
 }
 .btn-view i {
   color: #fff;
@@ -78,6 +80,7 @@
 .btn-edit:hover {
   background: #2586e7;
   color: #fff;
+  border-color: #2586e7;
 }
 .btn-edit:hover i {
   color: #fff;
@@ -109,6 +112,7 @@
 .btn-delete:hover {
   background: #e3342f;
   color: #fff;
+  border-color: #e3342f;
 }
 .btn-delete:hover i {
   color: #fff;
@@ -140,6 +144,7 @@
 .btn-back:hover {
   background: #e3342f;
   color: #fff;
+  border-color: #e3342f;
 }
 .btn-back:hover i {
   color: #fff;
@@ -167,6 +172,7 @@
 .btn-purchase:hover {
   background: #38c172;
   color: #fff;
+  border-color: #38c172;
 }
 .btn-purchase:hover i {
   color: #fff;
@@ -260,6 +266,101 @@
 .btn-standard:hover {
   background: #fff;
   color: #181924;
+}
+
+.btn-oauth {
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 0.75rem;
+  border: 1px solid #fff;
+  background: unset;
+  padding: 7px 20px;
+  transition: 0.5s all;
+  color: #fff;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin-right: 1rem;
+}
+.btn-oauth:last-child() {
+  margin-right: 0;
+}
+.btn-oauth:hover {
+  background: #fff;
+  color: #181924;
+}
+.btn-oauth:hover.facebook {
+  background: #4267B2;
+  border-color: #4267B2;
+  color: #fff;
+}
+.btn-oauth:hover.github {
+  background: #333;
+  border-color: #333;
+}
+.btn-oauth:hover.google {
+  background: #34a853;
+  border-color: #34a853;
+  color: #fff;
+}
+
+.btn-login {
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 0.75rem;
+  border: 1px solid #38c172;
+  background: transparent;
+  padding: 7px 20px;
+  transition: 0.5s all;
+  color: #fff;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin-right: 1rem;
+}
+.btn-login i {
+  color: #fff;
+}
+.btn-login:hover {
+  background: #38c172;
+  color: #fff;
+}
+.btn-login:hover i {
+  color: #fff;
+}
+
+.btn-forgot {
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 0.75rem;
+  border: 1px solid #3490dc;
+  background: transparent;
+  padding: 7px 20px;
+  transition: 0.5s all;
+  color: #fff;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+.btn-forgot i {
+  color: #fff;
+}
+.btn-forgot:hover {
+  background: #3490dc;
+  border-color: #3490dc;
+  color: #fff;
+}
+.btn-forgot:hover i {
+  color: #fff;
 }
 
 .btn-mot {

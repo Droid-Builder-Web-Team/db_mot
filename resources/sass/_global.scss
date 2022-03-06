@@ -267,6 +267,21 @@ img {
     background: $sidebarBackground;
     color: $secondaryColor;
     padding: 2rem 4rem;
+
+    button {
+        background: transparent;
+        border: 1px solid $blue;
+        transition: 0.5s all;
+
+        i {
+            margin-right: 0;
+            color: $secondaryColor;
+        }
+
+        &:hover {
+            background: $blue;
+        }
+    }
 }
 
 .navbar-btn {

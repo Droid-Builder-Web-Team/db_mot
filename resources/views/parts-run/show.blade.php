@@ -289,31 +289,31 @@
                                 </div>
                                 {{-- Trying to get this to hide the entire col-12 if the count for paid is 0 -RH --}} 
                                 @if(!$data->interest = 0)
-                                <div class="col-12 form-section text-sm-left db-my-1">
-                                    <ul>
-                                        @foreach($data->interested as $user)
-                                            @if($user->pivot->status == 'paid')
-                                                <li class="d-flex align-items-center justify-content-center paid-col">
-                                                    @can('View Members')
-                                                        <a class="p-link" href="{{ route('user.show', $user->id) }}">{{ $user->forename ?? "Deactivated"}} {{ $user->surname ?? "User"}}</a>
-                                                    @else
-                                                        {{ $user->forename ?? "Deactivated"}} {{ $user->surname ?? "User"}}
-                                                    @endcan
-                                                    @if($user->pivot->quantity != 1)
-                                                        ({{$user->pivot->quantity}})
-                                                    @endif
-                                                    @if(auth()->user()->id == $data->user_id || auth()->user()->id == $data->bc_rep_id)
-                                                        @if ($data->status == "Active")
-                                                        <div class="input-group justify-content-end">
-                                                            <button type="button" class="btn btn-paid" data-toggle="modal" data-userid="{{ $user->id }}" data-target="#shipModal"><i class="fas fa-truck"></i></button>
-                                                        </div>
+                                    <div class="col-12 form-section text-sm-left db-my-1">
+                                        <ul>
+                                            @foreach($data->interested as $user)
+                                                @if($user->pivot->status == 'paid')
+                                                    <li class="d-flex align-items-center justify-content-center paid-col">
+                                                        @can('View Members')
+                                                            <a class="p-link" href="{{ route('user.show', $user->id) }}">{{ $user->forename ?? "Deactivated"}} {{ $user->surname ?? "User"}}</a>
+                                                        @else
+                                                            {{ $user->forename ?? "Deactivated"}} {{ $user->surname ?? "User"}}
+                                                        @endcan
+                                                        @if($user->pivot->quantity != 1)
+                                                            ({{$user->pivot->quantity}})
                                                         @endif
-                                                    @endif
-                                                </li>
-                                            @endif
-                                        @endforeach
-                                    </ul>
-                                </div>
+                                                        @if(auth()->user()->id == $data->user_id || auth()->user()->id == $data->bc_rep_id)
+                                                            @if ($data->status == "Active")
+                                                            <div class="input-group justify-content-end">
+                                                                <button type="button" class="btn btn-paid" data-toggle="modal" data-userid="{{ $user->id }}" data-target="#shipModal"><i class="fas fa-truck"></i></button>
+                                                            </div>
+                                                            @endif
+                                                        @endif
+                                                    </li>
+                                                @endif
+                                            @endforeach
+                                        </ul>
+                                    </div>
                                 @endif
 
                                 <div class="col-12 form-section text-sm-left db-my-1">
@@ -405,7 +405,6 @@
             </div>
         </div>
     </div>
-
 
 
     <script>

@@ -272,6 +272,11 @@ ul.links {
   }
 }
 
+// Droid Show Page
+.notes-box {
+  border: 1px solid $white;
+}
+
 // Old Styling
 @media only screen and (max-width: 400px) {
   .oauth-buttons a {
