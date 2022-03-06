@@ -44,3 +44,11 @@ app.use(VueGoogleMaps, {
 $('#menu-toggle').click( function () {
 	$('#wrapper').toggleClass('wide');
 });
+
+
+// Hide Sidebar at 767px
+$(document).ready(function () {
+	if($(window).width() <= 767) {
+		$('#sidebar').addClass('active');
+	}
+});

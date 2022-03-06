@@ -1,8 +1,10 @@
 {
-    "/js/app.js": "/js/app.js?id=5eea856533bef76aed75",
-    "/css/app.css": "/css/app.css?id=3de8a2c6fac4c101c65c",
+    "/js/app.js": "/js/app.js?id=a7546b2b85d8c656bc8f",
+    "/css/app.css": "/css/app.css?id=daf6bcb6a8fa01274fd7",
     "/css/partsrun.css": "/css/partsrun.css?id=c3745de2e435038d097b",
-    "/css/sidebar.css": "/css/sidebar.css?id=3194fa7ca091fb570abc",
+    "/css/sidebar.css": "/css/sidebar.css?id=e05fab5743da1ab97487",
     "/css/cards.css": "/css/cards.css?id=1a6b0ec533b6e26c1853",
-    "/css/buttons.css": "/css/buttons.css?id=070e74398cc2d5762e92"
+    "/css/buttons.css": "/css/buttons.css?id=449bb1731582298517d1",
+    "/css/events.css": "/css/events.css?id=aa13af0fba75b51fd2bf",
+    "/css/modals.css": "/css/modals.css?id=d57c3150212a49e7f086"
 }

@@ -1,14 +1,14 @@
 @extends('layouts.app')
-
 @section('content')
-<div class="row">
-  <div class="col-lg-12 margin-tb">
-    <div class="card">
-      <div class="card-header">
-        <h4 class="title text-center">MOT Info</h4>
+<div class="build-section">
+  <div class="container-fluid">
+    <div class="row text-center">
+      <div class="col-12">
+        <h4>Club MOT Details</h4>
       </div>
-      <div class="card-body">
-        <ul>
+
+      <div class="col-12">
+        <ul class="blank-ul">
           @foreach($clubs as $club)
             @if($club->hasOption('mot'))
               <li><a href="{{ route('motinfo.show',$club->id) }}">{{ $club->name }}</a></li>
@@ -19,5 +19,4 @@
     </div>
   </div>
 </div>
-
 @endsection

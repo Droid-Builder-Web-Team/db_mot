@@ -1,14 +1,11 @@
 // Variables
 @import 'variables';
 
-@import 'responsive';
-
 // Global
 @import 'global';
 @import 'sidebar';
 
-// Bootstrap
-@import '~bootstrap/scss/bootstrap';
+@import 'responsive';
 
 // Parts Run
 .part-run-image {
@@ -23,8 +20,262 @@
  } 
 }
 
+// Show Parts Run
+.description-col p {
+  background-color: transparent !important;
+  font-family: 'Nunito', sans-serif !important;
+  
+  @include styleText('', 18, 'rem');
+  @include styleText('ls', 50, 'rem');
+}
+
+.form-control.interested {
+  border-top-right-radius: 0.25rem !important;
+  border-bottom-right-radius: 0.25rem !important;
+}
+
+.paid-col {
+  a.p-link {
+    width: 100%;
+  }
+}
+
+.interest-shipped i {
+  margin-left: auto;
+}
+
+// About Page
+ul.links {
+  list-style-type: none;
+  padding-left: 0;
+
+  li {
+    padding: 0.5rem;
+
+    i {
+      margin-right: 1rem;
+    }
+  }
+}
+
+// User Profile
+.profile-title {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
 
+  .pli-box-blank {
+    border-radius: 25px;
+    background: transparent;
+    border: 1px solid $white;
+    padding: 0.75rem;
+    display: flex;
+    transition: 0.5s all;
+
+    .btn-view {
+      padding: 0;
+      border: none;
+
+      &::before {
+        display: none;
+      }
+
+      &:hover {
+        background: transparent;
+        color: $secondaryColor;
+      }
+    }
+
+    &::before {
+      content: "\f019";
+      font-family: "Font Awesome 5 Free";
+      font-weight: 900;
+      color: $white;
+      margin-right: 0.5rem;
+    }
+
+    &:hover {
+      background: $secondaryColor;
+
+      &::before {
+        color: $primaryColor;
+      }
+      
+      .btn-view {
+        color: $primaryColor;
+      }
+    }
+  }
+
+  .pli-box-red {
+    background: $red;
+    border-radius: 25px;
+    padding: 0.75rem;
+  }
+}
+
+.user-table {
+  .buttons {
+    .btn-edit::before {
+      margin-right: 1rem;
+    }
+  }
+}
+
+.user-stats-box {
+  background: $secondaryColor;
+  padding: 1rem;
+  margin: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+
+  .icon-wrapper {
+    padding: 1rem;
+
+    &.blue {
+      background: $builderBlue;
+    }
+
+    &.purple {
+      background: $purple;
+    }
+
+    &.green {
+      background: $green;
+    }
+
+    &.orange {
+      background: $orange;
+    }
+
+    &.red {
+      background: $red;
+    }
+  }
+
+  .user-stat {
+    display: block;
+    width: 100%;
+    padding-left: 1rem;
+  }
+}
+
+.user-photo-col {
+  .id-photo-button {
+    .buttons {
+      button.btn-edit::before {
+        margin-right: 1rem;
+      }
+    }
+  }
+}
+
+.btn-standard.new-droid {
+  display: block;
+
+  i {
+    font-size: 2rem;
+    margin-bottom: 0.75rem;
+  }
+}
+
+.my-droid-card {
+    padding: 0.75rem;
+    border: 1px solid transparent;
+    transition: 0.5s all;
+
+    &:hover {
+      border-color: $builderBlue;
+    }
+
+  .droid-body-text {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1rem;
+
+    i {
+      font-size: 1.5rem;
+    }
+
+    .share,
+    .delete {
+      max-width: 50px;
+      cursor: pointer;
+      transition: 0.5s all;
+
+      img {
+        width: 100%;
+      }
+
+      &:hover {
+        opacity: 0.5;
+      }
+    }
+  }
+}
+
+.new-achievement {
+  .btn-edit {
+    i {
+      margin-right: 1rem;
+    }
+  }
+}
+
+.achievements {
+  .buttons {
+    .btn-view::before {
+      margin-right: 1rem;
+    }
+  }
+}
+
+.events {
+  .buttons .btn-view::before {
+    margin-right: 1rem;
+  }
+}
+
+.col-left {
+  justify-content: start;
+}
+
+.col-right {
+  justify-content: flex-end;
+}
+
+// Droid View Page
+.droid-view-col {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.droid-image-col {
+  flex-direction: column;
+}
+
+.images-row {
+  justify-content: space-evenly;
+}
+
+.droid-card {
+  .btn-standard:hover {
+    i {
+      color: $secondaryColor;
+    }
+  }
+}
+
+// Droid Show Page
+.notes-box {
+  border: 1px solid $white;
+}
 
 // Old Styling
 @media only screen and (max-width: 400px) {
@@ -37,20 +288,12 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, segoe ui, Roboto, helvetica neue, Arial, noto sans, sans-serif, apple color emoji, segoe ui emoji, segoe ui symbol, noto color emoji;
 }
 
-.padding-container {
-  padding: 2rem 2rem;
-}
-
 .c-dark-theme a {
   color: #000;
 }
 
 .dropdown-item .fas {
   margin-right: 8px;
-}
-
-.fas.fa-plus {
-  font-size: 10rem;
 }
 
 .title {

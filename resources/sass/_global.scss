@@ -87,11 +87,13 @@
     display: none !important;
 }
 
+a,
 a.p-link {
     color: $secondaryColor;
     text-decoration: none;
     transition: 0.5s all;
     border-bottom: 1px solid transparent;
+    width: fit-content;
 
     &:hover {
         color: $white;
@@ -246,6 +248,7 @@ img {
     padding: 2rem;
     display: flex;
     align-items: center;
+    justify-content: center;
 
     .buttons.icon-text {
         // Global CRUD Buttons with Icons
@@ -264,6 +267,21 @@ img {
     background: $sidebarBackground;
     color: $secondaryColor;
     padding: 2rem 4rem;
+
+    button {
+        background: transparent;
+        border: 1px solid $blue;
+        transition: 0.5s all;
+
+        i {
+            margin-right: 0;
+            color: $secondaryColor;
+        }
+
+        &:hover {
+            background: $blue;
+        }
+    }
 }
 
 .navbar-btn {
@@ -292,6 +310,25 @@ img {
         object-fit: cover;
         object-position: center;
     }
+}
+
+.image-wrapper.landscape {
+    position: relative;
+    padding-bottom: 18%;
+
+    img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+    }
+}
+
+.header-image img {
+    object-fit: contain !important;
 }
 
 .comment-card {
@@ -373,7 +410,7 @@ ul.top-nav {
     justify-content: center;
     align-items: center;
     width: 100%;
-    margin: 1rem auto 2rem;
+    margin: 1rem auto;
 
     a:nth-child(2) {
         margin-left: 1rem;
@@ -382,6 +419,11 @@ ul.top-nav {
     a:nth-child(3) {
         margin-left: 1rem;
     }
+}
+
+ul.blank-ul {
+    list-style-type: none;
+    padding-left: 0;
 }
 
 // Tables
@@ -433,6 +475,60 @@ ul.top-nav {
             span {
                 font-weight: 700;
             }
+        }
+    }
+}
+
+.form-section {
+    ul {
+        padding-left: 0;
+    }
+}
+
+// Modals
+.modal {
+    .modal-header {
+        display: block;
+
+        .close {
+            color: $secondaryColor;
+        }
+
+        .modal-title {
+            width: 100%;
+        }
+    
+        .small {
+            width: 100%;
+        }
+    }
+}
+
+.db-card {
+    .db-card-header {
+        width: 100%;
+        text-align: left;
+
+        .db-card-title {
+            color: $secondaryColor;
+            font-weight: 700;
+
+            .btn-accordion {
+                text-transform: uppercase;
+            }
+        }
+    }
+
+    .collapse {
+        width: 100%;
+
+        .db-card-body {
+            width: 100%;
+            text-align: left;
+            color: $secondaryColor;
+            padding-left: 4rem;
+            display: flex;
+            align-items: center;
         }
     }
 }

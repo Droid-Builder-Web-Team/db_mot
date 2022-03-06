@@ -9,6 +9,16 @@
     transition: all 0.3s;
     overflow-y: scroll;
 
+    a {
+        width: 100%;
+        text-decoration: none;
+        border: none;
+
+        &:hover {
+            text-decoration: none;
+        }
+    }
+
     .logo {
         padding: 0.5rem 1rem;
     }
@@ -150,7 +160,7 @@
                 color: $facebook;
             }
 
-            .dribble:hover {
+            .discord:hover {
                 color: $dribble;
             }
 

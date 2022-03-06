@@ -1,19 +1,54 @@
 // @media only screen and (max-width: 1920px){}
 // @media only screen and (max-width: 1680px){}
-// @media only screen and (max-width: 1366px){}
+@media only screen and (max-width: 1366px){
+    //
+}
+
 @media only screen and (max-width: 1199px){
     .form-wrapper .form-section.purchase-contact {
         display: block;
     }
+
+    .table .status-class {
+        .status-box span {
+            display: none;
+        }
+    }
+
+    .pli-box {
+        padding: 0.5rem;
+    }
+
+    .user-stats-box {
+        margin: 0.5rem;
+        padding: 0.5rem;
+    }
 }
 
 @media only screen and (max-width: 991px) {
+    .form-wrapper .form-section {
+        display: block !important;
+    }
+
+    .buttons {
+        margin: 1rem auto;
+    }
+
     .status-box {
         display: block;
     }
 
     .pr-circle {
         margin: 0 auto 0.5rem;
+    }
+
+    .user-stats-box {
+        margin: 0;
+        padding: 0;
+    }
+
+    .achievement-col-fields {
+        margin-bottom: 1rem;
     }
 }
 
@@ -34,6 +69,42 @@
             display: none;
         }
     }
+
+    .user-stats-box {
+        display: block !important;
+        width: 100%;
+        text-align: center;
+        margin-bottom: 2rem;
+
+        .icon-wrapper {
+            margin: auto;
+            width: fit-content;
+        }
+
+        .user-stat {
+            padding-left: 0 !important;
+            margin-top: 0.5rem;
+        }
+    }
 }
-// @media only screen and (max-width: 575px){}
+
+@media only screen and (max-width: 575px){
+    .padding-container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .pt {
+        padding-top: 1rem;
+    }
+
+    .pb {
+        padding-bottom: 1rem;
+    }
+
+    .build-section {
+        padding: 1rem;
+    }
+}
+
 // @media only screen and (max-width: 360px){}

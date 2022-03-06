@@ -1,7 +1,9 @@
 <div class="db-sidebar wrapper d-flex align-items-stretch">
-    <nav id="sidebar" class="">
-        <h4 class="large-menu-title logo">{{ config('app.name', 'Laravel') }}</h4>
-        <h4 class="small-menu-title logo">DB Portal</h4>
+    <nav id="sidebar">
+        <a class="p-link" href="{{ route('about') }}">
+            <h4 class="large-menu-title logo">{{ config('app.name', 'Laravel') }}</h4>
+            <h4 class="small-menu-title logo">DB Portal</h4>
+        </a>
 
         <ul class="sidebar-nav">
             @guest
@@ -67,7 +69,7 @@
                         </li>
                         @if(config('features.partrun', TRUE))
                             <li class="sidebar-nav-item">
-                                <a class="sidebar-nav-link" target="_blank" href="{{ route('partsRunInfo') }}">
+                                <a class="sidebar-nav-link" href="{{ route('partsRunInfo') }}">
                                     <span class="fas fa-list fa-fw"></span>
                                     Parts Runs
                                 </a>
@@ -197,7 +199,7 @@
             </p>
             <ul class="social-icons">
                 <li class="social-list-item"><a class="facebook" target="_blank" href="https://www.facebook.com/groups/droidbuildersuk"><i class="fab fa-facebook"></i></a></li>
-                <li class="social-list-item"><a class="dribbble" target="_blank" href="https://discord.gg/5D4QE4"><i class="fab fa-discord"></i></a></li>
+                <li class="social-list-item"><a class="discord" target="_blank" href="https://discord.gg/5D4QE4"><i class="fab fa-discord"></i></a></li>
                 <li class="social-list-item"><a class="youtube" target="_blank" href="https://www.youtube.com/c/DroidbuildersUK"><i class="fab fa-youtube"></i></a></li>
             </ul>
         </div>
@@ -207,7 +209,7 @@
     <div class="db-wrapper" id="content">
         <nav class="db-navbar navbar navbar-expand">
             <div class="container-fluid">
-                <button type="button" id="sidebarCollapse" class="btn btn-primary">
+                <button type="button" id="sidebarCollapse" class="btn btn-sidebaricon">
                     <i class="fa fa-bars"></i>
                     <span class="sr-only">Toggle Menu</span>
                 </button>

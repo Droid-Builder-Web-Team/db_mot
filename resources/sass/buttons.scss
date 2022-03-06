@@ -4,6 +4,10 @@
     box-shadow: none !important;
     font-family: 'Nunito', sans-serif;
     font-size: 1.125rem;
+
+    i {
+        margin-right: 0.5rem;
+    }
 }
 
 .nm::before {
@@ -45,8 +49,6 @@
         content: "\f06e";
         font-family: "Font Awesome 5 Free";
         font-weight: 900;
-        color: $white;
-        margin-right: 1rem;
     }
     
     i {
@@ -80,7 +82,6 @@
         font-family: "Font Awesome 5 Free";
         font-weight: 900;
         color: $white;
-        margin-right: 1rem;
     }
     
     i {
@@ -90,6 +91,7 @@
     &:hover {
         background: $editButton;
         color: $secondaryColor;
+        border-color: $editButton;
 
         i {
             color: $secondaryColor;
@@ -125,6 +127,7 @@
     &:hover {
         background: $red;
         color: $secondaryColor;
+        border-color: $red;
 
         i {
             color: $secondaryColor;
@@ -160,6 +163,7 @@
     &:hover {
         background: $red;
         color: $secondaryColor;
+        border-color: $red;
 
         i {
             color: $secondaryColor;
@@ -188,6 +192,7 @@
     &:hover {
         background: $green;
         color: $secondaryColor;
+        border-color: $green;
 
         i {
             color: $secondaryColor;
@@ -220,6 +225,167 @@
 
         i {
             color: $primaryColor;
+        }
+    }
+}
+
+.btn-paid {
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 0.75rem;
+    border: 1px solid $green;
+    background: transparent;
+    padding: 7px 20px;
+    transition: 0.5s all;
+    color: $secondaryColor;
+    width: fit-content;
+    
+    i {
+        color: $white;
+    }
+
+    &:hover {
+        background: $green;
+        color: $secondaryColor;
+
+        i {
+            color: $secondaryColor;
+        }
+    }
+}
+
+.btn-accordion {
+    color: $secondaryColor;
+    border-bottom: 1px solid transparent;
+    transition: 0.5s all;
+    width: fit-content;
+    border-radius: 0;
+
+    &:hover {
+        opacity: 0.5;
+        color: $secondaryColor;
+    }
+}
+
+.btn-standard {
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 0.75rem;
+    border: 1px solid $secondaryColor;
+    background: transparent;
+    padding: 7px 20px;
+    transition: 0.5s all;
+    color: $secondaryColor;
+    width: fit-content;
+
+    &:hover {
+        background: $secondaryColor;
+        color: $primaryColor;
+    }
+}
+
+.btn-oauth {
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 0.75rem;
+    border: 1px solid $secondaryColor;
+    background: unset;
+    padding: 7px 20px;
+    transition: 0.5s all;
+    color: $secondaryColor;
+    width: fit-content;
+    margin-right: 1rem;
+
+    &:last-child() {
+        margin-right: 0;
+    }
+
+    &:hover {
+        background: $secondaryColor;
+        color: $primaryColor;
+
+        &.facebook {
+            background: $facebook;
+            border-color: $facebook;
+            color: $secondaryColor;
+        }
+
+        &.github {
+            background: $github;
+            border-color: $github;
+        }
+
+        &.google {
+            background: $google;
+            border-color: $google;
+            color: $secondaryColor;
+        }
+    }
+}
+
+.btn-login {
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 0.75rem;
+    border: 1px solid $green;
+    background: transparent;
+    padding: 7px 20px;
+    transition: 0.5s all;
+    color: $secondaryColor;
+    width: fit-content;
+    margin-right: 1rem;
+    
+    i {
+        color: $white;
+    }
+
+    &:hover {
+        background: $green;
+        color: $secondaryColor;
+
+        i {
+            color: $secondaryColor;
+        }
+    }
+}
+
+.btn-forgot {
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 0.75rem;
+    border: 1px solid $blue;
+    background: transparent;
+    padding: 7px 20px;
+    transition: 0.5s all;
+    color: $secondaryColor;
+    width: fit-content;
+    
+    i {
+        color: $white;
+    }
+
+    &:hover {
+        background: $blue;
+        border-color: $blue;
+        color: $secondaryColor;
+
+        i {
+            color: $secondaryColor;
         }
     }
 }
