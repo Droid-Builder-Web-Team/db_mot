@@ -243,7 +243,7 @@ class EventsController extends Controller
     public function deny($event_id, $user_id)
     {
         $user = User::find($user_id);
-        $user->event($event_id)->delete();
+        $user->events()->updateExistingPivot($event_id, ["attended" => -1]);
         return back();
     }
 

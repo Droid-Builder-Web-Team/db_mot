@@ -176,82 +176,94 @@
 
       <div class="col-xs-4 col-sm-4 col-md-4">
         <div class="card">
-          <div class="card-header">
             @if(!$event->isFuture())
-              Attended By:
-            </div>
+                <div class="card-header">
+                    Attended By:
+                </div>
+            @else
+                <div class="card-header">
+                    Currently Interested:
+                </div>
+            @endif
             <div class="card-body">
-                @foreach($event->attended as $user)
-                  <li>
+                @if(!$event->isFuture())
+                    <ul>
+                        @foreach($event->attended as $user)
+                            <li>
+                                @can('Edit Events')
+                                    <a href="{{ route('user.show', $user->id) }}">{{ $user->forename ?? "Deactivated"}} {{ $user->surname ?? "User"}}</a>
+                                @else
+                                    {{ $user->forename ?? "Deactivated"}} {{ $user->surname ?? "User"}}
+                                @endcan
+                                @if ($user->event($event->id)->spotter == 'yes')
+                                    <i class="fas fa-binoculars"></i>
+                                @endif
+                            </li>
+                        @endforeach
+                    </ul>
                     @can('Edit Events')
-                      <a href="{{ route('user.show', $user->id) }}">{{ $user->forename ?? "Deactivated"}} {{ $user->surname ?? "User"}}</a>
-                    @else
-                      {{ $user->forename ?? "Deactivated"}} {{ $user->surname ?? "User"}}
+                        <i class="far fa-question-circle"></i><strong> No Show:</strong>
+                        <ul>
+                            @foreach($event->notAttended as $user)
+                                <li>
+                                    <a href="{{ route('user.show', $user->id) }}">{{ $user->forename ?? "Deactivated"}} {{ $user->surname ?? "User"}}</a>
+                                    @if ($user->event($event->id)->spotter == 'yes')
+                                        <i class="fas fa-binoculars"></i>
+                                    @endif
+                                 </li>
+                            @endforeach
+                        </ul>
                     @endcan
-                    @if ($user->event($event->id)->spotter == 'yes')
-                      <i class="fas fa-binoculars"></i>
-                    @endif
-                  </li>
-                @endforeach
-
-
-                @can('Edit Events')
-                <hr>
-                  Confirm Attendance:
-                  <ul>
-                    @foreach( $event->users as $user)
-                      @if($user->event($event->id)->attended == 0)
-                        <li>{{$user->forename}} {{ $user->surname}}
-                        <a href="{{ route('admin.events.attendance.confirm', [ 'event_id' => $event->id, 'user_id' => $user->id] )}}"><i class="fas fa-check-circle"></i></a>
-                        /
-                        <a href="{{ route('admin.events.attendance.deny', [ 'event_id' => $event->id, 'user_id' => $user->id] )}}"><i class="fas fa-times-circle"></i></a>
-                      </li>
+                    @can('Edit Events')
+                        <hr>
+                        Confirm Attendance:
+                        <ul>
+                            @foreach( $event->users as $user)
+                                @if($user->event($event->id)->attended == 0)
+                                    <li>{{$user->forename}} {{ $user->surname}}
+                                    <a href="{{ route('admin.events.attendance.confirm', [ 'event_id' => $event->id, 'user_id' => $user->id] )}}"><i class="fas fa-check-circle"></i></a>
+                                    /
+                                    <a href="{{ route('admin.events.attendance.deny', [ 'event_id' => $event->id, 'user_id' => $user->id] )}}"><i class="fas fa-times-circle"></i></a>
+                                </li>
+                                @endif
+                            @endforeach
+                        </ul>
+                    @endcan
+                @else
+                <i class="fas fa-check-circle"></i><strong> Going</strong>
+                <ul>
+                  @foreach($event->going as $user)
+                    <li>
+                      @canany(['Edit Events', 'Add MOT'])
+                        <a href="{{ route('user.show', $user->id) }}">{{ $user->forename ?? "Deactivated"}} {{ $user->surname ?? "User"}}</a>
+                        @if($user->pli_expires() < \Carbon\Carbon::parse($event->date))
+                          <span class="badge badge-danger">PLI expired</span>
+                        @endif
+                        @if($user->event($event->id)->mot_required)
+                          <i class="fas fa-tools" title="MOT will be required"></i>
+                        @endif
+                      @else
+                        {{ $user->forename ?? "Deactivated"}} {{ $user->surname ?? "User"}}
+                      @endcan
+                      @if ($user->event($event->id)->spotter == 'yes')
+                        <i class="fas fa-binoculars" title="No droid, just a spotter"></i>
                       @endif
+                    </li>
+                  @endforeach
+                </ul>
+                @canany(['Edit Events', 'Add MOT'])
+                  <i class="far fa-question-circle"></i><strong> Cancelled:</strong>
+                  <ul>
+                    @foreach($event->notgoing as $user)
+                      <li><a href="{{ route('user.show', $user->id) }}">{{ $user->forename ?? "Deactivated"}} {{ $user->surname ?? "User"}}</a></li>
                     @endforeach
                   </ul>
                 @endcan
-            @else
-              Currently Interested:
-            @endif
-          </div>
-          <div class="card-body">
-            @if(!$event->isFuture())
-
-            @else
-            <i class="fas fa-check-circle"></i><strong> Going</strong>
-              <ul>
-                @foreach($event->going as $user)
-                  <li>
-                    @canany(['Edit Events', 'Add MOT'])
-                      <a href="{{ route('user.show', $user->id) }}">{{ $user->forename ?? "Deactivated"}} {{ $user->surname ?? "User"}}</a>
-                      @if($user->pli_expires() < \Carbon\Carbon::parse($event->date))
-                        <span class="badge badge-danger">PLI expired</span>
-                      @endif
-                      @if($user->event($event->id)->mot_required)
-                        <i class="fas fa-tools" title="MOT will be required"></i>
-                      @endif
-                    @else
-                      {{ $user->forename ?? "Deactivated"}} {{ $user->surname ?? "User"}}
-                    @endcan
-                    @if ($user->event($event->id)->spotter == 'yes')
-                      <i class="fas fa-binoculars" title="No droid, just a spotter"></i>
-                    @endif
-                  </li>
-                @endforeach
-              </ul>
-              @canany(['Edit Events', 'Add MOT'])
-                <i class="far fa-question-circle"></i><strong> Cancelled:</strong>
-                <ul>
-                  @foreach($event->notgoing as $user)
-                    <li><a href="{{ route('user.show', $user->id) }}">{{ $user->forename ?? "Deactivated"}} {{ $user->surname ?? "User"}}</a></li>
-                  @endforeach
-                </ul>
-              @endcan
-              @can('Edit Events')
-              <span id="export" class="btn btn-primary" data-href={{ route('admin.events.export', $event->id) }} onclick="exportList(event.target);">Download list as CSV
-              </span>
-              @endcan
-            @endif
+                @can('Edit Events')
+                <span id="export" class="btn btn-primary" data-href={{ route('admin.events.export', $event->id) }} onclick="exportList(event.target);">Download list as CSV
+                </span>
+                @endcan
+                @endif
           </div>
         </div>
 

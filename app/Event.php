@@ -89,6 +89,17 @@ class Event extends Model implements \Acaronlex\LaravelCalendar\Event, Auditable
     }
 
     /**
+     * Get all who have not attended
+     *
+     * @return array of App\User
+     */
+    public function notAttended()
+    {
+        return $this->belongsToMany(User::class, 'members_events')
+            ->wherePivot('attended', "-1");
+    }
+
+    /**
      * Get location of event
      *
      * @return App\Location
