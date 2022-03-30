@@ -41,10 +41,9 @@
                     </li>
                     <li class="mb-4"><strong>I would like to do a parts run or a droid piece. How should I go about getting it approved?</strong>
                         <ul>
-                            <p class="mb-3">The first step is to fill in the following form to say you are interested in doing a parts run.</p>
-                                <p class="mb-3"><a href="https://astromech.net/forums/forms.php?do=form&fid=1"><u>https://astromech.net/forums/forms.php?do=form&fid=1</u></a></p>
-                                <p class="mb-3">Following that one of the BC will be in touch regarding the run. Depending on what is being made it could be a limited run of x many parts or a continual run making parts on demand.  Due to the run numbers being sometimes unknown a parts interest thread can be created once the form is submitted, this helps people not making 100 parts and only being able to sell 10 so is in the sellers interest.  As it allows a rough number of interested people this can be used to get a cost for the parts as the unit cost of 10 parts will be typically be more expensive than the unit cost of 20 parts.</p>
-                                <p class="mb-3">Once the run is approves then a sales thread can be created.</p>
+                            <p>If you are thinking of doing a parts run, first step is to get in touch with a member of the Builders Council. For the UK you can
+                                just email <a href="mailto:admin@droidbuilders.uk?subject=Potential parts run&body=I'm interested in doing a parts run.">admin@droidbuilders.uk</a>.
+                            </p>
                         </ul>
                     </li>
                 </ol>

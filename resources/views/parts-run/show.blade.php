@@ -46,7 +46,6 @@
                 <div class="text-center row">
                     <div class="col-12">
                         <a class="btn btn-primary" href={{ route('parts-run.edit', $data->id) }}>Edit Run</a>
-                        <a class="btn btn-secondary" href={{ route('parts-run.edit', $data->id) }}>Add Instructions</a>
                     </div>
                 </div>
                 @endif
