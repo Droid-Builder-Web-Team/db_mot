@@ -16,6 +16,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePortalNewsRequest;
 use App\Http\Requests\UpdatePortalNewsRequest;
 use App\PortalNews;
+use App\User;
 
 /**
  * PortalNewsController
@@ -35,6 +36,9 @@ class PortalNewsController extends Controller
      */
     public function index()
     {
+        $user = auth()->user();
+        $user->newnews = false;
+        $user->save();
         $news = PortalNews::orderBy('created_at', 'desc')->get();
         return view('portalnews.index', compact('news'));
     }
@@ -66,9 +70,9 @@ class PortalNewsController extends Controller
      * @param  \App\PortalNews  $portalNews
      * @return \Illuminate\Http\Response
      */
-    public function show(PortalNews $portalNews)
+    public function show($id)
     {
-        $article = $portalNews->first();
+        $article = PortalNews::find($id);
         return view('portalnews.show', compact('article'));
     }
 

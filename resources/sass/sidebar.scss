@@ -63,3 +63,11 @@
         border-radius: 0 !important;
     }
 }
+
+.dot {
+    height: 15px;
+    width: 15px;
+    background-color: rgb(255, 0, 0);
+    border-radius: 50%;
+    display: inline-block;
+  }
