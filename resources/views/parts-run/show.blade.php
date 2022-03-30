@@ -144,7 +144,9 @@
                                                     @endif
                                                 </p>
                                                 Note: Purchases are between you and the person doing the run. This site does not handle any transactions.
-                                                <p><a class="btn btn-primary" id="cancel_button" href="{{ route('parts-run.interested',[$data->id, 'interest' => 'no', 'quantity' => 0]) }}">Remove Interest!</a></p>
+                                                @if($data->isInterested->only([ Auth::user()->id ])->count() != 0)
+                                                    <p><a class="btn btn-primary" id="cancel_button" href="{{ route('parts-run.interested',[$data->id, 'interest' => 'no', 'quantity' => 0]) }}">Remove Interest!</a></p>
+                                                @endif
                                             @else
                                                 Run is currently only open to those who registered interest. It will become an open run once those people have had a chance to purchase if there are any left.
                                             @endif
@@ -160,21 +162,22 @@
                                                     $status = $user->pivot->status;
                                                 }
                                             @endphp
-                                            @if($status != 'no')
+                                            @if($status == 'interested')
                                                 <p><a class="btn btn-primary" href="{{ route('parts-run.interested',[$data->id, 'interest' => 'no', 'quantity' => 0]) }}">Remove Interest!</a></p>
                                             @else
-                                                @if(!$data->partsRunAd->quantity == 0 && $data->partsRunAd->quantity < $data->interested->count())
+                                                @if(!$data->partsRunAd->quantity == 0 && $data->partsRunAd->quantity + $data->partsRunAd->reserve < $data->interestQuantity())
                                                     <p>Interest List is Full</p>
-
-                                                @endif
-
+                                                @else
+                                                    @if($data->interestQuantity() >= $data->partsRunAd->quantity)
+                                                        <p>Run is full, but you may add yourself to the reserve list</p>
+                                                    @endif
                                                 <form action="{{ route('parts-run.interested',$data->id) }}" method="GET">
-
                                                     <input size=4 type=number value="1" name="quantity">
                                                     <input type="hidden" name="interest" value="interested">
                                                     <input class="btn btn-primary" type=submit value="Interested">
                                                 </form>
                                                     Note: Registering interest is not a commitment to buy, but please only do so if you think you will. This will give the person doing the run access to your email address.
+                                                @endif
                                             @endif
                                         @else
                                             <p>This run is inactive. Please wait for it to become active again.</p>
@@ -209,17 +212,6 @@
                         </div>
                     </div>
                 </div>
-                <hr class="parts-run-break">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="history">
-                                <div class="col-12">
-                                <p class="history-text"><strong>History:</strong></p>
-                                <p>{{ $data->partsRunAd->history }}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
     </div>
   </div>
@@ -234,6 +226,9 @@
     <div class="card-body">
       <h3>Interest</h3>
       <ul>
+        @php
+            $quantity = 0;
+        @endphp
         @foreach($data->interested as $user)
         @if($user->pivot->status == 'interested')
             <li>
@@ -245,6 +240,10 @@
                 @if($user->pivot->quantity != 1)
                     ({{$user->pivot->quantity}})
                 @endif
+                @php $quantity += $user->pivot->quantity @endphp
+                @if($quantity > $data->partsRunAd->quantity)
+                    (Reserve)
+                @endif
                 @if(auth()->user()->id == $data->user_id || Auth::user()->hasRole('BC Rep'))
                     @if ($data->status == "Active")
                         <form action="{{ route('parts-run.status_update') }}" method="POST">
@@ -252,7 +251,7 @@
                             <input type="hidden" name="user_id" id="user_id" value="{{ $user->id }}">
                             <input type="hidden" name="run_id" value="{{ $data->id }}">
                             <input type="hidden" name="status" value="paid">
-                            <button type="submit" class="btn" data-toggle="modal" data-userid="{{ $user->id }}" data-target="#shipModal"><i class="fas fa-pound-sign"></i></button>
+                            <button type="submit" class="btn"><i class="fas fa-pound-sign"></i></button>
                         </form>
                     @endif
                 @endif

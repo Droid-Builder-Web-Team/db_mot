@@ -31,7 +31,7 @@
             </thead>
             <tbody>
                 @foreach($partsRunData as $data)
-                @if($data->user->id == Auth()->user()->id)
+                @if($data->user->id == Auth()->user()->id || $data->bc_rep_id == Auth()->user()->id)
                 <tr>
                     <td>{{ $data->partsRunAd->title }}</td>
                     <td scope="col" class="d-none d-md-table-cell">{{ $data->club->name }}</td>

@@ -109,6 +109,7 @@ class PartsRunDataController extends Controller
             'parts_run_data_id' => $partsRunData->id,
             'contact_email' => $email,
             'location' => $location,
+            'title' => $request->title
             ]
         );
 
@@ -230,6 +231,15 @@ class PartsRunDataController extends Controller
             ]
         );
 
+        if (($request->purchase_url_type == "paypalme"
+            || $request->purchase_url_type == "website")
+            && $request->purchase_url != ""
+        ) {
+            if (!str_starts_with($request->purchase_url, 'http')) {
+                $request->purchase_url = "https://".$request->purchase_url;
+            }
+        }
+
         $partsRunData->partsRunAd()->update(
             [
             'title' => $request->title,
@@ -242,7 +252,8 @@ class PartsRunDataController extends Controller
             'purchase_url' => $request->purchase_url,
             'purchase_url_type' => $request->purchase_url_type,
             'contact_email' => $request->contact_email,
-            'quantity' => $request->quantity
+            'quantity' => $request->quantity,
+            'reserve' => $request->reserve
             ]
         );
 
@@ -287,7 +298,7 @@ class PartsRunDataController extends Controller
     public function interested(Request $request, PartsRunData $partsrun)
     {
 
-        if (!$partsrun->partsRunAd->quantity < $partsrun->isInterested->count()
+        if (!$partsrun->partsRunAd->quantity + $partsrun->partsRunAd->reserve < $partsrun->interestQuantity()
             && $request->interest == 'interested'
         ) {
             toastr()->error('Part Run Full');
@@ -301,8 +312,12 @@ class PartsRunDataController extends Controller
           'quantity' => $request->quantity
         ];
         if ($hasEntry) {
-            $result = $partsrun->interested()
-                ->updateExistingPivot($user, $attributes);
+            if ($request->interest == "no") {
+                $result = $partsrun->isInterested()->detach($user);
+            } else {
+                $result = $partsrun->interested()
+                    ->updateExistingPivot($user, $attributes);
+            }
         } else {
             $result = $partsrun->interested()->save($user, $attributes);
         }

@@ -22,7 +22,7 @@
 
                         <div class="form-group row">
                             <div class="col-md-6 col-12">
-                                <label for="select" class="col-4 col-form-label">Club</label>
+                                <label for="club_id" class="col-4 col-form-label">Club</label>
                                 <div class="col-12">
                                     <select id="club_id" name="club_id" class="custom-select"  required>
                                         <option value="null">Select a club</option>
@@ -34,7 +34,7 @@
                             </div>
 
                             <div class="col-md-6 col-12">
-                                <label for="select1" class="col-4 col-form-label">Member</label>
+                                <label for="user_id" class="col-4 col-form-label">Member</label>
                                 <div class="col-12">
                                     <select id="user_id" name="user_id" class="custom-select" required>
                                         <option value="null">Select a member</option>
@@ -42,6 +42,15 @@
                                             <option value={{ $runner->id }}>{{ $runner->forename }} {{ $runner->surname }}</option>
                                         @endforeach
                                     </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="col-md-12 col-12">
+                                <label for="title" class="col-12 col-form-label">Title</label>
+                                <div class="col-12">
+                                    <input type="text" id="title" name="title" class="form-control" required >
                                 </div>
                             </div>
                         </div>
