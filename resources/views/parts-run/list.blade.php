@@ -33,7 +33,7 @@
                 @foreach($partsRunData as $data)
                 @if($data->user->id == Auth()->user()->id || $data->bc_rep_id == Auth()->user()->id)
                 <tr>
-                    <td>{{ $data->partsRunAd->title }}</td>
+                    <td><a href={{ route('parts-run.show', $data->id) }}>{{ $data->partsRunAd->title }}</a></td>
                     <td scope="col" class="d-none d-md-table-cell">{{ $data->club->name }}</td>
 
                     <th class="status-class">
@@ -105,7 +105,7 @@
                 @foreach($partsRunData as $data)
                 @if($data->status != "Initial" && $data->status != "Inactive")
                 <tr>
-                    <td>{{ $data->partsRunAd->title }}</td>
+                    <td><a href={{ route('parts-run.show', $data->id) }}>{{ $data->partsRunAd->title }}</a></td>
                     <td scope="col" class="d-none d-md-table-cell">{{ $data->club->name }}</td>
                     <td scope="col" class="d-none d-sm-table-cell">{{ $data->user->forename }} {{ $data->user->surname }}</td>
 
