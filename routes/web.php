@@ -80,6 +80,7 @@ Route::group(
         Route::resource('droid', 'DroidController');
         Route::get('database', 'DroidDatabase@index');
         Route::resource('mot', 'MOTController', ['only' => ['index', 'show']]);
+        Route::resource('portalnews', 'PortalNewsController');
         Route::resource('motinfo', 'MOTInfoController');
         Route::get('motinfo/{id}/export', 'MOTInfoController@exportMotInfo')->name('motinfo.export');
         Route::get('motinfo/{id}/test', 'MOTInfoController@exportMotTest')->name('motinfo.test');

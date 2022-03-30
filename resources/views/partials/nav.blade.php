@@ -43,6 +43,14 @@
             <li class="c-sidebar-nav-title">Info</li>
 
             <li class="c-sidebar-nav-item">
+                <a class="c-sidebar-nav-link" href="{{ route('portalnews.index') }}">
+                    <svg class="c-sidebar-nav-icon">
+                        <i class="fas fa-newspaper fa-fw"></i>
+                    </svg><span class="ml-1">Portal News</span>
+                </a>
+            </li>
+
+            <li class="c-sidebar-nav-item">
                 <a class="c-sidebar-nav-link" href="{{ route('motinfo.index') }}">
                     <svg class="c-sidebar-nav-icon">
                         <i class="fas fa-info-circle fa-fw"></i>
@@ -58,13 +66,6 @@
                 </a>
             </li>
 
-            <li class="c-sidebar-nav-item">
-                <a class="c-sidebar-nav-link" target="_blank" href="https://wiki.droidbuilders.net/">
-                    <svg class="c-sidebar-nav-icon">
-                        <i class="fab fa-wikipedia-w fa-fw"></i>
-                    </svg><span class="ml-1">Droidbuilders Wiki</span>
-                </a>
-            </li>
             @if(config('features.partrun', TRUE))
             <li class="c-sidebar-nav-item">
                 <a class="c-sidebar-nav-link" target="_blank" href="{{ route('partsRunInfo') }}">
