@@ -131,7 +131,7 @@
                                     <div class="col-12 col-md-6">
 
                                         @if($data->status == "Active")
-                                            @if($data->open == 1 || Auth::user()->isInterestedIn($data->id))
+                                            @if($data->open == 1 || $data->canBuy(Auth::user()))
                                                 <p><strong>Purchase Link:</strong></p>
                                                 <p>
                                                     @if($data->partsRunAd->purchase_url_type == "email")

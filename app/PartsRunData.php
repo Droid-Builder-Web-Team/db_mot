@@ -128,7 +128,24 @@ class PartsRunData extends Model implements Auditable
     {
         return $this->belongsToMany(User::class, 'members_parts')
             ->wherePivotIn('status', ['interested'])
-            ->withPivot('status', 'quantity', 'tracking', 'shipper');
+            ->withPivot('status', 'quantity', 'tracking', 'shipper', 'timestamp');
+    }
+
+    /**
+     * Check if a user can buy this part, or if they are on the reserve list
+     *
+     * @param User $user User object to check
+     *
+     * @return boolean
+     */
+    public function canBuy(User $user)
+    {
+        $interested = $this->isInterested()->orderBy('timestamp', 'asc')->get();
+        $interested = $interested->take($this->partsRunAd->quantity);
+        if ($interested->contains('id', $user->id)) {
+            return true;
+        }
+        return false;
     }
 
     /**
