@@ -72,6 +72,10 @@
                                 <td>{{ $user->postcode }}</td>
                             </tr>
                             <tr>
+                                <th>Country</th>
+                                <td>{{ $user->country }}</td>
+                            </tr>
+                            <tr>
                                 <th>Forum Username</th>
                                 <td>{{ $user->username }}</td>
                             </tr>
