@@ -1,0 +1,5 @@
+---
+deployment:
+      tasks:
+        - export DEPLOYPATH=/home/robsr2d2/public_html/portal-dev
+        - /bin/cp -R * $DEPLOYPATH
