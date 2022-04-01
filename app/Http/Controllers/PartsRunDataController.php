@@ -393,6 +393,7 @@ class PartsRunDataController extends Controller
             'Forename',
             'Surname',
             'email',
+            'Country',
             'Quantity',
             'Status',
             'Date Added'
@@ -406,6 +407,7 @@ class PartsRunDataController extends Controller
                 $row['Forename']  = $user->forename;
                 $row['Surname']    = $user->surname;
                 $row['email']    = $user->email;
+                $row['country'] = $user->country;
                 $row['Quantity']  = $user->pivot->quantity;
                 $row['Status']  = $user->pivot->status;
                 $row['Date Added'] = $user->pivot->timestamp;
@@ -416,6 +418,7 @@ class PartsRunDataController extends Controller
                         $row['Forename'],
                         $row['Surname'],
                         $row['email'],
+                        $row['country'],
                         $row['Quantity'],
                         $row['Status'],
                         $row['Date Added']
