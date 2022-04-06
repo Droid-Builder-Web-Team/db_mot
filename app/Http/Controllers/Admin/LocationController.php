@@ -1,13 +1,32 @@
 <?php
+/**
+ * Locations Admin Controller
+ * php version 7.4
+ *
+ * @category Controller
+ * @package  Controllers
+ * @author   Darren Poulson <darren.poulson@gmail.com>
+ * @license  https://opensource.org/licenses/MIT MIT License
+ * @link     https://portal.droidbuilders.uk/
+ */
 
 namespace App\Http\Controllers\Admin;
 
 use App\Location;
-use App\VenueContact;
+use App\Contact;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\DataTables\LocationsDataTable;
 
+/**
+ * Locations Admin Controller
+ *
+ * @category Class
+ * @package  Controllers
+ * @author   Darren Poulson <darren.poulson@gmail.com>
+ * @license  https://opensource.org/licenses/MIT MIT License
+ * @link     https://portal.droidbuilders.uk/
+ */
 class LocationController extends Controller
 {
 
@@ -82,11 +101,9 @@ class LocationController extends Controller
      */
     public function edit(Location $location)
     {
-        $venueContacts = VenueContact::where('locations_id', $location->id)->get();
         return view('admin.locations.edit')->with(
             [
-            'location' => $location,
-            'venueContacts' => $venueContacts
+            'location' => $location
             ]
         );
     }

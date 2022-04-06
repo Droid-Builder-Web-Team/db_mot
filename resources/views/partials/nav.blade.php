@@ -20,14 +20,14 @@
                 <a class="c-sidebar-nav-link" href="{{ route('user.show', Auth::user()->id) }}">
                     <svg class="c-sidebar-nav-icon">
                         <i class="fas fa-user-circle fa-fw"></i>
-                    </svg><span class="ml-1">Your Profile</span>
+                    </svg><span class="ml-1">{{ __('Your Profile') }}</span>
                 </a>
             </li>
             <li class="c-sidebar-nav-item">
                 <a class="c-sidebar-nav-link" href="{{ route('event.index') }}">
                     <svg class="c-sidebar-nav-icon">
                         <i class="fas fa-calendar fa-fw"></i>
-                    </svg><span class="ml-1">Upcoming Events</span>
+                    </svg><span class="ml-1">{{ __('Upcoming Events') }}</span>
                 </a>
             </li>
             @if(config('features.partrun', FALSE))
@@ -35,7 +35,7 @@
                 <a class="c-sidebar-nav-link" href="{{ route('parts-run.index') }}">
                     <svg class="c-sidebar-nav-icon">
                         <i class="fas fa-wrench fa-fw"></i>
-                    </svg><span class="ml-1">Part Runs</span>
+                    </svg><span class="ml-1">{{ __('Part Runs') }}</span>
                 </a>
             </li>
             @endif
