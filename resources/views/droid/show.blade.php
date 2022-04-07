@@ -13,7 +13,7 @@
           {{ $droid->club->name }}
           <div class="custom-control custom-switch">
             <input type="checkbox" class="custom-control-input" id="publicToggle" value="{{$droid->public}}"
-            {{ $droid->public === 1 ? 'checked' : '' }}>
+            {{ $droid->public == 'Yes' ? 'checked' : '' }}>
             <label class="custom-control-label" for="publicToggle">Public Profile</label>
           </div>
 

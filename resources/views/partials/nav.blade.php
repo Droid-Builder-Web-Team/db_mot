@@ -40,6 +40,16 @@
             </li>
             @endif
 
+            @if(config('features.database', FALSE))
+            <li class="c-sidebar-nav-item">
+                <a class="c-sidebar-nav-link" href="{{ route('database.index') }}">
+                    <svg class="c-sidebar-nav-icon">
+                        <i class="fas fa-database fa-fw"></i>
+                    </svg><span class="ml-1">{{ __('Droid Database') }}</span>
+                </a>
+            </li>
+            @endif
+
             <li class="c-sidebar-nav-title">Info</li>
 
             <li class="c-sidebar-nav-item">

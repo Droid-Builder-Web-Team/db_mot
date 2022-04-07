@@ -214,9 +214,9 @@ class DroidController extends Controller
             abort(403);
         }
         if ($request->mode == 'true') {
-            $droid->public = 1;
+            $droid->public = 'Yes';
         } else {
-            $droid->public = 0;
+            $droid->public = 'No';
         }
         $droid->save();
     }

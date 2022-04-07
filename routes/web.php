@@ -78,7 +78,7 @@ Route::group(
         Route::resource('user', 'UserController');
         Route::post('droid/togglePublic', 'DroidController@togglePublic')->name('droid.togglePublic');
         Route::resource('droid', 'DroidController');
-        Route::get('database', 'DroidDatabase@index');
+        Route::resource('database', 'DroidDatabase');
         Route::resource('mot', 'MOTController', ['only' => ['index', 'show']]);
         Route::resource('portalnews', 'PortalNewsController');
         Route::resource('motinfo', 'MOTInfoController');
