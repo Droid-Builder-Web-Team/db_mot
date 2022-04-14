@@ -1,5 +1,84 @@
 {
     "private": true,
+    "stylelint": {
+        "extends": "stylelint-config-standard",
+        "rules": {
+            "no-empty-source": null,
+            "no-descending-specificity": null,
+            "font-family-no-missing-generic-family-keyword": null,
+            "indentation": null,
+            "declaration-colon-space-after": null,
+            "block-closing-brace-newline-after": null,
+            "at-rule-empty-line-before": null,
+            "declaration-colon-newline-after": null,
+            "no-invalid-position-at-import-rule": null,
+            "block-no-empty": [
+                false,
+                {
+                    "severity": "warning"
+                }
+            ],
+            "at-rule-no-unknown": [
+                true,
+                {
+                    "ignoreAtRules": [
+                        "extend",
+                        "at-root",
+                        "debug",
+                        "warn",
+                        "error",
+                        "if",
+                        "else",
+                        "for",
+                        "each",
+                        "while",
+                        "mixin",
+                        "include",
+                        "content",
+                        "return",
+                        "function",
+                        "use"
+                    ]
+                }
+            ]
+        }
+    },
+    "prettier": {
+        "overrides": [
+            {
+                "files": [
+                    "*.scss"
+                ],
+                "options": {
+                    "printWidth": 200,
+                    "tabWidth": 2,
+                    "semi": true,
+                    "singleQuote": false,
+                    "quoteProps": "as-needed",
+                    "trailingComma": "es5",
+                    "bracketSpacing": true,
+                    "bracketSameLine": false,
+                    "arrowParens": "always",
+                    "htmlWhitespaceSensitivity": "css"
+                }
+            },
+            {
+                "files": [
+                    "*.js"
+                ],
+                "options": {
+                    "tabWidth": 2,
+                    "semi": true,
+                    "singleQuote": true,
+                    "quoteProps": "as-needed",
+                    "trailingComma": "es5",
+                    "bracketSpacing": true,
+                    "bracketSameLine": false,
+                    "arrowParens": "always"
+                }
+            }
+        ]
+    },
     "scripts": {
         "dev": "npm run development",
         "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --config=node_modules/laravel-mix/setup/webpack.config.js",

@@ -1,11 +1,11 @@
 // Variables
-@import 'variables';
+@import "variables";
 
 // Global
-@import 'global';
-@import 'sidebar';
+@import "global";
+@import "sidebar";
 
-@import 'responsive';
+@import "responsive";
 
 // Parts Run
 .part-run-image {
@@ -13,20 +13,18 @@
 }
 
 .purchase-contact {
- .btn-purchase {
-  i {
-    margin-right: 1rem;
+  .btn-purchase {
+    i {
+      margin-right: 1rem;
+    }
   }
- } 
 }
 
 // Show Parts Run
 .description-col p {
   background-color: transparent !important;
-  font-family: 'Nunito', sans-serif !important;
-  
-  @include styleText('', 18, 'rem');
-  @include styleText('ls', 50, 'rem');
+  font-family: "Nunito", sans-serif !important;
+  font-size: rem(18);
 }
 
 .form-control.interested {
@@ -64,7 +62,7 @@ ul.links {
   display: flex;
   justify-content: space-between;
   align-items: center;
-
+  text-align: center;
 
   .pli-box-blank {
     border-radius: 25px;
@@ -102,7 +100,7 @@ ul.links {
       &::before {
         color: $primaryColor;
       }
-      
+
       .btn-view {
         color: $primaryColor;
       }
@@ -124,43 +122,52 @@ ul.links {
   }
 }
 
-.user-stats-box {
-  background: $secondaryColor;
-  padding: 1rem;
-  margin: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
+.stat-group {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 1rem;
 
-  .icon-wrapper {
-    padding: 1rem;
-
-    &.blue {
-      background: $builderBlue;
-    }
-
-    &.purple {
-      background: $purple;
-    }
-
-    &.green {
-      background: $green;
-    }
-
-    &.orange {
-      background: $orange;
-    }
-
-    &.red {
-      background: $red;
-    }
-  }
-
-  .user-stat {
-    display: block;
+  .user-stats-box {
+    background: $secondaryColor;
     width: 100%;
-    padding-left: 1rem;
+
+    .user-stat {
+      padding: 1rem;
+    }
+
+    // .icon-wrapper {
+    //   padding: 1rem;
+
+    //   &.blue {
+    //     background: $builderBlue;
+    //   }
+
+    //   &.purple {
+    //     background: $purple;
+    //   }
+
+    //   &.green {
+    //     background: $green;
+    //   }
+
+    //   &.orange {
+    //     background: $orange;
+    //   }
+
+    //   &.red {
+    //     background: $red;
+    //   }
+    // }
+
+    // .user-stat {
+    //   display: block;
+    //   width: 100%;
+    //   padding-left: 1rem;
+
+    //   p {
+    //     margin-bottom: 0;
+    //   }
+    // }
   }
 }
 
@@ -184,13 +191,13 @@ ul.links {
 }
 
 .my-droid-card {
-    padding: 0.75rem;
-    border: 1px solid transparent;
-    transition: 0.5s all;
+  padding: 0.75rem;
+  border: 1px solid transparent;
+  transition: 0.5s all;
 
-    &:hover {
-      border-color: $builderBlue;
-    }
+  &:hover {
+    border-color: $builderBlue;
+  }
 
   .droid-body-text {
     display: flex;
@@ -275,6 +282,66 @@ ul.links {
 // Droid Show Page
 .notes-box {
   border: 1px solid $white;
+}
+
+@media only screen and (max-width: 1680px) {
+  .stat-group {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+  }
+}
+
+@media only screen and (max-width: 1366px) {
+  .stat-group {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+  }
+}
+
+@media only screen and (max-width: 1199px) {
+  .stat-group {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-gap: 0 3rem;
+
+    .user-stats-box {
+      margin: 1rem 0;
+    }
+  }
+}
+
+@media only screen and (max-width: 991px) {
+  .stat-group {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-gap: 0 1rem;
+    width: 100%;
+    padding: 0 1rem;
+
+    .user-stats-box {
+      .user-stat {
+        text-align: center;
+        padding: 0;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .stat-group {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(5, 1fr);
+    padding: 0 1rem;
+    grid-gap: 0;
+    row-gap: 0.5rem;
+  }
+}
+
+@media only screen and (max-width: 575px) {
+  .profile-title {
+    flex-direction: column;
+    width: 100%;
+  }
 }
 
 // Old Styling
@@ -380,9 +447,9 @@ body {
   vertical-align: middle;
 }
 
-.fas.fa-trophy.fa-fw {
-  width: 1.25rem;
-}
+// .fas.fa-trophy.fa-fw {
+//   width: 1.25rem;
+// }
 
 /* Buttons */
 a.btn-header-primary {
@@ -412,130 +479,129 @@ a.btn-header-secondary:focus {
 }
 
 .vue-map-container {
-    height: 100%;
-    width: 100%;
-    margin-left: auto;
-    margin-right: auto;
+  height: 100%;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .gmap-marker {
-    font-family: -apple-system, BlinkMacSystemFont, segoe ui, Roboto, helvetica neue, Arial, noto sans, sans-serif, apple color emoji, segoe ui emoji, segoe ui symbol, noto color emoji;
-    color: #000;
+  font-family: -apple-system, BlinkMacSystemFont, segoe ui, Roboto, helvetica neue, Arial, noto sans, sans-serif, apple color emoji, segoe ui emoji, segoe ui symbol, noto color emoji;
+  color: #000;
 }
 
 // Admin
-  // Memebers Index Table
-  .dataTables_wrapper {
-    .dt-buttons {
-      .dt-button {
-        width: fit-content;
-        padding: 10px 20px;
-        background: transparent;
-        color: $white;
-        transition: 0.5s all;
-      }
-
-      .buttons-export:hover {
-        background: $white;
-        color: $black;
-      }
-
-      .buttons-print:hover {
-        background: #1b5c9e;
-        color: $white;
-      }
-
-      .buttons-reload:hover {
-        background: green;
-        color: $white;
-      }
+// Memebers Index Table
+.dataTables_wrapper {
+  .dt-buttons {
+    .dt-button {
+      width: fit-content;
+      padding: 10px 20px;
+      background: transparent;
+      color: $white;
+      transition: 0.5s all;
     }
 
-    .dataTables_filter {
-      float: right;
+    .buttons-export:hover {
+      background: $white;
+      color: $black;
+    }
 
-      input {
-        margin-left: 0.5rem;
-        background: transparent;
-        border: 1px solid $white;
-        border-radius: 5px;
-        color: $white;
-      }
+    .buttons-print:hover {
+      background: #1b5c9e;
+      color: $white;
+    }
+
+    .buttons-reload:hover {
+      background: green;
+      color: $white;
     }
   }
 
-  #users-table {
-    .badge {
-      margin-right: 0.5rem
-    }
+  .dataTables_filter {
+    float: right;
 
-    .buttons {
-      width: 100%;
-
-      a {
-        display: flex;
-        justify-content: center;
-        margin-bottom: 0.5rem;
-      }
-
-      form {
-        width: 100%;
-      }
-
-      .btn-view {
-        text-decoration: none;
-        transition: 0.5s all;
-
-        &:hover {
-          text-decoration: none;
-          background: $white;
-          border-color: $white;
-          
-          i {
-            color: $black;
-          }
-        }
-      }
-
-      .btn-edit {
-        text-decoration: none;
-        transition: 0.5s all;
-
-        &:hover {
-          text-decoration: none;
-          background: #1b5c9e
-        }
-      }
-
-      form {
-        text-decoration: none;
-        transition: 0.5s all;
-
-        &:hover {
-          text-decoration: none;
-          background: #d16767;
-        }
-      }
+    input {
+      margin-left: 0.5rem;
+      background: transparent;
+      border: 1px solid $white;
+      border-radius: 5px;
+      color: $white;
     }
   }
+}
 
-  .dataTables_paginate {
-    margin-top: 1rem;
+#users-table {
+  .badge {
+    margin-right: 0.5rem;
+  }
+
+  .buttons {
+    width: 100%;
 
     a {
-      color: $white;
-      margin: 0 1rem
+      display: flex;
+      justify-content: center;
+      margin-bottom: 0.5rem;
     }
 
-    span a {
-      margin: 0.75rem 0;
-      padding: 0.25rem;
-      color: $white !important; 
+    form {
+      width: 100%;
+    }
+
+    .btn-view {
+      text-decoration: none;
+      transition: 0.5s all;
+
+      &:hover {
+        text-decoration: none;
+        background: $white;
+        border-color: $white;
+
+        i {
+          color: $black;
+        }
+      }
+    }
+
+    .btn-edit {
+      text-decoration: none;
+      transition: 0.5s all;
+
+      &:hover {
+        text-decoration: none;
+        background: #1b5c9e;
+      }
+    }
+
+    form {
+      text-decoration: none;
+      transition: 0.5s all;
+
+      &:hover {
+        text-decoration: none;
+        background: #d16767;
+      }
     }
   }
+}
 
+.dataTables_paginate {
+  margin-top: 1rem;
 
-  /*
+  a {
+    color: $white;
+    margin: 0 1rem;
+  }
+
+  span a {
+    margin: 0.75rem 0;
+    padding: 0.25rem;
+    color: $white !important;
+  }
+}
+
+/*
     New Styling Methods - RH$primaryColor: #181924;
   */
 
@@ -543,4 +609,3 @@ a.btn-header-secondary:focus {
   color: $white !important;
   text-decoration: none;
 }
-
