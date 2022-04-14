@@ -452,7 +452,7 @@
 }
 
 .btn-cover:hover {
-  border: 1px solid #969595;
+  border: 1px solid rgb(150, 149, 149);
   text-decoration: none;
 }
 

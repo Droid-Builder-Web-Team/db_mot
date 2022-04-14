@@ -150,13 +150,29 @@ p {
   display: flex;
 }
 
+.row.build-section {
+  margin: 0;
+}
+
 .build-section {
   background: transparent;
   border: 2px solid $secondaryColor;
-  padding: 2rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 100%;
+
+  &.inner {
+    padding: 1rem 0;
+
+    &:not(last-child) {
+      margin-bottom: 2rem !important;
+    }
+  }
+
+  &.outer {
+    padding: 2rem 1rem;
+  }
 
   .buttons.icon-text {
     // Global CRUD Buttons with Icons
@@ -603,7 +619,37 @@ ul.blank-ul {
   }
 }
 
+@media only screen and (max-width: 991px) {
+  .padding-container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .build-section {
+    &.outer {
+      padding: 1rem 0;
+    }
+  }
+}
+
 @media only screen and (max-width: 575px) {
+  h4 {
+    font-size: rem(22);
+  }
+
+  .padding-container {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .pt {
+    padding-top: 0;
+  }
+
+  .pb {
+    padding-bottom: 0;
+  }
+
   .db-navbar {
     padding: 1rem;
   }

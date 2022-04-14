@@ -4,51 +4,48 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-import { createApp } from 'vue'
+import { createApp } from 'vue';
 require('./bootstrap');
 import ReactionComponent from './components/ReactionComponent.vue';
-import VueGoogleMaps from '@fawmi/vue-google-maps'
-import MapComponent from './components/MapComponent.vue'
+import VueGoogleMaps from '@fawmi/vue-google-maps';
+import MapComponent from './components/MapComponent.vue';
 
 const app = createApp({});
 
 app.component('reaction-component', ReactionComponent);
 app.component('map-component', MapComponent);
-app.use(VueGoogleMaps, {
+app
+  .use(VueGoogleMaps, {
     load: {
-        key: 'AIzaSyCOE-y6rIHLsG6ONcNib1pfv0eq3xTWRok',
-    }
-}).mount('#app');
+      key: 'AIzaSyCOE-y6rIHLsG6ONcNib1pfv0eq3xTWRok',
+    },
+  })
+  .mount('#app');
 
-(function($) {
+(function ($) {
+  'use strict';
 
-	"use strict";
+  var fullHeight = function () {
+    $('.js-fullheight').css('height', $(window).height());
+    $(window).resize(function () {
+      $('.js-fullheight').css('height', $(window).height());
+    });
+  };
+  fullHeight();
 
-	var fullHeight = function() {
-
-		$('.js-fullheight').css('height', $(window).height());
-		$(window).resize(function(){
-			$('.js-fullheight').css('height', $(window).height());
-		});
-
-	};
-	fullHeight();
-
-	$('#sidebarCollapse').on('click', function () {
-      $('#sidebar').toggleClass('active');
+  $('#sidebarCollapse').on('click', function () {
+    $('#sidebar').toggleClass('active');
   });
-
 })(jQuery);
 
 // Navbar Magic
-$('#menu-toggle').click( function () {
-	$('#wrapper').toggleClass('wide');
+$('#menu-toggle').click(function () {
+  $('#wrapper').toggleClass('wide');
 });
-
 
 // Hide Sidebar at 767px
 $(document).ready(function () {
-	if($(window).width() <= 767) {
-		$('#sidebar').addClass('active');
-	}
+  if ($(window).width() <= 767) {
+    $('#sidebar').addClass('active');
+  }
 });
