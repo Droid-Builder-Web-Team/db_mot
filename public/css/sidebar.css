@@ -1,3 +1,4 @@
+/** Bootstrap navbar fix (https://git.io/fADqW) */
 #sidebar {
   min-width: 270px;
   max-width: 270px;
@@ -123,11 +124,11 @@
   transition: 0.5s all;
 }
 #sidebar .social-icons .social-list-item .facebook:hover {
-  color: #4267B2;
+  color: #4267b2;
 }
 #sidebar .social-icons .social-list-item .discord:hover {
   color: #7289da;
 }
 #sidebar .social-icons .social-list-item .youtube:hover {
-  color: #FF0000;
+  color: #ff0000;
 }

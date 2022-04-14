@@ -1,534 +1,610 @@
 // Fonts
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800;900&display=swap");
 
-/** Font Sizes */
-@mixin styleText($style: '', $number: 16, $unit: 'rem', $important: false) {
-    @if $style=='' {
-        $style: 'font-size';
-    }
+*,
+*::before,
+*::after {
+  // Box-sizing should be border-box by default. - csswg.org
+  box-sizing: border-box;
+}
 
-    @else {
-        $style: 'letter-spacing';
-    }
+html {
+  // stops safari from enlgarging text when switching between portrait and landscape.
+  -moz-text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+  scroll-behavior: smooth;
+}
 
-    @if $important {
-        $important: '!important';
-    }
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 
-    @else {
-        $important: '';
-    }
+  *,
+  *::before,
+  *::after {
+    // stops all css animattions for users that have rediced motion declared on their device. Remember reduced motion
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 
-    @if $unit=='px' {
-        @if $style=='font-size' {
-            #{$style}: #{$number}px #{$important};
-        }
+  video[autoplay] {
+    // hides videos that autoplay for users that have rediced motion declared on their device.
+    visibility: hidden;
+  }
+}
 
-        @else {
-            #{$style}: calc((#{$number} / 1000) * 1px) #{$important};
-        }
-    }
+body {
+  // font family from variables
+  font-family: $font-1;
+  // tells rendering engine to optimise speed for rendering font families
+  text-rendering: optimizeSpeed;
+  // golden ratio line height
+  line-height: 1.618;
+}
 
-    @else {
-        @if $style=='font-size' {
-            #{$style}: calc((#{$number} / 16) * 1#{$unit}) #{$important};
-        }
+// set smaller line heights for headings due to them generally being larger, tweak if needed
+:where(h1, .h1) {
+  line-height: 1.2;
+}
 
-        @else {
-            #{$style}: calc((#{$number} / 1000) * 1#{$unit}) #{$important};
-        }
-    }
+:where(h2, .h2, h3, .h3) {
+  line-height: 1.325;
+}
+
+:where(h4, .h4, h5, .h5) {
+  line-height: 1.5;
+}
+
+table {
+  // Removes spacing between cells in tables
+  border-collapse: collapse;
+}
+
+:where(input, button, textarea, select) {
+  // inputs inherit body font
+  font: inherit;
+}
+
+:where(img, picture) {
+  // stops the image from exceeding its container
+  max-width: 100%;
+  // removes whitespace below image
+  display: block;
+}
+
+// screen reader class - with updated BS5 name
+.visually-hidden,
+.visually-hidden-focusable:not(:focus):not(:focus-within) {
+  @include visually-hidden();
+}
+
+body,
+:where(h1, h2, h3, h4, h5, h6, p, ol, ul, figure, blockquote, dl, dd) {
+  // sets margins to 0 to normalise them
+  margin: 0;
+}
+
+// set sizes for tags and "psuedo" classes
+h1,
+.h1 {
+  font-size: rem(70);
+}
+
+h2,
+.h2 {
+  font-size: rem(50);
+}
+
+h3,
+.h3 {
+  font-size: rem(44);
+}
+
+h4,
+.h4 {
+  font-size: rem(34);
+}
+
+h5,
+.h5 {
+  font-size: rem(20);
+}
+
+h6,
+.h6 {
+  font-size: rem(18);
+}
+
+li {
+  font-size: rem(18);
+}
+
+p {
+  font-size: rem(18);
 }
 
 .db-dark-theme {
-    background: $primaryColor;
-    color: $secondaryColor;
+  background: $primaryColor;
+  color: $secondaryColor;
 }
 
 .db-sidebar.wrapper {
-    background: $sidebarBackground;
-    color: $secondaryColor;
+  background: $sidebarBackground;
+  color: $secondaryColor;
 }
 
 .db-wrapper {
-    width: 100%;
-    background: $primaryColor;
+  width: 100%;
+  background: $primaryColor;
 }
 
 .db-header {
-    width: 100%;
-    background: $sidebarBackground;
-    color: $secondaryColor;
-    min-height: 56px;
-    display: flex;
+  width: 100%;
+  background: $sidebarBackground;
+  color: $secondaryColor;
+  min-height: 56px;
+  display: flex;
+}
+
+.build-section {
+  background: transparent;
+  border: 2px solid $secondaryColor;
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .buttons.icon-text {
+    // Global CRUD Buttons with Icons
+    .btn-edit,
+    .btn-delete,
+    .btn-view,
+    .btn-create {
+      i {
+        margin-right: 1rem;
+      }
+    }
+  }
 }
 
 .padding-container {
-    padding-left: 2rem;
-    padding-right: 2rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 
 .pt {
-    padding-top: 2rem;
+  padding-top: 2rem;
 }
 
 .pb {
-    padding-bottom: 2rem;
-}
-
-.bg-image {
-    background: $headerBG;
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-}
-
-.c-wrapper {
-    display: none !important;
+  padding-bottom: 2rem;
 }
 
 a,
 a.p-link {
-    color: $secondaryColor;
+  color: $secondaryColor;
+  text-decoration: none;
+  transition: 0.5s all;
+  border-bottom: 1px solid transparent;
+  width: fit-content;
+
+  &:hover {
+    color: $white;
     text-decoration: none;
-    transition: 0.5s all;
-    border-bottom: 1px solid transparent;
-    width: fit-content;
-
-    &:hover {
-        color: $white;
-        text-decoration: none;
-        border-color: $white;
-    }
-}
-
-h1 {
-    font-family: 'Nunito', sans-serif;
-    font-weight: 600;
-    font-style: normal;
-
-    @include styleText('', 70, 'rem');
-    @include styleText('ls', 50, 'rem');
-}
-
-h2 {
-    font-family: 'Nunito', sans-serif;
-    font-weight: 400;
-    font-style: normal;
-
-    @include styleText('', 50, 'rem');
-    @include styleText('ls', 50, 'rem');
-}
-
-h3 {
-    font-family: 'Nunito', sans-serif;
-    font-weight: 500;
-    font-style: normal;
-
-    @include styleText('', 44, 'rem');
-    @include styleText('ls', 50, 'rem');
-}
-
-h4 {
-    font-family: 'Nunito', sans-serif;
-    font-weight: 500;
-    font-style: normal;
-
-    @include styleText('', 34, 'rem');
-    @include styleText('ls', 50, 'rem');
-}
-
-h5 {
-    font-family: 'Nunito', sans-serif;
-    font-weight: 400;
-    font-style: normal;
-
-    @include styleText('', 20, 'rem');
-    @include styleText('ls', 50, 'rem');
-}
-
-h6 {
-    font-family: 'Nunito', sans-serif;
-    font-weight: 300;
-    font-style: normal;
-
-    @include styleText('', 18, 'rem');
-    @include styleText('ls', 50, 'rem');
-}
-
-li {
-    font-family: 'Nunito', sans-serif;
-    font-weight: 300;
-    font-style: normal;
-
-    @include styleText('', 16, 'rem');
-    @include styleText('ls', 50, 'rem');
-}
-
-p {
-    font-family: 'Nunito', sans-serif;
-    font-weight: 300;
-    font-style: normal;
-
-    @include styleText('', 18, 'rem');
-    @include styleText('ls', 50, 'rem');
+    border-color: $white;
+  }
 }
 
 img {
-    max-width: 100%;
-    object-fit: cover;
-    object-position: center;
+  max-width: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 
-// Custom Margin
-.db-mt-1 {
-    margin-top: 1rem;
+// Margin Bottom
+@for $var from 1 through 20 {
+  .db {
+    &-mb-#{$var} {
+      margin-bottom: $var * 1rem;
+    }
+  }
 }
 
-.db-mt-2 {
-    margin-top: 2rem;
+// Margin Top
+@for $var from 1 through 20 {
+  .db {
+    &-mt-#{$var} {
+      margin-top: $var * 1rem;
+    }
+  }
 }
 
-.db-mt-3 {
-    margin-top: 3rem;
+// Margin Left
+@for $var from 1 through 20 {
+  .db {
+    &-ml-#{$var} {
+      margin-left: $var * 1rem;
+    }
+  }
 }
 
-.db-mt-4 {
-    margin-top: 4rem;
+// Margin Right
+@for $var from 1 through 20 {
+  .db {
+    &-mr-#{$var} {
+      margin-right: $var * 1rem;
+    }
+  }
 }
 
-.db-mb-1 {
-    margin-bottom: 1rem;
+// Margin Top/ Bottom
+@for $var from 1 through 20 {
+  .db {
+    &-my-#{$var} {
+      margin-top: $var * 1rem;
+      margin-bottom: $var * 1rem;
+    }
+  }
 }
 
-.db-mb-2 {
-    margin-bottom: 2rem;
+// Margin Left/ Right
+@for $var from 1 through 20 {
+  .db {
+    &-mx-#{$var} {
+      margin-left: $var * 1rem;
+      margin-right: $var * 1rem;
+    }
+  }
 }
 
-.db-mb-3 {
-    margin-bottom: 3rem;
+// Padding Bottom
+@for $var from 1 through 20 {
+  .db {
+    &-pb-#{$var} {
+      padding-bottom: $var * 1rem;
+    }
+  }
 }
 
-.db-mb-4 {
-    margin-bottom: 4rem;
+// Padding Top
+@for $var from 1 through 20 {
+  .db {
+    &-pt-#{$var} {
+      padding-top: $var * 1rem;
+    }
+  }
 }
 
-.db-my-1 {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+// Padding Left
+@for $var from 1 through 20 {
+  .db {
+    &-pl-#{$var} {
+      padding-left: $var * 1rem;
+    }
+  }
 }
 
-.db-my-2 {
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+// Padding Right
+@for $var from 1 through 20 {
+  .db {
+    &-pr-#{$var} {
+      padding-right: $var * 1rem;
+    }
+  }
 }
 
-.db-my-3 {
-    margin-top: 3rem;
-    margin-bottom: 3rem;
+// Padding
+@for $var from 1 through 20 {
+  .db {
+    &-p-#{$var} {
+      padding: $var * 1rem;
+    }
+  }
 }
 
-.db-my-4 {
-    margin-top: 4rem;
-    margin-bottom: 4rem;
+// Margin Top/ Bottom
+@for $var from 1 through 20 {
+  .db {
+    &-py-#{$var} {
+      padding-top: $var * 1rem;
+      padding-bottom: $var * 1rem;
+    }
+  }
+}
+
+// Padding Left/ Right
+@for $var from 1 through 20 {
+  .db {
+    &-px-#{$var} {
+      padding-left: $var * 1rem;
+      padding-right: $var * 1rem;
+    }
+  }
 }
 
 .divider {
-    width: 95%;
-    background: $white;
-    height: 1px;
-    margin: 0 auto;
-}
-
-// Sidebar
-
-.build-section {
-    background: transparent;
-    border: 2px solid $secondaryColor;
-    padding: 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    .buttons.icon-text {
-        // Global CRUD Buttons with Icons
-        .btn-edit,
-        .btn-delete,
-        .btn-view,
-        .btn-create {
-            i {
-                margin-right: 1rem;
-            }
-        }
-    }
+  width: 95%;
+  background: $white;
+  height: 1px;
+  margin: 0 auto;
 }
 
 .db-navbar {
-    background: $sidebarBackground;
-    color: $secondaryColor;
-    padding: 2rem 4rem;
+  background: $sidebarBackground;
+  color: $secondaryColor;
+  padding: 2rem 4rem;
 
-    button {
-        background: transparent;
-        border: 1px solid $blue;
-        transition: 0.5s all;
+  button {
+    background: transparent;
+    border: 1px solid $blue;
+    transition: 0.5s all;
 
-        i {
-            margin-right: 0;
-            color: $secondaryColor;
-        }
-
-        &:hover {
-            background: $blue;
-        }
+    i {
+      margin-right: 0;
+      color: $secondaryColor;
     }
+
+    &:hover {
+      background: $blue;
+    }
+  }
 }
 
 .navbar-btn {
-    box-shadow: none;
-    outline: none !important;
-    border: none;
+  box-shadow: none;
+  outline: none !important;
+  border: none;
 }
 
 .line {
-    width: 100%;
-    height: 1px;
-    border-bottom: 1px dashed #ddd;
-    margin: 40px 0;
+  width: 100%;
+  height: 1px;
+  border-bottom: 1px dashed #ddd;
+  margin: 40px 0;
 }
 
 .image-wrapper {
-    position: relative;
-    padding-bottom: 70%;
+  position: relative;
+  padding-bottom: 70%;
 
-    img {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: center;
-    }
+  img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
 }
 
 .image-wrapper.landscape {
-    position: relative;
-    padding-bottom: 18%;
+  position: relative;
+  padding-bottom: 18%;
 
-    img {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: center;
-    }
+  img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
 }
 
 .header-image img {
-    object-fit: contain !important;
+  object-fit: contain !important;
 }
 
 .comment-card {
-    background: transparent;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    color: $secondaryColor;
-    
-    .comment {
-        width: 100%;
-        margin: 1rem 0;
-        border: 2px solid $builderBlue;
+  background: transparent;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  color: $secondaryColor;
 
-        .comment-header {
-            width: 100%;
-            padding: 1rem;
-            justify-content: space-around;
+  .comment {
+    width: 100%;
+    margin: 1rem 0;
+    border: 2px solid $builderBlue;
 
-            i {
-                margin-left: 0.5rem;
-            }
+    .comment-header {
+      width: 100%;
+      padding: 1rem;
+      justify-content: space-around;
 
-            h5 {
-                margin-bottom: 0;
-            }
-        }
+      i {
+        margin-left: 0.5rem;
+      }
 
-        .comment-body {
-            width: 100%;
-            padding: 1rem;
-            position: relative;
-
-            .reactions {
-                position: absolute;
-                right: 1rem;
-                bottom: 3rem;
-            }
-
-            textarea {
-                background: transparent;
-                border: 2px solid $secondaryColor;
-                color: $secondaryColor;
-            }
-        }
+      h5 {
+        margin-bottom: 0;
+      }
     }
+
+    .comment-body {
+      width: 100%;
+      padding: 1rem;
+      position: relative;
+
+      .reactions {
+        position: absolute;
+        right: 1rem;
+        bottom: 3rem;
+      }
+
+      textarea {
+        background: transparent;
+        border: 2px solid $secondaryColor;
+        color: $secondaryColor;
+      }
+    }
+  }
 }
 
 a[data-toggle="collapse"] {
-    position: relative;
+  position: relative;
 }
 
 .dropdown-toggle::after {
-    display: block;
-    position: absolute;
-    top: 50%;
-    right: 0;
-    transform: translateY(-50%);
+  display: block;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
 }
 
 ul.top-nav {
-    padding: 0.5rem 0;
+  padding: 0.5rem 0;
 
-    li.nav-item {
-        padding: 0 1rem;
+  li.nav-item {
+    padding: 0 1rem;
 
-        a {
-           transition: 0.5s all;
-        
-           i {
-                font-size: 1.5rem;
-            }
-        }
+    a {
+      transition: 0.5s all;
+
+      i {
+        font-size: 1.5rem;
+      }
     }
+  }
 }
 
 .buttons {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    margin: 1rem auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 1rem auto;
 
-    a:nth-child(2) {
-        margin-left: 1rem;
-    }
+  a:nth-child(2) {
+    margin-left: 1rem;
+  }
 
-    a:nth-child(3) {
-        margin-left: 1rem;
-    }
+  a:nth-child(3) {
+    margin-left: 1rem;
+  }
 }
 
 ul.blank-ul {
-    list-style-type: none;
-    padding-left: 0;
+  list-style-type: none;
+  padding-left: 0;
 }
 
 // Tables
 .table-responsive {
-    table {
+  table {
+    background: transparent;
+    color: $secondaryColor;
+
+    th {
+      vertical-align: middle;
+      padding: 0.75rem;
+    }
+
+    tbody {
+      tr {
+        transition: 0.5s all;
+      }
+
+      tr:hover {
         background: transparent;
         color: $secondaryColor;
-    
-        th {
-            vertical-align: middle;
-            padding: 0.75rem;
-        }
-
-        tbody {
-            tr {
-                transition: 0.5s all;
-            }
-        
-            tr:hover {
-                background: transparent;
-                color: $secondaryColor;
-                opacity: 0.75;
-            }
-        }
-    
-        .action-buttons {
-            justify-content: center;
-            text-align: center;
-    
-            a:not(:first-of-type) {
-                margin-left: 2rem;
-            }
-        }
+        opacity: 0.75;
+      }
     }
+
+    .action-buttons {
+      justify-content: center;
+      text-align: center;
+
+      a:not(:first-of-type) {
+        margin-left: 2rem;
+      }
+    }
+  }
 }
 
 // Forms
 // View Form
 .form-wrapper {
+  width: 100%;
+
+  .form-section {
     width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
 
-    .form-section {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-
-        .transaction-notice {
-            span {
-                font-weight: 700;
-            }
-        }
+    .transaction-notice {
+      span {
+        font-weight: 700;
+      }
     }
+  }
 }
 
 .form-section {
-    ul {
-        padding-left: 0;
-    }
+  ul {
+    padding-left: 0;
+  }
 }
 
 // Modals
 .modal {
-    .modal-header {
-        display: block;
+  .modal-header {
+    display: block;
 
-        .close {
-            color: $secondaryColor;
-        }
-
-        .modal-title {
-            width: 100%;
-        }
-    
-        .small {
-            width: 100%;
-        }
+    .close {
+      color: $secondaryColor;
     }
+
+    .modal-title {
+      width: 100%;
+    }
+
+    .small {
+      width: 100%;
+    }
+  }
 }
 
 .db-card {
-    .db-card-header {
-        width: 100%;
-        text-align: left;
+  .db-card-header {
+    width: 100%;
+    text-align: left;
 
-        .db-card-title {
-            color: $secondaryColor;
-            font-weight: 700;
+    .db-card-title {
+      color: $secondaryColor;
+      font-weight: 700;
 
-            .btn-accordion {
-                text-transform: uppercase;
-            }
-        }
+      .btn-accordion {
+        text-transform: uppercase;
+      }
     }
+  }
 
-    .collapse {
-        width: 100%;
+  .collapse {
+    width: 100%;
 
-        .db-card-body {
-            width: 100%;
-            text-align: left;
-            color: $secondaryColor;
-            padding-left: 4rem;
-            display: flex;
-            align-items: center;
-        }
+    .db-card-body {
+      width: 100%;
+      text-align: left;
+      color: $secondaryColor;
+      padding-left: 4rem;
+      display: flex;
+      align-items: center;
     }
+  }
+}
+
+@media only screen and (max-width: 575px) {
+  .db-navbar {
+    padding: 1rem;
+  }
 }

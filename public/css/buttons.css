@@ -1,3 +1,4 @@
+/** Bootstrap navbar fix (https://git.io/fADqW) */
 .btn {
   box-shadow: none !important;
   font-family: "Nunito", sans-serif;
@@ -293,8 +294,8 @@
   color: #181924;
 }
 .btn-oauth:hover.facebook {
-  background: #4267B2;
-  border-color: #4267B2;
+  background: #4267b2;
+  border-color: #4267b2;
   color: #fff;
 }
 .btn-oauth:hover.github {

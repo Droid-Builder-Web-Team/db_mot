@@ -1,5 +1,125 @@
 @import url(https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800;900&display=swap);
-/** Font Sizes */
+/** Bootstrap navbar fix (https://git.io/fADqW) */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -moz-text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+*::before,
+*::after {
+    -webkit-animation-duration: 0.01ms !important;
+            animation-duration: 0.01ms !important;
+    -webkit-animation-iteration-count: 1 !important;
+            animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  video[autoplay] {
+    visibility: hidden;
+  }
+}
+body {
+  font-family: source-sans-3, sans-serif;
+  text-rendering: optimizeSpeed;
+  line-height: 1.618;
+}
+
+:where(h1, .h1) {
+  line-height: 1.2;
+}
+
+:where(h2, .h2, h3, .h3) {
+  line-height: 1.325;
+}
+
+:where(h4, .h4, h5, .h5) {
+  line-height: 1.5;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+:where(input, button, textarea, select) {
+  font: inherit;
+}
+
+:where(img, picture) {
+  max-width: 100%;
+  display: block;
+}
+
+.visually-hidden,
+.visually-hidden-focusable:not(:focus):not(:focus-within) {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+body,
+:where(h1, h2, h3, h4, h5, h6, p, ol, ul, figure, blockquote, dl, dd) {
+  margin: 0;
+}
+
+h1,
+.h1 {
+  font-size: 4.375rem;
+}
+
+h2,
+.h2 {
+  font-size: 3.125rem;
+}
+
+h3,
+.h3 {
+  font-size: 2.75rem;
+}
+
+h4,
+.h4 {
+  font-size: 2.125rem;
+}
+
+h5,
+.h5 {
+  font-size: 1.25rem;
+}
+
+h6,
+.h6 {
+  font-size: 1.125rem;
+}
+
+li {
+  font-size: 1.125rem;
+}
+
+p {
+  font-size: 1.125rem;
+}
+
 .db-dark-theme {
   background: #181924;
   color: #fff;
@@ -23,6 +143,21 @@
   display: flex;
 }
 
+.build-section {
+  background: transparent;
+  border: 2px solid #fff;
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.build-section .buttons.icon-text .btn-edit i,
+.build-section .buttons.icon-text .btn-delete i,
+.build-section .buttons.icon-text .btn-view i,
+.build-section .buttons.icon-text .btn-create i {
+  margin-right: 1rem;
+}
+
 .padding-container {
   padding-left: 2rem;
   padding-right: 2rem;
@@ -34,17 +169,6 @@
 
 .pb {
   padding-bottom: 2rem;
-}
-
-.bg-image {
-  background: url(/images/BGimage.png);
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-
-.c-wrapper {
-  display: none !important;
 }
 
 a,
@@ -64,76 +188,92 @@ a.p-link:hover {
   border-color: #fff;
 }
 
-h1 {
-  font-family: "Nunito", sans-serif;
-  font-weight: 600;
-  font-style: normal;
-  font-size: calc((70 / 16) * 1rem);
-  letter-spacing: calc((50 / 1000) * 1rem);
-}
-
-h2 {
-  font-family: "Nunito", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-  font-size: calc((50 / 16) * 1rem);
-  letter-spacing: calc((50 / 1000) * 1rem);
-}
-
-h3 {
-  font-family: "Nunito", sans-serif;
-  font-weight: 500;
-  font-style: normal;
-  font-size: calc((44 / 16) * 1rem);
-  letter-spacing: calc((50 / 1000) * 1rem);
-}
-
-h4 {
-  font-family: "Nunito", sans-serif;
-  font-weight: 500;
-  font-style: normal;
-  font-size: calc((34 / 16) * 1rem);
-  letter-spacing: calc((50 / 1000) * 1rem);
-}
-
-h5 {
-  font-family: "Nunito", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-  font-size: calc((20 / 16) * 1rem);
-  letter-spacing: calc((50 / 1000) * 1rem);
-}
-
-h6 {
-  font-family: "Nunito", sans-serif;
-  font-weight: 300;
-  font-style: normal;
-  font-size: calc((18 / 16) * 1rem);
-  letter-spacing: calc((50 / 1000) * 1rem);
-}
-
-li {
-  font-family: "Nunito", sans-serif;
-  font-weight: 300;
-  font-style: normal;
-  font-size: calc((16 / 16) * 1rem);
-  letter-spacing: calc((50 / 1000) * 1rem);
-}
-
-p {
-  font-family: "Nunito", sans-serif;
-  font-weight: 300;
-  font-style: normal;
-  font-size: calc((18 / 16) * 1rem);
-  letter-spacing: calc((50 / 1000) * 1rem);
-}
-
 img {
   max-width: 100%;
   -o-object-fit: cover;
      object-fit: cover;
   -o-object-position: center;
      object-position: center;
+}
+
+.db-mb-1 {
+  margin-bottom: 1rem;
+}
+
+.db-mb-2 {
+  margin-bottom: 2rem;
+}
+
+.db-mb-3 {
+  margin-bottom: 3rem;
+}
+
+.db-mb-4 {
+  margin-bottom: 4rem;
+}
+
+.db-mb-5 {
+  margin-bottom: 5rem;
+}
+
+.db-mb-6 {
+  margin-bottom: 6rem;
+}
+
+.db-mb-7 {
+  margin-bottom: 7rem;
+}
+
+.db-mb-8 {
+  margin-bottom: 8rem;
+}
+
+.db-mb-9 {
+  margin-bottom: 9rem;
+}
+
+.db-mb-10 {
+  margin-bottom: 10rem;
+}
+
+.db-mb-11 {
+  margin-bottom: 11rem;
+}
+
+.db-mb-12 {
+  margin-bottom: 12rem;
+}
+
+.db-mb-13 {
+  margin-bottom: 13rem;
+}
+
+.db-mb-14 {
+  margin-bottom: 14rem;
+}
+
+.db-mb-15 {
+  margin-bottom: 15rem;
+}
+
+.db-mb-16 {
+  margin-bottom: 16rem;
+}
+
+.db-mb-17 {
+  margin-bottom: 17rem;
+}
+
+.db-mb-18 {
+  margin-bottom: 18rem;
+}
+
+.db-mb-19 {
+  margin-bottom: 19rem;
+}
+
+.db-mb-20 {
+  margin-bottom: 20rem;
 }
 
 .db-mt-1 {
@@ -152,20 +292,228 @@ img {
   margin-top: 4rem;
 }
 
-.db-mb-1 {
-  margin-bottom: 1rem;
+.db-mt-5 {
+  margin-top: 5rem;
 }
 
-.db-mb-2 {
-  margin-bottom: 2rem;
+.db-mt-6 {
+  margin-top: 6rem;
 }
 
-.db-mb-3 {
-  margin-bottom: 3rem;
+.db-mt-7 {
+  margin-top: 7rem;
 }
 
-.db-mb-4 {
-  margin-bottom: 4rem;
+.db-mt-8 {
+  margin-top: 8rem;
+}
+
+.db-mt-9 {
+  margin-top: 9rem;
+}
+
+.db-mt-10 {
+  margin-top: 10rem;
+}
+
+.db-mt-11 {
+  margin-top: 11rem;
+}
+
+.db-mt-12 {
+  margin-top: 12rem;
+}
+
+.db-mt-13 {
+  margin-top: 13rem;
+}
+
+.db-mt-14 {
+  margin-top: 14rem;
+}
+
+.db-mt-15 {
+  margin-top: 15rem;
+}
+
+.db-mt-16 {
+  margin-top: 16rem;
+}
+
+.db-mt-17 {
+  margin-top: 17rem;
+}
+
+.db-mt-18 {
+  margin-top: 18rem;
+}
+
+.db-mt-19 {
+  margin-top: 19rem;
+}
+
+.db-mt-20 {
+  margin-top: 20rem;
+}
+
+.db-ml-1 {
+  margin-left: 1rem;
+}
+
+.db-ml-2 {
+  margin-left: 2rem;
+}
+
+.db-ml-3 {
+  margin-left: 3rem;
+}
+
+.db-ml-4 {
+  margin-left: 4rem;
+}
+
+.db-ml-5 {
+  margin-left: 5rem;
+}
+
+.db-ml-6 {
+  margin-left: 6rem;
+}
+
+.db-ml-7 {
+  margin-left: 7rem;
+}
+
+.db-ml-8 {
+  margin-left: 8rem;
+}
+
+.db-ml-9 {
+  margin-left: 9rem;
+}
+
+.db-ml-10 {
+  margin-left: 10rem;
+}
+
+.db-ml-11 {
+  margin-left: 11rem;
+}
+
+.db-ml-12 {
+  margin-left: 12rem;
+}
+
+.db-ml-13 {
+  margin-left: 13rem;
+}
+
+.db-ml-14 {
+  margin-left: 14rem;
+}
+
+.db-ml-15 {
+  margin-left: 15rem;
+}
+
+.db-ml-16 {
+  margin-left: 16rem;
+}
+
+.db-ml-17 {
+  margin-left: 17rem;
+}
+
+.db-ml-18 {
+  margin-left: 18rem;
+}
+
+.db-ml-19 {
+  margin-left: 19rem;
+}
+
+.db-ml-20 {
+  margin-left: 20rem;
+}
+
+.db-mr-1 {
+  margin-right: 1rem;
+}
+
+.db-mr-2 {
+  margin-right: 2rem;
+}
+
+.db-mr-3 {
+  margin-right: 3rem;
+}
+
+.db-mr-4 {
+  margin-right: 4rem;
+}
+
+.db-mr-5 {
+  margin-right: 5rem;
+}
+
+.db-mr-6 {
+  margin-right: 6rem;
+}
+
+.db-mr-7 {
+  margin-right: 7rem;
+}
+
+.db-mr-8 {
+  margin-right: 8rem;
+}
+
+.db-mr-9 {
+  margin-right: 9rem;
+}
+
+.db-mr-10 {
+  margin-right: 10rem;
+}
+
+.db-mr-11 {
+  margin-right: 11rem;
+}
+
+.db-mr-12 {
+  margin-right: 12rem;
+}
+
+.db-mr-13 {
+  margin-right: 13rem;
+}
+
+.db-mr-14 {
+  margin-right: 14rem;
+}
+
+.db-mr-15 {
+  margin-right: 15rem;
+}
+
+.db-mr-16 {
+  margin-right: 16rem;
+}
+
+.db-mr-17 {
+  margin-right: 17rem;
+}
+
+.db-mr-18 {
+  margin-right: 18rem;
+}
+
+.db-mr-19 {
+  margin-right: 19rem;
+}
+
+.db-mr-20 {
+  margin-right: 20rem;
 }
 
 .db-my-1 {
@@ -188,26 +536,791 @@ img {
   margin-bottom: 4rem;
 }
 
+.db-my-5 {
+  margin-top: 5rem;
+  margin-bottom: 5rem;
+}
+
+.db-my-6 {
+  margin-top: 6rem;
+  margin-bottom: 6rem;
+}
+
+.db-my-7 {
+  margin-top: 7rem;
+  margin-bottom: 7rem;
+}
+
+.db-my-8 {
+  margin-top: 8rem;
+  margin-bottom: 8rem;
+}
+
+.db-my-9 {
+  margin-top: 9rem;
+  margin-bottom: 9rem;
+}
+
+.db-my-10 {
+  margin-top: 10rem;
+  margin-bottom: 10rem;
+}
+
+.db-my-11 {
+  margin-top: 11rem;
+  margin-bottom: 11rem;
+}
+
+.db-my-12 {
+  margin-top: 12rem;
+  margin-bottom: 12rem;
+}
+
+.db-my-13 {
+  margin-top: 13rem;
+  margin-bottom: 13rem;
+}
+
+.db-my-14 {
+  margin-top: 14rem;
+  margin-bottom: 14rem;
+}
+
+.db-my-15 {
+  margin-top: 15rem;
+  margin-bottom: 15rem;
+}
+
+.db-my-16 {
+  margin-top: 16rem;
+  margin-bottom: 16rem;
+}
+
+.db-my-17 {
+  margin-top: 17rem;
+  margin-bottom: 17rem;
+}
+
+.db-my-18 {
+  margin-top: 18rem;
+  margin-bottom: 18rem;
+}
+
+.db-my-19 {
+  margin-top: 19rem;
+  margin-bottom: 19rem;
+}
+
+.db-my-20 {
+  margin-top: 20rem;
+  margin-bottom: 20rem;
+}
+
+.db-mx-1 {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.db-mx-2 {
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+
+.db-mx-3 {
+  margin-left: 3rem;
+  margin-right: 3rem;
+}
+
+.db-mx-4 {
+  margin-left: 4rem;
+  margin-right: 4rem;
+}
+
+.db-mx-5 {
+  margin-left: 5rem;
+  margin-right: 5rem;
+}
+
+.db-mx-6 {
+  margin-left: 6rem;
+  margin-right: 6rem;
+}
+
+.db-mx-7 {
+  margin-left: 7rem;
+  margin-right: 7rem;
+}
+
+.db-mx-8 {
+  margin-left: 8rem;
+  margin-right: 8rem;
+}
+
+.db-mx-9 {
+  margin-left: 9rem;
+  margin-right: 9rem;
+}
+
+.db-mx-10 {
+  margin-left: 10rem;
+  margin-right: 10rem;
+}
+
+.db-mx-11 {
+  margin-left: 11rem;
+  margin-right: 11rem;
+}
+
+.db-mx-12 {
+  margin-left: 12rem;
+  margin-right: 12rem;
+}
+
+.db-mx-13 {
+  margin-left: 13rem;
+  margin-right: 13rem;
+}
+
+.db-mx-14 {
+  margin-left: 14rem;
+  margin-right: 14rem;
+}
+
+.db-mx-15 {
+  margin-left: 15rem;
+  margin-right: 15rem;
+}
+
+.db-mx-16 {
+  margin-left: 16rem;
+  margin-right: 16rem;
+}
+
+.db-mx-17 {
+  margin-left: 17rem;
+  margin-right: 17rem;
+}
+
+.db-mx-18 {
+  margin-left: 18rem;
+  margin-right: 18rem;
+}
+
+.db-mx-19 {
+  margin-left: 19rem;
+  margin-right: 19rem;
+}
+
+.db-mx-20 {
+  margin-left: 20rem;
+  margin-right: 20rem;
+}
+
+.db-pb-1 {
+  padding-bottom: 1rem;
+}
+
+.db-pb-2 {
+  padding-bottom: 2rem;
+}
+
+.db-pb-3 {
+  padding-bottom: 3rem;
+}
+
+.db-pb-4 {
+  padding-bottom: 4rem;
+}
+
+.db-pb-5 {
+  padding-bottom: 5rem;
+}
+
+.db-pb-6 {
+  padding-bottom: 6rem;
+}
+
+.db-pb-7 {
+  padding-bottom: 7rem;
+}
+
+.db-pb-8 {
+  padding-bottom: 8rem;
+}
+
+.db-pb-9 {
+  padding-bottom: 9rem;
+}
+
+.db-pb-10 {
+  padding-bottom: 10rem;
+}
+
+.db-pb-11 {
+  padding-bottom: 11rem;
+}
+
+.db-pb-12 {
+  padding-bottom: 12rem;
+}
+
+.db-pb-13 {
+  padding-bottom: 13rem;
+}
+
+.db-pb-14 {
+  padding-bottom: 14rem;
+}
+
+.db-pb-15 {
+  padding-bottom: 15rem;
+}
+
+.db-pb-16 {
+  padding-bottom: 16rem;
+}
+
+.db-pb-17 {
+  padding-bottom: 17rem;
+}
+
+.db-pb-18 {
+  padding-bottom: 18rem;
+}
+
+.db-pb-19 {
+  padding-bottom: 19rem;
+}
+
+.db-pb-20 {
+  padding-bottom: 20rem;
+}
+
+.db-pt-1 {
+  padding-top: 1rem;
+}
+
+.db-pt-2 {
+  padding-top: 2rem;
+}
+
+.db-pt-3 {
+  padding-top: 3rem;
+}
+
+.db-pt-4 {
+  padding-top: 4rem;
+}
+
+.db-pt-5 {
+  padding-top: 5rem;
+}
+
+.db-pt-6 {
+  padding-top: 6rem;
+}
+
+.db-pt-7 {
+  padding-top: 7rem;
+}
+
+.db-pt-8 {
+  padding-top: 8rem;
+}
+
+.db-pt-9 {
+  padding-top: 9rem;
+}
+
+.db-pt-10 {
+  padding-top: 10rem;
+}
+
+.db-pt-11 {
+  padding-top: 11rem;
+}
+
+.db-pt-12 {
+  padding-top: 12rem;
+}
+
+.db-pt-13 {
+  padding-top: 13rem;
+}
+
+.db-pt-14 {
+  padding-top: 14rem;
+}
+
+.db-pt-15 {
+  padding-top: 15rem;
+}
+
+.db-pt-16 {
+  padding-top: 16rem;
+}
+
+.db-pt-17 {
+  padding-top: 17rem;
+}
+
+.db-pt-18 {
+  padding-top: 18rem;
+}
+
+.db-pt-19 {
+  padding-top: 19rem;
+}
+
+.db-pt-20 {
+  padding-top: 20rem;
+}
+
+.db-pl-1 {
+  padding-left: 1rem;
+}
+
+.db-pl-2 {
+  padding-left: 2rem;
+}
+
+.db-pl-3 {
+  padding-left: 3rem;
+}
+
+.db-pl-4 {
+  padding-left: 4rem;
+}
+
+.db-pl-5 {
+  padding-left: 5rem;
+}
+
+.db-pl-6 {
+  padding-left: 6rem;
+}
+
+.db-pl-7 {
+  padding-left: 7rem;
+}
+
+.db-pl-8 {
+  padding-left: 8rem;
+}
+
+.db-pl-9 {
+  padding-left: 9rem;
+}
+
+.db-pl-10 {
+  padding-left: 10rem;
+}
+
+.db-pl-11 {
+  padding-left: 11rem;
+}
+
+.db-pl-12 {
+  padding-left: 12rem;
+}
+
+.db-pl-13 {
+  padding-left: 13rem;
+}
+
+.db-pl-14 {
+  padding-left: 14rem;
+}
+
+.db-pl-15 {
+  padding-left: 15rem;
+}
+
+.db-pl-16 {
+  padding-left: 16rem;
+}
+
+.db-pl-17 {
+  padding-left: 17rem;
+}
+
+.db-pl-18 {
+  padding-left: 18rem;
+}
+
+.db-pl-19 {
+  padding-left: 19rem;
+}
+
+.db-pl-20 {
+  padding-left: 20rem;
+}
+
+.db-pr-1 {
+  padding-right: 1rem;
+}
+
+.db-pr-2 {
+  padding-right: 2rem;
+}
+
+.db-pr-3 {
+  padding-right: 3rem;
+}
+
+.db-pr-4 {
+  padding-right: 4rem;
+}
+
+.db-pr-5 {
+  padding-right: 5rem;
+}
+
+.db-pr-6 {
+  padding-right: 6rem;
+}
+
+.db-pr-7 {
+  padding-right: 7rem;
+}
+
+.db-pr-8 {
+  padding-right: 8rem;
+}
+
+.db-pr-9 {
+  padding-right: 9rem;
+}
+
+.db-pr-10 {
+  padding-right: 10rem;
+}
+
+.db-pr-11 {
+  padding-right: 11rem;
+}
+
+.db-pr-12 {
+  padding-right: 12rem;
+}
+
+.db-pr-13 {
+  padding-right: 13rem;
+}
+
+.db-pr-14 {
+  padding-right: 14rem;
+}
+
+.db-pr-15 {
+  padding-right: 15rem;
+}
+
+.db-pr-16 {
+  padding-right: 16rem;
+}
+
+.db-pr-17 {
+  padding-right: 17rem;
+}
+
+.db-pr-18 {
+  padding-right: 18rem;
+}
+
+.db-pr-19 {
+  padding-right: 19rem;
+}
+
+.db-pr-20 {
+  padding-right: 20rem;
+}
+
+.db-p-1 {
+  padding: 1rem;
+}
+
+.db-p-2 {
+  padding: 2rem;
+}
+
+.db-p-3 {
+  padding: 3rem;
+}
+
+.db-p-4 {
+  padding: 4rem;
+}
+
+.db-p-5 {
+  padding: 5rem;
+}
+
+.db-p-6 {
+  padding: 6rem;
+}
+
+.db-p-7 {
+  padding: 7rem;
+}
+
+.db-p-8 {
+  padding: 8rem;
+}
+
+.db-p-9 {
+  padding: 9rem;
+}
+
+.db-p-10 {
+  padding: 10rem;
+}
+
+.db-p-11 {
+  padding: 11rem;
+}
+
+.db-p-12 {
+  padding: 12rem;
+}
+
+.db-p-13 {
+  padding: 13rem;
+}
+
+.db-p-14 {
+  padding: 14rem;
+}
+
+.db-p-15 {
+  padding: 15rem;
+}
+
+.db-p-16 {
+  padding: 16rem;
+}
+
+.db-p-17 {
+  padding: 17rem;
+}
+
+.db-p-18 {
+  padding: 18rem;
+}
+
+.db-p-19 {
+  padding: 19rem;
+}
+
+.db-p-20 {
+  padding: 20rem;
+}
+
+.db-py-1 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.db-py-2 {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.db-py-3 {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+.db-py-4 {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+.db-py-5 {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
+.db-py-6 {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+}
+
+.db-py-7 {
+  padding-top: 7rem;
+  padding-bottom: 7rem;
+}
+
+.db-py-8 {
+  padding-top: 8rem;
+  padding-bottom: 8rem;
+}
+
+.db-py-9 {
+  padding-top: 9rem;
+  padding-bottom: 9rem;
+}
+
+.db-py-10 {
+  padding-top: 10rem;
+  padding-bottom: 10rem;
+}
+
+.db-py-11 {
+  padding-top: 11rem;
+  padding-bottom: 11rem;
+}
+
+.db-py-12 {
+  padding-top: 12rem;
+  padding-bottom: 12rem;
+}
+
+.db-py-13 {
+  padding-top: 13rem;
+  padding-bottom: 13rem;
+}
+
+.db-py-14 {
+  padding-top: 14rem;
+  padding-bottom: 14rem;
+}
+
+.db-py-15 {
+  padding-top: 15rem;
+  padding-bottom: 15rem;
+}
+
+.db-py-16 {
+  padding-top: 16rem;
+  padding-bottom: 16rem;
+}
+
+.db-py-17 {
+  padding-top: 17rem;
+  padding-bottom: 17rem;
+}
+
+.db-py-18 {
+  padding-top: 18rem;
+  padding-bottom: 18rem;
+}
+
+.db-py-19 {
+  padding-top: 19rem;
+  padding-bottom: 19rem;
+}
+
+.db-py-20 {
+  padding-top: 20rem;
+  padding-bottom: 20rem;
+}
+
+.db-px-1 {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.db-px-2 {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.db-px-3 {
+  padding-left: 3rem;
+  padding-right: 3rem;
+}
+
+.db-px-4 {
+  padding-left: 4rem;
+  padding-right: 4rem;
+}
+
+.db-px-5 {
+  padding-left: 5rem;
+  padding-right: 5rem;
+}
+
+.db-px-6 {
+  padding-left: 6rem;
+  padding-right: 6rem;
+}
+
+.db-px-7 {
+  padding-left: 7rem;
+  padding-right: 7rem;
+}
+
+.db-px-8 {
+  padding-left: 8rem;
+  padding-right: 8rem;
+}
+
+.db-px-9 {
+  padding-left: 9rem;
+  padding-right: 9rem;
+}
+
+.db-px-10 {
+  padding-left: 10rem;
+  padding-right: 10rem;
+}
+
+.db-px-11 {
+  padding-left: 11rem;
+  padding-right: 11rem;
+}
+
+.db-px-12 {
+  padding-left: 12rem;
+  padding-right: 12rem;
+}
+
+.db-px-13 {
+  padding-left: 13rem;
+  padding-right: 13rem;
+}
+
+.db-px-14 {
+  padding-left: 14rem;
+  padding-right: 14rem;
+}
+
+.db-px-15 {
+  padding-left: 15rem;
+  padding-right: 15rem;
+}
+
+.db-px-16 {
+  padding-left: 16rem;
+  padding-right: 16rem;
+}
+
+.db-px-17 {
+  padding-left: 17rem;
+  padding-right: 17rem;
+}
+
+.db-px-18 {
+  padding-left: 18rem;
+  padding-right: 18rem;
+}
+
+.db-px-19 {
+  padding-left: 19rem;
+  padding-right: 19rem;
+}
+
+.db-px-20 {
+  padding-left: 20rem;
+  padding-right: 20rem;
+}
+
 .divider {
   width: 95%;
   background: #fff;
   height: 1px;
   margin: 0 auto;
-}
-
-.build-section {
-  background: transparent;
-  border: 2px solid #fff;
-  padding: 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.build-section .buttons.icon-text .btn-edit i,
-.build-section .buttons.icon-text .btn-delete i,
-.build-section .buttons.icon-text .btn-view i,
-.build-section .buttons.icon-text .btn-create i {
-  margin-right: 1rem;
 }
 
 .db-navbar {
@@ -438,6 +1551,12 @@ ul.blank-ul {
   align-items: center;
 }
 
+@media only screen and (max-width: 575px) {
+  .db-navbar {
+    padding: 1rem;
+  }
+}
+/** Bootstrap navbar fix (https://git.io/fADqW) */
 #sidebar {
   min-width: 270px;
   max-width: 270px;
@@ -563,13 +1682,13 @@ ul.blank-ul {
   transition: 0.5s all;
 }
 #sidebar .social-icons .social-list-item .facebook:hover {
-  color: #4267B2;
+  color: #4267b2;
 }
 #sidebar .social-icons .social-list-item .discord:hover {
   color: #7289da;
 }
 #sidebar .social-icons .social-list-item .youtube:hover {
-  color: #FF0000;
+  color: #ff0000;
 }
 
 @media only screen and (max-width: 1199px) {
@@ -662,7 +1781,23 @@ ul.blank-ul {
   }
 
   .build-section {
-    padding: 1rem;
+    padding: 1rem 0;
+  }
+
+  .oauth-button-group .btn-oauth {
+    width: 100%;
+  }
+  .oauth-button-group .btn-oauth:not(last-child) {
+    margin-bottom: 1rem;
+  }
+
+  .login-buttons button,
+.login-buttons .btn-forgot {
+    width: 100%;
+  }
+  .login-buttons button:not(last-child),
+.login-buttons .btn-forgot:not(last-child) {
+    margin-bottom: 1rem;
   }
 }
 .part-run-image {
@@ -676,8 +1811,7 @@ ul.blank-ul {
 .description-col p {
   background-color: transparent !important;
   font-family: "Nunito", sans-serif !important;
-  font-size: calc((18 / 16) * 1rem);
-  letter-spacing: calc((50 / 1000) * 1rem);
+  font-size: 1.125rem;
 }
 
 .form-control.interested {
@@ -1104,8 +2238,8 @@ a.btn-header-secondary:focus {
 }
 
 /*
-  New Styling Methods - RH$primaryColor: #181924;
-*/
+    New Styling Methods - RH$primaryColor: #181924;
+  */
 .white-link {
   color: #fff !important;
   text-decoration: none;
