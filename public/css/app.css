@@ -1604,7 +1604,6 @@ ul.blank-ul {
   background: #2a2b36;
   color: #fff;
   transition: all 0.3s;
-  overflow-y: scroll;
 }
 #sidebar a {
   width: 100%;
@@ -1903,9 +1902,38 @@ ul.links li i {
 .stat-group .user-stats-box {
   background: #fff;
   width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .stat-group .user-stats-box .user-stat {
   padding: 1rem;
+}
+.stat-group .user-stats-box .icon-wrapper {
+  padding: 1rem;
+}
+.stat-group .user-stats-box .icon-wrapper.blue {
+  background: #7eb6da;
+}
+.stat-group .user-stats-box .icon-wrapper.purple {
+  background: #9561e2;
+}
+.stat-group .user-stats-box .icon-wrapper.green {
+  background: #38c172;
+}
+.stat-group .user-stats-box .icon-wrapper.orange {
+  background: #f6993f;
+}
+.stat-group .user-stats-box .icon-wrapper.red {
+  background: #e3342f;
+}
+.stat-group .user-stats-box .user-stat {
+  display: block;
+  width: 100%;
+  padding-left: 1rem;
+}
+.stat-group .user-stats-box .user-stat p {
+  margin-bottom: 0;
 }
 
 .user-photo-col .id-photo-button .buttons button.btn-edit::before {
@@ -2033,15 +2061,32 @@ ul.links li i {
   .stat-group {
     grid-template-columns: 1fr;
     grid-template-rows: repeat(5, 1fr);
-    padding: 0 1rem;
+    padding: 0 6rem;
     grid-gap: 0;
     row-gap: 0.5rem;
   }
+  .stat-group .user-stats-box {
+    display: block;
+  }
+  .stat-group .user-stats-box .icon-wrapper {
+    margin: 0 auto;
+    width: 100%;
+    text-align: center;
+  }
 }
 @media only screen and (max-width: 575px) {
+  .stat-group {
+    padding: 0 3rem;
+  }
+
   .profile-title {
     flex-direction: column;
     width: 100%;
+  }
+}
+@media only screen and (max-width: 360px) {
+  .stat-group {
+    padding: 0 1.5rem;
   }
 }
 @media only screen and (max-width: 400px) {
