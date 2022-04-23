@@ -54,7 +54,7 @@
             <li class="c-sidebar-nav-item">
                 <a class="c-sidebar-nav-link" href="{{ route('assistance.index') }}">
                     <svg class="c-sidebar-nav-icon">
-                        <i class="fas fa-handshake-angle fa-fw"></i>
+                        <i class="fas fa-hands-helping fa-fw"></i>
                     </svg><span class="ml-1">{{ __('Assistance Requests') }}</span>
                 </a>
             </li>
