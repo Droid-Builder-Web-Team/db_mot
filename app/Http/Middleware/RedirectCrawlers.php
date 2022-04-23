@@ -30,9 +30,16 @@ class RedirectCrawlers
             switch (Route::currentRouteName()) {
             case "event.show":
                 list($id) = sscanf($request->path(), 'event/%d');
-                    
+
                 $event = Event::where('id', $id)->first();
                 return view('event.facebook', compact('event'));
+                break;
+            case "parts-run.show":
+                list($id) = sscanf($request->path(), 'parts-run/%d');
+
+                $partsRunData = PartsRunData::where('id', $id)->with('partsRunAd')->get();
+                return view('parts-run.facebook', compact('partsRunData'));
+                break;
             }
         }
         return $next($request);

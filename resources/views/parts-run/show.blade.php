@@ -9,6 +9,46 @@
 </script>
 
 <script>
+    function shareToFacebook(_this) {
+   var body = 'A Part Run has been added to the Droid Builders Portal. ';
+   body += 'Follow the link to see more details and to register your interest or ask any questions';
+   FB.ui({
+     display: 'iframe',
+     app_id: '{{ config('fb.fb_app_id', 'Laravel') }}',
+     method: 'share',
+     hashtag: '#dbukpartrun',
+     href: '{{ URL::current() }}',
+     quote: body,
+   }, function(response){});
+ }
+ </script>
+
+<script type="application/javascript" async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId            : '{{ config('fb.fb_app_id', 'Laravel') }}',
+      autoLogAppEvents : true,
+      xfbml            : true,
+      version          : 'v10.0'
+    });
+  };
+</script>
+
+<script>
+    function copyToClipboard() {
+  /* Get the text field */
+  var copyText = window.location.href;
+
+   /* Copy the text inside the text field */
+  navigator.clipboard.writeText(copyText);
+
+  /* Alert the copied text */
+  alert("Copied the text: " + copyText);
+    }
+</script>
+
+<script>
     $(document).ready(function(){
         $('#shipModal').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget) // Button that triggered the modal
@@ -46,6 +86,8 @@
                 <div class="text-center row">
                     <div class="col-12">
                         <a class="btn btn-primary" href={{ route('parts-run.edit', $data->id) }}>Edit Run</a>
+                        <span id="export" class="btn btn-info" onclick="shareToFacebook(event.target);">Share to Facebook</span>
+                        <span id="copyurl" class="btn btn-info" onclick="copyToClipboard();">Copy URL</span>
                     </div>
                 </div>
                 @endif
