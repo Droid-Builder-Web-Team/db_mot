@@ -50,6 +50,16 @@
             </li>
             @endif
 
+            @if(config('features.assistance', FALSE))
+            <li class="c-sidebar-nav-item">
+                <a class="c-sidebar-nav-link" href="{{ route('assistance.index') }}">
+                    <svg class="c-sidebar-nav-icon">
+                        <i class="fas fa-handshake-angle fa-fw"></i>
+                    </svg><span class="ml-1">{{ __('Assistance Requests') }}</span>
+                </a>
+            </li>
+            @endif
+
             <li class="c-sidebar-nav-title">Info</li>
 
             <li class="c-sidebar-nav-item">
