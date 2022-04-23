@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 use Material;
+use Assistance;
+use Offer;
 
 class Type extends Model
 {
@@ -19,5 +21,25 @@ class Type extends Model
     public function materials()
     {
         return $this->hasMany(Material::class);
+    }
+
+    /**
+     * Get all the materials this type can handle
+     *
+     * @return array of App\Assistance\Assistance
+     */
+    public function assistance()
+    {
+        return $this->belongsToMany(Assistance::class);
+    }
+
+    /**
+     * Get all the materials this type can handle
+     *
+     * @return array of App\Assistance\Assistance
+     */
+    public function offer()
+    {
+        return $this->belongsToMany(Offer::class);
     }
 }

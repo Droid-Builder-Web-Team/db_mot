@@ -20,4 +20,24 @@ class Assistance extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    /**
+     * Type of request
+     *
+     * @return array of App\Assistance\Type
+     */
+    public function type()
+    {
+        return $this->belongsTo(Type::class);
+    }
+
+    /**
+     * Type of material
+     *
+     * @return array of App\Assistance\Material
+     */
+    public function material()
+    {
+        return $this->belongsTo(Material::class);
+    }
 }
