@@ -82,4 +82,11 @@ class TypeController extends Controller
     {
         //
     }
+
+    public function getMaterials($id)
+    {
+        $type = Type::find($id);
+
+        return json($type->materials);
+    }
 }

@@ -98,10 +98,10 @@
                         <div class="text-left part-content">
                             <div class="row">
                                 <div class="run-header">
-                                    <div class="col-12 col-md-6">
+                                    <div class="col-md-6">
                                         <p class="title"><strong>{{ $data->partsRunAd->title }}</strong></p>
                                     </div>
-                                    <div class="col-12 col-md-6">
+                                    <div class="col-md-6">
                                         <div class="d-flex">
                                             <p class="pr-1 price"><strong>Price:</strong></p>
                                             <?php echo '£' . number_format($data->partsRunAd->price, 2); ?>
@@ -113,10 +113,10 @@
 
                             <div class="mb-4 row">
                                 <div class="seller-info">
-                                    <div class="col-12 col-md-6">
+                                    <div class="col-md-6">
                                         <p class="seller"><strong>Seller:</strong> {{ $data->user->forename }} {{ $data->user->surname }}</p>
                                     </div>
-                                    <div class="col-12 col-md-6">
+                                    <div class="col-md-6">
                                         <p class="droid"><strong>Club:</strong> {{ $data->club->name }}</p>
                                     </div>
                                 </div>
@@ -124,11 +124,11 @@
 
                             <div class="mb-4 row">
                                 <div class="location-shipping">
-                                    <div class="col-12 col-md-6">
+                                    <div class="col-md-6">
                                         <p class="location"><strong>Location:</strong> {{ $data->partsRunAd->location }}</p>
                                     </div>
                                     @if(count($shippingCostsArray) > 0)
-                                    <div class="col-12 col-md-6">
+                                    <div class="col-md-6">
                                         <div class="d-flex">
                                             <p class="pr-1 droid"><strong>Shipping Costs:</strong></p>
                                             <ul>
@@ -263,7 +263,7 @@
 
 <!-- Interest -->
 
-<div class="col-xs-3 col-sm-3 col-md-3">
+<div class="col-xs-12 col-sm-12 col-md-3">
   <div class="card">
     <div class="card-header">
       Status:
