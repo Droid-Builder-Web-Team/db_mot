@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Event;
+use App\PartsRunData;
 use Closure;
 use Illuminate\Support\Facades\Route;
 
