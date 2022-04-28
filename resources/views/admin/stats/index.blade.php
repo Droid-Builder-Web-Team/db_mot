@@ -27,7 +27,7 @@
 
     var stats = '';
 
-    var my_url = 'https://portal.r2djp.co.uk/admin/api/stats/total_users';
+    var my_url = '{{ config('app.url') }}/admin/api/stats/total_users';
     var total_users = (function () {
         var json = null;
         $.ajax({
@@ -60,7 +60,7 @@
                     type: 'time',
                     time: {
                         // Luxon format string
-                        tooltipFormat: 'DD T'
+                        tooltipFormat: 'dd T'
                     },
                     title: {
                         display: true,
