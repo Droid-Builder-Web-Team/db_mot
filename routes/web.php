@@ -60,6 +60,8 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(
         Route::post('/contacts/link', 'ContactController@link')->name('contacts.link');
         Route::post('/contacts/unlink', 'ContactController@unlink')->name('contacts.unlink');
         Route::get('/api/bcreps/{club_id}', 'ApiController@list_bcreps');
+        Route::get('/stats', 'StatsController@index');
+        Route::get('/api/stats/{stat}', 'StatsController@getStat');
         Route::resource('/map', 'MapsController', ['only' => ['index']]);
         Route::get('/badges/{keep}', 'BadgeController@download')->name('badges.download');
     }
