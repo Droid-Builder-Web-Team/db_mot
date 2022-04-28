@@ -27,20 +27,21 @@
 
     var stats = '';
 
-    var my_url = '{{ config('app.url') }}/admin/api/stats/total_users';
-    var total_users = (function () {
+    var my_url = '{{ config('app.url') }}/admin/api/stats/';
+
+    function getStat(stat){
         var json = null;
         $.ajax({
             'async': false,
             'global': false,
-            'url': my_url,
+            'url': my_url + stat,
             'dataType': "json",
             'success': function (data) {
                 json = data;
             }
         });
         return json;
-    })();
+    }
 
     const config = {
         type: 'line',
@@ -48,10 +49,28 @@
             datasets: [
                 {
                     label: "Total Users",
-                    data: total_users,
+                    data: getStat("total_users"),
                     fill: false,
                     borderColor: 'red',
-                }
+                },
+                {
+                    label: "Active Users (day)",
+                    data: getStat("users_active_day"),
+                    fill: false,
+                    borderColor: 'green',
+                },
+                {
+                    label: "Active Users (week)",
+                    data: getStat("users_active_week"),
+                    fill: false,
+                    borderColor: 'blue',
+                },
+                {
+                    label: "Active Users (month)",
+                    data: getStat("users_active_month"),
+                    fill: false,
+                    borderColor: 'yellow',
+                },
             ]
         },
         options: {
