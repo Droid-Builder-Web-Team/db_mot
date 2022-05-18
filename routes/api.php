@@ -14,11 +14,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
+Route::middleware('auth:api')->get('/members', function (Request $request) {
     return $request->user();
 });
 
-
+Route::group(
+    ['middleware' => ['auth:api']], function () {
+        Route::get('getmembers', 'Admin\ApiController@drivingCourseDownload');
+    }
+);
 Route::get('events/future', 'EventApiController@getFutureAllPublicEvents');
 Route::get('events/charity', 'EventApiController@getCharityYtd');
 Route::get('events/charity/{year}', 'EventApiController@getCharityYtd');

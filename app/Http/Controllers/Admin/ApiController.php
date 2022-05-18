@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\User;
+use App\Droid;
 use App\Club;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -24,5 +25,12 @@ class ApiController extends Controller
         }
 
         return response()->json($reps);
+    }
+
+    public function drivingCourseDownload()
+    {
+        $data = User::with('droids')->get();
+        $data->makeHidden(['api_token', 'badge_id', 'calendar_id', 'droid.notes']);
+        return response()->json(strip_tags($data));
     }
 }
