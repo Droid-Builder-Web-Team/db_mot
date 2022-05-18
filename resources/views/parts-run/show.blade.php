@@ -185,6 +185,19 @@
                                                         <a class="btn btn-primary" id="buy_button" target=_default href="{{ $data->partsRunAd->purchase_url }}">Buy Here</a>
                                                     @endif
                                                 </p>
+                                                @if($data->open == 1)
+                                                    @php
+                                                        $status="no";
+                                                        $quantity = 1;
+                                                        $user = $data->isInterested->only([ Auth::user()->id ])->first();
+                                                        if ($user != NULL) {
+                                                            $status = $user->pivot->status;
+                                                        }
+                                                    @endphp
+                                                    @if($status != 'interested')
+                                                        <p><a class="btn btn-primary" id="notify_button" href="{{ route('parts-run.interested',[$data->id, 'interest' => 'interested', 'quantity' => 1]) }}">Subscribe for Notifications</a></p>
+                                                    @endif
+                                                @endif
                                                 Note: Purchases are between you and the person doing the run. This site does not handle any transactions.
                                                 @if($data->isInterested->only([ Auth::user()->id ])->count() != 0)
                                                     <p><a class="btn btn-primary" id="cancel_button" href="{{ route('parts-run.interested',[$data->id, 'interest' => 'no', 'quantity' => 0]) }}">Remove Interest!</a></p>
@@ -286,7 +299,7 @@
                     ({{$user->pivot->quantity}})
                 @endif
                 @php $quantity += $user->pivot->quantity @endphp
-                @if($quantity > $data->partsRunAd->quantity)
+                @if($quantity > $data->partsRunAd->quantity && $data->open != 1)
                     (Reserve)
                 @endif
                 @if(auth()->user()->id == $data->user_id || Auth::user()->hasRole('BC Rep'))

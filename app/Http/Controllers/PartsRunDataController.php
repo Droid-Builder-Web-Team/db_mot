@@ -24,6 +24,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StorePartsRunRequest;
 use App\Notifications\PartsRunUpdated;
+use App\Notifications\PartsRunFull;
 
 /**
  * Parts Run Controller
@@ -298,8 +299,8 @@ class PartsRunDataController extends Controller
     public function interested(Request $request, PartsRunData $partsrun)
     {
 
-        if ((($partsrun->partsRunAd->quantity + $partsrun->partsRunAd->reserve) < $partsrun->interestQuantity())
-            && $request->interest == 'interested'
+        if ((($partsrun->partsRunAd->quantity + $partsrun->partsRunAd->reserve)
+            < $partsrun->interestQuantity()) && $request->interest == 'interested'
         ) {
             toastr()->error('Part Run Full');
             return back();
@@ -322,6 +323,13 @@ class PartsRunDataController extends Controller
             $result = $partsrun->interested()->save($user, $attributes);
         }
         toastr()->success('Interest registered for Parts Run');
+
+        $partsrun = $partsrun->fresh();
+
+        // Notify Part runner if quantity is reached
+        if ($partsrun->partsRunAd->quantity == $partsrun->interestQuantity()) {
+            $partsrun->user->notify(new PartsRunFull($partsrun));
+        }
         return back();
     }
 
