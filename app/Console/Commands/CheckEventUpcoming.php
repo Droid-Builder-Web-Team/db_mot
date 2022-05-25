@@ -53,6 +53,8 @@ class CheckEventUpcoming extends Command
                     $this->info('Event: Notifying: '.$user->forename);
                     $user->notify(new EventUpcoming($event));
                 }
+                # Also notify organiser
+                $event->organiser->notify(new EventUpcoming($event));
             }
         }
         return 0;

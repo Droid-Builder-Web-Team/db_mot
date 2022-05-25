@@ -26,6 +26,7 @@ use App\Notifications\EventChanged;
 use App\Notifications\EventCancelled;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * EventController
@@ -101,6 +102,7 @@ class EventsController extends Controller
         $event = $request->all();
         $linkify = new \Misd\Linkify\Linkify();
         $event['description'] = $linkify->process($request->description);
+        $event['created_by'] = Auth::id();
 
         $success = 0;
         try {

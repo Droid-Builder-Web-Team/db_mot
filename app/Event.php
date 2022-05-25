@@ -56,6 +56,14 @@ class Event extends Model implements \Acaronlex\LaravelCalendar\Event, Auditable
     }
 
     /**
+     * Get organiser user
+     */
+    public function organiser()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
+
+    /**
      * Get all who have said they are going
      *
      * @return array of App\User
