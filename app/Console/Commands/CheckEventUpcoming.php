@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use App\Event;
 use Carbon\Carbon;
 use App\Notifications\EventUpcoming;
+use App\Notifications\EventUpcomingEo;
 
 class CheckEventUpcoming extends Command
 {
@@ -54,7 +55,7 @@ class CheckEventUpcoming extends Command
                     $user->notify(new EventUpcoming($event));
                 }
                 # Also notify organiser
-                $event->organiser->notify(new EventUpcoming($event));
+                $event->organiser->notify(new EventUpcomingEo($event));
             }
         }
         return 0;
