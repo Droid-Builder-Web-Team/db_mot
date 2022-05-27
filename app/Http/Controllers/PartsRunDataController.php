@@ -209,7 +209,7 @@ class PartsRunDataController extends Controller
         }
 
         if (!auth()->user()->id == $partsRunData->user_id
-            || !auth()->user()->can('Create Partrun')
+            && !auth()->user()->can('Create Partrun')
         ) {
             abort(403);
         }
