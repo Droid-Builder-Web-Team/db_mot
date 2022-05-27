@@ -42,7 +42,7 @@
                         <div class="col-md-6 col-12">
                             <label for="price" class="col-4 col-form-label">Price</label>
                             <div class="col-12">
-                            <input type="float" name="price" value="{{ $data->partsRunAd->price }}" class="form-control" placeholder="Price" required>
+                            <input type="number" step="0.01" name="price" value="{{ $data->partsRunAd->price }}" class="form-control" placeholder="Price" required>
                             </div>
                         </div>
                     </div>
@@ -58,7 +58,7 @@
                         <div class="col-md-6 col-12">
                             <label for="shipping_costs" class="col-4 col-form-label">Shipping Costs (UK)</label>
                             <div class="col-12">
-                                <input type="text" name="shipping_costs" value="{{ $data->partsRunAd->shipping_costs }}" class="form-control">
+                                <input type="number" step="0.01" name="shipping_costs" value="{{ $data->partsRunAd->shipping_costs }}" class="form-control">
                             </div>
                         </div>
                     </div>
