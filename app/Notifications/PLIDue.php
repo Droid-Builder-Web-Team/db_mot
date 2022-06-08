@@ -27,10 +27,10 @@ class PLIDue extends Notification
         $this->user = $user;
         $this->title = "Your PLI is due in a month";
         $this->text = "You need to pay your PLI in a month. Please make sure "
-              + "you have a valid MOT on your droid too. To pay, click on the "
-              + "link above and you should be able to click the payment button "
-              + "at the top of your profile. Or you can log in to: "
-              + "https://portal.droidbuilders.uk/";
+              .= "you have a valid MOT on your droid too. To pay, click on the "
+              .= "link above and you should be able to click the payment button "
+              .= "at the top of your profile. Or you can log in to: "
+              .= "https://portal.droidbuilders.uk/";
         $this->link = route('user.show', $this->user->id);
         $this->icon = "user-circle";
     }

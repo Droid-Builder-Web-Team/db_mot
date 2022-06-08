@@ -178,13 +178,16 @@ class UserController extends Controller
      */
     public function displayMugShot($uid, $size = '')
     {
+
         if ($size != "") {
             $size = $size.'-';
         }
+        //return redirect(Storage::temporaryUrl('members/'.$uid.'/'.$size.'mug_shot.jpg', now()->addMinutes(5)));
         $path = 'members/'.$uid.'/'.$size.'mug_shot.png';
         if (!Storage::exists($path)) {
             $path = 'members/'.$uid.'/'.$size.'mug_shot.jpg';
         }
+        //return redirect(Storage::temporaryUrl($path, now()->addMinutes(5)));
         if (!Storage::exists($path)) {
             $path = getcwd().'/img/blank_mug_shot.jpg';
             $file = file_get_contents($path);
