@@ -2,10 +2,10 @@
   <GMapMap
       :center="center"
       :zoom="6"
-      style="width: 100vw; height: 600px"
+      style="width: 100vw; height: 800px"
   >
     <GMapCluster
-      :minimumClusterSize="15"
+      :minimumClusterSize="25"
       :zoomOnClick="true"
       >
       <GMapMarker
