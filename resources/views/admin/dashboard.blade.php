@@ -76,7 +76,7 @@
           @foreach ($users as $user)
             @if ($user->expiringPLI())
               <tr>
-                <td>{{$user->forename}} {{ $user->surname}}</td>
+                <td><a href="{{ route('user.show',$user->id) }}">{{ $user->forename }} {{ $user->surname }}</a></td>
                 <td>{{$user->pli_date}}</td>
                 <td>
                   @can('View Members')
@@ -112,8 +112,8 @@
               <tr>
                 <td>{{$droid->name}}</td>
                 <td>
-                  @foreach ( $droid->users as $users )
-                    {{ $users->forename }} {{ $users->surname }}<br>
+                  @foreach ( $droid->users as $user )
+                  <a href="{{ route('user.show',$user->id) }}">{{ $user->forename }} {{ $user->surname }}</a><br>
                   @endforeach
                 </td>
                 <td>{{$droid->motDate()}}</td>
@@ -148,7 +148,7 @@
           </tr>
           @foreach ($paypli as $user)
             <tr>
-              <td>{{$user->forename}} {{$user->surname}}</td>
+              <td><a href="{{ route('user.show',$user->id) }}">{{ $user->forename }} {{ $user->surname }}</a></td>
               <td>{{$user->pli_date}}</td>
             </tr>
           @endforeach
