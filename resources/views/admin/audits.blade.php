@@ -21,7 +21,7 @@
             <td>{{ $audit->auditable_type }} (id: {{ $audit->auditable_id }})</td>
             <td>{{ $audit->event }}</td>
             @if($audit->user)
-              <td>{{ $audit->user->forename }} {{ $audit->user->surname }}</td>
+              <td><a href="{{ route('user.show',$audit->user->id) }}">{{ $audit->user->forename }} {{ $audit->user->surname }}</a></td>
             @else
               <td></td>
             @endif
