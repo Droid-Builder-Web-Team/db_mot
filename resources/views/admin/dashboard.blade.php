@@ -136,7 +136,7 @@
 </div>
 
 <div class="row">
-<div class="col-md-6 text-center">
+  <div class="col-md-6 text-center">
     <div class="card border-primary">
       <div class="card-header title text-center">PLI To Pay</div>
       <div class="card-body">
@@ -156,7 +156,46 @@
         </div>
       </div>
     </div>
-  </div>  
+  </div>
+
+  <div class="col-md-6 text-center">
+    <div class="card border-primary">
+      <div class="card-header title text-center">Recent MOTs</div>
+      <div class="card-body">
+        <div class="table-responsive">
+        <table class="table table-striped table-sm table-hover table-dark text-center">
+          <tr>
+            <th>Name</th>
+            <th>Owner</th>
+            <th>MOT Date</th>
+            <th></th>
+          </tr>
+          @foreach ($droids as $droid)
+            @if (strtotime($droid->motDate()) > strtotime('-1 month'))
+              <tr>
+                <td>{{$droid->name}}</td>
+                <td>
+                  @foreach ( $droid->users as $user )
+                  <a href="{{ route('user.show',$user->id) }}">{{ $user->forename }} {{ $user->surname }}</a><br>
+                  @endforeach
+                </td>
+                <td>{{$droid->motDate()}}</td>
+                <td>
+                  @can('View Droids')
+                    <a class="btn-sm btn-view" href="{{ route('droid.show',$droid->id) }}"><i class="fas fa-eye"></i></a>
+                  @endcan
+                  @can('Edit Droids')
+                    <a class="btn-sm btn-edit" href="{{ route('admin.droids.edit',$droid->id) }}"><i class="fas fa-edit"></i></a>
+                  @endcan
+                </td>
+              </tr>
+              @endif
+        @endforeach
+        </table>
+        </div>
+      </div>
+    </div>
+  </div>
 
 </div>
 
