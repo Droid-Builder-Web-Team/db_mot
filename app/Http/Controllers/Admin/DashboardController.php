@@ -61,9 +61,25 @@ class DashboardController extends Controller
             ->get();
         $active = User::whereDate('last_activity', '>', Carbon::today()->subDays(60))
             ->count();
+
+        $paypli = [];
+        foreach ($users as $user) 
+        {
+            if (!$user->validPLI()) 
+            {
+                foreach ($user->droids as $droid) 
+                {
+                    if ($droid->hasMOT()) 
+                    {
+                        array_push($paypli, $user);
+                        break;
+                    }
+                }
+            }
+        }
         return view(
             'admin.dashboard', compact(
-                'users', 'droids', 'events', 'badges', 'active'
+                'users', 'droids', 'events', 'badges', 'active', 'paypli'
             )
         );
     }

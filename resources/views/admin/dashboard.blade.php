@@ -64,7 +64,7 @@
 <div class="row">
   <div class="col-md-6 text-center">
     <div class="card border-primary">
-      <div class="card-header title text-center">Upcoming PLI</div>
+      <div class="card-header title text-center">Upcoming PLI Expiration</div>
       <div class="card-body">
         <div class="table-responsive">
         <table class="table table-striped table-sm table-hover table-dark text-center">
@@ -97,7 +97,7 @@
 
   <div class="col-md-6 text-center">
     <div class="card border-primary">
-      <div class="card-header title text-center">Upcoming MOT</div>
+      <div class="card-header title text-center">Upcoming MOT Expiration</div>
       <div class="card-body">
         <div class="table-responsive">
         <table class="table table-striped table-sm table-hover table-dark text-center">
@@ -136,6 +136,27 @@
 </div>
 
 <div class="row">
+<div class="col-md-6 text-center">
+    <div class="card border-primary">
+      <div class="card-header title text-center">PLI To Pay</div>
+      <div class="card-body">
+        <div class="table-responsive">
+        <table class="table table-striped table-sm table-hover table-dark text-center">
+          <tr>
+            <th>Name</th>
+            <th>PLI Date</th>
+          </tr>
+          @foreach ($paypli as $user)
+            <tr>
+              <td>{{$user->forename}} {{$user->surname}}</td>
+              <td>{{$user->pli_date}}</td>
+            </tr>
+          @endforeach
+        </table>
+        </div>
+      </div>
+    </div>
+  </div>  
 
 </div>
 
