@@ -26,7 +26,10 @@ class PLIExpired extends Notification
     {
         $this->user = $user;
         $this->title = "Your PLI has Expired";
-        $this->text = "You need to pay your PLI to have cover.";
+        $this->text = "You need to pay your PLI to have cover. "
+            . "If you have a droid with a valid MOT you can pay your PLI "
+            . "in the portal by clicking the Pay PLI button on your profile "
+            . "page."
         $this->link = route('user.show', $this->user->id);
         $this->icon = "user-circle";
     }

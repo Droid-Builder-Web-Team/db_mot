@@ -47,7 +47,10 @@ class MOTAdded extends Notification
     {
         $this->mot = $mot;
         $this->title = "An MOT has been added.";
-        $this->text = "An MOT for one of your droids has been added.";
+        $this->text = "An MOT for one of your droids has been added. "
+            . "If your PLI is due or about to expire, you can log into "
+            . "the portal and click the Pay PLI PayPal button on your "
+            . "profile page";
         $this->link = route('mot.show', $this->mot->id);
         $this->icon = "robot";
     }
