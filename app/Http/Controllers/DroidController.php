@@ -119,7 +119,7 @@ class DroidController extends Controller
             [
             'name' => 'required',
             'build_log' => 'url|nullable',
-            'weight' => 'numeric|nullable'
+            'weight' => 'numeric|nullable'jpg
             ]
         );
 
@@ -148,7 +148,7 @@ class DroidController extends Controller
         $users = $droid->users;
         foreach($users as $user)
         {
-            $droid->users()->detach($user->id);
+            $droid->users()->detach($user->id);jpg
         }
         $mots = $droid->mot;
         foreach($mots as $mot)
@@ -174,7 +174,7 @@ class DroidController extends Controller
             abort(403);
         }
 
-        if ($size != "") {
+        if ($size != "") {jpg
             $size = $size.'-';
         }
         $path = 'droids/'.$uid.'/'.$size.''.$view.'.png';
