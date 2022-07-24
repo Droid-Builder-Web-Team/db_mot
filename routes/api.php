@@ -21,6 +21,8 @@ Route::middleware('auth:api')->get('/members', function (Request $request) {
 Route::group(
     ['middleware' => ['auth:api']], function () {
         Route::get('getmembers', 'Admin\ApiController@drivingCourseDownload');
+        Route::get('getmemberimage/{uid}', 'Admin\ApiController@get_member_image');
+        Route::get('getdroidimage/{uid}', 'Admin\ApiController@get_droid_image');
     }
 );
 Route::get('events/future', 'EventApiController@getFutureAllPublicEvents');
