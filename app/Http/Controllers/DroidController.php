@@ -119,7 +119,7 @@ class DroidController extends Controller
             [
             'name' => 'required',
             'build_log' => 'url|nullable',
-            'weight' => 'numeric|nullable'jpg
+            'weight' => 'numeric|nullable'
             ]
         );
 
@@ -148,7 +148,7 @@ class DroidController extends Controller
         $users = $droid->users;
         foreach($users as $user)
         {
-            $droid->users()->detach($user->id);jpg
+            $droid->users()->detach($user->id);
         }
         $mots = $droid->mot;
         foreach($mots as $mot)
