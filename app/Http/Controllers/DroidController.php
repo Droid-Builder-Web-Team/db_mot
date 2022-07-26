@@ -174,7 +174,7 @@ class DroidController extends Controller
             abort(403);
         }
 
-        if ($size != "") {jpg
+        if ($size != "") {
             $size = $size.'-';
         }
         $path = 'droids/'.$uid.'/'.$size.''.$view.'.png';
