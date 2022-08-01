@@ -27,6 +27,7 @@ use App\Achievement;
 use App\CourseRun;
 use App\Club;
 use App\PartsRunData;
+use App\Models\Auction;
 use Dialect\Gdpr\Portable;
 
 use Rennokki\Rating\Traits\CanRate;
@@ -172,6 +173,20 @@ class User extends Authenticatable implements MustVerifyEmail,
                 'mot_required'
             );
     }
+
+    /**
+     * Get all the user's Auctions
+     *
+     * @return array of App\Auctions
+     */
+    public function auctions()
+    {
+        return $this->belongsToMany(Auction::class, 'auction_members')
+            ->withPivot(
+                'amount'
+            );
+    }
+
 
     /**
      * Events user is going to

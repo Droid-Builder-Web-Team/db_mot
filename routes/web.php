@@ -136,6 +136,10 @@ Route::group(
         Route::get('parts-run/interested/{partsrun}', 'PartsRunDataController@interested')->name('parts-run.interested');
         Route::post('parts-run/status_update', 'PartsRunDataController@statusUpdate')->name('parts-run.status_update');
         Route::get('parts-run/export/{partsrun}', 'PartsRunDataController@export')->name('parts-run.export');
+
+
+        Route::resource('auctions', 'AuctionController');
+        Route::put('auctions/bid/{auction}', 'AuctionController@bid')->name('auctions.bid');
     }
 );
 

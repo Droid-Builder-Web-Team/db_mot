@@ -5,6 +5,7 @@ return [
     'database' => env('FEATURE_DATABASE', FALSE),
     'assistance' => env('FEATURE_ASSISTANCE', FALSE),
     'marketplace' => env('FEATURE_MARKETPLACE', FALSE),
+    'auction' => env('FEATURE_AUCTION', FALSE),
 ];
 
 ?>

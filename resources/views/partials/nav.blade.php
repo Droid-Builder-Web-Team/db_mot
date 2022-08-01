@@ -60,6 +60,16 @@
             </li>
             @endif
 
+            @if(config('features.auction', FALSE))
+            <li class="c-sidebar-nav-item">
+                <a class="c-sidebar-nav-link" href="{{ route('auctions.index') }}">
+                    <svg class="c-sidebar-nav-icon">
+                        <i class="fas fa-hand-holding-heart fa-fw"></i>
+                    </svg><span class="ml-1">{{ __('Charity Auctions') }}</span>
+                </a>
+            </li>
+            @endif
+
             <li class="c-sidebar-nav-title">Info</li>
 
             <li class="c-sidebar-nav-item">
