@@ -47,7 +47,9 @@
 
             @can('Edit Auction')
               <br />
-              Admin eyes only: Current winner is ({{$auction->highest()['user']->forename}} {{$auction->highest()['user']->surname}})
+              @if ($auction->highest()['highest'] != 0)
+                Admin eyes only: Current winner is ({{$auction->highest()['user']->forename}} {{$auction->highest()['user']->surname}})
+              @endif
             @endcan
           </div>
         </div>
