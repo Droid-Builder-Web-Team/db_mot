@@ -33,25 +33,16 @@
 
                     <input type=hidden name="user_id" value="{{ Auth::user()->id }}">
                     <div class="row">
-                        <div class="col-xs-9 col-sm-9 col-md-9">
+                        <div class="col-xs-12 col-sm-12 col-md-12">
                             <div class="form-group">
                                 <strong>Title:</strong>
                                 <input type="text" name="title" class="form-control" placeholder="Title" value='{{ old('title') }}'>
                             </div>
                         </div>
-                        <div class="col-xs-3 col-sm-3 col-md-3">
-                            <div class="form-group">
-                                <strong>Type:</strong><br>
-                                <select name=type>
-                                        <option value="standard">Standard (eBay style)</option>
-                                        <option value="silent">Silent</option>
-                                </select>
-                            </div>
-                        </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-sm-2">
+                        <div class="col-sm-2 form-group">
                             <label for="description"><strong>Description:</strong></label>
                         </div>
                     </div>
@@ -64,7 +55,7 @@
 
 
                     <div class="row">
-                    <div class="col-xs-3 col-sm-3 col-md-3">
+                    <div class="col-xs-4 col-sm-4 col-md-4">
                             <div class="form-group">
                                 <strong>Country:</strong><br>
                                 <select name=country>
@@ -73,7 +64,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-xs-3 col-sm-3 col-md-3">
+                        <div class="col-xs-4 col-sm-4 col-md-4">
                             <div class="form-group">
                                 <strong>Currency:</strong><br>
                                 <select name=currency>
@@ -82,12 +73,29 @@
                                 </select>
                             </div>
                         </div>
+                        <div class="col-xs-4 col-sm-4 col-md-4">
+                            <div class="form-group">
+                                <strong>Type:</strong><br>
+                                <select name=type>
+                                        <option value="standard">Standard (eBay style)</option>
+                                        <option value="silent">Silent</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-3 col-sm-3 col-md-3">
+                            <div class="form-group">
+                                <strong>Finish Date:</strong>
+                                <input type="date" name=finish_date>
+                            </div>
+                        </div>
                         <div class="col-xs-3 col-sm-3 col-md-3">
                             <div class="form-group">
                                 <strong>Finish Time:</strong>
-                                <input type="datetime-local" name=finish_time>
+                                <input type="time" name=finish_time size=2>
                             </div>
-                        </div>
+                        </div>                        
                         <div class="col-xs-3 col-sm-3 col-md-3">
                             <div class="form-group">
                                 <strong>Timezone:</strong><br>

@@ -32,6 +32,9 @@ class CommentController extends Controller
             case "App\PartsRunData":
                 $permission = "Edit Partrun";
                 break;
+            case "App\Models\Auction":
+                $permission = "Edit Auction";
+                break;
             default:
                 $permission = "";
                 break;
@@ -46,6 +49,9 @@ class CommentController extends Controller
                             $user->notify(new CommentBroadcast($result));
                             break;
                         case "App\PartsRunData":
+                            $user->notify(new CommentBroadcast($result));
+                            break;
+                        case "App\Models\Auction":
                             $user->notify(new CommentBroadcast($result));
                             break;
                         default:

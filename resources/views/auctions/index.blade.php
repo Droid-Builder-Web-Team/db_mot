@@ -41,7 +41,13 @@
                                 {{ $auction->highest()['highest'] }} ({{ strtoupper($auction->currency) }})
                             @endif
                         </td>
-                        <td>{{$auction->finish_time}}</td>
+                        <td>
+                            @if ($auction->secondsLeft() < 0 )
+                                Finished
+                            @else
+                                {{$auction->timeLeft()}}
+                            @endif
+                        </td>
                         <td>
                             <div class="d-flex">
                                 <a class="btn btn-view" href={{ route('auctions.show', $auction->id) }}><div class="d-block d-sm-none"><i class="fas fa-eye"></i></div><span class="d-none d-sm-block">View</span></a>

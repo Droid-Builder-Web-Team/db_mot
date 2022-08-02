@@ -428,4 +428,18 @@ class User extends Authenticatable implements MustVerifyEmail,
             return false;
         }
     }
+
+    public function highestBid(Auction $auction)
+    {
+        $amount = 0;
+        foreach($auction->users()->where('user_id', $this->id)->get() as $user)
+        {
+            if($amount < $user->pivot->amount) 
+            {
+                $amount = $user->pivot->amount;
+            }
+        }
+        return $amount;
+
+    }
 }

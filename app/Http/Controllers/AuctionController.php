@@ -16,6 +16,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Auction;
 use App\User;
+use Carbon\Carbon;
 
 /**
  * AuctionController
@@ -46,7 +47,9 @@ class AuctionController extends Controller
      */
     public function index()
     {
-        $auctions = Auction::all();
+        $auctions = Auction::whereDate('finish_time', ">", Carbon::now()->subHours(2))
+                    ->orderBy('finish_time')
+                    ->get();
 
         return view('auctions.index', compact('auctions'));
     }
@@ -76,10 +79,12 @@ class AuctionController extends Controller
             'type' => 'in:standard,silent',
             'currency' => 'in:gbp,usd',
             'country' => 'required',
-            'finish_time' => 'date',
+            'finish_date' => 'date',
             'timezone' => 'timezone',
             ]
         );
+
+        $request['finish_time'] = $request->finish_date . " " . $request->finish_time;
         try {
             $auction = Auction::create($request->all());
             toastr()->success('Auction created successfully');
@@ -112,13 +117,23 @@ class AuctionController extends Controller
           'amount' => $request->amount,
           'auction_id' => $auction->id
         ];
-        if ($hasEntry) {
-            $result = $auction->users()->updateExistingPivot($user, $attributes);
-            toastr()->success('Bid amount updated');
-        } else {
-            $result = $auction->users()->save($user, $attributes);
-            toastr()->success('Bid submitted');
+
+        if($auction->secondsLeft() < 0)
+        {
+            toastr()->error('Auction has finished');
+            return back();
         }
+
+        if($hasEntry) {
+            $amount = $user->highestBid($auction);
+            if ($amount > $request->amount) 
+            {
+                toastr()->error('Lowering bid is not allowed');
+                return back();
+            }
+        }
+        $result = $auction->users()->save($user, $attributes);
+        toastr()->success('Bid submitted');
         return back();
     }
 
