@@ -47,9 +47,8 @@ class AuctionController extends Controller
      */
     public function index()
     {
-        $auctions = Auction::whereDate('finish_time', ">", Carbon::now()->subHours(2))
-                    ->orderBy('finish_time')
-                    ->get();
+        $auctions = Auction::all()
+                    ->sortByDesc('finish_time', );
 
         return view('auctions.index', compact('auctions'));
     }
@@ -135,6 +134,59 @@ class AuctionController extends Controller
         $result = $auction->users()->save($user, $attributes);
         toastr()->success('Bid submitted');
         return back();
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param \App\Auction $auction Auction model to edit
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Auction $auction)
+    {
+        $auctions = Auction::all();
+        return view(
+            'auctions.edit'
+            )->with('auction', $auction);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param \Illuminate\Http\Request $request Request data
+     * @param \App\Event               $event   Event to update
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, Auction $auction)
+    {
+        $validatedData = $request->validate(
+            [
+            'title' => 'required',
+            'type' => 'in:standard,silent',
+            'currency' => 'in:gbp,usd',
+            'country' => 'required',
+            'finish_date' => 'date',
+            'timezone' => 'timezone',
+            ]
+        );
+
+        $newauction = $request->all();
+        $linkify = new \Misd\Linkify\Linkify();
+        $newauction['description'] = $linkify->process($request->description);
+        try {
+            $auction->update($newauction);
+            toastr()->success('Auction updated successfully');
+        } catch (\Illuminate\Database\QueryException $exception) {
+            toastr()->error(
+                'Failed to update Auction'
+            );
+        }
+
+
+        return view('auctions.show', compact('auction'));
+
     }
 
 }

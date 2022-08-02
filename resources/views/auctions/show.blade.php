@@ -66,6 +66,7 @@
           </div>
         </div>
 
+        @if ($auction->secondsLeft() > 0)
         <div class="row">
           <div class="col-md-12">
             <br />
@@ -76,7 +77,11 @@
               <input type=hidden name="user_id" value="{{ Auth::user()->id }}">
               <div class="form-group">
                   <strong>Bid:</strong>
-                  <input type="number" name="amount" size=6>
+                  @if ($auction->type != "silent")
+                    <input type="number" name="amount" size=6 min="{{$auction->highest()['highest'] + 1 }}" value="{{$auction->highest()['highest'] + 1 }}" max=999999>
+                  @else
+                    <input type="number" name="amount" size=6 min="{{Auth::user()->highestBid($auction) + 1 }}" value="{{Auth::user()->highestBid($auction) + 1 }}" max=999999>
+                  @endif
                   <input type="submit" name="submit" value="Place Your Bid!">
                   (Current Bid: {{ Auth::user()->highestBid($auction)}})
               </div>
@@ -84,6 +89,7 @@
             </form>
           </div>
         </div>
+        @endif
       </div>
     </div>
   </div>

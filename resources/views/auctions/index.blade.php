@@ -65,5 +65,15 @@
   </div>
 </div>
 
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                These auctions are for charity only. Unless otherwise specified in the auction, the proceeds will go to the current Droidbuilders charity which can be found here: <a target="_default" href="https://droidbuilders.uk/charity">https://droidbuilders.uk/charity</a>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 @endsection
