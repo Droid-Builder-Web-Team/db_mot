@@ -125,9 +125,17 @@
 <script>
     tinymce.init({
         selector: '#description',
-        plugins: 'autolink lists table link hr autoresize',
-        toolbar: 'table numlist bullist link hr',
+        plugins: 'autolink lists table link hr autoresize code image media',
+        toolbar: 'undo redo | formatselect | ' +
+  'bold italic backcolor | alignleft aligncenter ' +
+  'alignright alignjustify | bullist numlist outdent indent | ' +
+  'removeformat | table | link image media | hr code ',
         toolbar_mode: 'floating',
+        image_caption: true,
+        content_style: 'img {max-width: 800px; width: 100%; height: auto;}',
+        image_class_list: [
+            {title: 'Responsive', value: 'img-responsive'}
+        ]
     });
 </script>
 @endsection
