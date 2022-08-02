@@ -172,6 +172,8 @@ class AuctionController extends Controller
             ]
         );
 
+
+        $request['finish_time'] = $request->finish_date . " " . $request->finish_time;
         $newauction = $request->all();
         $linkify = new \Misd\Linkify\Linkify();
         $newauction['description'] = $linkify->process($request->description);

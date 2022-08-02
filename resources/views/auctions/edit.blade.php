@@ -85,7 +85,7 @@
                         <div class="col-xs-3 col-sm-3 col-md-3">
                             <div class="form-group">
                                 <strong>Finish Time:</strong>
-                                <input type="time" name=finish_time size=2 value={{ $auction->finish_time }}>
+                                <input type="time" name=finish_time size=2 value={{ explode(" ", $auction->finish_time)[1] }}>
                             </div>
                         </div>                        
                         <div class="col-xs-3 col-sm-3 col-md-3">
