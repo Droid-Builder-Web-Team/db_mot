@@ -299,8 +299,9 @@ class PartsRunDataController extends Controller
     public function interested(Request $request, PartsRunData $partsrun)
     {
 
-        if ((($partsrun->partsRunAd->quantity + $partsrun->partsRunAd->reserve)
-            < $partsrun->interestQuantity()) && $request->interest == 'interested'
+        if (((($partsrun->partsRunAd->quantity + $partsrun->partsRunAd->reserve)
+            < $partsrun->interestQuantity()) && $request->interest == 'interested') 
+            && $partsrun->partsRunAd->quantity != 0
         ) {
             toastr()->error('Part Run Full');
             return back();
