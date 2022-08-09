@@ -41,7 +41,19 @@
 
                 <div class="form-group">
                     <label for="country"><strong>Country</strong></label>
-                    <input type="text" name="country" class="form-control" placeholder="Country" value="{{ $location->country }}">
+                      <select name="country" class="form-control" placeholder="Country">
+                        <option disabled value>Please Select</option>
+                        <option value="United Kingdom">United Kingdom</option>
+                        <option value="United States">United States</option>
+                        <option disabled value>----</option>
+                        @foreach($countries as $code => $country)
+                          <option value="{{ $country }}"
+                          @if($country == $location->country)
+                            selected
+                          @endif
+                          >{{ $country }}</option>
+                        @endforeach
+                      </select>
                 </div>
 
                 <div class="form-group">

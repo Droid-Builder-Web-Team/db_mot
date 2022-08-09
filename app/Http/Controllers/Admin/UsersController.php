@@ -21,6 +21,7 @@ use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Yajra\Datatables\Facades\Datatables;
 use App\DataTables\UsersDataTable;
+use CountryState;
 
 /**
  * UsersController
@@ -75,11 +76,14 @@ class UsersController extends Controller
                 array_push($clubs, $club);
             }
         }
+        $countries = CountryState::getCountries();
+        rsort($countries);
         return view('admin.users.edit')->with(
             [
                 'user' => $user,
                 'roles' => $roles,
-                'clubs' => $clubs
+                'clubs' => $clubs,
+                'countries' => $countries
             ]
         );
     }

@@ -45,9 +45,21 @@
                       <input type="text" name="postcode" value="{{ $user->postcode }}" class="form-control" placeholder="Postcode">
                     </div>
                     <div class="col-md-3 mb-3">
-                        <label>Country</label>
-                        <input type="text" name="country" value="{{ $user->country }}" class="form-control" placeholder="Country">
-                      </div>
+                      <label>Country</label>
+                      <select name="country" class="form-control" placeholder="Country">
+                        <option disabled value>Please Select</option>
+                        <option value="United Kingdom">United Kingdom</option>
+                        <option value="United States">United States</option>
+                        <option disabled value>----</option>
+                        @foreach($countries as $code => $country)
+                          <option value="{{ $country }}"
+                          @if($country == $user->country)
+                            selected
+                          @endif
+                          >{{ $country }}</option>
+                        @endforeach
+                      </select>
+                    </div>
                   </div>
                   <div class="form-row">
                     <div class="col-md-3 mb-3">

@@ -17,6 +17,8 @@ use App\Contact;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\DataTables\LocationsDataTable;
+use CountryState;
+
 
 /**
  * Locations Admin Controller
@@ -52,7 +54,9 @@ class LocationController extends Controller
      */
     public function create()
     {
-        return view('admin.locations.create');
+        $countries = CountryState::getCountries();
+        rsort($countries);
+        return view('admin.locations.create')->with('countries', $countries);
     }
 
     /**
@@ -101,9 +105,12 @@ class LocationController extends Controller
      */
     public function edit(Location $location)
     {
+        $countries = CountryState::getCountries();
+        rsort($countries);
         return view('admin.locations.edit')->with(
             [
-            'location' => $location
+            'location' => $location,
+            'countries' => $countries
             ]
         );
     }

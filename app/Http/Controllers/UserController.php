@@ -17,6 +17,7 @@ use App\Achievement;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Response;
+use CountryState;
 use PDF;
 
 /**
@@ -84,7 +85,11 @@ class UserController extends Controller
         ) {
             abort(403);
         }
-        return view('user.edit')->with('user', $user);
+        $countries = CountryState::getCountries();
+        rsort($countries);
+        return view('user.edit')
+            ->with('user', $user)
+            ->with('countries', $countries);
     }
 
     /**
