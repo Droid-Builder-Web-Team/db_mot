@@ -126,6 +126,12 @@
                    <input type="text" name="weight" class="form-control" value="{{ $droid->weight }}">
                </div>
            </div>
+           <div class="col-xs-4 col-sm-4 col-md-4">
+               <div class="form-group">
+                   <strong>Top Speed</strong> (in m/s)
+                   <input type="text" name="top_speed" class="form-control" value="{{ $droid->top_speed }}">
+               </div>
+           </div>
          </div>
          <div class="form-row">
          <div class="col-xs-12 col-sm-12 col-md-12">

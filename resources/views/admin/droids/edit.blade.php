@@ -70,66 +70,71 @@
                             </select>
                         </div>
                     </div>
-                    <div class="form-row">
-                        <div class="col-xs-12 col-sm-12 col-md-12">
-                            <div class="form-group">
-                                <strong>Sound System:</strong>
-                                <input type="text" name="sound_system" class="form-control" value="{{ $droid->sound_system }}">
-                            </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-xs-4 col-sm-4 col-md-4">
+                        <div class="form-group">
+                            <strong>Sound System:</strong>
+                            <input type="text" name="sound_system" class="form-control" value="{{ $droid->sound_system }}">
                         </div>
                     </div>
-                    <div class="form-row">
-                        <div class="col-xs-12 col-sm-12 col-md-12">
-                            <div class="form-group">
-                                <strong>Build Material:</strong>
-                                <input type="text" name="material" class="form-control" value="{{ $droid->material }}">
-                            </div>
+                    <div class="col-xs-4 col-sm-4 col-md-4">
+                        <div class="form-group">
+                            <strong>Build Material:</strong>
+                            <input type="text" name="material" class="form-control" value="{{ $droid->material }}">
                         </div>
                     </div>
-                    <div class="form-row">
-                        <div class="col-xs-4 col-sm-4 col-md-4">
-                            <div class="form-group">
-                                <strong>Battery Type:</strong> (eg, LiPo, LiFePo, SLA.)
-                                <input type="text" name="battery" class="form-control" value="{{ $droid->battery }}">
-                            </div>
-                        </div>
-                        <div class="col-xs-4 col-sm-4 col-md-4">
-                            <div class="form-group">
-                                <strong>Drive Type:</strong> (eg, Warp drives, Scavenger.)
-                                <input type="text" name="drive_type" class="form-control" value="{{ $droid->drive_type }}">
-                            </div>
-                        </div>
-                        <div class="col-xs-4 col-sm-4 col-md-4">
-                            <div class="form-group">
-                                <strong>Voltage</strong>
-                                <input type="text" name="drive_voltage" class="form-control" value="{{ $droid->drive_voltage }}">
-                            </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-xs-4 col-sm-4 col-md-4">
+                        <div class="form-group">
+                            <strong>Battery Type:</strong> (eg, LiPo, LiFePo, SLA.)
+                            <input type="text" name="battery" class="form-control" value="{{ $droid->battery }}">
                         </div>
                     </div>
-                    <div class="form-row">
-                        <div class="col-xs-4 col-sm-4 col-md-4">
-                            <div class="form-group">
-                                <strong>Approx Value:</strong>
-                                <input type="text" name="value" class="form-control" value="{{ $droid->value }}">
-                            </div>
-                        </div>
-                        <div class="col-xs-4 col-sm-4 col-md-4">
-                            <div class="form-group">
-                                <strong>Approx Weight</strong> (in kg)
-                                <input type="text" name="weight" class="form-control" value="{{ $droid->weight }}">
-                            </div>
+                    <div class="col-xs-4 col-sm-4 col-md-4">
+                        <div class="form-group">
+                            <strong>Drive Type:</strong> (eg, Warp drives, scavenger.)
+                            <input type="text" name="drive_type" class="form-control" value="{{ $droid->drive_type }}">
                         </div>
                     </div>
-                    <div class="form-row">
-                        <div class="col-xs-12 col-sm-12 col-md-12">
-                            <div class="form-group">
-                                <strong>Build Log:</strong>
-                                <input type="text" name="build_log" class="form-control" value="{{ $droid->build_log }}">
-                            </div>
+                    <div class="col-xs-4 col-sm-4 col-md-4">
+                        <div class="form-group">
+                            <strong>Voltage</strong>
+                            <input type="text" name="drive_voltage" class="form-control" value="{{ $droid->drive_voltage }}">
                         </div>
                     </div>
-                    <div class="form-row">
-                        <div class="col-md-1 mb-3">
+                </div>
+                <div class="form-row">
+                    <div class="col-xs-4 col-sm-4 col-md-4">
+                        <div class="form-group">
+                            <strong>Approx Value:</strong>
+                            <input type="text" name="value" class="form-control" value="{{ $droid->value }}">
+                        </div>
+                    </div>
+                    <div class="col-xs-4 col-sm-4 col-md-4">
+                        <div class="form-group">
+                            <strong>Approx Weight</strong> (in kg)
+                            <input type="text" name="weight" class="form-control" value="{{ $droid->weight }}">
+                        </div>
+                    </div>
+                    <div class="col-xs-4 col-sm-4 col-md-4">
+                        <div class="form-group">
+                            <strong>Top Speed</strong> (in m/s)
+                            <input type="text" name="top_speed" class="form-control" value="{{ $droid->top_speed }}">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="form-group">
+                            <strong>Build Log:</strong>
+                            <input type="text" name="build_log" class="form-control" value="{{ $droid->build_log }}">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-1 mb-3">
                             {{ Form::hidden('active', 'off') }}
                             <label>Active</label>
                             <input type="checkbox" name="active" {{ $droid->active == 'on' ? 'checked' : '' }} class="form-control">
