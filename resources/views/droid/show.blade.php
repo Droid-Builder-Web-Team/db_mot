@@ -34,11 +34,11 @@
           <tr><th>Radio Controlled?</th><td>{{ $droid->radio_controlled }}</td></tr>
           <tr><th>Transmitter Type</th><td>{{ $droid->transmitter_type }}</td></tr>
           <tr><th>Material</th><td>{{ $droid->material }}</td></tr>
-          <tr><th>Approx Weight</th><td>{{ $droid->weight }}</td></tr>
+          <tr><th>Approx Weight</th><td>{{ $droid->weight }} (kg)</td></tr>
           <tr><th>Battery Type</th><td>{{ $droid->battery }}</td></tr>
           <tr><th>Drive Voltage</th><td>{{ $droid->drive_voltage }}</td></tr>
           <tr><th>Drive Type</th><td>{{ $droid->drive_type }}</td></tr>
-          <tr><th>Top Speed</th><td>{{ $droid->top_speed }}</td></tr>
+          <tr><th>Top Speed</th><td>{{ $droid->top_speed }} (m/s)</td></tr>
           <tr><th>Sound System</th><td>{{ $droid->sound_system }}</td></tr>
           <tr><th>Approx Value</th><td>{{ $droid->value }}</td></tr>
           <tr><th>Build Log</th><td><a target="_blank" href="{{ $droid->build_log }}">{{ $droid->build_log }}</a></td></tr>
