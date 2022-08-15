@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\User;
 use App\Droid;
 use App\Club;
+use App\CourseRun;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
@@ -86,4 +87,26 @@ class ApiController extends Controller
 
         return $response;
     }    
+
+    public function upload_course_run(Request $request)
+    {
+        $run = json_decode($request->json);
+
+        print(json_encode($run));
+
+        $courserun = new CourseRun();
+        $courserun->run_type = 1;
+        $courserun->user_id = $run->member_uid;
+        $courserun->droid_id = $run->droid_uid;
+        $courserun->first_half = $run->first_half;
+        $courserun->second_half = $run->second_half;
+        $courserun->clock_time = $run->clock_time;
+        $courserun->final_time = $run->final_time;
+        $courserun->num_penalties = $run->num_penalties;
+        $courserun->penalties = json_encode($run->penalties);
+        $courserun->dribble = 0;
+        $courserun->timestamps = false;
+        $courserun->run_timestamp = $run->start;
+        $courserun->save();
+    }
 }

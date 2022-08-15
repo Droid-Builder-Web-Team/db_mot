@@ -118,6 +118,14 @@
             </li>
 
             <li class="c-sidebar-nav-item">
+                <a class="c-sidebar-nav-link" href="{{ route('runs.index') }}">
+                    <svg class="c-sidebar-nav-icon">
+                        <i class="fas fa-flag-checkered fa-fw"></i>
+                    </svg><span class="ml-1">Driving Course</span>
+                </a>
+            </li>           
+
+            <li class="c-sidebar-nav-item">
                 <a class="c-sidebar-nav-link" href="{{ route('about') }}">
                     <svg class="c-sidebar-nav-icon">
                         <i class="fas fa-info fa-fw"></i>

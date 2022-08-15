@@ -50,4 +50,15 @@ class CourseRun extends Model
     {
         return $this->belongsTo(Droid::class);
     }
+
+    /**
+     * Get comments written on this auction
+     *
+     * @return array of App\Comment
+     */
+    public function comments()
+    {
+        return $this->morphMany('App\Comment', 'commentable')
+            ->orderBy('created_at');
+    }
 }

@@ -32,7 +32,15 @@
           <td>{{ formatMilliseconds($run->first_half)}}</td>
           <td>{{ formatMilliseconds($run->second_half)}}</td>
           <td>{{ formatMilliseconds($run->clock_time)}}</td>
-          <td>{{ $run->num_penalties }}</td>
+          <td>
+                                        @if ($run->num_penalties == 0)
+                                            <a class="btn-sm btn-success">{{ $run->num_penalties }}</a>
+                                        @elseif ($run->num_penalties == 1)
+                                            <a class="btn-sm btn-warning">{{ $run->num_penalties }}</a>
+                                        @else
+                                            <a class="btn-sm btn-danger">{{ $run->num_penalties }}</a>
+                                        @endif
+                                    </td>
           <td>{{ formatMilliseconds($run->final_time)}}</td>
           <td><a class="btn-sm btn-primary" href="{{ route('runs.show', $run->id) }}">View</a></td>
           @php $i++ @endphp

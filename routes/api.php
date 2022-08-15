@@ -23,6 +23,7 @@ Route::group(
         Route::get('getmembers', 'Admin\ApiController@drivingCourseDownload');
         Route::get('getmemberimage/{uid}', 'Admin\ApiController@get_member_image');
         Route::get('getdroidimage/{uid}', 'Admin\ApiController@get_droid_image');
+        Route::post('uploadrun', 'Admin\ApiController@upload_course_run');
     }
 );
 Route::get('events/future', 'EventApiController@getFutureAllPublicEvents');
