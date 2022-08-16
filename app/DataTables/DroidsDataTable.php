@@ -92,6 +92,8 @@ class DroidsDataTable extends DataTable
     {
         return [
           Column::make('name'),
+          Column::make('top_speed'),
+          Column::make('weight'),
           Column::make('owner'),
           Column::computed('mot'),
           Column::computed('action')
