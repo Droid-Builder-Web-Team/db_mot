@@ -36,7 +36,10 @@ class CommentController extends Controller
                 $permission = "Edit Auction";
                 break;
             case "App\CourseRun":
-                $permission = "Edit Auction";
+                $permission = "Edit Members";
+                break;
+            case "App\Location":
+                $permission = "Edit Events";
                 break;
             default:
                 $permission = "";
@@ -58,6 +61,9 @@ class CommentController extends Controller
                             $user->notify(new CommentBroadcast($result));
                             break;
                         case "App\CourseRun":
+                            $user->notify(new CommentBroadcast($result));
+                            break;
+                        case "App\Location":
                             $user->notify(new CommentBroadcast($result));
                             break;
                         default:

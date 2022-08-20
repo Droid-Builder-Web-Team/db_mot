@@ -62,6 +62,16 @@ class CommentBroadcast extends Notification
             $model_title = $model->partsRunAd->title;
             $this->link = route('parts-run.show', $comment->commentable_id);
             break;
+        case "App\Models\Auction":
+            $type_text = "An Auction";
+            $model_title = $model->title;
+            $this->link = route('auction.show', $comment->commentable_id);
+            break;
+        case "App\Location":
+            $type_text = "A Location";
+            $model_title = $model->title;
+            $this->link = route('location.show', $comment->commentable_id);
+            break;
         default:
             $type_text = "An error";
             $model_title = "Null model";
