@@ -127,7 +127,8 @@ class MOTController extends Controller
                     [
                         'user_id' => $user->id,
                         'reissue' => false,
-                        'paid' => false
+                        'paid' => false,
+                        'droid_id' => $droid->id
                     ]
                 );
             }
