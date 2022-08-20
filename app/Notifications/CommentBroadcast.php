@@ -65,7 +65,7 @@ class CommentBroadcast extends Notification
         case "App\Models\Auction":
             $type_text = "An Auction";
             $model_title = $model->title;
-            $this->link = route('auction.show', $comment->commentable_id);
+            $this->link = route('auctions.show', $comment->commentable_id);
             break;
         case "App\Location":
             $type_text = "A Location";
