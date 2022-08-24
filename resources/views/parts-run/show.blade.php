@@ -254,7 +254,7 @@
                     @if(!$data->partsRunAd->quantity == 0 && $data->partsRunAd->quantity + $data->partsRunAd->reserve < $data->interestQuantity())
                         <p>Interest List is Full</p>
                     @else
-                        @if($data->interestQuantity() >= $data->partsRunAd->quantity)
+                        @if($data->interestQuantity() >= $data->partsRunAd->quantity && $data->partsRunAd->quantity != 0)
                             <p>Run is full, but you may add yourself to the reserve list</p>
                         @endif
                         <form action="{{ route('parts-run.interested',$data->id) }}" method="GET">
