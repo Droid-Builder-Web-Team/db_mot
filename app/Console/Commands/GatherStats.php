@@ -77,13 +77,13 @@ class GatherStats extends Command
         $stats['total_mots'] = MOT::count();
         $stats['achievements_awarded'] = DB::table('members_achievements')->count();
         $stats['users_active_day'] = User::whereDate(
-            'last_activity', '>', Carbon::today()->subDays(1)
+            'last_activity', '>', Carbon::now()->subDays(1)
         )->count();
         $stats['users_active_week'] = User::whereDate(
-            'last_activity', '>', Carbon::today()->subDays(7)
+            'last_activity', '>', Carbon::now()->subDays(7)
         )->count();
         $stats['users_active_month'] = User::whereDate(
-            'last_activity', '>', Carbon::today()->subMonths(1)
+            'last_activity', '>', Carbon::now()->subMonths(1)
         )->count();
         $stats['users_cleared'] = User::whereDate(
             'pli_date', '>', Carbon::today()->subYears(1)
