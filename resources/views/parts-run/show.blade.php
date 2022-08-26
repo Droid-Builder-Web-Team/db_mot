@@ -251,8 +251,8 @@
                 @if($status == 'interested')
                     <p><a class="btn btn-primary" href="{{ route('parts-run.interested',[$data->id, 'interest' => 'no', 'quantity' => 0]) }}">Remove Interest!</a></p>
                 @else
-                    @if(!$data->partsRunAd->quantity == 0 && $data->partsRunAd->quantity + $data->partsRunAd->reserve < $data->interestQuantity())
-                        <p>Interest List is Full</p>
+                    @if(!$data->partsRunAd->quantity == 0 && $data->partsRunAd->quantity + $data->partsRunAd->reserve <= $data->interestQuantity())
+                        <p>Interest List is Full. Please wait for a future run. Making a comment below to be added to the list will not work.</p>
                     @else
                         @if($data->interestQuantity() >= $data->partsRunAd->quantity && $data->partsRunAd->quantity != 0)
                             <p>Run is full, but you may add yourself to the reserve list</p>

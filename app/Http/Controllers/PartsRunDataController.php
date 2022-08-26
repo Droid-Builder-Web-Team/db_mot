@@ -300,7 +300,7 @@ class PartsRunDataController extends Controller
     {
 
         if (((($partsrun->partsRunAd->quantity + $partsrun->partsRunAd->reserve)
-            < $partsrun->interestQuantity()) && $request->interest == 'interested') 
+            <= $partsrun->interestQuantity()) && $request->interest == 'interested') 
             && $partsrun->partsRunAd->quantity != 0
         ) {
             toastr()->error('Part Run Full');
