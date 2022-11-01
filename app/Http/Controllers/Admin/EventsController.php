@@ -329,6 +329,7 @@ class EventsController extends Controller
                 $row['Status']        = $user->pivot->status;
                 $row['Spotter']       = $user->pivot->spotter;
                 $row['MOT Requested'] = $user->pivot->mot_required;
+                $row['Email']         = $user->email;
 
                 fputcsv(
                     $file, array(
@@ -336,7 +337,8 @@ class EventsController extends Controller
                         $row['Surname'],
                         $row['Status'],
                         $row['Spotter'],
-                        $row['MOT Requested']
+                        $row['MOT Requested'],
+                        $row['Email']
                         )
                 );
             }
