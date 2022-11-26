@@ -95,6 +95,9 @@ class DroidsDataTable extends DataTable
           Column::make('top_speed'),
           Column::make('weight'),
           Column::make('owner'),
+          Column::make('topps_id'),
+          Column::make('date_added'),
+          Column::make('last_updated'),
           Column::computed('mot'),
           Column::computed('action')
               ->exportable(false)
