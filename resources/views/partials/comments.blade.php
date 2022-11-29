@@ -9,7 +9,7 @@
           <div class="card border-primary">
             <div class="card-header">
               @can('View Members')
-                <strong><a class="btn btn-info" href="{{ route('user.show', $user->id) }}">{{ $comment->user->forename ?? "Deactivated"}} {{ $comment->user->surname ?? "User"}}</a></strong>
+                <strong><a class="btn btn-info" href="{{ route('user.show', $comment->user->id) }}">{{ $comment->user->forename ?? "Deactivated"}} {{ $comment->user->surname ?? "User"}}</a></strong>
               @else
                 <strong>{{ $comment->user->forename ?? "Deactivated"}} {{ $comment->user->surname ?? "User"}}</strong>
               @endcan
