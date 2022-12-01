@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f639413f83831fb86245191280fb9485",
+    "content-hash": "6e8dc6f31504bbf41c233caa903d9028",
     "packages": [
         {
             "name": "acaronlex/laravel-calendar",
@@ -639,6 +639,59 @@
                 "source": "https://github.com/php-cache/tag-interop/tree/1.1.0"
             },
             "time": "2021-12-31T10:03:23+00:00"
+        },
+        {
+            "name": "codegreencreative/laravel-samlidp",
+            "version": "v5.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/codegreencreative/laravel-samlidp.git",
+                "reference": "c0dcc987de170e951f5f66950effce2682de9e21"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/codegreencreative/laravel-samlidp/zipball/c0dcc987de170e951f5f66950effce2682de9e21",
+                "reference": "c0dcc987de170e951f5f66950effce2682de9e21",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/routing": "^7.0 | ^8.0 | ^9.0",
+                "illuminate/support": "^7.0 | ^8.0 | ^9.0",
+                "litesaml/lightsaml": "^4.0",
+                "php": "^7.2.5 | ^8.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "CodeGreenCreative\\SamlIdp\\LaravelSamlIdpServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "CodeGreenCreative\\SamlIdp\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Make your PHP Laravel application an Identification Provider using SAML 2.0. This package allows you to implement your own Identification Provider (idP) using the SAML 2.0 standard to be used with supporting SAML 2.0 Service Providers (SP).",
+            "keywords": [
+                "SAML 2.0",
+                "SSO",
+                "acl",
+                "auth",
+                "idp",
+                "laravel",
+                "saml"
+            ],
+            "support": {
+                "issues": "https://github.com/codegreencreative/laravel-samlidp/issues",
+                "source": "https://github.com/codegreencreative/laravel-samlidp/tree/v5.2.1"
+            },
+            "time": "2022-08-26T18:49:51+00:00"
         },
         {
             "name": "coreui/coreui",
@@ -3480,6 +3533,75 @@
             "time": "2021-08-15T23:05:49+00:00"
         },
         {
+            "name": "litesaml/lightsaml",
+            "version": "v4.0.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/litesaml/lightsaml.git",
+                "reference": "9f3c51cef1b849c930c7bcd4fc92020601cb98b8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/litesaml/lightsaml/zipball/9f3c51cef1b849c930c7bcd4fc92020601cb98b8",
+                "reference": "9f3c51cef1b849c930c7bcd4fc92020601cb98b8",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.4",
+                "psr/event-dispatcher": "^1.0",
+                "robrichards/xmlseclibs": "~2.0|~3.0|~4.0",
+                "symfony/http-foundation": "~5.0|~6.0"
+            },
+            "require-dev": {
+                "litesaml/schemas": "~1.0.0",
+                "marcocesarato/php-conventional-changelog": "^1.15",
+                "monolog/monolog": "^2.0.0",
+                "phpstan/phpstan": "^1.8",
+                "phpunit/phpunit": "~8.4|~9.5",
+                "pimple/pimple": "~3.0",
+                "squizlabs/php_codesniffer": "^3.6",
+                "symfony/css-selector": "~5.0",
+                "symfony/dom-crawler": "~5.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "LightSaml\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "William",
+                    "email": "work@suppo.fr"
+                },
+                {
+                    "name": "Milos Tomic",
+                    "email": "tmilos@gmail.com",
+                    "homepage": "https://github.com/tmilos/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "SAML 2.0 PHP library",
+            "keywords": [
+                "SAML 2.0",
+                "Single Logout",
+                "Single SignOn",
+                "library",
+                "lightSAML",
+                "php"
+            ],
+            "support": {
+                "docs": "https://litesaml.github.io",
+                "issues": "https://github.com/litesaml/lightsaml/issues",
+                "source": "https://github.com/litesaml/lightsaml"
+            },
+            "time": "2022-11-26T15:20:46+00:00"
+        },
+        {
             "name": "maatwebsite/excel",
             "version": "3.1.38",
             "source": {
@@ -6079,6 +6201,48 @@
                 "source": "https://github.com/rinvex/countries"
             },
             "time": "2022-05-01T03:39:46+00:00"
+        },
+        {
+            "name": "robrichards/xmlseclibs",
+            "version": "3.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/robrichards/xmlseclibs.git",
+                "reference": "f8f19e58f26cdb42c54b214ff8a820760292f8df"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/robrichards/xmlseclibs/zipball/f8f19e58f26cdb42c54b214ff8a820760292f8df",
+                "reference": "f8f19e58f26cdb42c54b214ff8a820760292f8df",
+                "shasum": ""
+            },
+            "require": {
+                "ext-openssl": "*",
+                "php": ">= 5.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "RobRichards\\XMLSecLibs\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "A PHP library for XML Security",
+            "homepage": "https://github.com/robrichards/xmlseclibs",
+            "keywords": [
+                "security",
+                "signature",
+                "xml",
+                "xmldsig"
+            ],
+            "support": {
+                "issues": "https://github.com/robrichards/xmlseclibs/issues",
+                "source": "https://github.com/robrichards/xmlseclibs/tree/3.1.1"
+            },
+            "time": "2020-09-05T13:00:25+00:00"
         },
         {
             "name": "sabberworm/php-css-parser",
@@ -12498,5 +12662,5 @@
         "php": "^7.2.5|^8.0"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.2.0"
 }

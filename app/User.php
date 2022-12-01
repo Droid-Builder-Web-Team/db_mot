@@ -108,7 +108,6 @@ class User extends Authenticatable implements MustVerifyEmail,
         'last_activity', 'last_updated', 'last_login', 'password', 'remember_token'
     ];
 
-
     /**
      * Get all the user's Droids
      *

@@ -8,6 +8,7 @@
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
+                        @samlidp
                         <div class="row mb-3 d-flex justify-content-center align-items-center">
                             <div class="col-sm-2 text-center">
                                 <label for="inputEmail3" class="mb-2 mb-lg-0 text-center text-lg-left">{{ __('E-Mail Address') }}</label>

@@ -18,6 +18,10 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+
+        'CodeGreenCreative\SamlIdp\Events\Assertion' => [
+            'App\Listeners\SamlAssertionAttributes'
+        ],
     ];
 
     /**
