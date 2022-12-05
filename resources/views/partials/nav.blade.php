@@ -61,8 +61,8 @@
             @endif
 
             @if(config('features.auction', FALSE))
-            <li class="c-sidebar-nav-item">
-                <a class="c-sidebar-nav-link" href="{{ route('auctions.index') }}">
+            <li class="c-sidebar-nav-item disabled">
+                <a class="c-sidebar-nav-link disabled" href="{{ route('auctions.index') }}">
                     <svg class="c-sidebar-nav-icon">
                         <i class="fas fa-hand-holding-heart fa-fw"></i>
                     </svg><span class="ml-1">{{ __('Charity Auctions') }}</span>
@@ -70,6 +70,19 @@
             </li>
             @endif
 
+            @if(config('features.friendica', FALSE))
+            <li class="c-sidebar-nav-item" data-toggle="tooltip" data-placement="top" title="Set a username first in your profile">
+                @if(Auth::user()->username != "")
+                    <a class="c-sidebar-nav-link" target="_blank" href="https://fr.droidbuilders.uk">
+                @else
+                    <a class="c-sidebar-nav-link" href="{{ route('user.edit', Auth::user()->id) }}">
+                @endif
+                    <svg class="c-sidebar-nav-icon">
+                        <i class="fas fa-share-nodes fa-fw"></i>
+                    </svg><span class="ml-1">{{ __('Friendica') }}</span>
+                </a>
+            </li>
+            @endif
             <li class="c-sidebar-nav-title">Info</li>
 
             <li class="c-sidebar-nav-item">
