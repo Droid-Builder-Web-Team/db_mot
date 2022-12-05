@@ -6,6 +6,7 @@ return [
     'assistance' => env('FEATURE_ASSISTANCE', FALSE),
     'marketplace' => env('FEATURE_MARKETPLACE', FALSE),
     'auction' => env('FEATURE_AUCTION', FALSE),
+    'friendica' => env('FEATURE_FRIENDICA', FALSE),
 ];
 
 ?>
