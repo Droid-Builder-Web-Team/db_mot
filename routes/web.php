@@ -27,7 +27,7 @@ use Illuminate\Support\Facades\Route;
 
 //Auth::routes();
 Auth::routes(['verify' => true]);
-Auth::routes();
+//Auth::routes();
 
 Route::redirect('/id.php', '/user');
 Route::namespace('Admin')->prefix('admin')->name('admin.')->group(
