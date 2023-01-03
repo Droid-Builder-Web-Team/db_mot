@@ -37,6 +37,18 @@ use App\Notifications\PartsRunFull;
  */
 class PartsRunDataController extends Controller
 {
+
+    /**
+     * __construct
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('verified');
+    }
+    
     /**
      * Display a listing of the resource.
      *
