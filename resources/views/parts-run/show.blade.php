@@ -204,7 +204,6 @@
     </div>
     <div class="card-body">
 
-        @if(Auth::user()->country != "")
             @if($data->status == "Active")
                 @if($data->open == 1 || $data->canBuy(Auth::user()))
                     <p>
@@ -268,9 +267,6 @@
             @else
                 <p>This run is inactive. Please wait for it to become active again.</p>
             @endif
-        @else
-            <b>Please enter at least your country in your profile. This is required to sign up for a part run.</b>
-        @endif
     </div>
   </div>
 

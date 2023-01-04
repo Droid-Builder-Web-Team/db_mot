@@ -346,7 +346,7 @@ class PartsRunDataController extends Controller
         $partsrun = $partsrun->fresh();
 
         // Notify Part runner if quantity is reached
-        if ($partsrun->partsRunAd->quantity == $partsrun->interestQuantity()) {
+        if ($partsrun->partsRunAd->quantity == $partsrun->interestQuantity() && $partsrun->partsRunAd->quantity != 0) {
             $partsrun->user->notify(new PartsRunFull($partsrun));
         }
         return back();
