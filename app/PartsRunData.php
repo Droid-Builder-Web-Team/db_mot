@@ -21,6 +21,7 @@ use App\PartsRunImage;
 use App\PartsRunAd;
 use App\User;
 use OwenIt\Auditing\Contracts\Auditable;
+use Spatie\Tags\HasTags;
 
 /**
  * PartsRunData
@@ -35,6 +36,7 @@ class PartsRunData extends Model implements Auditable
 {
     use HasFactory;
     use \OwenIt\Auditing\Auditable;
+    use HasTags;
 
     protected $table = 'parts_run_data';
 
@@ -211,6 +213,13 @@ class PartsRunData extends Model implements Auditable
             break;
         case "Yodel":
             $display = $id;
+            break;
+        case "UPS":
+            $url = "https://wwwapps.ups.com/tracking/tracking.cgi?"
+                . "tracknum="
+                . $id;
+            $display = "<a target=\"_default\" href=\"" . $url
+                    . "\">" . $id . "</a>";
             break;
         case "Other":
             $display = $id;

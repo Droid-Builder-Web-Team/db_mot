@@ -367,7 +367,7 @@ class PartsRunDataController extends Controller
         ) {
             return abort(403);
         }
-        $status_array = array('paid','shipped');
+        $status_array = array('paid','shipped','no');
 
         if (in_array($request->status, $status_array)) {
             $user = User::find($request->user_id);
@@ -376,12 +376,16 @@ class PartsRunDataController extends Controller
                 'shipper' => $request->shipper ??  '',
                 'tracking' => $request->tracking ?? ''
             ];
-            try {
-                $result = $partsrun->interested()
-                    ->updateExistingPivot($user, $attributes);
-                toastr()->success('Status Updated');
-            } catch (Exception $e) {
-                toastr()->error('Status Update failed');
+            if ($request->status == "no") {
+                $partsrun->isInterested()->detach($user);
+            } else {
+                try {
+                    $result = $partsrun->interested()
+                        ->updateExistingPivot($user, $attributes);
+                    toastr()->success('Status Updated');
+                } catch (Exception $e) {
+                    toastr()->error('Status Update failed');
+                }
             }
 
         }

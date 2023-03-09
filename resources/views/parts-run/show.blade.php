@@ -109,6 +109,16 @@
                                     </div>
                                 </div>
                             </div>
+                            @if(config('features.partsruntags', FALSE))
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <strong>Tags:</strong>
+                                        @foreach($data->tags as $tag)
+                                        <label class="badge badge-info mx-1">{{ $tag->name }}</label>
+                                        @endforeach
+                                    </div>
+                                </div>          
+                            @endif           
                             <hr class="parts-run-break">
 
                             <div class="mb-4 row">
@@ -298,8 +308,16 @@
                     (Reserve)
                 @endif
                 @if(auth()->user()->id == $data->user_id || Auth::user()->hasRole('BC Rep'))
+                <span>
+                    <form action="{{ route('parts-run.status_update') }}" method="POST" style="display: inline;">
+                        @csrf
+                        <input type="hidden" name="user_id" id="user_id" value="{{ $user->id }}">
+                        <input type="hidden" name="run_id" value="{{ $data->id }}">
+                        <input type="hidden" name="status" value="no">
+                        <button type="submit" class="btn"><i class="fas fa-trash"></i></button>
+                    </form>               
                     @if ($data->status == "Active")
-                        <form action="{{ route('parts-run.status_update') }}" method="POST">
+                        <form action="{{ route('parts-run.status_update') }}" method="POST" style="display: inline;">
                             @csrf
                             <input type="hidden" name="user_id" id="user_id" value="{{ $user->id }}">
                             <input type="hidden" name="run_id" value="{{ $data->id }}">
@@ -307,6 +325,7 @@
                             <button type="submit" class="btn"><i class="fas fa-pound-sign"></i></button>
                         </form>
                     @endif
+                    </span>
                 @endif
             </li>
         @endif
@@ -399,6 +418,7 @@
                                     <option value="Parcel Force">Parcel Force</option>
                                     <option value="DPD">DPD</option>
                                     <option value="Hermes">Hermes</option>
+                                    <option value="UPS">UPS</option>
                                     <option value="Other">Other...</option>
                                 </select>
                                 Tracking Number: <input type="text" size=20 name="tracking">

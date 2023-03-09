@@ -55,7 +55,10 @@ class CommentController extends Controller
                             $user->notify(new CommentBroadcast($result));
                             break;
                         case "App\PartsRunData":
-                            $user->notify(new CommentBroadcast($result));
+                            if ($user->isInterestedIn($request->id))
+                            {   
+                                $user->notify(new CommentBroadcast($result));
+                            }
                             break;
                         case "App\Models\Auction":
                             $user->notify(new CommentBroadcast($result));

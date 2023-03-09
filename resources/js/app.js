@@ -7,13 +7,16 @@
 import { createApp } from 'vue'
 require('./bootstrap');
 import ReactionComponent from './components/ReactionComponent.vue';
-import VueGoogleMaps from '@fawmi/vue-google-maps'
-import MapComponent from './components/MapComponent.vue'
+import VueGoogleMaps from '@fawmi/vue-google-maps';
+import MapComponent from './components/MapComponent.vue';
+import Vue3EasyDataTable from 'vue3-easy-data-table';
+import 'vue3-easy-data-table/dist/style.css';
 
 const app = createApp({});
 
 app.component('reaction-component', ReactionComponent);
 app.component('map-component', MapComponent);
+app.component('EasyDataTable', Vue3EasyDataTable);
 app.use(VueGoogleMaps, {
     load: {
         key: 'AIzaSyCOE-y6rIHLsG6ONcNib1pfv0eq3xTWRok',

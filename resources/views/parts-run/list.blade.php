@@ -98,6 +98,9 @@
                     @role("Super Admin")
                         <th scope="col" class="d-none d-md-table-cell">Quantity</th>
                     @endrole
+                    @if(config('features.partsruntags', FALSE))
+                      <th>Tags</th>
+                    @endif
                     <th>Action</th>
                 </tr>
             </thead>
@@ -121,15 +124,22 @@
                       @endif
                     </th>
                     @role("Super Admin")
-                    <td>{{ $data->interestQuantity() }} /
+                      <td>{{ $data->interestQuantity() }} /
                         @if ($data->partsRunAd->quantity == 0)
                           unlimited
                         @else
                           {{ $data->partsRunAd->quantity }}
                         @endif
                       </td>
-                        @endrole
-                        <td>
+                    @endrole
+                    @if(config('features.partsruntags', FALSE))
+                      <td>
+                        @foreach($data->tags as $tag)
+                          <label class="badge badge-info mx-1">{{ $tag->name }}</label>
+                        @endforeach
+                      </td>
+                    @endif
+                    <td>
                       <div class="d-flex">
                         <a class="btn btn-view" href={{ route('parts-run.show', $data->id) }}><div class="d-block d-sm-none"><i class="fas fa-eye"></i></div><span class="d-none d-sm-block">View</span></a>
                         @if(Gate::check('Edit Partrun') && (Auth()->user()->id == $data->user_id || Auth()->user()->id == $data->bc_rep_id))

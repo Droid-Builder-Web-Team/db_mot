@@ -36,6 +36,7 @@
         "laravel-mix": "^6.0.25",
         "tinymce": "^5.8.2",
         "vue-datasource": "^1.0.10",
-        "vue-good-table-next": "^0.1.0"
+        "vue-good-table-next": "^0.1.0",
+        "vue3-easy-data-table": "^1.5.34"
     }
 }
