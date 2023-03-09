@@ -335,7 +335,7 @@
     @if ($data->status == "Active")
     <h3>Paid</h3>
     <ul>
-        @foreach($data->interested as $user)
+        @foreach($data->interested->sortByDesc(function ($user, $key) { return $user->pivot->updated_at; }) as $user)
         @if($user->pivot->status == 'paid')
             <li>
                 @can('View Members')
@@ -357,29 +357,29 @@
     </ul>
     <h3>Shipped</h3>
     <ul>
-        @foreach($data->interested as $user)
-        @if($user->pivot->status == 'shipped')
-            <li>
-                @can('View Members')
-                    <a class="p-link" href="{{ route('user.show', $user->id) }}">{{ $user->forename ?? "Deactivated"}} {{ $user->surname ?? "User"}}</a>
-                @else
-                    {{ $user->forename ?? "Deactivated"}} {{ $user->surname ?? "User"}}
-                @endcan
-                @if($user->pivot->quantity != 1)
-                    ({{$user->pivot->quantity}})
-                @endif
-                &nbsp;<i class="fas fa-box"></i>&nbsp;
-                @if(auth()->user()->id == $data->user_id || auth()->user()->id == $data->bc_rep_id || auth()->user()->id == $user->id)
-                    @if($user->pivot->tracking != "" )
-                        {!! $data->trackingUrl($user->pivot->tracking, $user->pivot->shipper) !!}
+        @foreach($data->interested->sortByDesc(function ($user, $key) { return $user->pivot->updated_at; }) as $user)
+            @if($user->pivot->status == 'shipped')
+                <li>
+                    @can('View Members')
+                        <a class="p-link" href="{{ route('user.show', $user->id) }}">{{ $user->forename ?? "Deactivated"}} {{ $user->surname ?? "User"}}</a>
                     @else
-                        No tracking
+                        {{ $user->forename ?? "Deactivated"}} {{ $user->surname ?? "User"}}
+                    @endcan
+                    @if($user->pivot->quantity != 1)
+                        ({{$user->pivot->quantity}})
                     @endif
-                @endif
-            </li>
-        @endif
+                    &nbsp;<i class="fas fa-box"></i>&nbsp;
+                    @if(auth()->user()->id == $data->user_id || auth()->user()->id == $data->bc_rep_id || auth()->user()->id == $user->id)
+                        @if($user->pivot->tracking != "" )
+                            {!! $data->trackingUrl($user->pivot->tracking, $user->pivot->shipper) !!}
+                        @else
+                            No tracking
+                        @endif
+                    @endif
+                </li>
+            @endif
     @endforeach
-  </ul>
+    </ul>
 
 
     @endif

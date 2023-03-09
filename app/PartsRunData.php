@@ -116,8 +116,8 @@ class PartsRunData extends Model implements Auditable
     public function interested()
     {
         return $this->belongsToMany(User::class, 'members_parts')
-            ->withPivot('status', 'quantity', 'tracking', 'shipper', 'timestamp')
-            ->orderBy('timestamp');
+            ->withPivot('status', 'quantity', 'tracking', 'shipper', 'timestamp', 'updated_at')
+            ->orderBy('timestamp')->withTimestamps();
     }
 
 

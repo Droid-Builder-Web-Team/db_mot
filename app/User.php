@@ -388,7 +388,8 @@ class User extends Authenticatable implements MustVerifyEmail,
     {
         return $this->belongsToMany(PartsRunData::class, 'members_parts')
             ->wherePivot('status', 'interested')
-            ->withPivot('status', 'quantity', 'tracking', 'shipper');
+            ->withPivot('status', 'quantity', 'tracking', 'shipper')
+            ->withTimestamps();
     }
 
     /**
