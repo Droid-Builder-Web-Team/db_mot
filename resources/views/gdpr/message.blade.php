@@ -81,7 +81,7 @@
                           <h4>2) General procedures</h4>
                           <ol>
                           <li>Data will be stored securely. When it is stored electronically, it will be kept in password protected files. When it is stored online in a third party website (e.g. Google Drive) we will ensure the third party comply with the GDPR. When it is stored on paper it will be filed carefully in a locked filing cabinet.</li>
-                          <li>When we no longer need data, or when someone has asked for their data to be deleted, it will be deleted securely. We will ensure that data is permanently deleted from computers, and that paper data is shredded.</li>
+                          <li>When we no longer need data, or when someone has asked for their data to be deleted (by emailing a request with the subject '#User Delete Request' to admin@droidbuilders.uk), it will be deleted securely. We will ensure that data is permanently deleted from computers, and that paper data is shredded.</li>
                           <li>We will keep records of consent given for us to collect, use and store data. These records will be stored securely.</li>
                           </ol>
                           <h4>3) Mailing list</h4>
