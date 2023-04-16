@@ -44,7 +44,8 @@ class DroidController extends Controller
             [
             'name' => 'required',
             'build_log' => 'url|nullable',
-            'weight' => 'numeric|nullable'
+            'weight' => 'numeric|nullable',
+            'build_type' => 'max:36'
             ]
         );
 
