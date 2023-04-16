@@ -2,11 +2,17 @@
   <GMapMap
       :center="center"
       :zoom="6"
+      :options="{
+        zoomControl: true,
+        fullscreenControl: true,
+      }"
       style="width: 100vw; height: 800px"
   >
     <GMapCluster
-      :minimumClusterSize="25"
+      :minimumClusterSize="40"
       :zoomOnClick="true"
+      :zoom-on-click="true"
+      :minimum-cluster-size="40"
       >
       <GMapMarker
           :key="index"

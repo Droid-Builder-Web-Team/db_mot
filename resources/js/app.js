@@ -7,7 +7,7 @@
 import { createApp } from 'vue'
 require('./bootstrap');
 import ReactionComponent from './components/ReactionComponent.vue';
-import VueGoogleMaps from '@fawmi/vue-google-maps';
+import VueGoogleMaps from 'vue-google-maps-community-fork';
 import MapComponent from './components/MapComponent.vue';
 import Vue3EasyDataTable from 'vue3-easy-data-table';
 import 'vue3-easy-data-table/dist/style.css';
