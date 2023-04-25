@@ -179,24 +179,25 @@ class Droid extends Model implements Auditable
     {
         $motstatus = "No Valid MOT";
         $motstate = "alert-danger";
-        if ($this->hasFullMOT()) {
-            $motstatus = "Valid " . Carbon::parse($this->motDate())
+        if ($this->hasWIPMOT()) {
+            $motstatus = "WIP " . Carbon::parse($this->motDate())
                 ->isoFormat(auth()->user()->settings()->get('date_format'));
-            $motstate = "alert-success";
+            $motstate = "alert-warning";
         }
         if ($this->hasAdvisoryMOT()) {
             $motstatus = "Advisory " . Carbon::parse($this->motDate())
                 ->isoFormat(auth()->user()->settings()->get('date_format'));
             $motstate = "alert-warning";
         }
-        if ($this->hasWIPMOT()) {
-            $motstatus = "WIP " . Carbon::parse($this->motDate())
+        if ($this->hasFullMOT()) {
+            $motstatus = "Valid " . Carbon::parse($this->motDate())
                 ->isoFormat(auth()->user()->settings()->get('date_format'));
-            $motstate = "alert-warning";
+            $motstate = "alert-success";
         }
         if ($this->hasExpiringMOT()) {
             $motstate = "alert-primary";
         }
+        
 
         $displayMOT = array("status" => $motstatus, "state" => $motstate);
 
