@@ -29,7 +29,7 @@
           <li>Website: <a href="https://droidbuilders.uk/" target="_blank">https://droidbuilders.uk/</a></li>
           <li>Youtube: <a href="https://www.youtube.com/c/DroidbuildersUK/featured" target="_blank">https://www.youtube.com/c/DroidbuildersUK/featured</a></li>
           <li>Facebook: <a href="https://www.facebook.com/groups/droidbuildersuk" target="_blank">https://www.facebook.com/groups/droidbuildersuk</a></li>
-          <li>Discord: <a href="https://discord.gg/ddPD7z22">Droid Builders Discord</a></li>
+          <li>Discord: <a href="https://discord.gg/VstCbqJAY8">Droid Builders Discord</a></li>
           <li><a href={{ route('gdpr-terms') }}>GDPR</a></li>
           <li><a href="{{ route('codeofconduct') }}">Code of Conduct</a></li>
         </ul>
