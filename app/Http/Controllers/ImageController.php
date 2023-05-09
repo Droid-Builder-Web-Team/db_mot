@@ -33,6 +33,8 @@ class ImageController extends Controller
                 abort(403);
             }
             break;
+        case 'topps_front':
+        case 'topps_rear':
         case 'photo_front':
         case 'photo_side':
         case 'photo_rear':
