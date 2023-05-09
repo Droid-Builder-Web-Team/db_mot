@@ -18,4 +18,6 @@
 </div>
 {{ $droids->links() }}
 
+Buy your cards <a href="https://artoo-detoo.co.uk/product-category/trading-cards/">here!</a>
+
 @endsection
