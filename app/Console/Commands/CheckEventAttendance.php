@@ -6,7 +6,7 @@ use Illuminate\Console\Command;
 use App\Event;
 use Carbon\Carbon;
 
-class CheckEventUpcoming extends Command
+class CheckEventAttendance extends Command
 {
     /**
      * The name and signature of the console command.
