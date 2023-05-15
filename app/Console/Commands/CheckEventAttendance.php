@@ -46,9 +46,8 @@ class CheckEventAttendance extends Command
             {
                 if($user->event($event->id)->attended == 0)
                 {
-                    $this->info('Event: Marking '.$user->forename.' '.$user->surname.' as in attendance');
-                    $user->event($event->id)->attended = 1;
-                    $user->save();
+                    $this->info('Event: Marking '.$user->forename.' '.$user->surname.' as in attendance for event id '.$event->id);
+                    $user->events()->updateExistingPivot($event->id, ["attended" => 1]);
                 }
             }
         }
