@@ -189,6 +189,9 @@
                                 @if ($user->event($event->id)->spotter == 'yes')
                                     <i class="fas fa-binoculars"></i>
                                 @endif
+                                @can('Edit Events')
+                                    <a href="{{ route('admin.events.attendance.deny', [ 'event_id' => $event->id, 'user_id' => $user->id] )}}"><i class="fas fa-times-circle"></i></a>
+                                @endcan
                             </li>
                         @endforeach
                     </ul>
@@ -202,21 +205,6 @@
                                         <i class="fas fa-binoculars"></i>
                                     @endif
                                  </li>
-                            @endforeach
-                        </ul>
-                    @endcan
-                    @can('Edit Events')
-                        <hr>
-                        Confirm Attendance:
-                        <ul>
-                            @foreach( $event->users as $user)
-                                @if($user->event($event->id)->attended == 0)
-                                    <li>{{$user->forename}} {{ $user->surname}}
-                                    <a href="{{ route('admin.events.attendance.confirm', [ 'event_id' => $event->id, 'user_id' => $user->id] )}}"><i class="fas fa-check-circle"></i></a>
-                                    /
-                                    <a href="{{ route('admin.events.attendance.deny', [ 'event_id' => $event->id, 'user_id' => $user->id] )}}"><i class="fas fa-times-circle"></i></a>
-                                </li>
-                                @endif
                             @endforeach
                         </ul>
                     @endcan
