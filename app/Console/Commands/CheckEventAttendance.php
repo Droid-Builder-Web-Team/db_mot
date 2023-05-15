@@ -46,7 +46,9 @@ class CheckEventAttendance extends Command
             {
                 if($user->event($event->id)->attended == 0)
                 {
+                    $this->info('Event: Marking '.$user->forename.' '.$user->surname.' as in attendance');
                     $user->event($event->id)->attended = 1;
+                    $user->save();
                 }
             }
         }
