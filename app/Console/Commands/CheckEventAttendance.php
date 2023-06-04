@@ -39,17 +39,24 @@ class CheckEventAttendance extends Command
      */
     public function handle()
     {
-        $events = Event::whereDate('date', '<=', Carbon::now())->get();
-        foreach($events as $event)
+        $pastevents = Event::where('date', '<', Carbon::now())
+                ->where('date', '>', Carbon::now()->subDays(180))
+                        ->orderBy('date')->get();
+        echo "Count: ".$pastevents->count();
+        for ($i = 0; $i < $pastevents->count(); $i++)
         {
-            foreach( $event->users as $user)
-            {
-                if($user->event($event->id)->attended == 0)
+                $id = $pastevents[$i]->id;
+                $users = $pastevents[$i]->users;
+                echo $i. "/".$pastevents->count().": ".$pastevents[$i]->name." ID: ".$id." Attended: ".$users->count();
+                echo "\n";
+                foreach($users as $user)
                 {
-                    $this->info('Event: Marking '.$user->forename.' '.$user->surname.' as in attendance for event id '.$event->id);
-                    $user->events()->updateExistingPivot($event->id, ["attended" => 1]);
+                        if ($user->event($id)->attended == 0)
+                        {
+                                $user->events()->updateExistingPivot($id, ["attended" => 1]);
+                        }
                 }
-            }
+                echo "\n";
         }
         return 0;
     }

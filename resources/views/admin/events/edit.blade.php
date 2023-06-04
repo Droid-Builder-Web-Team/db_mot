@@ -53,7 +53,7 @@
 
                     <div class="col-xs-3 col-sm-3 col-md-3">
                         <label for="quantity"><strong>Droid Limit</strong> (0 = no limit)</label>
-                        <input type="number" name="quantity" value="0" class="form-control" placeholder="Droid Limit" required>
+                        <input type="number" name="quantity" value="{{ $event->quantity }}" class="form-control" placeholder="Droid Limit" required>
                     </div>
 
                 </div>

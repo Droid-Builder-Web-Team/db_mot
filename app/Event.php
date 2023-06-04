@@ -52,7 +52,7 @@ class Event extends Model implements \Acaronlex\LaravelCalendar\Event, Auditable
     public function users()
     {
         return $this->belongsToMany(User::class, 'members_events')
-            ->withPivot('spotter', 'date_added', 'status', 'mot_required');
+            ->withPivot('spotter', 'date_added', 'status', 'mot_required', 'attended');
     }
 
     /**
