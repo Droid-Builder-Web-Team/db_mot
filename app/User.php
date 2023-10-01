@@ -28,6 +28,7 @@ use App\CourseRun;
 use App\Club;
 use App\PartsRunData;
 use App\Models\Auction;
+use App\Models\Ware;
 use Dialect\Gdpr\Portable;
 
 use Rennokki\Rating\Traits\CanRate;
@@ -378,6 +379,17 @@ class User extends Authenticatable implements MustVerifyEmail,
     {
         return $this->hasMany(PartsRunData::class);
     }
+
+    /**
+     * Marketplace Wares user is selling
+     *
+     * @return array of App\Ware
+     */
+    public function wares()
+    {
+        return $this->hasMany(Ware::class);
+    }
+
 
     /**
      * Part runs user is interested in

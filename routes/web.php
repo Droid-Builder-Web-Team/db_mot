@@ -139,6 +139,7 @@ Route::group(
 
 
         Route::resource('auctions', 'AuctionController');
+        Route::resource('ware', 'WareController');
         Route::put('auctions/bid/{auction}', 'AuctionController@bid')->name('auctions.bid');
     }
 );

@@ -40,6 +40,16 @@
             </li>
             @endif
 
+            @if(config('features.marketplace', FALSE))
+            <li class="c-sidebar-nav-item">
+                <a class="c-sidebar-nav-link" href="{{ route('ware.index') }}">
+                    <svg class="c-sidebar-nav-icon">
+                        <i class="fas fa-shop fa-fw"></i>
+                    </svg><span class="ml-1">{{ __('Marketplace') }}</span>
+                </a>
+            </li>
+            @endif
+
             @if(config('features.database', FALSE))
             <li class="c-sidebar-nav-item">
                 <a class="c-sidebar-nav-link" href="{{ route('database.index') }}">

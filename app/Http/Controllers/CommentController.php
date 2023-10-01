@@ -41,6 +41,9 @@ class CommentController extends Controller
             case "App\Location":
                 $permission = "Edit Events";
                 break;
+            case "App\Models\Ware":
+                $permission = "Edit Marketplace";
+                break;
             default:
                 $permission = "";
                 break;
@@ -67,6 +70,9 @@ class CommentController extends Controller
                             $user->notify(new CommentBroadcast($result));
                             break;
                         case "App\Location":
+                            $user->notify(new CommentBroadcast($result));
+                            break;
+                        case "App\Models\Ware":
                             $user->notify(new CommentBroadcast($result));
                             break;
                         default:

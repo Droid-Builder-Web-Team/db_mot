@@ -51,7 +51,7 @@ class CheckEventAttendance extends Command
                 echo "\n";
                 foreach($users as $user)
                 {
-                        if ($user->event($id)->attended == 0)
+                        if ($user->event($id)->attended == 0 && $user->event($id)->status == 'yes')
                         {
                                 $user->events()->updateExistingPivot($id, ["attended" => 1]);
                         }
