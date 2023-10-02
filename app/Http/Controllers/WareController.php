@@ -125,6 +125,10 @@ class WareController extends Controller
      */
     public function edit(Ware $ware)
     {
+        if(!$ware->user->id == auth()->user()->id || !auth()->user()->can('Edit Marketplace'))
+        {
+            abort(403);
+        }
         return view('ware.edit', compact('ware'));
     }
 
@@ -137,6 +141,11 @@ class WareController extends Controller
      */
     public function update(Request $request, Ware $ware)
     {
+        if(!$ware->user->id == auth()->user()->id || !auth()->user()->can('Edit Marketplace'))
+        {
+            abort(403);
+        }
+        
         $validatedData = $request->validate(
             [
             'title' => 'required',
@@ -170,6 +179,11 @@ class WareController extends Controller
      */
     public function destroy(Ware $ware)
     {
+
+        if(!$ware->user->id == auth()->user()->id || !auth()->user()->can('Edit Marketplace'))
+        {
+            abort(403);
+        }
         $ware->delete();
 
         return redirect()->route('ware.index')
