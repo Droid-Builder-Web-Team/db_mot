@@ -54,7 +54,10 @@ class WareController extends Controller
         $userwares = Ware::where('state', 1)
                     ->where('user_id', auth()->user()->id)
                     ->get();
-        return view('ware.index', compact('wares', 'userwares'));
+        $oldwares = Ware::where('state', 0)
+                    ->OrderBy('updated_at')
+                    ->get();                    
+        return view('ware.index', compact('wares', 'userwares', 'oldwares'));
     }
 
     /**
@@ -90,6 +93,8 @@ class WareController extends Controller
         } else {
             $request['showemail'] = 0;
         }
+        $linkify = new \Misd\Linkify\Linkify();
+        $request['description'] = $linkify->process($request->description);
         try {
             $auction = Ware::create($request->all());
             toastr()->success('Item listing created successfully');
@@ -120,7 +125,7 @@ class WareController extends Controller
      */
     public function edit(Ware $ware)
     {
-        //
+        return view('ware.edit', compact('ware'));
     }
 
     /**
@@ -132,7 +137,29 @@ class WareController extends Controller
      */
     public function update(Request $request, Ware $ware)
     {
-        //
+        $validatedData = $request->validate(
+            [
+            'title' => 'required',
+            'type' => 'in:FS,WTB,FREE',
+            'description' => 'required',
+            ]
+        );
+
+
+        $newware = $request->all();
+        $linkify = new \Misd\Linkify\Linkify();
+        $newware['description'] = $linkify->process($request->description);
+        try {
+            $ware->update($newware);
+            toastr()->success('Item updated successfully');
+        } catch (\Illuminate\Database\QueryException $exception) {
+            toastr()->error(
+                'Failed to update Item'
+            );
+        }
+
+
+        return view('ware.show', compact('ware'));
     }
 
     /**
@@ -143,6 +170,9 @@ class WareController extends Controller
      */
     public function destroy(Ware $ware)
     {
-        //
+        $ware->delete();
+
+        return redirect()->route('ware.index')
+            ->with('success', 'Item deleted successfully');
     }
 }

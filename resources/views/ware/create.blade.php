@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="col-lg-12 margin-tb">
                     <div class="mb-4 pull-right">
-                        <a class="btn btn-mot-invert" style="width:auto; color:white;" href="{{ route('admin.locations.index') }}">Back</a>
+                        <a class="btn btn-mot-invert" style="width:auto; color:white;" href="{{ route('ware.index') }}">Back</a>
                     </div>
                     <div class="mb-4 pull-left">
                         <h2>Create Item</h2>
@@ -26,11 +26,11 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="title"><strong>Type of Post</strong></label>
+                    <label for="type"><strong>Type of Post</strong></label>
                     <select id="type" name="type" class="custom-select">
                         <option value="FS">For Sale</option>
                         <option value="WTB">Want To Buy</option>
-                        <option value="FREE">Free</option>
+                        <option value="FREE">Free (Not including postage)</option>
                     </select>
                 </div>
 
@@ -40,7 +40,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="title"><strong>Show Email</strong></label>
+                    <label for="showemail"><strong>Show Email</strong></label>
                     <input type="checkbox" name="showemail" class="form-control">
                 </div>
 
