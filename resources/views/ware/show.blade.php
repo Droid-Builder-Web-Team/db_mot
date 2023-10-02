@@ -1,5 +1,22 @@
 @extends('layouts.app')
+@section('scripts')
 
+<script>
+  function shareToFacebook(_this) {
+ var body = 'An item has been added to the Droid Builders Portal Marketplace. ';
+ body += 'Follow the link to see more details and to ask any questions';
+ FB.ui({
+   display: 'iframe',
+   app_id: '{{ config('fb.fb_app_id', 'Laravel') }}',
+   method: 'share',
+   hashtag: '#marketplace',
+   href: '{{ URL::current() }}',
+   quote: body,
+ }, function(response){});
+}
+</script>
+
+@endsection
 @section('content')
 
 <div class="row">
@@ -41,6 +58,9 @@
             <div id="description">{!! $ware->description !!}</div>
           </div>
         </div>
+        @if(Auth::user()->id == $ware->user->id)
+          <span id="export" class="btn btn-info" onclick="shareToFacebook(event.target);">Share to Facebook</span>
+        @endif
       </div>
     </div>
   </div>
