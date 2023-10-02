@@ -16,6 +16,18 @@
 }
 </script>
 
+<script type="application/javascript" async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId            : '{{ config('fb.fb_app_id', 'Laravel') }}',
+      autoLogAppEvents : true,
+      xfbml            : true,
+      version          : 'v10.0'
+    });
+  };
+</script>
+
 @endsection
 @section('content')
 
