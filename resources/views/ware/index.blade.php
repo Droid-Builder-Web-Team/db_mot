@@ -34,11 +34,6 @@
                                         <div class="d-flex">
                                             <a class="btn-sm btn-xs btn-view" style="color:#FFF;" href="{{ route('ware.show', $ware->id) }}"><i class="fas fa-eye"></i></a>
                                             <a class="btn-sm btn-xs btn-edit" style="color:#FFF;" href="{{ route('ware.edit', $ware->id) }}"><i class="fas fa-edit"></i></a>
-                                            <form action="{{ route('ware.destroy', $ware->id) }}" method="POST" onsubmit="return confirm('Are You Sure?');" style="display: inline-block;">
-                                                <input type="hidden" name="_method" value="DELETE">
-                                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                <button type="submit" class="btn-sm btn-xs btn-kill action-buttons"><i style="color:#FFF;" class="fas fa-trash-alt"></i></button>
-                                            </form>
                                         </div>
                                     </td>
                                 </tr>
