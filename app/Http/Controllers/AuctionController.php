@@ -104,7 +104,6 @@ class AuctionController extends Controller
      */
     public function show(Auction $auction)
     {
-        dd($auction);
         return view('auctions.show', compact('auction'));
     }
 
