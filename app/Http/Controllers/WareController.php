@@ -43,7 +43,7 @@ class WareController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View
      */
     public function index()
     {
@@ -63,7 +63,7 @@ class WareController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View
      */
     public function create()
     {
@@ -74,7 +74,7 @@ class WareController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View
      */
     public function store(Request $request)
     {
@@ -99,7 +99,6 @@ class WareController extends Controller
             $auction = Ware::create($request->all());
             toastr()->success('Item listing created successfully');
         }   catch (\Illuminate\Database\QueryException $exception) {
-            dd($exception);
             toastr()->error('Failed to create Item Listing');
         }
 
@@ -110,7 +109,7 @@ class WareController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\Ware  $ware
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View
      */
     public function show(Ware $ware)
     {
@@ -121,7 +120,7 @@ class WareController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Ware  $ware
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View
      */
     public function edit(Ware $ware)
     {
@@ -137,7 +136,7 @@ class WareController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Ware  $ware
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View
      */
     public function update(Request $request, Ware $ware)
     {
@@ -175,7 +174,7 @@ class WareController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Ware  $ware
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View
      */
     public function destroy(Ware $ware)
     {

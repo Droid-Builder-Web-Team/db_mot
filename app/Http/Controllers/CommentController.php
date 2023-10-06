@@ -6,7 +6,17 @@ use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use App\Comment;
 use App\Notifications\CommentBroadcast;
+use App\Notifications\NewComment;
 
+/**
+ * Comment Controller
+ *
+ * @category Class
+ * @package  Controllers
+ * @author   Darren Poulson <darren.poulson@gmail.com>
+ * @license  https://opensource.org/licenses/MIT MIT License
+ * @link     https://portal.droidbuilders.uk/
+ */
 class CommentController extends Controller
 {
     public function store(Request $request)
@@ -24,29 +34,30 @@ class CommentController extends Controller
 
         $result = $model->comments()->save($comment);
 
+        // Send out broadcast if requested
         if ($request->broadcast == 'on') {
             switch ($request->model) {
-            case "App\Event":
-                $permission = "Edit Events";
-                break;
-            case "App\PartsRunData":
-                $permission = "Edit Partrun";
-                break;
-            case "App\Models\Auction":
-                $permission = "Edit Auction";
-                break;
-            case "App\CourseRun":
-                $permission = "Edit Members";
-                break;
-            case "App\Location":
-                $permission = "Edit Events";
-                break;
-            case "App\Models\Ware":
-                $permission = "Edit Marketplace";
-                break;
-            default:
-                $permission = "";
-                break;
+                case "App\Event":
+                    $permission = "Edit Events";
+                    break;
+                case "App\PartsRunData":
+                    $permission = "Edit Partrun";
+                    break;
+                case "App\Models\Auction":
+                    $permission = "Edit Auction";
+                    break;
+                case "App\CourseRun":
+                    $permission = "Edit Members";
+                    break;
+                case "App\Location":
+                    $permission = "Edit Events";
+                    break;
+                case "App\Models\Ware":
+                    $permission = "Edit Marketplace";
+                    break;
+                default:
+                    $permission = "";
+                    break;
             }
 
             if ($permission != "") {
@@ -54,30 +65,15 @@ class CommentController extends Controller
                     foreach($model->users as $user)
                     {
                         switch ($request->model) {
-                        case "App\Event":
-                            $user->notify(new CommentBroadcast($result));
-                            break;
-                        case "App\PartsRunData":
-                            if ($user->isInterestedIn($request->id))
-                            {   
+                            case "App\PartsRunData":
+                                if ($user->isInterestedIn($request->id))
+                                {   
+                                    $user->notify(new CommentBroadcast($result));
+                                }
+                                break;
+                            default:
                                 $user->notify(new CommentBroadcast($result));
-                            }
-                            break;
-                        case "App\Models\Auction":
-                            $user->notify(new CommentBroadcast($result));
-                            break;
-                        case "App\CourseRun":
-                            $user->notify(new CommentBroadcast($result));
-                            break;
-                        case "App\Location":
-                            $user->notify(new CommentBroadcast($result));
-                            break;
-                        case "App\Models\Ware":
-                            $user->notify(new CommentBroadcast($result));
-                            break;
-                        default:
-                              echo "error";
-                            break;
+                                break;
                         }
                     }
                     $result->broadcast = true;
@@ -85,6 +81,23 @@ class CommentController extends Controller
                 }
             }
 
+        }
+        // Send notification to model owner
+        switch ($request->model) {
+            case "App\Event":
+                $model->organiser->notify(new NewComment($result));
+                break;
+            case "App\PartsRunData":
+                $model->user->notify(new NewComment($result));
+                break;
+            case "App\Models\Auction":
+                $model->user->notify(new NewComment($result));
+                break;
+            case "App\Models\Ware":
+                $model->user->notify(new NewComment($result));
+                break;
+            default:
+                break;
         }
 
 

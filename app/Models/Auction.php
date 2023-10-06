@@ -48,13 +48,13 @@ class Auction extends Model implements Auditable
 
     public function user()
     {
-        return $this->hasOne(User::class);
+        return $this->belongsTo(User::class);
     }   
 
     /**
      * List users this entering this auction
      * 
-     * @return array of App\User
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany of App\User
      */
     public function users()
     {

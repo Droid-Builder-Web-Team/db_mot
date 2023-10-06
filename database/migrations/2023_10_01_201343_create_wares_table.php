@@ -19,7 +19,7 @@ class CreateWaresTable extends Migration
             $table->foreignId('user_id')->constrained();
             $table->string('type');
             $table->string('title');
-            $table->string('description');
+            $table->text('description');
             $table->boolean('state');
             $table->boolean('showemail');
         });

@@ -43,7 +43,7 @@ class AuctionController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View
      */
     public function index()
     {
@@ -141,7 +141,7 @@ class AuctionController extends Controller
      *
      * @param \App\Auction $auction Auction model to edit
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View
      */
     public function edit(Auction $auction)
     {
@@ -157,7 +157,7 @@ class AuctionController extends Controller
      * @param \Illuminate\Http\Request $request Request data
      * @param \App\Event               $event   Event to update
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View
      */
     public function update(Request $request, Auction $auction)
     {

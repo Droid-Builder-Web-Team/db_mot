@@ -52,7 +52,7 @@ class PartsRunDataController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View
      */
     public function index()
     {
@@ -71,7 +71,7 @@ class PartsRunDataController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View
      */
     public function create()
     {
@@ -94,7 +94,7 @@ class PartsRunDataController extends Controller
      *
      * @param \Illuminate\Http\Request $request POST data passed to function
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View
      */
     public function store(Request $request)
     {
@@ -136,7 +136,7 @@ class PartsRunDataController extends Controller
      *
      * @param int $id $ID of part run to display
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View
      */
     public function show($id)
     {
@@ -168,7 +168,7 @@ class PartsRunDataController extends Controller
      *
      * @param int $id Id of Part Run
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View
      */
     public function edit($id)
     {
@@ -208,7 +208,7 @@ class PartsRunDataController extends Controller
      * @param \Illuminate\Http\Request $request POST data from form
      * @param int                      $id      ID of Part run to update
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View
      */
     public function update(Request $request, $id)
     {
@@ -278,7 +278,7 @@ class PartsRunDataController extends Controller
      *
      * @param \App\PartsRunData $partsRunData PartsRunData model
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View
      */
     public function destroy(PartsRunData $partsRunData)
     {
@@ -293,7 +293,7 @@ class PartsRunDataController extends Controller
      *
      * @param \Illuminate\Http\Request $request Form data
      *
-     * @return void
+     * @return string
      */
     public function requestPartsRun(Request $request)
     {
@@ -306,7 +306,7 @@ class PartsRunDataController extends Controller
      * @param \Illuminate\Http\Request $request  Form data
      * @param \App\PartsRunData        $partsrun Part run model
      *
-     * @return void
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function interested(Request $request, PartsRunData $partsrun)
     {
@@ -357,7 +357,7 @@ class PartsRunDataController extends Controller
      *
      * @param \Illuminate\Http\Request $request Form data
      *
-     * @return view
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function statusUpdate(Request $request)
     {
@@ -466,7 +466,7 @@ class PartsRunDataController extends Controller
     /**
      * List none active runs
      *
-     * @return void
+     * @return \Illuminate\Contracts\View\View
      */
     public function noneActiveRuns()
     {
