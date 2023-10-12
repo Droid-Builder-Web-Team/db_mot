@@ -41,6 +41,11 @@
                 </div>
 
                 <div class="form-group">
+                    To add images, first have them saved somewhere like Google Photos or another image hosting site. From there you can get a link to the image. (For Google, hit the share icon and click 'Create link')
+                    Now click on Insert->Image from the menu in text entry above, and post the link into the Source field. You can also set hover over text and a size limit to the picture. 
+                </div>
+
+                <div class="form-group">
                     <label for="showemail"><strong>Show Email</strong></label>
                     {{Form::hidden('showemail','0')}}
                     <input type="checkbox" {{ $ware->showemail ? 'checked=1 value=1' : 'value=1' }} name="showemail" class="form-control">
