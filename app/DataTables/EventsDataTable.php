@@ -27,6 +27,14 @@ class EventsDataTable extends DataTable
                     return $location_name;
                 }
             )
+            ->addColumn(
+                'attendance', function (Event $event) {
+                    $attendance = $event->attended->count();
+                    $attendance .= "/";
+                    $attendance .= $event->notattended->count();
+                    return $attendance;
+                }
+            )
           ->addColumn('action', '')
         ->editColumn(
             'action', function ($row) {
@@ -82,6 +90,7 @@ class EventsDataTable extends DataTable
           Column::make('date'),
           Column::make('name'),
           Column::computed('location'),
+          Column::computed('attendance'),
           Column::computed('action')
               ->exportable(false)
               ->printable(false)
