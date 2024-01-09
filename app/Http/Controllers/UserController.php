@@ -219,6 +219,12 @@ class UserController extends Controller
         $path = 'members/'.$uid.'/qr_code.png';
         if (!Storage::exists($path)) {
             $path = 'members/'.$uid.'/qr_code.jpg';
+            if (!Storage::exists($path)) {
+                // QR Code image doesn't exist, regenerate it
+                $user = User::find($uid);
+                $user->generateQR($user->badge_id, $user->id);
+                $path = 'members/'.$uid.'/qr_code.png';
+            }
         }
         $file = Storage::get($path);
         $type = Storage::mimeType($path);
