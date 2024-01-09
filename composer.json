@@ -43,6 +43,7 @@
         "rap2hpoutre/laravel-log-viewer": "^1.7",
         "rennokki/rating": "^2.4",
         "silviolleite/laravelpwa": "^2.0",
+        "simplesoftwareio/simple-qrcode": "~4",
         "spatie/calendar-links": "^1.4",
         "spatie/laravel-backup": "^6.16",
         "spatie/laravel-cookie-consent": "^2.12",

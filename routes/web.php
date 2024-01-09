@@ -167,3 +167,5 @@ Route::get('topps_image/{uid}/{view}/{size?}', 'ToppsController@displayToppsImag
 Route::get('events/image/show/{event_id}', 'EventApiController@showimage')
     ->name('events.showimage');
 
+    
+Route::get('/chart', 'QrCodeController@show')->name('chart');

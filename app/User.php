@@ -308,8 +308,7 @@ class User extends Authenticatable implements MustVerifyEmail,
     public static function generateQR($id, $user_id)
     {
         $link = url('/')."/id.php?id=".$id;
-        $url = "https://chart.googleapis.com/chart?cht=qr&chld=L|1&chs=500x500&chl="
-            . urlencode($link);
+        $url = url('/chain?chl='.urlencode($link));
         $image = imagecreatefrompng($url);
         $file = '/members/' . $user_id . '/qr_code.png';
 
