@@ -309,7 +309,7 @@ class User extends Authenticatable implements MustVerifyEmail,
     {
         $link = url('/')."/id.php?id=".$id;
         $url = url('/chart?chl='.urlencode($link));
-        $image = imagecreatefrompng($url);
+        //$image = imagecreatefrompng($url);
         $file = '/members/' . $user_id . '/qr_code.png';
 
         Storage::put($file, file_get_contents($url));
