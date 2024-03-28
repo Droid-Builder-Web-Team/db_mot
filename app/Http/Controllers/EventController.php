@@ -140,6 +140,37 @@ class EventController extends Controller
     }
 
     /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        $locations = Location::all();
+        return view('event.create', compact('locations'));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+
+        try {
+            $droid->users()->attach(auth()->user()->id);
+            toastr()->success('Event submitted for admin approval');
+        } catch (\Illuminate\Database\QueryException $exception) {
+            toastr()->error('Failed to submit event');
+        }
+
+        return redirect()->route('event.index');
+
+    }
+
+    /**
      * Display the specified resource.
      *
      * @param int $id ID of event to show

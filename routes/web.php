@@ -90,8 +90,8 @@ Route::group(
         Route::get('qr_code/{uid}', 'UserController@displayQRCode')->name('image.displayQRCode');
         Route::get('event/past', 'EventController@past')->name('event.past');
         Route::get('event/map', 'EventController@map')->name('event.map');
-        Route::resource('location', 'LocationController', ['only' => ['show']]);
-        Route::post('/location/{location}/rating', 'LocationController@store')->name('location.rating');
+        Route::resource('location', 'LocationController', ['only' => ['show', 'create', 'store']]);
+        Route::post('/location/{location}/rating', 'LocationController@rating')->name('location.rating');
         Route::get('image', 'ImageController@index')->name('image');
         Route::post('image/upload', 'ImageController@upload');
         Route::get('image/destroy', 'ImageController@destroy');
@@ -147,7 +147,7 @@ Route::group(
 
 Route::group(
     ['middleware' => ['auth', 'gdpr.terms']], function () {
-        Route::resource('event', 'EventController', ['only' => ['index', 'show', 'update']]);
+        Route::resource('event', 'EventController', ['only' => ['index', 'show', 'create', 'store', 'update']]);
     }
 );
 

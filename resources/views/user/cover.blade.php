@@ -20,7 +20,7 @@ said member has paid their subscription to the club.
     The Cover is provided by Self Assured Underwriting Agencies Limited.
   </p>
   <table>
-    <tr><th>Policy Number: </th><td>SALSALIA/S258571/0120/23</td></tr>
+    <tr><th>Policy Number: </th><td>SALSALIA/S296081/BB012/24</td></tr>
     <tr><th>Wording: </th><td>Liability Insurance Policy (SAUA Associations & Clubs PLPW1220)</td></tr>
     <tr><th>People Covered: </th><td>Members of a club who attend shows to show their droids.</td></tr>
     <tr><th>Public Liability: </th><td>GBP 2,000,000 any one Occurrence, defence costs and expenses in addition</td></tr>
