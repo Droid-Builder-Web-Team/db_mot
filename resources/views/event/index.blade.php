@@ -18,7 +18,13 @@
             <a class="btn-sm btn-link" href="{{ route('codeofconduct') }}">Droid Builders UK - Event Code of Conduct</a>
 	        <a class="btn-sm btn-link" href="{{ route('event.past') }}">Past Events</a>
             <a class="btn-sm btn-link" href="{{ route('event.map') }}">View as Map</a>
-			<a class="btn-sm btn-link" href="{{ route('event.create') }}">Submit Event</a>
+			<a class="btn-sm btn-link" href="/ical/{{ auth()->user()->calendar_id }}" target="_blank">Your Events (iCal)</a>
+			@can('Edit Events')
+				<a class="btn-sm btn-link" href="/ical/{{ auth()->user()->calendar_id }}/all" target="_blank">All Events (iCal)</a>
+			@endcan
+			@if(config('features.userevents', FALSE))
+				<a class="btn-sm btn-link" href="{{ route('event.create') }}">Submit Event</a>				
+            @endif
           </p>
       </div>
     </div>

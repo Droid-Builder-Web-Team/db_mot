@@ -152,7 +152,7 @@ Route::group(
 );
 
 Route::get('/id/{id}', 'ID');
-Route::get('/ical/{icalId}', 'ICalController');
+Route::get('/ical/{icalId}/{scope?}', 'ICalController');
 
 
 Route::get('/auth/redirect/{provider}', 'SocialController@redirect');

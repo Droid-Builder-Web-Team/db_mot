@@ -21,7 +21,7 @@ use Eluceo\iCal\Domain\ValueObject\SingleDay;
 use Eluceo\iCal\Presentation\Factory\CalendarFactory;
 use Illuminate\Support\Carbon;
 use Eluceo\iCal\Domain\ValueObject\Location;
-use App\Events;
+use App\Event as Events;
 use App\User;
 
 /**
@@ -43,10 +43,16 @@ class ICalController extends Controller
      *
      * @return void
      */
-    public function __invoke($calId)
+    public function __invoke($calId, $scope = "user")
     {
         $user = User::where('calendar_id', $calId)->first();
-        $events = $user->events;
+
+        if ($scope == "user") 
+        { 
+            $events = $user->events;
+        } else if ($scope == "all") {
+            $events = Events::all();
+        }
 
         $calendar = new Calendar();
 
@@ -65,6 +71,8 @@ class ICalController extends Controller
 
             $calendar->addEvent($entry);
         }
+        
+
         /*
         define('ICAL_FORMAT', 'Ymd\T\0\0\0\0\0\0\Z');
 
