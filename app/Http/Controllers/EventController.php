@@ -22,8 +22,11 @@ use App\Comment;
 use App\Contact;
 use DateTime;
 use App\Notifications\EventUpdated;
+use App\Notifications\UserEventCreated;
 use Spatie\CalendarLinks\Link;
 use Acaronlex\LaravelCalendar\Calendar;
+use CountryState;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * EventController
@@ -60,6 +63,7 @@ class EventController extends Controller
         }
 
         $events = Event::whereDate('date', '>=', Carbon::now())
+            ->where('approved', '1')
             ->orderBy('date', 'asc')->get();
 
         $calevents = [];
@@ -147,7 +151,9 @@ class EventController extends Controller
     public function create()
     {
         $locations = Location::all();
-        return view('event.create', compact('locations'));
+        $countries = CountryState::getCountries();
+        rsort($countries);
+        return view('event.create', compact(['locations', 'countries']));
     }
 
     /**
@@ -158,12 +164,68 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate(
+            [
+            'name' => 'required',
+            'description' => 'required',
+            'date' => 'required'
+            ]
+        );
+
+
+        if($request->location_id == "new") {
+            dd("Adding new location");
+        } else {
+            $event['location_id'] = $request->location_id;
+        }
+
+        if ($request['url'] != "") {
+            if (!str_starts_with($request['url'], 'http')) {
+                $event['url'] = "http://".$request['url'];
+            }
+        } else {
+            $event['url'] = "";
+        }
+
+        $event['name'] = $request->name;
+        $event['parking_details'] = $request->parking_details;
+        $event['quantity'] = $request->quantity;
+        $event['public'] = $request->public;
+        $event['date'] = $request->date;
+        $event['wip_allowed'] = 0;
+        $event['mot'] = 0;
+        $linkify = new \Misd\Linkify\Linkify();
+        $event['description'] = $linkify->process($request->description);
+        $event['created_by'] = Auth::id();
+        $event['approved'] = 0;
 
         try {
-            $droid->users()->attach(auth()->user()->id);
+            $newevent = Event::create($event);
             toastr()->success('Event submitted for admin approval');
         } catch (\Illuminate\Database\QueryException $exception) {
             toastr()->error('Failed to submit event');
+            return back();
+        }
+
+        $officers = User::role('Events Officer')->get();
+        foreach ($officers as $officer)
+        {
+            //$officer->notify(new UserEventCreated($newevent));
+        }
+
+        if ($request->days != 1) {
+            for ($x = 1; $x <= $request->days - 1; $x++) {
+                $event['date'] = date(
+                    'Y-m-d', strtotime(
+                        $request->date. ' + ' . $x . ' days'
+                    )
+                );
+                $newevent = Event::create($event);
+                foreach ($officers as $officer)
+                {
+                    //$officer->notify(new UserEventCreated($newevent));
+                }
+            }
         }
 
         return redirect()->route('event.index');

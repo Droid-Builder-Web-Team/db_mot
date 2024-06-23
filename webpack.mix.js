@@ -18,4 +18,5 @@ mix.sass('resources/sass/app.scss', 'public/css')
     .sass('resources/sass/cards.scss', 'public/css')
     .sass('resources/sass/sidebar.scss', 'public/css')
     .sass('resources/sass/partsrun.scss', 'public/css')
+    .sass('resources/sass/select2.scss', 'public/css')
     .sass('resources/sass/buttons.scss', 'public/css').version();

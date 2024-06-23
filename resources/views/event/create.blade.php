@@ -15,6 +15,16 @@
     </div>
     <div class="card-body">
 
+        <div class="row d-flex justify-content-center align-items-center">
+            <div class="col-sm-12">
+                <p>
+            This form is to allow members to submit events that they have heard about and are interested in going. A member of the admin team will then approve it. Please enter 
+            as much detail as you can, and make sure the address is correct. Also, please check that the location doesn't already exist using the drop down. This will allow us to rate and comment about
+            venues for future events.
+                </p>
+            </div>
+        </div>
+
         <form action="{{ route('event.store') }}" method="POST">
             @csrf
 
@@ -34,7 +44,8 @@
                 </div>
 
                 <div class="col-sm-5">
-                    <select class="form-control" name="location_id">
+                    <select class="form-control location-dropdown" name="location_id" id="location_id">
+                        <option value="new">New Location</option>
                         @foreach ($locations as $location)
                             <option value="{{ $location->id }}">{{ $location->name }}</option>
                         @endforeach
@@ -42,9 +53,56 @@
                 </div>
 
                 <div class="col-sm-5">
-                    <a class="btn btn-info" href={{ route('admin.locations.create') }}>New Location</a>
+                    <a class="btn btn-info" id="new-location-btn" href=#>New Location</a>
                 </div>
             </div>
+
+<div id="new-location" style="display:none">
+    <div class="card">
+        <div class="card-header">
+            New location
+        </div>
+        <div class="card-body">
+            <div class="form-group">
+                <label for="name"><strong>Name</strong></label>
+                <input type="text" name="location_name" class="form-control" placeholder="Name">
+            </div>
+
+            <div class="form-group">
+                <label for="street"><strong>Street</strong></label>
+                <input type="text" name="street" class="form-control" placeholder="Street">
+            </div>
+
+            <div class="form-group">
+                <label for="town"><strong>Town</strong></label>
+                <input type="text" name="town" class="form-control" placeholder="Town">
+            </div>
+
+            <div class="form-group">
+                <label for="county"><strong>County</strong></label>
+                <input type="text" name="county" class="form-control" placeholder="County">
+            </div>
+
+            <div class="form-group">
+                <label for="country"><strong>Country</strong></label>
+                <select name="country" class="form-control" placeholder="Country">
+                    <option disabled value>Please Select</option>
+                    <option value="United Kingdom">United Kingdom</option>
+                    <option value="United States">United States</option>
+                    <option disabled value>----</option>
+                    @foreach($countries as $code => $country)
+                    <option value="{{ $country }}">{{ $country }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="postcode"><strong>Postcode</strong></label>
+                <input type="text" name="postcode" class="form-control" placeholder="Postcode">
+            </div>
+        </div>
+    </div>
+</div>
 
             <div class="form-group row d-flex justify-content-center align-items-center">
                 <div class="col-sm-2">
@@ -73,7 +131,7 @@
                     <label for="date"><strong>Date</strong></label>
                 </div>
 
-                <div class="col-sm-4">
+                <div class="col-sm-3">
                     <input type="date" name="date" class="form-control" placeholder="Date">
                 </div>
 
@@ -85,8 +143,8 @@
                     <input type="number" name="days" value="1" class="form-control" placeholder="Number of Days" required>
                 </div>
 
-                <div class="col-sm-1">
-                    <label for="quantity"><strong>Droid Limit</strong><br>(0 = no limit)</label>
+                <div class="col-sm-2">
+                    <label for="days"><strong>Droid Limit</strong></label>
                 </div>
 
                 <div class="col-sm-2">
@@ -94,31 +152,17 @@
                 </div>
             </div>
 
-
             <div class="form-group row d-flex justify-content-center align-items-center">
-                <div class="col-sm-2">
-                    <label for="date"><strong>Event Options</strong></label>
+
+                <div class="col-sm-3">
+                    <label for="days"><strong>Public Event</strong></label>
                 </div>
 
-                <div class="col-sm-10">
-                    <div class="form-check">
-                        {{ Form::hidden('mot', '0') }}
-                        <input type="checkbox" id="mot" name="mot" class="form-check-input" value="1">
-                        <label class="form-check-label" for="mot">MOTs can be done at this event</label>
-                    </div>
-
-                    <div class="form-check">
-                        {{ Form::hidden('public', '0') }}
-                        <input type="checkbox" id="public" name="public" class="form-check-input" value="1">
-                        <label class="form-check-label" for="public">Display publicly on droidbuilders.uk if anyone is attending</label>
-                    </div>
-
-                    <div class="form-check">
-                        {{ Form::hidden('wip_allowed', '0') }}
-                        <input type="checkbox" id="wip_allowed" name="wip_allowed" class="form-check-input" value="1">
-                        <label class="form-check-label" for="wip_allowed">WIP Allowed</label>
-                    </div>
+                <div class="col-sm-9 form-check">
+                    {{ Form::hidden('public', '0') }}
+                    <input type="checkbox" id="public" name="public" class="form-check-input" value="1">
                 </div>
+
             </div>
 
             <div class="form-group row d-flex justify-content-center align-items-center">
@@ -148,4 +192,19 @@ tinymce.init({
 });
 </script>
 
+<script>
+$(document).ready(function() {
+    $('.location-dropdown').select2();
+});
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#new-location-btn").click(function () {
+            $("#location_id option[value='new']").attr("selected", true);
+            $("#location_id option[value='new']").prop("selected", "selected");
+            $("#new-location").toggle();
+        });
+    });
+    </script>
 @endsection

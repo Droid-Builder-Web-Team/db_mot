@@ -147,4 +147,11 @@
         toolbar_mode: 'floating',
     });
 </script>
+
+<script>
+    $(document).ready(function() {
+        $('.location-dropdown').select2();
+    });
+</script>
+
 @endsection

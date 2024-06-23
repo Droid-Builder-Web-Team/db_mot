@@ -15,7 +15,7 @@
     {!! $calendar->script() !!}
           <p>
             <br />
-            <a class="btn-sm btn-link" href="{{ route('codeofconduct') }}">Droid Builders UK - Event Code of Conduct</a>
+            
 	        <a class="btn-sm btn-link" href="{{ route('event.past') }}">Past Events</a>
             <a class="btn-sm btn-link" href="{{ route('event.map') }}">View as Map</a>
 			<a class="btn-sm btn-link" href="/ical/{{ auth()->user()->calendar_id }}" target="_blank">Your Events (iCal)</a>
@@ -26,6 +26,10 @@
 				<a class="btn-sm btn-link" href="{{ route('event.create') }}">Submit Event</a>				
             @endif
           </p>
+		  <p>
+			<br />
+			<a class="btn-sm btn-link" href="{{ route('codeofconduct') }}">Droid Builders UK - Event Code of Conduct</a>
+		  </p>
       </div>
     </div>
   </div>
@@ -35,7 +39,7 @@
 		<div class="p-4 card">
 			<h4 class="mb-3 text-underline">New Events</h4>
 			<p>Club PLI covers you for any events listed here. If you want to do an event that is not listed here, either get the event organiser to
-			email the club, or email in yourself with the details. </p>
+			email the club, email in yourself with the details, or use the Submit Event button above.</p>
 			<p>Details required:
 				<ul>
 					<li>Event name</li>

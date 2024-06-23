@@ -110,7 +110,6 @@ class LocationController extends Controller
     {
 
         try {
-            $droid->users()->attach(auth()->user()->id);
             toastr()->success('Event submitted for admin approval');
         } catch (\Illuminate\Database\QueryException $exception) {
             toastr()->error('Failed to submit event');
