@@ -34,7 +34,7 @@
                     </div>
 
                     <div class="col-sm-5">
-                        <select class="form-control" name="location_id">
+                        <select class="form-control location-dropdown" name="location_id">
                             @foreach ($locations as $location)
                                 <option value="{{ $location->id }}">{{ $location->name }}</option>
                             @endforeach
