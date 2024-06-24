@@ -35,7 +35,14 @@ class EventsDataTable extends DataTable
                     return $attendance;
                 }
             )
+            ->addColumn(
+                'approved', function (Event $event) {
+                    $approved = $event->approved ? '<!--approved--><i class="fas fa-check">': '<!--n--><i class="fas fa-times">';
+                    return $approved;
+                }
+            )            
           ->addColumn('action', '')
+          ->orderColumns(['name', 'location', 'approved', 'date'], '+:column $1')
         ->editColumn(
             'action', function ($row) {
                 $crudRoutePart = "event";
@@ -43,7 +50,7 @@ class EventsDataTable extends DataTable
                 return view('partials.datatablesActions', compact('row', 'crudRoutePart', 'parts'));
             }
         )
-          ->rawColumns(['action']);
+          ->rawColumns(['action', 'approved']);
     }
 
     /**
@@ -91,6 +98,7 @@ class EventsDataTable extends DataTable
           Column::make('name'),
           Column::computed('location'),
           Column::computed('attendance'),
+          Column::make('approved'),
           Column::computed('action')
               ->exportable(false)
               ->printable(false)
@@ -99,7 +107,7 @@ class EventsDataTable extends DataTable
         ];
     }
 
-    /**
+    /**     
      * Get filename for export.
      *
      * @return string

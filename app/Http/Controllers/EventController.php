@@ -168,13 +168,42 @@ class EventController extends Controller
             [
             'name' => 'required',
             'description' => 'required',
-            'date' => 'required'
+            'date' => 'required',
             ]
         );
 
 
         if($request->location_id == "new") {
-            dd("Adding new location");
+            // Create a new location
+            if ($request['postcode'] != "") {
+                $address = str_replace(' ', '+', $request['postcode']).'+'.str_replace(' ', '+', $request['country']);
+                $url = "https://maps.google.com/maps/api/geocode/json?key=".config('gmap.google_api_key')."&address=".$address."&sensor=false";
+                $geocode=file_get_contents($url);
+                $output= json_decode($geocode);
+                $location['latitude'] = strval($output->results[0]->geometry->location->lat);
+                $location['longitude'] = strval($output->results[0]->geometry->location->lng);
+            } else {
+                $location['latitude'] = "";
+                $location['longitude'] = "";
+            }
+
+            $location['name'] = $request->location_name;
+            $location['street'] = $request->street;
+            $location['town'] = $request->town;
+            $location['county'] = $request->county;
+            $location['country'] = $request->country;
+            $location['postcode'] = $request->postcode;
+
+            try {
+                $newlocation = Location::create($location);
+                toastr()->success('Location created successfully');
+            } catch (\Illuminate\Database\QueryException $exception) {
+                dd($exception);
+                toastr()->error('Failed to create Location');
+                return back()->withInput();
+            }     
+            $event['location_id'] = $newlocation->id;
+            $request['location_id'] = $event['location_id'];    // If location is created successfully, set request incase event can't be created
         } else {
             $event['location_id'] = $request->location_id;
         }
@@ -204,13 +233,13 @@ class EventController extends Controller
             toastr()->success('Event submitted for admin approval');
         } catch (\Illuminate\Database\QueryException $exception) {
             toastr()->error('Failed to submit event');
-            return back();
+            return back()->withInput();
         }
 
-        $officers = User::role('Events Officer')->get();
+        $officers = User::role('Super Admin')->get();
         foreach ($officers as $officer)
         {
-            //$officer->notify(new UserEventCreated($newevent));
+            $officer->notify(new UserEventCreated($newevent));
         }
 
         if ($request->days != 1) {
@@ -223,7 +252,7 @@ class EventController extends Controller
                 $newevent = Event::create($event);
                 foreach ($officers as $officer)
                 {
-                    //$officer->notify(new UserEventCreated($newevent));
+                    $officer->notify(new UserEventCreated($newevent));
                 }
             }
         }

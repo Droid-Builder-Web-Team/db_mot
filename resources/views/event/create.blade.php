@@ -19,7 +19,10 @@
             <div class="col-sm-12">
                 <p>
             This form is to allow members to submit events that they have heard about and are interested in going. A member of the admin team will then approve it. Please enter 
-            as much detail as you can, and make sure the address is correct. Also, please check that the location doesn't already exist using the drop down. This will allow us to rate and comment about
+            as much detail as you can, and make sure the address is correct.
+                </p>
+                <p>
+            Also, please check that the location doesn't already exist using the drop down. This will allow us to rate and comment about
             venues for future events.
                 </p>
             </div>
@@ -154,13 +157,14 @@
 
             <div class="form-group row d-flex justify-content-center align-items-center">
 
-                <div class="col-sm-3">
+                <div class="col-sm-2">
                     <label for="days"><strong>Public Event</strong></label>
                 </div>
 
-                <div class="col-sm-9 form-check">
+                <div class="col-sm-10 form-check">
                     {{ Form::hidden('public', '0') }}
                     <input type="checkbox" id="public" name="public" class="form-check-input" value="1">
+                    <label class="form-check-label" for="public">Check box if public event such as a comic con, leave unticked for things like weddings</label>
                 </div>
 
             </div>
