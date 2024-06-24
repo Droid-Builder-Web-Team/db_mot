@@ -41,7 +41,7 @@ class Droid extends Model implements Auditable
     /**
      * List users this droid belongs to
      *
-     * @return array of App\User
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany of App\User
      */
     public function users()
     {
@@ -51,7 +51,7 @@ class Droid extends Model implements Auditable
     /**
      * What club does the droid belong to
      *
-     * @return App\Club
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function club()
     {
@@ -61,7 +61,7 @@ class Droid extends Model implements Auditable
     /**
      * Get MOTs for droid
      *
-     * @return array of App\MOT
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany of App\MOT
      */
     public function mot()
     {
@@ -71,7 +71,7 @@ class Droid extends Model implements Auditable
     /**
      * Get date of latest MOT if available
      *
-     * @return date or 0
+     * @return \date or 0
      */
     public function motDate()
     {
@@ -221,7 +221,7 @@ class Droid extends Model implements Auditable
     /**
      * Get comments for droid
      *
-     * @return array of App\Comment
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany of App\Comment
      */
     public function comments()
     {

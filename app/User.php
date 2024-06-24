@@ -112,7 +112,7 @@ class User extends Authenticatable implements MustVerifyEmail,
     /**
      * Get all the user's Droids
      *
-     * @return array of App\Droid
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany of App\Droid
      */
     public function droids()
     {
@@ -122,7 +122,7 @@ class User extends Authenticatable implements MustVerifyEmail,
     /**
      * Get all the user's Achievements
      *
-     * @return array of App\Achievement
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany of App\Achievement
      */
     public function achievements()
     {
@@ -160,7 +160,7 @@ class User extends Authenticatable implements MustVerifyEmail,
     /**
      * Get all the user's Events
      *
-     * @return array of App\Event
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany of App\Event
      */
     public function events()
     {
@@ -177,7 +177,7 @@ class User extends Authenticatable implements MustVerifyEmail,
     /**
      * Get all the user's Auctions
      *
-     * @return array of App\Auctions
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany of App\Auctions
      */
     public function auctions()
     {
@@ -191,7 +191,7 @@ class User extends Authenticatable implements MustVerifyEmail,
     /**
      * Events user is going to
      *
-     * @return array of App\Event
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany of App\Event
      */
     public function goingTo()
     {
@@ -204,7 +204,7 @@ class User extends Authenticatable implements MustVerifyEmail,
     /**
      * Get list of all events user has attended
      *
-     * @return array of App\Event
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany of App\Event
      */
     public function attended_events()
     {
@@ -234,7 +234,7 @@ class User extends Authenticatable implements MustVerifyEmail,
     /**
      * Does a droid belong to this user
      *
-     * @param App\Droid $droid Droid Model
+     * @param \App\Droid $droid Droid Model
      *
      * @return bool
      */
@@ -280,7 +280,7 @@ class User extends Authenticatable implements MustVerifyEmail,
      */
     public function pli_expires()
     {
-        $expires = Carbon::parse($this->pli_date)->addYear(1);
+        $expires = Carbon::parse($this->pli_date)->addYear();
         return $expires;
 
     }
@@ -288,7 +288,7 @@ class User extends Authenticatable implements MustVerifyEmail,
     /**
      * How many years has user been a member
      *
-     * @return Carbon
+     * @return int
      */
     public function yearsService()
     {
@@ -339,7 +339,7 @@ class User extends Authenticatable implements MustVerifyEmail,
     /**
      * Get CourseRuns for user
      *
-     * @return array of App\CourseRun
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany of App\CourseRun
      */
     public function course_runs()
     {
@@ -349,7 +349,7 @@ class User extends Authenticatable implements MustVerifyEmail,
     /**
      * What clubs is user a member of
      *
-     * @return array of App\Clubs
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany of App\Clubs
      */
     public function clubs()
     {
@@ -360,7 +360,7 @@ class User extends Authenticatable implements MustVerifyEmail,
     /**
      * Is user an admin of a club
      *
-     * @param App\Club $club Club Model
+     * @param \App\Club $club Club Model
      *
      * @return bool
      */
@@ -372,7 +372,7 @@ class User extends Authenticatable implements MustVerifyEmail,
     /**
      * Part runs user is organiser of
      *
-     * @return array of App\PartsRunData
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany of App\PartsRunData
      */
     public function partsRun()
     {
@@ -382,7 +382,7 @@ class User extends Authenticatable implements MustVerifyEmail,
     /**
      * Marketplace Wares user is selling
      *
-     * @return array of App\Ware
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany of App\Ware
      */
     public function wares()
     {
@@ -393,7 +393,7 @@ class User extends Authenticatable implements MustVerifyEmail,
     /**
      * Part runs user is interested in
      *
-     * @return array of App\PartsRunData
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany of App\PartsRunData
      */
     public function partsInterested()
     {

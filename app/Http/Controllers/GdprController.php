@@ -12,7 +12,7 @@ class GdprController extends Controller
     /**
      * Download the GDPR compliant data portability JSON file.
      *
-     * @param  \Dialect\Package\Gdpr\Http\Requests\GdprDownload $request
+     * @param  \Dialect\Gdpr\Http\Requests\GdprDownload $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function download(GdprDownload $request)

@@ -51,7 +51,7 @@ class MOT extends Model implements Auditable
     /**
      * Get club of droid associated with the MOT
      *
-     * @return App\Club
+     * @return \App\Club
      */
     public function club()
     {
@@ -61,7 +61,7 @@ class MOT extends Model implements Auditable
     /**
      * Get droid associated with MOT
      *
-     * @return App\Droid
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function droid()
     {
@@ -71,7 +71,7 @@ class MOT extends Model implements Auditable
     /**
      * Get owner of droid with this MOT
      *
-     * @return array of App\User
+     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough of App\User
      */
     public function users()
     {
@@ -81,7 +81,7 @@ class MOT extends Model implements Auditable
     /**
      * Get list of sections
      *
-     * @return array of sections
+     * @return \Illuminate\Support\Collection of sections
      */
     public function sections()
     {
@@ -98,7 +98,7 @@ class MOT extends Model implements Auditable
      *
      * @param mixed $section_id Section to get lines for
      *
-     * @return array of lines
+     * @return \Illuminate\Support\Collection of lines
      */
     public static function lines($section_id)
     {
@@ -130,7 +130,7 @@ class MOT extends Model implements Auditable
     /**
      * Get details of MOT
      *
-     * @return array of details lines
+     * @return \Illuminate\Support\Collection of details lines
      */
     public function details()
     {
@@ -156,7 +156,7 @@ class MOT extends Model implements Auditable
     /**
      * Get comments
      *
-     * @return array of App\Comment
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany of App\Comment
      */
     public function comments()
     {

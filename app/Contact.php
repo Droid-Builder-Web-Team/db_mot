@@ -34,7 +34,7 @@ class Contact extends Model implements Auditable
     /**
      * What model is the comment for
      *
-     * @return Model
+     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
      */
     public function contactable()
     {
@@ -44,7 +44,7 @@ class Contact extends Model implements Auditable
     /**
      * Get all of the locations that are assigned this contact.
      *
-     * @return Collection
+     * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
      */
     public function locations()
     {
@@ -54,7 +54,7 @@ class Contact extends Model implements Auditable
     /**
      * Get all of the events that are assigned this contact.
      *
-     * @return Collection
+     * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
      */
     public function events()
     {

@@ -39,7 +39,7 @@ class PartsRunImage extends Model implements Auditable
     /**
      * Find PartRunData image is associated with
      *
-     * @return App\PartsRunData
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function data()
     {
@@ -49,7 +49,7 @@ class PartsRunImage extends Model implements Auditable
     /**
      * Find PartsRunAd image is associated with
      *
-     * @return App\PartsRunAd
+     * @return \Illuminate\Database\Eloquent\Relations\HasOneThrough
      */
     public function ad()
     {

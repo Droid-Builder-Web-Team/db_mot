@@ -51,7 +51,7 @@ class PartsRunData extends Model implements Auditable
     /**
      * Get associated partsRunAd
      *
-     * @return App\PartsRunAd
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function partsRunAd()
     {
@@ -61,7 +61,7 @@ class PartsRunData extends Model implements Auditable
     /**
      * Get person organising part run
      *
-     * @return App\User
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function user()
     {
@@ -71,7 +71,7 @@ class PartsRunData extends Model implements Auditable
     /**
      * Get bc Rep for run
      *
-     * @return App\User
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function bcRep()
     {
@@ -81,7 +81,7 @@ class PartsRunData extends Model implements Auditable
     /**
      * Get club for run
      *
-     * @return App\Club
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function club()
     {
@@ -91,7 +91,7 @@ class PartsRunData extends Model implements Auditable
     /**
      * Get list of images
      *
-     * @return array of PartsRunImage
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany of PartsRunImage
      */
     public function images()
     {
@@ -101,7 +101,7 @@ class PartsRunData extends Model implements Auditable
     /**
      * Get comments for run
      *
-     * @return array of App\Comment
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany of App\Comment
      */
     public function comments()
     {
@@ -111,7 +111,7 @@ class PartsRunData extends Model implements Auditable
     /**
      * Get list of members who have registered interest at any point with pivot
      *
-     * @return array of App\User
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany of App\User
      */
     public function interested()
     {
@@ -124,7 +124,7 @@ class PartsRunData extends Model implements Auditable
     /**
      * Get list of users currently interested
      *
-     * @return array of App\User
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany of App\User
      */
     public function isInterested()
     {
@@ -153,7 +153,7 @@ class PartsRunData extends Model implements Auditable
     /**
      * Get list of members who have registered interest at any point
      *
-     * @return array of App\User
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany of App\User
      */
     public function users()
     {

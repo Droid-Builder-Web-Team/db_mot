@@ -37,7 +37,7 @@ class Club extends Model
     /**
      * Club Options
      *
-     * @return array of App\ClubOptions
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany of App\ClubOptions
      */
     public function options()
     {
@@ -47,7 +47,7 @@ class Club extends Model
     /**
      * Droids belonging to club
      *
-     * @return array of App\Droid
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany of App\Droid
      */
     public function droids()
     {
@@ -57,7 +57,7 @@ class Club extends Model
     /**
      * Get list of all clubs
      *
-     * @return array of dict
+     * @return \Illuminate\Support\Collection of dict
      */
     public function listClubs()
     {
@@ -67,7 +67,7 @@ class Club extends Model
     /**
      * Check if club has option set
      *
-     * @param App\ClubOptions $hasoption Option to check for
+     * @param \App\ClubOptions $hasoption Option to check for
      *
      * @return bool
      */

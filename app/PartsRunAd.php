@@ -54,7 +54,7 @@ class PartsRunAd extends Model implements Auditable
     /**
      * Find associated partsRunData
      *
-     * @return App\PartsRunData
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function partsRunData()
     {

@@ -47,7 +47,7 @@ class Event extends Model implements \Acaronlex\LaravelCalendar\Event, Auditable
     /**
      * Get list of users registered against an event
      *
-     * @return array of App\User
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany of App\User
      */
     public function users()
     {
@@ -66,7 +66,7 @@ class Event extends Model implements \Acaronlex\LaravelCalendar\Event, Auditable
     /**
      * Get all who have said they are going
      *
-     * @return array of App\User
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany of App\User
      */
     public function going()
     {
@@ -77,7 +77,7 @@ class Event extends Model implements \Acaronlex\LaravelCalendar\Event, Auditable
     /**
      * Get all who have said they are no longer going
      *
-     * @return array of App\User
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany of App\User
      */
     public function notgoing()
     {
@@ -88,7 +88,7 @@ class Event extends Model implements \Acaronlex\LaravelCalendar\Event, Auditable
     /**
      * Get all who have attended
      *
-     * @return array of App\User
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany of App\User
      */
     public function attended()
     {
@@ -99,7 +99,7 @@ class Event extends Model implements \Acaronlex\LaravelCalendar\Event, Auditable
     /**
      * Get all who have not attended
      *
-     * @return array of App\User
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany of App\User
      */
     public function notAttended()
     {
@@ -110,7 +110,7 @@ class Event extends Model implements \Acaronlex\LaravelCalendar\Event, Auditable
     /**
      * Get location of event
      *
-     * @return App\Location
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function location()
     {
@@ -120,7 +120,7 @@ class Event extends Model implements \Acaronlex\LaravelCalendar\Event, Auditable
     /**
      * Get comments written on this event
      *
-     * @return array of App\Comment
+     * @return \Illuminate\Database\Eloquent\Relations\morphMany of App\Comment
      */
     public function comments()
     {
@@ -131,7 +131,7 @@ class Event extends Model implements \Acaronlex\LaravelCalendar\Event, Auditable
     /**
      * Get contacts for this event
      *
-     * @return array of App\Contact
+     * @return \Illuminate\Database\Eloquent\Relations\MorphToMany of App\Contact
      */
     public function contacts()
     {
@@ -166,7 +166,7 @@ class Event extends Model implements \Acaronlex\LaravelCalendar\Event, Auditable
     /**
      * Get the start time
      *
-     * @return DateTime
+     * @return \DateTime
      */
     public function getStart()
     {
@@ -176,7 +176,7 @@ class Event extends Model implements \Acaronlex\LaravelCalendar\Event, Auditable
     /**
      * Get the end time
      *
-     * @return DateTime
+     * @return \DateTime
      */
     public function getEnd()
     {
@@ -261,9 +261,9 @@ class Event extends Model implements \Acaronlex\LaravelCalendar\Event, Auditable
     /**
      * Notify discord an event has been created
      *
-     * @param App\Event $event Event to pass
+     * @param \App\Event $event Event to pass
      *
-     * @return null
+     * @return \Illuminate\Http\Client\Response
      */
     public function createdEventNotification($event)
     {
@@ -292,9 +292,9 @@ class Event extends Model implements \Acaronlex\LaravelCalendar\Event, Auditable
     /**
      * Notify discord an event has been updated
      *
-     * @param App\Event $event Event to pass
+     * @param \App\Event $event Event to pass
      *
-     * @return null
+     * @return \Illuminate\Http\Client\Response
      */
     public function updatedEventNotification($event)
     {
@@ -323,9 +323,9 @@ class Event extends Model implements \Acaronlex\LaravelCalendar\Event, Auditable
     /**
      * Notify discord an event has been deleted
      *
-     * @param App\Event $event Event to pass
+     * @param \App\Event $event Event to pass
      *
-     * @return null
+     * @return \Illuminate\Http\Client\Response
      */
     public function deletedEventNotification($event)
     {

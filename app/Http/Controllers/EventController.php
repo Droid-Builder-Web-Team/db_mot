@@ -172,6 +172,10 @@ class EventController extends Controller
             ]
         );
 
+        if($request->location_id == "---") {
+            toastr()->error('Please enter a location');
+            return back()->withInput();
+        }
 
         if($request->location_id == "new") {
             // Create a new location

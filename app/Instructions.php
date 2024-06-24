@@ -44,7 +44,7 @@ class Instructions extends Model implements Auditable
     /**
      * PartsRunData
      *
-     * @return App\PartsRunData
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function partsRunData()
     {
@@ -54,7 +54,7 @@ class Instructions extends Model implements Auditable
     /**
      * PartsRunAd
      *
-     * @return App\PartsRunAd
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function partsRunAd()
     {

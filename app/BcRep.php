@@ -40,7 +40,7 @@ class BcRep extends Model
     /**
      * Find user
      *
-     * @return App\User
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function user()
     {

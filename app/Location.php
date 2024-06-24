@@ -37,7 +37,7 @@ class Location extends Model implements Rateable, Auditable
     /**
      * Get list of events at venue
      *
-     * @return array of Events
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany of Events
      */
     public function events()
     {
@@ -47,7 +47,7 @@ class Location extends Model implements Rateable, Auditable
     /**
      * Get venue Contact
      *
-     * @return array of App\VenueContact
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany of App\VenueContact
      */
     public function venueContact()
     {
@@ -57,7 +57,7 @@ class Location extends Model implements Rateable, Auditable
     /**
      * Get comments
      *
-     * @return array of App\Comment
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany of App\Comment
      */
     public function comments()
     {
@@ -67,7 +67,7 @@ class Location extends Model implements Rateable, Auditable
     /**
      * Get contacts for this location
      *
-     * @return array of App\Contact
+     * @return \Illuminate\Database\Eloquent\Relations\MorphToMany of App\Contact
      */
     public function contacts()
     {

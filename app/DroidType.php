@@ -40,7 +40,7 @@ class DroidType extends Model
     /**
      * PartsRunData this type belongs to
      *
-     * @return array of App\PartsRunData
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany of App\PartsRunData
      */
     public function partsRun()
     {
@@ -50,7 +50,7 @@ class DroidType extends Model
     /**
      * PartsRunAd this type belongs to
      *
-     * @return array of App\PartsRunAd
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo of App\PartsRunAd
      */
     public function partsRunAd()
     {

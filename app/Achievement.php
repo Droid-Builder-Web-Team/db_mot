@@ -40,7 +40,7 @@ class Achievement extends Model implements Auditable
     /**
      * Users with achievements
      *
-     * @return void
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function users()
     {

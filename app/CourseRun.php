@@ -34,7 +34,7 @@ class CourseRun extends Model
     /**
      * Who does this run belong to
      *
-     * @return App\User
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function user()
     {
@@ -44,7 +44,7 @@ class CourseRun extends Model
     /**
      * What droid did this run
      *
-     * @return App\Droid
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function droid()
     {
@@ -54,7 +54,7 @@ class CourseRun extends Model
     /**
      * Get comments written on this auction
      *
-     * @return array of App\Comment
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany of App\Comment
      */
     public function comments()
     {

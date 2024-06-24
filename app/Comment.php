@@ -35,7 +35,7 @@ class Comment extends Model implements Auditable,ReactableInterface
     /**
      * What model is the comment for
      *
-     * @return Model
+     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
      */
     public function commentable()
     {
@@ -45,7 +45,7 @@ class Comment extends Model implements Auditable,ReactableInterface
     /**
      * Who wrote the comment
      *
-     * @return App\User
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function user()
     {

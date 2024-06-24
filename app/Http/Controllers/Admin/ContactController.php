@@ -45,7 +45,7 @@ class ContactController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param DataTable $dataTable Datatable object
+     * @param ContactDataTable $dataTable Datatable object
      *
      * @return \Illuminate\Http\Response
      */

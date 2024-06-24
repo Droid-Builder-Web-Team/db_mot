@@ -139,7 +139,7 @@ class AuctionController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param \App\Auction $auction Auction model to edit
+     * @param \App\Models\Auction $auction Auction model to edit
      *
      * @return \Illuminate\Contracts\View\View
      */
