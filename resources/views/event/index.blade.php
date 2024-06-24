@@ -11,9 +11,7 @@
         <h4 class="text-center title">Upcoming Events</h4>
       </div>
       <div class="card-body">
-    {!! $calendar->calendar() !!}
-    {!! $calendar->script() !!}
-          <p>
+		<p>
             <br />
             
 	        <a class="btn-sm btn-link" href="{{ route('event.past') }}">Past Events</a>
@@ -26,6 +24,9 @@
 				<a class="btn-sm btn-link" href="{{ route('event.create') }}">Submit Event</a>				
             @endif
           </p>
+    {!! $calendar->calendar() !!}
+    {!! $calendar->script() !!}
+
 		  <p>
 			<br />
 			<a class="btn-sm btn-link" href="{{ route('codeofconduct') }}">Droid Builders UK - Event Code of Conduct</a>
