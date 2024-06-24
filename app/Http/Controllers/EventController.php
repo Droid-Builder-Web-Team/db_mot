@@ -236,7 +236,7 @@ class EventController extends Controller
             return back()->withInput();
         }
 
-        $officers = User::role('Super Admin')->get();
+        $officers = User::role('Events Officer')->get();
         foreach ($officers as $officer)
         {
             $officer->notify(new UserEventCreated($newevent));
