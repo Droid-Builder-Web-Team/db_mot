@@ -19,66 +19,118 @@
                 @csrf
                 @method('PUT')
 
-                <div class="form-group">
-                    <label for="name"><strong>Name</strong></label>
-                    <input type="text" name="name" class="form-control" placeholder="Name" value="{{ $event->name }}">
-                </div>
 
-                <div class="form-group row">
-                    <div class="col-xs-3 col-sm-3 col-md-3">
+                <div class="form-group row d-flex justify-content-center align-items-center">
+                    <div class="col-sm-2">
+                        <label for="name"><strong>Name</strong></label>
+                    </div>
+    
+                    <div class="col-sm-10">
+                        <input type="text" name="name" class="form-control" placeholder="Event Name" value="{{ $event->name }}">
+                    </div>
+                </div>
+    
+                <div class="form-group row d-flex justify-content-center align-items-center">
+                    <div class="col-sm-2">
                         <label for="location_id"><strong>Location</strong></label>
-                        <select class="form-control" name="location_id">
+                    </div>
+    
+                    <div class="col-sm-5">
+                        <select class="form-control location-dropdown" name="location_id" id="location_id">
+                            <option value="new">New Location</option>
                             @foreach ($locations as $location)
                                 <option value="{{ $location->id }}" @if ($event->location_id == $location->id) selected @endif>{{ $location->name }}</option>
                             @endforeach
                         </select>
                     </div>
+    
+                    <div class="col-sm-5">
+                        <a class="btn btn-info" id="new-location-btn" href=#>New Location</a>
+                    </div>
                 </div>
 
-                <div class="form-group">
-                    <a class="btn btn-info" href={{ route('admin.locations.create') }}>New location</a>
+                <div class="form-group row d-flex justify-content-center align-items-center">
+                    <div class="col-sm-2">
+                        <label for="date"><strong>Parking Details</strong></label>
+                    </div>
+    
+                    <div class="col-sm-10">
+                        <input type="text" name="parking_details" id="parking_details" class="form-control" placeholder="Event Parking Details" value="{{ $event->parking_details }}">
+                    </div>
                 </div>
-
-                <div class="form-group">
-                    <label for="description"><strong>Description</strong></label>
-                    <textarea class="form-control" style="height:150px" id="description" name="description" placeholder="Description">{{ $event->description }}</textarea>
+    
+    
+    
+                <div class="form-group row d-flex justify-content-center align-items-center">
+                    <div class="col-sm-2">
+                        <label for="description"><strong>Description</strong></label>
+                    </div>
+    
+                    <div class="col-sm-10">
+                        <textarea class="form-control" style="height:150px" id="description" name="description" placeholder="Event Description">{{ $event->description }}</textarea>
+                    </div>
                 </div>
-
-                <div class="form-group row">
-                    <div class="col-xs-3 col-sm-3 col-md-3">
+    
+                <div class="form-group row d-flex justify-content-center align-items-center">
+                    <div class="col-sm-2">
                         <label for="date"><strong>Date</strong></label>
+                    </div>
+    
+                    <div class="col-sm-3">
                         <input type="date" name="date" class="form-control" placeholder="Date" value="{{ $event->date }}">
                     </div>
-
-
-                    <div class="col-xs-3 col-sm-3 col-md-3">
-                        <label for="quantity"><strong>Droid Limit</strong> (0 = no limit)</label>
+    
+                    <div class="col-sm-2">
+                        <label for="days"><strong>Droid Limit</strong></label>
+                    </div>
+    
+                    <div class="col-sm-2">
                         <input type="number" name="quantity" value="{{ $event->quantity }}" class="form-control" placeholder="Droid Limit" required>
                     </div>
 
-                </div>
-
-                <div class="form-group">
-                    <div class="form-check">
-                        {{ Form::hidden('mot', '0') }}
-                        <input type="checkbox" id="mot" name="mot" class="form-check-input" {{ $event->mot ? 'checked=1 value=1' : 'value=1' }}>
-                        <label class="form-check-label" for="mot">MOTs can be done at this event</label>
+                    <div class="col-sm-3">
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <div class="form-check">
-                        {{ Form::hidden('public', '0') }}
-                        <input type="checkbox" id="public" name="public" class="form-check-input" {{ $event->public ? 'checked=1 value=1' : 'value=1' }}>
-                        <label class="form-check-label" for="public">Display publicly</label>
+
+                <div class="form-group row d-flex justify-content-center align-items-center">
+                    <div class="col-sm-2">
+                        <label for="date"><strong>Event Options</strong></label>
+                    </div>
+
+                    <div class="col-sm-10">
+                        <div class="form-check">
+                            {{ Form::hidden('mot', '0') }}
+                            <input type="checkbox" id="mot" name="mot" class="form-check-input" {{ $event->mot ? 'checked=1 value=1' : 'value=1' }}>
+                            <label class="form-check-label" for="mot">MOTs can be done at this event</label>
+                        </div>
+
+                        <div class="form-check">
+                            {{ Form::hidden('public', '0') }}
+                            <input type="checkbox" id="public" name="public" class="form-check-input" {{ $event->public ? 'checked=1 value=1' : 'value=1' }}>
+                            <label class="form-check-label" for="public">Display publicly on droidbuilders.uk if anyone is attending</label>
+                        </div>
+
+                        <div class="form-check">
+                            {{ Form::hidden('wip_allowed', '0') }}
+                            <input type="checkbox" id="wip_allowed" name="wip_allowed" class="form-check-input" {{ $event->wip_allowed ? 'checked=1 value=1' : 'value=1' }}>
+                            <label class="form-check-label" for="wip_allowed">WIP Allowed</label>
+                        </div>
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <div class="form-check">
-                        {{ Form::hidden('wip_allowed', '0') }}
-                        <input type="checkbox" id="wip_allowed" name="wip_allowed" class="form-check-input" {{ $event->wip_allowed ? 'checked=1 value=1' : 'value=1' }}>
-                        <label class="form-check-label" for="wip_allowed">WIP are allowed</label>
+
+                <div class="form-group row d-flex justify-content-center align-items-center">
+                    <div class="col-sm-2">
+                        <label for="date"><strong>Approval</strong></label>
+                    </div>
+
+                    <div class="col-sm-10">
+                        <div class="form-check">
+                            {{ Form::hidden('approved', '0') }}
+                            <input type="checkbox" id="approved" name="approved" class="form-check-input" {{ $event->approved ? 'checked=1 value=1' : 'value=1' }}>
+                            <label class="form-check-label" for="approved">Approve event (User submitted)</label>
+                        </div>
                     </div>
                 </div>
 
@@ -117,6 +169,12 @@
             plugins: 'autolink lists table link hr autoresize',
             toolbar: 'table numlist bullist link hr',
             toolbar_mode: 'floating',
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $('.location-dropdown').select2();
         });
     </script>
 @endsection
