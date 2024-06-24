@@ -15,6 +15,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Event;
 use App\Location;
+use App\Notifications\UserEventApproved;
 use App\User;
 use App\Comment;
 use App\Http\Controllers\Controller;
@@ -170,11 +171,22 @@ class EventsController extends Controller
                 $request['url'] = "http://".$request['url'];
             }
         }
+
+        $approved = 0;
+        if ($event->approved == 0 && $request['approved'] == 1) {
+            $approved = 1;
+        }
         $newevent = $request->all();
         $linkify = new \Misd\Linkify\Linkify();
         $newevent['description'] = $linkify->process($request->description);
         try {
             $event->update($newevent);
+            if ($approved == 1) {
+                // Notify submitter that their event has been approved
+                $user = User::find($event['created_by']);
+                $user->notify(new UserEventApproved($event));
+                toastr()->success('User notified of event approval');
+            }
             toastr()->success('Event updated successfully');
         } catch (\Illuminate\Database\QueryException $exception) {
             toastr()->error(
