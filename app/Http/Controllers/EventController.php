@@ -24,7 +24,7 @@ use DateTime;
 use App\Notifications\EventUpdated;
 use App\Notifications\UserEventCreated;
 use Spatie\CalendarLinks\Link;
-use Acaronlex\LaravelCalendar\Calendar;
+use DPoulson\LaravelCalendar\Calendar;
 use CountryState;
 use Illuminate\Support\Facades\Auth;
 
@@ -90,6 +90,7 @@ class EventController extends Controller
                 ]
             );
         }
+
 
         $calendar = new Calendar();
         $calendar->addEvents($calevents)

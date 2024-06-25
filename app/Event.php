@@ -27,7 +27,7 @@ use Illuminate\Support\Facades\Storage;
  * @license  https://opensource.org/licenses/MIT MIT License
  * @link     https://portal.droidbuilders.uk/
  */
-class Event extends Model implements \Acaronlex\LaravelCalendar\Event, Auditable
+class Event extends Model implements \DPoulson\LaravelCalendar\Event, Auditable
 {
     use \OwenIt\Auditing\Auditable;
 

@@ -4,60 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4b9c4e98443ccefea8a669e50c2180e7",
+    "content-hash": "512b3bb91516e654690d9e9cdfd0d1e2",
     "packages": [
-        {
-            "name": "acaronlex/laravel-calendar",
-            "version": "1.6",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/acaronlex/laravel-calendar.git",
-                "reference": "03490c4990187b1191e2d6686a881502b8cb7439"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/acaronlex/laravel-calendar/zipball/03490c4990187b1191e2d6686a881502b8cb7439",
-                "reference": "03490c4990187b1191e2d6686a881502b8cb7439",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/support": "~7.0|~8.0",
-                "php": ">=7.2.5"
-            },
-            "type": "package",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Acaronlex\\LaravelCalendar\\ServiceProvider"
-                    ],
-                    "aliases": {
-                        "Calendar": "Acaronlex\\LaravelCalendar\\Facades\\Calendar"
-                    }
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Acaronlex\\LaravelCalendar\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "acaronlex",
-                    "email": "acaronlex@outlook.com"
-                }
-            ],
-            "description": "Laravel helper for FullCalendar.io",
-            "support": {
-                "issues": "https://github.com/acaronlex/laravel-calendar/issues",
-                "source": "https://github.com/acaronlex/laravel-calendar/tree/1.6"
-            },
-            "abandoned": true,
-            "time": "2021-11-14T19:32:18+00:00"
-        },
         {
             "name": "asm89/stack-cors",
             "version": "v2.2.0",
@@ -170,16 +118,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.314.6",
+            "version": "3.314.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "d04da330b0201edab71edd33a03b8d5ad6e4a313"
+                "reference": "3a7ea3e49ae50eaaa969dc15d69b2dd46b4d7284"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/d04da330b0201edab71edd33a03b8d5ad6e4a313",
-                "reference": "d04da330b0201edab71edd33a03b8d5ad6e4a313",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/3a7ea3e49ae50eaaa969dc15d69b2dd46b4d7284",
+                "reference": "3a7ea3e49ae50eaaa969dc15d69b2dd46b4d7284",
                 "shasum": ""
             },
             "require": {
@@ -259,9 +207,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.314.6"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.314.7"
             },
-            "time": "2024-06-20T18:09:51+00:00"
+            "time": "2024-06-24T21:03:27+00:00"
         },
         {
             "name": "bacon/bacon-qr-code",
@@ -1436,6 +1384,47 @@
             "time": "2024-02-02T15:45:33+00:00"
         },
         {
+            "name": "dpoulson/laravel-calendar",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dpoulson/laravel-calendar",
+                "reference": "47e204cae2bdf371323130c2c6eaa7c02efe1109"
+            },
+            "require": {
+                "illuminate/support": "~7.0|~8.0",
+                "php": ">=7.2.5"
+            },
+            "default-branch": true,
+            "type": "package",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "DPoulson\\LaravelCalendar\\ServiceProvider"
+                    ],
+                    "aliases": {
+                        "Calendar": "DPoulson\\LaravelCalendar\\Facades\\Calendar"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "DPoulson\\LaravelCalendar\\": "src"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "dpoulson",
+                    "email": "darren.poulson@gmail.com"
+                }
+            ],
+            "description": "Laravel helper for FullCalendar.io",
+            "time": "2024-06-25T00:25:13+00:00"
+        },
+        {
             "name": "dragonmantank/cron-expression",
             "version": "v3.3.3",
             "source": {
@@ -2100,16 +2089,16 @@
         },
         {
             "name": "google/apiclient-services",
-            "version": "v0.360.0",
+            "version": "v0.361.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-api-php-client-services.git",
-                "reference": "e48813050e660c7dcbe48cb6556461efe6381a54"
+                "reference": "f90e9a059ce5a6076b4fc8571a4fac6564012782"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/e48813050e660c7dcbe48cb6556461efe6381a54",
-                "reference": "e48813050e660c7dcbe48cb6556461efe6381a54",
+                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/f90e9a059ce5a6076b4fc8571a4fac6564012782",
+                "reference": "f90e9a059ce5a6076b4fc8571a4fac6564012782",
                 "shasum": ""
             },
             "require": {
@@ -2138,9 +2127,9 @@
             ],
             "support": {
                 "issues": "https://github.com/googleapis/google-api-php-client-services/issues",
-                "source": "https://github.com/googleapis/google-api-php-client-services/tree/v0.360.0"
+                "source": "https://github.com/googleapis/google-api-php-client-services/tree/v0.361.0"
             },
-            "time": "2024-06-17T01:06:20+00:00"
+            "time": "2024-06-23T01:02:19+00:00"
         },
         {
             "name": "google/auth",
@@ -5377,16 +5366,16 @@
         },
         {
             "name": "phpseclib/phpseclib",
-            "version": "3.0.38",
+            "version": "3.0.39",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpseclib/phpseclib.git",
-                "reference": "b18b8788e51156c4dd97b7f220a31149a0052067"
+                "reference": "211ebc399c6e73c225a018435fe5ae209d1d1485"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/b18b8788e51156c4dd97b7f220a31149a0052067",
-                "reference": "b18b8788e51156c4dd97b7f220a31149a0052067",
+                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/211ebc399c6e73c225a018435fe5ae209d1d1485",
+                "reference": "211ebc399c6e73c225a018435fe5ae209d1d1485",
                 "shasum": ""
             },
             "require": {
@@ -5467,7 +5456,7 @@
             ],
             "support": {
                 "issues": "https://github.com/phpseclib/phpseclib/issues",
-                "source": "https://github.com/phpseclib/phpseclib/tree/3.0.38"
+                "source": "https://github.com/phpseclib/phpseclib/tree/3.0.39"
             },
             "funding": [
                 {
@@ -5483,7 +5472,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-06-17T10:11:32+00:00"
+            "time": "2024-06-24T06:27:33+00:00"
         },
         {
             "name": "psr/cache",
@@ -13075,7 +13064,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "dpoulson/laravel-calendar": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

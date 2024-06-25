@@ -179,7 +179,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
-        Acaronlex\LaravelCalendar\ServiceProvider::class
+        DPoulson\LaravelCalendar\ServiceProvider::class
     ],
 
     /*
@@ -234,7 +234,7 @@ return [
         'PDF' => Barryvdh\DomPDF\Facade::class,
         'PayPal' => Srmklive\PayPal\Facades\PayPal::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
-        'Calendar' => Acaronlex\LaravelCalendar\Facades\Calendar::class
+        'Calendar' => DPoulson\LaravelCalendar\Facades\Calendar::class
     ],
 
 ];
