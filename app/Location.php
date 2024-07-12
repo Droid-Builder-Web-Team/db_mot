@@ -14,9 +14,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Rennokki\Rating\Traits\CanBeRated;
-use Rennokki\Rating\Contracts\Rateable;
 use OwenIt\Auditing\Contracts\Auditable;
+use willvincent\Rateable\Rateable;
 
 /**
  * Location
@@ -27,10 +26,10 @@ use OwenIt\Auditing\Contracts\Auditable;
  * @license  https://opensource.org/licenses/MIT MIT License
  * @link     https://portal.droidbuilders.uk/
  */
-class Location extends Model implements Rateable, Auditable
+class Location extends Model implements Auditable
 {
     use \OwenIt\Auditing\Auditable;
-    use CanBeRated;
+    use Rateable;
 
     protected $guarded = [];
 

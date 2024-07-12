@@ -108,10 +108,10 @@ class EventsController extends Controller
         $success = 0;
         try {
             $newevent = Event::create($event);
-            toastr()->success('Event created successfully');
+            flash()->addSuccess('Event created successfully');
             $success = 1;
         } catch (\Illuminate\Database\QueryException $exception) {
-            toastr()->error('Failed to create Event ');
+            flash()->addError('Failed to create Event ');
             return back();
         }
 
@@ -185,11 +185,11 @@ class EventsController extends Controller
                 // Notify submitter that their event has been approved
                 $user = User::find($event['created_by']);
                 $user->notify(new UserEventApproved($event));
-                toastr()->success('User notified of event approval');
+                flash()->addSuccess('User notified of event approval');
             }
-            toastr()->success('Event updated successfully');
+            flash()->addSuccess('Event updated successfully');
         } catch (\Illuminate\Database\QueryException $exception) {
-            toastr()->error(
+            flash()->addError(
                 'Failed to update Event'
             );
         }
@@ -220,9 +220,9 @@ class EventsController extends Controller
 
         try {
             $event->delete();
-            toastr()->success('Event deleted successfully');
+            flash()->addSuccess('Event deleted successfully');
         } catch (\Illuminate\Database\QueryException $exception) {
-            toastr()->error('Failed to delete Event');
+            flash()->addError('Failed to delete Event');
         }
 
         // Don't need to notify discord if event gets deleted.

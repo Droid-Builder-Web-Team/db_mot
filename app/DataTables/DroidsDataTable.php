@@ -53,7 +53,7 @@ class DroidsDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param  \App\DroidsDataTable $model
+     * @param  \App\Droid $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function query(Droid $model)
@@ -112,7 +112,7 @@ class DroidsDataTable extends DataTable
      *
      * @return string
      */
-    protected function filename()
+    protected function filename(): string
     {
         return 'Droids_' . date('YmdHis');
     }

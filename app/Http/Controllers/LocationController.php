@@ -110,9 +110,9 @@ class LocationController extends Controller
     {
 
         try {
-            toastr()->success('Event submitted for admin approval');
+            flash()->addSuccess('Event submitted for admin approval');
         } catch (\Illuminate\Database\QueryException $exception) {
-            toastr()->error('Failed to submit event');
+            flash()->addError('Failed to submit event');
         }
 
         return redirect()->route('event.index');
@@ -133,12 +133,14 @@ class LocationController extends Controller
         $user = auth()->user();
 
         $userRating = $request->input('locationRating');
-
-        if ($user->hasRated($location)) {
-            $user->updateRatingFor($location, $userRating);
-        } else {
-            $user->rate($location, $userRating);
+        
+        try {
+            $location->rateOnce($userRating);
+            flash()->addSuccess('Rating applied to Location');
+        } catch (\Illuminate\Database\QueryException $exception) {
+            flash()->addError('Failed to leave a rating');
         }
+
         return redirect()->back();
     }
 

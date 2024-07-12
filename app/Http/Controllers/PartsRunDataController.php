@@ -321,7 +321,7 @@ class PartsRunDataController extends Controller
             <= $partsrun->interestQuantity()) && $request->interest == 'interested') 
             && $partsrun->partsRunAd->quantity != 0
         ) {
-            toastr()->error('Part Run Full');
+            flash()->addError('Part Run Full');
             return back();
         }
         $user = auth()->user();
@@ -341,7 +341,7 @@ class PartsRunDataController extends Controller
         } else {
             $result = $partsrun->interested()->save($user, $attributes);
         }
-        toastr()->success('Interest registered for Parts Run');
+        flash()->addSuccess('Interest registered for Parts Run');
 
         $partsrun = $partsrun->fresh();
 
@@ -382,9 +382,9 @@ class PartsRunDataController extends Controller
                 try {
                     $result = $partsrun->interested()
                         ->updateExistingPivot($user, $attributes);
-                    toastr()->success('Status Updated');
+                    flash()->addSuccess('Status Updated');
                 } catch (Exception $e) {
-                    toastr()->error('Status Update failed');
+                    flash()->addError('Status Update failed');
                 }
             }
 

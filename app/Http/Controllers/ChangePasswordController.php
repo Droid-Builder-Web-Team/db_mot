@@ -46,9 +46,9 @@ class ChangePasswordController extends Controller
 
         try {
             User::find(auth()->user()->id)->update(['password'=> Hash::make($request->new_password)]);
-            toastr()->success('Password changed successfully');
+            flash()->addSuccess('Password changed successfully');
         } catch (\Illuminate\Database\QueryException $exception) {
-            toastr()->error('Failed to change the password');
+            flash()->addError('Failed to change the password');
         }
 
 

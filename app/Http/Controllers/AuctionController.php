@@ -86,9 +86,9 @@ class AuctionController extends Controller
         $request['finish_time'] = $request->finish_date . " " . $request->finish_time;
         try {
             $auction = Auction::create($request->all());
-            toastr()->success('Auction created successfully');
+            flash()->addSuccess('Auction created successfully');
         }   catch (\Illuminate\Database\QueryException $exception) {
-            toastr()->error('Failed to create Auction');
+            flash()->addError('Failed to create Auction');
         }
 
         return redirect()->route('auctions.index');
@@ -119,7 +119,7 @@ class AuctionController extends Controller
 
         if($auction->secondsLeft() < 0)
         {
-            toastr()->error('Auction has finished');
+            flash()->addError('Auction has finished');
             return back();
         }
 
@@ -127,12 +127,12 @@ class AuctionController extends Controller
             $amount = $user->highestBid($auction);
             if ($amount > $request->amount) 
             {
-                toastr()->error('Lowering bid is not allowed');
+                flash()->addError('Lowering bid is not allowed');
                 return back();
             }
         }
         $result = $auction->users()->save($user, $attributes);
-        toastr()->success('Bid submitted');
+        flash()->addSuccess('Bid submitted');
         return back();
     }
 
@@ -179,9 +179,9 @@ class AuctionController extends Controller
         $newauction['description'] = $linkify->process($request->description);
         try {
             $auction->update($newauction);
-            toastr()->success('Auction updated successfully');
+            flash()->addSuccess('Auction updated successfully');
         } catch (\Illuminate\Database\QueryException $exception) {
-            toastr()->error(
+            flash()->addError(
                 'Failed to update Auction'
             );
         }

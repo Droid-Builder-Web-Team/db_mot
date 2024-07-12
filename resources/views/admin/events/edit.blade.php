@@ -116,6 +116,12 @@
                             <input type="checkbox" id="wip_allowed" name="wip_allowed" class="form-check-input" {{ $event->wip_allowed ? 'checked=1 value=1' : 'value=1' }}>
                             <label class="form-check-label" for="wip_allowed">WIP Allowed</label>
                         </div>
+
+                        <div class="form-check">
+                            {{ Form::hidden('sw_only', '0') }}
+                            <input type="checkbox" id="sw_only" name="sw_only" class="form-check-input" {{ $event->wip_allowed ? 'checked=1 value=1' : 'value=1' }}>
+                            <label class="form-check-label" for="sw_only">Star Wars Only event</label>
+                        </div>
                     </div>
                 </div>
 

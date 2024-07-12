@@ -5,7 +5,7 @@
     <div class="card-header">
         <div class="row d-flex ">
             <div class="text-left col-3">
-                <a class="btn btn-mot-invert" style="width:auto; color:white;" href="{{ route('admin.events.index') }}">Back</a>
+                <a class="btn btn-mot-invert" style="width:auto; color:white;" href="{{ route('event.index') }}">Back</a>
             </div>
             <div class="text-center col-6">
                 <h2 class="justify-content-center">Create Event</h2>
@@ -157,17 +157,22 @@
             </div>
 
             <div class="form-group row d-flex justify-content-center align-items-center">
-
                 <div class="col-sm-2">
-                    <label for="days"><strong>Public Event</strong></label>
+                    <label for="date"><strong>Event Options</strong></label>
                 </div>
 
-                <div class="col-sm-10 form-check">
-                    {{ Form::hidden('public', '0') }}
-                    <input type="checkbox" id="public" name="public" class="form-check-input" value="1">
-                    <label class="form-check-label" for="public">Check box if public event such as a comic con, leave unticked for things like weddings</label>
+                <div class="col-sm-10">
+                    <div class="form-check">
+                        {{ Form::hidden('public', '0') }}
+                        <input type="checkbox" id="public" name="public" class="form-check-input" value="1">
+                        <label class="form-check-label" for="public">Display publicly on droidbuilders.uk if anyone is attending</label>
+                    </div>
+                    <div class="form-check">
+                        {{ Form::hidden('sw_only', '0') }}
+                        <input type="checkbox" id="sw_only" name="sw_only" class="form-check-input" value="1">
+                        <label class="form-check-label" for="sw_only">Star Wars Only event</label>
+                    </div>
                 </div>
-
             </div>
 
             <div class="form-group row d-flex justify-content-center align-items-center">

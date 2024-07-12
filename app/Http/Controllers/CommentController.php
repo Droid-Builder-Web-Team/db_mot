@@ -101,7 +101,7 @@ class CommentController extends Controller
         }
 
 
-        toastr()->success('Comment Added');
+        flash()->addSuccess('Comment Added');
         return back();
     }
 
@@ -109,7 +109,7 @@ class CommentController extends Controller
     {
         $comment = Comment::find($id);
         $comment->delete();
-        toastr()->success('Comment Deleted');
+        flash()->addSuccess('Comment Deleted');
         return back();
     }
 

@@ -95,9 +95,9 @@ class ContactController extends Controller
 
         try {
             Contact::create($request->all());
-            toastr()->success('Contact created successfully');
+            flash()->addSuccess('Contact created successfully');
         } catch (\Illuminate\Database\QueryException $exception) {
-            toastr()->error('Failed to create Contact');
+            flash()->addError('Failed to create Contact');
         }
 
         return redirect()->route('admin.contacts.index');
@@ -134,9 +134,9 @@ class ContactController extends Controller
 
         try {
             $contact->update($request->all());
-            toastr()->success('Contact updated successfully');
+            flash()->addSuccess('Contact updated successfully');
         } catch (\Illuminate\Database\QueryException $exception) {
-            toastr()->error('Failed to update Contact');
+            flash()->addError('Failed to update Contact');
         }
 
         return redirect()->route('admin.contacts.index');

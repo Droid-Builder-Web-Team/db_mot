@@ -91,7 +91,13 @@
                       <p>Attendee Limit: {{ $event->quantity }}</p>
                   </div>
                 @endif
+
+                @if($event->sw_only == 1)
+                  <div class="sw_only">
+                    <p><b>Star Wars Only Event</b></p>
+                  </div>
                 <br>
+                @endif
 
                 @can('Edit Events')
                     @include('partials.show_contacts', ['contacts' => $event->contacts, 'model_type' => 'App\Event', 'model_id' => $event->id])
@@ -148,6 +154,15 @@
                 <br>
                 <span class="float-right">
                   <a class="btn-sm btn-link" href="{{ route('location.show', $event->location->id )}}">{{ $event->location->name}}</a>
+                
+                @for ($i = 0; $i < 5; $i++)
+                  @if ($i < $event->location->averageRating(\App\User::class))
+                    <i class="fas fa-star"></i>
+                  @else
+                    <i class="far fa-star"></i>
+                  @endif
+                @endfor
+                ( {{ $event->location->usersRated() }} ratings )
                 </span>
               </div>
             </div>

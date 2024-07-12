@@ -31,8 +31,6 @@ use App\Models\Auction;
 use App\Models\Ware;
 use Dialect\Gdpr\Portable;
 
-use Rennokki\Rating\Traits\CanRate;
-use Rennokki\Rating\Contracts\Rater;
 use OwenIt\Auditing\Contracts\Auditable;
 use Qirolab\Laravel\Reactions\Traits\Reacts;
 use Qirolab\Laravel\Reactions\Contracts\ReactsInterface;
@@ -47,7 +45,6 @@ use Qirolab\Laravel\Reactions\Contracts\ReactsInterface;
  * @link     https://portal.droidbuilders.uk/
  */
 class User extends Authenticatable implements MustVerifyEmail,
-                                                Rater,
                                                 Auditable,
                                                 ReactsInterface
 {
@@ -55,7 +52,6 @@ class User extends Authenticatable implements MustVerifyEmail,
     use HasRoles;
     use Portable;
     use HasSettingsField;
-    use CanRate;
     use Reacts;
     use \OwenIt\Auditing\Auditable;
 

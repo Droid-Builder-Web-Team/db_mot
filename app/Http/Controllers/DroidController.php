@@ -51,16 +51,16 @@ class DroidController extends Controller
 
         try {
             $droid = Droid::create($request->all());
-            toastr()->success('Droid created successfully');
+            flash()->addSuccess('Droid created successfully');
         } catch (\Illuminate\Database\QueryException $exception) {
-            toastr()->error('Failed to create Droid');
+            flash()->addError('Failed to create Droid');
         }
 
         try {
             $droid->users()->attach(auth()->user()->id);
-            toastr()->success('Droid attached to your account successfully');
+            flash()->addSuccess('Droid attached to your account successfully');
         } catch (\Illuminate\Database\QueryException $exception) {
-            toastr()->error('Failed to attach Droid');
+            flash()->addError('Failed to attach Droid');
         }
 
         return redirect()->route('user.show', auth()->user()->id);
@@ -126,9 +126,9 @@ class DroidController extends Controller
 
         try {
             $droid->update($request->all());
-            toastr()->success('Droid updated successfully');
+            flash()->addSuccess('Droid updated successfully');
         } catch (\Illuminate\Database\QueryException $exception) {
-            toastr()->error('Failed to update Droid');
+            flash()->addError('Failed to update Droid');
         }
         return redirect()->route('droid.show', $droid->id);
     }
@@ -160,9 +160,9 @@ class DroidController extends Controller
 
         try {
             $droid->delete();
-            toastr()->success('Droid deleted successfully');
+            flash()->addSuccess('Droid deleted successfully');
         } catch (\Illuminate\Database\QueryException $exception) {
-            toastr()->error('Failed to delete Droid');
+            flash()->addError('Failed to delete Droid');
         }
 
         return redirect()->route('user.show', auth()->user()->id);

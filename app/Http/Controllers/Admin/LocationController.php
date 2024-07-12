@@ -88,9 +88,9 @@ class LocationController extends Controller
 
         try {
             $location = Location::create($request->all());
-            toastr()->success('Location created successfully');
+            flash()->addSuccess('Location created successfully');
         } catch (\Illuminate\Database\QueryException $exception) {
-            toastr()->error('Failed to create Location');
+            flash()->addError('Failed to create Location');
         }
 
         return redirect()->route('admin.locations.index');
@@ -145,9 +145,9 @@ class LocationController extends Controller
 
         try {
             $location->update($request->all());
-            toastr()->success('Location updated successfully');
+            flash()->addSuccess('Location updated successfully');
         } catch (\Illuminate\Database\QueryException $exception) {
-            toastr()->error('Failed to update Location');
+            flash()->addError('Failed to update Location');
         }
 
         return redirect()->route('admin.locations.index');

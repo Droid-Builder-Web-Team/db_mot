@@ -55,7 +55,7 @@ class SocialController extends Controller
         $getInfo = Socialite::driver($provider)->user();
 
         if ($getInfo->email == null) {
-            toastr()->error('You must have an email registered with the account');
+            flash()->addError('You must have an email registered with the account');
             return redirect()->to('/login');
         }
 
@@ -65,14 +65,14 @@ class SocialController extends Controller
             try {
                 $login = \Auth::login($user);
             } catch(Exception $e) {
-                toastr()->error('Login error: ' . $e);
+                flash()->addError('Login error: ' . $e);
             }
         } else {
-            toastr()->error('Account inactive');
+            flash()->addError('Account inactive');
             return redirect()->to('/login');
         }
 
-        toastr()->success('Logging in');
+        flash()->addSuccess('Logging in');
         return redirect()->to('/user');
 
     }

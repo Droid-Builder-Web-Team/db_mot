@@ -72,7 +72,7 @@ class ImageController extends Controller
         $file = $folderPath . '240-' . $request->photo_name . '.png';
         Storage::put($file, $img->encode());
 
-        toastr()->success('Image uploaded successfully');
+        flash()->addSuccess('Image uploaded successfully');
 
         return response()->json(
             ['success'=>'success',
@@ -116,7 +116,7 @@ class ImageController extends Controller
 
         Storage::delete($image_array);
 
-        toastr()->success('Image deleted successfully');
+        flash()->addSuccess('Image deleted successfully');
         return redirect()->route('droid.show', $request->droid);
     }
 

@@ -27,6 +27,7 @@ use Spatie\CalendarLinks\Link;
 use DPoulson\LaravelCalendar\Calendar;
 use CountryState;
 use Illuminate\Support\Facades\Auth;
+use Flasher\Prime\FlasherInterface;
 
 /**
  * EventController
@@ -174,7 +175,7 @@ class EventController extends Controller
         );
 
         if($request->location_id == "---") {
-            toastr()->error('Please enter a location');
+            flash()->addError('Please enter a location');
             return back()->withInput();
         }
 
@@ -201,10 +202,10 @@ class EventController extends Controller
 
             try {
                 $newlocation = Location::create($location);
-                toastr()->success('Location created successfully');
+                flash()->addSuccess('Location created successfully');
             } catch (\Illuminate\Database\QueryException $exception) {
-                dd($exception);
-                toastr()->error('Failed to create Location');
+
+                flash()->addError('Failed to create Location');
                 return back()->withInput();
             }     
             $event['location_id'] = $newlocation->id;
@@ -232,12 +233,13 @@ class EventController extends Controller
         $event['description'] = $linkify->process($request->description);
         $event['created_by'] = Auth::id();
         $event['approved'] = 0;
+        $event['sw_only'] = $request->sw_only;
 
         try {
             $newevent = Event::create($event);
-            toastr()->success('Event submitted for admin approval');
+            flash()->addSuccess('Event submitted for admin approval');
         } catch (\Illuminate\Database\QueryException $exception) {
-            toastr()->error('Failed to submit event');
+            flash()->addError('Failed to submit event');
             return back()->withInput();
         }
 
@@ -278,7 +280,7 @@ class EventController extends Controller
         $event = Event::where('id', $id)->first();
         $contacts = Contact::all();
         if ($event == null) {
-            toastr()->error('No such event');
+            flash()->addError('No such event');
             return redirect('/event');
         } else {
             $date = DateTime::createFromFormat('Y-m-d', $event->date);
@@ -315,12 +317,12 @@ class EventController extends Controller
         ];
         if ($hasEntry) {
             $result = $event->users()->updateExistingPivot($user, $attributes);
-            toastr()->success('Interest updated for Event');
+            flash()->addSuccess('Interest updated for Event');
         } elseif ($event->isFull()) {
-            toastr()->error('Sorry, event is full');
+            flash()->addError('Sorry, event is full');
         } else {
             $result = $event->users()->save($user, $attributes);
-            toastr()->success('Interest registered for Event');
+            flash()->addSuccess('Interest registered for Event');
         }
         return back();
     }

@@ -33,7 +33,7 @@ class PartsRunDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param  \App\PartsRunDataTable $model
+     * @param  \App\PartsRunData $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function query(PartsRunData $model)
@@ -82,7 +82,7 @@ class PartsRunDataTable extends DataTable
      *
      * @return string
      */
-    protected function filename()
+    protected function filename(): string
     {
         return 'Droids_' . date('YmdHis');
     }

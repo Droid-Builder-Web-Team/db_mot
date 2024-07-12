@@ -89,7 +89,7 @@ class MOTController extends Controller
                     $comment->user_id = auth()->user()->id;
 
                     $mot->comments()->save($comment);
-                    toastr()->success('Comment Added');
+                    flash()->addSuccess('Comment Added');
                 }
 
                 $lines = DB::table('mot_lines')
@@ -134,7 +134,7 @@ class MOTController extends Controller
             }
         }
 
-        toastr()->success('MOT added successfully');
+        flash()->addSuccess('MOT added successfully');
 
         return redirect()->route('droid.show', $request->droid_id);
     }
@@ -155,7 +155,7 @@ class MOTController extends Controller
         $comment->user_id = auth()->user()->id;
 
         $result = $mot->comments()->save($comment);
-        toastr()->success('Comment Added');
+        flash()->addSuccess('Comment Added');
         return view('mot.show', compact('mot'));
     }
 }

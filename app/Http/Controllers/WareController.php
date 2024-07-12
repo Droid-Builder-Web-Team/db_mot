@@ -97,9 +97,9 @@ class WareController extends Controller
         $request['description'] = $linkify->process($request->description);
         try {
             $auction = Ware::create($request->all());
-            toastr()->success('Item listing created successfully');
+            flash()->addSuccess('Item listing created successfully');
         }   catch (\Illuminate\Database\QueryException $exception) {
-            toastr()->error('Failed to create Item Listing');
+            flash()->addError('Failed to create Item Listing');
         }
 
         return redirect()->route('ware.index');
@@ -159,9 +159,9 @@ class WareController extends Controller
         $newware['description'] = $linkify->process($request->description);
         try {
             $ware->update($newware);
-            toastr()->success('Item updated successfully');
+            flash()->addSuccess('Item updated successfully');
         } catch (\Illuminate\Database\QueryException $exception) {
-            toastr()->error(
+            flash()->addError(
                 'Failed to update Item'
             );
         }

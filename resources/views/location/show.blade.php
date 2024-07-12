@@ -49,16 +49,12 @@
                   <i class="far fa-star"></i>
                 @endif
               @endfor
-              ( {{ $location->raters(\App\User::class)->get()->count() }} ratings )
+              ( {{ $location->usersRated() }} ratings )
               <form method="POST" action="{{ route('location.rating', $location) }}">
                 @csrf
                 <select id="locationRating" name="locationRating">
                   @for ($i = 1; $i <= 5; $i++)
-                    @if(Auth::user()->hasRated($location))
                       <option name="ratings[]" value="{{ $i }}">{{$i}}</option>
-                    @else
-                      <option name="ratings[]" value="{{ $i }}">{{$i}}</option>
-                    @endif
                   @endfor
                 </select>
                 <button type="submit">Rate Location</button>

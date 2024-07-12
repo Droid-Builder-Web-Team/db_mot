@@ -132,9 +132,9 @@ class UserController extends Controller
 
         try {
             $user->update($request->all());
-            toastr()->success('User updated successfully');
+            flash()->addSuccess('User updated successfully');
         } catch (\Illuminate\Database\QueryException $exception) {
-            toastr()->error('Failed to update User');
+            flash()->addError('Failed to update User');
         }
 
         return redirect()->route('user.show', auth()->user()->id);
@@ -282,7 +282,7 @@ class UserController extends Controller
         $user->settings()->update('date_format', $request->input('date_format'));
         $user->settings()->update('time_format', $request->input('time_format'));
         $user->settings()->update('timezone', $request->input('timezone'));
-        toastr()->success('User settings updated successfully');
+        flash()->addSuccess('User settings updated successfully');
         return redirect()->route('settings.edit', auth()->user()->id);
     }
 

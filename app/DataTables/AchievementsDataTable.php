@@ -88,7 +88,7 @@ class AchievementsDataTable extends DataTable
      *
      * @return string
      */
-    protected function filename()
+    protected function filename(): string
     {
         return 'Achievements_' . date('YmdHis');
     }

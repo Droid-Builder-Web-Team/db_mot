@@ -99,7 +99,7 @@
                 <a class="c-sidebar-nav-link" href="{{ route('portalnews.index') }}">
                     <svg class="c-sidebar-nav-icon">
                         <i class="fas fa-newspaper fa-fw"></i>
-                    </svg><span class="ml-1">Portal News </span>
+                    </svg><span class="ml-1">News and Updates</span>
                     @if(Auth::user()->newnews)
                      &nbsp;<span class="dot"></span>
                     @endif

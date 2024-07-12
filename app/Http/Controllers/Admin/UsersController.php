@@ -102,7 +102,7 @@ class UsersController extends Controller
             if (in_array('Super Admin', $request->roles)
                 && !auth()->user()->hasRole('Super Admin')
             ) {
-                toastr()->error('Cannot grant Super Admin role');
+                flash()->addError('Cannot grant Super Admin role');
                 return back();
             }
         }
@@ -140,9 +140,9 @@ class UsersController extends Controller
 
         try {
             $user->update($request->except('roles', 'clubs'));
-            toastr()->success('User updated successfully');
+            flash()->addSuccess('User updated successfully');
         } catch (\Illuminate\Database\QueryException $exception) {
-            toastr()->error('Failed to update User');
+            flash()->addError('Failed to update User');
         }
 
         return redirect()->route('admin.users.index');

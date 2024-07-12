@@ -55,9 +55,9 @@ class AchievementsController extends Controller
 
         try {
             Achievement::create($request->all());
-            toastr()->success('Achievement created successfully');
+            flash()->addSuccess('Achievement created successfully');
         } catch (\Illuminate\Database\QueryException $exception) {
-            toastr()->error('Failed to create Achievement');
+            flash()->addError('Failed to create Achievement');
         }
 
         return redirect()->route('admin.achievements.index');
