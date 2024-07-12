@@ -9,6 +9,7 @@ return [
     'friendica' => env('FEATURE_FRIENDICA', FALSE),
     'partsruntags' => env('FEATURE_PARTSRUNTAGS', FALSE),
     'userevents' => env('FEATURE_USEREVENTS', FALSE),
+    'assets' => env('FEATURE_ASSETS', FALSE),
 ];
 
 ?>

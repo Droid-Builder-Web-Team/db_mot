@@ -7,9 +7,9 @@
       <div class="card-header">
         <div class="row d-flex align-items-center">
           <div class="col-sm-2 text-left">
-            @can('Edit Members')
-              <a class="btn btn-primary" href={{ route('news.create') }}>Create Article</a>
-            @endcan
+            @hasanyrole('Super Admin|Org Admin')
+              <a class="btn btn-primary" href={{ route('portalnews.create') }}>Create Article</a>
+            @endhasanyrole
           </div>
           <div class="col-sm-8 text-center">
             <h4 class="text-center title">News and Updates</h4>

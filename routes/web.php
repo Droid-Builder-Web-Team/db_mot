@@ -85,6 +85,7 @@ Route::group(
         Route::resource('portalnews', 'PortalNewsController');
         Route::resource('assistance', 'AssistanceController');
         Route::resource('motinfo', 'MOTInfoController');
+        Route::resource('asset', 'AssetController');
         Route::get('motinfo/{id}/export', 'MOTInfoController@exportMotInfo')->name('motinfo.export');
         Route::get('motinfo/{id}/test', 'MOTInfoController@exportMotTest')->name('motinfo.test');
         Route::get('qr_code/{uid}', 'UserController@displayQRCode')->name('image.displayQRCode');
