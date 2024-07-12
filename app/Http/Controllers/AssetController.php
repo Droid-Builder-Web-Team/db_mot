@@ -45,7 +45,7 @@ class AssetController extends Controller
      */
     public function show(Asset $asset)
     {
-        //
+        return view('asset.show', compact('asset'));
     }
 
     /**

@@ -52,7 +52,7 @@
         <div class="card">
             <div class="card-header">
                 <div class="row d-flex align-items-center">
-                    <div class="col-sm-8 text-center">
+                    <div class="col-sm-10 text-center">
                         <h4 class="text-center title">Active Club Assets</h4>
                     </div>
                 </div>
@@ -73,11 +73,40 @@
                         <tbody>
                             @foreach($assets as $asset)
                                 <tr>
-                                    <td>{{ $asset->type }}</td>
+                                    <td>{{ strtoupper($asset->type->value) }}</td>
                                     <td><a href="{{ route('asset.show', $asset->id) }}">{{ $asset->title }}</a></td>
                                     <td>{{ $asset->user->forename }} {{ $asset->user->surname }}</td>
-                                    <td>{{ $asset->user->county }}</td>
-                                    <td>{{ $asset->current_state }}</td>
+                                    <td>{{ $asset->current_holder->county }}</td>
+                                    <td>
+                                        @php
+                                        $bgcolor = "grey";
+                                        $color = "black";
+                        
+                                        switch ($asset->current_state->value) {
+                                          case "new":
+                                            $bgcolor = "blue";
+                                            $color = "white";
+                                            break;
+                                          case "good":
+                                            $bgcolor = "green";
+                                            $color = "white";  
+                                            break;
+                                          case "worn":
+                                            $bgcolor = "yellow";
+                                            $color = "grey"; 
+                                            break; 
+                                          case "damaged":
+                                            $bgcolor = "red";
+                                            $color = "white";  
+                                            break;
+                                          case "retired":
+                                            $bgcolor = "grey";
+                                            $color = "black";  
+                                            break;
+                                        }
+                                      @endphp
+                                        <div class="btn-sm" style="background-color: {{ $bgcolor }}; color: {{ $color }}">{{ $asset->current_state }}</div>
+                                    </td>
                                     <td>
                                         <div class="d-flex">
                                             <a class="btn-sm btn-xs btn-view" style="color:#FFF;" href="{{ route('asset.show', $asset->id) }}"><i class="fas fa-eye"></i></a>
@@ -106,7 +135,7 @@
         <div class="card">
             <div class="card-header">
                 <div class="row d-flex align-items-center">
-                    <div class="col-sm-8 text-center">
+                    <div class="col-sm-10 text-center">
                         <h4 class="text-center title">Retired Assets</h4>
                     </div>
                 </div>
@@ -129,7 +158,7 @@
                                     <td>{{ $asset->type }}</td>
                                     <td><a href="{{ route('asset.show', $asset->id) }}">{{ $asset->title }}</a></td>
                                     <td>{{ $asset->user->forename }} {{ $asset->user->surname }}</td>
-                                    <td>{{ $asset->user->country }}</td>
+                                    <td>{{ $asset->current_holder->country }}</td>
                                     <td>
                                         <div class="d-flex">
                                             <a class="btn-sm btn-xs btn-view" style="color:#FFF;" href="{{ route('asset.show', $asset->id) }}"><i class="fas fa-eye"></i></a>

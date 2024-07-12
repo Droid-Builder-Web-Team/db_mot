@@ -1,69 +1,59 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="row">
-    <div class="col-md-12">
-        <div class="card">
-            <div class="card-header">
-                <h4 class="text-center title">Create a News article</h4>
-            </div>
-            <div class="card-body">
-                <form action="{{ route('parts-run.store') }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                        @endif
-
-                        <div class="form-group row">
-                            <div class="col-md-6 col-12">
-                                <label for="club_id" class="col-4 col-form-label">Club</label>
-                                <div class="col-12">
-                                    <select id="club_id" name="club_id" class="custom-select"  required>
-                                        <option value="null">Select a club</option>
-                                        @foreach($clubs as $club)
-                                            <option value={{ $club->id }}>{{ $club->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6 col-12">
-                                <label for="user_id" class="col-4 col-form-label">Member</label>
-                                <div class="col-12">
-                                    <select id="user_id" name="user_id" class="custom-select" required>
-                                        <option value="null">Select a member</option>
-                                        @foreach($runners as $runner)
-                                            <option value={{ $runner->id }}>{{ $runner->forename }} {{ $runner->surname }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div>
-                            <div class="col-md-12 col-12">
-                                <label for="title" class="col-12 col-form-label">Title</label>
-                                <div class="col-12">
-                                    <input type="text" id="title" name="title" class="form-control" required >
-                                </div>
-                            </div>
-                        </div>
-
-                    <div class="form-group row">
-                        <div class="mt-3 text-center col-xs-12 col-sm-12 col-md-12">
-                            <button type="submit" style="width:auto;" class="btn btn-transparent-outline-blue">Submit</button>
-                        </div>
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-lg-12 margin-tb">
+                    <div class="mb-4 pull-right">
+                        <a class="btn btn-mot-invert" style="width:auto; color:white;" href="{{ route('portalnews.index') }}">Back</a>
                     </div>
-                </form>
+                    <div class="mb-4 pull-left">
+                        <h2>Create News Item</h2>
+                    </div>
+                </div>
             </div>
-    </div>
-</div>
-</div>
+        </div>
+        <div class="card-body">
 
+            <form action="{{ route('portalnews.store') }}" method="POST">
+                @csrf
+                <input type="hidden" name="state" value=1>
+
+                <div class="form-group">
+                    <label for="title"><strong>Title</strong></label>
+                    <input type="text" name="title" class="form-control" placeholder="Title">
+                </div>
+
+                <div class="form-group">
+                    <label for="message"><strong>Message</strong></label>
+                    <textarea class="form-control" style="height:250px" id="message" name="message" placeholder="Message"></textarea>
+                </div>
+
+                <div class="form-group">
+                    To add images, first have them saved somewhere like Google Photos or another image hosting site. From there you can get a link to the image. (For Google, hit the share icon and click 'Create link')
+                    Now click on Insert->Image from the menu in text entry above, and post the link into the Source field. You can also set hover over text and a size limit to the picture. 
+                </div>
+
+                <div class="text-center form-group">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+    <script src="{{ asset('node_modules/tinymce/tinymce.js') }}"></script>
+    <script>
+        tinymce.init({
+            selector: '#message',
+            plugins: 'autolink lists table link hr autoresize code image media',
+            toolbar: 'undo redo | formatselect | ' +
+      'bold italic backcolor | alignleft aligncenter ' +
+      'alignright alignjustify | bullist numlist outdent indent | ' +
+      'removeformat | table | link image media | hr code ',
+            toolbar_mode: 'floating',
+            image_caption: true,
+            content_style: 'img {max-width: 100%; height: auto;}'
+        });
+    </script>
 @endsection

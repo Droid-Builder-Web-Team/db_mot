@@ -50,7 +50,7 @@ class PortalNewsController extends Controller
      */
     public function create()
     {
-        //
+        return view('portalnews.create');
     }
 
     /**
