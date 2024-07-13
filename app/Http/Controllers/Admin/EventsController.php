@@ -67,7 +67,7 @@ class EventsController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View
      */
     public function create()
     {
@@ -81,7 +81,7 @@ class EventsController extends Controller
      *
      * @param \Illuminate\Http\Request $request Request Data
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
@@ -155,7 +155,7 @@ class EventsController extends Controller
      * @param \Illuminate\Http\Request $request Request data
      * @param \App\Event               $event   Event to update
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, Event $event)
     {
@@ -212,7 +212,7 @@ class EventsController extends Controller
      *
      * @param \App\Event $event Event to delete
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Event $event)
     {
@@ -236,7 +236,7 @@ class EventsController extends Controller
      * @param int $event_id Event ID
      * @param int $user_id  User ID
      *
-     * @return void
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function confirm($event_id, $user_id)
     {
@@ -251,7 +251,7 @@ class EventsController extends Controller
      * @param int $event_id Event ID
      * @param int $user_id  User ID
      *
-     * @return void
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function deny($event_id, $user_id)
     {

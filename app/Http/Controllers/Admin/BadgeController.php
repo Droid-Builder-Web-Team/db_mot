@@ -153,7 +153,8 @@ class BadgeController extends Controller
                             ]
                         )->delete();
                 }
-                fputcsv($fp, array(
+                fputcsv(
+                    $fp, array(
                     $user->forename,
                     $user->surname,
                     $user->id,
@@ -161,7 +162,8 @@ class BadgeController extends Controller
                     $user->validPLI(),
                     $userid->reissue,
                     $droid->droid_id
-                ));
+                    )
+                );
             }
 
             

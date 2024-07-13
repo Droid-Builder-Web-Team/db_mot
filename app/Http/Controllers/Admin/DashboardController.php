@@ -49,7 +49,7 @@ class DashboardController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View
      */
     public function index()
     {
@@ -65,12 +65,10 @@ class DashboardController extends Controller
         $paypli = [];
         foreach ($users as $user) 
         {
-            if (!$user->validPLI()) 
-            {
+            if (!$user->validPLI()) {
                 foreach ($user->droids as $droid) 
                 {
-                    if ($droid->hasMOT()) 
-                    {
+                    if ($droid->hasMOT()) {
                         array_push($paypli, $user);
                         break;
                     }

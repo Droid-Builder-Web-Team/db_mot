@@ -66,9 +66,8 @@ class Auction extends Model implements Auditable
     public function highest()
     {
         $highest = 0;
-        $winner = NULL;
-        if ($this->users()->count() != 0) 
-        {
+        $winner = null;
+        if ($this->users()->count() != 0) {
             foreach ($this->users as $user) {
                 if ($user != false && $user->pivot->amount > $highest) {
                     $highest = $user->pivot->amount;

@@ -12,7 +12,7 @@ class QrCodeController extends Controller
         $url = $request->input('chl');
         return QrCode::size(500)
             ->generate(
-            $url
-        );
+                $url
+            );
     }    
 }

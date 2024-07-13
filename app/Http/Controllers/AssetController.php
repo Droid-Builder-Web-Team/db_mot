@@ -1,10 +1,30 @@
 <?php
+/**
+ * Asset Controller
+ * php version 7.4
+ *
+ * @category Controller
+ * @package  Controllers
+ * @author   Darren Poulson <darren.poulson@gmail.com>
+ * @license  https://opensource.org/licenses/MIT MIT License
+ * @link     https://portal.droidbuilders.uk/
+ */
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AssetRequest;
 use App\Models\Asset;
 use Illuminate\Http\Request;
 
+/**
+ * AssetController
+ *
+ * @category Class
+ * @package  Controllers
+ * @author   Darren Poulson <darren.poulson@gmail.com>
+ * @license  https://opensource.org/licenses/MIT MIT License
+ * @link     https://portal.droidbuilders.uk/
+ */
 class AssetController extends Controller
 {
     /**
@@ -13,13 +33,13 @@ class AssetController extends Controller
     public function index()
     {
         $assets = Asset::where('current_state', '!=', 'RETIRED')
-                ->OrderBy('updated_at')
-                ->get();
+            ->OrderBy('updated_at')
+            ->get();
         $userassets = Asset::where('user_id', auth()->user()->id)
                 ->get();
         $oldassets = Asset::where('current_state', '=', 'RETIRED')
-                ->OrderBy('updated_at')
-                ->get();                    
+            ->OrderBy('updated_at')
+            ->get();                    
         return view('asset.index', compact('assets', 'userassets', 'oldassets'));
     }
 

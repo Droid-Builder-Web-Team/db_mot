@@ -317,8 +317,7 @@ class PartsRunDataController extends Controller
             ]
         );
 
-        if (((($partsrun->partsRunAd->quantity + $partsrun->partsRunAd->reserve)
-            <= $partsrun->interestQuantity()) && $request->interest == 'interested') 
+        if (((($partsrun->partsRunAd->quantity + $partsrun->partsRunAd->reserve)<= $partsrun->interestQuantity()) && $request->interest == 'interested') 
             && $partsrun->partsRunAd->quantity != 0
         ) {
             flash()->addError('Part Run Full');

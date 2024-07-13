@@ -33,7 +33,7 @@ class DroidsController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View
      */
     public function create($id)
     {
@@ -84,7 +84,7 @@ class DroidsController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Droid $droid
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View
      */
     public function show(Droid $droid)
     {

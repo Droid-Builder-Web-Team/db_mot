@@ -30,7 +30,7 @@ class OfferController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -41,7 +41,7 @@ class OfferController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Assistance\Offer  $offer
+     * @param  \App\Models\Assistance\Offer $offer
      * @return \Illuminate\Http\Response
      */
     public function show(Offer $offer)
@@ -52,7 +52,7 @@ class OfferController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Assistance\Offer  $offer
+     * @param  \App\Models\Assistance\Offer $offer
      * @return \Illuminate\Http\Response
      */
     public function edit(Offer $offer)
@@ -63,8 +63,8 @@ class OfferController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Assistance\Offer  $offer
+     * @param  \Illuminate\Http\Request     $request
+     * @param  \App\Models\Assistance\Offer $offer
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Offer $offer)
@@ -75,7 +75,7 @@ class OfferController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Assistance\Offer  $offer
+     * @param  \App\Models\Assistance\Offer $offer
      * @return \Illuminate\Http\Response
      */
     public function destroy(Offer $offer)

@@ -1,5 +1,14 @@
 <?php
-
+/**
+ * Welcome Mail
+ * php version 8.2
+ *
+ * @category Mail
+ * @package  Mail
+ * @author   Darren Poulson <darren.poulson@gmail.com>
+ * @license  https://opensource.org/licenses/MIT MIT License
+ * @link     https://portal.droidbuilders.uk/
+ */
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
@@ -12,6 +21,7 @@ class WelcomeUser extends Mailable
 {
     use Queueable, SerializesModels;
 
+    
     public $user;
 
     /**

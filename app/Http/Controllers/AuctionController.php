@@ -100,7 +100,7 @@ class AuctionController extends Controller
      *
      * @param \App\Location $location Location to show
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View
      */
     public function show(Auction $auction)
     {

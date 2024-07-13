@@ -1,5 +1,14 @@
 <?php
-
+/**
+ * Clubs Datatable
+ * php version 8.2
+ *
+ * @category Datatable
+ * @package  Datatables
+ * @author   Darren Poulson <darren.poulson@gmail.com>
+ * @license  https://opensource.org/licenses/MIT MIT License
+ * @link     https://portal.droidbuilders.uk/
+ */
 namespace App\DataTables;
 
 use App\Club;
@@ -14,7 +23,8 @@ class ClubsDataTable extends DataTable
     /**
      * Build DataTable class.
      *
-     * @param  mixed $query Results from query() method.
+     * @param mixed $query Results from query() method.
+     * 
      * @return \Yajra\DataTables\DataTableAbstract
      */
     public function dataTable($query)
@@ -24,13 +34,13 @@ class ClubsDataTable extends DataTable
             ->addColumn(
                 'links', function (Club $club) {
                     $output = "";
-                    if(isset($club->facebook)) {
+                    if (isset($club->facebook)) {
                         $output .="<a class=\"btn-sm btn-link\" style='color:white;' href=\"".$club->facebook."\">Facebook</a>";
                     }
-                    if(isset($club->website)) {
+                    if (isset($club->website)) {
                         $output .="<a class=\"btn-sm btn-link\" style='color:white;' href=\"".$club->website."\">Website</a>";
                     }
-                    if(isset($club->forum)) {
+                    if (isset($club->forum)) {
                         $output .="<a class=\"btn-sm btn-link\" style='color:white;' href=\"".$club->forum."\">Forum</a>";
                     }
                     return $output;
@@ -50,7 +60,8 @@ class ClubsDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param  \App\Club $model
+     * @param \App\Club $model
+     * 
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function query(Club $model)

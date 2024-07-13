@@ -57,9 +57,8 @@ class ContactController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param \App\Contact $contact Contact to show
-     *
-     * @return \Illuminate\Http\Response
+     * @param  \App\Contact $contact Contact to show
+     * @return \Illuminate\Contracts\View\View
      */
     public function show(Contact $contact)
     {
@@ -69,7 +68,7 @@ class ContactController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View
      */
     public function create()
     {
@@ -147,7 +146,7 @@ class ContactController extends Controller
      *
      * @param \App\Contact $contact Contact to destroy
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Contact $contact)
     {
@@ -160,9 +159,8 @@ class ContactController extends Controller
     /**
      * Link a contact to a model
      *
-     * @param \Illuminate\Http\Request $request HTTP Request
-     *
-     * @return view
+     * @param  \Illuminate\Http\Request $request HTTP Request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function link(Request $request)
     {
@@ -175,9 +173,8 @@ class ContactController extends Controller
     /**
      * Unlink a contact from a model
      *
-     * @param \Illuminate\Http\Request $request HTTP Request
-     *
-     * @return view
+     * @param  \Illuminate\Http\Request $request HTTP Request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function unlink(Request $request)
     {

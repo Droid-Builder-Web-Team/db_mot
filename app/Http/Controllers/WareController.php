@@ -49,14 +49,14 @@ class WareController extends Controller
     {
 
         $wares = Ware::where('state', 1)
-                    ->OrderBy('updated_at')
-                    ->get();
+            ->OrderBy('updated_at')
+            ->get();
         $userwares = Ware::where('state', 1)
-                    ->where('user_id', auth()->user()->id)
-                    ->get();
+            ->where('user_id', auth()->user()->id)
+            ->get();
         $oldwares = Ware::where('state', 0)
-                    ->OrderBy('updated_at')
-                    ->get();                    
+            ->OrderBy('updated_at')
+            ->get();                    
         return view('ware.index', compact('wares', 'userwares', 'oldwares'));
     }
 
@@ -73,7 +73,7 @@ class WareController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Contracts\View\View
      */
     public function store(Request $request)
@@ -108,7 +108,7 @@ class WareController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Ware  $ware
+     * @param  \App\Models\Ware $ware
      * @return \Illuminate\Contracts\View\View
      */
     public function show(Ware $ware)
@@ -119,13 +119,12 @@ class WareController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Ware  $ware
+     * @param  \App\Models\Ware $ware
      * @return \Illuminate\Contracts\View\View
      */
     public function edit(Ware $ware)
     {
-        if(!$ware->user->id == auth()->user()->id && !auth()->user()->can('Edit Marketplace'))
-        {
+        if(!$ware->user->id == auth()->user()->id && !auth()->user()->can('Edit Marketplace')) {
             abort(403);
         }
         return view('ware.edit', compact('ware'));
@@ -134,14 +133,13 @@ class WareController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Ware  $ware
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\Models\Ware         $ware
      * @return \Illuminate\Contracts\View\View
      */
     public function update(Request $request, Ware $ware)
     {
-        if(!$ware->user->id == auth()->user()->id && !auth()->user()->can('Edit Marketplace'))
-        {
+        if(!$ware->user->id == auth()->user()->id && !auth()->user()->can('Edit Marketplace')) {
             abort(403);
         }
         
@@ -173,14 +171,13 @@ class WareController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Ware  $ware
+     * @param  \App\Models\Ware $ware
      * @return \Illuminate\Contracts\View\View
      */
     public function destroy(Ware $ware)
     {
 
-        if(!auth()->user()->can('Edit Marketplace'))
-        {
+        if(!auth()->user()->can('Edit Marketplace')) {
             abort(403);
         }
         $ware->delete();

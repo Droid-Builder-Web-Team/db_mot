@@ -33,7 +33,7 @@ class ApiController extends Controller
     public function drivingCourseDownload()
     {
         $data = User::with('droids')
-                    ->where("active", "on")->get();
+            ->where("active", "on")->get();
         $data->makeHidden(['api_token', 'calendar_id', 'droid.notes']);
         return response()->json(strip_tags($data));
     }

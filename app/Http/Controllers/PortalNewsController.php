@@ -15,6 +15,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePortalNewsRequest;
 use App\Http\Requests\UpdatePortalNewsRequest;
+use Illuminate\Support\Facades\Auth;
 use App\PortalNews;
 use App\User;
 
@@ -36,7 +37,7 @@ class PortalNewsController extends Controller
      */
     public function index()
     {
-        $user = auth()->user();
+        $user = Auth::user();
         $user->newnews = false;
         $user->save();
         $news = PortalNews::orderBy('created_at', 'desc')->get();
@@ -56,7 +57,7 @@ class PortalNewsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StorePortalNewsRequest  $request
+     * @param  \App\Http\Requests\StorePortalNewsRequest $request
      * @return \Illuminate\Http\Response
      */
     public function store(StorePortalNewsRequest $request)
@@ -83,7 +84,7 @@ class PortalNewsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\PortalNews  $portalnews
+     * @param  \App\PortalNews $portalnews
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -95,13 +96,12 @@ class PortalNewsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\PortalNews  $portalnews
+     * @param  \App\PortalNews $portalnews
      * @return \Illuminate\Http\Response
      */
     public function edit(PortalNews $portalnews)
     {
-        if(!auth()->user()->hasRole(['Super Admin', 'Org Admin']))
-        {
+        if(!Auth::user()->hasRole(['Super Admin', 'Org Admin'])) {
             abort(403);
         }
         return view('portalnews.edit', compact('portalnews'));
@@ -110,8 +110,8 @@ class PortalNewsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdatePortalNewsRequest  $request
-     * @param  \App\PortalNews  $portalNews
+     * @param  \App\Http\Requests\UpdatePortalNewsRequest $request
+     * @param  \App\PortalNews                            $portalNews
      * @return \Illuminate\Http\Response
      */
     public function update(UpdatePortalNewsRequest $request, PortalNews $portalnews)
@@ -130,14 +130,13 @@ class PortalNewsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\PortalNews  $portalnews
+     * @param  \App\PortalNews $portalnews
      * @return \Illuminate\Http\Response
      */
     public function destroy(PortalNews $portalnews)
     {
 
-        if(!auth()->user()->hasRole(['Super Admin', 'Org Admin']))
-        {
+        if(!Auth::user()->hasRole(['Super Admin', 'Org Admin'])) {
             abort(403);
         }
         

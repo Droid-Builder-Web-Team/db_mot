@@ -30,7 +30,7 @@ class MaterialController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -41,7 +41,7 @@ class MaterialController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Requests\Material  $material
+     * @param  \App\Models\Requests\Material $material
      * @return \Illuminate\Http\Response
      */
     public function show(Material $material)
@@ -52,7 +52,7 @@ class MaterialController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Requests\Material  $material
+     * @param  \App\Models\Requests\Material $material
      * @return \Illuminate\Http\Response
      */
     public function edit(Material $material)
@@ -63,8 +63,8 @@ class MaterialController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Requests\Material  $material
+     * @param  \Illuminate\Http\Request      $request
+     * @param  \App\Models\Requests\Material $material
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Material $material)
@@ -75,7 +75,7 @@ class MaterialController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Requests\Material  $material
+     * @param  \App\Models\Requests\Material $material
      * @return \Illuminate\Http\Response
      */
     public function destroy(Material $material)

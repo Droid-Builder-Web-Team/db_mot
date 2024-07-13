@@ -47,8 +47,7 @@ class ICalController extends Controller
     {
         $user = User::where('calendar_id', $calId)->first();
 
-        if ($scope == "user") 
-        { 
+        if ($scope == "user") { 
             $events = $user->events;
         } else if ($scope == "all") {
             $events = Events::all();
