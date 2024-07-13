@@ -44,7 +44,8 @@ class ContactDataTable extends DataTable
             ->eloquent($query)
             ->addColumn('action', '')
             ->editColumn(
-                'action', function ($row) {
+                'action',
+                function ($row) {
                     $crudRoutePart = "contact";
                     $parts = array( 'edit', 'delete');
                     return view(

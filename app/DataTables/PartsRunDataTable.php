@@ -9,7 +9,6 @@ use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Facades\DataTables;
 use Yajra\DataTables\Services\DataTable;
 
-
 class PartsRunDataTable extends DataTable
 {
     /**
@@ -23,7 +22,8 @@ class PartsRunDataTable extends DataTable
         $query = PartsRunData::query();
         return DataTables::eloquent($query)
             ->withQuery(
-                'count', function () use ($query) {
+                'count',
+                function () use ($query) {
                     return $query->count();
                 }
             )

@@ -62,11 +62,12 @@
         "zanysoft/laravel-zip": "^1.0"
     },
     "require-dev": {
-        "spatie/laravel-ignition": "^2.0",
+        "friendsofphp/php-cs-fixer": "^3.59",
         "laracasts/generators": "^2.0",
         "mockery/mockery": "^1.3.1",
         "nunomaduro/collision": "^7.0",
-        "phpunit/phpunit": "^10.0"
+        "phpunit/phpunit": "^10.0",
+        "spatie/laravel-ignition": "^2.0"
     },
     "config": {
         "optimize-autoloader": true,

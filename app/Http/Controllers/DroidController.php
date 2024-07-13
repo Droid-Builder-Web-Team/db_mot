@@ -77,8 +77,7 @@ class DroidController extends Controller
     {
         if ($droid->users->contains(auth()->user()) || auth()->user()->can('View Droids')) {
             return view('droid.show', compact('droid'));
-        } else
-        {
+        } else {
             abort(403);
         }
 
@@ -94,9 +93,9 @@ class DroidController extends Controller
     {
         $clubs = Club::all();
         if ($droid->users->contains(auth()->user()) || auth()->user()->can('Edit Droids')) {
-            return view('droid.edit', compact('clubs'))->with('droid', $droid);;
-        } else
-        {
+            return view('droid.edit', compact('clubs'))->with('droid', $droid);
+            ;
+        } else {
             abort(403);
         }
 
@@ -147,13 +146,11 @@ class DroidController extends Controller
         }
 
         $users = $droid->users;
-        foreach($users as $user)
-        {
+        foreach($users as $user) {
             $droid->users()->detach($user->id);
         }
         $mots = $droid->mot;
-        foreach($mots as $mot)
-        {
+        foreach($mots as $mot) {
             $droid->mot()->delete();
         }
         $droid->delete();

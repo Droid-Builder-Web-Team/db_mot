@@ -9,6 +9,7 @@
  * @license  https://opensource.org/licenses/MIT MIT License
  * @link     https://portal.droidbuilders.uk/
  */
+
 namespace App\DataTables;
 
 use App\Club;
@@ -24,7 +25,7 @@ class ClubsDataTable extends DataTable
      * Build DataTable class.
      *
      * @param mixed $query Results from query() method.
-     * 
+     *
      * @return \Yajra\DataTables\DataTableAbstract
      */
     public function dataTable($query)
@@ -32,23 +33,25 @@ class ClubsDataTable extends DataTable
         return datatables()
             ->eloquent($query)
             ->addColumn(
-                'links', function (Club $club) {
+                'links',
+                function (Club $club) {
                     $output = "";
                     if (isset($club->facebook)) {
-                        $output .="<a class=\"btn-sm btn-link\" style='color:white;' href=\"".$club->facebook."\">Facebook</a>";
+                        $output .= "<a class=\"btn-sm btn-link\" style='color:white;' href=\"".$club->facebook."\">Facebook</a>";
                     }
                     if (isset($club->website)) {
-                        $output .="<a class=\"btn-sm btn-link\" style='color:white;' href=\"".$club->website."\">Website</a>";
+                        $output .= "<a class=\"btn-sm btn-link\" style='color:white;' href=\"".$club->website."\">Website</a>";
                     }
                     if (isset($club->forum)) {
-                        $output .="<a class=\"btn-sm btn-link\" style='color:white;' href=\"".$club->forum."\">Forum</a>";
+                        $output .= "<a class=\"btn-sm btn-link\" style='color:white;' href=\"".$club->forum."\">Forum</a>";
                     }
                     return $output;
                 }
             )
           ->addColumn('action', '')
         ->editColumn(
-            'action', function ($row) {
+            'action',
+            function ($row) {
                 $crudRoutePart = "club";
                 $parts = array( 'edit', 'delete');
                 return view('partials.datatablesActions', compact('row', 'crudRoutePart', 'parts'));
@@ -61,7 +64,7 @@ class ClubsDataTable extends DataTable
      * Get query source of dataTable.
      *
      * @param \App\Club $model
-     * 
+     *
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function query(Club $model)

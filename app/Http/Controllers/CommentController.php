@@ -28,7 +28,7 @@ class CommentController extends Controller
             'body' => 'required',
             ]
         );
-        $comment = new Comment;
+        $comment = new Comment();
         $comment->body = $request->body;
         $comment->user_id = auth()->user()->id;
 
@@ -37,42 +37,41 @@ class CommentController extends Controller
         // Send out broadcast if requested
         if ($request->broadcast == 'on') {
             switch ($request->model) {
-            case "App\Event":
-                $permission = "Edit Events";
-                break;
-            case "App\PartsRunData":
-                $permission = "Edit Partrun";
-                break;
-            case "App\Models\Auction":
-                $permission = "Edit Auction";
-                break;
-            case "App\CourseRun":
-                $permission = "Edit Members";
-                break;
-            case "App\Location":
-                $permission = "Edit Events";
-                break;
-            case "App\Models\Ware":
-                $permission = "Edit Marketplace";
-                break;
-            default:
-                $permission = "";
-                break;
+                case "App\Event":
+                    $permission = "Edit Events";
+                    break;
+                case "App\PartsRunData":
+                    $permission = "Edit Partrun";
+                    break;
+                case "App\Models\Auction":
+                    $permission = "Edit Auction";
+                    break;
+                case "App\CourseRun":
+                    $permission = "Edit Members";
+                    break;
+                case "App\Location":
+                    $permission = "Edit Events";
+                    break;
+                case "App\Models\Ware":
+                    $permission = "Edit Marketplace";
+                    break;
+                default:
+                    $permission = "";
+                    break;
             }
 
             if ($permission != "") {
                 if (auth()->user()->can($permission)) {
-                    foreach($model->users as $user)
-                    {
+                    foreach($model->users as $user) {
                         switch ($request->model) {
-                        case "App\PartsRunData":
-                            if ($user->isInterestedIn($request->id)) {   
+                            case "App\PartsRunData":
+                                if ($user->isInterestedIn($request->id)) {
+                                    $user->notify(new CommentBroadcast($result));
+                                }
+                                break;
+                            default:
                                 $user->notify(new CommentBroadcast($result));
-                            }
-                            break;
-                        default:
-                            $user->notify(new CommentBroadcast($result));
-                            break;
+                                break;
                         }
                     }
                     $result->broadcast = true;
@@ -83,20 +82,20 @@ class CommentController extends Controller
         }
         // Send notification to model owner
         switch ($request->model) {
-        case "App\Event":
-            $model->organiser->notify(new NewComment($result));
-            break;
-        case "App\PartsRunData":
-            $model->user->notify(new NewComment($result));
-            break;
-        case "App\Models\Auction":
-            $model->user->notify(new NewComment($result));
-            break;
-        case "App\Models\Ware":
-            $model->user->notify(new NewComment($result));
-            break;
-        default:
-            break;
+            case "App\Event":
+                $model->organiser->notify(new NewComment($result));
+                break;
+            case "App\PartsRunData":
+                $model->user->notify(new NewComment($result));
+                break;
+            case "App\Models\Auction":
+                $model->user->notify(new NewComment($result));
+                break;
+            case "App\Models\Ware":
+                $model->user->notify(new NewComment($result));
+                break;
+            default:
+                break;
         }
 
 

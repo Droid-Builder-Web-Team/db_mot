@@ -14,5 +14,5 @@ class QrCodeController extends Controller
             ->generate(
                 $url
             );
-    }    
+    }
 }

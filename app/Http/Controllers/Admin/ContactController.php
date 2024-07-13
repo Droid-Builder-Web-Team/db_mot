@@ -30,7 +30,6 @@ use App\DataTables\ContactDataTable;
  */
 class ContactController extends Controller
 {
-
     /**
      * __construct
      *

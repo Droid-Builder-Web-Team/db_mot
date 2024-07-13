@@ -19,7 +19,7 @@ class PaypalController extends Controller
     public function postNotify(Request $request)
     {
         // Import the namespace Srmklive\PayPal\Services\ExpressCheckout first in your controller.
-        $provider = new ExpressCheckout;
+        $provider = new ExpressCheckout();
 
         $request->merge(['cmd' => '_notify-validate']);
         $post = $request->all();
@@ -35,12 +35,12 @@ class PaypalController extends Controller
             $user->notify(new PLIPaid($user));
         }
         $admins = User::has('roles')->whereHas(
-            "permissions", function ($q) {
-                $q->where("name", "Add MOT"); 
+            "permissions",
+            function ($q) {
+                $q->where("name", "Add MOT");
             }
         )->get();
-        foreach($admins as $admin)
-        {
+        foreach($admins as $admin) {
             $admin->notify(new PLIPaidAdmin($user));
         }
 

@@ -154,7 +154,8 @@ class BadgeController extends Controller
                         )->delete();
                 }
                 fputcsv(
-                    $fp, array(
+                    $fp,
+                    array(
                     $user->forename,
                     $user->surname,
                     $user->id,
@@ -166,7 +167,7 @@ class BadgeController extends Controller
                 );
             }
 
-            
+
 
         }
         fclose($fp);

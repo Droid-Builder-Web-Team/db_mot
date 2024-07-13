@@ -30,7 +30,7 @@ class Asset extends Model implements Auditable
     public function current_holder()
     {
         return $this->belongsTo(User::class);
-    }  
+    }
 
     public function comments()
     {

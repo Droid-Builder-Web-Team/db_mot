@@ -40,7 +40,6 @@ use Illuminate\Support\Facades\Auth;
  */
 class EventsController extends Controller
 {
-
     /**
      * __construct
      *
@@ -120,7 +119,8 @@ class EventsController extends Controller
         if ($request->days != 1) {
             for ($x = 1; $x <= $request->days - 1; $x++) {
                 $event['date'] = date(
-                    'Y-m-d', strtotime(
+                    'Y-m-d',
+                    strtotime(
                         $request->date. ' + ' . $x . ' days'
                     )
                 );
@@ -143,7 +143,8 @@ class EventsController extends Controller
     {
         $locations = Location::all();
         return view(
-            'admin.events.edit', compact(
+            'admin.events.edit',
+            compact(
                 'locations'
             )
         )->with('event', $event);
@@ -292,7 +293,8 @@ class EventsController extends Controller
         }
 
         $eventImage = $request->image->storeAs(
-            'events/'.$request->event_id.'/', 'event_image.jpg'
+            'events/'.$request->event_id.'/',
+            'event_image.jpg'
         );
 
         return redirect()->route('event.show', $request->event_id);
@@ -344,7 +346,8 @@ class EventsController extends Controller
                 $row['Email']         = $user->email;
 
                 fputcsv(
-                    $file, array(
+                    $file,
+                    array(
                         $row['Forename'],
                         $row['Surname'],
                         $row['Status'],

@@ -65,7 +65,8 @@ class PortalNewsController extends Controller
         $validatedData = $request->validated();
 
         try {
-            $portalnews = PortalNews::create($validatedData);;
+            $portalnews = PortalNews::create($validatedData);
+            ;
             flash()->addSuccess('News created successfully');
         } catch (\Illuminate\Database\QueryException $exception) {
             flash()->addError('Failed to create News');
@@ -139,7 +140,7 @@ class PortalNewsController extends Controller
         if(!Auth::user()->hasRole(['Super Admin', 'Org Admin'])) {
             abort(403);
         }
-        
+
         $portalnews->delete();
 
         try {

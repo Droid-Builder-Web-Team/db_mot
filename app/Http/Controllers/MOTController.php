@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 
 class MOTController extends Controller
 {
-
     public function __construct()
     {
         $this->middleware('auth');
@@ -34,8 +33,7 @@ class MOTController extends Controller
     {
         if ($mot->droid->users->contains(auth()->user()) || auth()->user()->can('View Droids')) {
             return view('mot.show', compact('mot'));
-        } else
-        {
+        } else {
             abort(403);
         }
 
@@ -50,8 +48,7 @@ class MOTController extends Controller
                 array_push($data, $mot->lines($section->id));
             }
             return response()->json($mot->details());
-        } else
-        {
+        } else {
             abort(403);
         }
     }

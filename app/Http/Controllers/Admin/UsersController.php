@@ -34,7 +34,6 @@ use CountryState;
  */
 class UsersController extends Controller
 {
-
     /**
      * Constructor
      */
@@ -127,8 +126,8 @@ class UsersController extends Controller
             $url = "https://maps.google.com/maps/api/geocode/json?key="
                 . config('gmap.google_api_key') . "&address=" . $address .
                 "&sensor=false";
-            $geocode=file_get_contents($url);
-            $output= json_decode($geocode);
+            $geocode = file_get_contents($url);
+            $output = json_decode($geocode);
             $request['latitude']
                 = strval($output->results[0]->geometry->location->lat);
             $request['longitude']

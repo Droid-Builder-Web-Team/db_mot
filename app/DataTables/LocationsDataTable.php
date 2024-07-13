@@ -23,7 +23,8 @@ class LocationsDataTable extends DataTable
             ->eloquent($query)
             ->addColumn('action', '')
             ->editColumn(
-                'action', function ($row) {
+                'action',
+                function ($row) {
                     $crudRoutePart = "location";
                     $parts = array( 'view', 'edit', 'delete');
                     return view('partials.datatablesActions', compact('row', 'crudRoutePart', 'parts'));

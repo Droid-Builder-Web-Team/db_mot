@@ -11,7 +11,6 @@ use App\DataTables\AchievementsDataTable;
 
 class AchievementsController extends Controller
 {
-
     public function __construct()
     {
         $this->middleware('auth');
@@ -115,7 +114,8 @@ class AchievementsController extends Controller
     {
         $user = User::find($request->user_id);
         $user->achievements()->attach(
-            $request->achievement_id, [
+            $request->achievement_id,
+            [
                     'added_by' => auth()->user()->id,
                     'notes' => $request->notes
             ]

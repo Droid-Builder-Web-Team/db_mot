@@ -10,6 +10,7 @@
  * @license  https://opensource.org/licenses/MIT MIT License
  * @link     https://portal.droidbuilders.uk/
  */
+
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
@@ -75,7 +76,7 @@ class AchievementAdded extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)
+        return (new MailMessage())
             ->line($this->title)
             ->action('View Achievement', $this->link)
             ->line($this->text);

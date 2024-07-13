@@ -27,7 +27,7 @@ use Qirolab\Laravel\Reactions\Contracts\ReactableInterface;
  * @license  https://opensource.org/licenses/MIT MIT License
  * @link     https://portal.droidbuilders.uk/
  */
-class Comment extends Model implements Auditable,ReactableInterface
+class Comment extends Model implements Auditable, ReactableInterface
 {
     use \OwenIt\Auditing\Auditable;
     use Reactable;

@@ -17,8 +17,7 @@ class MOTDesignController extends Controller
 
         $lines = [];
 
-        foreach ($sections as $section)
-        {
+        foreach ($sections as $section) {
             $lines[$section->id] = DB::table('mot_lines')
                 ->where('section_id', $section->id)
                 ->get();

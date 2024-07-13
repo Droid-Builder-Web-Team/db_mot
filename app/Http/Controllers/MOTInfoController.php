@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\DB;
 
 class MOTInfoController extends Controller
 {
-
     public function __construct()
     {
         $this->middleware('auth');
@@ -62,16 +61,14 @@ class MOTInfoController extends Controller
 
         $lines = [];
 
-        foreach ($sections as $section)
-        {
+        foreach ($sections as $section) {
             $lines[$section->id] = DB::table('mot_lines')
                 ->where('section_id', $section->id)
                 ->get();
         }
         $mot_officers = [];
         $club = Club::find($id);
-        foreach (User::role('MOT Officer')->get() as $officer)
-        {
+        foreach (User::role('MOT Officer')->get() as $officer) {
             if ($officer->isAdminOf($club)) {
                 $mot_officers[] = $officer;
             }
@@ -87,8 +84,7 @@ class MOTInfoController extends Controller
 
         $lines = [];
 
-        foreach ($sections as $section)
-        {
+        foreach ($sections as $section) {
             $lines[$section->id] = DB::table('mot_lines')
                 ->where('section_id', $section->id)
                 ->get();
@@ -108,8 +104,7 @@ class MOTInfoController extends Controller
 
         $lines = [];
 
-        foreach ($sections as $section)
-        {
+        foreach ($sections as $section) {
             $lines[$section->id] = DB::table('mot_lines')
                 ->where('section_id', $section->id)
                 ->get();

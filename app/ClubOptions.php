@@ -26,7 +26,6 @@ use Illuminate\Database\Eloquent\Model;
  */
 class ClubOptions extends Model
 {
-
     /**
      * Clubs with option
      *

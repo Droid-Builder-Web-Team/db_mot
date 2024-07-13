@@ -54,7 +54,7 @@ class EventMOT extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)
+        return (new MailMessage())
             ->subject($this->title)
             ->line($this->title)
             ->action('View Event', $this->link)

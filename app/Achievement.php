@@ -30,8 +30,8 @@ class Achievement extends Model implements Auditable
 {
     use \OwenIt\Auditing\Auditable;
 
-    const CREATED_AT = 'date_created';
-    const UPDATED_AT = 'date_updated';
+    public const CREATED_AT = 'date_created';
+    public const UPDATED_AT = 'date_updated';
 
     protected $guarded = [
 

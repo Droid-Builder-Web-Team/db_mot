@@ -14,7 +14,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Validator,Redirect,Response,File;
+use Validator;
+use Redirect;
+use Response;
+use File;
 use Socialite;
 use App\User;
 use App\Notifications\NewUser;
@@ -85,7 +88,7 @@ class SocialController extends Controller
      *
      * @return void
      */
-    function createUser($getInfo,$provider)
+    public function createUser($getInfo, $provider)
     {
 
         $user = User::where('email', $getInfo->email)->first();
@@ -107,12 +110,13 @@ class SocialController extends Controller
             );
             $qr = User::generateQR($id, $user->id);
             $admins = User::whereHas(
-                "roles", function ($q) {
+                "roles",
+                function ($q) {
                     $q->where("name", "Super Admin");
                 }
             )->get();
             foreach ($admins as $admin) {
-                  $admin->notify(new NewUser($user));
+                $admin->notify(new NewUser($user));
             }
         }
 

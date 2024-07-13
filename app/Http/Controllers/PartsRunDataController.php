@@ -37,7 +37,6 @@ use App\Notifications\PartsRunFull;
  */
 class PartsRunDataController extends Controller
 {
-
     /**
      * __construct
      *
@@ -48,7 +47,7 @@ class PartsRunDataController extends Controller
         $this->middleware('auth');
         $this->middleware('verified');
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -62,8 +61,9 @@ class PartsRunDataController extends Controller
             ->get();
 
         return view(
-            'parts-run.list', [
-            'partsRunData'=> $partsRunData,
+            'parts-run.list',
+            [
+            'partsRunData' => $partsRunData,
             ]
         );
     }
@@ -76,13 +76,14 @@ class PartsRunDataController extends Controller
     public function create()
     {
         if (!auth()->user()->can('Create Partrun')) {
-              abort(403);
+            abort(403);
         }
         $clubs = Club::all();
         $runners = User::permission('Edit Partrun')->get();
 
         return view(
-            'parts-run.create', [
+            'parts-run.create',
+            [
             'clubs' => $clubs,
             'runners' => $runners,
             ]
@@ -149,13 +150,15 @@ class PartsRunDataController extends Controller
         if ($partsRunData[0]->partsRunAd->shipping_costs != null) {
             foreach ($partsRunData as $shippingCosts) {
                 $shippingCostsArray = explode(
-                    ",", $shippingCosts->partsRunAd->shipping_costs
+                    ",",
+                    $shippingCosts->partsRunAd->shipping_costs
                 );
             };
         };
 
         return view(
-            'parts-run.show', [
+            'parts-run.show',
+            [
             'data' => $partsRunData[0],
             'includesArray' => $includesArray,
             'shippingCostsArray' => $shippingCostsArray
@@ -186,14 +189,16 @@ class PartsRunDataController extends Controller
 
         foreach ($partsRunData as $shippingCosts) {
             $shippingCostsArray = explode(
-                ",", $shippingCosts->partsRunAd->shipping_costs
+                ",",
+                $shippingCosts->partsRunAd->shipping_costs
             );
             // Implode to return as a string when displaying update form - RH
             $shipping = implode(",", $shippingCostsArray);
         };
 
         return view(
-            'parts-run.edit', [
+            'parts-run.edit',
+            [
             'partsRunData' => $partsRunData,
             'includes' => $includes,
             'shipping' => $shipping,
@@ -317,7 +322,7 @@ class PartsRunDataController extends Controller
             ]
         );
 
-        if (((($partsrun->partsRunAd->quantity + $partsrun->partsRunAd->reserve)<= $partsrun->interestQuantity()) && $request->interest == 'interested') 
+        if (((($partsrun->partsRunAd->quantity + $partsrun->partsRunAd->reserve) <= $partsrun->interestQuantity()) && $request->interest == 'interested')
             && $partsrun->partsRunAd->quantity != 0
         ) {
             flash()->addError('Part Run Full');
@@ -476,10 +481,10 @@ class PartsRunDataController extends Controller
             ->get();
 
         return view(
-            'parts-run.none-active-runs', [
-                'inactivePartsRunData'=> $inactivePartsRunData,
+            'parts-run.none-active-runs',
+            [
+                'inactivePartsRunData' => $inactivePartsRunData,
             ]
         );
     }
 }
-

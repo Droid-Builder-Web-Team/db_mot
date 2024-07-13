@@ -50,7 +50,7 @@ class PLIPaidAdmin extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)
+        return (new MailMessage())
             ->line($this->title)
             ->action('View User', $this->link)
             ->line($this->text);

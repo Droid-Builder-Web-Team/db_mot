@@ -32,8 +32,8 @@ use OwenIt\Auditing\Contracts\Auditable;
 class Droid extends Model implements Auditable
 {
     use \OwenIt\Auditing\Auditable;
-    const CREATED_AT = 'date_added';
-    const UPDATED_AT = 'last_updated';
+    public const CREATED_AT = 'date_added';
+    public const UPDATED_AT = 'last_updated';
 
     protected $guarded = [
     ];
@@ -197,7 +197,7 @@ class Droid extends Model implements Auditable
         if ($this->hasExpiringMOT()) {
             $motstate = "alert-primary";
         }
-        
+
 
         $displayMOT = array("status" => $motstatus, "state" => $motstate);
 

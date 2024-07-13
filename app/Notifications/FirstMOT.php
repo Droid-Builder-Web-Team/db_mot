@@ -30,7 +30,6 @@ use App\MOT;
  */
 class FirstMOT extends Notification
 {
-
     use Queueable;
     protected $mot;
     protected $title;
@@ -76,8 +75,9 @@ class FirstMOT extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)->view(
-            'emails.firstmot', ['mot'  => $this->mot ]
+        return (new MailMessage())->view(
+            'emails.firstmot',
+            ['mot'  => $this->mot ]
         );
     }
     /**

@@ -13,15 +13,13 @@ use Illuminate\Support\Facades\Response;
 
 class ApiController extends Controller
 {
-
     public function list_bcreps($club_id)
     {
         $reps = [];
         $club = Club::find($club_id);
 
         $allreps = User::role('BC Rep')->get(['id', 'surname', 'forename']);
-        foreach($allreps as $rep)
-        {
+        foreach($allreps as $rep) {
             if($rep->isAdminOf($club)) {
                 array_push($reps, $rep);
             }
@@ -63,7 +61,7 @@ class ApiController extends Controller
         return $response;
     }
 
-    public function get_droid_image($uid, $view = 'photo_front', $size=240)
+    public function get_droid_image($uid, $view = 'photo_front', $size = 240)
     {
         $droid = Droid::find($uid);
 
@@ -86,7 +84,7 @@ class ApiController extends Controller
         $response->header("Content-Type", $type);
 
         return $response;
-    }    
+    }
 
     public function upload_course_run(Request $request)
     {

@@ -50,7 +50,7 @@ class PartsRunUpdated extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)
+        return (new MailMessage())
             ->line($this->title)
             ->action('View Parts Run', $this->link)
             ->line($this->text);

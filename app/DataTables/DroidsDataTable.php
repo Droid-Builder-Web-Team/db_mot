@@ -9,7 +9,6 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-
 class DroidsDataTable extends DataTable
 {
     /**
@@ -23,7 +22,8 @@ class DroidsDataTable extends DataTable
         return datatables()
             ->eloquent($query)
             ->addColumn(
-                'owner', function (Droid $droid) {
+                'owner',
+                function (Droid $droid) {
                     $owner = $droid->users()->first();
                     $name = $owner->forename.' '.$owner->surname;
                     //return '<a class="btn-link btn-sml" href="/user/'.$owner->id.'">'.$name.'</a>';
@@ -31,7 +31,8 @@ class DroidsDataTable extends DataTable
                 }
             )
             ->addColumn(
-                'mot', function (Droid $droid) {
+                'mot',
+                function (Droid $droid) {
                     if ($droid->club->hasOption('mot')) {
                         return "<button class=\"btn-sm alert ".$droid->displayMOT()['state']." actions-buttons\">".$droid->displayMOT()['status']."</button>";
                     } else {
@@ -41,7 +42,8 @@ class DroidsDataTable extends DataTable
             )
             ->addColumn('action', '')
             ->editColumn(
-                'action', function ($row) {
+                'action',
+                function ($row) {
                     $crudRoutePart = "droid";
                     $parts = array('view', 'edit', 'delete');
                     return view('partials.datatablesActions', compact('row', 'crudRoutePart', 'parts'));

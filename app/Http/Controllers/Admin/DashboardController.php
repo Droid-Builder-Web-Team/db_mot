@@ -11,6 +11,7 @@
  * @license  https://opensource.org/licenses/MIT MIT License
  * @link     https://portal.droidbuilders.uk/
  */
+
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
@@ -63,11 +64,9 @@ class DashboardController extends Controller
             ->count();
 
         $paypli = [];
-        foreach ($users as $user) 
-        {
+        foreach ($users as $user) {
             if (!$user->validPLI()) {
-                foreach ($user->droids as $droid) 
-                {
+                foreach ($user->droids as $droid) {
                     if ($droid->hasMOT()) {
                         array_push($paypli, $user);
                         break;
@@ -76,8 +75,14 @@ class DashboardController extends Controller
             }
         }
         return view(
-            'admin.dashboard', compact(
-                'users', 'droids', 'events', 'badges', 'active', 'paypli'
+            'admin.dashboard',
+            compact(
+                'users',
+                'droids',
+                'events',
+                'badges',
+                'active',
+                'paypli'
             )
         );
     }

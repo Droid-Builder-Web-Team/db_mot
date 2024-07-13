@@ -38,14 +38,14 @@ class ChangePasswordController extends Controller
     {
         $request->validate(
             [
-            'current_password' => ['required', new MatchOldPassword],
+            'current_password' => ['required', new MatchOldPassword()],
             'new_password' => ['required'],
             'new_confirm_password' => ['same:new_password'],
             ]
         );
 
         try {
-            User::find(auth()->user()->id)->update(['password'=> Hash::make($request->new_password)]);
+            User::find(auth()->user()->id)->update(['password' => Hash::make($request->new_password)]);
             flash()->addSuccess('Password changed successfully');
         } catch (\Illuminate\Database\QueryException $exception) {
             flash()->addError('Failed to change the password');

@@ -39,7 +39,7 @@ class AssetController extends Controller
                 ->get();
         $oldassets = Asset::where('current_state', '=', 'RETIRED')
             ->OrderBy('updated_at')
-            ->get();                    
+            ->get();
         return view('asset.index', compact('assets', 'userassets', 'oldassets'));
     }
 

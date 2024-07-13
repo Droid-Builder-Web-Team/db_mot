@@ -40,7 +40,6 @@ use Flasher\Prime\FlasherInterface;
  */
 class EventController extends Controller
 {
-
     /**
      * __construct
      *
@@ -129,7 +128,7 @@ class EventController extends Controller
                 ],
                 'customButtons' => [
                 'map' => [
-                    'text'=> 'View as Map',
+                    'text' => 'View as Map',
                     'click' => 'function() {
                         window.open("event/map","_self")
                     }'
@@ -184,8 +183,8 @@ class EventController extends Controller
             if ($request['postcode'] != "") {
                 $address = str_replace(' ', '+', $request['postcode']).'+'.str_replace(' ', '+', $request['country']);
                 $url = "https://maps.google.com/maps/api/geocode/json?key=".config('gmap.google_api_key')."&address=".$address."&sensor=false";
-                $geocode=file_get_contents($url);
-                $output= json_decode($geocode);
+                $geocode = file_get_contents($url);
+                $output = json_decode($geocode);
                 $location['latitude'] = strval($output->results[0]->geometry->location->lat);
                 $location['longitude'] = strval($output->results[0]->geometry->location->lng);
             } else {
@@ -207,7 +206,7 @@ class EventController extends Controller
 
                 flash()->addError('Failed to create Location');
                 return back()->withInput();
-            }     
+            }
             $event['location_id'] = $newlocation->id;
             $request['location_id'] = $event['location_id'];    // If location is created successfully, set request incase event can't be created
         } else {
@@ -244,21 +243,20 @@ class EventController extends Controller
         }
 
         $officers = User::role('Events Officer')->get();
-        foreach ($officers as $officer)
-        {
+        foreach ($officers as $officer) {
             $officer->notify(new UserEventCreated($newevent));
         }
 
         if ($request->days != 1) {
             for ($x = 1; $x <= $request->days - 1; $x++) {
                 $event['date'] = date(
-                    'Y-m-d', strtotime(
+                    'Y-m-d',
+                    strtotime(
                         $request->date. ' + ' . $x . ' days'
                     )
                 );
                 $newevent = Event::create($event);
-                foreach ($officers as $officer)
-                {
+                foreach ($officers as $officer) {
                     $officer->notify(new UserEventCreated($newevent));
                 }
             }
@@ -360,7 +358,8 @@ class EventController extends Controller
                 . $event->location->name . ' - '
                 . $event->location->town . ')';
             $entry['url'] = "<a href=".route(
-                'event.show', ['event' => $event->id]
+                'event.show',
+                ['event' => $event->id]
             ).">".$entry['title']."</a>";
             $entry['extra'] = $event->date;
             $entry['position'] = array(

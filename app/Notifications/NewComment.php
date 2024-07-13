@@ -53,41 +53,41 @@ class NewComment extends Notification
     {
         $model = app($comment->commentable_type)::find($comment->commentable_id);
         switch ($comment->commentable_type) {
-        case "App\Event":
-            $type_text = "An Event";
-            $model_title = $model->name;
-            $subject = "Event";
-            $this->link = route('event.show', $comment->commentable_id);
-            break;
-        case "App\PartsRunData":
-            $type_text = "A Parts Run";
-            $model_title = $model->partsRunAd->title;
-            $subject = "Part Run";
-            $this->link = route('parts-run.show', $comment->commentable_id);
-            break;
-        case "App\Models\Auction":
-            $type_text = "An Auction";
-            $model_title = $model->title;
-            $subject = "Auction";
-            $this->link = route('auctions.show', $comment->commentable_id);
-            break;
-        case "App\Location":
-            $type_text = "A Location";
-            $model_title = $model->title;
-            $subject = "Location";
-            $this->link = route('location.show', $comment->commentable_id);
-            break;
-        case "App\Models\Ware":
-            $type_text = "A Marketplace Item";
-            $model_title = $model->title;
-            $subject = "Marketplace";
-            $this->link = route('ware.show', $comment->commentable_id);
-            break;
-        default:
-            $type_text = "An error";
-            $model_title = "Null model";
-            $subject = "";
-            break;
+            case "App\Event":
+                $type_text = "An Event";
+                $model_title = $model->name;
+                $subject = "Event";
+                $this->link = route('event.show', $comment->commentable_id);
+                break;
+            case "App\PartsRunData":
+                $type_text = "A Parts Run";
+                $model_title = $model->partsRunAd->title;
+                $subject = "Part Run";
+                $this->link = route('parts-run.show', $comment->commentable_id);
+                break;
+            case "App\Models\Auction":
+                $type_text = "An Auction";
+                $model_title = $model->title;
+                $subject = "Auction";
+                $this->link = route('auctions.show', $comment->commentable_id);
+                break;
+            case "App\Location":
+                $type_text = "A Location";
+                $model_title = $model->title;
+                $subject = "Location";
+                $this->link = route('location.show', $comment->commentable_id);
+                break;
+            case "App\Models\Ware":
+                $type_text = "A Marketplace Item";
+                $model_title = $model->title;
+                $subject = "Marketplace";
+                $this->link = route('ware.show', $comment->commentable_id);
+                break;
+            default:
+                $type_text = "An error";
+                $model_title = "Null model";
+                $subject = "";
+                break;
         }
         $this->subject = $subject;
         $this->comment = $comment;
@@ -120,7 +120,7 @@ class NewComment extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)
+        return (new MailMessage())
             ->subject("New Comment - " . $this->subject)
             ->greeting("Hi, " . $notifiable->forename)
             ->line($this->title)

@@ -43,7 +43,8 @@ class UsersDataTable extends DataTable
         return datatables()
             ->eloquent($query)
             ->addColumn(
-                'pli', function (User $user) {
+                'pli',
+                function (User $user) {
                     if ($user->pli_date == null) {
                         $pli = "-";
                     } else {
@@ -53,12 +54,14 @@ class UsersDataTable extends DataTable
                 }
             )
             ->addColumn(
-                'droid_count', function (User $user) {
+                'droid_count',
+                function (User $user) {
                     return $user->droids()->count();
                 }
             )
             ->addColumn(
-                'roles', function (User $user) {
+                'roles',
+                function (User $user) {
                     $roles = "";
                     foreach ($user->roles as $role) {
                         $roles
@@ -70,12 +73,16 @@ class UsersDataTable extends DataTable
             )
             ->addColumn('action', '')
             ->editColumn(
-                'action', function ($row) {
+                'action',
+                function ($row) {
                     $crudRoutePart = "user";
                     $parts = array('view', 'edit', 'delete');
                     return view(
-                        'partials.datatablesActions', compact(
-                            'row', 'crudRoutePart', 'parts'
+                        'partials.datatablesActions',
+                        compact(
+                            'row',
+                            'crudRoutePart',
+                            'parts'
                         )
                     );
                 }

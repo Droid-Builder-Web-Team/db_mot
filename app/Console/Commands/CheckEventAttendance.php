@@ -43,19 +43,17 @@ class CheckEventAttendance extends Command
             ->where('date', '>', Carbon::now()->subDays(180))
             ->orderBy('date')->get();
         echo "Count: ".$pastevents->count();
-        for ($i = 0; $i < $pastevents->count(); $i++)
-        {
-                $id = $pastevents[$i]->id;
-                $users = $pastevents[$i]->users;
-                echo $i. "/".$pastevents->count().": ".$pastevents[$i]->name." ID: ".$id." Attended: ".$users->count();
-                echo "\n";
-            foreach($users as $user)
-                {
+        for ($i = 0; $i < $pastevents->count(); $i++) {
+            $id = $pastevents[$i]->id;
+            $users = $pastevents[$i]->users;
+            echo $i. "/".$pastevents->count().": ".$pastevents[$i]->name." ID: ".$id." Attended: ".$users->count();
+            echo "\n";
+            foreach ($users as $user) {
                 if ($user->event($id)->attended == 0 && $user->event($id)->status == 'yes') {
-                        $user->events()->updateExistingPivot($id, ["attended" => 1]);
+                    $user->events()->updateExistingPivot($id, ["attended" => 1]);
                 }
             }
-                echo "\n";
+            echo "\n";
         }
         return 0;
     }

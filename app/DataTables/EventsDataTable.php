@@ -22,13 +22,15 @@ class EventsDataTable extends DataTable
         return datatables()
             ->eloquent($query)
             ->addColumn(
-                'location', function (Event $event) {
+                'location',
+                function (Event $event) {
                     $location_name = $event->location->name;
                     return $location_name;
                 }
             )
             ->addColumn(
-                'attendance', function (Event $event) {
+                'attendance',
+                function (Event $event) {
                     $attendance = $event->attended->count();
                     $attendance .= "/";
                     $attendance .= $event->notattended->count();
@@ -36,15 +38,17 @@ class EventsDataTable extends DataTable
                 }
             )
             ->addColumn(
-                'approved', function (Event $event) {
-                    $approved = $event->approved ? '<!--approved--><i class="fas fa-check">': '<!--n--><i class="fas fa-times">';
+                'approved',
+                function (Event $event) {
+                    $approved = $event->approved ? '<!--approved--><i class="fas fa-check">' : '<!--n--><i class="fas fa-times">';
                     return $approved;
                 }
-            )            
+            )
           ->addColumn('action', '')
           ->orderColumns(['name', 'location', 'approved', 'date'], '+:column $1')
         ->editColumn(
-            'action', function ($row) {
+            'action',
+            function ($row) {
                 $crudRoutePart = "event";
                 $parts = array('view', 'edit', 'delete');
                 return view('partials.datatablesActions', compact('row', 'crudRoutePart', 'parts'));
@@ -107,7 +111,7 @@ class EventsDataTable extends DataTable
         ];
     }
 
-    /**     
+    /**
      * Get filename for export.
      *
      * @return string

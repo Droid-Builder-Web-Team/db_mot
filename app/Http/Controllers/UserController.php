@@ -10,6 +10,7 @@
  * @license  https://opensource.org/licenses/MIT MIT License
  * @link     https://portal.droidbuilders.uk/
  */
+
 namespace App\Http\Controllers;
 
 use App\User;
@@ -31,7 +32,6 @@ use PDF;
  */
 class UserController extends Controller
 {
-
     /**
      * __construct
      *
@@ -119,8 +119,8 @@ class UserController extends Controller
                 . str_replace(' ', '+', $request['country']);
             $url = "https://maps.google.com/maps/api/geocode/json?key="
                 . config('gmap.google_api_key')."&address=".$address."&sensor=false";
-            $geocode=file_get_contents($url);
-            $output= json_decode($geocode);
+            $geocode = file_get_contents($url);
+            $output = json_decode($geocode);
             $request['latitude']
                 = strval($output->results[0]->geometry->location->lat);
             $request['longitude']

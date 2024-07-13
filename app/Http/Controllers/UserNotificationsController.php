@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 
 class UserNotificationsController extends Controller
 {
-
     public function __construct()
     {
         $this->middleware('auth');
@@ -20,7 +19,8 @@ class UserNotificationsController extends Controller
         $notifications->markAsRead();
 
         return view(
-            'notifications.show', [
+            'notifications.show',
+            [
             'notifications' => $notifications
             ]
         );

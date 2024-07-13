@@ -10,6 +10,7 @@
  * @license  https://opensource.org/licenses/MIT MIT License
  * @link     https://portal.droidbuilders.uk/
  */
+
 namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;

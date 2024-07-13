@@ -12,7 +12,6 @@ use Illuminate\Http\Request;
 
 class DroidsController extends Controller
 {
-
     public function __construct()
     {
         $this->middleware('auth');
@@ -38,7 +37,7 @@ class DroidsController extends Controller
     public function create($id)
     {
         if (!auth()->user()->can('Edit Droids')) {
-              abort(403);
+            abort(403);
         }
         $clubs = Club::all();
         $user = User::find($id);
@@ -55,7 +54,7 @@ class DroidsController extends Controller
     {
 
         if (!auth()->user()->can('Edit Droids')) {
-              abort(403);
+            abort(403);
         }
         $request->validate(
             [
@@ -100,7 +99,7 @@ class DroidsController extends Controller
     public function edit(Droid $droid)
     {
         if (!auth()->user()->can('Edit Droids')) {
-              abort(403);
+            abort(403);
         }
         $clubs = Club::all();
         return view('admin.droids.edit', compact('clubs'))->with('droid', $droid);
@@ -116,7 +115,7 @@ class DroidsController extends Controller
     public function update(Request $request, Droid $droid)
     {
         if (!auth()->user()->can('Edit Droids')) {
-              abort(403);
+            abort(403);
         }
         $request->validate(
             [
@@ -145,13 +144,11 @@ class DroidsController extends Controller
     public function destroy(Droid $droid)
     {
         $users = $droid->users;
-        foreach($users as $user)
-        {
+        foreach($users as $user) {
             $droid->users()->detach($user->id);
         }
         $mots = $droid->mot;
-        foreach($mots as $mot)
-        {
+        foreach($mots as $mot) {
             $droid->mot()->delete();
         }
         $droid->delete();

@@ -8,7 +8,6 @@ use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use App\User;
 
-
 class NewUser extends Notification
 {
     use Queueable;
@@ -51,7 +50,7 @@ class NewUser extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)
+        return (new MailMessage())
             ->line($this->title)
             ->action('View User', $this->link)
             ->line($this->text);

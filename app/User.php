@@ -44,9 +44,10 @@ use Qirolab\Laravel\Reactions\Contracts\ReactsInterface;
  * @license  https://opensource.org/licenses/MIT MIT License
  * @link     https://portal.droidbuilders.uk/
  */
-class User extends Authenticatable implements MustVerifyEmail,
-                                                Auditable,
-                                                ReactsInterface
+class User extends Authenticatable implements
+    MustVerifyEmail,
+    Auditable,
+    ReactsInterface
 {
     use Notifiable;
     use HasRoles;
@@ -56,8 +57,8 @@ class User extends Authenticatable implements MustVerifyEmail,
     use \OwenIt\Auditing\Auditable;
 
     protected $table = 'members';
-    const CREATED_AT = 'created_on';
-    const UPDATED_AT = 'last_updated';
+    public const CREATED_AT = 'created_on';
+    public const UPDATED_AT = 'last_updated';
 
     protected $guarded = [
 
@@ -234,7 +235,7 @@ class User extends Authenticatable implements MustVerifyEmail,
      *
      * @return bool
      */
-    public function hasDroid( Droid $droid )
+    public function hasDroid(Droid $droid)
     {
         return $this->droids->contains($droid);
     }
@@ -246,7 +247,7 @@ class User extends Authenticatable implements MustVerifyEmail,
      */
     public function validPLI()
     {
-        if (strtotime($this->pli_date) > strtotime('-1 year') ) {
+        if (strtotime($this->pli_date) > strtotime('-1 year')) {
             return true;
         } else {
             return false;
@@ -439,8 +440,7 @@ class User extends Authenticatable implements MustVerifyEmail,
     public function highestBid(Auction $auction)
     {
         $amount = 0;
-        foreach($auction->users()->where('user_id', $this->id)->get() as $user)
-        {
+        foreach($auction->users()->where('user_id', $this->id)->get() as $user) {
             if($amount < $user->pivot->amount) {
                 $amount = $user->pivot->amount;
             }

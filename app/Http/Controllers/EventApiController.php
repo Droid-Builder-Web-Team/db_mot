@@ -18,8 +18,7 @@ class EventApiController extends Controller
         $events = Event::where('public', '1')
             ->whereDate('date', '>=', Carbon::now())
             ->get();
-        foreach($events as $event)
-        {
+        foreach($events as $event) {
             if($event->going()->count() > 0) {
                 $tmp = array();
                 $location = Location::find($event->location)->last();
@@ -43,8 +42,7 @@ class EventApiController extends Controller
         }
         $events = Event::whereYear('date', $year)->get();
         $charity = 0;
-        foreach($events as $event)
-        {
+        foreach($events as $event) {
             $charity += $event->charity_raised;
         }
         return response($charity, 200);

@@ -9,6 +9,7 @@
  * @license  https://opensource.org/licenses/MIT MIT License
  * @link     https://portal.droidbuilders.uk/
  */
+
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;

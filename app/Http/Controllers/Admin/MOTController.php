@@ -34,7 +34,6 @@ use Illuminate\Support\Facades\DB;
  */
 class MOTController extends Controller
 {
-
     /**
      * __construct
      *
@@ -150,7 +149,7 @@ class MOTController extends Controller
     public function comment(Request $request, MOT $mot)
     {
 
-        $comment = new Comment;
+        $comment = new Comment();
         $comment->body = $request->body;
         $comment->user_id = auth()->user()->id;
 

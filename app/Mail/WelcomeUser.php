@@ -9,6 +9,7 @@
  * @license  https://opensource.org/licenses/MIT MIT License
  * @link     https://portal.droidbuilders.uk/
  */
+
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
@@ -19,9 +20,10 @@ use App\User;
 
 class WelcomeUser extends Mailable
 {
-    use Queueable, SerializesModels;
+    use Queueable;
+    use SerializesModels;
 
-    
+
     public $user;
 
     /**

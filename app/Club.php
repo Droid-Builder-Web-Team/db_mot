@@ -28,8 +28,6 @@ use App\Droid;
  */
 class Club extends Model
 {
-
-
     protected $fillable = [
         'name', 'website', 'facebook', 'forum'
     ];

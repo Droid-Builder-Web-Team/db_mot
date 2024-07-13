@@ -53,7 +53,7 @@ class EventUpcomingEo extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)
+        return (new MailMessage())
             ->subject('Upcoming Event (Organiser)')
             ->line($this->title)
             ->action('View Event', $this->link)

@@ -33,7 +33,6 @@ use Illuminate\Http\Request;
  */
 class LocationController extends Controller
 {
-
     /**
      * __construct
      *
@@ -81,8 +80,12 @@ class LocationController extends Controller
         $contacts = Contact::all();
 
         return view(
-            'location.show', compact(
-                'location', 'events', 'upcoming', 'contacts'
+            'location.show',
+            compact(
+                'location',
+                'events',
+                'upcoming',
+                'contacts'
             )
         );
     }
@@ -133,7 +136,7 @@ class LocationController extends Controller
         $user = auth()->user();
 
         $userRating = $request->input('locationRating');
-        
+
         try {
             $location->rateOnce($userRating);
             flash()->addSuccess('Rating applied to Location');

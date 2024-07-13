@@ -270,7 +270,8 @@ class Event extends Model implements \DPoulson\LaravelCalendar\Event, Auditable
         $webHook = config('discord.eventhook');
         if ($webHook != 'none') {
             return Http::post(
-                $webHook, [
+                $webHook,
+                [
                 'content' =>
                     "A new event has been created in the Droid Builders Portal. "
                     . "Click below to view the event.",
@@ -301,7 +302,8 @@ class Event extends Model implements \DPoulson\LaravelCalendar\Event, Auditable
         $webHook = config('discord.eventhook');
         if ($webHook != 'none') {
             return Http::post(
-                $webHook, [
+                $webHook,
+                [
                 'content' =>
                     "An event has been updated in the Droid Builders Portal. "
                     . "Click below to view the event.",
@@ -332,7 +334,8 @@ class Event extends Model implements \DPoulson\LaravelCalendar\Event, Auditable
         $webHook = config('discord.eventhook');
         if ($webHook != 'none') {
             return Http::post(
-                $webHook, [
+                $webHook,
+                [
                 'content' =>
                     "An event has been deleted in the Droid Builders Portal. ",
                 'embeds' => [

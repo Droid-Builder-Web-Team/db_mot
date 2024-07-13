@@ -17,7 +17,6 @@ use App\Models\Ware;
 use App\User;
 use Illuminate\Http\Request;
 
-
 /**
  * WareController
  *
@@ -56,7 +55,7 @@ class WareController extends Controller
             ->get();
         $oldwares = Ware::where('state', 0)
             ->OrderBy('updated_at')
-            ->get();                    
+            ->get();
         return view('ware.index', compact('wares', 'userwares', 'oldwares'));
     }
 
@@ -98,7 +97,7 @@ class WareController extends Controller
         try {
             $auction = Ware::create($request->all());
             flash()->addSuccess('Item listing created successfully');
-        }   catch (\Illuminate\Database\QueryException $exception) {
+        } catch (\Illuminate\Database\QueryException $exception) {
             flash()->addError('Failed to create Item Listing');
         }
 
@@ -142,7 +141,7 @@ class WareController extends Controller
         if(!$ware->user->id == auth()->user()->id && !auth()->user()->can('Edit Marketplace')) {
             abort(403);
         }
-        
+
         $validatedData = $request->validate(
             [
             'title' => 'required',

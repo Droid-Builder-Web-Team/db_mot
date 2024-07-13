@@ -73,7 +73,8 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make(
-            $data, [
+            $data,
+            [
             'forename' => ['required', 'string', 'max:60'],
             'surname' => ['required', 'string', 'max:60'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:members'],
@@ -110,7 +111,7 @@ class RegisterController extends Controller
         $result = file_get_contents($url, false, $context);
         $resultJson = json_decode($result);
         if ($resultJson->success != true) {
-                return back()->withErrors(['captcha' => 'ReCaptcha Error']);
+            return back()->withErrors(['captcha' => 'ReCaptcha Error']);
         }
         if ($resultJson->score > 0.3) {
             //Validation was successful, add your form submission logic here
@@ -130,7 +131,8 @@ class RegisterController extends Controller
             );
             $qr = User::generateQR($id, $user->id);
             $admins = User::whereHas(
-                "roles", function ($q) {
+                "roles",
+                function ($q) {
                     $q->where("name", "Super Admin");
                 }
             )->get();
@@ -141,7 +143,7 @@ class RegisterController extends Controller
             return $user;
 
         } else {
-                return back()->withErrors(['captcha' => 'ReCaptcha Error']);
+            return back()->withErrors(['captcha' => 'ReCaptcha Error']);
         }
 
     }

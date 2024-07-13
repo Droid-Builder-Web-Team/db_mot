@@ -69,7 +69,7 @@ class AuctionController extends Controller
 
         if (!auth()->user()->can('Edit Auction')) {
             abort(403);
-        } 
+        }
 
 
         $validatedData = $request->validate(
@@ -87,7 +87,7 @@ class AuctionController extends Controller
         try {
             $auction = Auction::create($request->all());
             flash()->addSuccess('Auction created successfully');
-        }   catch (\Illuminate\Database\QueryException $exception) {
+        } catch (\Illuminate\Database\QueryException $exception) {
             flash()->addError('Failed to create Auction');
         }
 
@@ -117,16 +117,14 @@ class AuctionController extends Controller
           'auction_id' => $auction->id
         ];
 
-        if($auction->secondsLeft() < 0)
-        {
+        if($auction->secondsLeft() < 0) {
             flash()->addError('Auction has finished');
             return back();
         }
 
         if($hasEntry) {
             $amount = $user->highestBid($auction);
-            if ($amount > $request->amount) 
-            {
+            if ($amount > $request->amount) {
                 flash()->addError('Lowering bid is not allowed');
                 return back();
             }
@@ -148,7 +146,7 @@ class AuctionController extends Controller
         $auctions = Auction::all();
         return view(
             'auctions.edit'
-            )->with('auction', $auction);
+        )->with('auction', $auction);
     }
 
     /**
@@ -192,4 +190,3 @@ class AuctionController extends Controller
     }
 
 }
-

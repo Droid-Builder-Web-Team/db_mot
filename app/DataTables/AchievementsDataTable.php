@@ -9,7 +9,6 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-
 class AchievementsDataTable extends DataTable
 {
     /**
@@ -24,7 +23,8 @@ class AchievementsDataTable extends DataTable
             ->eloquent($query)
             ->addColumn('action', '')
             ->editColumn(
-                'action', function ($row) {
+                'action',
+                function ($row) {
                     $crudRoutePart = "achievement";
                     $parts = array( 'edit', 'delete');
                     return view('partials.datatablesActions', compact('row', 'crudRoutePart', 'parts'));

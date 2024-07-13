@@ -19,7 +19,6 @@ use App\Http\Controllers\Controller;
 use App\DataTables\LocationsDataTable;
 use CountryState;
 
-
 /**
  * Locations Admin Controller
  *
@@ -31,7 +30,6 @@ use CountryState;
  */
 class LocationController extends Controller
 {
-
     public function __construct()
     {
         $this->middleware('auth');
@@ -77,8 +75,8 @@ class LocationController extends Controller
         if ($request['postcode'] != "") {
             $address = str_replace(' ', '+', $request['postcode']).'+'.str_replace(' ', '+', $request['country']);
             $url = "https://maps.google.com/maps/api/geocode/json?key=".config('gmap.google_api_key')."&address=".$address."&sensor=false";
-            $geocode=file_get_contents($url);
-            $output= json_decode($geocode);
+            $geocode = file_get_contents($url);
+            $output = json_decode($geocode);
             $request['latitude'] = strval($output->results[0]->geometry->location->lat);
             $request['longitude'] = strval($output->results[0]->geometry->location->lng);
         } else {
@@ -134,8 +132,8 @@ class LocationController extends Controller
         if ($request['postcode'] != "") {
             $address = str_replace(' ', '+', $request['postcode']).'+'.str_replace(' ', '+', $request['country']);
             $url = "https://maps.google.com/maps/api/geocode/json?key=".config('gmap.google_api_key')."&address=".$address."&sensor=false";
-            $geocode=file_get_contents($url);
-            $output= json_decode($geocode);
+            $geocode = file_get_contents($url);
+            $output = json_decode($geocode);
             $request['latitude'] = strval($output->results[0]->geometry->location->lat);
             $request['longitude'] = strval($output->results[0]->geometry->location->lng);
         } else {

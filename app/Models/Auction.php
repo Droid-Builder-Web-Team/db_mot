@@ -20,7 +20,6 @@ use Carbon\CarbonInterface;
 use OwenIt\Auditing\Contracts\Auditable;
 use App\User;
 
-
 /**
  * Auction
  *
@@ -35,11 +34,11 @@ class Auction extends Model implements Auditable
     use \OwenIt\Auditing\Auditable;
     use HasFactory;
 
-    protected $fillable = ['title', 
-                            'description', 
-                            'country', 
-                            'currency', 
-                            'type', 
+    protected $fillable = ['title',
+                            'description',
+                            'country',
+                            'currency',
+                            'type',
                             'finish_time',
                             'timezone',
                             'user_id'
@@ -49,11 +48,11 @@ class Auction extends Model implements Auditable
     public function user()
     {
         return $this->belongsTo(User::class);
-    }   
+    }
 
     /**
      * List users this entering this auction
-     * 
+     *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany of App\User
      */
     public function users()
@@ -78,17 +77,17 @@ class Auction extends Model implements Auditable
         return ['highest' => $highest, 'user' => $winner];
     }
 
-    public function timeLeft() 
+    public function timeLeft()
     {
         $end = new Carbon($this->finish_time, $this->timezone);
         return Carbon::now()->diff($end, true)->format('%d days, %h hours, %i minutes, %s seconds');
     }
 
-    public function secondsLeft() 
+    public function secondsLeft()
     {
         $end = new Carbon($this->finish_time, $this->timezone);
         return Carbon::now()->diffInSeconds($end, false);
-    }   
+    }
 
     /**
      * Get comments written on this auction

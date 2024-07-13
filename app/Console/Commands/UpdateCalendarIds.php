@@ -48,4 +48,3 @@ class UpdateCalendarIds extends Command
         return Command::SUCCESS;
     }
 }
-

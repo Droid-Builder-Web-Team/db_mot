@@ -8,7 +8,6 @@ use App\Stat;
 
 class StatsController extends Controller
 {
-
     /**
      * __construct
      *

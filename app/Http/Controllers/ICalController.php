@@ -35,7 +35,6 @@ use App\User;
  */
 class ICalController extends Controller
 {
-
     /**
      * Get all users registered events and generate an Ical
      *
@@ -47,9 +46,9 @@ class ICalController extends Controller
     {
         $user = User::where('calendar_id', $calId)->first();
 
-        if ($scope == "user") { 
+        if ($scope == "user") {
             $events = $user->events;
-        } else if ($scope == "all") {
+        } elseif ($scope == "all") {
             $events = Events::all();
         }
 
@@ -70,7 +69,7 @@ class ICalController extends Controller
 
             $calendar->addEvent($entry);
         }
-        
+
 
         /*
         define('ICAL_FORMAT', 'Ymd\T\0\0\0\0\0\0\Z');

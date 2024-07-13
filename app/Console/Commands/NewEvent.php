@@ -41,16 +41,14 @@ class NewEvent extends Command
      */
     public function handle()
     {
-        $events = Event::where('created_at', '>',  Carbon::now()->subDays(1)->toDateTimeString());
-        foreach($events as $event)
-        {
+        $events = Event::where('created_at', '>', Carbon::now()->subDays(1)->toDateTimeString());
+        foreach($events as $event) {
             echo "Checking: ".$event->name;
             $users = User::where('active', 'on')->get();
             $location = Location::find($event->location_id);
-            foreach($users as $user)
-            {
+            foreach($users as $user) {
                 if($user->postcode != "") {
-                    $distance = ($user->settings()->get('max_event_distance'))*1609.344;
+                    $distance = ($user->settings()->get('max_event_distance')) * 1609.344;
                     $origin = $user->postcode;
                     $destination = $location->postcode;
                     $url = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&'.
