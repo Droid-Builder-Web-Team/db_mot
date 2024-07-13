@@ -13,15 +13,17 @@ class CreatePartsRunImagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('parts_run_images', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('parts_run_data_id');
-            $table->string('filename');
-            $table->string('filetype');
-            $table->timestamps();
+        Schema::create(
+            'parts_run_images', function (Blueprint $table) {
+                $table->id();
+                $table->unsignedBigInteger('parts_run_data_id');
+                $table->string('filename');
+                $table->string('filetype');
+                $table->timestamps();
 
-            $table->foreign('parts_run_data_id')->references('id')->on('parts_run_data');
-        });
+                $table->foreign('parts_run_data_id')->references('id')->on('parts_run_data');
+            }
+        );
     }
 
     /**

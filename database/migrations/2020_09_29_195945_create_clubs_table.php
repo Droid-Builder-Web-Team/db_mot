@@ -13,15 +13,17 @@ class CreateClubsTable extends Migration
      */
     public function up()
     {
-        Schema::create('clubs', function (Blueprint $table) {
-            $table->integer('id', true);
-            $table->string('name', 40);
-            $table->string('website', 80)->nullable();
-            $table->string('facebook', 80)->nullable();
-            $table->string('forum', 80)->nullable();
-            $table->dateTime('created_at')->useCurrent();
-            $table->dateTime('updated_at')->useCurrent();
-        });
+        Schema::create(
+            'clubs', function (Blueprint $table) {
+                $table->integer('id', true);
+                $table->string('name', 40);
+                $table->string('website', 80)->nullable();
+                $table->string('facebook', 80)->nullable();
+                $table->string('forum', 80)->nullable();
+                $table->dateTime('created_at')->useCurrent();
+                $table->dateTime('updated_at')->useCurrent();
+            }
+        );
     }
 
     /**

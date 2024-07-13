@@ -13,16 +13,18 @@ class CreateNotificationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('notifications', function (Blueprint $table) {
-            $table->char('id', 36)->primary();
-            $table->string('type');
-            $table->string('notifiable_type');
-            $table->unsignedBigInteger('notifiable_id');
-            $table->text('data');
-            $table->timestamp('read_at')->nullable();
-            $table->timestamps();
-            $table->index(['notifiable_type', 'notifiable_id']);
-        });
+        Schema::create(
+            'notifications', function (Blueprint $table) {
+                $table->char('id', 36)->primary();
+                $table->string('type');
+                $table->string('notifiable_type');
+                $table->unsignedBigInteger('notifiable_id');
+                $table->text('data');
+                $table->timestamp('read_at')->nullable();
+                $table->timestamps();
+                $table->index(['notifiable_type', 'notifiable_id']);
+            }
+        );
     }
 
     /**

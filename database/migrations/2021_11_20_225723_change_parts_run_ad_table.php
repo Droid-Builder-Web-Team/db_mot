@@ -13,15 +13,17 @@ class ChangePartsRunAdTable extends Migration
      */
     public function up()
     {
-        Schema::table('parts_run_ad', function (Blueprint $table) {
-            $table->string('title')->default('Title')->change();
-            $table->text('description')->nullable()->change();
-            $table->longText('history')->nullable()->change();
-            $table->decimal('price')->default(0.00)->change();
-            $table->string('includes')->default('-')->change();
-            $table->json('shipping_costs')->nullable()->change();
-            $table->string('instructions_url')->nullable()->change();
-        });
+        Schema::table(
+            'parts_run_ad', function (Blueprint $table) {
+                $table->string('title')->default('Title')->change();
+                $table->text('description')->nullable()->change();
+                $table->longText('history')->nullable()->change();
+                $table->decimal('price')->default(0.00)->change();
+                $table->string('includes')->default('-')->change();
+                $table->json('shipping_costs')->nullable()->change();
+                $table->string('instructions_url')->nullable()->change();
+            }
+        );
     }
 
     /**
@@ -31,8 +33,10 @@ class ChangePartsRunAdTable extends Migration
      */
     public function down()
     {
-        Schema::table('parts_run_ad', function (Blueprint $table) {
-            //
-        });
+        Schema::table(
+            'parts_run_ad', function (Blueprint $table) {
+                //
+            }
+        );
     }
 }

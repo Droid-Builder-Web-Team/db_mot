@@ -13,9 +13,11 @@ class AddCountryToMembersTable extends Migration
      */
     public function up()
     {
-        Schema::table('members', function (Blueprint $table) {
-            $table->string('country')->default('United Kingdom');
-        });
+        Schema::table(
+            'members', function (Blueprint $table) {
+                $table->string('country')->default('United Kingdom');
+            }
+        );
     }
 
     /**
@@ -25,8 +27,10 @@ class AddCountryToMembersTable extends Migration
      */
     public function down()
     {
-        Schema::table('members', function (Blueprint $table) {
-            //
-        });
+        Schema::table(
+            'members', function (Blueprint $table) {
+                //
+            }
+        );
     }
 }

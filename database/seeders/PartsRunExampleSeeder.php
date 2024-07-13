@@ -13,12 +13,16 @@ class PartsRunExampleSeeder extends Seeder
      */
     public function run()
     {
-        $droidType = DB::table('droid_type')->insert([
+        $droidType = DB::table('droid_type')->insert(
+            [
             'name' => 'R2',
-        ]);
+            ]
+        );
 
-        $bcRep = DB::table('bc_rep')->insert([
+        $bcRep = DB::table('bc_rep')->insert(
+            [
             'user_id' => 1
-        ]);
+            ]
+        );
     }
 }

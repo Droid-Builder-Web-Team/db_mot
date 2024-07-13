@@ -13,10 +13,12 @@ class AddTimestampsToPartsrunInterest extends Migration
      */
     public function up()
     {
-        Schema::table('members_parts', function (Blueprint $table) {
-            $table->dateTime('updated_at')->nullable();
-            $table->dateTime('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-        });
+        Schema::table(
+            'members_parts', function (Blueprint $table) {
+                $table->dateTime('updated_at')->nullable();
+                $table->dateTime('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            }
+        );
     }
 
     /**
@@ -26,8 +28,10 @@ class AddTimestampsToPartsrunInterest extends Migration
      */
     public function down()
     {
-        Schema::table('partsrun_interest', function (Blueprint $table) {
-            //
-        });
+        Schema::table(
+            'partsrun_interest', function (Blueprint $table) {
+                //
+            }
+        );
     }
 }

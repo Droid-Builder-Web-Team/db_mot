@@ -13,12 +13,14 @@ class CreatePortalNewsTable extends Migration
      */
     public function up()
     {
-        Schema::create('portal_news', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-            $table->string('title');
-            $table->text('message');
-        });
+        Schema::create(
+            'portal_news', function (Blueprint $table) {
+                $table->id();
+                $table->timestamps();
+                $table->string('title');
+                $table->text('message');
+            }
+        );
     }
 
     /**

@@ -13,9 +13,11 @@ class UpdatePartsRunAdTableWithInstructionsUrl extends Migration
      */
     public function up()
     {
-        Schema::table('parts_run_ad', function (Blueprint $table) {
-            $table->string('instructions_url')->nullable()->after('shipping_costs');
-        });
+        Schema::table(
+            'parts_run_ad', function (Blueprint $table) {
+                $table->string('instructions_url')->nullable()->after('shipping_costs');
+            }
+        );
     }
 
     /**

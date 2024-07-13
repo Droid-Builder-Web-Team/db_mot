@@ -13,21 +13,23 @@ class CreateEventsTable extends Migration
      */
     public function up()
     {
-        Schema::create('events', function (Blueprint $table) {
-            $table->integer('id', true);
-            $table->text('name');
-            $table->text('description');
-            $table->integer('location_id');
-            $table->text('forum_link')->nullable();
-            $table->text('report_link')->nullable();
-            $table->date('date');
-            $table->float('charity_raised', 10, 0)->default(0);
-            $table->boolean('public');
-            $table->boolean('mot');
-            $table->text('url')->nullable();
-            $table->timestamp('created_at')->useCurrent();
-            $table->timestamp('updated_at')->useCurrent();
-        });
+        Schema::create(
+            'events', function (Blueprint $table) {
+                $table->integer('id', true);
+                $table->text('name');
+                $table->text('description');
+                $table->integer('location_id');
+                $table->text('forum_link')->nullable();
+                $table->text('report_link')->nullable();
+                $table->date('date');
+                $table->float('charity_raised', 10, 0)->default(0);
+                $table->boolean('public');
+                $table->boolean('mot');
+                $table->text('url')->nullable();
+                $table->timestamp('created_at')->useCurrent();
+                $table->timestamp('updated_at')->useCurrent();
+            }
+        );
     }
 
     /**

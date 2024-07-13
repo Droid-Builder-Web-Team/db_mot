@@ -13,9 +13,11 @@ class AddParkingFieldToEventsTable extends Migration
      */
     public function up()
     {
-        Schema::table('events', function (Blueprint $table) {
-            $table->string('parking_details')->nullable()->after('location_id');
-        });
+        Schema::table(
+            'events', function (Blueprint $table) {
+                $table->string('parking_details')->nullable()->after('location_id');
+            }
+        );
     }
 
     /**
@@ -25,8 +27,10 @@ class AddParkingFieldToEventsTable extends Migration
      */
     public function down()
     {
-        Schema::table('events', function (Blueprint $table) {
-            //
-        });
+        Schema::table(
+            'events', function (Blueprint $table) {
+                //
+            }
+        );
     }
 }

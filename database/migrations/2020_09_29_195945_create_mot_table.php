@@ -13,17 +13,19 @@ class CreateMotTable extends Migration
      */
     public function up()
     {
-        Schema::create('mot', function (Blueprint $table) {
-            $table->integer('id', true);
-            $table->integer('droid_id')->index('droid_uid');
-            $table->date('date');
-            $table->text('location');
-            $table->string('mot_type', 10)->default('Initial');
-            $table->string('approved', 15);
-            $table->integer('user');
-            $table->timestamp('updated_at')->useCurrent();
-            $table->timestamp('created_at')->useCurrent();
-        });
+        Schema::create(
+            'mot', function (Blueprint $table) {
+                $table->integer('id', true);
+                $table->integer('droid_id')->index('droid_uid');
+                $table->date('date');
+                $table->text('location');
+                $table->string('mot_type', 10)->default('Initial');
+                $table->string('approved', 15);
+                $table->integer('user');
+                $table->timestamp('updated_at')->useCurrent();
+                $table->timestamp('created_at')->useCurrent();
+            }
+        );
     }
 
     /**

@@ -13,9 +13,11 @@ class AddPurchaseUrlTypeToPartsrunadTable extends Migration
      */
     public function up()
     {
-        Schema::table('parts_run_ad', function (Blueprint $table) {
-            $table->string('purchase_url_type')->default('email');
-        });
+        Schema::table(
+            'parts_run_ad', function (Blueprint $table) {
+                $table->string('purchase_url_type')->default('email');
+            }
+        );
     }
 
     /**
@@ -25,8 +27,10 @@ class AddPurchaseUrlTypeToPartsrunadTable extends Migration
      */
     public function down()
     {
-        Schema::table('partsrunad', function (Blueprint $table) {
-            //
-        });
+        Schema::table(
+            'partsrunad', function (Blueprint $table) {
+                //
+            }
+        );
     }
 }

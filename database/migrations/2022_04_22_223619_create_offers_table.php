@@ -13,14 +13,16 @@ class CreateOffersTable extends Migration
      */
     public function up()
     {
-        Schema::create('offers', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-            $table->integer('user_id');
-            $table->bigInteger('type_id');
-            $table->text('details');
-            $table->json('size');
-        });
+        Schema::create(
+            'offers', function (Blueprint $table) {
+                $table->id();
+                $table->timestamps();
+                $table->integer('user_id');
+                $table->bigInteger('type_id');
+                $table->text('details');
+                $table->json('size');
+            }
+        );
     }
 
     /**

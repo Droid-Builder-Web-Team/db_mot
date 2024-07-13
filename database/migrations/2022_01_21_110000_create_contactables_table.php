@@ -13,12 +13,14 @@ class CreateContactablesTable extends Migration
      */
     public function up()
     {
-        Schema::create('contactables', function (Blueprint $table) {
-            $table->id();
-            $table->bigInteger('contact_id');
-            $table->integer('contactable_id');
-            $table->string('contactable_type');
-        });
+        Schema::create(
+            'contactables', function (Blueprint $table) {
+                $table->id();
+                $table->bigInteger('contact_id');
+                $table->integer('contactable_id');
+                $table->string('contactable_type');
+            }
+        );
     }
 
     /**

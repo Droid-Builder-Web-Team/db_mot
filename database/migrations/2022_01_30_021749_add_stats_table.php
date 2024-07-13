@@ -13,12 +13,14 @@ class AddStatsTable extends Migration
      */
     public function up()
     {
-        Schema::create('stats', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->timestamps();
-            $table->string('name');
-            $table->string('value')->nullable();
-        });
+        Schema::create(
+            'stats', function (Blueprint $table) {
+                $table->bigIncrements('id');
+                $table->timestamps();
+                $table->string('name');
+                $table->string('value')->nullable();
+            }
+        );
     }
 
     /**

@@ -13,9 +13,11 @@ class AddQuantityToEventsTable extends Migration
      */
     public function up()
     {
-        Schema::table('events', function (Blueprint $table) {
-            $table->integer('quantity')->default(0);
-        });
+        Schema::table(
+            'events', function (Blueprint $table) {
+                $table->integer('quantity')->default(0);
+            }
+        );
     }
 
     /**
@@ -25,8 +27,10 @@ class AddQuantityToEventsTable extends Migration
      */
     public function down()
     {
-        Schema::table('events', function (Blueprint $table) {
-            //
-        });
+        Schema::table(
+            'events', function (Blueprint $table) {
+                //
+            }
+        );
     }
 }

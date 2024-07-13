@@ -13,9 +13,11 @@ class AddDroidIdToIdListTable extends Migration
      */
     public function up()
     {
-        Schema::table('id_list', function (Blueprint $table) {
-            $table->integer('droid_id');
-        });
+        Schema::table(
+            'id_list', function (Blueprint $table) {
+                $table->integer('droid_id');
+            }
+        );
     }
 
     /**
@@ -25,8 +27,10 @@ class AddDroidIdToIdListTable extends Migration
      */
     public function down()
     {
-        Schema::table('id_list', function (Blueprint $table) {
-            //
-        });
+        Schema::table(
+            'id_list', function (Blueprint $table) {
+                //
+            }
+        );
     }
 }

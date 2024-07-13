@@ -13,16 +13,18 @@ class CreateAssistancesTable extends Migration
      */
     public function up()
     {
-        Schema::create('assistances', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-            $table->string('title');
-            $table->text('description');
-            $table->json('size');
-            $table->integer('user_id');
-            $table->bigInteger('type_id');
-            $table->bigInteger('material_id');
-        });
+        Schema::create(
+            'assistances', function (Blueprint $table) {
+                $table->id();
+                $table->timestamps();
+                $table->string('title');
+                $table->text('description');
+                $table->json('size');
+                $table->integer('user_id');
+                $table->bigInteger('type_id');
+                $table->bigInteger('material_id');
+            }
+        );
     }
 
     /**

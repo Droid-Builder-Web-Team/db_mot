@@ -13,14 +13,16 @@ class CreateMembersPartsTable extends Migration
      */
     public function up()
     {
-        Schema::create('members_parts', function (Blueprint $table) {
-            $table->integer('id', true);
-            $table->integer('user_id');
-            $table->integer('parts_run_data_id');
-            $table->text('status');
-            $table->integer('quantity')->default(1);
-            $table->timestamp('timestamp')->useCurrent();
-        });
+        Schema::create(
+            'members_parts', function (Blueprint $table) {
+                $table->integer('id', true);
+                $table->integer('user_id');
+                $table->integer('parts_run_data_id');
+                $table->text('status');
+                $table->integer('quantity')->default(1);
+                $table->timestamp('timestamp')->useCurrent();
+            }
+        );
     }
 
     /**

@@ -13,11 +13,13 @@ class CreateClubClubOptionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('club_club_options', function (Blueprint $table) {
-            $table->integer('id', true);
-            $table->integer('club_id');
-            $table->integer('club_options_id');
-        });
+        Schema::create(
+            'club_club_options', function (Blueprint $table) {
+                $table->integer('id', true);
+                $table->integer('club_id');
+                $table->integer('club_options_id');
+            }
+        );
     }
 
     /**

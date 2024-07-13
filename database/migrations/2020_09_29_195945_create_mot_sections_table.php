@@ -13,12 +13,14 @@ class CreateMotSectionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('mot_sections', function (Blueprint $table) {
-            $table->integer('club_id');
-            $table->integer('id', true);
-            $table->string('section_name', 16);
-            $table->text('section_long_description');
-        });
+        Schema::create(
+            'mot_sections', function (Blueprint $table) {
+                $table->integer('club_id');
+                $table->integer('id', true);
+                $table->string('section_name', 16);
+                $table->text('section_long_description');
+            }
+        );
     }
 
     /**

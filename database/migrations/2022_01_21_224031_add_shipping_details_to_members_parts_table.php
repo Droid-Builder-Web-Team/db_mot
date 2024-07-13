@@ -13,10 +13,12 @@ class AddShippingDetailsToMembersPartsTable extends Migration
      */
     public function up()
     {
-        Schema::table('members_parts', function (Blueprint $table) {
-            $table->string('tracking')->nullable();
-            $table->string('shipper')->nullable();
-        });
+        Schema::table(
+            'members_parts', function (Blueprint $table) {
+                $table->string('tracking')->nullable();
+                $table->string('shipper')->nullable();
+            }
+        );
     }
 
     /**
@@ -26,8 +28,10 @@ class AddShippingDetailsToMembersPartsTable extends Migration
      */
     public function down()
     {
-        Schema::table('members_parts', function (Blueprint $table) {
-            //
-        });
+        Schema::table(
+            'members_parts', function (Blueprint $table) {
+                //
+            }
+        );
     }
 }

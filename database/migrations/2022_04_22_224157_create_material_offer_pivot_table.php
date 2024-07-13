@@ -12,13 +12,15 @@ class CreateMaterialOfferPivotTable extends Migration
      */
     public function up()
     {
-        Schema::create('material_offer', function (Blueprint $table) {
-            $table->unsignedBigInteger('material_id')->index();
-            $table->foreign('material_id')->references('id')->on('materials')->onDelete('cascade');
-            $table->unsignedBigInteger('offer_id')->index();
-            $table->foreign('offer_id')->references('id')->on('offers')->onDelete('cascade');
-            $table->primary(['material_id', 'offer_id']);
-        });
+        Schema::create(
+            'material_offer', function (Blueprint $table) {
+                $table->unsignedBigInteger('material_id')->index();
+                $table->foreign('material_id')->references('id')->on('materials')->onDelete('cascade');
+                $table->unsignedBigInteger('offer_id')->index();
+                $table->foreign('offer_id')->references('id')->on('offers')->onDelete('cascade');
+                $table->primary(['material_id', 'offer_id']);
+            }
+        );
     }
 
     /**

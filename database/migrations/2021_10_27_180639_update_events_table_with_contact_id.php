@@ -13,12 +13,14 @@ class UpdateEventsTableWithContactId extends Migration
      */
     public function up()
     {
-        Schema::table('events', function (Blueprint $table) {
-            $table->integer('venue_contacts_id');
+        Schema::table(
+            'events', function (Blueprint $table) {
+                $table->integer('venue_contacts_id');
 
-            // Foreign
-            $table->foreign('venue_contacts_id')->references('id')->on('venue_contacts')->nullable();
-        });
+                // Foreign
+                $table->foreign('venue_contacts_id')->references('id')->on('venue_contacts')->nullable();
+            }
+        );
     }
 
     /**

@@ -13,11 +13,13 @@ class CreateRoleHasPermissionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('role_has_permissions', function (Blueprint $table) {
-            $table->unsignedBigInteger('permission_id');
-            $table->unsignedBigInteger('role_id')->index('role_has_permissions_role_id_foreign');
-            $table->primary(['permission_id', 'role_id']);
-        });
+        Schema::create(
+            'role_has_permissions', function (Blueprint $table) {
+                $table->unsignedBigInteger('permission_id');
+                $table->unsignedBigInteger('role_id')->index('role_has_permissions_role_id_foreign');
+                $table->primary(['permission_id', 'role_id']);
+            }
+        );
     }
 
     /**

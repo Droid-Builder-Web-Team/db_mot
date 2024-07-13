@@ -13,9 +13,11 @@ class AddColumnSwOnly extends Migration
      */
     public function up()
     {
-        Schema::table('events', function (Blueprint $table) {
-            $table->boolean('sw_only')->default(0);
-        });
+        Schema::table(
+            'events', function (Blueprint $table) {
+                $table->boolean('sw_only')->default(0);
+            }
+        );
     }
 
     /**
@@ -25,8 +27,10 @@ class AddColumnSwOnly extends Migration
      */
     public function down()
     {
-        Schema::table('events', function (Blueprint $table) {
-            $table->dropColumn(['sw_only']);
-        });
+        Schema::table(
+            'events', function (Blueprint $table) {
+                $table->dropColumn(['sw_only']);
+            }
+        );
     }
 }

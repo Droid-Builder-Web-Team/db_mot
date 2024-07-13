@@ -13,11 +13,13 @@ class AddLatlngColumnsLocationsTable extends Migration
      */
     public function up()
     {
-        Schema::table('locations', function (Blueprint $table) {
-            $table->text('latitude')->nullable();
-            $table->text('longitude')->nullable();
-            $table->string('country')->default('United Kingdom');
-        });
+        Schema::table(
+            'locations', function (Blueprint $table) {
+                $table->text('latitude')->nullable();
+                $table->text('longitude')->nullable();
+                $table->string('country')->default('United Kingdom');
+            }
+        );
     }
 
     /**
@@ -27,7 +29,9 @@ class AddLatlngColumnsLocationsTable extends Migration
      */
     public function down()
     {
-        Schema::table('locations', function (Blueprint $table) {
-        });
+        Schema::table(
+            'locations', function (Blueprint $table) {
+            }
+        );
     }
 }

@@ -1,15 +1,15 @@
 <?php
 
 return [
-    'partrun' => env('FEATURE_PART_RUN', FALSE),
-    'database' => env('FEATURE_DATABASE', FALSE),
-    'assistance' => env('FEATURE_ASSISTANCE', FALSE),
-    'marketplace' => env('FEATURE_MARKETPLACE', FALSE),
-    'auction' => env('FEATURE_AUCTION', FALSE),
-    'friendica' => env('FEATURE_FRIENDICA', FALSE),
-    'partsruntags' => env('FEATURE_PARTSRUNTAGS', FALSE),
-    'userevents' => env('FEATURE_USEREVENTS', FALSE),
-    'assets' => env('FEATURE_ASSETS', FALSE),
+    'partrun' => env('FEATURE_PART_RUN', false),
+    'database' => env('FEATURE_DATABASE', false),
+    'assistance' => env('FEATURE_ASSISTANCE', false),
+    'marketplace' => env('FEATURE_MARKETPLACE', false),
+    'auction' => env('FEATURE_AUCTION', false),
+    'friendica' => env('FEATURE_FRIENDICA', false),
+    'partsruntags' => env('FEATURE_PARTSRUNTAGS', false),
+    'userevents' => env('FEATURE_USEREVENTS', false),
+    'assets' => env('FEATURE_ASSETS', false),
 ];
 
 ?>

@@ -13,18 +13,20 @@ class CreateVenueContactsTable extends Migration
      */
     public function up()
     {
-        Schema::create('venue_contacts', function (Blueprint $table) {
-            $table->id();
-            $table->integer('locations_id');
-            $table->string('contact_name');
-            $table->string('contact_email');
-            $table->string('contact_number');
-            $table->string('notes');
-            $table->timestamps();
+        Schema::create(
+            'venue_contacts', function (Blueprint $table) {
+                $table->id();
+                $table->integer('locations_id');
+                $table->string('contact_name');
+                $table->string('contact_email');
+                $table->string('contact_number');
+                $table->string('notes');
+                $table->timestamps();
 
-            // Foreign Key
-            $table->foreign('locations_id')->references('id')->on('locations');
-        });
+                // Foreign Key
+                $table->foreign('locations_id')->references('id')->on('locations');
+            }
+        );
     }
 
     /**

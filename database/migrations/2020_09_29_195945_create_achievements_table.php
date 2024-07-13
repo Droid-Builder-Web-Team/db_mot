@@ -13,15 +13,17 @@ class CreateAchievementsTable extends Migration
      */
     public function up()
     {
-        Schema::create('achievements', function (Blueprint $table) {
-            $table->integer('id', true);
-            $table->string('name', 60);
-            $table->text('description');
-            $table->timestamp('date_created')->useCurrent();
-            $table->timestamp('date_updated')->useCurrent();
-            $table->binary('image')->nullable();
-            $table->binary('icon')->nullable();
-        });
+        Schema::create(
+            'achievements', function (Blueprint $table) {
+                $table->integer('id', true);
+                $table->string('name', 60);
+                $table->text('description');
+                $table->timestamp('date_created')->useCurrent();
+                $table->timestamp('date_updated')->useCurrent();
+                $table->binary('image')->nullable();
+                $table->binary('icon')->nullable();
+            }
+        );
     }
 
     /**

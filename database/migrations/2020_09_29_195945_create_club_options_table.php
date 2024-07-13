@@ -13,12 +13,14 @@ class CreateClubOptionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('club_options', function (Blueprint $table) {
-            $table->integer('id', true);
-            $table->string('name', 30);
-            $table->dateTime('created_at')->useCurrent();
-            $table->dateTime('updated_at')->useCurrent();
-        });
+        Schema::create(
+            'club_options', function (Blueprint $table) {
+                $table->integer('id', true);
+                $table->string('name', 30);
+                $table->dateTime('created_at')->useCurrent();
+                $table->dateTime('updated_at')->useCurrent();
+            }
+        );
     }
 
     /**

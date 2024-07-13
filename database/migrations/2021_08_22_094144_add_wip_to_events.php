@@ -13,9 +13,11 @@ class AddWipToEvents extends Migration
      */
     public function up()
     {
-        Schema::table('events', function (Blueprint $table) {
-            $table->boolean('wip_allowed');
-        });
+        Schema::table(
+            'events', function (Blueprint $table) {
+                $table->boolean('wip_allowed');
+            }
+        );
     }
 
     /**
@@ -25,8 +27,10 @@ class AddWipToEvents extends Migration
      */
     public function down()
     {
-        Schema::table('events', function (Blueprint $table) {
-            $table->dropColumn('wip_allowed');
-        });
+        Schema::table(
+            'events', function (Blueprint $table) {
+                $table->dropColumn('wip_allowed');
+            }
+        );
     }
 }

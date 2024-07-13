@@ -15,7 +15,8 @@ class TypeSeeder extends Seeder
     {
         \DB::table('types')->delete();
 
-        \DB::table('types')->insert(array (
+        \DB::table('types')->insert(
+            array (
             0 =>
             array (
                 'id' => 1,
@@ -31,6 +32,7 @@ class TypeSeeder extends Seeder
                 'id' => 3,
                 'name' => 'Laser Cutter',
             ),
-        ));
+            )
+        );
     }
 }

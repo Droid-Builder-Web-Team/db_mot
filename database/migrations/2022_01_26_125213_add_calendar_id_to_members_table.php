@@ -13,9 +13,11 @@ class AddCalendarIdToMembersTable extends Migration
      */
     public function up()
     {
-        Schema::table('members', function (Blueprint $table) {
-            $table->text('calendar_id');
-        });
+        Schema::table(
+            'members', function (Blueprint $table) {
+                $table->text('calendar_id');
+            }
+        );
     }
 
     /**
@@ -25,8 +27,10 @@ class AddCalendarIdToMembersTable extends Migration
      */
     public function down()
     {
-        Schema::table('members', function (Blueprint $table) {
-            //
-        });
+        Schema::table(
+            'members', function (Blueprint $table) {
+                //
+            }
+        );
     }
 }

@@ -13,12 +13,14 @@ class CreateDroidMembersTable extends Migration
      */
     public function up()
     {
-        Schema::create('droid_members', function (Blueprint $table) {
-            $table->integer('id', true);
-            $table->integer('user_id');
-            $table->integer('droid_id');
-            $table->timestamp('timestamp')->useCurrent();
-        });
+        Schema::create(
+            'droid_members', function (Blueprint $table) {
+                $table->integer('id', true);
+                $table->integer('user_id');
+                $table->integer('droid_id');
+                $table->timestamp('timestamp')->useCurrent();
+            }
+        );
     }
 
     /**

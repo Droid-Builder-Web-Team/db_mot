@@ -13,13 +13,15 @@ class CreateIdListTable extends Migration
      */
     public function up()
     {
-        Schema::create('id_list', function (Blueprint $table) {
-            $table->id();
-            $table->timestamp('created_at');
-            $table->integer('user_id');
-            $table->boolean('reissue');
-            $table->boolean('paid');
-        });
+        Schema::create(
+            'id_list', function (Blueprint $table) {
+                $table->id();
+                $table->timestamp('created_at');
+                $table->integer('user_id');
+                $table->boolean('reissue');
+                $table->boolean('paid');
+            }
+        );
     }
 
     /**

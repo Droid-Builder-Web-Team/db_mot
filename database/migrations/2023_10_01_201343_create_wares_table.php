@@ -13,16 +13,18 @@ class CreateWaresTable extends Migration
      */
     public function up()
     {
-        Schema::create('wares', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-            $table->foreignId('user_id')->constrained();
-            $table->string('type');
-            $table->string('title');
-            $table->text('description');
-            $table->boolean('state');
-            $table->boolean('showemail');
-        });
+        Schema::create(
+            'wares', function (Blueprint $table) {
+                $table->id();
+                $table->timestamps();
+                $table->foreignId('user_id')->constrained();
+                $table->string('type');
+                $table->string('title');
+                $table->text('description');
+                $table->boolean('state');
+                $table->boolean('showemail');
+            }
+        );
     }
 
     /**

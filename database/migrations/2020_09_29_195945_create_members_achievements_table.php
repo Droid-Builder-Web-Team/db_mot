@@ -13,14 +13,16 @@ class CreateMembersAchievementsTable extends Migration
      */
     public function up()
     {
-        Schema::create('members_achievements', function (Blueprint $table) {
-            $table->integer('id', true);
-            $table->integer('user_id');
-            $table->integer('achievement_id');
-            $table->text('notes')->nullable();
-            $table->timestamp('date_added')->useCurrent();
-            $table->integer('added_by');
-        });
+        Schema::create(
+            'members_achievements', function (Blueprint $table) {
+                $table->integer('id', true);
+                $table->integer('user_id');
+                $table->integer('achievement_id');
+                $table->text('notes')->nullable();
+                $table->timestamp('date_added')->useCurrent();
+                $table->integer('added_by');
+            }
+        );
     }
 
     /**

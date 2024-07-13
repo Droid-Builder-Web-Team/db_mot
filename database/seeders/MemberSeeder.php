@@ -15,7 +15,8 @@ class MemberSeeder extends Seeder
      */
     public function run()
     {
-        $user = DB::table('members')->insert([
+        $user = DB::table('members')->insert(
+            [
             'forename' => 'Admin',
             'surname' => 'Istrator',
             'username' => 'Administrator',
@@ -23,12 +24,15 @@ class MemberSeeder extends Seeder
             'password' => Hash::make('Password1'),
             'email_verified_at' => Carbon::now(),
             'gdpr_accepted' => 1
-        ]);
+            ]
+        );
 
-        $adminRole = DB::table('model_has_roles')->insert([
+        $adminRole = DB::table('model_has_roles')->insert(
+            [
             'role_id' => 6,
             'model_type' => 'App\User',
             'model_id' => 1
-        ]);
+            ]
+        );
     }
 }

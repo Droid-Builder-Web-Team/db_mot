@@ -13,9 +13,11 @@ class AddOpenColumnPartsRunDataTable extends Migration
      */
     public function up()
     {
-        Schema::table('parts_run_data', function (Blueprint $table) {
-            $table->boolean('open')->default(false);
-        });
+        Schema::table(
+            'parts_run_data', function (Blueprint $table) {
+                $table->boolean('open')->default(false);
+            }
+        );
     }
 
     /**
@@ -25,8 +27,10 @@ class AddOpenColumnPartsRunDataTable extends Migration
      */
     public function down()
     {
-        Schema::table('parts_run_data', function (Blueprint $table) {
-            //
-        });
+        Schema::table(
+            'parts_run_data', function (Blueprint $table) {
+                //
+            }
+        );
     }
 }

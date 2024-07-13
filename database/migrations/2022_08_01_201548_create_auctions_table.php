@@ -13,18 +13,20 @@ class CreateAuctionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('auctions', function (Blueprint $table) {
-            $table->id();
-            $table->integer('user_id');
-            $table->text('title');
-            $table->text('description');
-            $table->string('country');
-            $table->string('currency');
-            $table->timestamp('finish_time');
-            $table->string('timezone');
-            $table->string('type');
-            $table->timestamps();
-        });
+        Schema::create(
+            'auctions', function (Blueprint $table) {
+                $table->id();
+                $table->integer('user_id');
+                $table->text('title');
+                $table->text('description');
+                $table->string('country');
+                $table->string('currency');
+                $table->timestamp('finish_time');
+                $table->string('timezone');
+                $table->string('type');
+                $table->timestamps();
+            }
+        );
     }
 
     /**

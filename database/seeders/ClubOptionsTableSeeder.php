@@ -17,7 +17,8 @@ class ClubOptionsTableSeeder extends Seeder
 
         \DB::table('club_options')->delete();
 
-        \DB::table('club_options')->insert(array (
+        \DB::table('club_options')->insert(
+            array (
             0 =>
             array (
                 'id' => 1,
@@ -38,7 +39,8 @@ class ClubOptionsTableSeeder extends Seeder
                 'id' => 9,
                 'name' => 'partruns',
             ),
-        ));
+            )
+        );
 
 
     }

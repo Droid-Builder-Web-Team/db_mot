@@ -13,9 +13,11 @@ class AddDaysToEventsTable extends Migration
      */
     public function up()
     {
-        Schema::table('events', function (Blueprint $table) {
-            $table->integer('days')->default(1);
-        });
+        Schema::table(
+            'events', function (Blueprint $table) {
+                $table->integer('days')->default(1);
+            }
+        );
     }
 
     /**
@@ -25,8 +27,10 @@ class AddDaysToEventsTable extends Migration
      */
     public function down()
     {
-        Schema::table('events', function (Blueprint $table) {
-            //
-        });
+        Schema::table(
+            'events', function (Blueprint $table) {
+                //
+            }
+        );
     }
 }

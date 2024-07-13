@@ -13,9 +13,11 @@ class AddReserveToPartsRunAdTable extends Migration
      */
     public function up()
     {
-        Schema::table('parts_run_ad', function (Blueprint $table) {
-            $table->integer('reserve')->default(0);
-        });
+        Schema::table(
+            'parts_run_ad', function (Blueprint $table) {
+                $table->integer('reserve')->default(0);
+            }
+        );
     }
 
     /**
@@ -25,8 +27,10 @@ class AddReserveToPartsRunAdTable extends Migration
      */
     public function down()
     {
-        Schema::table('parts_run_ad', function (Blueprint $table) {
-            //
-        });
+        Schema::table(
+            'parts_run_ad', function (Blueprint $table) {
+                //
+            }
+        );
     }
 }

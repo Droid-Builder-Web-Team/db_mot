@@ -13,12 +13,14 @@ class CreateMotDetailsTable extends Migration
      */
     public function up()
     {
-        Schema::create('mot_details', function (Blueprint $table) {
-            $table->integer('mot_uid');
-            $table->string('mot_test', 32);
-            $table->string('mot_test_result', 5);
-            $table->integer('mot_detail_uid', true);
-        });
+        Schema::create(
+            'mot_details', function (Blueprint $table) {
+                $table->integer('mot_uid');
+                $table->string('mot_test', 32);
+                $table->string('mot_test_result', 5);
+                $table->integer('mot_detail_uid', true);
+            }
+        );
     }
 
     /**

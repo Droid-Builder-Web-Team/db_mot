@@ -17,7 +17,8 @@ class ClubsTableSeeder extends Seeder
 
 
         DB::table('clubs')->delete();
-        DB::table('clubs')->insert(array (
+        DB::table('clubs')->insert(
+            array (
             0 =>
             array (
                 'id' => 1,
@@ -30,25 +31,25 @@ class ClubsTableSeeder extends Seeder
             array (
                 'id' => 2,
                 'name' => '39.1%',
-                'website' => NULL,
-                'facebook' => NULL,
-                'forum' => NULL,
+                'website' => null,
+                'facebook' => null,
+                'forum' => null,
             ),
             2 =>
             array (
                 'id' => 3,
                 'name' => 'UK BB-8 Builders',
-                'website' => NULL,
-                'facebook' => NULL,
-                'forum' => NULL,
+                'website' => null,
+                'facebook' => null,
+                'forum' => null,
             ),
             3 =>
             array (
                 'id' => 4,
                 'name' => 'UK MSE-9 Builders',
-                'website' => NULL,
-                'facebook' => NULL,
-                'forum' => NULL,
+                'website' => null,
+                'facebook' => null,
+                'forum' => null,
             ),
             4 =>
             array (
@@ -62,10 +63,11 @@ class ClubsTableSeeder extends Seeder
             array (
                 'id' => 6,
                 'name' => 'HO-15 Builders',
-                'website' => NULL,
+                'website' => null,
                 'facebook' => 'https://www.facebook.com/groups/HO15BuildersGroup',
-                'forum' => NULL,
+                'forum' => null,
             ),
-        ));
+            )
+        );
     }
 }

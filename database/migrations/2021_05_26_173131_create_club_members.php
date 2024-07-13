@@ -13,12 +13,14 @@ class CreateClubMembers extends Migration
      */
     public function up()
     {
-        Schema::create('club_members', function (Blueprint $table) {
-            $table->id();
-            $table->integer('user_id');
-            $table->integer('club_id');
-            $table->timestamps();
-        });
+        Schema::create(
+            'club_members', function (Blueprint $table) {
+                $table->id();
+                $table->integer('user_id');
+                $table->integer('club_id');
+                $table->timestamps();
+            }
+        );
     }
 
     /**

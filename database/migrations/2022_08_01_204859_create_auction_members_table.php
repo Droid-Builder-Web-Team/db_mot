@@ -13,13 +13,15 @@ class CreateAuctionMembersTable extends Migration
      */
     public function up()
     {
-        Schema::create('auction_members', function (Blueprint $table) {
-            $table->id();
-            $table->bigInteger('auction_id');
-            $table->integer('user_id');
-            $table->float('amount');
-            $table->timestamps();
-        });
+        Schema::create(
+            'auction_members', function (Blueprint $table) {
+                $table->id();
+                $table->bigInteger('auction_id');
+                $table->integer('user_id');
+                $table->float('amount');
+                $table->timestamps();
+            }
+        );
     }
 
     /**

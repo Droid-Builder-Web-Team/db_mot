@@ -399,15 +399,15 @@
 
 
 <div class="modal fade" id="shipModal" tabindex="-1" role="dialog" aria-labelledby="shipModalLabel" aria-hidden="true">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="shipModalLabel">Shipping</h5>
-								<button type="button" class="close" data-dismiss="modal" aria-
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="shipModalLabel">Shipping</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-
                                 label="Close" id=close-button>
-									<span aria-hidden="true">&times;</span>
-								</button>
-						</div>
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                        </div>
                         <div>
                             <form action="{{ route('parts-run.status_update') }}" method="POST">
                                 @csrf
@@ -426,12 +426,12 @@
                                 <input type="hidden" name="run_id" value="{{ $data->id }}">
                                 <input type="hidden" name="status" value="shipped">
                         </div>
-						<div class="modal-footer">
-							<input type="submit" class="btn btn-primary" value="Shipped">
-						</div>
-					</div>
-				</div>
-			</div>
+                        <div class="modal-footer">
+                            <input type="submit" class="btn btn-primary" value="Shipped">
+                        </div>
+                    </div>
+                </div>
+            </div>
 
 
 <script>

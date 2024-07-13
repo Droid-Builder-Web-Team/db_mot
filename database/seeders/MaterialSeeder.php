@@ -15,7 +15,8 @@ class MaterialSeeder extends Seeder
     {
         \DB::table('materials')->delete();
 
-        \DB::table('materials')->insert(array (
+        \DB::table('materials')->insert(
+            array (
             0 =>
             array (
                 'id' => 1,
@@ -46,6 +47,7 @@ class MaterialSeeder extends Seeder
                 'id' => 63,
                 'name' => 'Aluminium',
             ),
-        ));
+            )
+        );
     }
 }

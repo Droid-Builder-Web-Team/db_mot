@@ -17,8 +17,10 @@ const app = createApp({});
 app.component('reaction-component', ReactionComponent);
 app.component('map-component', MapComponent);
 app.component('EasyDataTable', Vue3EasyDataTable);
-app.use(VueGoogleMaps, {
-    load: {
-        key: 'AIzaSyCOE-y6rIHLsG6ONcNib1pfv0eq3xTWRok',
+app.use(
+    VueGoogleMaps, {
+        load: {
+            key: 'AIzaSyCOE-y6rIHLsG6ONcNib1pfv0eq3xTWRok',
+        }
     }
-}).mount('#app');
+).mount('#app');

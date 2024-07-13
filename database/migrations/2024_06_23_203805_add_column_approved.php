@@ -13,9 +13,11 @@ class AddColumnApproved extends Migration
      */
     public function up()
     {
-        Schema::table('events', function (Blueprint $table) {
-            $table->boolean('approved')->default(1);
-        });
+        Schema::table(
+            'events', function (Blueprint $table) {
+                $table->boolean('approved')->default(1);
+            }
+        );
     }
 
     /**
@@ -25,8 +27,10 @@ class AddColumnApproved extends Migration
      */
     public function down()
     {
-        Schema::table('events', function (Blueprint $table) {
-            $table->dropColumn(['approved']);
-        });
+        Schema::table(
+            'events', function (Blueprint $table) {
+                $table->dropColumn(['approved']);
+            }
+        );
     }
 }

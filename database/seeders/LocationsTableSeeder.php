@@ -17,7 +17,8 @@ class LocationsTableSeeder extends Seeder
 
         \DB::table('locations')->delete();
 
-        \DB::table('locations')->insert(array (
+        \DB::table('locations')->insert(
+            array (
             0 =>
             array (
                 'id' => 1,
@@ -36,17 +37,17 @@ class LocationsTableSeeder extends Seeder
                 'town' => 'York Town',
                 'county' => 'Camberley',
                 'postcode' => 'GU15 3JA',
-                'other_details' => NULL,
+                'other_details' => null,
             ),
             2 =>
             array (
                 'id' => 3,
                 'name' => 'Harper Adams University',
-                'street' => NULL,
+                'street' => null,
                 'town' => 'Edgmond',
                 'county' => 'Newport',
                 'postcode' => 'TF10 8NB',
-                'other_details' => NULL,
+                'other_details' => null,
             ),
             3 =>
             array (
@@ -56,7 +57,7 @@ class LocationsTableSeeder extends Seeder
                 'town' => 'Hunts Bank',
                 'county' => 'Manchester',
                 'postcode' => 'M3 1AR',
-                'other_details' => NULL,
+                'other_details' => null,
             ),
             4 =>
             array (
@@ -66,69 +67,70 @@ class LocationsTableSeeder extends Seeder
                 'town' => 'Newtown',
                 'county' => 'Wigan',
                 'postcode' => 'WN5 0UL',
-                'other_details' => NULL,
+                'other_details' => null,
             ),
             5 =>
             array (
                 'id' => 6,
                 'name' => 'Scarborough Spa',
-                'street' => NULL,
+                'street' => null,
                 'town' => 'South Bay',
                 'county' => 'Scarborough',
                 'postcode' => 'YO11 2HD',
-                'other_details' => NULL,
+                'other_details' => null,
             ),
             6 =>
             array (
                 'id' => 7,
                 'name' => 'Manchester Central Convention Complex',
                 'street' => 'Windmill Street',
-                'town' => NULL,
+                'town' => null,
                 'county' => 'Manchester',
                 'postcode' => 'M2 3GX',
-                'other_details' => NULL,
+                'other_details' => null,
             ),
             7 =>
             array (
                 'id' => 8,
                 'name' => 'Sandymoor Community Hall',
                 'street' => 'Otterburn Street',
-                'town' => NULL,
+                'town' => null,
                 'county' => 'Runcorn',
                 'postcode' => 'WA7 1XU',
-                'other_details' => NULL,
+                'other_details' => null,
             ),
             8 =>
             array (
                 'id' => 9,
                 'name' => 'Humber Bridge',
-                'street' => NULL,
-                'town' => NULL,
+                'street' => null,
+                'town' => null,
                 'county' => 'Humberside',
                 'postcode' => 'HU13 0LN',
-                'other_details' => NULL,
+                'other_details' => null,
             ),
             9 =>
             array (
                 'id' => 0,
                 'name' => 'No Location',
-                'street' => NULL,
-                'town' => NULL,
-                'county' => NULL,
-                'postcode' => NULL,
-                'other_details' => NULL,
+                'street' => null,
+                'town' => null,
+                'county' => null,
+                'postcode' => null,
+                'other_details' => null,
             ),
             10 =>
             array (
                 'id' => 12,
                 'name' => 'Online',
-                'street' => NULL,
-                'town' => NULL,
-                'county' => NULL,
-                'postcode' => NULL,
-                'other_details' => NULL,
+                'street' => null,
+                'town' => null,
+                'county' => null,
+                'postcode' => null,
+                'other_details' => null,
             ),
-        ));
+            )
+        );
 
 
     }

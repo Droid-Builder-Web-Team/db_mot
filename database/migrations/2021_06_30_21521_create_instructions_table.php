@@ -13,16 +13,18 @@ class CreateInstructionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('instructions', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('parts_run_data_id');
-            $table->string('filename')->nullable();
-            $table->string('filetype')->nullable();
-            $table->timestamps();
-            $table->softDeletes();
+        Schema::create(
+            'instructions', function (Blueprint $table) {
+                $table->id();
+                $table->unsignedBigInteger('parts_run_data_id');
+                $table->string('filename')->nullable();
+                $table->string('filetype')->nullable();
+                $table->timestamps();
+                $table->softDeletes();
 
-            $table->foreign('parts_run_data_id')->references('id')->on('parts_run_data');
-        });
+                $table->foreign('parts_run_data_id')->references('id')->on('parts_run_data');
+            }
+        );
     }
 
     /**
