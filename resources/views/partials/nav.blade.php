@@ -81,11 +81,11 @@
             @endif
             
             @if(config('features.assets', FALSE))
-            @hasanyrole('Super Admin|Org Admin|Events Officer|MOT Officer')
+            @hasanyrole('Super Admin|Org Admin')
             <li class="c-sidebar-nav-item disabled">
                 <a class="c-sidebar-nav-link disabled" href="{{ route('asset.index') }}">
                     <svg class="c-sidebar-nav-icon">
-                        <i class="fas fa-hand-holding-heart fa-fw"></i>
+                        <i class="fas fa-boxes-stacked fa-fw"></i>
                     </svg><span class="ml-1">{{ __('Club Assets') }}</span>
                 </a>
             </li>

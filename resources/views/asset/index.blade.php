@@ -7,10 +7,10 @@
             <div class="card-header">
                 <div class="row d-flex align-items-center">
                     <div class="col-sm-2 text-left">
-                        <a class="btn btn-primary" href={{ route('asset.create') }}>Your Assets</a>
+                        <a class="btn btn-primary" href={{ route('asset.create') }}>Add Asset</a>
                     </div>
                     <div class="col-sm-8 text-center">
-                        <h4 class="text-center title">Club Assets</h4>
+                        <h4 class="text-center title">Your Assets</h4>
                     </div>
                     <div class="col-sm-2 text-right"></div>
                 </div>

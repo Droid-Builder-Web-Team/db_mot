@@ -62,7 +62,7 @@
                 </div>
             </main>
         </div>
-        @include('cookieConsent::index')
+        @include('cookie-consent::index')
     </div>
     <!-- Optional JavaScript -->
     <!-- Popper.js first, then CoreUI JS -->
@@ -70,7 +70,6 @@
     <script src="https://unpkg.com/@coreui/coreui@3.0.0/dist/js/coreui.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
     @stack('scripts')
-    @toastr_render
 </body>
 
 </html>

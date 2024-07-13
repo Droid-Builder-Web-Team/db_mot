@@ -172,3 +172,22 @@ a.btn-header-secondary:focus {
     font-family: -apple-system, BlinkMacSystemFont, segoe ui, Roboto, helvetica neue, Arial, noto sans, sans-serif, apple color emoji, segoe ui emoji, segoe ui symbol, noto color emoji;
     color: #000;
 }
+
+/* Tables */
+.table td {
+    padding: 0.5rem;
+}
+
+.table th {
+  padding: 0.5rem;
+}
+
+/* Droid Database */
+.db-row {
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.c-dark-theme .nav-tabs .nav-link.active {
+  color: darkslategray;
+}

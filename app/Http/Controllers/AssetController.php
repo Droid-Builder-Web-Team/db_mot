@@ -15,8 +15,7 @@ class AssetController extends Controller
         $assets = Asset::where('current_state', '!=', 'RETIRED')
                 ->OrderBy('updated_at')
                 ->get();
-        $userassets = Asset::where('current_state', '!=', 'RETIRED')
-                ->where('user_id', auth()->user()->id)
+        $userassets = Asset::where('user_id', auth()->user()->id)
                 ->get();
         $oldassets = Asset::where('current_state', '=', 'RETIRED')
                 ->OrderBy('updated_at')

@@ -211,7 +211,7 @@ class DroidController extends Controller
     {
 
         $droid = Droid::find($request->id);
-        if (!$droid->users->contains(auth()->user()) || !auth()->user()->can('Edit Droids')) {
+        if (!$droid->users->contains(auth()->user()) && !auth()->user()->can('Edit Droids')) {
             abort(403);
         }
         if ($request->mode == 'true') {

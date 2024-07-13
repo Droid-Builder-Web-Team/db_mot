@@ -1,0 +1,60 @@
+@extends('layouts.app')
+
+@section('content')
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-lg-12 margin-tb">
+                    <div class="mb-4 pull-right">
+                        <a class="btn btn-mot-invert" style="width:auto; color:white;" href="{{ route('portalnews.index') }}">News</a>
+                    </div>
+                    <div class="mb-4 pull-left">
+                        <h2>Edit Item</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+
+            <form action="{{ route('portalnews.update', $portalnews->id) }}" method="POST">
+                @method('PUT')
+                @csrf
+                <input type="hidden" name="state" value=1>
+
+                <div class="form-group">
+                    <label for="title"><strong>Title</strong></label>
+                    <input type="text" name="title" class="form-control" placeholder="Title" value="{{$portalnews->title}}">
+                </div>
+
+                <div class="form-group">
+                    <label for="description"><strong>Message</strong></label>
+                    <textarea class="form-control" style="height:250px" id="message" name="message" placeholder="message">{{ $portalnews->message }}</textarea>
+                </div>
+
+                <div class="form-group">
+                    To add images, first have them saved somewhere like Google Photos or another image hosting site. From there you can get a link to the image. (For Google, hit the share icon and click 'Create link')
+                    Now click on Insert->Image from the menu in text entry above, and post the link into the Source field. You can also set hover over text and a size limit to the picture. 
+                </div>
+
+                <div class="text-center form-group">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+    <script src="{{ asset('node_modules/tinymce/tinymce.js') }}"></script>
+    <script>
+        tinymce.init({
+            selector: '#message',
+            plugins: 'autolink lists table link hr autoresize code image media',
+            toolbar: 'undo redo | formatselect | ' +
+      'bold italic backcolor | alignleft aligncenter ' +
+      'alignright alignjustify | bullist numlist outdent indent | ' +
+      'removeformat | table | link image media | hr code ',
+            toolbar_mode: 'floating',
+            image_caption: true,
+            content_style: 'img {max-width: 100%; height: auto;}'
+        });
+    </script>
+@endsection

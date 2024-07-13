@@ -17,12 +17,29 @@
           <div class="col-sm-2 text-right"></div>
         </div>
       </div>
+
+
+
+
       <div class="card-body">
-        <ul>
-          @foreach($news as $article)
-              <li>{{ \Carbon\Carbon::parse($article->created_at)->isoFormat(Auth::user()->settings()->get('date_format')) }} - <a href="{{ route('portalnews.show',$article->id) }}">{{ $article->title }}</a></li>
-          @endforeach
-        </ul>
+        <div class="table text-center card-body table-striped table-hover table-dark">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Title</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($news as $article)
+                        <tr>
+                            <td>{{ \Carbon\Carbon::parse($article->created_at)->isoFormat(Auth::user()->settings()->get('date_format')) }}</td>
+                            <td><a href="{{ route('portalnews.show',$article->id) }}">{{ $article->title }}</a></td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
       </div>
     </div>
   </div>

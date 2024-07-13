@@ -61,13 +61,22 @@ class PortalNewsController extends Controller
      */
     public function store(StorePortalNewsRequest $request)
     {
-        //
+        $validatedData = $request->validated();
+
+        try {
+            $portalnews = PortalNews::create($validatedData);;
+            flash()->addSuccess('News created successfully');
+        } catch (\Illuminate\Database\QueryException $exception) {
+            flash()->addError('Failed to create News');
+        }
+        return redirect()->route('portalnews.show', $portalnews->id);
+
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\PortalNews  $portalNews
+     * @param  \App\PortalNews  $portalnews
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -79,12 +88,16 @@ class PortalNewsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\PortalNews  $portalNews
+     * @param  \App\PortalNews  $portalnews
      * @return \Illuminate\Http\Response
      */
-    public function edit(PortalNews $portalNews)
+    public function edit(PortalNews $portalnews)
     {
-        //
+        if(!auth()->user()->hasRole(['Super Admin', 'Org Admin']))
+        {
+            abort(403);
+        }
+        return view('portalnews.edit', compact('portalnews'));
     }
 
     /**
@@ -94,19 +107,44 @@ class PortalNewsController extends Controller
      * @param  \App\PortalNews  $portalNews
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatePortalNewsRequest $request, PortalNews $portalNews)
+    public function update(UpdatePortalNewsRequest $request, PortalNews $portalnews)
     {
-        //
+        $validatedData = $request->validated();
+
+        try {
+            $portalnews->update($validatedData);
+            flash()->addSuccess('News updated successfully');
+        } catch (\Illuminate\Database\QueryException $exception) {
+            flash()->addError('Failed to update News');
+        }
+        return redirect()->route('portalnews.show', $portalnews->id);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\PortalNews  $portalNews
+     * @param  \App\PortalNews  $portalnews
      * @return \Illuminate\Http\Response
      */
-    public function destroy(PortalNews $portalNews)
+    public function destroy(PortalNews $portalnews)
     {
-        //
+
+        if(!auth()->user()->hasRole(['Super Admin', 'Org Admin']))
+        {
+            abort(403);
+        }
+        
+        $portalnews->delete();
+
+        try {
+            $portalnews->delete();
+            flash()->addSuccess('News deleted successfully');
+        } catch (\Illuminate\Database\QueryException $exception) {
+            flash()->addError('Failed to delete news');
+        }
+
+        // Don't need to notify discord if event gets deleted.
+        //$event->deletedEventNotification($event);
+        return redirect()->route('portalnews.index');
     }
 }
