@@ -69,6 +69,13 @@ class PortalNewsController extends Controller
         } catch (\Illuminate\Database\QueryException $exception) {
             flash()->addError('Failed to create News');
         }
+
+        try {
+            User::query()->update(['newnews' => 1 ]);
+            flash()->addSuccess('Updated notification for all users');
+        } catch (\Illuminate\Database\QueryException $exception) {
+            flash()->addError('Failed to notify users');
+        }
         return redirect()->route('portalnews.show', $portalnews->id);
 
     }
