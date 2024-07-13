@@ -19,8 +19,8 @@ class ApiController extends Controller
         $club = Club::find($club_id);
 
         $allreps = User::role('BC Rep')->get(['id', 'surname', 'forename']);
-        foreach($allreps as $rep) {
-            if($rep->isAdminOf($club)) {
+        foreach ($allreps as $rep) {
+            if ($rep->isAdminOf($club)) {
                 array_push($reps, $rep);
             }
         }

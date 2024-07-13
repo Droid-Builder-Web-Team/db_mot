@@ -67,7 +67,7 @@ class SocialController extends Controller
         if ($user->active == "on") {
             try {
                 $login = \Auth::login($user);
-            } catch(Exception $e) {
+            } catch (Exception $e) {
                 flash()->addError('Login error: ' . $e);
             }
         } else {
@@ -77,7 +77,6 @@ class SocialController extends Controller
 
         flash()->addSuccess('Logging in');
         return redirect()->to('/user');
-
     }
 
     /**

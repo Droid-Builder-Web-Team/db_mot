@@ -119,7 +119,6 @@ class LocationController extends Controller
         }
 
         return redirect()->route('event.index');
-
     }
 
     /**
@@ -146,5 +145,4 @@ class LocationController extends Controller
 
         return redirect()->back();
     }
-
 }

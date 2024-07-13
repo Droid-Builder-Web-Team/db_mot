@@ -44,7 +44,7 @@ class CheckPLI extends Command
         $expired = Carbon::today()->subYear();
         $expiring = Carbon::today()->subYear()->addMonth();
         $users = User::all();
-        foreach($users as $user) {
+        foreach ($users as $user) {
             $this->info('PLI: Checking droid: '.$user->forename.' PLI Date: '.$user->pli_date);
             if ($user->pli_date == $expired->format('Y-m-d')) {
                 $this->info('PLI: User PLI expires today: '.$user->forename);

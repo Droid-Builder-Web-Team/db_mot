@@ -62,7 +62,7 @@ class CommentController extends Controller
 
             if ($permission != "") {
                 if (auth()->user()->can($permission)) {
-                    foreach($model->users as $user) {
+                    foreach ($model->users as $user) {
                         switch ($request->model) {
                             case "App\PartsRunData":
                                 if ($user->isInterestedIn($request->id)) {
@@ -78,7 +78,6 @@ class CommentController extends Controller
                     $result->save();
                 }
             }
-
         }
         // Send notification to model owner
         switch ($request->model) {
@@ -130,5 +129,4 @@ class CommentController extends Controller
             ]
         );
     }
-
 }

@@ -144,6 +144,5 @@ class GatherStats extends Command
             );
             echo $stat . " => " . $value . "\n";
         }
-
     }
 }

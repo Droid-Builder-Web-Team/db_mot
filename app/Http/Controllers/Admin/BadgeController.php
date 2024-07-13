@@ -41,7 +41,6 @@ class BadgeController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('permission:View Members');
-
     }
 
     /**
@@ -166,9 +165,6 @@ class BadgeController extends Controller
                     )
                 );
             }
-
-
-
         }
         fclose($fp);
         $zip->addFile($csv_filename, 'id_list.csv');
@@ -178,6 +174,5 @@ class BadgeController extends Controller
             'Content-Type' => 'application/zip',
         );
         return response()->download($zip_file, 'id_badges.zip', $headers);
-
     }
 }

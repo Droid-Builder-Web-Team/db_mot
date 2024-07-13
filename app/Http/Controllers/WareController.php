@@ -87,7 +87,7 @@ class WareController extends Controller
         );
 
         $request['user_id'] = auth()->user()->id;
-        if(isset($request['showemail'])) {
+        if (isset($request['showemail'])) {
             $request['showemail'] = 1;
         } else {
             $request['showemail'] = 0;
@@ -123,7 +123,7 @@ class WareController extends Controller
      */
     public function edit(Ware $ware)
     {
-        if(!$ware->user->id == auth()->user()->id && !auth()->user()->can('Edit Marketplace')) {
+        if (!$ware->user->id == auth()->user()->id && !auth()->user()->can('Edit Marketplace')) {
             abort(403);
         }
         return view('ware.edit', compact('ware'));
@@ -138,7 +138,7 @@ class WareController extends Controller
      */
     public function update(Request $request, Ware $ware)
     {
-        if(!$ware->user->id == auth()->user()->id && !auth()->user()->can('Edit Marketplace')) {
+        if (!$ware->user->id == auth()->user()->id && !auth()->user()->can('Edit Marketplace')) {
             abort(403);
         }
 
@@ -176,7 +176,7 @@ class WareController extends Controller
     public function destroy(Ware $ware)
     {
 
-        if(!auth()->user()->can('Edit Marketplace')) {
+        if (!auth()->user()->can('Edit Marketplace')) {
             abort(403);
         }
         $ware->delete();

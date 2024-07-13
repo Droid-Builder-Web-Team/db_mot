@@ -29,11 +29,10 @@ class UserNotificationsController extends Controller
     public function read($id)
     {
         $notification = auth()->user()->notifications()->find($id);
-        if($notification) {
+        if ($notification) {
             $notification->markAsRead();
         }
 
         return redirect($notification->data['link']);
     }
-
 }

@@ -18,8 +18,8 @@ class EventApiController extends Controller
         $events = Event::where('public', '1')
             ->whereDate('date', '>=', Carbon::now())
             ->get();
-        foreach($events as $event) {
-            if($event->going()->count() > 0) {
+        foreach ($events as $event) {
+            if ($event->going()->count() > 0) {
                 $tmp = array();
                 $location = Location::find($event->location)->last();
                 $tmp['id'] = $event->id;
@@ -37,12 +37,12 @@ class EventApiController extends Controller
     public function getCharityYtd($year = 0)
     {
 
-        if($year == 0) {
+        if ($year == 0) {
             $year = date('Y');
         }
         $events = Event::whereYear('date', $year)->get();
         $charity = 0;
-        foreach($events as $event) {
+        foreach ($events as $event) {
             $charity += $event->charity_raised;
         }
         return response($charity, 200);

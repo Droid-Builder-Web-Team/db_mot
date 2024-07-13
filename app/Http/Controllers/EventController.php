@@ -173,12 +173,12 @@ class EventController extends Controller
             ]
         );
 
-        if($request->location_id == "---") {
+        if ($request->location_id == "---") {
             flash()->addError('Please enter a location');
             return back()->withInput();
         }
 
-        if($request->location_id == "new") {
+        if ($request->location_id == "new") {
             // Create a new location
             if ($request['postcode'] != "") {
                 $address = str_replace(' ', '+', $request['postcode']).'+'.str_replace(' ', '+', $request['country']);
@@ -203,7 +203,6 @@ class EventController extends Controller
                 $newlocation = Location::create($location);
                 flash()->addSuccess('Location created successfully');
             } catch (\Illuminate\Database\QueryException $exception) {
-
                 flash()->addError('Failed to create Location');
                 return back()->withInput();
             }
@@ -263,7 +262,6 @@ class EventController extends Controller
         }
 
         return redirect()->route('event.index');
-
     }
 
     /**
@@ -373,5 +371,4 @@ class EventController extends Controller
 
         return view('event.map', compact('eventlist'));
     }
-
 }

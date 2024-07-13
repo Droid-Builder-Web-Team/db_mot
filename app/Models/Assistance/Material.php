@@ -20,6 +20,4 @@ class Material extends Model
     {
         return $this->belongsToMany(Type::class);
     }
-
-
 }

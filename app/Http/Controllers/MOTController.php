@@ -36,7 +36,6 @@ class MOTController extends Controller
         } else {
             abort(403);
         }
-
     }
 
     public function json($id)
@@ -44,7 +43,7 @@ class MOTController extends Controller
         $mot = MOT::find($id);
         if ($mot->droid->users->contains(auth()->user()) || auth()->user()->can('View Droids')) {
             $data = [];
-            foreach($mot->sections() as $section) {
+            foreach ($mot->sections() as $section) {
                 array_push($data, $mot->lines($section->id));
             }
             return response()->json($mot->details());
@@ -52,5 +51,4 @@ class MOTController extends Controller
             abort(403);
         }
     }
-
 }

@@ -42,12 +42,12 @@ class NewEvent extends Command
     public function handle()
     {
         $events = Event::where('created_at', '>', Carbon::now()->subDays(1)->toDateTimeString());
-        foreach($events as $event) {
+        foreach ($events as $event) {
             echo "Checking: ".$event->name;
             $users = User::where('active', 'on')->get();
             $location = Location::find($event->location_id);
-            foreach($users as $user) {
-                if($user->postcode != "") {
+            foreach ($users as $user) {
+                if ($user->postcode != "") {
                     $distance = ($user->settings()->get('max_event_distance')) * 1609.344;
                     $origin = $user->postcode;
                     $destination = $location->postcode;
@@ -57,7 +57,7 @@ class NewEvent extends Command
                             '&key='.config('gmap.google_directions_key');
                     $json = json_decode(Http::get($url));
                     $meters = $json->rows[0]->elements[0]->distance->value;
-                    if($meters < $distance) {
+                    if ($meters < $distance) {
                         $user->notify(new EventCreated($event));
                     }
                 }

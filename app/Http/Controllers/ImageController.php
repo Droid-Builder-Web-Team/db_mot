@@ -25,7 +25,7 @@ class ImageController extends Controller
         $droid = Droid::find($request->droid);
         $user = User::find($request->user);
         $folderPath = $request->photo_name;
-        switch($request->photo_name) {
+        switch ($request->photo_name) {
             case 'mug_shot':
                 $folderPath = 'members/'.$request->user.'/';
                 if ($user != auth()->user() && !auth()->user()->can('Edit Members')) {
@@ -89,7 +89,7 @@ class ImageController extends Controller
     {
 
         $folderPath = $request->photo_name;
-        switch($request->photo_name) {
+        switch ($request->photo_name) {
             case 'mug_shot':
                 $folderPath = 'members/'.$request->user.'/';
                 if ($user != auth()->user() && !auth()->user()->can('Edit Members')) {
@@ -134,9 +134,9 @@ class ImageController extends Controller
             'topps_rear'
         ];
 
-        foreach($droids as $droid) {
+        foreach ($droids as $droid) {
             echo "Updating images for: ".$droid->name. " ID: ".$droid->id."<br>";
-            foreach($pic_types as $type) {
+            foreach ($pic_types as $type) {
                 echo "Checking for: ".$type." ";
                 $path = 'droids/'.$droid->id.'/'.$type.'.png';
                 if (!Storage::exists($path)) {

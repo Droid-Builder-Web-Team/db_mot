@@ -391,7 +391,6 @@ class PartsRunDataController extends Controller
                     flash()->addError('Status Update failed');
                 }
             }
-
         }
         return back();
     }

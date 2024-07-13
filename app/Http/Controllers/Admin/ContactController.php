@@ -182,5 +182,4 @@ class ContactController extends Controller
 
         return back();
     }
-
 }

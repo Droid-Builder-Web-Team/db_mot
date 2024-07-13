@@ -40,7 +40,7 @@ class PaypalController extends Controller
                 $q->where("name", "Add MOT");
             }
         )->get();
-        foreach($admins as $admin) {
+        foreach ($admins as $admin) {
             $admin->notify(new PLIPaidAdmin($user));
         }
 

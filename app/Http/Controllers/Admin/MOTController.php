@@ -43,7 +43,6 @@ class MOTController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('permission:Add MOT');
-
     }
 
     /**
@@ -106,7 +105,6 @@ class MOTController extends Controller
                 }
 
                 return $mot;
-
             }
         );
 

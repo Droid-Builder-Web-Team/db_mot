@@ -39,8 +39,8 @@ class UpdateLocationLatLng extends Command
     public function handle()
     {
         $locations = Location::all();
-        foreach($locations as $location) {
-            if($location->postcode != "") {
+        foreach ($locations as $location) {
+            if ($location->postcode != "") {
                 $address = str_replace(' ', '+', $location->postcode).'+'.str_replace(' ', '+', $location->country);
                 $url = "https://maps.google.com/maps/api/geocode/json?key=".config('gmap.google_api_key')."&address=".$address."&sensor=false";
                 $geocode = file_get_contents($url);

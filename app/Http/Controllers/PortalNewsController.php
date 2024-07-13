@@ -79,7 +79,6 @@ class PortalNewsController extends Controller
             flash()->addError('Failed to notify users');
         }
         return redirect()->route('portalnews.show', $portalnews->id);
-
     }
 
     /**
@@ -102,7 +101,7 @@ class PortalNewsController extends Controller
      */
     public function edit(PortalNews $portalnews)
     {
-        if(!Auth::user()->hasRole(['Super Admin', 'Org Admin'])) {
+        if (!Auth::user()->hasRole(['Super Admin', 'Org Admin'])) {
             abort(403);
         }
         return view('portalnews.edit', compact('portalnews'));
@@ -137,7 +136,7 @@ class PortalNewsController extends Controller
     public function destroy(PortalNews $portalnews)
     {
 
-        if(!Auth::user()->hasRole(['Super Admin', 'Org Admin'])) {
+        if (!Auth::user()->hasRole(['Super Admin', 'Org Admin'])) {
             abort(403);
         }
 

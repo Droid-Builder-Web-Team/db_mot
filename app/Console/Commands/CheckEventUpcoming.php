@@ -44,11 +44,11 @@ class CheckEventUpcoming extends Command
         $upcoming = Carbon::today()->addWeek();
         $events = Event::whereDate('date', '>=', Carbon::now())->get();
         $this->info('Event: One weeks time: '.$upcoming);
-        foreach($events as $event) {
+        foreach ($events as $event) {
             $this->info('Event: Checking event: '.$event->name.' Date: '.$event->date);
             if ($event->date == $upcoming->format('Y-m-d')) {
                 $this->info('Event: An event is happening in a week: '.$event->name);
-                foreach($event->users as $user) {
+                foreach ($event->users as $user) {
                     $this->info('Event: Notifying: '.$user->forename);
                     $user->notify(new EventUpcoming($event));
                 }

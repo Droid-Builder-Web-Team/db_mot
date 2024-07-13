@@ -72,7 +72,6 @@ class MOTInfoController extends Controller
             if ($officer->isAdminOf($club)) {
                 $mot_officers[] = $officer;
             }
-
         }
         return view('motinfo.show', compact('sections', 'lines', 'mot_officers'));
     }

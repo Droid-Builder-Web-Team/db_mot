@@ -29,6 +29,5 @@ class PartsRunImageController extends Controller
         $response->header("Content-Type", $image->filetype);
 
         return $response;
-
     }
 }

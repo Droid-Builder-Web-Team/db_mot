@@ -60,5 +60,4 @@ class Contact extends Model implements Auditable
     {
         return $this->morphedByMany(Event::class, 'contactable');
     }
-
 }

@@ -293,8 +293,5 @@ class UserController extends Controller
      */
     public function requestId()
     {
-
-
-
     }
 }

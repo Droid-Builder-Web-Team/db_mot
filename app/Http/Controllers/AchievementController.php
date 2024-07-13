@@ -20,8 +20,5 @@ class AchievementController extends Controller
         $achievements = Achievement::all();
 
         return view('achievements.index', compact('achievements'));
-
     }
-
-
 }

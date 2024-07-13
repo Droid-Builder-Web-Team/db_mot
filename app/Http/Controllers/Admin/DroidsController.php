@@ -16,7 +16,6 @@ class DroidsController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('permission:View Droids|Edit Droids');
-
     }
 
     /**
@@ -144,11 +143,11 @@ class DroidsController extends Controller
     public function destroy(Droid $droid)
     {
         $users = $droid->users;
-        foreach($users as $user) {
+        foreach ($users as $user) {
             $droid->users()->detach($user->id);
         }
         $mots = $droid->mot;
-        foreach($mots as $mot) {
+        foreach ($mots as $mot) {
             $droid->mot()->delete();
         }
         $droid->delete();

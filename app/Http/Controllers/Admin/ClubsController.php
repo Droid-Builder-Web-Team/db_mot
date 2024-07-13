@@ -107,5 +107,4 @@ class ClubsController extends Controller
         return redirect()->route('admin.clubs.index')
             ->with('success', 'Club deleted successfully');
     }
-
 }

@@ -205,7 +205,6 @@ class EventsController extends Controller
 
 
         return redirect()->route('admin.events.index');
-
     }
 
     /**
@@ -363,5 +362,4 @@ class EventsController extends Controller
 
         return response()->stream($callback, 200, $headers);
     }
-
 }

@@ -27,7 +27,7 @@ class ToppsController extends Controller
     {
         $droid = Droid::find($uid);
 
-        if(!in_array($view, array('topps_front', 'topps_rear'))) {
+        if (!in_array($view, array('topps_front', 'topps_rear'))) {
             abort(403);
         }
 

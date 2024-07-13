@@ -64,7 +64,6 @@ class DroidController extends Controller
         }
 
         return redirect()->route('user.show', auth()->user()->id);
-
     }
 
     /**
@@ -80,7 +79,6 @@ class DroidController extends Controller
         } else {
             abort(403);
         }
-
     }
 
     /**
@@ -98,7 +96,6 @@ class DroidController extends Controller
         } else {
             abort(403);
         }
-
     }
 
     /**
@@ -146,11 +143,11 @@ class DroidController extends Controller
         }
 
         $users = $droid->users;
-        foreach($users as $user) {
+        foreach ($users as $user) {
             $droid->users()->detach($user->id);
         }
         $mots = $droid->mot;
-        foreach($mots as $mot) {
+        foreach ($mots as $mot) {
             $droid->mot()->delete();
         }
         $droid->delete();

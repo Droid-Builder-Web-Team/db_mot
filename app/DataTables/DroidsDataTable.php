@@ -82,7 +82,6 @@ class DroidsDataTable extends DataTable
                 Button::make('print'),
                 Button::make('reload')
             );
-
     }
 
     /**

@@ -225,7 +225,6 @@ class User extends Authenticatable implements
         } else {
             return null;
         }
-
     }
 
     /**
@@ -279,7 +278,6 @@ class User extends Authenticatable implements
     {
         $expires = Carbon::parse($this->pli_date)->addYear();
         return $expires;
-
     }
 
     /**
@@ -291,7 +289,6 @@ class User extends Authenticatable implements
     {
         $now = Carbon::now();
         return Carbon::parse($this->join_date)->DiffInYears($now);
-
     }
 
     /**
@@ -440,12 +437,11 @@ class User extends Authenticatable implements
     public function highestBid(Auction $auction)
     {
         $amount = 0;
-        foreach($auction->users()->where('user_id', $this->id)->get() as $user) {
-            if($amount < $user->pivot->amount) {
+        foreach ($auction->users()->where('user_id', $this->id)->get() as $user) {
+            if ($amount < $user->pivot->amount) {
                 $amount = $user->pivot->amount;
             }
         }
         return $amount;
-
     }
 }

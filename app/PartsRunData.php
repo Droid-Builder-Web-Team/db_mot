@@ -188,38 +188,38 @@ class PartsRunData extends Model implements Auditable
         switch ($shipper) {
             case "Royal Mail":
                 $url = "http://www.royalmail.com/portal/rm/track?trackNumber="
-                    . $id;
+                . $id;
                 $display = "<a target=\"_default\" href=\"" . $url
-                    . "\">" . $id . "</a>";
+                . "\">" . $id . "</a>";
                 break;
             case "Parcel Force":
                 $url = "http://www.parcelforce.com/portal/pw/track?trackNumber="
-                    . $id;
+                . $id;
                 $display = "<a target=\"_default\" href=\"" . $url
-                    . "\">" . $id . "</a>";
+                . "\">" . $id . "</a>";
                 break;
             case "Hermes":
                 $url = "https://new.myhermes.co.uk/track.html#/parcel/" . $id;
                 $display = "<a target=\"_default\" href=\"" . $url
-                    . "\">" . $id . "</a>";
+                . "\">" . $id . "</a>";
                 break;
             case "DPD":
                 $url = "http://www.dpd.co.uk/tracking/quicktrack.do?"
-                    . "search.consignmentNumber="
-                    . $id
-                    . "&search.searchType=16&search.javascriptValidated=0&appmode=guest";
+                . "search.consignmentNumber="
+                . $id
+                . "&search.searchType=16&search.javascriptValidated=0&appmode=guest";
                 $display = "<a target=\"_default\" href=\"" . $url
-                        . "\">" . $id . "</a>";
+                    . "\">" . $id . "</a>";
                 break;
             case "Yodel":
                 $display = $id;
                 break;
             case "UPS":
                 $url = "https://wwwapps.ups.com/tracking/tracking.cgi?"
-                    . "tracknum="
-                    . $id;
+                . "tracknum="
+                . $id;
                 $display = "<a target=\"_default\" href=\"" . $url
-                        . "\">" . $id . "</a>";
+                    . "\">" . $id . "</a>";
                 break;
             case "Other":
                 $display = $id;
@@ -233,6 +233,5 @@ class PartsRunData extends Model implements Auditable
         }
 
         return $display;
-
     }
 }

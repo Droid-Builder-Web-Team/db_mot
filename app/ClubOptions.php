@@ -33,6 +33,5 @@ class ClubOptions extends Model
      */
     public function clubs()
     {
-
     }
 }

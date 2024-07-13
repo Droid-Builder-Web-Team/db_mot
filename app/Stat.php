@@ -32,5 +32,4 @@ class Stat extends Model
     protected $guarded = [
 
     ];
-
 }

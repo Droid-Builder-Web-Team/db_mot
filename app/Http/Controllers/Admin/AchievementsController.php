@@ -93,7 +93,6 @@ class AchievementsController extends Controller
 
         return redirect()->route('admin.achievements.index')
             ->with('success', 'Achievement updated successfully.');
-
     }
 
     /**
@@ -122,5 +121,4 @@ class AchievementsController extends Controller
         );
         return back();
     }
-
 }

@@ -55,7 +55,6 @@ class ICalController extends Controller
         $calendar = new Calendar();
 
         foreach ($events as $event) {
-
             $date = new Date(Carbon::createFromFormat('Y-m-d', $event->date));
             $occurrence = new SingleDay($date);
 
@@ -115,8 +114,5 @@ class ICalController extends Controller
         header('Content-Disposition: attachment; filename="cal.ics"');
 
         echo $calendarComponent;
-
-
     }
-
 }

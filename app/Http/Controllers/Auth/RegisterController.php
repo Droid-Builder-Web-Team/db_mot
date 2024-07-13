@@ -141,10 +141,8 @@ class RegisterController extends Controller
             }
             Mail::to($user)->send(new \App\Mail\WelcomeUser($user));
             return $user;
-
         } else {
             return back()->withErrors(['captcha' => 'ReCaptcha Error']);
         }
-
     }
 }
