@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Response;
 
 class ApiController extends Controller
 {
-    public function list_bcreps($club_id)
+    public function list_bcreps($club_id) // phpcs:ignore PSR1.Methods.CamelCapsMethodName.NotCamelCaps
     {
         $reps = [];
         $club = Club::find($club_id);
@@ -36,7 +36,7 @@ class ApiController extends Controller
         return response()->json(strip_tags($data));
     }
 
-    public function get_member_image($uid, $size = 240)
+    public function get_member_image($uid, $size = 240) // phpcs:ignore PSR1.Methods.CamelCapsMethodName.NotCamelCaps
     {
         if ($size != "") {
             $size = $size.'-';
@@ -61,7 +61,7 @@ class ApiController extends Controller
         return $response;
     }
 
-    public function get_droid_image($uid, $view = 'photo_front', $size = 240)
+    public function get_droid_image($uid, $view = 'photo_front', $size = 240) // phpcs:ignore PSR1.Methods.CamelCapsMethodName.NotCamelCaps
     {
         $droid = Droid::find($uid);
 
@@ -86,7 +86,7 @@ class ApiController extends Controller
         return $response;
     }
 
-    public function upload_course_run(Request $request)
+    public function upload_course_run(Request $request) // phpcs:ignore PSR1.Methods.CamelCapsMethodName.NotCamelCaps
     {
         $run = json_decode($request->json);
 

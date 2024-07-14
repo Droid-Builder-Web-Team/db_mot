@@ -15,13 +15,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('auth:api')->get(
-    '/members', function (Request $request) {
+    '/members',
+    function (Request $request) {
         return $request->user();
     }
 );
 
 Route::group(
-    ['middleware' => ['auth:api']], function () {
+    ['middleware' => ['auth:api']],
+    function () {
         Route::get('getmembers', 'Admin\ApiController@drivingCourseDownload');
         Route::get('getmemberimage/{uid}', 'Admin\ApiController@get_member_image');
         Route::get('getdroidimage/{uid}', 'Admin\ApiController@get_droid_image');

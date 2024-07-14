@@ -33,7 +33,8 @@ Route::redirect('/id.php', '/user');
 Route::namespace('Admin')->prefix('admin')->name('admin.')->group(
     function () {
         Route::get(
-            '/', function () {
+            '/',
+            function () {
                 return redirect('/admin/dashboard');
             }
         );
@@ -68,13 +69,15 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(
 );
 
 Route::get(
-    '/', function () {
+    '/',
+    function () {
         return view('about');
     }
 );
 
 Route::group(
-    ['middleware' => ['auth', 'gdpr.terms']], function () {
+    ['middleware' => ['auth', 'gdpr.terms']],
+    function () {
         Route::get('user/{user}/settings', 'UserController@edit_settings')->name('settings.edit');
         Route::put('user/{user}/settings', 'UserController@update_settings')->name('settings.update');
         Route::resource('user', 'UserController');
@@ -116,7 +119,8 @@ Route::group(
         Route::get('codeofconduct', 'CodeOfConductController@index')->name('codeofconduct');
         Route::post('codeofconduct', 'CodeOfConductController@store');
         Route::get(
-            'about', function () {
+            'about',
+            function () {
                 return view('about');
             }
         )->name('about');
@@ -129,7 +133,8 @@ Route::group(
         Route::get('/request-a-part-run', 'PartsRunDataController@requestPartsRun')
             ->name('request');
         Route::get(
-            '/parts-run-info', function () {
+            '/parts-run-info',
+            function () {
                 return view('parts-run.info');
             }
         )->name('partsRunInfo');
@@ -147,7 +152,8 @@ Route::group(
 
 
 Route::group(
-    ['middleware' => ['auth', 'gdpr.terms']], function () {
+    ['middleware' => ['auth', 'gdpr.terms']],
+    function () {
         Route::resource('event', 'EventController', ['only' => ['index', 'show', 'create', 'store', 'update']]);
     }
 );

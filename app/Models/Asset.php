@@ -27,7 +27,7 @@ class Asset extends Model implements Auditable
         return $this->belongsTo(User::class);
     }
 
-    public function current_holder()
+    public function current_holder() // phpcs:ignore PSR1.Methods.CamelCapsMethodName.NotCamelCaps
     {
         return $this->belongsTo(User::class);
     }

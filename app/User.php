@@ -203,7 +203,7 @@ class User extends Authenticatable implements
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany of App\Event
      */
-    public function attended_events()
+    public function attended_events() // phpcs:ignore PSR1.Methods.CamelCapsMethodName.NotCamelCaps
     {
         return $this->belongsToMany(Event::class, 'members_events')
             ->wherePivot('attended', "1")
@@ -274,7 +274,7 @@ class User extends Authenticatable implements
      *
      * @return Carbon
      */
-    public function pli_expires()
+    public function pli_expires() // phpcs:ignore PSR1.Methods.CamelCapsMethodName.NotCamelCaps
     {
         $expires = Carbon::parse($this->pli_date)->addYear();
         return $expires;
@@ -335,7 +335,7 @@ class User extends Authenticatable implements
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany of App\CourseRun
      */
-    public function course_runs()
+    public function course_runs() // phpcs:ignore PSR1.Methods.CamelCapsMethodName.NotCamelCaps
     {
         return $this->hasMany(CourseRun::class)->orderBy('final_time');
     }

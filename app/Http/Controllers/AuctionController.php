@@ -48,7 +48,7 @@ class AuctionController extends Controller
     public function index()
     {
         $auctions = Auction::all()
-                    ->sortByDesc('finish_time', );
+                    ->sortByDesc('finish_time');
 
         return view('auctions.index', compact('auctions'));
     }
@@ -92,7 +92,6 @@ class AuctionController extends Controller
         }
 
         return redirect()->route('auctions.index');
-
     }
 
     /**
@@ -117,12 +116,12 @@ class AuctionController extends Controller
           'auction_id' => $auction->id
         ];
 
-        if($auction->secondsLeft() < 0) {
+        if ($auction->secondsLeft() < 0) {
             flash()->addError('Auction has finished');
             return back();
         }
 
-        if($hasEntry) {
+        if ($hasEntry) {
             $amount = $user->highestBid($auction);
             if ($amount > $request->amount) {
                 flash()->addError('Lowering bid is not allowed');
@@ -186,7 +185,5 @@ class AuctionController extends Controller
 
 
         return view('auctions.show', compact('auction'));
-
     }
-
 }

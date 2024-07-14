@@ -257,7 +257,7 @@ class UserController extends Controller
      *
      * @return void
      */
-    public function edit_settings(User $user)
+    public function edit_settings(User $user) // phpcs:ignore PSR1.Methods.CamelCapsMethodName.NotCamelCaps
     {
         $settings = $user->settings()->all();
         return view('settings.edit', compact('settings'));
@@ -271,7 +271,7 @@ class UserController extends Controller
      *
      * @return void
      */
-    public function update_settings(Request $request, User $user)
+    public function update_settings(Request $request, User $user) // phpcs:ignore PSR1.Methods.CamelCapsMethodName.NotCamelCaps
     {
 
         foreach ($request->input('notifications') as $notification => $value) {
