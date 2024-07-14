@@ -32,7 +32,7 @@
         "bootstrap-select": "^1.13.18",
         "is-svg": ">=5.0.0",
         "laravel-mix": "^6.0.25",
-        "tinymce": "^5.10.7",
+        "tinymce": "^7.2.0",
         "vue-datasource": "^1.0.10",
         "vue-good-table-next": "^0.1.0",
         "vue-google-maps-community-fork": "^0.3.1",
