@@ -140,8 +140,6 @@ class PortalNewsController extends Controller
             abort(403);
         }
 
-        $portalnews->delete();
-
         try {
             $portalnews->delete();
             flash()->addSuccess('News deleted successfully');

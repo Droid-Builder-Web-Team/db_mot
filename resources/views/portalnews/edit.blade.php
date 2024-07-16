@@ -3,15 +3,14 @@
 @section('content')
     <div class="card">
         <div class="card-header">
-            <div class="row">
-                <div class="col-lg-12 margin-tb">
-                    <div class="mb-4 pull-right">
-                        <a class="btn btn-mot-invert" style="width:auto; color:white;" href="{{ route('portalnews.index') }}">News</a>
-                    </div>
-                    <div class="mb-4 pull-left">
-                        <h2>Edit Item</h2>
-                    </div>
+            <div class="row d-flex ">
+                <div class="text-left col-3">
+                    <a class="btn btn-mot-invert" style="width:auto; color:white;" href="{{ route('portalnews.index') }}">Back</a>
                 </div>
+                <div class="text-center col-6">
+                    <h2 class="justify-content-center">Edit Article</h2>
+                </div>
+                <div class="text-right col-3"></div>
             </div>
         </div>
         <div class="card-body">

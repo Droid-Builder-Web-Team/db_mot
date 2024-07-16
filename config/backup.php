@@ -102,6 +102,9 @@ return [
          * The file extension should be specified without a leading .
          */
         'database_dump_file_extension' => '',
+        'database_dump_file_timestamp_format' => null,
+        'database_dump_filename_base' => 'database',
+
 
         'destination' => [
 
@@ -147,14 +150,13 @@ return [
      * the `Spatie\Backup\Events` classes.
      */
     'notifications' => [
-
         'notifications' => [
-            \Spatie\Backup\Notifications\Notifications\BackupHasFailed::class => ['mail'],
-            \Spatie\Backup\Notifications\Notifications\UnhealthyBackupWasFound::class => ['mail'],
-            \Spatie\Backup\Notifications\Notifications\CleanupHasFailed::class => ['mail'],
-            \Spatie\Backup\Notifications\Notifications\BackupWasSuccessful::class => ['mail'],
-            \Spatie\Backup\Notifications\Notifications\HealthyBackupWasFound::class => ['mail'],
-            \Spatie\Backup\Notifications\Notifications\CleanupWasSuccessful::class => ['mail'],
+            \Spatie\Backup\Notifications\Notifications\BackupHasFailedNotification::class => ['mail'],
+            \Spatie\Backup\Notifications\Notifications\UnhealthyBackupWasFoundNotification::class => ['mail'],
+            \Spatie\Backup\Notifications\Notifications\CleanupHasFailedNotification::class => ['mail'],
+            \Spatie\Backup\Notifications\Notifications\BackupWasSuccessfulNotification::class => ['mail'],
+            \Spatie\Backup\Notifications\Notifications\HealthyBackupWasFoundNotification::class => ['mail'],
+            \Spatie\Backup\Notifications\Notifications\CleanupWasSuccessfulNotification::class => ['mail'],
         ],
 
         /*
@@ -259,6 +261,16 @@ return [
              */
             'delete_oldest_backups_when_using_more_megabytes_than' => 9000,
         ],
+        /*
+         * The number of attempts, in case the cleanup command encounters an exception
+         */
+        'tries' => 1,
+
+        /*
+         * The number of seconds to wait before attempting a new cleanup if the previous try failed
+         * Set to `0` for none
+         */
+        'retry_delay' => 0,
     ],
 
 ];

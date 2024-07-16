@@ -25,7 +25,8 @@ class AssetRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return Auth::user()->hasRole(['Super Admin', 'Org Admin', 'Quartermaster']);
+        return true; 
+        //Auth::user()->hasRole(['Super Admin', 'Org Admin', 'Quartermaster']);
     }
 
     /**
@@ -35,13 +36,28 @@ class AssetRequest extends FormRequest
      */
     public function rules(): array
     {
+
         return [
-            'name' => 'required',
+            'title' => 'required',
             'description' => 'required',
-            'owner_id' => 'required',
-            'current_holder_id' => 'required',
             'current_state' => [ Rule::enum(AssetConditions::class)],
             'type' => [ Rule::enum(AssetTypes::class)]
+        ] + ($this->isMethod('POST') ? $this->store() : $this->update());
+
+    }
+
+    protected function store() 
+    {
+        return [
+
+        ];
+    }
+
+    protected function update() 
+    {
+        return [
+            'user_id' => 'required',
+            'current_holder_id' => 'required',
         ];
     }
 }
