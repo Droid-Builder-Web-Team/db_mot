@@ -126,46 +126,46 @@
                 </div>
                 @endif
                 <div>
-                @if($event->location->name == "No Location")
-                  <!-- No Location -->
-                @elseif ($event->location->name == "Online")
-                  @if($event->url != "")
-                    @php
-                      parse_str( parse_url( $event->url, PHP_URL_QUERY ), $args );
-                    @endphp
-                    <iframe id="ytplayer" type="text/html" width="250" height="200"
-                      src="https://www.youtube.com/embed/{{ $args['v'] }}?autoplay=0&origin=https://portal.droidbuilders.uk"
-                      frameborder="0"></iframe>
+                  @if($event->location->name == "No Location")
+                    <!-- No Location -->
+                  @elseif ($event->location->name == "Online")
+                    @if($event->url != "")
+                      @php
+                        parse_str( parse_url( $event->url, PHP_URL_QUERY ), $args );
+                      @endphp
+                      <iframe id="ytplayer" type="text/html" width="250" height="200"
+                        src="https://www.youtube.com/embed/{{ $args['v'] }}?autoplay=0&origin=https://portal.droidbuilders.uk"
+                        frameborder="0"></iframe>
+                    @else
+                      <iframe src="https://www.youtube.com/embed/?listType=user_uploads&list=DroidbuildersUK" width="250" height="200"></iframe>
+                    @endif
                   @else
-                    <iframe src="https://www.youtube.com/embed/?listType=user_uploads&list=DroidbuildersUK" width="250" height="200"></iframe>
+                    <div class="map-responsive">
+                      <iframe
+                        width="200"
+                        height="200"
+                        frameborder="0"
+                        style="border:1"
+                        src="https://www.google.com/maps/embed/v1/place?key={{ config('gmap.google_api_key') }}&q={{ urlencode($event->location->name) }},{{ urlencode($event->location->postcode) }}"
+                        allowfullscreen>
+                      </iframe>
+                    </div>
                   @endif
-                @else
-                <div class="map-responsive">
-                <iframe
-                  width="200"
-                  height="200"
-                  frameborder="0"
-                  style="border:1"
-                  src="https://www.google.com/maps/embed/v1/place?key={{ config('gmap.google_api_key') }}&q={{ urlencode($event->location->name) }},{{ urlencode($event->location->postcode) }}"
-                  allowfullscreen>
-                </iframe>
+                  <br>
+                  <span class="float-right">
+                    <a class="btn-sm btn-link" href="{{ route('location.show', $event->location->id )}}">{{ $event->location->name}}</a>
+                  
+                  @for ($i = 0; $i < 5; $i++)
+                    @if ($i < $event->location->averageRating(\App\User::class))
+                      <i class="fas fa-star"></i>
+                    @else
+                      <i class="far fa-star"></i>
+                    @endif
+                  @endfor
+                  ( {{ $event->location->usersRated() }} ratings )
+                  </span>
+                </div>
               </div>
-              @endif
-                <br>
-                <span class="float-right">
-                  <a class="btn-sm btn-link" href="{{ route('location.show', $event->location->id )}}">{{ $event->location->name}}</a>
-                
-                @for ($i = 0; $i < 5; $i++)
-                  @if ($i < $event->location->averageRating(\App\User::class))
-                    <i class="fas fa-star"></i>
-                  @else
-                    <i class="far fa-star"></i>
-                  @endif
-                @endfor
-                ( {{ $event->location->usersRated() }} ratings )
-                </span>
-              </div>
-            </div>
             </div>
             @can('Edit Events')
               <a class="btn btn-edit" style="width:auto;" href="{{ route('admin.events.edit',$event->id) }}">Edit</a>
@@ -174,8 +174,11 @@
               <button type="button" class="btn btn-primary m-2" data-toggle="modal" data-target="#addContactModal">Add Contact</button>
 
             @endcan
-
-
+            <div>
+              <span class="float-right">
+                <small>Event Created By: {{  $event->organiser->forename }} {{  $event->organiser->surname }}</small>
+              </span>
+            </div>
           </div>
         </div>
       </div>
