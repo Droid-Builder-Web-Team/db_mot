@@ -176,7 +176,7 @@
             @endcan
             <div>
               <span class="float-right">
-                <small>Event Created By: {{  $event->organiser->forename }} {{  $event->organiser->surname }}</small>
+                <small>Event Submitted By: {{  $event->organiser->forename }} {{  $event->organiser->surname }}</small>
               </span>
             </div>
           </div>

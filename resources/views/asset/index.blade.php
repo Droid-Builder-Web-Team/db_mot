@@ -53,7 +53,7 @@
             <div class="card-header">
                 <div class="row d-flex align-items-center">
                     <div class="col-sm-10 text-center">
-                        <h4 class="text-center title">Active Club Assets</h4>
+                        <h4 class="text-center title">Active Assets</h4>
                     </div>
                 </div>
             </div>
@@ -125,6 +125,7 @@
                         </tbody>
                     </table>
                 </div>
+                Assets are not necessarily property of the club. Some are personally owned by the club member and they are under no obligation to provide access to the asset. 
             </div>
         </div>
     </div>
