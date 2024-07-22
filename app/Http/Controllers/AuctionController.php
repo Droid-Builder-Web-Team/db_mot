@@ -84,6 +84,7 @@ class AuctionController extends Controller
         );
 
         $request['finish_time'] = $request->finish_date . " " . $request->finish_time;
+
         try {
             $auction = Auction::create($request->all());
             flash()->addSuccess('Auction created successfully');
@@ -171,11 +172,15 @@ class AuctionController extends Controller
 
 
         $request['finish_time'] = $request->finish_date . " " . $request->finish_time;
+
         $newauction = $request->all();
+
+        #dd($newauction);
         $linkify = new \Misd\Linkify\Linkify();
         $newauction['description'] = $linkify->process($request->description);
         try {
             $auction->update($newauction);
+            #dd($auction);
             flash()->addSuccess('Auction updated successfully');
         } catch (\Illuminate\Database\QueryException $exception) {
             flash()->addError(

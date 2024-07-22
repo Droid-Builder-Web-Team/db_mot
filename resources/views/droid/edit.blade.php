@@ -70,12 +70,6 @@
                 </select>
             </div>
         </div>
-           {{-- <div class="col-xs-3 col-sm-3 col-md-3">
-               <div class="form-group">
-                   <strong>RC?</strong>
-                   <input type="text" name="radio_controlled" class="form-control" value="{{ $droid->radio_controlled }}">
-               </div>
-           </div> --}}
          </div>
          <div class="form-row">
            <div class="col-xs-12 col-sm-12 col-md-12">
@@ -145,13 +139,13 @@
            <div class="col-xs-6 col-sm-6 col-md-6">
              Builders Notes
              <div class="form-group">
-               <textarea type="text" class="form-control" name="notes">{!! nl2br(e($droid->notes)) !!}</textarea>
+               <textarea type="text" class="form-control" name="notes">{{ $droid->notes }}</textarea>
              </div>
            </div>
             <div class="col-xs-6 col-sm-6 col-md-6">
               Back Story
               <div class="form-group">
-                <textarea type="text" class="form-control" name="back_story">{!! nl2br(e($droid->back_story)) !!}</textarea>
+                <textarea type="text" class="form-control" name="back_story">{{ $droid->back_story }}</textarea>
               </div>
            </div>
          </div>
