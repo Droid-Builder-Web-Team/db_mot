@@ -15,6 +15,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use OwenIt\Auditing\Contracts\Auditable;
 
 /**
  * PortalNews
@@ -25,9 +26,11 @@ use Illuminate\Database\Eloquent\Model;
  * @license  https://opensource.org/licenses/MIT MIT License
  * @link     https://portal.droidbuilders.uk/
  */
-class PortalNews extends Model
+class PortalNews extends Model implements
+    Auditable
 {
     use HasFactory;
+    use \OwenIt\Auditing\Auditable;
 
     protected $guarded = [];
 }
