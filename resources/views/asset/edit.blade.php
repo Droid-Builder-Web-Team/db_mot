@@ -5,10 +5,10 @@
         <div class="card-header">
             <div class="row d-flex ">
                 <div class="text-left col-3">
-                    <a class="btn btn-mot-invert" style="width:auto; color:white;" href="{{ route('asset.index') }}">Back</a>
+                    <a class="btn btn-mot-invert" style="width:auto; color:white;" href="{{ route('asset.index') }}">{{ __('Back') }}</a>
                 </div>
                 <div class="text-center col-6">
-                    <h2 class="justify-content-center">Edit Asset</h2>
+                    <h2 class="justify-content-center">{{ __('Edit Asset') }}</h2>
                 </div>
                 <div class="text-right col-3"></div>
             </div>
@@ -81,7 +81,7 @@
             </div>
 
             <div class="text-center form-group">
-                {{  html()->submit("Submit")->class('btn btn-primary') }}
+                {{  html()->submit(__('Submit'))->class('btn btn-primary') }}
             </div>
 
             {{ html()->closeModelForm() }}

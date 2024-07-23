@@ -31,7 +31,7 @@
                     @if ($uses_pli)
                         @if ($user->validPLI())
                             <span class="float-right">
-                                <a class="btn btn-cover" style="color:white;" href="{{ action('UserController@downloadPDF', $user->id) }}" target="_blank">Cover Note</a>
+                                <a class="btn btn-cover" style="color:white;" href="{{ action('UserController@downloadPDF', $user->id) }}" target="_blank">{{ __('Cover Note') }}</a>
                             </span>
                         @else
                             <span class="float-right badge badge-danger">
@@ -61,29 +61,29 @@
                     <div class="table-responsive">
                         <table class="table table-striped table-sm table-hover table-dark">
                             <tr>
-                                <th>Email</th>
+                                <th>{{ __('Email') }}</th>
                                 <td>{{ $user->email }}</td>
                             </tr>
                             <tr>
-                                <th>County</th>
+                                <th>{{ __('County') }}</th>
                                 <td>{{ $user->county }}</td>
                             </tr>
                             <tr>
-                                <th>Postcode</th>
+                                <th>{{ __('Postcode') }}</th>
                                 <td>{{ $user->postcode }}</td>
                             </tr>
                             <tr>
-                                <th>Country</th>
+                                <th>{{ __('Country') }}</th>
                                 <td>{{ $user->country }}</td>
                             </tr>
                             <tr>
-                                <th>Forum Username</th>
+                                <th>{{ __('Forum Username') }}</th>
                                 <td>{{ $user->username }}</td>
                             </tr>
                             <tr>
-                                <th>Joined On</th>
+                                <th>{{ __('Joined On') }}</th>
                                 @if ($user->join_date == null)
-                                    <td>Unknown</td>
+                                    <td>{{ __('Unknown') }}</td>
                                 @else
                                     <td>{{ \Carbon\Carbon::parse($user->join_date)->isoFormat($user->settings()->get('date_format')) }}</td>
                                 @endif
@@ -110,9 +110,9 @@
                     </div>
                     <div class="text-center edit-button">
                         @can('Edit Members')
-                            <a class="btn btn-transparent-outline-blue" href="{{ route('admin.users.edit', $user->id) }}">Edit</a>
+                            <a class="btn btn-transparent-outline-blue" href="{{ route('admin.users.edit', $user->id) }}">{{ __('Edit') }}</a>
                         @else
-                            <a class="btn btn-transparent-outline-blue" href="{{ route('user.edit', $user->id) }}">Edit</a>
+                            <a class="btn btn-transparent-outline-blue" href="{{ route('user.edit', $user->id) }}">{{ __('Edit') }}</a>
                         @endcan
                     </div>
                 </div>
@@ -128,7 +128,7 @@
                     </div>
                     <div>
                         <div class="text-value text-info">{{ $user->attended_events->count() }}</div>
-                        <div class="text-muted text-uppercase font-weight-bold small">Events</div>
+                        <div class="text-muted text-uppercase font-weight-bold small">{{ __('Events') }}</div>
                     </div>
                 </div>
             </div>
@@ -139,7 +139,7 @@
                     </div>
                     <div>
                         <div class="text-value text-primary">{{ $user->droids->count() }}</div>
-                        <div class="text-muted text-uppercase font-weight-bold small">Droids</div>
+                        <div class="text-muted text-uppercase font-weight-bold small">{{ __('Droids') }}</div>
                     </div>
                 </div>
             </div>
@@ -151,7 +151,7 @@
                         </div>
                         <div>
                             <div class="text-value text-success">{{ $user->yearsService() }}</div>
-                            <div class="text-muted text-uppercase font-weight-bold small">Years</div>
+                            <div class="text-muted text-uppercase font-weight-bold small">{{ __('Years') }}</div>
                         </div>
                     </div>
                 </div>
@@ -163,7 +163,7 @@
                         </div>
                         <div>
                             <div class="text-value text-success">0</div>
-                            <div class="text-muted text-uppercase font-weight-bold small">Years</div>
+                            <div class="text-muted text-uppercase font-weight-bold small">{{ __('Years') }}</div>
                         </div>
                     </div>
                 </div>
@@ -175,7 +175,7 @@
                     </div>
                     <div>
                         <div class="text-value text-warning">{{ $user->achievements->count() }}</div>
-                        <div class="text-muted text-uppercase font-weight-bold small">Achievements</div>
+                        <div class="text-muted text-uppercase font-weight-bold small">{{ __('Achievements') }}</div>
                     </div>
                 </div>
             </div>
@@ -186,7 +186,7 @@
                     </div>
                     <div>
                         <div class="text-value text-info">£{{ $user->attended_events->sum('charity_raised') }}</div>
-                        <div class="text-muted text-uppercase font-weight-bold small">Raised For Charity</div>
+                        <div class="text-muted text-uppercase font-weight-bold small">{{ __('Charity Raised') }}</div>
                     </div>
                 </div>
             </div>
@@ -210,7 +210,7 @@
                                 <input type="hidden" name="user" value="{{ $user->id }}">
                                 <input type="hidden" name="droid" value=0>
                                 <input type="hidden" name="photo_name" value="mug_shot">
-                                <button type="submit" class="btn btn-transparent-outline-blue">Change</button>
+                                <button type="submit" class="btn btn-transparent-outline-blue">{{ __('Change') }}</button>
                             </form>
                         @endif
                     </div>
@@ -224,7 +224,7 @@
         <div class="col-12">
             <div class="text-center card">
                 <div class="card-header">
-                    <h4 class="text-center title">Your Droids</h4>
+                    <h4 class="text-center title">{{ __('Your Droids') }}</h4>
                 </div>
                 <div class="text-center card-body">
                     <div class="row">
@@ -272,7 +272,7 @@
                                     <div class="droid-card-table" style="z-index:2">
                                         <div class="droid-card-row">
                                             <div class="droid-card-center noclick">
-                                                <h2 style="margin-bottom:0px">Add a Droid</h2>
+                                                <h2 style="margin-bottom:0px">{{ __('Add a Droid') }}</h2>
                                             </div>
                                         </div>
                                     </div>
@@ -287,7 +287,7 @@
                                     <div class="droid-card-table" style="z-index:2">
                                         <div class="droid-card-row">
                                             <div class="droid-card-center noclick">
-                                                <h2 style="margin-bottom:0px">Add a Droid</h2>
+                                                <h2 style="margin-bottom:0px">{{ __('Add a Droid') }}</h2>
                                             </div>
                                         </div>
                                     </div>
@@ -305,7 +305,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="text-center card-header">
-                    <h4 class="text-center title">Achievements</h4>
+                    <h4 class="text-center title">{{ __('Achievements') }}</h4>
                 </div>
                 <div class="card-body">
                     @can('Edit Members')
@@ -340,9 +340,9 @@
                     <div class="table-responsive">
                         <table class="table text-center table-striped table-sm table-hover table-dark">
                             <tr>
-                                <th>Name</th>
-                                <th>Notes</th>
-                                <th width=140>Date Added</th>
+                                <th>{{ __('Name') }}</th>
+                                <th>{{ __('Notes') }}</th>
+                                <th width=140>{{ __('Date Added') }}</th>
                             </tr>
                             @foreach ($user->achievements as $achievement)
                                 <tr>
@@ -354,12 +354,12 @@
                         </table>
                     </div>
                     <span class="float-right">
-                        <a class="btn btn-transparent-outline-blue" href="{{ route('achievements.index') }}">View All</a>
+                        <a class="btn btn-transparent-outline-blue" href="{{ route('achievements.index') }}">{{ __('View All') }}</a>
                     </span>
                     @else
                     <span class="float-center">
                         Achievements can be gained for certain actions. Click the button below to find out more<br>
-                        <a class="btn btn-transparent-outline-blue" href="{{ route('achievements.index') }}">View All</a>
+                        <a class="btn btn-transparent-outline-blue" href="{{ route('achievements.index') }}">{{ __('View All') }}</a>
                     </span>
                     @endif
                 </div>
@@ -382,13 +382,13 @@
                     <div class="table-responsive">
                         <table class="table text-center table-striped table-sm table-hover table-dark">
                             <tr>
-                                <th>Date</th>
-                                <th>Details</th>
-                                <th>Location</th>
-                                <th>Charity Raised</th>
+                                <th>{{ __('Date') }}</th>
+                                <th>{{ __('Details') }}</th>
+                                <th>{{ __('Location') }}</th>
+                                <th>{{ __('Charity Raised') }}</th>
                                 <th></th>
                             </tr>
-                            <tr><th colspan=5>Upcoming</th></tr>
+                            <tr><th colspan=5>{{ __('Upcoming') }}</th></tr>
                             @foreach ($user->goingTo as $event)
                                 <tr>
                                     <td>{{ \Carbon\Carbon::parse($event->date)->isoFormat($user->settings()->get('date_format')) }}</td>
@@ -398,7 +398,7 @@
                                     <td><a class="btn-outline-icon-view" href="{{ route('event.show', $event->id) }}"><i class="fas fa-eye"></a></td>
                                 </tr>
                             @endforeach
-                            <tr><th colspan=5>Attended</th></tr>
+                            <tr><th colspan=5>{{ __('Attended') }}</th></tr>
                             @foreach ($user->attended_events as $event)
                                 <tr>
                                     <td>{{ \Carbon\Carbon::parse($event->date)->isoFormat($user->settings()->get('date_format')) }}</td>
@@ -422,16 +422,16 @@
         <div class="col-12">
             <div class="card">
                 <div class="text-center card-header">
-                    <h4 class="text-center title">Driving Course Runs</h4>
+                    <h4 class="text-center title">{{ __('Driving Course Runs') }}</h4>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table text-center table-striped table-sm table-hover table-dark">
                             <tr>
-                                <th>Run Date</th>
-                                <th>Droid Name</th>
-                                <th>Penalties</th>
-                                <th>Final Time</th>
+                                <th>{{ __('Run Date') }}</th>
+                                <th>{{ __('Droid Name') }}</th>
+                                <th>{{ __('Penalties') }}</th>
+                                <th>{{ __('Final Time') }}</th>
                                 <th></th>
                             </tr>
                             @foreach ($user->course_runs as $course_run)

@@ -3,7 +3,7 @@
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h5 class="modal-title" id="addContactModalLabel">Add contact</h5>
+							<h5 class="modal-title" id="addContactModalLabel">{{ __('Add Contact') }}</h5>
 								<button type="button" class="close" data-dismiss="modal" aria-
                                 label="Close" id=close-button>
 									<span aria-hidden="true">&times;</span>
@@ -22,7 +22,7 @@
                         </div>
 						<div class="modal-footer">
 							<input type="submit" class="btn btn-primary" value="Link Contact">
-                            <a class="btn btn-info" href="{{ route('admin.contacts.create') }}">Create New Contact</a>
+                            <a class="btn btn-info" href="{{ route('admin.contacts.create') }}">{{ __('Create New Contact') }}</a>
 						</div>
 					</div>
 				</div>

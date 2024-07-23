@@ -1,4 +1,4 @@
 
 <div class="alert {{$state }}">
-MOT: {{ $status }}
+{{ __('MOT') }}: {{ $status }}
 </div>

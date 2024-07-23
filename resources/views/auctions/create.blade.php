@@ -9,10 +9,10 @@
                     <div class="col-sm-2 text-left">
                     </div>
                     <div class="col-sm-8 text-center">
-                        <h4 class="text-center title">Charity Auctions</h4>
+                        <h4 class="text-center title">{{ __('Charity Auctions') }}</h4>
                     </div>
                     <div class="col-sm-2 text-right">
-                        <a class="btn btn-primary" href="{{ route('auctions.index') }}">Back</a>
+                        <a class="btn btn-primary" href="{{ route('auctions.index') }}">{{ __('Back') }}</a>
                     </div>
                 </div>
             </div>
@@ -43,7 +43,7 @@
 
                     <div class="row">
                         <div class="col-sm-2 form-group">
-                            <label for="description"><strong>Description:</strong></label>
+                            <label for="description"><strong>{{ __('Description') }}:</strong></label>
                         </div>
                     </div>
 
@@ -57,7 +57,7 @@
                     <div class="row">
                     <div class="col-xs-4 col-sm-4 col-md-4">
                             <div class="form-group">
-                                <strong>Country:</strong><br>
+                                <strong>{{ __('Country') }}:</strong><br>
                                 <select name=country>
                                         <option value="united kingdom">United Kingdom</option>
                                         <option value="united states">United States</option>
@@ -66,7 +66,7 @@
                         </div>
                         <div class="col-xs-4 col-sm-4 col-md-4">
                             <div class="form-group">
-                                <strong>Currency:</strong><br>
+                                <strong>{{ __('Currency') }}:</strong><br>
                                 <select name=currency>
                                         <option value="gbp">GBP (£)</option>
                                         <option value="usd">USD ($)</option>
@@ -75,7 +75,7 @@
                         </div>
                         <div class="col-xs-4 col-sm-4 col-md-4">
                             <div class="form-group">
-                                <strong>Type:</strong><br>
+                                <strong>{{ __('Type') }}:</strong><br>
                                 <select name=type>
                                         <option value="standard">Standard (eBay style)</option>
                                         <option value="silent">Silent</option>
@@ -86,19 +86,19 @@
                     <div class="row">
                         <div class="col-xs-3 col-sm-3 col-md-3">
                             <div class="form-group">
-                                <strong>Finish Date:</strong>
+                                <strong>{{ __('Finish Date') }}:</strong>
                                 <input type="date" name=finish_date>
                             </div>
                         </div>
                         <div class="col-xs-3 col-sm-3 col-md-3">
                             <div class="form-group">
-                                <strong>Finish Time:</strong>
+                                <strong>{{ __('Finish Time') }}:</strong>
                                 <input type="time" name=finish_time size=2>
                             </div>
                         </div>                        
                         <div class="col-xs-3 col-sm-3 col-md-3">
                             <div class="form-group">
-                                <strong>Timezone:</strong><br>
+                                <strong>{{ __('Timezone') }}:</strong><br>
                                 <select name=timezone>
                                         <option value="Europe/London">British Summer Time</option>
                                         <option value="America/New York">Grenwich Mean Time</option>
@@ -110,7 +110,7 @@
 
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
                         </div>
                     </div>
 

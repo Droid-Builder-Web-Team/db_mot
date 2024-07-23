@@ -73,7 +73,7 @@
           <div class="card-body">
             <div class="row no-gutters">
               <div class="col-md-8">
-                <h2 class="card-title">Description</h2>
+                <h2 class="card-title">{{ __('Description') }}</h2>
                 @if($event->created_at > \Carbon\Carbon::create(2021,8,23,0,0,0, 'Europe/London'))
                  <div id="event_description">{!! $event->description !!}</div>
                 @else
@@ -88,13 +88,13 @@
 
                 @if($event->quantity != 0)
                   <div class="droid_limit">
-                      <p>Attendee Limit: {{ $event->quantity }}</p>
+                      <p>{{ __('Attendee Limit') }}: {{ $event->quantity }}</p>
                   </div>
                 @endif
 
                 @if($event->sw_only == 1)
                   <div class="sw_only">
-                    <p><b>Star Wars Only Event</b></p>
+                    <p><b>{{ __('Star Wars Only event') }}</b></p>
                   </div>
                 <br>
                 @endif
@@ -104,15 +104,15 @@
                 @endcan
 
                 @if(!$event->isFuture())
-                  <strong>Charity Raised:</strong>
+                  <strong>{{ __('Charity Raised') }}:</strong>
                   £{{ $event->charity_raised }}
                 @endif
                 @if($event->url != "")
                   <br>
-                  <strong>Event URL:</strong> <a href="{{ $event->url }}" target="_blank">{{$event->url}}</a>
+                  <strong>{{ __('Event URL') }}:</strong> <a href="{{ $event->url }}" target="_blank">{{$event->url}}</a>
                 @endif
                 <hr>
-                <i class="fas fa-calendar-day"></i> Add to Calendar:
+                <i class="fas fa-calendar-day"></i> {{ __('Add to Calendar') }}:
                 <a target="_blank" href="{{ $link->google() }}" class="btn-sm btn-link">Google</a>
                 <a target="_blank" href="{{ $link->webOutlook() }}" class="btn-sm btn-link">Outlook</a>
                 <a target="_blank" href="{{ $link->ics() }}" class="btn-sm btn-link">Apple</a>
@@ -168,15 +168,15 @@
               </div>
             </div>
             @can('Edit Events')
-              <a class="btn btn-edit" style="width:auto;" href="{{ route('admin.events.edit',$event->id) }}">Edit</a>
-              <a class="btn btn-edit" style="width:auto;" href="{{ route('admin.events.addimage',[ 'event_id' => $event->id]) }}">Add Image</a>
+              <a class="btn btn-edit" style="width:auto;" href="{{ route('admin.events.edit',$event->id) }}">{{ __('Edit') }}</a>
+              <a class="btn btn-edit" style="width:auto;" href="{{ route('admin.events.addimage',[ 'event_id' => $event->id]) }}">{{ __('Add Image') }}</a>
               <span id="export" class="btn btn-info" onclick="shareToFacebook(event.target);">Share to Facebook</span>
-              <button type="button" class="btn btn-primary m-2" data-toggle="modal" data-target="#addContactModal">Add Contact</button>
+              <button type="button" class="btn btn-primary m-2" data-toggle="modal" data-target="#addContactModal">{{ __('Add Contact') }}</button>
 
             @endcan
             <div>
               <span class="float-right">
-                <small>Event Submitted By: {{  $event->organiser->forename }} {{  $event->organiser->surname }}</small>
+                <small>{{ __('Event Submitted By') }}: {{  $event->organiser->forename }} {{  $event->organiser->surname }}</small>
               </span>
             </div>
           </div>
@@ -187,11 +187,11 @@
         <div class="card">
             @if(!$event->isFuture())
                 <div class="card-header">
-                    Attended By:
+                  {{ __('Attended By') }}:
                 </div>
             @else
                 <div class="card-header">
-                    Currently Interested:
+                  {{ __('Currently Interested') }}:
                 </div>
             @endif
             <div class="card-body">
@@ -227,7 +227,7 @@
                         </ul>
                     @endcan
                 @else
-                <i class="fas fa-check-circle"></i><strong> Going</strong>
+                <i class="fas fa-check-circle"></i><strong> {{ __('Going') }}</strong>
                 <ul>
                   @foreach($event->going as $user)
                     <li>
@@ -249,7 +249,7 @@
                   @endforeach
                 </ul>
                 @canany(['Edit Events', 'Add MOT'])
-                  <i class="far fa-question-circle"></i><strong> Cancelled:</strong>
+                  <i class="far fa-question-circle"></i><strong> {{ __('Cancelled') }}:</strong>
                   <ul>
                     @foreach($event->notgoing as $user)
                       <li><a href="{{ route('user.show', $user->id) }}">{{ $user->forename ?? "Deactivated"}} {{ $user->surname ?? "User"}}</a></li>
@@ -271,22 +271,22 @@
   @method('PUT')
   <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
 <div class="card">
-<div class="card-header">Register Interest</div>
+<div class="card-header">{{ __('Register Interest') }}</div>
 <div class="card-body">
     @if($user_status == "no" && $event->isFull())
-      Event is full
+    {{ __('Event is Full') }}
     @else
       <div class="form-group">
       <div class="form-check form-check-inline">
           <input class="form-check-input" type="radio" name="going" id="not_going" value="no" {{ $user_status == 'no' ? 'checked' : '' }}>
           <label class="form-check-label" for="not_going">
-          Not Going
+            {{ __('Not Going') }}
           </label>
       </div>
       <div class="form-check form-check-inline">
           <input class="form-check-input" type="radio" name="going" id="is_going" value="yes" {{ $user_status == 'yes' ? 'checked' : '' }}>
           <label class="form-check-label" for="is_going">
-          Going
+            {{ __('Going') }}
           </label>
       </div>
       </div>
@@ -294,13 +294,13 @@
       <div class="form-check form-check-inline">
           <input class="form-check-input" type="radio" name="spotter" id="with_droid" value="no" {{ $user_spotter == 'no' ? 'checked' : '' }}>
           <label class="form-check-label" for="with_droid">
-          With Droid
+            {{ __('With Droid') }}
           </label>
       </div>
       <div class="form-check form-check-inline">
           <input class="form-check-input" type="radio" name="spotter" id="no_droid" value="yes" {{ $user_spotter == 'yes' ? 'checked' : '' }}>
           <label class="form-check-label" for="no_droid">
-          Spotter
+            {{ __('Spotter') }}
           </label>
       </div>
       </div>
@@ -309,7 +309,7 @@
       <div class="form-check form-check-inline">
           {{Form::hidden('mot_required','0')}}
           <input type="checkbox" id="mot_required" name="mot_required" {{ $user_mot ? 'checked=1 value=1' : 'value=1' }} class="form-check-input">
-          <label class="form-check-label" for="mot_required">Request MOT at event</label>
+          <label class="form-check-label" for="mot_required">{{ __('Request MOT at event') }}</label>
       </div>
       </div>
       @else
@@ -324,7 +324,7 @@
       </div>
       @endif
       <div class="form-group">
-          <button type="submit" class="btn btn-mot">Submit</button>
+          <button type="submit" class="btn btn-mot">{{ __('Submit') }}</button>
       </div>
     @endif
 </div>

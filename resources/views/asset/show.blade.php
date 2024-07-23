@@ -9,14 +9,14 @@
             <div class="row d-flex align-items-center">
                 <div class="col-sm-2 text-left">
                     @if(Auth::user()->id == $asset->user->id || Gate::check('Edit Marketplace'))
-                        <a class="btn btn-primary" href={{ route('asset.edit', $asset->id) }}>Edit Asset</a>
+                        <a class="btn btn-primary" href={{ route('asset.edit', $asset->id) }}>{{ __('Edit Asset') }}</a>
                     @endif
                 </div>
                 <div class="col-sm-8 text-center">
                     <h4 class="text-center title">{{$asset->title}}</h4>
                 </div>
                 <div class="col-sm-2 text-right">
-                    <a class="btn btn-primary" href="{{ route('asset.index') }}">Back</a>
+                    <a class="btn btn-primary" href="{{ route('asset.index') }}">{{ __('Back') }}</a>
                 </div>
             </div>
         </div>
@@ -24,15 +24,15 @@
       <div class="card-body">
           <div class="row">
             <div class="col-md-12">
-              <div class="row"><div class="col-md-3"><strong>Name:</strong></div><div class="col-md-9">{{ $asset->title }}</div></div>
-              <div class="row"><div class="col-md-3"><strong>Owner:</strong></div><div class="col-md-9">{{ $asset->user->forename }} {{ $asset->user->surname }}</div></div>
-              <div class="row"><div class="col-md-3"><strong>Current Location:</strong></div><div class="col-md-9">{{ $asset->current_holder->county }} ({{ $asset->current_holder->forename }} {{ $asset->current_holder->surname }})</div></div>
-              <div class="row"><div class="col-md-3"><strong>Added:</strong></div><div class="col-md-9">{{ $asset->added }}</div></div>
+              <div class="row"><div class="col-md-3"><strong>{{ __('Name') }}:</strong></div><div class="col-md-9">{{ $asset->title }}</div></div>
+              <div class="row"><div class="col-md-3"><strong>{{ __('Owner') }}:</strong></div><div class="col-md-9">{{ $asset->user->forename }} {{ $asset->user->surname }}</div></div>
+              <div class="row"><div class="col-md-3"><strong>{{ __('Current Location') }}:</strong></div><div class="col-md-9">{{ $asset->current_holder->county }} ({{ $asset->current_holder->forename }} {{ $asset->current_holder->surname }})</div></div>
+              <div class="row"><div class="col-md-3"><strong>{{ __('Added') }}:</strong></div><div class="col-md-9">{{ $asset->added }}</div></div>
               @if( $asset->created_at != $asset->updated_at)
-                <div class="row"><div class="col-md-3"><strong>Updated:</strong></div><div class="col-md-9">{{ $asset->updated_at }}</div></div>
+                <div class="row"><div class="col-md-3"><strong>{{ __('Updated') }}:</strong></div><div class="col-md-9">{{ $asset->updated_at }}</div></div>
               @endif
-              <div class="row"><div class="col-md-3"><strong>Type:</strong></div><div class="col-md-9">{{ strtoupper($asset->type->value) }}</div></div>
-              <div class="row"><div class="col-md-3"><strong>Current State:</strong></div>
+              <div class="row"><div class="col-md-3"><strong>{{ __('Type') }}:</strong></div><div class="col-md-9">{{ strtoupper($asset->type->value) }}</div></div>
+              <div class="row"><div class="col-md-3"><strong>{{ __('Current State') }}:</strong></div>
               @php
                 $bgcolor = "grey";
                 $color = "black";
@@ -66,7 +66,7 @@
         </div>
         <div class="row">
           <div class="col-md-12">
-            <strong>Description:</strong>
+            <strong>{{ __('Description') }}:</strong>
             <div id="description">{!! $asset->description !!}</div>
           </div>
         </div>

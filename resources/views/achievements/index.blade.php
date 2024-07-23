@@ -4,7 +4,7 @@
 
 <div class="card">
   <div class="card-header">
-    <h4 class="title text-center">Achievements</h4>
+    <h4 class="title text-center">{{ __('Achievements') }}</h4>
   </div>
   <div class="card-body">
     <div>
@@ -14,9 +14,9 @@
     </div class="table-responsive">
     <table class="table table-striped table-sm table-hover table-dark">
       <tr>
-        <th>Achievement</th>
-        <th>Description</th>
-        <th>Awarded</th>
+        <th>{{ __('Achievement') }}</th>
+        <th>{{ __('Description') }}</th>
+        <th>{{ __('Awarded') }}</th>
       </tr>
       @foreach($achievements as $achievement)
         <tr>

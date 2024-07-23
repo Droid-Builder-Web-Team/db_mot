@@ -9,11 +9,11 @@
         <div class="row d-flex align-items-center">
             <div class="col-sm-2 text-left">
                 @can('Edit Auction')
-                <a class="btn btn-primary" href={{ route('auctions.create') }}>Create Auction</a>
+                <a class="btn btn-primary" href={{ route('auctions.create') }}>{{ __('Create Auction') }}</a>
                 @endcan
             </div>
             <div class="col-sm-8 text-center">
-                <h4 class="text-center title">Charity Auctions</h4>
+                <h4 class="text-center title">{{ __('Charity Auctions') }}</h4>
             </div>
             <div class="col-sm-2 text-right"></div>
         </div>
@@ -22,11 +22,11 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>Auction</th>
-                    <th scope="col" class="d-none d-md-table-cell">Country</th>
-                    <th scope="col" class="d-none d-sm-table-cell">Current</th>
-                    <th>Time Left</th>
-                    <th>Action</th>
+                    <th>{{ __('Auction') }}</th>
+                    <th scope="col" class="d-none d-md-table-cell">{{ __('Country') }}</th>
+                    <th scope="col" class="d-none d-sm-table-cell">{{ __('Current') }}</th>
+                    <th>{{ __('Time Left') }}</th>
+                    <th>{{ __('Action') }}</th>
                 </tr>
             </thead>
             <tbody>
@@ -36,14 +36,14 @@
                         <td scope="col" class="d-none d-md-table-cell">{{ ucwords($auction->country) }}</td>
                         <td scope="col" class="d-none d-sm-table-cell">
                             @if($auction->type == "silent")
-                                Silent Auction
+                                {{ __('Silent Auction') }}
                             @else
                                 {{ $auction->highest()['highest'] }} ({{ strtoupper($auction->currency) }})
                             @endif
                         </td>
                         <td>
                             @if ($auction->secondsLeft() < 0 )
-                                Finished
+                                {{ __('Finished') }}
                             @else
                                 {{$auction->timeLeft()}}
                             @endif

@@ -8,19 +8,19 @@
   <div class="col-lg-12 margin-tb">
     <div class="card">
       <div class="card-header">
-        <h4 class="text-center title">Upcoming Events</h4>
+        <h4 class="text-center title">{{ __('Upcoming Events') }}</h4>
       </div>
       <div class="card-body">
 		<p>
             <br />
             
-	        <a class="btn-sm btn-link" href="{{ route('event.past') }}">Past Events</a>
-			<a class="btn-sm btn-link" href="/ical/{{ auth()->user()->calendar_id }}" target="_blank">Your Events (iCal)</a>
+	        <a class="btn-sm btn-link" href="{{ route('event.past') }}">{{ __('Past Events') }}</a>
+			<a class="btn-sm btn-link" href="/ical/{{ auth()->user()->calendar_id }}" target="_blank">{{ __('Your Events') }} (iCal)</a>
 			@can('Edit Events')
-				<a class="btn-sm btn-link" href="/ical/{{ auth()->user()->calendar_id }}/all" target="_blank">All Events (iCal)</a>
+				<a class="btn-sm btn-link" href="/ical/{{ auth()->user()->calendar_id }}/all" target="_blank">{{ __('All Events') }} (iCal)</a>
 			@endcan
 			@if(config('features.userevents', FALSE))
-				<a class="btn-sm btn-link" href="{{ route('event.create') }}">Submit Event</a>				
+				<a class="btn-sm btn-link" href="{{ route('event.create') }}">{{ __('Submit Event') }}</a>				
             @endif
           </p>
     {!! $calendar->calendar() !!}

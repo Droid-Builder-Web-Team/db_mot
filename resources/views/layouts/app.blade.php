@@ -18,6 +18,7 @@
     <link href="{{ asset('css/media.css') }}" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link href="/vendor/flasher/flasher.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.2.3/css/flag-icons.min.css" rel="stylesheet" />
 
 
 
@@ -66,6 +67,7 @@
                     <li class="c-header-nav-item">
                         <a href="/Droid Builders Portal User Guide.pdf" target="_blank"><i class="far fa-question-circle fa-2x" title="User Guide"></i></a>
                     </li>
+                    @include('partials.language_switcher')
                     @include('partials.notification')
                     @include('partials.account')
 

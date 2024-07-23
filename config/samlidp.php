@@ -32,19 +32,6 @@ return [
     'digest_algorithm' => \RobRichards\XMLSecLibs\XMLSecurityDSig::SHA1,
     // list of all service providers
     'sp' => [
-            // Base64 encoded ACS URL
-            env('SAML_FRIENDICA_BASE64_URL', false) => [ // aHR0cHM6Ly9mci42MGNoZXF1ZXJzYXZlbnVlLm5ldC9zYW1sL3Nzbw==
-            //     // Your destination is the ACS URL of the Service Provider
-            'destination' => env('SAML_FRIENDICA_DESTINATION', false), // 'https://fr.60chequersavenue.net/saml/sso',
-            'logout' => env('SAML_FRIENDICA_LOGOUT', false), // 'https://fr.60chequersavenue.net/saml/slo',
-            //    // SP certificate
-            'certificate' => '',
-            //    // Turn off auto appending of the idp query param
-            'query_params' => false,
-            //    // Turn off the encryption of the assertion per SP
-            'encrypt_assertion' => false
-            // ]
-            ],
             env('SAML_WORDPRESS_BASE64_URL', false) => [ // aHR0cHM6Ly9kcm9pZGJ1aWxkZXJzLnVrLw==
             //     // Your destination is the ACS URL of the Service Provider
             'destination' => env('SAML_WORDPRESS_DESTINATION', false), // 'https://fr.60chequersavenue.net/saml/sso',

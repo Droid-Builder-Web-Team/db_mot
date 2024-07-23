@@ -36,7 +36,7 @@
             </a>
           @endforeach
           <a class="dropdown-item text-center border-top" href="{{ route('notifications')}}">
-            View all notifications
+            {{ __('View All Notifications') }}
           </a>
         </div>
       </li>

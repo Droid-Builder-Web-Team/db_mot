@@ -66,7 +66,6 @@ class PortalNewsController extends Controller
 
         try {
             $portalnews = PortalNews::create($validatedData);
-            ;
             flash()->addSuccess('News created successfully');
         } catch (\Illuminate\Database\QueryException $exception) {
             flash()->addError('Failed to create News');
@@ -78,7 +77,7 @@ class PortalNewsController extends Controller
         } catch (\Illuminate\Database\QueryException $exception) {
             flash()->addError('Failed to notify users');
         }
-        return redirect()->route('portalnews.show', $portalnews->id);
+        return redirect('portalnews');
     }
 
     /**

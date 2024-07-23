@@ -147,6 +147,12 @@ Route::group(
         Route::resource('auctions', 'AuctionController');
         Route::resource('ware', 'WareController');
         Route::put('auctions/bid/{auction}', 'AuctionController@bid')->name('auctions.bid');
+
+        Route::get('language/{locale}', function ($locale) {
+            app()->setLocale($locale);
+            session()->put('locale', $locale);
+            return redirect()->back();
+        });
     }
 );
 

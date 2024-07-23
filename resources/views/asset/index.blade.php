@@ -7,10 +7,10 @@
             <div class="card-header">
                 <div class="row d-flex align-items-center">
                     <div class="col-sm-2 text-left">
-                        <a class="btn btn-primary" href={{ route('asset.create') }}>Add Asset</a>
+                        <a class="btn btn-primary" href={{ route('asset.create') }}>{{ __('Add Asset') }}</a>
                     </div>
                     <div class="col-sm-8 text-center">
-                        <h4 class="text-center title">Your Assets</h4>
+                        <h4 class="text-center title">{{ __('Your Assets') }}</h4>
                     </div>
                     <div class="col-sm-2 text-right"></div>
                 </div>
@@ -20,9 +20,9 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>Type</th>
-                                <th>Name</th>
-                                <th>Action</th>
+                                <th>{{ __('Type') }}</th>
+                                <th>{{ __('Name') }}</th>
+                                <th>{{ __('Action') }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -53,7 +53,7 @@
             <div class="card-header">
                 <div class="row d-flex align-items-center">
                     <div class="col-sm-10 text-center">
-                        <h4 class="text-center title">Active Assets</h4>
+                        <h4 class="text-center title">{{ __('Active Assets') }}</h4>
                     </div>
                 </div>
             </div>
@@ -62,12 +62,12 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>Type</th>
-                                <th>Name</th>
-                                <th>Owner</th>
-                                <th>Current Location</th>
-                                <th>Current State</th>
-                                <th>Action</th>
+                                <th>{{ __('Type') }}</th>
+                                <th>{{ __('Name') }}</th>
+                                <th>{{ __('Owner') }}</th>
+                                <th>{{ __('Current Location') }}</th>
+                                <th>{{ __('Current State') }}</th>
+                                <th>{{ __('Action') }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -137,7 +137,7 @@
             <div class="card-header">
                 <div class="row d-flex align-items-center">
                     <div class="col-sm-10 text-center">
-                        <h4 class="text-center title">Retired Assets</h4>
+                        <h4 class="text-center title">{{ __('Retired Assets') }}</h4>
                     </div>
                 </div>
             </div>
@@ -146,11 +146,11 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>Type</th>
-                                <th>Name</th>
-                                <th>Owner</th>
-                                <th>Current Location</th>
-                                <th>Action</th>
+                                <th>{{ __('Type') }}</th>
+                                <th>{{ __('Name') }}</th>
+                                <th>{{ __('Owner') }}</th>
+                                <th>{{ __('Current Location') }}</th>
+                                <th>{{ __('Action') }}</th>
                             </tr>
                         </thead>
                         <tbody>

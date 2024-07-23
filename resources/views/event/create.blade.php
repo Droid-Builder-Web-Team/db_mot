@@ -5,10 +5,10 @@
     <div class="card-header">
         <div class="row d-flex ">
             <div class="text-left col-3">
-                <a class="btn btn-mot-invert" style="width:auto; color:white;" href="{{ route('event.index') }}">Back</a>
+                <a class="btn btn-mot-invert" style="width:auto; color:white;" href="{{ route('event.index') }}">{{ __('Back') }}</a>
             </div>
             <div class="text-center col-6">
-                <h2 class="justify-content-center">Create Event</h2>
+                <h2 class="justify-content-center">{{ __('Create Event') }}</h2>
             </div>
             <div class="text-right col-3"></div>
         </div>
@@ -33,7 +33,7 @@
 
             <div class="form-group row d-flex justify-content-center align-items-center">
                 <div class="col-sm-2">
-                    <label for="name"><strong>Name</strong></label>
+                    <label for="name"><strong>{{ __('Name') }}</strong></label>
                 </div>
 
                 <div class="col-sm-10">
@@ -43,13 +43,13 @@
 
             <div class="form-group row d-flex justify-content-center align-items-center">
                 <div class="col-sm-2">
-                    <label for="location_id"><strong>Location</strong></label>
+                    <label for="location_id"><strong>{{ __('Location') }}</strong></label>
                 </div>
 
                 <div class="col-sm-5">
                     <select class="form-control location-dropdown" name="location_id" id="location_id">
                         <option value="---">---</option>
-                        <option value="new">New Location</option>
+                        <option value="new">{{ __('New Location') }}</option>
                         @foreach ($locations as $location)
                             <option value="{{ $location->id }}">{{ $location->name }}</option>
                         @endforeach
@@ -57,38 +57,38 @@
                 </div>
 
                 <div class="col-sm-5">
-                    <a class="btn btn-info" id="new-location-btn" href=#>New Location</a>
+                    <a class="btn btn-info" id="new-location-btn" href=#>{{ __('New Location') }}</a>
                 </div>
             </div>
 
 <div id="new-location" style="display:none">
     <div class="card">
         <div class="card-header">
-            New location
+            {{ __('New Location') }}
         </div>
         <div class="card-body">
             <div class="form-group">
-                <label for="name"><strong>Name</strong></label>
+                <label for="name"><strong>{{ __('Name') }}</strong></label>
                 <input type="text" name="location_name" class="form-control" placeholder="Name">
             </div>
 
             <div class="form-group">
-                <label for="street"><strong>Street</strong></label>
+                <label for="street"><strong>{{ __('Street') }}</strong></label>
                 <input type="text" name="street" class="form-control" placeholder="Street">
             </div>
 
             <div class="form-group">
-                <label for="town"><strong>Town</strong></label>
+                <label for="town"><strong>{{ __('Town') }}</strong></label>
                 <input type="text" name="town" class="form-control" placeholder="Town">
             </div>
 
             <div class="form-group">
-                <label for="county"><strong>County</strong></label>
+                <label for="county"><strong>{{ __('County') }}</strong></label>
                 <input type="text" name="county" class="form-control" placeholder="County">
             </div>
 
             <div class="form-group">
-                <label for="country"><strong>Country</strong></label>
+                <label for="country"><strong>{{ __('Country') }}</strong></label>
                 <select name="country" class="form-control" placeholder="Country">
                     <option disabled value>Please Select</option>
                     <option value="United Kingdom">United Kingdom</option>
@@ -101,7 +101,7 @@
             </div>
 
             <div class="form-group">
-                <label for="postcode"><strong>Postcode</strong></label>
+                <label for="postcode"><strong>{{ __('Postcode') }}</strong></label>
                 <input type="text" name="postcode" class="form-control" placeholder="Postcode">
             </div>
         </div>
@@ -110,7 +110,7 @@
 
             <div class="form-group row d-flex justify-content-center align-items-center">
                 <div class="col-sm-2">
-                    <label for="date"><strong>Parking Details</strong></label>
+                    <label for="date"><strong>{{ __('Parking Details') }}</strong></label>
                 </div>
 
                 <div class="col-sm-10">
@@ -122,7 +122,7 @@
 
             <div class="form-group row d-flex justify-content-center align-items-center">
                 <div class="col-sm-2">
-                    <label for="description"><strong>Description</strong></label>
+                    <label for="description"><strong>{{ __('Description') }}</strong></label>
                 </div>
 
                 <div class="col-sm-10">
@@ -132,7 +132,7 @@
 
             <div class="form-group row d-flex justify-content-center align-items-center">
                 <div class="col-sm-2">
-                    <label for="date"><strong>Date</strong></label>
+                    <label for="date"><strong>{{ __('Date') }}</strong></label>
                 </div>
 
                 <div class="col-sm-3">
@@ -140,7 +140,7 @@
                 </div>
 
                 <div class="col-sm-1">
-                    <label for="days"><strong>Days</strong></label>
+                    <label for="days"><strong>{{ __('Days') }}</strong></label>
                 </div>
 
                 <div class="col-sm-2">
@@ -148,7 +148,7 @@
                 </div>
 
                 <div class="col-sm-2">
-                    <label for="days"><strong>Droid Limit</strong></label>
+                    <label for="days"><strong>{{ __('Droid Limit') }}</strong></label>
                 </div>
 
                 <div class="col-sm-2">
@@ -158,26 +158,26 @@
 
             <div class="form-group row d-flex justify-content-center align-items-center">
                 <div class="col-sm-2">
-                    <label for="date"><strong>Event Options</strong></label>
+                    <label for="date"><strong>{{ __('Event Options') }}</strong></label>
                 </div>
 
                 <div class="col-sm-10">
                     <div class="form-check">
                         {{ Form::hidden('public', '0') }}
                         <input type="checkbox" id="public" name="public" class="form-check-input" value="1">
-                        <label class="form-check-label" for="public">Display publicly on droidbuilders.uk if anyone is attending</label>
+                        <label class="form-check-label" for="public">{{ __('Display publicly on droidbuilders.uk if anyone is attending') }}</label>
                     </div>
                     <div class="form-check">
                         {{ Form::hidden('sw_only', '0') }}
                         <input type="checkbox" id="sw_only" name="sw_only" class="form-check-input" value="1">
-                        <label class="form-check-label" for="sw_only">Star Wars Only event</label>
+                        <label class="form-check-label" for="sw_only">{{ __('Star Wars Only event') }}</label>
                     </div>
                 </div>
             </div>
 
             <div class="form-group row d-flex justify-content-center align-items-center">
                 <div class="col-sm-2">
-                    <label for="date"><strong>URL</strong></label>
+                    <label for="date"><strong>{{ __('URL') }}</strong></label>
                 </div>
 
                 <div class="col-sm-10">
@@ -186,7 +186,7 @@
             </div>
 
             <div class="text-center form-group">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
             </div>
         </form>
     </div>

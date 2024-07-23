@@ -4,7 +4,7 @@
 
 <div class="card">
     <div class="card-header">
-        <h2>Droid Database</h2>
+        <h2>{{ __('Droid Database') }}</h2>
     </div>
     <div class="card-content">
         <ul class="nav nav-tabs nav-justified">

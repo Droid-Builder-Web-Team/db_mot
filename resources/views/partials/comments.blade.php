@@ -2,7 +2,7 @@
     <div class="col-md-12">
       <div class="card">
         <div class="card-header">
-          Comments
+          {{ __('Comments') }}
         </div>
         <div class="card-body">
   @foreach($comments as $comment)
@@ -29,7 +29,7 @@
               {!! nl2br(e($comment->body)) !!}
               @can('Edit Partrun')
               <span class="float-right">
-                <a href="{{ route('comment.delete', $comment->id )}}" class="btn-sm btn-danger">Delete</a>
+                <a href="{{ route('comment.delete', $comment->id )}}" class="btn-sm btn-danger">{{ __('Delete') }}</a>
               </span>
               @endcan
               <span class="float-right">
@@ -46,7 +46,7 @@
   @endforeach
           <div class="card border-primary">
             <div class="card-header">
-              <strong>Add Comment</strong>
+              <strong>{{ __('Add Comment') }}</strong>
             </div>
             <div class="card-body">
               <form action="{{ route('comment.add', [ 'id' => $model_id]) }}" method="POST">
@@ -60,7 +60,7 @@
                 @can($permission)
                   <div class="form-check float-right">
                     <input class="form-check-input" type="checkbox" name="broadcast" id="broadcast">
-                    <label class="form-check-label" for="broadcast">Broadcast</label>
+                    <label class="form-check-label" for="broadcast">{{ __('Broadcast') }}</label>
                   </div>
                 @endcan
               </form>

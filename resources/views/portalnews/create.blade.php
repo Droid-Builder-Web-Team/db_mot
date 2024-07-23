@@ -21,12 +21,18 @@
 
                 <div class="form-group">
                     <label for="title"><strong>Title</strong></label>
-                    <input type="text" name="title" class="form-control" placeholder="Title">
+                    <input type="text" name="title" class="form-control @error('title') is-invalid @enderror" placeholder="Title" value={{ old('title') }}>
+                    @error('title')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="form-group">
                     <label for="message"><strong>Message</strong></label>
-                    <textarea class="form-control" style="height:250px" id="message" name="message" placeholder="Message"></textarea>
+                    <textarea class="form-control @error('message') is-invalid @enderror" style="height:250px" id="message" name="message" placeholder="Message">{{ old('message') }}</textarea>
+                    @error('message')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="form-group">

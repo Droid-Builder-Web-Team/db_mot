@@ -80,7 +80,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'gb',
 
     /*
     |--------------------------------------------------------------------------
@@ -93,7 +93,15 @@ return [
     |
     */
 
-    'fallback_locale' => 'en',
+    'fallback_locale' => 'gb',
+
+    'available_locales' => [
+        'English' => 'gb',
+        'Deutsch' => 'de',
+        'Français' => 'fr',
+        'Italiana' => 'it',
+        'Español' => 'es'
+        ],
 
     /*
     |--------------------------------------------------------------------------
