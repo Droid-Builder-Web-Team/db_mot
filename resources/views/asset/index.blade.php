@@ -66,7 +66,7 @@
                                 <th>{{ __('Name') }}</th>
                                 <th>{{ __('Owner') }}</th>
                                 <th>{{ __('Current Location') }}</th>
-                                <th>{{ __('Current State') }}</th>
+                                <th>{{ __('Condition') }}</th>
                                 <th>{{ __('Action') }}</th>
                             </tr>
                         </thead>

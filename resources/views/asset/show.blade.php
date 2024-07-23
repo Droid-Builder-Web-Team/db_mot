@@ -32,7 +32,7 @@
                 <div class="row"><div class="col-md-3"><strong>{{ __('Updated') }}:</strong></div><div class="col-md-9">{{ $asset->updated_at }}</div></div>
               @endif
               <div class="row"><div class="col-md-3"><strong>{{ __('Type') }}:</strong></div><div class="col-md-9">{{ strtoupper($asset->type->value) }}</div></div>
-              <div class="row"><div class="col-md-3"><strong>{{ __('Current State') }}:</strong></div>
+              <div class="row"><div class="col-md-3"><strong>{{ __('Condition') }}:</strong></div>
               @php
                 $bgcolor = "grey";
                 $color = "black";
