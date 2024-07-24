@@ -5,7 +5,7 @@
         <div class="card-header">
             <div class="row d-flex ">
                 <div class="text-left col-3">
-                    <a class="btn btn-mot-invert" style="width:auto; color:white;" href="{{ route('portalnews.index') }}">Back</a>
+                    <a class="btn btn-mot-invert" style="width:auto; color:white;" href="{{ route('portalnews.index') }}">{{  __('Back') }}</a>
                 </div>
                 <div class="text-center col-6">
                     <h2 class="justify-content-center">Edit Article</h2>
@@ -21,12 +21,12 @@
                 <input type="hidden" name="state" value=1>
 
                 <div class="form-group">
-                    <label for="title"><strong>Title</strong></label>
+                    <label for="title"><strong>{{  __('Title') }}</strong></label>
                     <input type="text" name="title" class="form-control" placeholder="Title" value="{{$portalnews->title}}">
                 </div>
 
                 <div class="form-group">
-                    <label for="description"><strong>Message</strong></label>
+                    <label for="description"><strong>{{  __('Message') }}</strong></label>
                     <textarea class="form-control" style="height:250px" id="message" name="message" placeholder="message">{{ $portalnews->message }}</textarea>
                 </div>
 
@@ -36,7 +36,7 @@
                 </div>
 
                 <div class="text-center form-group">
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">{{  __('Submit') }}</button>
                 </div>
 
             </form>

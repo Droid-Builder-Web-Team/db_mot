@@ -14,6 +14,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\EventRequest;
 use Illuminate\Support\Carbon;
 use App\Event;
 use App\User;
@@ -163,7 +164,7 @@ class EventController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(EventRequest $request)
     {
         $request->validate(
             [
@@ -172,11 +173,6 @@ class EventController extends Controller
             'date' => 'required',
             ]
         );
-
-        if ($request->location_id == "---") {
-            flash()->addError('Please enter a location');
-            return back()->withInput();
-        }
 
         if ($request->location_id == "new") {
             // Create a new location
@@ -230,20 +226,30 @@ class EventController extends Controller
         $linkify = new \Misd\Linkify\Linkify();
         $event['description'] = $linkify->process($request->description);
         $event['created_by'] = Auth::id();
-        $event['approved'] = 0;
+        if (Auth::user()->can('Edit Events')) {
+            $event['approved'] = 1;
+        } else {
+            $event['approved'] = 0;
+        }
         $event['sw_only'] = $request->sw_only;
 
         try {
             $newevent = Event::create($event);
-            flash()->addSuccess('Event submitted for admin approval');
+            if ($event['approved'] == 0) {
+                flash()->addSuccess('Event submitted for admin approval');
+            } else {
+                flash()->addSuccess('Event added successfully');
+            }
         } catch (\Illuminate\Database\QueryException $exception) {
             flash()->addError('Failed to submit event');
             return back()->withInput();
         }
 
         $officers = User::role('Events Officer')->get();
-        foreach ($officers as $officer) {
-            $officer->notify(new UserEventCreated($newevent));
+        if ($event['approved'] == 0) {
+            foreach ($officers as $officer) {
+                $officer->notify(new UserEventCreated($newevent));
+            }
         }
 
         if ($request->days != 1) {
@@ -255,8 +261,10 @@ class EventController extends Controller
                     )
                 );
                 $newevent = Event::create($event);
-                foreach ($officers as $officer) {
-                    $officer->notify(new UserEventCreated($newevent));
+                if ($event['approved'] == 0) {
+                    foreach ($officers as $officer) {
+                        $officer->notify(new UserEventCreated($newevent));
+                    }
                 }
             }
         }

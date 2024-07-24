@@ -8,11 +8,11 @@
         <div class="row d-flex align-items-center">
           <div class="col-sm-2 text-left">
             @hasanyrole('Super Admin|Org Admin')
-              <a class="btn btn-primary" href={{ route('portalnews.create') }}>Create Article</a>
+              <a class="btn btn-primary" href={{ route('portalnews.create') }}>{{  __('Create Article') }}</a>
             @endhasanyrole
           </div>
           <div class="col-sm-8 text-center">
-            <h4 class="text-center title">News and Updates</h4>
+            <h4 class="text-center title">{{  __('News and Updates') }}</h4>
           </div>
           <div class="col-sm-2 text-right"></div>
         </div>
@@ -26,8 +26,8 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Date</th>
-                        <th>Title</th>
+                        <th>{{  __('Date') }}</th>
+                        <th>{{  __('Title') }}</th>
                     </tr>
                 </thead>
                 <tbody>

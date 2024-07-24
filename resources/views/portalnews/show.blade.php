@@ -8,7 +8,7 @@
           <div class="row d-flex align-items-center">
             <div class="col-sm-2 text-left">
               @hasanyrole('Super Admin|Org Admin')
-                <a class="btn btn-primary" href={{ route('portalnews.edit', $article->id) }}>Edit Article</a>
+                <a class="btn btn-primary" href={{ route('portalnews.edit', $article->id) }}>{{  __('Edit Article') }}</a>
               @endhasanyrole
             </div>
             <div class="col-sm-8 text-center">
@@ -28,7 +28,7 @@
         <div class="card-body">
             <h3>{{ \Carbon\Carbon::parse($article->created_at)->isoFormat(Auth::user()->settings()->get('date_format')) }}</h3>
             @if( $article->created_at != $article->updated_at)
-              <div class="row"><div class="col-md-2"><strong>Updated:</strong></div><div class="col-md-10">{{ $article->updated_at }}</div></div>
+              <div class="row"><div class="col-md-2"><strong>{{  __('Updated') }}:</strong></div><div class="col-md-10">{{ $article->updated_at }}</div></div>
             @endif
             <div id="news_description">{!! $article->message !!}</div>
 

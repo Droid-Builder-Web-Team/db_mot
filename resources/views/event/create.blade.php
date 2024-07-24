@@ -37,7 +37,10 @@
                 </div>
 
                 <div class="col-sm-10">
-                    <input type="text" name="name" class="form-control" placeholder="Event Name">
+                    <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" placeholder="Event Name" value={{ old('name') }}>
+                    @error('name')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                 </div>
             </div>
 
@@ -47,13 +50,16 @@
                 </div>
 
                 <div class="col-sm-5">
-                    <select class="form-control location-dropdown" name="location_id" id="location_id">
+                    <select class="form-control location-dropdown @error('location_id') is-invalid @enderror" name="location_id" id="location_id">
                         <option value="---">---</option>
                         <option value="new">{{ __('New Location') }}</option>
                         @foreach ($locations as $location)
                             <option value="{{ $location->id }}">{{ $location->name }}</option>
                         @endforeach
                     </select>
+                    @error('location_id')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="col-sm-5">
@@ -69,22 +75,28 @@
         <div class="card-body">
             <div class="form-group">
                 <label for="name"><strong>{{ __('Name') }}</strong></label>
-                <input type="text" name="location_name" class="form-control" placeholder="Name">
+                <input type="text" name="location_name" class="form-control @error('location_name') is-invalid @enderror" placeholder="Name" value={{ old('location_name') }}>
+                @error('location_name')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
             </div>
 
             <div class="form-group">
                 <label for="street"><strong>{{ __('Street') }}</strong></label>
-                <input type="text" name="street" class="form-control" placeholder="Street">
+                <input type="text" name="street" class="form-control" placeholder="Street" value={{ old('street') }}>
             </div>
 
             <div class="form-group">
                 <label for="town"><strong>{{ __('Town') }}</strong></label>
-                <input type="text" name="town" class="form-control" placeholder="Town">
+                <input type="text" name="town" class="form-control @error('town') is-invalid @enderror" placeholder="Town" value={{ old('town') }}>
+                @error('town')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
             </div>
 
             <div class="form-group">
                 <label for="county"><strong>{{ __('County') }}</strong></label>
-                <input type="text" name="county" class="form-control" placeholder="County">
+                <input type="text" name="county" class="form-control" placeholder="County" value={{ old('county') }}>
             </div>
 
             <div class="form-group">
@@ -102,7 +114,10 @@
 
             <div class="form-group">
                 <label for="postcode"><strong>{{ __('Postcode') }}</strong></label>
-                <input type="text" name="postcode" class="form-control" placeholder="Postcode">
+                <input type="text" name="postcode" class="form-control @error('postcode') is-invalid @enderror" placeholder="Postcode" value={{ old('postcode') }}>
+                @error('postcode')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
             </div>
         </div>
     </div>
@@ -114,7 +129,7 @@
                 </div>
 
                 <div class="col-sm-10">
-                    <input type="text" name="parking_details" id="parking_details" class="form-control" placeholder="Event Parking Details">
+                    <input type="text" name="parking_details" id="parking_details" class="form-control" placeholder="Event Parking Details" value={{ old('parking_details') }}>
                 </div>
             </div>
 
@@ -126,7 +141,10 @@
                 </div>
 
                 <div class="col-sm-10">
-                    <textarea class="form-control" style="height:150px" id="description" name="description" placeholder="Event Description"></textarea>
+                    <textarea class="form-control @error('description') is-invalid @enderror" style="height:150px" id="description" name="description" placeholder="Event Description">{{ old('description') }}</textarea>
+                    @error('description')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                 </div>
             </div>
 
@@ -136,7 +154,10 @@
                 </div>
 
                 <div class="col-sm-3">
-                    <input type="date" name="date" class="form-control" placeholder="Date">
+                    <input type="date" name="date" class="form-control @error('date') is-invalid @enderror" placeholder="Date" value={{ old('date') }}>
+                    @error('date')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="col-sm-1">
@@ -144,7 +165,7 @@
                 </div>
 
                 <div class="col-sm-2">
-                    <input type="number" name="days" value="1" class="form-control" placeholder="Number of Days" required>
+                    <input type="number" name="days" value="1" class="form-control" placeholder="Number of Days" required  value={{ old('days') }}>
                 </div>
 
                 <div class="col-sm-2">
@@ -152,7 +173,7 @@
                 </div>
 
                 <div class="col-sm-2">
-                    <input type="number" name="quantity" value="0" class="form-control" placeholder="Droid Limit" required>
+                    <input type="number" name="quantity" value="0" class="form-control" placeholder="Droid Limit" required value={{ old('quantity') }}>
                 </div>
             </div>
 
