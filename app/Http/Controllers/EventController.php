@@ -241,6 +241,7 @@ class EventController extends Controller
                 flash()->addSuccess('Event added successfully');
             }
         } catch (\Illuminate\Database\QueryException $exception) {
+            report($exception);
             flash()->addError('Failed to submit event');
             return back()->withInput();
         }
