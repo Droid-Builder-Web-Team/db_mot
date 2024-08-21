@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-right">
-                <h2>Course Runs</h2>
+                <h2>Fastest Course Runs</h2>
             </div>
         </div>
     </div>
@@ -23,7 +23,7 @@
           <th></th>
         </tr>
         @php $i = 1 @endphp
-        @foreach ($runs as $run)
+        @foreach ($fastestTimes as $run)
         <tr>
           <td>{{ $i }}</td>
           <td>{{ $run->run_timestamp}}</td>
