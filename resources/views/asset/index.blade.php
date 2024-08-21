@@ -110,7 +110,7 @@
                                     <td>
                                         <div class="d-flex">
                                             <a class="btn-sm btn-xs btn-view" style="color:#FFF;" href="{{ route('asset.show', $asset->id) }}"><i class="fas fa-eye"></i></a>
-                                            @can('Edit Marketplace')
+                                            @can('Edit Assets')
                                                 <a class="btn-sm btn-xs btn-edit" style="color:#FFF;" href="{{ route('asset.edit', $asset->id) }}"><i class="fas fa-edit"></i></a>
                                                 <form action="{{ route('asset.destroy', $asset->id) }}" method="POST" onsubmit="return confirm('Are You Sure?');" style="display: inline-block;">
                                                     <input type="hidden" name="_method" value="DELETE">
