@@ -43,7 +43,7 @@
         "orangehill/iseed": "^3.0",
         "owen-it/laravel-auditing": "^13.0",
         "php-flasher/flasher-laravel": "^1.15",
-        "phpoffice/phpspreadsheet": "^1.21",
+        "phpoffice/phpspreadsheet": "^2.2",
         "qirolab/laravel-reactions": "^2.5",
         "rap2hpoutre/laravel-log-viewer": "^2",
         "silviolleite/laravelpwa": "^2.0",
