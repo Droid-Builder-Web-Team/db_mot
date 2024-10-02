@@ -38,6 +38,7 @@
         "laravelcollective/html": "^6.1",
         "league/flysystem": "^3",
         "league/flysystem-aws-s3-v3": "~3.0",
+        "maatwebsite/excel": "^3.1",
         "marvinlabs/laravel-discord-logger": "^1.1",
         "misd/linkify": "^1.1",
         "orangehill/iseed": "^3.0",
