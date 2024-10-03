@@ -26,7 +26,7 @@ class EventApiController extends Controller
                 $tmp['name'] = $event->name;
                 $tmp['date'] = $event->date;
                 $tmp['url'] = $event->url;
-                $tmp['location'] = $location;
+                $tmp['location'] = $event->location;
 
                 $data[] = $tmp;
             }
