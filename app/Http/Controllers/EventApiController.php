@@ -21,7 +21,6 @@ class EventApiController extends Controller
         foreach ($events as $event) {
             if ($event->going()->count() > 0) {
                 $tmp = array();
-                $location = Location::find($event->location)->last();
                 $tmp['id'] = $event->id;
                 $tmp['name'] = $event->name;
                 $tmp['date'] = $event->date;
