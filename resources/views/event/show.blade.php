@@ -25,6 +25,20 @@
 }
 </script>
 
+<script>
+
+  function copyToClipboard(text) {
+      navigator.clipboard.writeText(text).then(() => {
+          // Optional: Add a success message
+          alert("Link copied to clipboard!");
+      }).catch(err => {
+          // Optional: Handle error
+          console.error("Failed to copy: ", err);
+      });
+  }
+</script>
+
+
 <script type="application/javascript" async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
 <script>
   window.fbAsyncInit = function() {
@@ -171,6 +185,7 @@
               <a class="btn btn-edit" style="width:auto;" href="{{ route('admin.events.edit',$event->id) }}">{{ __('Edit') }}</a>
               <a class="btn btn-edit" style="width:auto;" href="{{ route('admin.events.addimage',[ 'event_id' => $event->id]) }}">{{ __('Add Image') }}</a>
               <span id="export" class="btn btn-info" onclick="shareToFacebook(event.target);">Share to Facebook</span>
+              <button class="btn btn-info" onclick="copyToClipboard('{{ url()->current() }}')">Copy Link</button>
               <button type="button" class="btn btn-primary m-2" data-toggle="modal" data-target="#addContactModal">{{ __('Add Contact') }}</button>
 
             @endcan
