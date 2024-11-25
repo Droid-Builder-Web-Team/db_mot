@@ -28,6 +28,19 @@
   };
 </script>
 
+<script>
+
+  function copyToClipboard(text) {
+      navigator.clipboard.writeText(text).then(() => {
+          // Optional: Add a success message
+          alert("Link copied to clipboard!");
+      }).catch(err => {
+          // Optional: Handle error
+          console.error("Failed to copy: ", err);
+      });
+  }
+</script>
+
 @endsection
 @section('content')
 
@@ -72,6 +85,7 @@
         </div>
         @if(Auth::user()->id == $ware->user->id)
           <span id="export" class="btn btn-info" onclick="shareToFacebook(event.target);">Share to Facebook</span>
+          <button class="btn btn-info" onclick="copyToClipboard('{{ url()->current() }}')">Copy Link</button>
         @endif
       </div>
     </div>
