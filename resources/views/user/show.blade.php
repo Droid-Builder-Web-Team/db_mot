@@ -39,20 +39,9 @@
                             </span>
                         @endif
                         @if (($has_mot && !$user->validPLI()) || $user->expiringPLI())
+
                             <span class="float-right badge badge-warning">
-                                <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-                                    Pay PLI:
-                                    <input type="hidden" name="cmd" value="_s-xclick">
-                                    <input type="hidden" name="hosted_button_id" value="BZBYZ6BEW7TH4">
-                                    <input type="hidden" name="custom" value="{{ $user->id }}">
-                                    <input type="hidden" name="on0" value="MOT Type">
-                                    <input type="hidden" name="os0" value="Initial/Renewal">
-                                    <input type="hidden" name="currency_code" value="GBP">
-                                    <input type="hidden" name="notify_url" value="{{ url('') }}/ipn/notify">
-                                    <input type="hidden" name="return" value="{{ url('') }}/user/{{ $user->id }}">
-                                    <input type="image" src="https://www.paypalobjects.com/en_GB/i/btn/btn_paynow_SM.gif" border="0" name="submit" alt="PayPal – The safer, easier way to pay online!">
-                                    <img alt="" border="0" src="https://www.paypalobjects.com/en_GB/i/scr/pixel.gif" width="1" height="1">
-                                </form>
+                                <a class="btn btn-info" href="{{ route('payPLI') }}">Pay PLI</a>
                             </span>
                         @endif
                     @endif
