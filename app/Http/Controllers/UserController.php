@@ -245,7 +245,12 @@ class UserController extends Controller
     {
         $user = User::find($id);
         $pdf = PDF::loadView('user.cover', compact('user'));
-        //$pdf->defaultFont = 'Arial';
+
+        //$imageFile = public_path('/img/dbbg.jpg');
+        //imagesize($imageFile, $width, $height);
+
+        // Insert the image at the position (0, 0)
+        //$pdf->addImage($imageFile, 'JPEG', 100, 100, 0, 0);
 
         return $pdf->download('cover_note.pdf');
     }

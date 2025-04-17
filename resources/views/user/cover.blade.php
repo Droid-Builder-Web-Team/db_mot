@@ -5,11 +5,13 @@
     <title>Droid Builders Club - PLI Cover</title>
   </head>
   <body>
-    <table class="table table-bordered">
-      <tr><th>Member:</th><td>{{$user->forename}} {{ $user->surname}}</td></tr>
-      <tr><th>Contact:</th><td>{{$user->email}}</td></tr>
-      <tr><th>PLI Starts:</th><td>{{$user->pli_date}}</td></tr>
-      <tr><th>PLI Ends:</th><td>{{ gmdate("Y-m-d", strtotime($user->pli_date." +1 year"))}}</td></tr>
+    <h2>Droid Builders Club - PLI Cover</h2>
+    <hr />
+    <table border=1 cellpadding=8>
+      <tr><th align=left>Member:</th><td align=right>{{$user->forename}} {{ $user->surname}}</td></tr>
+      <tr><th align=left>Contact:</th><td align=right>{{$user->email}}</td></tr>
+      <tr><th align=left>PLI Starts:</th><td align=right>{{$user->pli_date}}</td></tr>
+      <tr><th align=left>PLI Ends:</th><td align=right>{{ gmdate("Y-m-d", strtotime($user->pli_date." +1 year"))}}</td></tr>
     </table>
     <p>
       This document certifies that {{$user->forename}} {{ $user->surname}} has had their Astromech Droid checked by an officer of
@@ -19,17 +21,18 @@ said member has paid their subscription to the club.
   <p>
     The Cover is provided by Self Assured Underwriting Agencies Limited.
   </p>
-  <table>
-    <tr><th>Policy Number: </th><td>SALSALIA/S296081/BB012/24</td></tr>
-    <tr><th>Wording: </th><td>Liability Insurance Policy (SAUA Associations & Clubs PLPW1220)</td></tr>
-    <tr><th>People Covered: </th><td>Members of a club who attend shows to show their droids.</td></tr>
-    <tr><th>Public Liability: </th><td>GBP 2,000,000 any one Occurrence, defence costs and expenses in addition</td></tr>
-    <tr><th>Property Liability: </th><td>GBP 2,000,000 any one Occurrence and in the aggregate, defence costs and expenses in addition</td></tr>
+  <table border=1 cellpadding=8>
+    <tr><th align=left>Policy Number: </th><td align=left>SALSALIA/S338723/BB012/25</td></tr>
+    <tr><th align=left>Wording: </th><td align=left>Liability Insurance Policy (SAUA Associations & Clubs PLPW1220)</td></tr>
+    <tr><th align=left>People Covered: </th><td align=left>Members of a club who attend shows to show their droids.</td></tr>
+    <tr><th align=left>Public Liability: </th><td align=left>GBP 2,000,000 any one Occurrence, defence costs and expenses in addition</td></tr>
+    <tr><th align=left>Property Liability: </th><td align=left>GBP 2,000,000 any one Occurrence and in the aggregate, defence costs and expenses in addition</td></tr>
+    <tr><th align=left>Excess: <tr><th align=left>Property Damage GBP 250 each and every Occurrence</td></tr>
   </table>
-  Contacts:
-  <table>
-    <tr><th>Chairman</th><td>Lee Towersey <lee@artoo-detoo.co.uk></td></tr>
-    <tr><th>Admin</th><td><admin@droidbuilders.uk></td></tr>
+  <h4>Contacts:</h4>
+  <table border=1 cellpadding=8>
+    <tr><th align=left>Chairman</th><td align=left>Lee Towersey <lee@artoo-detoo.co.uk></td></tr>
+    <tr><th align=left>Admin</th><td align=left>admin@droidbuilders.uk</td></tr>
   </table>
   </body>
 </html>
