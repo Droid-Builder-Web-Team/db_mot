@@ -27,7 +27,7 @@ said member has paid their subscription to the club.
     <tr><th align=left>People Covered: </th><td align=left>Members of a club who attend shows to show their droids.</td></tr>
     <tr><th align=left>Public Liability: </th><td align=left>GBP 2,000,000 any one Occurrence, defence costs and expenses in addition</td></tr>
     <tr><th align=left>Property Liability: </th><td align=left>GBP 2,000,000 any one Occurrence and in the aggregate, defence costs and expenses in addition</td></tr>
-    <tr><th align=left>Excess: <tr><th align=left>Property Damage GBP 250 each and every Occurrence</td></tr>
+    <tr><th align=left>Excess: </th><td align=left>Property Damage GBP 250 each and every Occurrence</td></tr>
   </table>
   <h4>Contacts:</h4>
   <table border=1 cellpadding=8>
