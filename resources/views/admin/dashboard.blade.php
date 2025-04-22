@@ -74,7 +74,7 @@
             <th></th>
           </tr>
           @foreach ($users as $user)
-            @if ($user->expiringPLI())
+            @if ($user->expiringPLI() && $user->pli_type == 0)
               <tr>
                 <td><a href="{{ route('user.show',$user->id) }}">{{ $user->forename }} {{ $user->surname }}</a></td>
                 <td>{{$user->pli_date}}</td>

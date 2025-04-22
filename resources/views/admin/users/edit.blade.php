@@ -89,6 +89,13 @@
 
       <div class="form-row">
         <div class="col-md-4 mb-3">
+          <label>PLI Type</label>
+          <input type="integer" name="pli_type" value="{{ $user->pli_type }}" class="form-control" placeholder="">
+        </div>
+    </div>
+
+      <div class="form-row">
+        <div class="col-md-4 mb-3">
           <label>Created On: </label>
           {{ $user->created_on }}
         </div>

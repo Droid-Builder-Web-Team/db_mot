@@ -64,7 +64,7 @@ class DashboardController extends Controller
 
         $paypli = [];
         foreach ($users as $user) {
-            if (!$user->validPLI()) {
+            if (!$user->validPLI() && $user->pli_type == 0) {
                 foreach ($user->droids as $droid) {
                     if ($droid->hasMOT()) {
                         array_push($paypli, $user);

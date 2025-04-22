@@ -28,7 +28,7 @@
                     <span class="float-left">
                         <h2>{{ $user->forename }} {{ $user->surname }} </h2>
                     </span>
-                    @if ($uses_pli)
+                    @if ($uses_pli && $user->pli_type == 0)
                         @if ($user->validPLI())
                             <span class="float-right">
                                 <a class="btn btn-cover" style="color:white;" href="{{ action('UserController@downloadPDF', $user->id) }}" target="_blank">{{ __('Cover Note') }}</a>
@@ -44,6 +44,10 @@
                                 <a class="btn btn-info" href="{{ route('payPLI') }}">Pay PLI</a>
                             </span>
                         @endif
+                    @elseif ($user->pli_type > 0)
+                        <span class="float-right badge badge-danger">
+                            Third Party PLI
+                        </span>
                     @endif
                 </div>
                 <div class="card-body">

@@ -248,8 +248,11 @@
                     <li>
                       @canany(['Edit Events', 'Add MOT'])
                         <a href="{{ route('user.show', $user->id) }}">{{ $user->forename ?? "Deactivated"}} {{ $user->surname ?? "User"}}</a>
-                        @if($user->pli_expires() < \Carbon\Carbon::parse($event->date))
+                        @if($user->pli_expires() < \Carbon\Carbon::parse($event->date) && $user->pli_type == 0)
                           <span class="badge badge-danger">PLI expired</span>
+                        @endif
+                        @if($user->pli_type > 0)
+                          <span class="badge badge-warning">Third Party PLI</span>
                         @endif
                         @if($user->event($event->id)->mot_required)
                           <i class="fas fa-tools" title="MOT will be required"></i>
