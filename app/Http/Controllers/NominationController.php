@@ -29,7 +29,7 @@ class NominationController extends Controller
     {
 
         if (!auth()->user()->can('Edit Nominations')) {
-            return view('nominations.create');
+            return redirect()->route('nominations.create');
         }
 
         $nominations = Nomination::all();
