@@ -92,6 +92,16 @@
             @endhasanyrole
             @endif
 
+            @if(config('features.nominations', FALSE))
+            <li class="c-sidebar-nav-item disabled">
+                <a class="c-sidebar-nav-link disabled" href="{{ route('nominations.index') }}">
+                    <svg class="c-sidebar-nav-icon">
+                        <i class="fas fa-award fa-fw"></i>
+                    </svg><span class="ml-1">{{ __('Nominations') }}</span>
+                </a>
+            </li>
+            @endif
+
 
             @if(config('features.friendica', FALSE))
             <li class="c-sidebar-nav-item" data-toggle="tooltip" data-placement="top" title="Set a username first in your profile">
