@@ -175,7 +175,7 @@ Route::get('/auth/redirect/{provider}', 'SocialController@redirect');
 Route::get('/callback/{provider}', 'SocialController@callback');
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::post('ipn/notify', 'PaypalController@postNotify');
+# Route::post('ipn/notify', 'PaypalController@postNotify');
 
 Route::get('/topps', 'ToppsController@index')->name('topps');
 Route::get('topps_image/{uid}/{view}/{size?}', 'ToppsController@displayToppsImage')
