@@ -47,7 +47,7 @@
           @endif
           @if ($droid->club->hasOption('topps'))
             @if ($droid->topps_id != null)
-              <tr><th>Topps Number</th><td>{{ $droid->topps_id }}</td></tr>
+              <tr><th>Topps Number</th><td>Run: {{ $droid->topps_run }} Card:{{ $droid->topps_id }}</td></tr>
               @endif
           @endif
         </table>

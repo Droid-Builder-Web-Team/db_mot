@@ -140,6 +140,10 @@
                             <input type="checkbox" name="active" {{ $droid->active == 'on' ? 'checked' : '' }} class="form-control">
                         </div>
                         @if ($droid->club->hasOption('topps'))
+                            <div class="col-md-2 mb-3">
+                                <label>Topps Run</label>
+                                <input type="text" name="topps_run" class="form-control" value="{{ $droid->topps_run }}">
+                            </div>
                             <div class="col-md-1 mb-3">
                                 <label>Topps ID</label>
                                 <input type="text" name="topps_id" class="form-control" value="{{ $droid->topps_id }}">

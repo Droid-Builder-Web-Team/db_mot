@@ -40,7 +40,7 @@ class CheckEventAttendance extends Command
     public function handle()
     {
         $pastevents = Event::where('date', '<', Carbon::now())
-            ->where('date', '>', Carbon::now()->subDays(180))
+            ->where('date', '>', Carbon::now()->subDays(60))
             ->orderBy('date')->get();
         echo "Count: ".$pastevents->count();
         for ($i = 0; $i < $pastevents->count(); $i++) {

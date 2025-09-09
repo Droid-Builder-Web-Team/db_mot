@@ -18,6 +18,7 @@ class ToppsController extends Controller
     public function index()
     {
         $droids = Droid::where('topps_id', '!=', 0)
+            ->where('topps_run', '==', 1)
             ->orderBy('topps_id')
             ->paginate(8);
         return view('topps', compact('droids'));

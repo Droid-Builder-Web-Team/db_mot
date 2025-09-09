@@ -166,7 +166,8 @@ class DroidController extends Controller
     {
         $droid = Droid::find($uid);
         if (!$droid->users->contains(auth()->user()) && !auth()->user()->can('View Droids')) {
-            abort(403);
+            if ($droid->public != "Yes")
+                abort(403);
         }
 
         if ($size != "") {
