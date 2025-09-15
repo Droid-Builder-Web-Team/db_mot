@@ -10,7 +10,8 @@ return [
     'partsruntags' => env('FEATURE_PARTSRUNTAGS', false),
     'userevents' => env('FEATURE_USEREVENTS', false),
     'assets' => env('FEATURE_ASSETS', false),
-    'nominations' => env('FEATURE_NOMINATIONS', false)
+    'nominations' => env('FEATURE_NOMINATIONS', false),
+    'ballots' => env('FEATURE_BALLOTS', false)
 ];
 
 ?>

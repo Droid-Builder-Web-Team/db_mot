@@ -14,7 +14,7 @@
 use App\VenueContact;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PayPalController;
-
+use App\Http\Controllers\BallotController;
 
 /*
 |--------------------------------------------------------------------------
@@ -67,6 +67,12 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(
         Route::get('/api/stats/{stat}', 'StatsController@getStat');
         Route::resource('/map', 'MapsController', ['only' => ['index']]);
         Route::get('/badges/{keep}', 'BadgeController@download')->name('badges.download');
+        Route::get('/ballots', [BallotController::class, 'index'])->name('ballots.index');
+        Route::get('/ballots/create', [BallotController::class, 'create'])->name('ballots.create');
+        Route::post('/ballots', [BallotController::class, 'store'])->name('ballots.store');
+        Route::delete('/ballots/{ballot}', [BallotController::class, 'destroy'])->name('ballots.destroy');
+
+
     }
 );
 
@@ -156,6 +162,11 @@ Route::group(
             session()->put('locale', $locale);
             return redirect()->back();
         });
+        Route::get('/ballots/{ballot}', [BallotController::class, 'show'])->name('ballots.show');
+        Route::post('/ballots/{ballot}/vote', [BallotController::class, 'vote'])->name('ballots.vote');
+        Route::get('/ballots/{ballot}/results', [BallotController::class, 'results'])->name('ballots.results');
+        Route::get('/ballots', [BallotController::class, 'index'])->name('ballots.index');
+        
     }
 );
 

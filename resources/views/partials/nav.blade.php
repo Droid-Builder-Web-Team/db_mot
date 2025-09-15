@@ -102,6 +102,16 @@
             </li>
             @endif
 
+            @if(config('features.ballots', FALSE))
+            <li class="c-sidebar-nav-item disabled">
+                <a class="c-sidebar-nav-link disabled" href="{{ route('ballots.index') }}">
+                    <svg class="c-sidebar-nav-icon">
+                        <i class="fas fa-check-to-slot fa-fw"></i>
+                    </svg><span class="ml-1">{{ __('Ballots') }}</span>
+                </a>
+            </li>
+            @endif
+
 
             @if(config('features.friendica', FALSE))
             <li class="c-sidebar-nav-item" data-toggle="tooltip" data-placement="top" title="Set a username first in your profile">
