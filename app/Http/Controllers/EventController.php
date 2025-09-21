@@ -246,6 +246,8 @@ class EventController extends Controller
             return back()->withInput();
         }
 
+        $newevent->createdEventNotificationCommittee($newevent);
+
         $officers = User::role('Events Officer')->get();
         if ($event['approved'] == 0) {
             foreach ($officers as $officer) {
