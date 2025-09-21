@@ -103,6 +103,7 @@ class EventsController extends Controller
         $linkify = new \Misd\Linkify\Linkify();
         $event['description'] = $linkify->process($request->description);
         $event['created_by'] = Auth::id();
+        $event['approved'] = 1; # Admins pre approved
 
         $success = 0;
         try {
