@@ -263,6 +263,7 @@ class EventController extends Controller
                 );
                 $newevent = Event::create($event);
                 if ($event['approved'] == 0) {
+                    $event->createdEventNotificationCommittee($event);
                     foreach ($officers as $officer) {
                         $officer->notify(new UserEventCreated($newevent));
                     }

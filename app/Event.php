@@ -351,4 +351,39 @@ class Event extends Model implements \DPoulson\LaravelCalendar\Event, Auditable
             );
         }
     }
+
+    /**
+     * Notify committee discord an event has been created
+     *
+     * @param \App\Event $event Event to pass
+     *
+     * @return \Illuminate\Http\Client\Response
+     */
+    public function createdEventNotificationCommittee($event)
+    {
+
+        if ($event->approved == 1) {
+            $content = "An event has been created in the Portal. ";
+        } else {
+            $content = "A user (".$event->organiser->forename." ".$event->organiser->surname.") has submitted an event in the portal, please check and approve it.";
+        }
+        $webHook = config('discord.managementhook');
+        if ($webHook != 'none') {
+            return Http::post(
+                $webHook,
+                [
+                'content' => $content,
+                'embeds' => [
+                    [
+                        'title' => $event->name . ' - ' . $event->date,
+                        'description' => $event->location->name . ', '
+                            . $event->location->county . ', '
+                            . $event->location->postcode,
+                        'color' => '7506394',
+                    ]
+                ],
+                 ]
+            );
+        }
+    }
 }

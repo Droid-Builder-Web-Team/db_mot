@@ -115,6 +115,7 @@ class EventsController extends Controller
         }
 
         $newevent->createdEventNotification($newevent);
+        $newevent->createdEventNotificationCommittee($newevent);
 
         if ($request->days != 1) {
             for ($x = 1; $x <= $request->days - 1; $x++) {
