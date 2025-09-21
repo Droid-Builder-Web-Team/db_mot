@@ -30,7 +30,9 @@
                     <tr>
                         <th>Rank</th>
                         <th>Candidate</th>
-                        <th>Total Score</th>
+                        @can('Edit Ballot')
+                            <th>Total Score</th>
+                        @endcan
                     </tr>
                 </thead>
                 <tbody>
@@ -38,7 +40,9 @@
                         <tr @if($index === 0) class="winner" @endif>
                             <td>{{ $index + 1 }}</td>
                             <td>{{ $candidates[$result->candidate_id]->name }}</td>
-                            <td>{{ $result->total_score }}</td>
+                            @can('Edit Ballot')
+                                <td>{{ $result->total_score }}</td>
+                            @endcan
                         </tr>
                     @endforeach
                 </tbody>
