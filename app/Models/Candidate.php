@@ -28,4 +28,3 @@ class Candidate extends Model
         return $this->belongsTo(Ballot::class);
     }
 }
-

@@ -69,5 +69,5 @@ class AssetRequest extends FormRequest
             'title.required' => 'This field is required',
             'body.required' => 'A message is required',
         ];
-    } 
+    }
 }

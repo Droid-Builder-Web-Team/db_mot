@@ -119,6 +119,6 @@ class NominationController extends Controller
 
         // Don't need to notify discord if event gets deleted.
         //$event->deletedEventNotification($event);
-        return redirect()->route('nominations.index');        
+        return redirect()->route('nominations.index');
     }
 }

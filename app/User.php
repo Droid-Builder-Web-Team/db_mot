@@ -246,7 +246,7 @@ class User extends Authenticatable implements
      */
     public function validPLI()
     {
-        if ((strtotime($this->pli_date) > strtotime('-1 year')) 
+        if ((strtotime($this->pli_date) > strtotime('-1 year'))
             && ($this->pli_type == 0)
         ) {
             return true;

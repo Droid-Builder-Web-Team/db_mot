@@ -87,7 +87,7 @@ class AssetController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit(Asset $asset)
-    {   
+    {
         if (!Auth::user()->can('Edit Assets') && Auth::user()->id != $asset->user->id) {
             abort(403);
         }

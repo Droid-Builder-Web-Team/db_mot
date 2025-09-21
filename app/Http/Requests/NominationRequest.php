@@ -56,6 +56,5 @@ class NominationRequest extends FormRequest
             'nominee_id.required' => 'This field is required',
             'reason.required' => 'A reason is required',
         ];
-    } 
-
+    }
 }

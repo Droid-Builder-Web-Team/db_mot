@@ -33,6 +33,5 @@ class Nomination extends Model implements Auditable
     public function nominee()
     {
         return $this->belongsTo(User::class);
-    }   
-
+    }
 }

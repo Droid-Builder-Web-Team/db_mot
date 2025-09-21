@@ -71,8 +71,6 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(
         Route::get('/ballots/create', [BallotController::class, 'create'])->name('ballots.create');
         Route::post('/ballots', [BallotController::class, 'store'])->name('ballots.store');
         Route::delete('/ballots/{ballot}', [BallotController::class, 'destroy'])->name('ballots.destroy');
-
-
     }
 );
 
@@ -166,7 +164,6 @@ Route::group(
         Route::post('/ballots/{ballot}/vote', [BallotController::class, 'vote'])->name('ballots.vote');
         Route::get('/ballots/{ballot}/results', [BallotController::class, 'results'])->name('ballots.results');
         Route::get('/ballots', [BallotController::class, 'index'])->name('ballots.index');
-        
     }
 );
 

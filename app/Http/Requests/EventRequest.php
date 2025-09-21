@@ -74,5 +74,5 @@ class EventRequest extends FormRequest
             'town.required_if' => 'Please enter a town for the location',
             'location_id.doesnt_start_with' => 'Please select an existing location, or enter a new one'
         ];
-    } 
+    }
 }
