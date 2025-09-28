@@ -47,6 +47,7 @@ class BallotController extends Controller
 
         $validatedData = $request->validate([
             'title' => 'required|string|max:255',
+            'description' => 'required|string',
             'start_date' => 'required|date',
             'end_date' => 'required|date|after:start_date',
             'candidate_ids' => 'required|array|min:2', // Require at least two candidates.
@@ -57,6 +58,7 @@ class BallotController extends Controller
             // Create the ballot
             $ballot = Ballot::create([
                 'title' => $validatedData['title'],
+                'description' => $validatedData['description'],
                 'start_date' => $validatedData['start_date'],
                 'end_date' => $validatedData['end_date'],
                 'is_active' => true, // You can make this optional if you want a separate activation step.

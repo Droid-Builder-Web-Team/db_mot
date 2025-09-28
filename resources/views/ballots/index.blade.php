@@ -7,7 +7,7 @@
         <div class="card-header">
           <div class="row d-flex align-items-center">
               <div class="col-sm-2 text-left">
-                  @can('Edit Auction')
+                  @can('Edit Ballot')
                   <a class="btn btn-primary" href={{ route('admin.ballots.create') }}>{{ __('Create Ballot') }}</a>
                   @endcan
               </div>

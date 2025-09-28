@@ -20,6 +20,7 @@
         <div class="card-body">
 
         <h1>Results for: {{ $ballot->title }}</h1>
+        <div id="event_description">{!! $ballot->description !!}</div>
         <p>This ballot concluded on: {{ $ballot->end_date->format('F j, Y H:i') }}</p>
 
         @if ($results->isEmpty())
