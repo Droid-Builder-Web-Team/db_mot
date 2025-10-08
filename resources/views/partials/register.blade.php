@@ -1,4 +1,31 @@
+
+
+
 <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModal" aria-hidden="true">
+  @if ($errors->any())
+    <div style="color: red; border: 1px solid red; padding: 10px;">
+        <h3>Validation Errors (Debug)</h3>
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
+<div class="form-group row mb-0">
+  <div class="col-md-6 offset-md-4">
+      <button type="submit" class="btn btn-primary">
+          Register
+      </button>
+
+      @error('captcha')
+          <span class="invalid-feedback" role="alert" style="display: block;">
+              <strong>{{ $message }}</strong>
+          </span>
+      @enderror
+  </div>
+</div>
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -90,4 +117,11 @@
                 }
              });
          });
+
+         @if ($errors->any())
+        // Assuming you have Bootstrap and jQuery available:
+        $(document).ready(function() {
+            $('#registerModal').modal('show');
+        });
+    @endif
 </script>

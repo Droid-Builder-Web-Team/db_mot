@@ -15,6 +15,7 @@ use App\VenueContact;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PayPalController;
 use App\Http\Controllers\BallotController;
+use Laravel\Fortify\RouteServiceProvider;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,8 +29,9 @@ use App\Http\Controllers\BallotController;
 */
 
 //Auth::routes();
-Auth::routes(['verify' => true]);
+Auth::routes(['verify' => true, 'login' => false, 'twofactor' => false]);
 //Auth::routes();
+
 
 Route::redirect('/id.php', '/user');
 Route::namespace('Admin')->prefix('admin')->name('admin.')->group(
