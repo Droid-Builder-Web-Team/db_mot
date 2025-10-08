@@ -25,7 +25,9 @@ class DroidsDataTable extends DataTable
                 'owner',
                 function (Droid $droid) {
                     $owner = $droid->users()->first();
-                    $name = $owner->forename ?? "null".' '.$owner->surname ?? "null";
+                    $forename = $owner->forename ?? "null";
+                    $surname = $owner->surname ?? "null";
+                    $name = $forename.' '.$surname;
                     //return '<a class="btn-link btn-sml" href="/user/'.$owner->id.'">'.$name.'</a>';
                     return $name;
                 }
