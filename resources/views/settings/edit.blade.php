@@ -4,6 +4,7 @@
 
 @section('content')
 
+
     <div class="row">
         <div class="col-md-12 mb-2">
             {{-- <div class="card">
@@ -11,9 +12,123 @@
                     User Settings
                 </div> --}}
             {{-- <div class="card-body"> --}}
+
+                <div class="card">
+                    <div class="card-header">
+                        Two-Factor Authentication (2FA)
+                    </div>
+                    <div class="card-body">
+                        <h5 class="mb-3">
+                            @if (auth()->user()->two_factor_secret)
+                                @if (auth()->user()->two_factor_confirmed_at)
+                                    <span class="text-success">2FA is Enabled.</span>
+                                @else
+                                    <span class="text-warning">2FA Setup Pending Confirmation.</span>
+                                @endif
+                            @else
+                                <span class="text-danger">2FA is Not Enabled.</span>
+                            @endif
+                        </h5>
+                
+                        {{-- Session Status Messages (from Fortify actions) --}}
+                        @if (session('status') == 'two-factor-authentication-enabled')
+                            <div class="alert alert-success">
+                                **Two-Factor Authentication Enabled!** Please scan the QR code and confirm the token to finish the setup.
+                            </div>
+                        @endif
+                
+                        @if (session('status') == 'two-factor-authentication-disabled')
+                            <div class="alert alert-danger">
+                                Two-Factor Authentication has been disabled.
+                            </div>
+                        @endif
+                
+                        @error('code')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                
+                        {{-- 1. DISPLAY QR CODE & CONFIRMATION (If Secret exists but is NOT confirmed) --}}
+                        @if (auth()->user()->two_factor_secret && ! auth()->user()->two_factor_confirmed_at)
+                            <div class="mb-4">
+                                <p>Scan the following QR code using your phone's authenticator application (e.g., Google Authenticator, Authy).</p>
+                                {{-- WARNING: Must use {!! !!} to render raw SVG --}}
+                                {!! auth()->user()->twoFactorQrCodeSvg() !!}
+                            </div>
+                
+                            <form action="{{ route('two-factor.confirm') }}" method="POST" class="mt-4">
+                                @csrf
+                                <div class="form-group row">
+                                    <label for="code" class="col-md-4 col-form-label text-md-right">Confirmation Code</label>
+                                    <div class="col-md-6">
+                                        <input id="code" type="text" class="form-control" name="code" required autofocus>
+                                    </div>
+                                </div>
+                                <div class="form-group row mb-0">
+                                    <div class="col-md-8 offset-md-4">
+                                        <button type="submit" class="btn btn-primary">Confirm 2FA Setup</button>
+                                    </div>
+                                </div>
+                            </form>
+                
+                            <hr>
+                        @endif
+                
+                
+                        {{-- 2. DISPLAY RECOVERY CODES & DISABLE BUTTON (If CONFIRMED and Enabled) --}}
+                        @if (auth()->user()->two_factor_secret && auth()->user()->two_factor_confirmed_at)
+                            <div class="mb-4">
+                                <p>Your two-factor authentication is active. Use the buttons below to view/regenerate recovery codes or disable the feature.</p>
+                
+                                {{-- Recovery Codes Section --}}
+                                <h6 class="mt-4">Recovery Codes:</h6>
+                                @if (session('status') == 'recovery-codes-generated')
+                                    <div class="alert alert-warning">
+                                        **NEW** Recovery Codes Generated! Please store these immediately!
+                                    </div>
+                                @endif
+                                
+                                <div class="card card-body bg-dark text-white p-2">
+                                    <div class="row">
+                                        @foreach (json_decode(decrypt(auth()->user()->two_factor_recovery_codes), true) as $code)
+                                            <div class="col-md-6">{{ $code }}</div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                                <small class="form-text text-muted">Store these codes in a secure location. They can be used to log in if you lose access to your authenticator device.</small>
+                
+                                {{-- Regenerate Recovery Codes --}}
+                                <form action="{{ route('two-factor.recovery-codes') }}" method="POST" class="d-inline-block mt-3 mr-2">
+                                    @csrf
+                                    <button type="submit" class="btn btn-sm btn-warning">Regenerate Recovery Codes</button>
+                                </form>
+                                
+                                {{-- Disable 2FA --}}
+                                <form action="{{ route('two-factor.disable') }}" method="POST" class="d-inline-block mt-3">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-sm btn-danger">Disable 2FA</button>
+                                </form>
+                                
+                            <hr>
+                        @endif
+                
+                        {{-- 3. ENABLE BUTTON (If NOT Enabled) --}}
+                        @if (! auth()->user()->two_factor_secret)
+                            <p>Two-Factor Authentication adds an extra layer of security to your account.</p>
+                            <form action="{{ route('two-factor.enable') }}" method="POST">
+                                @csrf
+                                <button type="submit" class="btn btn-success">Enable 2FA</button>
+                            </form>
+                        @endif
+                        
+                    </div>
+                </div>
+
+
             <form action="{{ route('settings.update', Auth::user()->id) }}" method="POST">
                 @csrf
                 @method('PUT')
+
 
                 <div class="card">
                     <div class="card-header">

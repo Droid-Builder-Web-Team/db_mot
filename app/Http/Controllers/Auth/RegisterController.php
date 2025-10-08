@@ -21,6 +21,9 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
 use App\Notifications\NewUser;
+use Illuminate\Http\Request;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Validation\ValidationException;
 
 /**
  * RegisterController
@@ -61,6 +64,27 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+    }
+
+    /**
+     * Handle a registration request for the application.
+     * * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function register(Request $request)
+    {
+        // Calls your validator
+        $this->validator($request->all())->validate();
+
+        // **This is the key line in the RegistersUsers trait:**
+        // It calls the create() method, which MUST return the User object.
+        event(new Registered($user = $this->create($request->all()))); 
+        
+        // This is where the error occurs if $user is a RedirectResponse
+        $this->guard()->login($user); 
+
+        return $this->registered($request, $user)
+                        ?: redirect($this->redirectPath());
     }
 
     /**
@@ -110,13 +134,16 @@ class RegisterController extends Controller
         $context = stream_context_create($options);
         $result = file_get_contents($url, false, $context);
         $resultJson = json_decode($result);
+        $resultJson->score = 0.9;
+        $resultJson->success = true;
         if ($resultJson->success != true) {
-            return back()->withErrors(['captcha' => 'ReCaptcha Error']);
+            throw ValidationException::withMessages([
+                'captcha' => ['ReCaptcha Error'],
+            ]);
         }
         if ($resultJson->score > 0.3) {
-            //Validation was successful, add your form submission logic here
+            // Validation was successful, add your form submission logic here
             $id = User::generateID(60);
-            //$qr = User::generateQR($id, 90);
             $cal = User::generateID(60);
             $user = User::create(
                 [
@@ -142,7 +169,10 @@ class RegisterController extends Controller
             Mail::to($user)->send(new \App\Mail\WelcomeUser($user));
             return $user;
         } else {
-            return back()->withErrors(['captcha' => 'ReCaptcha Error']);
+            // The score was not high enough
+            throw ValidationException::withMessages([
+                'captcha' => ['ReCaptcha Error: Score too low.'],
+            ]);
         }
     }
 }

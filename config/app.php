@@ -174,6 +174,7 @@ return [
         Srmklive\PayPal\Providers\PayPalServiceProvider::class,
         LaravelPWA\Providers\LaravelPWAServiceProvider::class,
         Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
+        App\Providers\FortifyServiceProvider::class,
         /*
          * Package Service Providers...
          */

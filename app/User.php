@@ -16,6 +16,7 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Glorand\Model\Settings\Traits\HasSettingsField;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laravel\Fortify\TwoFactorAuthenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 use Spatie\Permission\Models\Permission;
@@ -49,6 +50,7 @@ class User extends Authenticatable implements
     Auditable,
     ReactsInterface
 {
+    use TwoFactorAuthenticatable;
     use Notifiable;
     use HasRoles;
     use Portable;
@@ -81,6 +83,7 @@ class User extends Authenticatable implements
     protected $casts = [
         'email_verified_at' => 'datetime',
         'usersEvents' => 'array',
+        'two_factor_confirmed_at' => 'datetime'
     ];
 
     /**
