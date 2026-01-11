@@ -48,7 +48,7 @@ class WareController extends Controller
     {
 
         $wares = Ware::where('state', 1)
-            ->OrderBy('updated_at')
+            ->OrderBy('updated_at', 'desc')
             ->get();
         $userwares = Ware::where('state', 1)
             ->where('user_id', auth()->user()->id)

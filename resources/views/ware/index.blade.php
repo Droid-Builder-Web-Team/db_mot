@@ -75,6 +75,8 @@
                                 <th>Title</th>
                                 <th>Member</th>
                                 <th>Country</th>
+                                <th>Created</th>
+                                <th>Last Updated</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -86,6 +88,8 @@
                                         <td><a href="{{ route('ware.show', $ware->id) }}">{{ $ware->title }}</a></td>
                                         <td>{{ $ware->user->forename }} {{ $ware->user->surname }}</td>
                                         <td>{{ $ware->user->country }}</td>
+                                        <td>{{ $ware->created_at }}</td>
+                                        <td>{{ $ware->updated_at }}</td>
                                         <td>
                                             <div class="d-flex">
                                                 <a class="btn-sm btn-xs btn-view" style="color:#FFF;" href="{{ route('ware.show', $ware->id) }}"><i class="fas fa-eye"></i></a>
