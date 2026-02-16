@@ -35,6 +35,6 @@ class CodeOfConductController extends Controller
             'accepted_coc' => 1
             ]
         );
-        return redirect('event');
+        return redirect('/');
     }
 }
