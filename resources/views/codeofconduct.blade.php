@@ -18,9 +18,10 @@
           <li>Always ask permission when taking photographs involving members of the public whenever possible, especially children.</li>
           <li>Make sure your droid is powered off or otherwise has its main drive disabled when leaving it unattended.</li>
           <li>Never leave any batteries charging unattended, especially over night at weekend events.</li>
-          <li>Do not accept payment for attending events, beyond typical expenses. Charitable donations to the club's designated charity are perfectly fine.</li>
+          <li>Do not accept payment for attending events, beyond typical expenses. Charitable donations to the club's <a href="https://droidbuilders.uk/charity">designated charity</a> are perfectly fine.</li>
+          <li>The selling of droids is not acceptable. Whether it be making complete droids to
+            order or the selling of kits for people to build. For more information <a href="https://droidbuilders.uk/selling-of-droids/">click here</a>.</li>
         </ul>
-
         <p>By clicking the button below, you are agreeing to abide by the rules of Droidbuilders UK when representing the club in any form.</p>
         <form  method="POST">
           @csrf
