@@ -10,16 +10,23 @@ class CheckCodeOfConduct
 {
     public function handle(Request $request, Closure $next): Response
     {
-        // 1. Check if the user is logged in
-        // 2. Check if they haven't accepted the CoC
-        // 3. Prevent an infinite redirect loop by checking the current path
-        if (auth()->check() && 
-            auth()->user()->accepted_coc == 0 && 
-            !$request->is('codeofconduct*')) {
-            
-            return redirect('codeofconduct');
-        }
 
+        $user = auth()->user();
+        if (!auth()->check() || $request->is('codeofconduct*', 'verify*', 'logout')) {
+            return $next($request);
+        }
+    
+        // 2. IMPORTANT: If they haven't accepted GDPR yet, let the GDPR middleware handle it.
+        // Do NOT redirect to CoC yet.
+        if ($user->accepted_gdpr == NULL) {
+            return $next($request);
+        }
+    
+        // 3. If they HAVE accepted GDPR but NOT the CoC, send them to CoC.
+        if ($user->accepted_coc == 0) {
+            return redirect()->route('codeofconduct'); // Use named routes where possible
+        }
+    
         return $next($request);
     }
 }
