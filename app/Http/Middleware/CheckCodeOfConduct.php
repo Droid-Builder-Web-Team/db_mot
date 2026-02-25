@@ -12,13 +12,13 @@ class CheckCodeOfConduct
     {
 
         $user = auth()->user();
-        if (!auth()->check() || $request->is('codeofconduct*', 'verify*', 'logout')) {
+        if (!auth()->check() || $request->is('codeofconduct*', 'verify*', 'email/*', 'logout')) {
             return $next($request);
         }
     
         // 2. IMPORTANT: If they haven't accepted GDPR yet, let the GDPR middleware handle it.
         // Do NOT redirect to CoC yet.
-        if ($user->accepted_gdpr == NULL) {
+        if ($user->accepted_gdpr == NULL || !$user->hasVerifiedEmail()) {
             return $next($request);
         }
     
