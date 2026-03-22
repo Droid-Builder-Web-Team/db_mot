@@ -35,7 +35,7 @@
               </ul>
 
               <div>
-              {!!  $nomination->reason !!}
+              {!! clean($nomination->reason) !!}
               </div>
 
             </div>

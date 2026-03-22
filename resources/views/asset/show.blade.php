@@ -67,7 +67,7 @@
         <div class="row">
           <div class="col-md-12">
             <strong>{{ __('Description') }}:</strong>
-            <div id="description">{!! $asset->description !!}</div>
+            <div id="description">{!! clean($asset->description) !!}</div>
           </div>
         </div>
       </div>

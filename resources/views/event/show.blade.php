@@ -89,9 +89,9 @@
               <div class="col-md-8">
                 <h2 class="card-title">{{ __('Description') }}</h2>
                 @if($event->created_at > \Carbon\Carbon::create(2021,8,23,0,0,0, 'Europe/London'))
-                 <div id="event_description">{!! $event->description !!}</div>
+                 <div id="event_description">{!! clean($event->description) !!}</div>
                 @else
-                 <div id="event_description">{!! nl2br($event->description) !!}</div>
+                 <div id="event_description">{!! clean(nl2br($event->description)) !!}</div>
                 @endif
 
                 @if(!is_null($event->parking_details))

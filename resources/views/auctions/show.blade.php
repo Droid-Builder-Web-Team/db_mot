@@ -26,7 +26,7 @@
           <div class="col-md-8">
             <div class="row">
               <div class="col-md-12">
-                <div id="event_description">{!! $auction->description !!}</div>
+                <div id="event_description">{!! clean($auction->description) !!}</div>
               </div>
             </div>
           </div>

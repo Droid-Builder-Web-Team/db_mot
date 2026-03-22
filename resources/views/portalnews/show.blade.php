@@ -30,7 +30,7 @@
             @if( $article->created_at != $article->updated_at)
               <div class="row"><div class="col-md-2"><strong>{{  __('Updated') }}:</strong></div><div class="col-md-10">{{ $article->updated_at }}</div></div>
             @endif
-            <div id="news_description">{!! $article->message !!}</div>
+            <div id="news_description">{!! clean($article->message) !!}</div>
 
         </div>
       </div>
