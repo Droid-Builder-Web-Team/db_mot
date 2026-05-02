@@ -79,7 +79,7 @@ class MOTController extends Controller
         $mot = DB::transaction(
             function () use ($request) {
                 // Save main data
-                $mot = MOT::create($request->all());
+                $mot = MOT::create($request->validated());
 
                 if ($request->body != "") {
                     $comment = new Comment();

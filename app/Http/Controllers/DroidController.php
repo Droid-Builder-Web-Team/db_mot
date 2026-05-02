@@ -50,7 +50,11 @@ class DroidController extends Controller
         );
 
         try {
-            $droid = Droid::create($request->all());
+            $droid = Droid::create($request->only([
+                'name', 'style', 'transmitter_type', 'radio_controlled', 'sound_system', 
+                'material', 'battery', 'drive_type', 'drive_voltage', 'value', 'weight', 
+                'top_speed', 'build_log', 'notes', 'back_story', 'build_type', 'public'
+            ]));
             flash()->addSuccess('Droid created successfully');
         } catch (\Illuminate\Database\QueryException $exception) {
             flash()->addError('Failed to create Droid');
@@ -121,7 +125,11 @@ class DroidController extends Controller
         );
 
         try {
-            $droid->update($request->all());
+            $droid->update($request->only([
+                'name', 'style', 'transmitter_type', 'radio_controlled', 'sound_system', 
+                'material', 'battery', 'drive_type', 'drive_voltage', 'value', 'weight', 
+                'top_speed', 'build_log', 'notes', 'back_story', 'build_type', 'public'
+            ]));
             flash()->addSuccess('Droid updated successfully');
         } catch (\Illuminate\Database\QueryException $exception) {
             flash()->addError('Failed to update Droid');

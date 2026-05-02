@@ -122,10 +122,10 @@ class DroidsController extends Controller
             ]
         );
 
-        $droid->update($request->all());
+        $droid->update($request->except(['id']));
 
         try {
-            $droid->update($request->all());
+            $droid->update($request->except(['id']));
             flash()->addSuccess('Droid updated successfully');
         } catch (\Illuminate\Database\QueryException $exception) {
             flash()->addError('Failed to update Droid');
