@@ -19,7 +19,7 @@
 
         <div class="card-body">
             <h1>{{ $ballot->title }}</h1>
-            <div id="event_description">{!! $ballot->description !!}</div>
+            <div id="event_description">{!! clean($ballot->description) !!}</div>
             <p><strong>Voting Period:</strong> {{ $ballot->start_date->format('F j, Y H:i') }} - {{ $ballot->end_date->format('F j, Y H:i') }}</p>
 
             @if ($hasVoted)

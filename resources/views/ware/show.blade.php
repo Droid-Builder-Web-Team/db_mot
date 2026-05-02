@@ -80,7 +80,7 @@
         <div class="row">
           <div class="col-md-12">
             <strong>Description:</strong>
-            <div id="description">{!! $ware->description !!}</div>
+            <div id="description">{!! clean($ware->description) !!}</div>
           </div>
         </div>
         @if(Auth::user()->id == $ware->user->id)

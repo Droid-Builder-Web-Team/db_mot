@@ -157,7 +157,7 @@
                                 <div class="description">
                                     <div class="col-12">
                                         <p class="description-text"><strong>Description:</strong></p>
-                                        <p>{!! $data->partsRunAd->description !!}</p>
+                                        <p>{!! clean($data->partsRunAd->description) !!}</p>
                                     </div>
                                 </div>
                             </div>
