@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Droid;
+use App\Event;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
 
 class ScanController extends Controller
