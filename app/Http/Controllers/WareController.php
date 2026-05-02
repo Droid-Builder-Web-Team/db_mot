@@ -95,7 +95,7 @@ class WareController extends Controller
         $linkify = new \Misd\Linkify\Linkify();
         $request['description'] = $linkify->process($request->description);
         try {
-            $auction = Ware::create($request->except(['id', 'user_id']));
+            $auction = Ware::create($request->all());
             flash()->addSuccess('Item listing created successfully');
         } catch (\Illuminate\Database\QueryException $exception) {
             flash()->addError('Failed to create Item Listing');
@@ -151,7 +151,7 @@ class WareController extends Controller
         );
 
 
-        $newware = $request->except(['id', 'user_id']);
+        $newware = $request->all();
         $linkify = new \Misd\Linkify\Linkify();
         $newware['description'] = $linkify->process($request->description);
         try {
