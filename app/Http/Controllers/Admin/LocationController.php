@@ -85,7 +85,7 @@ class LocationController extends Controller
         }
 
         try {
-            $location = Location::create($request->except(['id']));
+            $location = Location::create($request->all());
             flash()->addSuccess('Location created successfully');
         } catch (\Illuminate\Database\QueryException $exception) {
             flash()->addError('Failed to create Location');
@@ -142,7 +142,7 @@ class LocationController extends Controller
         }
 
         try {
-            $location->update($request->except(['id']));
+            $location->update($request->all());
             flash()->addSuccess('Location updated successfully');
         } catch (\Illuminate\Database\QueryException $exception) {
             flash()->addError('Failed to update Location');
