@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\Event;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class CheckEventAttendance extends Command
 {
@@ -41,20 +42,28 @@ class CheckEventAttendance extends Command
     {
         $pastevents = Event::where('date', '<', Carbon::now())
             ->where('date', '>', Carbon::now()->subDays(60))
-            ->orderBy('date')->get();
-        echo "Count: ".$pastevents->count();
-        for ($i = 0; $i < $pastevents->count(); $i++) {
-            $id = $pastevents[$i]->id;
-            $users = $pastevents[$i]->users;
-            echo $i. "/".$pastevents->count().": ".$pastevents[$i]->name." ID: ".$id." Attended: ".$users->count();
-            echo "\n";
-            foreach ($users as $user) {
-                if ($user->event($id)->attended == 0 && $user->event($id)->status == 'yes') {
-                    $user->events()->updateExistingPivot($id, ["attended" => 1]);
-                }
+            ->orderBy('date');
+
+        $totalCount = $pastevents->count();
+        $this->line("Count: " . $totalCount);
+
+        $processedCount = 0;
+        $pastevents->with('users')->chunk(10, function ($events) use (&$processedCount, $totalCount) {
+            foreach ($events as $event) {
+                $processedCount++;
+                $id = $event->id;
+                $users = $event->users;
+
+                $this->line($processedCount . "/" . $totalCount . ": " . $event->name . " ID: " . $id . " Attended: " . $users->count());
+
+                DB::table('members_events')
+                    ->where('event_id', $id)
+                    ->where('status', 'yes')
+                    ->where('attended', 0)
+                    ->update(['attended' => 1]);
             }
-            echo "\n";
-        }
+        });
+
         return 0;
     }
 }

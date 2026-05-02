@@ -222,7 +222,12 @@ class User extends Authenticatable implements
      */
     public function event($id)
     {
-        $status = $this->events->only($id)->first();
+        if ($this->relationLoaded('events')) {
+            $status = $this->events->find($id);
+        } else {
+            $status = $this->events()->where('event_id', $id)->first();
+        }
+
         if ($status != null) {
             return $status->pivot;
         } else {
