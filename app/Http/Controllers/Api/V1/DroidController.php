@@ -13,11 +13,25 @@ class DroidController extends Controller
      */
     public function index()
     {
-        // For the hunter app, we only want to expose droids that are "public" or have a certain status.
-        // For now, let's just return droids with their name and basic info.
-        return Droid::select('id', 'name', 'description', 'image', 'club_id')
-            ->with('club:id,name')
-            ->get();
+        try {
+            $droids = Droid::where('public', 'Yes')
+                ->select('id', 'name', 'notes', 'club_id')
+                ->with('club:id,name')
+                ->get();
+
+            return $droids->map(function ($droid) {
+                return [
+                    'id' => $droid->id,
+                    'name' => $droid->name,
+                    'description' => $droid->notes,
+                    'club' => $droid->club,
+                    'image' => url('/droid_image/' . $droid->id . '/front'),
+                ];
+            });
+        } catch (\Exception $e) {
+            \Log::error('Droid Hunter API Error: ' . $e->getMessage());
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
 
     /**
@@ -31,6 +45,14 @@ class DroidController extends Controller
             return response()->json(['message' => 'Droid not found'], 404);
         }
 
-        return $droid;
+        return [
+            'id' => $droid->id,
+            'name' => $droid->name,
+            'description' => $droid->notes,
+            'club' => $droid->club,
+            'image' => url('/droid_image/' . $droid->id . '/front'),
+            'type' => $droid->type,
+            'style' => $droid->style,
+        ];
     }
 }
