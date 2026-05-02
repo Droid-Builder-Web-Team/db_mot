@@ -66,7 +66,7 @@
       <div class="card-header title text-center">Active Attendees</div>
       <div class="card-body">
         <h2 style="color:#000000;">{{ $attended_last_year }}</h2>
-        <span class="text-muted">Attended in the last year</span>
+        <span style="color:#000000;">Attended in the last year</span>
       </div>
     </div>
   </div>
