@@ -92,7 +92,7 @@ class ContactController extends Controller
         );
 
         try {
-            Contact::create($request->except(['id']));
+            Contact::create($request->all());
             flash()->addSuccess('Contact created successfully');
         } catch (\Illuminate\Database\QueryException $exception) {
             flash()->addError('Failed to create Contact');
@@ -131,7 +131,7 @@ class ContactController extends Controller
         );
 
         try {
-            $contact->update($request->except(['id']));
+            $contact->update($request->all());
             flash()->addSuccess('Contact updated successfully');
         } catch (\Illuminate\Database\QueryException $exception) {
             flash()->addError('Failed to update Contact');
