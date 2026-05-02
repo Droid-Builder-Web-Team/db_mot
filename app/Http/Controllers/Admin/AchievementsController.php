@@ -53,7 +53,7 @@ class AchievementsController extends Controller
         );
 
         try {
-            Achievement::create($request->except(['id']));
+            Achievement::create($request->all());
             flash()->addSuccess('Achievement created successfully');
         } catch (\Illuminate\Database\QueryException $exception) {
             flash()->addError('Failed to create Achievement');
@@ -89,7 +89,7 @@ class AchievementsController extends Controller
             ]
         );
 
-        $achievement->update($request->except(['id']));
+        $achievement->update($request->all());
 
         return redirect()->route('admin.achievements.index')
             ->with('success', 'Achievement updated successfully.');
