@@ -33,6 +33,7 @@
         "laravel/fortify": "^1.21",
         "laravel/framework": "^10",
         "laravel/sail": "^1.8",
+        "laravel/sanctum": "*",
         "laravel/socialite": "^5.0",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^4.0",

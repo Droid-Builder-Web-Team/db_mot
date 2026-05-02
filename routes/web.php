@@ -200,3 +200,6 @@ Route::get('create-transaction', [PayPalController::class, 'createTransaction'])
 Route::get('process-transaction', [PayPalController::class, 'payPLI'])->name('payPLI');
 Route::get('success-transaction', [PayPalController::class, 'successTransaction'])->name('successTransaction');
 Route::get('cancel-transaction', [PayPalController::class, 'cancelTransaction'])->name('cancelTransaction');
+
+// Droid Hunter Scan Redirect
+Route::get('/scan/{id}', 'ScanController@redirect')->name('scan.redirect');

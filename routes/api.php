@@ -34,3 +34,9 @@ Route::get('events/future', 'EventApiController@getFutureAllPublicEvents');
 Route::get('events/charity', 'EventApiController@getCharityYtd');
 Route::get('events/charity/{year}', 'EventApiController@getCharityYtd');
 Route::get('mot/{id}', 'MOTController@json');
+
+// Droid Hunter API
+Route::prefix('v1')->group(function () {
+    Route::get('droids', 'Api\V1\DroidController@index');
+    Route::get('droids/{id}', 'Api\V1\DroidController@show');
+});
