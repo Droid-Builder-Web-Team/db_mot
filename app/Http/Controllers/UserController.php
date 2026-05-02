@@ -131,9 +131,7 @@ class UserController extends Controller
         }
 
         try {
-            $user->update($request->only([
-                'forename', 'surname', 'username', 'county', 'postcode', 'country', 'join_date', 'latitude', 'longitude'
-            ]));
+            $user->update($request->all());
             flash()->addSuccess('User updated successfully');
         } catch (\Illuminate\Database\QueryException $exception) {
             flash()->addError('Failed to update User');
