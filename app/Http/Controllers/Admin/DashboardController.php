@@ -61,6 +61,10 @@ class DashboardController extends Controller
             ->get();
         $active = User::whereDate('last_activity', '>', Carbon::today()->subDays(60))
             ->count();
+        $attended_last_year = User::whereHas('events', function ($query) {
+            $query->where('attended', 'Yes')
+                ->whereDate('date', '>=', Carbon::now()->subYear());
+        })->count();
 
         $paypli = [];
         foreach ($users as $user) {
@@ -81,6 +85,7 @@ class DashboardController extends Controller
                 'events',
                 'badges',
                 'active',
+                'attended_last_year',
                 'paypli'
             )
         );
