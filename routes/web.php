@@ -201,5 +201,5 @@ Route::get('process-transaction', [PayPalController::class, 'payPLI'])->name('pa
 Route::get('success-transaction', [PayPalController::class, 'successTransaction'])->name('successTransaction');
 Route::get('cancel-transaction', [PayPalController::class, 'cancelTransaction'])->name('cancelTransaction');
 
-// Droid Hunter Scan Redirect
-Route::get('/scan/{id}', 'ScanController@redirect')->name('scan.redirect');
+// Droid Hunter// Scan Redirector with Anti-Cheat Hash
+Route::get('/scan/{id}/{hash?}', 'ScanController@redirect')->name('scan.redirect');

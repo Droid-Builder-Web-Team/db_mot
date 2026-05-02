@@ -11,8 +11,16 @@ class ScanController extends Controller
     /**
      * Handle the scan redirect from a physical tag.
      */
-    public function redirect($id)
+    public function redirect($id, $hash = null)
     {
+        // Anti-Cheat: Verify the tag signature
+        $tagSecret = env('TAG_SECRET', 'changeme');
+        $expectedHash = substr(hash_hmac('sha256', $id, $tagSecret), 0, 8);
+
+        if ($hash !== $expectedHash) {
+            abort(403, 'Invalid or missing scan signature on physical tag.');
+        }
+
         $droid = Droid::find($id);
 
         if (!$droid) {
