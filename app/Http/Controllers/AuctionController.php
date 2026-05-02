@@ -173,7 +173,7 @@ class AuctionController extends Controller
 
         $request['finish_time'] = $request->finish_date . " " . $request->finish_time;
 
-        $newauction = $request->all());
+        $newauction = $request->all();
 
         #dd($newauction);
         $linkify = new \Misd\Linkify\Linkify();
