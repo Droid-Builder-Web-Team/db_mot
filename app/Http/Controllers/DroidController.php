@@ -42,10 +42,10 @@ class DroidController extends Controller
 
         $validatedData = $request->validate(
             [
-            'name' => 'required',
-            'build_log' => 'url|nullable',
-            'weight' => 'numeric|nullable',
-            'build_type' => 'max:36'
+                'name' => 'required',
+                'build_log' => 'url|nullable',
+                'weight' => 'numeric|nullable',
+                'build_type' => 'max:36'
             ]
         );
 
@@ -114,9 +114,9 @@ class DroidController extends Controller
 
         $request->validate(
             [
-            'name' => 'required',
-            'build_log' => 'url|nullable',
-            'weight' => 'numeric|nullable'
+                'name' => 'required',
+                'build_log' => 'url|nullable',
+                'weight' => 'numeric|nullable'
             ]
         );
 
@@ -166,29 +166,41 @@ class DroidController extends Controller
     {
         $droid = Droid::find($uid);
         if (!$droid->users->contains(auth()->user()) && !auth()->user()->can('View Droids')) {
-            if ($droid->public != "Yes")
+            if ($droid->public != "Yes") {
                 abort(403);
+            }
         }
 
         if ($size != "") {
-            $size = $size.'-';
+            $size = $size . '-';
         }
-        $path = 'droids/'.$uid.'/'.$size.''.$view.'.png';
+        $path = 'droids/' . $uid . '/' . $size . '' . $view . '.png';
         if (!Storage::exists($path)) {
-            $path = 'droids/'.$uid.'/'.$size.''.$view.'.jpg';
+            $path = 'droids/' . $uid . '/' . $size . '' . $view . '.jpg';
         }
-        if (!Storage::exists($path)) {
-            $path = getcwd().'/img/blank_'.$view.'.jpg';
-            $file = file_get_contents($path);
-            $type = "image/jpeg";
-        } else {
-            $file = Storage::get($path);
-            $type = Storage::mimeType($path);
-        }
-        $response = Response::make($file, 200);
-        $response->header("Content-Type", $type);
 
-        return $response;
+        if (!Storage::exists($path)) {
+            $localPath = public_path('img/blank_' . $view . '.jpg');
+            if (file_exists($localPath)) {
+                return response()->file($localPath);
+            }
+            // fallback if public_path doesn't find it
+            $oldPath = getcwd() . '/img/blank_' . $view . '.jpg';
+            if (file_exists($oldPath)) {
+                return response()->file($oldPath);
+            }
+            abort(404);
+        }
+
+        // If using S3, generate a signed URL to offload the transfer to AWS
+        if (config('filesystems.default') === 's3' || config('filesystems.cloud') === 's3') {
+            return redirect()->away(Storage::temporaryUrl($path, now()->addMinutes(5)));
+        }
+
+        // Fallback for local development
+        $file = Storage::get($path);
+        $type = Storage::mimeType($path);
+        return Response::make($file, 200)->header("Content-Type", $type);
     }
 
     public function downloadPDF($id)
@@ -199,7 +211,7 @@ class DroidController extends Controller
         $pdf->defaultFont = 'Arial';
         $pdf->setPaper('A4', 'portrait');
 
-        return $pdf->download('info_sheet_'.$droid->name.'.pdf');
+        return $pdf->download('info_sheet_' . $droid->name . '.pdf');
     }
 
     public function togglePublic(Request $request)
