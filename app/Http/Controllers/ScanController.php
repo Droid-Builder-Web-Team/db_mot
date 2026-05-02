@@ -13,18 +13,43 @@ class ScanController extends Controller
      */
     public function redirect($id, $hash = null)
     {
-        // Anti-Cheat: Verify the tag signature
+        // 1. Verify the tag signature
         $tagSecret = env('TAG_SECRET', 'changeme');
         $expectedHash = substr(hash_hmac('sha256', $id, $tagSecret), 0, 8);
 
         if ($hash !== $expectedHash) {
-            abort(403, 'Invalid or missing scan signature on physical tag.');
+            abort(403, 'This tag signature is invalid.');
         }
 
-        $droid = Droid::find($id);
+        $droid = Droid::with('users')->find($id);
 
         if (!$droid) {
-            abort(404, 'Droid not found');
+            abort(404, 'Droid not found.');
+        }
+
+        // 2. Find all events happening today
+        $today = now()->startOfDay();
+        $activeEvents = Event::where('date', '<=', $today)
+            ->get()
+            ->filter(function($event) use ($today) {
+                $endDate = \Carbon\Carbon::parse($event->date)->addDays($event->days - 1)->endOfDay();
+                return $today->lte($endDate);
+            });
+
+        if ($activeEvents->isEmpty()) {
+            abort(403, 'There are no active events scheduled for today.');
+        }
+
+        // 3. Check if any owner of this droid is registered for any active event
+        $ownerIds = $droid->users->pluck('id');
+        $isAttending = \DB::table('members_events')
+            ->whereIn('event_id', $activeEvents->pluck('id'))
+            ->whereIn('user_id', $ownerIds)
+            ->where('status', 'yes')
+            ->exists();
+
+        if (!$isAttending) {
+            abort(403, 'This droid is not currently registered for any active event.');
         }
 
         // Generate a signed URL for the Hunter PWA.
