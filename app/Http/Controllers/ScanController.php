@@ -27,29 +27,34 @@ class ScanController extends Controller
             abort(404, 'Droid not found.');
         }
 
-        // 2. Find all events happening today
-        $today = now()->startOfDay();
-        $activeEvents = Event::where('date', '<=', $today)
-            ->get()
-            ->filter(function($event) use ($today) {
-                $endDate = \Carbon\Carbon::parse($event->date)->addDays($event->days - 1)->endOfDay();
-                return $today->lte($endDate);
-            });
+        // --- TEST MODE BYPASS ---
+        if (config('app.env') === 'local' || env('HUNTER_TEST_MODE') === true) {
+            // Skip event check in local dev or if test mode is explicitly enabled
+        } else {
+            // 2. Find all events happening today
+            $today = now()->startOfDay();
+            $activeEvents = Event::where('date', '<=', $today)
+                ->get()
+                ->filter(function($event) use ($today) {
+                    $endDate = \Carbon\Carbon::parse($event->date)->addDays($event->days - 1)->endOfDay();
+                    return $today->lte($endDate);
+                });
 
-        if ($activeEvents->isEmpty()) {
-            abort(403, 'There are no active events scheduled for today.');
-        }
+            if ($activeEvents->isEmpty()) {
+                abort(403, 'There are no active events scheduled for today.');
+            }
 
-        // 3. Check if any owner of this droid is registered for any active event
-        $ownerIds = $droid->users->pluck('id');
-        $isAttending = \DB::table('members_events')
-            ->whereIn('event_id', $activeEvents->pluck('id'))
-            ->whereIn('user_id', $ownerIds)
-            ->where('status', 'yes')
-            ->exists();
+            // 3. Check if any owner of this droid is registered for any active event
+            $ownerIds = $droid->users->pluck('id');
+            $isAttending = \DB::table('members_events')
+                ->whereIn('event_id', $activeEvents->pluck('id'))
+                ->whereIn('user_id', $ownerIds)
+                ->where('status', 'yes')
+                ->exists();
 
-        if (!$isAttending) {
-            abort(403, 'This droid is not currently registered for any active event.');
+            if (!$isAttending) {
+                abort(403, 'This droid is not currently registered for any active event.');
+            }
         }
 
         // Generate a signed URL for the Hunter PWA.
