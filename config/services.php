@@ -64,5 +64,6 @@ return [
 
     'hunter_pwa' => [
         'url' => env('HUNTER_PWA_URL', 'http://localhost:8000'),
+        'secret' => env('HUNTER_SHARED_SECRET'),
     ],
 ];

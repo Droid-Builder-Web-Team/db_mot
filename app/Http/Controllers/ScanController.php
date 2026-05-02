@@ -28,11 +28,9 @@ class ScanController extends Controller
         // if we want the PWA to validate it using the same key.
         // BUT, a better way is to just pass a token that the PWA can then verify via API.
         
-        // For now, let's just generate a simple signed URL redirect.
-        // Note: Both apps will need to share the same APP_KEY for this to work out-of-the-box,
-        // or we use a shared secret.
-        
-        $signature = hash_hmac('sha256', $id, config('app.key'));
+        // Use a dedicated shared secret for the signature to avoid sharing APP_KEY.
+        $secret = config('services.hunter_pwa.secret');
+        $signature = hash_hmac('sha256', $id, $secret);
         
         return redirect()->away($pwaUrl . "/scan/" . $id . "?signature=" . $signature);
     }
