@@ -99,7 +99,7 @@ class EventsController extends Controller
                 $request['url'] = "http://".$request['url'];
             }
         }
-        $event = $request->all());
+        $event = $request->all();
         $linkify = new \Misd\Linkify\Linkify();
         $event['description'] = $linkify->process($request->description);
         $event['created_by'] = Auth::id();
@@ -179,7 +179,7 @@ class EventsController extends Controller
         if ($event->approved == 0 && $request['approved'] == 1) {
             $approved = 1;
         }
-        $newevent = $request->all());
+        $newevent = $request->all();
         $linkify = new \Misd\Linkify\Linkify();
         $newevent['description'] = $linkify->process($request->description);
         try {
