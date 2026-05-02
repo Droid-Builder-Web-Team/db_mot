@@ -51,7 +51,7 @@ class ClubsController extends Controller
             ]
         );
 
-        $club = Club::create($request->except(['id']));
+        $club = Club::create($request->all());
         Storage::makeDirectory('clubs/'.$club->id);
 
         return redirect()->route('admin.clubs.index')
@@ -87,7 +87,7 @@ class ClubsController extends Controller
 
         $club->options()->sync($request->options);
 
-        $club->update($request->except(['id']));
+        $club->update($request->all());
 
         return redirect()->route('admin.clubs.index')
             ->with('success', 'Club updated successfully.');
