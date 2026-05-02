@@ -86,7 +86,7 @@ class AuctionController extends Controller
         $request['finish_time'] = $request->finish_date . " " . $request->finish_time;
 
         try {
-            $auction = Auction::create($request->all());
+            $auction = Auction::create($request->except(['id', 'user_id']));
             flash()->addSuccess('Auction created successfully');
         } catch (\Illuminate\Database\QueryException $exception) {
             flash()->addError('Failed to create Auction');
@@ -173,7 +173,7 @@ class AuctionController extends Controller
 
         $request['finish_time'] = $request->finish_date . " " . $request->finish_time;
 
-        $newauction = $request->all();
+        $newauction = $request->except(['id', 'user_id']);
 
         #dd($newauction);
         $linkify = new \Misd\Linkify\Linkify();
