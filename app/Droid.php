@@ -107,7 +107,8 @@ class Droid extends Model implements Auditable
     {
         $valid = false;
         foreach ($this->mot as $mot) {
-            if ((strtotime($mot->date) > strtotime('-1 year'))
+            if (
+                (strtotime($mot->date) > strtotime('-1 year'))
                 && ($mot->approved == "Yes")
             ) {
                 $valid = true;
@@ -125,7 +126,8 @@ class Droid extends Model implements Auditable
     {
         $valid = false;
         foreach ($this->mot as $mot) {
-            if ((strtotime($mot->date) > strtotime('-1 year'))
+            if (
+                (strtotime($mot->date) > strtotime('-1 year'))
                 && ($mot->approved == "Advisory")
             ) {
                 $valid = true;
@@ -143,7 +145,8 @@ class Droid extends Model implements Auditable
     {
         $valid = false;
         foreach ($this->mot as $mot) {
-            if ((strtotime($mot->date) > strtotime('-1 year'))
+            if (
+                (strtotime($mot->date) > strtotime('-1 year'))
                 && ($mot->approved == "WIP")
             ) {
                 $valid = true;
@@ -161,7 +164,8 @@ class Droid extends Model implements Auditable
     {
         $expiring = false;
         foreach ($this->mot as $mot) {
-            if ((strtotime($mot->date) < strtotime('-11 months'))
+            if (
+                (strtotime($mot->date) < strtotime('-11 months'))
                 && (strtotime($mot->date) > strtotime('-1 year'))
             ) {
                 $expiring = true;
@@ -226,5 +230,17 @@ class Droid extends Model implements Auditable
     public function comments()
     {
         return $this->morphMany('App\Comment', 'commentable')->orderBy('created_at');
+    }
+    /**
+     * Get the secure tag URL for this droid
+     *
+     * @return string
+     */
+    public function tagUrl()
+    {
+        $tagSecret = env('TAG_SECRET', 'changeme');
+        $baseUrl = config('app.url');
+        $hash = substr(hash_hmac('sha256', $this->id, $tagSecret), 0, 8);
+        return rtrim($baseUrl, '/') . "/scan/{$this->id}/{$hash}";
     }
 }
