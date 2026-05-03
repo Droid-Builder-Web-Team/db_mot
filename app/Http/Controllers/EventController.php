@@ -63,7 +63,7 @@ class EventController extends Controller
             return redirect('codeofconduct');
         }
 
-        $events = Event::whereDate('date', '>=', Carbon::now())
+        $events = Event::whereDate('date', '>=', Carbon::today())
             ->where('approved', '1')
             ->orderBy('date', 'asc')->get();
 
@@ -371,7 +371,7 @@ class EventController extends Controller
     public function map()
     {
         $key = config('gmap.google_api_key');
-        $events = Event::whereDate('date', '>=', Carbon::now())->get();
+        $events = Event::whereDate('date', '>=', Carbon::today())->get();
 
         $eventlist = [];
         $index = 0;

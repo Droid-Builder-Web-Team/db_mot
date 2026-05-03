@@ -149,11 +149,7 @@ class Event extends Model implements \DPoulson\LaravelCalendar\Event, Auditable
      */
     public function isFuture()
     {
-        if ($this->date > now()) {
-            return true;
-        } else {
-            return false;
-        }
+        return $this->date >= now()->toDateString();
     }
 
     /**
