@@ -230,7 +230,12 @@
             @foreach ($events as $event)
               <tr>
                 <td>{{ $event->date }}</td>
-                <td>{{ $event->name }}</td>
+                <td>
+                  {{ $event->name }}
+                  @if($event->is_stem)
+                    <span class="badge badge-info">STEM</span>
+                  @endif
+                </td>
                 <td><a class="btn-sm btn-link"
                     href="{{ route('location.show', $event->location->id) }}">{{ $event->location->name }}</a></td>
                 <td>{{ $event->going->count() }}/{{$event->notgoing->count()}}</td>

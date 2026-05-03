@@ -32,6 +32,9 @@ class Event extends Model implements \DPoulson\LaravelCalendar\Event, Auditable
     use \OwenIt\Auditing\Auditable;
 
     protected $guarded = [];
+    protected $casts = [
+        'is_stem' => 'boolean',
+    ];
 
     /**
      * Return event options
@@ -272,20 +275,20 @@ class Event extends Model implements \DPoulson\LaravelCalendar\Event, Auditable
             return Http::post(
                 $webHook,
                 [
-                'content' =>
-                    "A new event has been created in the Droid Builders Portal. "
-                    . "Click below to view the event.",
-                'embeds' => [
-                    [
-                        'title' => $event->name . ' - ' . $event->date,
-                        'description' => $event->location->name . ', '
-                            . $event->location->county . ', '
-                            . $event->location->postcode,
-                        'url' => route('event.show', $event->id),
-                        'color' => '7506394',
-                    ]
-                ],
-                 ]
+                    'content' =>
+                        "A new event has been created in the Droid Builders Portal. "
+                        . "Click below to view the event.",
+                    'embeds' => [
+                        [
+                            'title' => $event->name . ' - ' . $event->date,
+                            'description' => $event->location->name . ', '
+                                . $event->location->county . ', '
+                                . $event->location->postcode,
+                            'url' => route('event.show', $event->id),
+                            'color' => '7506394',
+                        ]
+                    ],
+                ]
             );
         }
     }
@@ -304,20 +307,20 @@ class Event extends Model implements \DPoulson\LaravelCalendar\Event, Auditable
             return Http::post(
                 $webHook,
                 [
-                'content' =>
-                    "An event has been updated in the Droid Builders Portal. "
-                    . "Click below to view the event.",
-                'embeds' => [
-                    [
-                        'title' => $event->name . ' - ' . $event->date,
-                        'description' => $event->location->name . ', '
-                            . $event->location->county . ', '
-                            . $event->location->postcode,
-                        'url' => route('event.show', $event->id),
-                        'color' => '7506394',
-                    ]
-                ],
-                 ]
+                    'content' =>
+                        "An event has been updated in the Droid Builders Portal. "
+                        . "Click below to view the event.",
+                    'embeds' => [
+                        [
+                            'title' => $event->name . ' - ' . $event->date,
+                            'description' => $event->location->name . ', '
+                                . $event->location->county . ', '
+                                . $event->location->postcode,
+                            'url' => route('event.show', $event->id),
+                            'color' => '7506394',
+                        ]
+                    ],
+                ]
             );
         }
     }
@@ -336,18 +339,18 @@ class Event extends Model implements \DPoulson\LaravelCalendar\Event, Auditable
             return Http::post(
                 $webHook,
                 [
-                'content' =>
-                    "An event has been deleted in the Droid Builders Portal. ",
-                'embeds' => [
-                    [
-                        'title' => $event->name . ' - ' . $event->date,
-                        'description' => $event->location->name . ', '
-                            . $event->location->county . ', '
-                            . $event->location->postcode,
-                        'color' => '7506394',
-                    ]
-                ],
-                 ]
+                    'content' =>
+                        "An event has been deleted in the Droid Builders Portal. ",
+                    'embeds' => [
+                        [
+                            'title' => $event->name . ' - ' . $event->date,
+                            'description' => $event->location->name . ', '
+                                . $event->location->county . ', '
+                                . $event->location->postcode,
+                            'color' => '7506394',
+                        ]
+                    ],
+                ]
             );
         }
     }
@@ -365,24 +368,24 @@ class Event extends Model implements \DPoulson\LaravelCalendar\Event, Auditable
         if ($event->approved == 1) {
             $content = "An event has been created in the Portal. ";
         } else {
-            $content = "A user (".$event->organiser->forename." ".$event->organiser->surname.") has submitted an event in the portal, please check and approve it.";
+            $content = "A user (" . $event->organiser->forename . " " . $event->organiser->surname . ") has submitted an event in the portal, please check and approve it.";
         }
         $webHook = config('discord.managementhook');
         if ($webHook != 'none') {
             return Http::post(
                 $webHook,
                 [
-                'content' => $content,
-                'embeds' => [
-                    [
-                        'title' => $event->name . ' - ' . $event->date,
-                        'description' => $event->location->name . ', '
-                            . $event->location->county . ', '
-                            . $event->location->postcode,
-                        'color' => '7506394',
-                    ]
-                ],
-                 ]
+                    'content' => $content,
+                    'embeds' => [
+                        [
+                            'title' => $event->name . ' - ' . $event->date,
+                            'description' => $event->location->name . ', '
+                                . $event->location->county . ', '
+                                . $event->location->postcode,
+                            'color' => '7506394',
+                        ]
+                    ],
+                ]
             );
         }
     }

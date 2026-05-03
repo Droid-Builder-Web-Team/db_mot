@@ -84,9 +84,10 @@ class EventController extends Controller
                 $event->date,
                 $event->id,
                 [
-                'url' => 'event/'.$event->id,
-                'title' => $title,
-                'borderColor' =>  $background,
+                    'url' => 'event/' . $event->id,
+                    'title' => $title,
+                    'borderColor' => $background,
+                    'is_stem' => (int) $event->is_stem,
 
                 ]
             );
@@ -95,49 +96,62 @@ class EventController extends Controller
 
         $calendar = new Calendar();
         $calendar->addEvents($calevents)
+            ->setCallbacks([
+                'eventDidMount' => 'function(info) {
+                    if (info.event.extendedProps.is_stem == 1 || info.event.extendedProps.is_stem === true) {
+                        let badge = document.createElement("span");
+                        badge.className = "badge badge-info ml-1";
+                        badge.innerText = "STEM";
+                        let titleEl = info.el.querySelector(".fc-list-event-title") || info.el.querySelector(".fc-event-title");
+                        if (titleEl) {
+                            titleEl.appendChild(badge);
+                        }
+                    }
+                }'
+            ])
             ->setOptions(
                 [
-                'locale' => 'en',
-                'themeSystem' => 'bootstrap',
-                'aspectRatio' => 2.5,
-                'height' => 'auto',
-                'firstDay' => 0,
-                'titleFormat' => [
-                'month' => 'short',
-                'year' => 'numeric'
-                ],
-                'views' => [
-                'listYear' => [
+                    'locale' => 'en',
+                    'themeSystem' => 'bootstrap',
+                    'aspectRatio' => 2.5,
+                    'height' => 'auto',
+                    'firstDay' => 0,
                     'titleFormat' => [
-                        'year' => 'numeric',
-                      ]
-                ],
-                ],
-                'displayEventTime' => false,
-                'selectable' => true,
-                'initialView' => 'listYear',
-                'bootstrapFontAwesome' => [
-                'today' => 'calendar-day',
-                'dayGridMonth' => 'fa-calendar-alt',
-                'listMonth' => 'fa-list'
-                ],
-                'buttonText' => [
-                'listYear' => 'Year',
-                ],
-                'buttonIcons' => [
+                        'month' => 'short',
+                        'year' => 'numeric'
+                    ],
+                    'views' => [
+                        'listYear' => [
+                            'titleFormat' => [
+                                'year' => 'numeric',
+                            ]
+                        ],
+                    ],
+                    'displayEventTime' => false,
+                    'selectable' => true,
+                    'initialView' => 'listYear',
+                    'bootstrapFontAwesome' => [
+                        'today' => 'calendar-day',
+                        'dayGridMonth' => 'fa-calendar-alt',
+                        'listMonth' => 'fa-list'
+                    ],
+                    'buttonText' => [
+                        'listYear' => 'Year',
+                    ],
+                    'buttonIcons' => [
 
-                ],
-                'customButtons' => [
-                'map' => [
-                    'text' => 'View as Map',
-                    'click' => 'function() {
+                    ],
+                    'customButtons' => [
+                        'map' => [
+                            'text' => 'View as Map',
+                            'click' => 'function() {
                         window.open("event/map","_self")
                     }'
-                ]
-                ],
-                'headerToolbar' => [
-                'end' => 'map today,prev,next dayGridMonth,listMonth,listYear'
-                ]
+                        ]
+                    ],
+                    'headerToolbar' => [
+                        'end' => 'map today,prev,next dayGridMonth,listMonth,listYear'
+                    ]
                 ]
             );
         $calendar->setId('1');
@@ -168,17 +182,17 @@ class EventController extends Controller
     {
         $request->validate(
             [
-            'name' => 'required',
-            'description' => 'required',
-            'date' => 'required',
+                'name' => 'required',
+                'description' => 'required',
+                'date' => 'required',
             ]
         );
 
         if ($request->location_id == "new") {
             // Create a new location
             if ($request['postcode'] != "") {
-                $address = str_replace(' ', '+', $request['postcode']).'+'.str_replace(' ', '+', $request['country']);
-                $url = "https://maps.google.com/maps/api/geocode/json?key=".config('gmap.google_api_key')."&address=".$address."&sensor=false";
+                $address = str_replace(' ', '+', $request['postcode']) . '+' . str_replace(' ', '+', $request['country']);
+                $url = "https://maps.google.com/maps/api/geocode/json?key=" . config('gmap.google_api_key') . "&address=" . $address . "&sensor=false";
                 $geocode = file_get_contents($url);
                 $output = json_decode($geocode);
                 $location['latitude'] = strval($output->results[0]->geometry->location->lat);
@@ -210,7 +224,7 @@ class EventController extends Controller
 
         if ($request['url'] != "") {
             if (!str_starts_with($request['url'], 'http')) {
-                $event['url'] = "http://".$request['url'];
+                $event['url'] = "http://" . $request['url'];
             }
         } else {
             $event['url'] = "";
@@ -232,6 +246,7 @@ class EventController extends Controller
             $event['approved'] = 0;
         }
         $event['sw_only'] = $request->sw_only;
+        $event['is_stem'] = $request->is_stem;
 
         try {
             $newevent = Event::create($event);
@@ -260,7 +275,7 @@ class EventController extends Controller
                 $event['date'] = date(
                     'Y-m-d',
                     strtotime(
-                        $request->date. ' + ' . $x . ' days'
+                        $request->date . ' + ' . $x . ' days'
                     )
                 );
                 $newevent = Event::create($event);
@@ -293,13 +308,13 @@ class EventController extends Controller
         } else {
             $date = DateTime::createFromFormat('Y-m-d', $event->date);
             $link = Link::create(
-                $event->name,
+                $event->is_stem ? "[STEM] " . $event->name : $event->name,
                 $date,
                 $date,
                 true
             )
-                    ->description($event->description)
-                    ->address($event->location->name.','.$event->location->postcode);
+                ->description($event->description)
+                ->address($event->location->name . ',' . $event->location->postcode);
 
             return view('event.show', compact('event', 'link', 'contacts'));
         }
@@ -319,9 +334,9 @@ class EventController extends Controller
         $user = User::find($request->user_id);
         $hasEntry = $user->events()->where('event_id', $event->id)->exists();
         $attributes = [
-          'spotter' => $request->spotter,
-          'status' => $request->going,
-          'mot_required' => $request->mot_required
+            'spotter' => $request->spotter,
+            'status' => $request->going,
+            'mot_required' => $request->mot_required
         ];
         if ($hasEntry) {
             $result = $event->users()->updateExistingPivot($user, $attributes);
@@ -367,10 +382,10 @@ class EventController extends Controller
             $entry['title'] = $event->name . ' - ('
                 . $event->location->name . ' - '
                 . $event->location->town . ')';
-            $entry['url'] = "<a href=".route(
+            $entry['url'] = "<a href=" . route(
                 'event.show',
                 ['event' => $event->id]
-            ).">".$entry['title']."</a>";
+            ) . ">" . $entry['title'] . "</a>";
             $entry['extra'] = $event->date;
             $entry['position'] = array(
                 "lat" => floatval($event->location->latitude),

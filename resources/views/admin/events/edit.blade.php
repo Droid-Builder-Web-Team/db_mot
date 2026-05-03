@@ -6,7 +6,8 @@
             <div class="row">
                 <div class="col-lg-12 margin-tb">
                     <div class="pull-right mb-4">
-                        <a class="btn btn-mot-invert" style="width:auto; color:white;" href="{{ route('admin.events.index') }}">Back</a>
+                        <a class="btn btn-mot-invert" style="width:auto; color:white;"
+                            href="{{ route('admin.events.index') }}">Back</a>
                     </div>
                     <div class="pull-left mb-4">
                         <h2>Edit Event</h2>
@@ -24,26 +25,29 @@
                     <div class="col-sm-2">
                         <label for="name"><strong>Name</strong></label>
                     </div>
-    
+
                     <div class="col-sm-10">
-                        <input type="text" name="name" class="form-control" placeholder="Event Name" value="{{ $event->name }}">
+                        <input type="text" name="name" class="form-control" placeholder="Event Name"
+                            value="{{ $event->name }}">
                     </div>
                 </div>
-    
+
                 <div class="form-group row d-flex justify-content-center align-items-center">
                     <div class="col-sm-2">
                         <label for="location_id"><strong>Location</strong></label>
                     </div>
-    
+
                     <div class="col-sm-5">
                         <select class="form-control location-dropdown" name="location_id" id="location_id">
                             <option value="new">New Location</option>
                             @foreach ($locations as $location)
-                                <option value="{{ $location->id }}" @if ($event->location_id == $location->id) selected @endif>{{ $location->name }}</option>
+                                <option value="{{ $location->id }}" @if ($event->location_id == $location->id) selected @endif>
+                                    {{ $location->name }}
+                                </option>
                             @endforeach
                         </select>
                     </div>
-    
+
                     <div class="col-sm-5">
                         <a class="btn btn-info" id="new-location-btn" href=#>New Location</a>
                     </div>
@@ -53,39 +57,42 @@
                     <div class="col-sm-2">
                         <label for="date"><strong>Parking Details</strong></label>
                     </div>
-    
+
                     <div class="col-sm-10">
-                        <input type="text" name="parking_details" id="parking_details" class="form-control" placeholder="Event Parking Details" value="{{ $event->parking_details }}">
+                        <input type="text" name="parking_details" id="parking_details" class="form-control"
+                            placeholder="Event Parking Details" value="{{ $event->parking_details }}">
                     </div>
                 </div>
-    
-    
-    
+
+
+
                 <div class="form-group row d-flex justify-content-center align-items-center">
                     <div class="col-sm-2">
                         <label for="description"><strong>Description</strong></label>
                     </div>
-    
+
                     <div class="col-sm-10">
-                        <textarea class="form-control" style="height:150px" id="description" name="description" placeholder="Event Description">{{ $event->description }}</textarea>
+                        <textarea class="form-control" style="height:150px" id="description" name="description"
+                            placeholder="Event Description">{{ $event->description }}</textarea>
                     </div>
                 </div>
-    
+
                 <div class="form-group row d-flex justify-content-center align-items-center">
                     <div class="col-sm-2">
                         <label for="date"><strong>Date</strong></label>
                     </div>
-    
+
                     <div class="col-sm-3">
                         <input type="date" name="date" class="form-control" placeholder="Date" value="{{ $event->date }}">
                     </div>
-    
+
                     <div class="col-sm-2">
                         <label for="days"><strong>Droid Limit</strong></label>
                     </div>
-    
+
                     <div class="col-sm-2">
-                        <input type="number" name="quantity" value="{{ $event->quantity }}" class="form-control" placeholder="Droid Limit" required>
+                        <input type="number" name="quantity" value="{{ $event->quantity }}" class="form-control"
+                            placeholder="Droid Limit" required>
                     </div>
 
                     <div class="col-sm-3">
@@ -108,7 +115,8 @@
                         <div class="form-check">
                             {{ Form::hidden('public', '0') }}
                             <input type="checkbox" id="public" name="public" class="form-check-input" {{ $event->public ? 'checked=1 value=1' : 'value=1' }}>
-                            <label class="form-check-label" for="public">Display publicly on droidbuilders.uk if anyone is attending</label>
+                            <label class="form-check-label" for="public">Display publicly on droidbuilders.uk if anyone is
+                                attending</label>
                         </div>
 
                         <div class="form-check">
@@ -119,8 +127,14 @@
 
                         <div class="form-check">
                             {{ Form::hidden('sw_only', '0') }}
-                            <input type="checkbox" id="sw_only" name="sw_only" class="form-check-input" {{ $event->wip_allowed ? 'checked=1 value=1' : 'value=1' }}>
+                            <input type="checkbox" id="sw_only" name="sw_only" class="form-check-input" {{ $event->sw_only ? 'checked=1 value=1' : 'value=1' }}>
                             <label class="form-check-label" for="sw_only">Star Wars Only event</label>
+                        </div>
+
+                        <div class="form-check">
+                            {{ Form::hidden('is_stem', '0') }}
+                            <input type="checkbox" id="is_stem" name="is_stem" class="form-check-input" {{ $event->is_stem ? 'checked=1 value=1' : 'value=1' }}>
+                            <label class="form-check-label" for="is_stem">STEM/STEAM Event</label>
                         </div>
                     </div>
                 </div>
@@ -147,17 +161,20 @@
 
                 <div class="form-group">
                     <label for="charity_raised"><strong>Charity Raised</strong></label>
-                    <input type="text" name="charity_raised" value="{{ $event->charity_raised }}" class="form-control" placeholder="Charity Amount">
+                    <input type="text" name="charity_raised" value="{{ $event->charity_raised }}" class="form-control"
+                        placeholder="Charity Amount">
                 </div>
 
                 <div class="form-group">
                     <label for="forum_link"><strong>Forum Link</strong></label>
-                    <input type="text" name="forum_link" value="{{ $event->forum_link }}" class="form-control" placeholder="Forum Link">
+                    <input type="text" name="forum_link" value="{{ $event->forum_link }}" class="form-control"
+                        placeholder="Forum Link">
                 </div>
 
                 <div class="form-group">
                     <label for="report_link"><strong>Event Report</strong></label>
-                    <input type="text" name="report_link" value="{{ $event->report_link }}" class="form-control" placeholder="Report Link">
+                    <input type="text" name="report_link" value="{{ $event->report_link }}" class="form-control"
+                        placeholder="Report Link">
                 </div>
 
                 <div class="form-group text-center">
@@ -179,7 +196,7 @@
     </script>
 
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('.location-dropdown').select2();
         });
     </script>

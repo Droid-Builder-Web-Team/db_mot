@@ -5,7 +5,8 @@
         <div class="card-header">
             <div class="row d-flex ">
                 <div class="text-left col-3">
-                    <a class="btn btn-mot-invert" style="width:auto; color:white;" href="{{ route('admin.events.index') }}">Back</a>
+                    <a class="btn btn-mot-invert" style="width:auto; color:white;"
+                        href="{{ route('admin.events.index') }}">Back</a>
                 </div>
                 <div class="text-center col-6">
                     <h2 class="justify-content-center">Create Event</h2>
@@ -52,7 +53,8 @@
                     </div>
 
                     <div class="col-sm-10">
-                        <input type="text" name="parking_details" id="parking_details" class="form-control" placeholder="Event Parking Details">
+                        <input type="text" name="parking_details" id="parking_details" class="form-control"
+                            placeholder="Event Parking Details">
                     </div>
                 </div>
 
@@ -64,7 +66,8 @@
                     </div>
 
                     <div class="col-sm-10">
-                        <textarea class="form-control" style="height:150px" id="description" name="description" placeholder="Event Description"></textarea>
+                        <textarea class="form-control" style="height:150px" id="description" name="description"
+                            placeholder="Event Description"></textarea>
                     </div>
                 </div>
 
@@ -82,7 +85,8 @@
                     </div>
 
                     <div class="col-sm-2">
-                        <input type="number" name="days" value="1" class="form-control" placeholder="Number of Days" required>
+                        <input type="number" name="days" value="1" class="form-control" placeholder="Number of Days"
+                            required>
                     </div>
 
                     <div class="col-sm-1">
@@ -90,7 +94,8 @@
                     </div>
 
                     <div class="col-sm-2">
-                        <input type="number" name="quantity" value="0" class="form-control" placeholder="Droid Limit" required>
+                        <input type="number" name="quantity" value="0" class="form-control" placeholder="Droid Limit"
+                            required>
                     </div>
                 </div>
 
@@ -110,7 +115,8 @@
                         <div class="form-check">
                             {{ Form::hidden('public', '0') }}
                             <input type="checkbox" id="public" name="public" class="form-check-input" value="1">
-                            <label class="form-check-label" for="public">Display publicly on droidbuilders.uk if anyone is attending</label>
+                            <label class="form-check-label" for="public">Display publicly on droidbuilders.uk if anyone is
+                                attending</label>
                         </div>
 
                         <div class="form-check">
@@ -123,6 +129,12 @@
                             {{ Form::hidden('sw_only', '0') }}
                             <input type="checkbox" id="sw_only" name="sw_only" class="form-check-input" value="1">
                             <label class="form-check-label" for="sw_only">Star Wars Only event</label>
+                        </div>
+
+                        <div class="form-check">
+                            {{ Form::hidden('is_stem', '0') }}
+                            <input type="checkbox" id="is_stem" name="is_stem" class="form-check-input" value="1">
+                            <label class="form-check-label" for="is_stem">STEM/STEAM Event</label>
                         </div>
                     </div>
                 </div>
@@ -144,20 +156,20 @@
         </div>
     </div>
 
-<script src="{{ asset('node_modules/tinymce/tinymce.js') }}"></script>
-<script>
-    tinymce.init({
-        selector: '#description',
-        plugins: 'autolink lists table link hr autoresize',
-        toolbar: 'table numlist bullist link hr',
-        toolbar_mode: 'floating',
-    });
-</script>
+    <script src="{{ asset('node_modules/tinymce/tinymce.js') }}"></script>
+    <script>
+        tinymce.init({
+            selector: '#description',
+            plugins: 'autolink lists table link hr autoresize',
+            toolbar: 'table numlist bullist link hr',
+            toolbar_mode: 'floating',
+        });
+    </script>
 
-<script>
-    $(document).ready(function() {
-        $('.location-dropdown').select2();
-    });
-</script>
+    <script>
+        $(document).ready(function () {
+            $('.location-dropdown').select2();
+        });
+    </script>
 
 @endsection

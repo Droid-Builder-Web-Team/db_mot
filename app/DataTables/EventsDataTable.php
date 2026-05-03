@@ -44,17 +44,27 @@ class EventsDataTable extends DataTable
                     return $approved;
                 }
             )
-          ->addColumn('action', '')
-          ->orderColumns(['name', 'location', 'approved', 'date'], '+:column $1')
-        ->editColumn(
-            'action',
-            function ($row) {
-                $crudRoutePart = "event";
-                $parts = array('view', 'edit', 'delete');
-                return view('partials.datatablesActions', compact('row', 'crudRoutePart', 'parts'));
-            }
-        )
-          ->rawColumns(['action', 'approved']);
+            ->addColumn('action', '')
+            ->orderColumns(['name', 'location', 'approved', 'date'], '+:column $1')
+            ->editColumn(
+                'name',
+                function (Event $event) {
+                    $name = $event->name;
+                    if ($event->is_stem) {
+                        $name .= ' <span class="badge badge-info">STEM</span>';
+                    }
+                    return $name;
+                }
+            )
+            ->editColumn(
+                'action',
+                function ($row) {
+                    $crudRoutePart = "event";
+                    $parts = array('view', 'edit', 'delete');
+                    return view('partials.datatablesActions', compact('row', 'crudRoutePart', 'parts'));
+                }
+            )
+            ->rawColumns(['action', 'approved', 'name']);
     }
 
     /**
@@ -80,7 +90,7 @@ class EventsDataTable extends DataTable
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->dom('Bfrtip')
-            ->lengthMenu([15,25,50])
+            ->lengthMenu([15, 25, 50])
             ->orderBy(0)
             ->buttons(
                 Button::make('create'),
@@ -98,16 +108,16 @@ class EventsDataTable extends DataTable
     protected function getColumns()
     {
         return [
-          Column::make('date'),
-          Column::make('name'),
-          Column::computed('location'),
-          Column::computed('attendance'),
-          Column::make('approved'),
-          Column::computed('action')
-              ->exportable(false)
-              ->printable(false)
-              ->width(85)
-              ->addClass('text-center'),
+            Column::make('date'),
+            Column::make('name'),
+            Column::computed('location'),
+            Column::computed('attendance'),
+            Column::make('approved'),
+            Column::computed('action')
+                ->exportable(false)
+                ->printable(false)
+                ->width(85)
+                ->addClass('text-center'),
         ];
     }
 

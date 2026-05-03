@@ -61,7 +61,7 @@ class ICalController extends Controller
             $location = new Location($event->location->name . ", " . $event->location->postcode . ", " . $event->location->country);
 
             $entry = (new Event())
-                ->setSummary($event->name)
+                ->setSummary($event->is_stem ? "[STEM] " . $event->name : $event->name)
                 ->setDescription($event->description)
                 ->setOccurrence($occurrence)
                 ->setLocation($location);
