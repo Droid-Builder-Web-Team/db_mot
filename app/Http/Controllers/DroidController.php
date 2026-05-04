@@ -16,8 +16,8 @@ class DroidController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
-        $this->middleware('verified');
+        $this->middleware('auth')->except(['displayDroidImage']);
+        $this->middleware('verified')->except(['displayDroidImage']);
     }
 
     /**
@@ -162,10 +162,15 @@ class DroidController extends Controller
         return redirect()->route('user.show', auth()->user()->id);
     }
 
-    public function displayDroidImage($uid, $view, $size = '')
+    public function displayDroidImage(Request $request, $uid, $view, $size = '')
     {
         $droid = Droid::find($uid);
-        if (!$droid->users->contains(auth()->user()) && !auth()->user()->can('View Droids')) {
+        
+        // Secret Access for Hunter App
+        $hunterSecret = $request->header('X-Hunter-Secret');
+        $isHunter = $hunterSecret && $hunterSecret === config('services.core_portal.secret');
+
+        if (!$isHunter && (!auth()->check() || (!$droid->users->contains(auth()->user()) && !auth()->user()->can('View Droids')))) {
             if ($droid->public != "Yes") {
                 abort(403);
             }
@@ -179,28 +184,36 @@ class DroidController extends Controller
             $path = 'droids/' . $uid . '/' . $size . '' . $view . '.jpg';
         }
 
+        $response = null;
         if (!Storage::exists($path)) {
             $localPath = public_path('img/blank_' . $view . '.jpg');
             if (file_exists($localPath)) {
-                return response()->file($localPath);
+                $response = response()->file($localPath);
+            } else {
+                // fallback if public_path doesn't find it
+                $oldPath = getcwd() . '/img/blank_' . $view . '.jpg';
+                if (file_exists($oldPath)) {
+                    $response = response()->file($oldPath);
+                } else {
+                    abort(404);
+                }
             }
-            // fallback if public_path doesn't find it
-            $oldPath = getcwd() . '/img/blank_' . $view . '.jpg';
-            if (file_exists($oldPath)) {
-                return response()->file($oldPath);
+        } else {
+            // If using S3, generate a signed URL to offload the transfer to AWS
+            if (config('filesystems.default') === 's3' || config('filesystems.cloud') === 's3') {
+                $response = redirect()->away(Storage::temporaryUrl($path, now()->addMinutes(5)));
+            } else {
+                // Fallback for local development
+                $file = Storage::get($path);
+                $type = Storage::mimeType($path);
+                $response = Response::make($file, 200)->header("Content-Type", $type);
             }
-            abort(404);
         }
 
-        // If using S3, generate a signed URL to offload the transfer to AWS
-        if (config('filesystems.default') === 's3' || config('filesystems.cloud') === 's3') {
-            return redirect()->away(Storage::temporaryUrl($path, now()->addMinutes(5)));
-        }
-
-        // Fallback for local development
-        $file = Storage::get($path);
-        $type = Storage::mimeType($path);
-        return Response::make($file, 200)->header("Content-Type", $type);
+        // Add CORS for Droid Hunter capture
+        return $response->header('Access-Control-Allow-Origin', '*')
+                        ->header('Access-Control-Allow-Methods', 'GET, OPTIONS')
+                        ->header('Access-Control-Allow-Headers', 'X-Hunter-Secret, Origin, Content-Type, Accept');
     }
 
     public function downloadPDF($id)

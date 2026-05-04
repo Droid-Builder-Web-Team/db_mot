@@ -112,8 +112,6 @@ Route::group(
         Route::get('/info_sheet/{id}', 'DroidController@downloadPDF');
         Route::get('notifications', 'UserNotificationsController@index')->name('notifications');
         Route::get('notifications/read/{id}', 'UserNotificationsController@read')->name('notifications.read');
-        Route::get('droid_image/{uid}/{view}/{size?}', 'DroidController@displayDroidImage')
-            ->name('image.displayDroidImage');
         Route::get('mug_shot/{uid}/{size?}', 'UserController@displayMugShot')
             ->name('image.displayMugShot');
         Route::get('/images/update', 'ImageController@update');
@@ -192,6 +190,8 @@ Route::get('topps_image/{uid}/{view}/{size?}', 'ToppsController@displayToppsImag
     ->name('image.displayToppsImage');
 Route::get('events/image/show/{event_id}', 'EventApiController@showimage')
     ->name('events.showimage');
+Route::get('droid_image/{uid}/{view}/{size?}', 'DroidController@displayDroidImage')
+    ->name('image.displayDroidImage');
 
     
 Route::get('/chart', 'QrCodeController@show')->name('chart');
