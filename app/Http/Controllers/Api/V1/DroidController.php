@@ -104,6 +104,7 @@ class DroidController extends Controller
             return response()->json(['message' => 'Droid not found'], 404);
         }
 
+        $droid->timestamps = false;
         $droid->increment('commendations');
 
         return response()->json([
@@ -127,6 +128,7 @@ class DroidController extends Controller
             return response()->json(['message' => 'Droid not found'], 404);
         }
 
+        $droid->timestamps = false;
         $droid->increment('scan_count');
 
         return response()->json([
