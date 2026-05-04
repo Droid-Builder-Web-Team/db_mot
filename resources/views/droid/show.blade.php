@@ -33,14 +33,16 @@
                 @endforeach
               </td>
             </tr>
-            <tr>
-                <th>Scan Count</th>
-                <td>{{ $droid->scan_count ?? 0 }}</td>
-            </tr>
-            <tr>
-                <th>Commendations</th>
-                <td>★ {{ $droid->commendations ?? 0 }}</td>
-            </tr>
+            @if ($droid->public == 'Yes')
+                <tr>
+                    <th>Scan Count</th>
+                    <td>{{ $droid->scan_count ?? 0 }}</td>
+                </tr>
+                <tr>
+                    <th>Commendations</th>
+                    <td>★ {{ $droid->commendations ?? 0 }}</td>
+                </tr>
+            @endif
             <tr>
               <th>Type</th>
               <td>{{ $droid->type }}</td>
