@@ -95,7 +95,7 @@ class DroidController extends Controller
     public function commend(Request $request, $id)
     {
         $secret = $request->header('X-Hunter-Secret');
-        if (!$secret || $secret !== config('services.core_portal.secret')) {
+        if (!$secret || $secret !== config('services.hunter_pwa.secret')) {
             return response()->json(['message' => 'Unauthorized'], 401);
         }
 
@@ -119,7 +119,7 @@ class DroidController extends Controller
     public function reportScan(Request $request, $id)
     {
         $secret = $request->header('X-Hunter-Secret');
-        if (!$secret || $secret !== config('services.core_portal.secret')) {
+        if (!$secret || $secret !== config('services.hunter_pwa.secret')) {
             return response()->json(['message' => 'Unauthorized'], 401);
         }
 
