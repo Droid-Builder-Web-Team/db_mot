@@ -166,9 +166,13 @@ class DroidController extends Controller
     {
         $droid = Droid::find($uid);
         
+        if (!$droid) {
+            abort(404);
+        }
+        
         // Secret Access for Hunter App
         $hunterSecret = $request->header('X-Hunter-Secret');
-        $isHunter = $hunterSecret && $hunterSecret === config('services.core_portal.secret');
+        $isHunter = $hunterSecret && $hunterSecret === config('services.hunter_pwa.secret');
 
         if (!$isHunter && (!auth()->check() || (!$droid->users->contains(auth()->user()) && !auth()->user()->can('View Droids')))) {
             if ($droid->public != "Yes") {
