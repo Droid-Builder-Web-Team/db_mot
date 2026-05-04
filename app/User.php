@@ -455,4 +455,14 @@ class User extends Authenticatable implements
         }
         return $amount;
     }
+
+    /**
+     * Get the total number of commendations across all the user's droids
+     *
+     * @return int
+     */
+    public function totalCommendations()
+    {
+        return $this->droids->sum('commendations');
+    }
 }

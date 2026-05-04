@@ -174,6 +174,17 @@
             </div>
             <div class="card card-mot-info">
                 <div class="p-3 card-body d-flex align-items-center">
+                    <div class="p-3 bg-gradient-success mfe-3">
+                        <i class="fas fa-thumbs-up fa-fw"></i>
+                    </div>
+                    <div>
+                        <div class="text-value text-success">{{ $user->totalCommendations() }}</div>
+                        <div class="text-muted text-uppercase font-weight-bold small">{{ __('Commendations') }}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="card card-mot-info">
+                <div class="p-3 card-body d-flex align-items-center">
                     <div class="p-3 bg-gradient-info mfe-3">
                         <i class="fas fa-pound-sign"></i>
                     </div>
