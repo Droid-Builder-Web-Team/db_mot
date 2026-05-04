@@ -215,12 +215,12 @@ class DroidController extends Controller
         }
 
         // Add CORS and Caching for Droid Hunter
-        return $response->withHeaders([
-            'Access-Control-Allow-Origin' => '*',
-            'Access-Control-Allow-Methods' => 'GET, OPTIONS',
-            'Access-Control-Allow-Headers' => 'X-Hunter-Secret, Origin, Content-Type, Accept',
-            'Cache-Control' => 'public, max-age=31536000', // Cache for 1 year
-        ]);
+        $response->headers->set('Access-Control-Allow-Origin', '*');
+        $response->headers->set('Access-Control-Allow-Methods', 'GET, OPTIONS');
+        $response->headers->set('Access-Control-Allow-Headers', 'X-Hunter-Secret, Origin, Content-Type, Accept');
+        $response->headers->set('Cache-Control', 'public, max-age=31536000'); // Cache for 1 year
+
+        return $response;
     }
 
     public function downloadPDF($id)
