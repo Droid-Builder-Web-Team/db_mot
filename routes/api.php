@@ -39,4 +39,6 @@ Route::get('mot/{id}', 'MOTController@json');
 Route::prefix('v1')->group(function () {
     Route::get('droids', 'Api\V1\DroidController@index');
     Route::get('droids/{id}', 'Api\V1\DroidController@show');
+    Route::post('droids/{id}/commend', 'Api\V1\DroidController@commend');
+    Route::post('droids/{id}/scan', 'Api\V1\DroidController@reportScan');
 });

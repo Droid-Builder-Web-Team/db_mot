@@ -90,6 +90,52 @@ class DroidController extends Controller
     }
 
     /**
+     * Increment commendations for a droid.
+     */
+    public function commend(Request $request, $id)
+    {
+        $secret = $request->header('X-Hunter-Secret');
+        if (!$secret || $secret !== config('services.core_portal.secret')) {
+            return response()->json(['message' => 'Unauthorized'], 401);
+        }
+
+        $droid = Droid::find($id);
+        if (!$droid) {
+            return response()->json(['message' => 'Droid not found'], 404);
+        }
+
+        $droid->increment('commendations');
+
+        return response()->json([
+            'message' => 'Commendation recorded',
+            'count' => $droid->commendations
+        ]);
+    }
+
+    /**
+     * Increment scan count for a droid.
+     */
+    public function reportScan(Request $request, $id)
+    {
+        $secret = $request->header('X-Hunter-Secret');
+        if (!$secret || $secret !== config('services.core_portal.secret')) {
+            return response()->json(['message' => 'Unauthorized'], 401);
+        }
+
+        $droid = Droid::find($id);
+        if (!$droid) {
+            return response()->json(['message' => 'Droid not found'], 404);
+        }
+
+        $droid->increment('scan_count');
+
+        return response()->json([
+            'message' => 'Scan recorded',
+            'count' => $droid->scan_count
+        ]);
+    }
+
+    /**
      * Calculate rarity based on the owner's event frequency in the last year.
      */
     private function calculateRarity($droid)
