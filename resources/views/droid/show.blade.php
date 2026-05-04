@@ -102,7 +102,15 @@
             @if(Auth::user()->can('Edit Droids') || $droid->users->contains(Auth::user()))
               <tr id="tagUrlRow" style="{{ $droid->public == 'Yes' ? '' : 'display: none;' }}">
                 <th>Tag URL</th>
-                <td><a target="_blank" href="{{ $droid->tagUrl() }}">{{ $droid->tagUrl() }}</a></td>
+                <td>
+                  <a id="tagUrlLink" class="text-break" target="_blank"
+                    href="{{ $droid->tagUrl() }}">{{ $droid->tagUrl() }}</a>
+                  <div class="mt-2">
+                    <button id="writeNfcBtn" class="btn btn-sm btn-nfc" style="display: none;">
+                      <i class="fas fa-rss"></i> Write to Tag
+                    </button>
+                  </div>
+                </td>
               </tr>
             @endif
           </table>
@@ -301,5 +309,38 @@
         }
       });
     });
+
+    if ('NDEFReader' in window) {
+      $('#writeNfcBtn').show();
+      $('#writeNfcBtn').click(async () => {
+        const btn = $('#writeNfcBtn');
+        const originalHtml = btn.html();
+        try {
+          btn.html('<i class="fas fa-spinner fa-spin"></i> Approach Tag...');
+          btn.prop('disabled', true);
+          const ndef = new NDEFReader();
+          await ndef.write({
+            records: [{ recordType: "url", data: $('#tagUrlLink').attr('href') }]
+          });
+          if (typeof flasher !== 'undefined') {
+            flasher.success("URL written to NFC tag successfully!");
+          } else {
+            alert("URL written to NFC tag successfully!");
+          }
+        } catch (error) {
+          console.error("Write failed: " + error);
+          if (error.name != 'AbortError') {
+            if (typeof flasher !== 'undefined') {
+              flasher.error("Write failed: " + error);
+            } else {
+              alert("Write failed: " + error);
+            }
+          }
+        } finally {
+          btn.html(originalHtml);
+          btn.prop('disabled', false);
+        }
+      });
+    }
   </script>
 @endsection
