@@ -18,8 +18,10 @@ use App\Droid;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MOTStoreRequest;
 use App\MOT;
+use App\User;
 use App\Notifications\MOTAdded;
 use App\Notifications\FirstMOT;
+use App\Notifications\DroidFirstMOT;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -97,9 +99,9 @@ class MOTController extends Controller
                 foreach ($lines as $line) {
                     DB::table('mot_details')->insert(
                         [
-                        'mot_uid' => $mot->id,
-                        'mot_test' => $line->test_name,
-                        'mot_test_result' => $request->{$line->test_name},
+                            'mot_uid' => $mot->id,
+                            'mot_test' => $line->test_name,
+                            'mot_test_result' => $request->{$line->test_name},
                         ]
                     );
                 }
@@ -112,6 +114,12 @@ class MOTController extends Controller
 
 
         $droid = Droid::find($request->droid_id);
+        if ($droid->mot->count() == 1) {
+            $admins = User::permission('Add MOT')->get();
+            foreach ($admins as $admin) {
+                $admin->notify(new DroidFirstMOT($mot));
+            }
+        }
         foreach ($droid->users as $user) {
             if ($user->firstMot()) {
                 $user->notify(new FirstMOT($mot));
