@@ -90,33 +90,63 @@
         position: relative;
         text-align: center;
         cursor: pointer;
-    }
 
-    .mot-bar {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        background-color: #ffeb3b;
-        color: #000;
-        font-size: 0.75rem;
-        padding: 2px 5px;
-        border-bottom: 1px solid #000;
-        z-index: 10;
-        display: flex;
-        justify-content: space-around;
-        font-weight: bold;
-        border-radius: 4px 4px 0 0;
+        .mot-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: #ffeb3b;
+            color: #000;
+            font-size: 0.75rem;
+            padding: 2px 5px;
+            border-bottom: 1px solid #000;
+            z-index: 10;
+            display: flex;
+            justify-content: space-around;
+            font-weight: bold;
+            border-radius: 4px 4px 0 0;
 
-        .mot-bar-item {
-            margin: 0 2px;
-            white-space: nowrap;
+            .mot-bar-item {
+                margin: 0 2px;
+                white-space: nowrap;
 
-            span {
-                border: 1px solid #000;
-                padding: 0 3px;
-                border-radius: 3px;
-                background: #fff;
+                span {
+                    border: 1px solid #000;
+                    padding: 0 3px;
+                    border-radius: 3px;
+                    background: #fff;
+                }
+            }
+        }
+
+        .mot-status-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 5;
+            border-radius: 0 0 4px 4px;
+            overflow: hidden;
+
+            .alert {
+                margin-bottom: 0;
+                padding: 2px 5px;
+                font-size: 0.75rem;
+                text-align: center;
+                border-radius: 0;
+                border: none;
+                color: #fff;
+                font-weight: bold;
+
+                &.alert-success { background-color: rgba(40, 167, 69, 0.8) !important; }
+                &.alert-danger { background-color: rgba(220, 53, 69, 0.8) !important; }
+                &.alert-warning { 
+                    background-color: rgba(255, 193, 7, 0.8) !important; 
+                    color: #000;
+                }
+                &.alert-secondary { background-color: rgba(108, 117, 125, 0.8) !important; }
+                &.alert-primary { background-color: rgba(0, 123, 255, 0.8) !important; }
             }
         }
     }

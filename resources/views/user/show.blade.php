@@ -247,6 +247,11 @@
                                                 </div>
                                             @endif
                                         @endcan
+                                        @if ($droid->club->hasOption('mot'))
+                                            <div class="mot-status-overlay">
+                                                <h5>@include('partials.motstatus', $droid->displayMOT())</h5>
+                                            </div>
+                                        @endif
                                     </div>
 
                                     <div class="droid-card-table" style="z-index:2">
@@ -268,11 +273,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                    @if ($droid->club->hasOption('mot'))
-                                        <div class="pli-container noclick">
-                                            <h5 class="pli-text">@include('partials.motstatus', $droid->displayMOT())</h5>
-                                        </div>
-                                    @endif
                                 </div>
                             </div>
                         @endforeach

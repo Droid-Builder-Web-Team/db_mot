@@ -186,7 +186,7 @@ class Droid extends Model implements Auditable
         if ($this->hasWIPMOT()) {
             $motstatus = "WIP " . Carbon::parse($this->motDate())
                 ->isoFormat(auth()->user()->settings()->get('date_format'));
-            $motstate = "alert-warning";
+            $motstate = "alert-secondary";
         }
         if ($this->hasAdvisoryMOT()) {
             $motstatus = "Advisory " . Carbon::parse($this->motDate())
