@@ -93,7 +93,7 @@ return [
     |
     */
 
-    'fallback_locale' => 'gb',
+    'fallback_locale' => 'en',
 
     'available_locales' => [
         'English' => 'gb',
@@ -101,7 +101,7 @@ return [
         'Français' => 'fr',
         'Italiana' => 'it',
         'Español' => 'es'
-        ],
+    ],
 
     /*
     |--------------------------------------------------------------------------

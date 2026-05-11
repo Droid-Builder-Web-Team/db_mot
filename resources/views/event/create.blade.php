@@ -31,7 +31,7 @@
                 </div>
             </div>
 
-            <form action="{{ route('event.store') }}" method="POST">
+            {!! html()->form('POST', route('event.store'))->open() !!}
                 @csrf
 
                 <div class="form-group row d-flex justify-content-center align-items-center">
@@ -200,18 +200,18 @@
 
                     <div class="col-sm-10">
                         <div class="form-check">
-                            {{ Form::hidden('public', '0') }}
+                            {!! html()->hidden('public', '0') !!}
                             <input type="checkbox" id="public" name="public" class="form-check-input" value="1">
                             <label class="form-check-label"
                                 for="public">{{ __('Display publicly on droidbuilders.uk if anyone is attending') }}</label>
                         </div>
                         <div class="form-check">
-                            {{ Form::hidden('sw_only', '0') }}
+                            {!! html()->hidden('sw_only', '0') !!}
                             <input type="checkbox" id="sw_only" name="sw_only" class="form-check-input" value="1">
                             <label class="form-check-label" for="sw_only">{{ __('Star Wars Only event') }}</label>
                         </div>
                         <div class="form-check">
-                            {{ Form::hidden('is_stem', '0') }}
+                            {!! html()->hidden('is_stem', '0') !!}
                             <input type="checkbox" id="is_stem" name="is_stem" class="form-check-input" value="1">
                             <label class="form-check-label" for="is_stem">{{ __('STEM/STEAM Event') }}</label>
                         </div>
@@ -231,7 +231,7 @@
                 <div class="text-center form-group">
                     <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
                 </div>
-            </form>
+            {!! html()->form()->close() !!}
         </div>
     </div>
 

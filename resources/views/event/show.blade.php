@@ -299,70 +299,68 @@
 
 
     @if($event->isFuture())
-      <form action="{{ route('event.update', $event->id) }}" method="POST">
-        @csrf
-        @method('PUT')
-        <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-        <div class="card">
-          <div class="card-header">{{ __('Register Interest') }}</div>
-          <div class="card-body">
-            @if($user_status == "no" && $event->isFull())
-              {{ __('Event is Full') }}
+      {!! html()->form('PUT', route('event.update', $event->id))->open() !!}
+      <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+      <div class="card">
+        <div class="card-header">{{ __('Register Interest') }}</div>
+        <div class="card-body">
+          @if($user_status == "no" && $event->isFull())
+            {{ __('Event is Full') }}
+          @else
+            <div class="form-group">
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="going" id="not_going" value="no" {{ $user_status == 'no' ? 'checked' : '' }}>
+                <label class="form-check-label" for="not_going">
+                  {{ __('Not Going') }}
+                </label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="going" id="is_going" value="yes" {{ $user_status == 'yes' ? 'checked' : '' }}>
+                <label class="form-check-label" for="is_going">
+                  {{ __('Going') }}
+                </label>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="spotter" id="with_droid" value="no" {{ $user_spotter == 'no' ? 'checked' : '' }}>
+                <label class="form-check-label" for="with_droid">
+                  {{ __('With Droid') }}
+                </label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="spotter" id="no_droid" value="yes" {{ $user_spotter == 'yes' ? 'checked' : '' }}>
+                <label class="form-check-label" for="no_droid">
+                  {{ __('Spotter') }}
+                </label>
+              </div>
+            </div>
+            @if ($event->canMOT())
+              <div class="form-group">
+                <div class="form-check form-check-inline">
+                  {!! html()->hidden('mot_required', '0') !!}
+                  <input type="checkbox" id="mot_required" name="mot_required" {{ $user_mot ? 'checked=1 value=1' : 'value=1' }} class="form-check-input">
+                  <label class="form-check-label" for="mot_required">{{ __('Request MOT at event') }}</label>
+                </div>
+              </div>
             @else
               <div class="form-group">
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="going" id="not_going" value="no" {{ $user_status == 'no' ? 'checked' : '' }}>
-                  <label class="form-check-label" for="not_going">
-                    {{ __('Not Going') }}
-                  </label>
-                </div>
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="going" id="is_going" value="yes" {{ $user_status == 'yes' ? 'checked' : '' }}>
-                  <label class="form-check-label" for="is_going">
-                    {{ __('Going') }}
-                  </label>
-                </div>
-              </div>
-              <div class="form-group">
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="spotter" id="with_droid" value="no" {{ $user_spotter == 'no' ? 'checked' : '' }}>
-                  <label class="form-check-label" for="with_droid">
-                    {{ __('With Droid') }}
-                  </label>
-                </div>
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="spotter" id="no_droid" value="yes" {{ $user_spotter == 'yes' ? 'checked' : '' }}>
-                  <label class="form-check-label" for="no_droid">
-                    {{ __('Spotter') }}
-                  </label>
-                </div>
-              </div>
-              @if ($event->canMOT())
-                <div class="form-group">
-                  <div class="form-check form-check-inline">
-                    {{Form::hidden('mot_required', '0')}}
-                    <input type="checkbox" id="mot_required" name="mot_required" {{ $user_mot ? 'checked=1 value=1' : 'value=1' }} class="form-check-input">
-                    <label class="form-check-label" for="mot_required">{{ __('Request MOT at event') }}</label>
-                  </div>
-                </div>
-              @else
-                <div class="form-group">
-                  {{Form::hidden('mot_required', '0')}}
-                  MOT are not available at this event
-                </div>
-              @endif
-              @if (!$event->canWIP())
-                <div class="form-group">
-                  Only completed droids at this event please.
-                </div>
-              @endif
-              <div class="form-group">
-                <button type="submit" class="btn btn-mot">{{ __('Submit') }}</button>
+                {!! html()->hidden('mot_required', '0') !!}
+                MOT are not available at this event
               </div>
             @endif
-          </div>
+            @if (!$event->canWIP())
+              <div class="form-group">
+                Only completed droids at this event please.
+              </div>
+            @endif
+            <div class="form-group">
+              <button type="submit" class="btn btn-mot">{{ __('Submit') }}</button>
+            </div>
+          @endif
         </div>
-      </form>
+      </div>
+      {!! html()->form()->close() !!}
     @endif
   </div>
 </div>
