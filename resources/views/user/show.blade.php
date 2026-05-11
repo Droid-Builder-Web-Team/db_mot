@@ -235,8 +235,18 @@
                         @foreach ($user->droids as $droid)
                             <div class="mx-auto my-auto text-center col-md-3 droid-card">
                                 <div class="droid-card-content">
-                                    <div style="text-align:center" onclick="document.location='{{ route('droid.show', $droid->id) }}'">
+                                    <div class="droid-image-container" onclick="document.location='{{ route('droid.show', $droid->id) }}'">
                                         <img src="{{ route('image.displayDroidImage', [$droid->id, 'photo_front', '240']) }}" alt="{{ $droid->name }}" class="mb-1 rounded img-fluid">
+                                        @can('Edit Droids')
+                                            @if($droid->mot->count() > 0)
+                                                <div class="mot-bar">
+                                                    <div class="mot-bar-item">Pass: <span>{{ $droid->countMOTsByStatus('Yes') }}</span></div>
+                                                    <div class="mot-bar-item">Fail: <span>{{ $droid->countMOTsByStatus('No') }}</span></div>
+                                                    <div class="mot-bar-item">WiP: <span>{{ $droid->countMOTsByStatus('WIP') }}</span></div>
+                                                    <div class="mot-bar-item">Adv: <span>{{ $droid->countMOTsByStatus('Advisory') }}</span></div>
+                                                </div>
+                                            @endif
+                                        @endcan
                                     </div>
 
                                     <div class="droid-card-table" style="z-index:2">
@@ -460,6 +470,7 @@
                 </div>
             </div>
         </div>
-        @endif
+    </div>
+    @endif
 
-    @endsection
+@endsection

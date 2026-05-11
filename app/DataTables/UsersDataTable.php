@@ -65,8 +65,8 @@ class UsersDataTable extends DataTable
                     $roles = "";
                     foreach ($user->roles as $role) {
                         $roles
-                            .= "<span class=\"badge badge-info\">".
-                                $role->name . "</span>";
+                            .= "<span class=\"badge badge-info\">" .
+                            $role->name . "</span>";
                     }
                     return $roles;
                 }
@@ -114,7 +114,7 @@ class UsersDataTable extends DataTable
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->dom('Bfrtip')
-            ->lengthMenu([15,25,50])
+            ->lengthMenu([15, 25, 50])
             ->orderBy(0)
             ->buttons(
                 Button::make('export'),

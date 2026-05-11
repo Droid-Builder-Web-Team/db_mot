@@ -27,7 +27,7 @@ class DroidsDataTable extends DataTable
                     $owner = $droid->users()->first();
                     $forename = $owner->forename ?? "null";
                     $surname = $owner->surname ?? "null";
-                    $name = $forename.' '.$surname;
+                    $name = $forename . ' ' . $surname;
                     //return '<a class="btn-link btn-sml" href="/user/'.$owner->id.'">'.$name.'</a>';
                     return $name;
                 }
@@ -36,13 +36,19 @@ class DroidsDataTable extends DataTable
                 'mot',
                 function (Droid $droid) {
                     if ($droid->club->hasOption('mot')) {
-                        return "<button class=\"btn-sm alert ".$droid->displayMOT()['state']." actions-buttons\">".$droid->displayMOT()['status']."</button>";
+                        return "<button class=\"btn-sm alert " . $droid->displayMOT()['state'] . " actions-buttons\">" . $droid->displayMOT()['status'] . "</button>";
                     } else {
                         return "";
                     }
                 }
             )
             ->addColumn('action', '')
+            ->editColumn('date_added', function (Droid $droid) {
+                return $droid->date_added->format('Y-m-d');
+            })
+            ->editColumn('last_updated', function (Droid $droid) {
+                return $droid->last_updated->format('Y-m-d');
+            })
             ->editColumn(
                 'action',
                 function ($row) {
@@ -77,7 +83,7 @@ class DroidsDataTable extends DataTable
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->dom('Bfrtip')
-            ->lengthMenu([15,25,50])
+            ->lengthMenu([15, 25, 50])
             ->orderBy(0)
             ->buttons(
                 Button::make('export'),
@@ -94,19 +100,19 @@ class DroidsDataTable extends DataTable
     protected function getColumns()
     {
         return [
-          Column::make('name'),
-          Column::make('top_speed'),
-          Column::make('weight'),
-          Column::make('owner'),
-          Column::make('topps_id'),
-          Column::make('date_added'),
-          Column::make('last_updated'),
-          Column::computed('mot'),
-          Column::computed('action')
-              ->exportable(false)
-              ->printable(false)
-              ->width(85)
-              ->addClass('text-center'),
+            Column::make('name'),
+            Column::make('top_speed'),
+            Column::make('weight'),
+            Column::make('owner'),
+            Column::make('topps_id'),
+            Column::make('date_added'),
+            Column::make('last_updated'),
+            Column::computed('mot'),
+            Column::computed('action')
+                ->exportable(false)
+                ->printable(false)
+                ->width(85)
+                ->addClass('text-center'),
         ];
     }
 

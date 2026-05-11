@@ -231,6 +231,7 @@ class Droid extends Model implements Auditable
     {
         return $this->morphMany('App\Comment', 'commentable')->orderBy('created_at');
     }
+
     /**
      * Get the secure tag URL for this droid
      *
@@ -242,5 +243,17 @@ class Droid extends Model implements Auditable
         $baseUrl = config('app.url');
         $hash = substr(hash_hmac('sha256', $this->id, $tagSecret), 0, 8);
         return rtrim($baseUrl, '/') . "/scan/{$this->id}/{$hash}";
+    }
+
+    /**
+     * Count MOTs by status
+     *
+     * @param string $status Result status
+     *
+     * @return int
+     */
+    public function countMOTsByStatus($status)
+    {
+        return $this->mot()->where('approved', $status)->count();
     }
 }
