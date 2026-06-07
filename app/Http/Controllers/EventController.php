@@ -166,7 +166,7 @@ class EventController extends Controller
      */
     public function create()
     {
-        $locations = Location::all();
+        $locations = Location::all()->sortBy('name');
         $countries = CountryState::getCountries();
         rsort($countries);
         return view('event.create', compact(['locations', 'countries']));

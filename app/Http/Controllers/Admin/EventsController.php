@@ -70,7 +70,7 @@ class EventsController extends Controller
      */
     public function create()
     {
-        $locations = Location::all();
+        $locations = Location::all()->sortBy('name');
         return view('admin.events.create', compact('locations'));
     }
 
@@ -87,16 +87,16 @@ class EventsController extends Controller
 
         $request->validate(
             [
-            'name' => 'required',
-            'description' => 'required',
-            'date' => 'required'
+                'name' => 'required',
+                'description' => 'required',
+                'date' => 'required'
             ]
         );
 
 
         if ($request['url'] != "") {
             if (!str_starts_with($request['url'], 'http')) {
-                $request['url'] = "http://".$request['url'];
+                $request['url'] = "http://" . $request['url'];
             }
         }
         $event = $request->all();
@@ -123,7 +123,7 @@ class EventsController extends Controller
                 $event['date'] = date(
                     'Y-m-d',
                     strtotime(
-                        $request->date. ' + ' . $x . ' days'
+                        $request->date . ' + ' . $x . ' days'
                     )
                 );
                 $newevent = Event::create($event);
@@ -164,14 +164,14 @@ class EventsController extends Controller
     {
         $request->validate(
             [
-            'name' => 'required',
-            'description' => 'required',
+                'name' => 'required',
+                'description' => 'required',
             ]
         );
 
         if ($request['url'] != "") {
             if (!str_starts_with($request['url'], 'http')) {
-                $request['url'] = "http://".$request['url'];
+                $request['url'] = "http://" . $request['url'];
             }
         }
 
@@ -288,13 +288,13 @@ class EventsController extends Controller
         if ($request->hasFile('image')) {
             $request->validate(
                 [
-                'image' => 'mimes:jpeg,bmp,png'
+                    'image' => 'mimes:jpeg,bmp,png'
                 ]
             );
         }
 
         $eventImage = $request->image->storeAs(
-            'events/'.$request->event_id.'/',
+            'events/' . $request->event_id . '/',
             'event_image.jpg'
         );
 
@@ -319,11 +319,11 @@ class EventsController extends Controller
         $fileName = 'attendance.csv';
 
         $headers = array(
-            "Content-type"        => "text/csv",
+            "Content-type" => "text/csv",
             "Content-Disposition" => "attachment; filename=$fileName",
-            "Pragma"              => "no-cache",
-            "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
-            "Expires"             => "0"
+            "Pragma" => "no-cache",
+            "Cache-Control" => "must-revalidate, post-check=0, pre-check=0",
+            "Expires" => "0"
         );
 
         $columns = array(
@@ -339,12 +339,12 @@ class EventsController extends Controller
             fputcsv($file, $columns);
 
             foreach ($event->users as $user) {
-                $row['Forename']      = $user->forename;
-                $row['Surname']       = $user->surname;
-                $row['Status']        = $user->pivot->status;
-                $row['Spotter']       = $user->pivot->spotter;
+                $row['Forename'] = $user->forename;
+                $row['Surname'] = $user->surname;
+                $row['Status'] = $user->pivot->status;
+                $row['Spotter'] = $user->pivot->spotter;
                 $row['MOT Requested'] = $user->pivot->mot_required;
-                $row['Email']         = $user->email;
+                $row['Email'] = $user->email;
 
                 fputcsv(
                     $file,
@@ -355,7 +355,7 @@ class EventsController extends Controller
                         $row['Spotter'],
                         $row['MOT Requested'],
                         $row['Email']
-                        )
+                    )
                 );
             }
 

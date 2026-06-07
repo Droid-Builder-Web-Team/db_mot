@@ -150,4 +150,38 @@
             }
         }
     }
+
+    .droid-card-table {
+        display: table;
+        width: 100%;
+        margin-top: 5px;
+
+        .droid-card-row {
+            display: table-row;
+
+            .droid-card-left, .droid-card-center, .droid-card-right {
+                display: table-cell;
+                vertical-align: middle;
+            }
+
+            .droid-card-left, .droid-card-right {
+                width: 30px;
+                text-align: center;
+                
+                input[type="image"] {
+                    width: 20px;
+                    height: auto;
+                    transition: 0.2s ease;
+                    &:hover {
+                        opacity: 0.8;
+                    }
+                }
+            }
+
+            .droid-card-center {
+                text-align: center;
+                padding: 0 5px;
+            }
+        }
+    }
 }
