@@ -28,27 +28,41 @@
                     <span class="float-left">
                         <h2>{{ $user->forename }} {{ $user->surname }} </h2>
                     </span>
-                    @if ($uses_pli && $user->pli_type == 0)
-                        @if ($user->validPLI())
-                            <span class="float-right">
-                                <a class="btn btn-cover" style="color:white;" href="{{ action('UserController@downloadPDF', $user->id) }}" target="_blank">{{ __('Cover Note') }}</a>
-                            </span>
-                        @else
-                            <span class="float-right badge badge-danger">
-                                No Valid PLI
+                    <div class="d-flex align-items-center">
+                        @if ($user->pli_type == 0)
+                            @if ($user->validPLI())
+                                <span class="badge badge-success mr-2" style="font-size: 1rem;">
+                                    {{ $user->pli_level ?: 'Static' }} PLI
+                                </span>
+                                <span>
+                                    <a class="btn btn-cover" style="color:white;" href="{{ action('UserController@downloadPDF', $user->id) }}" target="_blank">{{ __('Cover Note') }}</a>
+                                </span>
+                            @else
+                                <span class="badge badge-danger">
+                                    No Valid PLI
+                                </span>
+                            @endif
+                            @if (!$user->validPLI() || $user->expiringPLI())
+                                <form action="{{ route('payPLI') }}" method="GET" class="form-inline ml-2 mb-0">
+                                    <div class="input-group input-group-sm">
+                                        <div class="input-group-prepend">
+                                            <button type="submit" class="btn btn-info" style="border-right: 1px solid rgba(255,255,255,0.2);">Pay PLI</button>
+                                        </div>
+                                        <select name="type" class="form-control bg-info text-white" style="border: none; outline: none;">
+                                            <option value="static" title="Covers static/WIP droids and spotting. Enables driving an MOT'd droid with owner permission.">Static / Spotter</option>
+                                            @if ($has_mot)
+                                            <option value="driving" title="Covers driving your own droids at events.">Driving Droid</option>
+                                            @endif
+                                        </select>
+                                    </div>
+                                </form>
+                            @endif
+                        @elseif ($user->pli_type > 0)
+                            <span class="badge badge-danger">
+                                Third Party PLI
                             </span>
                         @endif
-                        @if (($has_mot && !$user->validPLI()) || $user->expiringPLI())
-
-                            <span class="float-right badge badge-warning">
-                                <a class="btn btn-info" href="{{ route('payPLI') }}">Pay PLI</a>
-                            </span>
-                        @endif
-                    @elseif ($user->pli_type > 0)
-                        <span class="float-right badge badge-danger">
-                            Third Party PLI
-                        </span>
-                    @endif
+                    </div>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">

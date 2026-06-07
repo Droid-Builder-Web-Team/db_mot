@@ -58,6 +58,9 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(
         Route::resource('/dashboard', 'DashboardController', ['only' => ['index']]);
         Route::get('mot/{droid_id}', 'MOTController@create')->name('mot.create');
         Route::resource('/mot', 'MOTController', ['only' => ['store']]);
+        Route::get('/covernote', 'CoverNoteSettingsController@edit')->name('covernote.edit');
+        Route::put('/covernote', 'CoverNoteSettingsController@update')->name('covernote.update');
+        Route::get('/settings', 'SettingsController@index')->name('settings.index');
         Route::resource('/motdesign', 'MOTDesignController', ['only' => ['edit', 'update']]);
         Route::get('audits', 'AuditController@index')->name('audits.index');
         Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index')->name('logs.index');
@@ -197,7 +200,7 @@ Route::get('droid_image/{uid}/{view}/{size?}', 'DroidController@displayDroidImag
 Route::get('/chart', 'QrCodeController@show')->name('chart');
 
 Route::get('create-transaction', [PayPalController::class, 'createTransaction'])->name('createTransaction');
-Route::get('process-transaction', [PayPalController::class, 'payPLI'])->name('payPLI');
+Route::get('process-transaction/{type?}', [PayPalController::class, 'payPLI'])->name('payPLI');
 Route::get('success-transaction', [PayPalController::class, 'successTransaction'])->name('successTransaction');
 Route::get('cancel-transaction', [PayPalController::class, 'cancelTransaction'])->name('cancelTransaction');
 

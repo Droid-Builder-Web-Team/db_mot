@@ -144,7 +144,7 @@ class UsersController extends Controller
             flash()->addError('Failed to update User');
         }
 
-        return redirect()->route('admin.users.index');
+        return redirect()->route('user.show', $user->id);
     }
 
     /**

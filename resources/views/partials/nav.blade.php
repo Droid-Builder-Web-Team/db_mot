@@ -273,6 +273,13 @@
             @endcan
             @hasanyrole('Super Admin|Org Admin')
             <li class="c-sidebar-nav-item">
+                <a class="c-sidebar-nav-link" href="{{ route('admin.settings.index') }}">
+                    <svg class="c-sidebar-nav-icon">
+                        <i class="fas fa-cogs fa-fw"></i>
+                    </svg><span class="ml-1">{{ __('Settings') }}</span>
+                </a>
+            </li>
+            <li class="c-sidebar-nav-item">
                 <a class="c-sidebar-nav-link" href="{{ route('admin.audits.index') }}">
                     <svg class="c-sidebar-nav-icon">
                         <i class="fas fa-file-contract fa-fw"></i>

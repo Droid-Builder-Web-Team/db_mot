@@ -86,7 +86,20 @@
       <div class="form-row">
         <div class="col-md-4 mb-3">
           <label>PLI Type</label>
-          <input type="integer" name="pli_type" value="{{ $user->pli_type }}" class="form-control" placeholder="">
+          <select name="pli_type" class="form-control">
+            @foreach(\App\Enums\PLITypes::cases() as $type)
+              <option value="{{ $type->value }}" @if($user->pli_type == $type->value) selected @endif>
+                {{ $type->label() }}
+              </option>
+            @endforeach
+          </select>
+        </div>
+        <div class="col-md-4 mb-3">
+          <label>PLI Class</label>
+          <select name="pli_level" class="form-control">
+            <option value="Static" @if($user->pli_level == 'Static' || empty($user->pli_level)) selected @endif>Static</option>
+            <option value="Driving" @if($user->pli_level == 'Driving') selected @endif>Driving</option>
+          </select>
         </div>
       </div>
 
