@@ -6,6 +6,11 @@ use Srmklive\PayPal\Services\PayPal as PayPalClient;
 use Carbon\Carbon;
 use App\Notifications\PLIPaid;
 
+/**
+ * Class PayPalController
+ * Handles PayPal integration for Public Liability Insurance (PLI) payments.
+ * Uses the Srmklive PayPal SDK to process transactions.
+ */
 class PayPalController extends Controller
 {
     /**
@@ -18,12 +23,47 @@ class PayPalController extends Controller
         return view('transaction');
     }
     /**
-     * process transaction.
+     * Initializes a PayPal transaction for purchasing PLI.
+     * Determines the appropriate cost (£10 for static, £20 for driving)
+     * and redirects the user to PayPal for approval.
      *
-     * @return \Illuminate\Http\Response
+     * @param \Illuminate\Http\Request $request
+     * @param string $type The requested level of PLI ('static' or 'driving')
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function payPLI(Request $request)
+    public function payPLI(Request $request, $type = 'static')
     {
+        $type = strtolower($request->input('type', $type));
+        
+        $levelsJson = \App\Setting::where('name', 'pli_levels')->value('value');
+        $levels = $levelsJson ? json_decode($levelsJson, true) : ['Static' => 10, 'Driving' => 20];
+        
+        // Find the matching name and price, case-insensitively
+        $actualName = 'Static';
+        $amount = '10.00';
+        foreach ($levels as $name => $price) {
+            if (strtolower($name) === $type) {
+                $actualName = $name;
+                $amount = number_format((float)$price, 2, '.', '');
+                break;
+            }
+        }
+
+        if ($type === 'driving') {
+            $has_mot = false;
+            foreach (auth()->user()->droids as $droid) {
+                if ($droid->club->hasOption('mot') && $droid->hasMOT() && !$droid->hasExpiringMOT()) {
+                    $has_mot = true;
+                    break;
+                }
+            }
+            if (!$has_mot) {
+                return redirect()->route('user.show', auth()->user()->id)->with('error', 'You need an MOT\'d droid to purchase driving PLI.');
+            }
+        }
+
+        session(['pli_type_pending' => $actualName]);
+
         $provider = new PayPalClient;
         $provider->setApiCredentials(config('paypal'));
         $paypalToken = $provider->getAccessToken();
@@ -31,9 +71,10 @@ class PayPalController extends Controller
             'intent'=> 'CAPTURE',
             'purchase_units'=> [[
                 'reference_id' => 'PLIPaymentID'. auth()->user()->id,
+                'description' => ($type === 'driving' ? 'Driving Droid' : 'Static / Spotter') . ' PLI Payment - ' . auth()->user()->forename . ' ' . auth()->user()->surname,
                 'amount'=> [
                   'currency_code'=> 'GBP',
-                  'value'=> '25.00'
+                  'value'=> $amount
                 ]
             ]],
             'application_context' => [
@@ -41,12 +82,25 @@ class PayPalController extends Controller
                  'return_url' => route('successTransaction')
             ]
         ]);
-        return redirect($response['links'][1]['href'])->send();
+
+        if (isset($response['id']) && $response['id'] != null) {
+            foreach ($response['links'] as $links) {
+                if ($links['rel'] == 'approve') {
+                    return redirect()->away($links['href']);
+                }
+            }
+        }
+
+        return redirect()
+            ->route('user.show', auth()->user()->id)
+            ->with('error', $response['message'] ?? 'Something went wrong. Could not connect to PayPal.');
     }
     /**
-     * success transaction.
+     * Handles the successful return from PayPal after user approves the transaction.
+     * Captures the payment, updates the user's PLI expiry date, and sends a notification.
      *
-     * @return \Illuminate\Http\Response
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function successTransaction(Request $request)
     {
@@ -55,10 +109,20 @@ class PayPalController extends Controller
         $provider->getAccessToken();
         $response = $provider->capturePaymentOrder($request['token']);
         if (isset($response['status']) && $response['status'] == 'COMPLETED') {
-            auth()->user()->update([ 'pli_date' => Carbon::today()->format('Y-m-d')]);
-            auth()->user()->notify(new PLIPaid(auth()->user()));
+            $user = auth()->user();
+            if ($user->validPLI()) {
+                $newDate = Carbon::parse($user->pli_date)->addYear()->format('Y-m-d');
+            } else {
+                $newDate = Carbon::today()->format('Y-m-d');
+            }
+            
+            $pliLevel = session('pli_type_pending', 'Static');
+            $user->update([ 'pli_date' => $newDate, 'pli_level' => $pliLevel ]);
+            session()->forget('pli_type_pending');
+            
+            $user->notify(new PLIPaid($user));
             return redirect()
-                ->route('user.show', auth()->user()->id)
+                ->route('user.show', $user->id)
                 ->with('success', 'Transaction complete.');
         } else {
             return redirect()
@@ -67,14 +131,15 @@ class PayPalController extends Controller
         }
     }
     /**
-     * cancel transaction.
+     * Handles the scenario where a user cancels the PayPal transaction.
      *
-     * @return \Illuminate\Http\Response
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function cancelTransaction(Request $request)
     {
         return redirect()
             ->route('user.show', auth()->user()->id)
-            ->with('error', $response['message'] ?? 'You have canceled the transaction.');
+            ->with('error', 'You have canceled the transaction.');
     }
 }

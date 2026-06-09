@@ -33,7 +33,7 @@ class ScanController extends Controller
         $today = now()->startOfDay();
         $activeEvents = Event::where('date', '<=', $today)
             ->get()
-            ->filter(function($event) use ($today) {
+            ->filter(function ($event) use ($today) {
                 $endDate = \Carbon\Carbon::parse($event->date)->addDays($event->days - 1)->endOfDay();
                 return $today->lte($endDate);
             });
@@ -62,7 +62,7 @@ class ScanController extends Controller
         $pwaUrl = config('services.hunter_pwa.url', 'http://localhost:8000');
         
         // 4. Identify the specific event name for the Hunter app
-        $matchingEvent = $activeEvents->first(function($event) use ($ownerIds) {
+        $matchingEvent = $activeEvents->first(function ($event) use ($ownerIds) {
             return \DB::table('members_events')
                 ->where('event_id', $event->id)
                 ->whereIn('user_id', $ownerIds)

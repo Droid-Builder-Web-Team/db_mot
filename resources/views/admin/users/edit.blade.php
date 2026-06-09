@@ -86,7 +86,25 @@
       <div class="form-row">
         <div class="col-md-4 mb-3">
           <label>PLI Type</label>
-          <input type="integer" name="pli_type" value="{{ $user->pli_type }}" class="form-control" placeholder="">
+          <select name="pli_type" class="form-control">
+            @foreach(\App\Enums\PLITypes::cases() as $type)
+              <option value="{{ $type->value }}" @if($user->pli_type == $type->value) selected @endif>
+                {{ $type->label() }}
+              </option>
+            @endforeach
+          </select>
+        </div>
+        <div class="col-md-4 mb-3">
+          <label>PLI Class</label>
+          <select name="pli_level" class="form-control">
+            @php
+              $levelsJson = \App\Setting::where('name', 'pli_levels')->value('value');
+              $levels = $levelsJson ? json_decode($levelsJson, true) : ['Static' => 10, 'Driving' => 20];
+            @endphp
+            @foreach($levels as $name => $price)
+              <option value="{{ $name }}" @if($user->pli_level == $name || (empty($user->pli_level) && $loop->first)) selected @endif>{{ $name }}</option>
+            @endforeach
+          </select>
         </div>
       </div>
 

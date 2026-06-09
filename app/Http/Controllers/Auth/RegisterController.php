@@ -78,10 +78,10 @@ class RegisterController extends Controller
 
         // **This is the key line in the RegistersUsers trait:**
         // It calls the create() method, which MUST return the User object.
-        event(new Registered($user = $this->create($request->all()))); 
+        event(new Registered($user = $this->create($request->all())));
         
         // This is where the error occurs if $user is a RedirectResponse
-        $this->guard()->login($user); 
+        $this->guard()->login($user);
 
         return $this->registered($request, $user)
                         ?: redirect($this->redirectPath());

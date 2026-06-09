@@ -65,7 +65,7 @@ class FortifyServiceProvider extends ServiceProvider
 
         // 4. View Customization (Tells Fortify where to find the views)
         Fortify::loginView(function () {
-            return view('auth.login'); 
+            return view('auth.login');
         });
         
         Fortify::twoFactorChallengeView(function () {
@@ -91,7 +91,5 @@ class FortifyServiceProvider extends ServiceProvider
         $this->app->bind(EnableTwoFactorAuthenticationContract::class, EnableTwoFactorAuthentication::class);
         $this->app->bind(ConfirmTwoFactorAuthenticationContract::class, ConfirmTwoFactorAuthentication::class);
         $this->app->bind(DisableTwoFactorAuthenticationContract::class, DisableTwoFactorAuthentication::class);
-
     }
-
 }

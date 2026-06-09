@@ -156,9 +156,15 @@ class DroidController extends Controller
             }
         }
 
-        if ($maxEvents >= 10) return 'Common';
-        if ($maxEvents >= 5)  return 'Uncommon';
-        if ($maxEvents >= 2)  return 'Rare';
+        if ($maxEvents >= 10) {
+            return 'Common';
+        }
+        if ($maxEvents >= 5) {
+            return 'Uncommon';
+        }
+        if ($maxEvents >= 2) {
+            return 'Rare';
+        }
         return 'Legendary';
     }
 }

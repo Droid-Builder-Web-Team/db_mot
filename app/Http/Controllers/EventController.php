@@ -330,7 +330,6 @@ class EventController extends Controller
      */
     public function update(Request $request, Event $event)
     {
-
         $user = User::find($request->user_id);
         $hasEntry = $user->events()->where('event_id', $event->id)->exists();
         $attributes = [
@@ -338,15 +337,37 @@ class EventController extends Controller
             'status' => $request->going,
             'mot_required' => $request->mot_required
         ];
+
+        $currentStatus = $hasEntry ? $event->users()->where('user_id', $user->id)->first()->pivot->status : 'no';
+
+        if ($request->going == 'yes' && $event->isFull() && $currentStatus != 'yes') {
+            $attributes['status'] = 'reserve';
+            if ($currentStatus != 'reserve') {
+                $attributes['date_added'] = now();
+            }
+        }
+
         if ($hasEntry) {
             $result = $event->users()->updateExistingPivot($user, $attributes);
-            flash()->addSuccess('Interest updated for Event');
-        } elseif ($event->isFull()) {
-            flash()->addError('Sorry, event is full');
         } else {
             $result = $event->users()->save($user, $attributes);
-            flash()->addSuccess('Interest registered for Event');
         }
+
+        if ($attributes['status'] == 'reserve') {
+            flash()->addWarning('Event is full, you have been added to the waiting list.');
+        } else {
+            flash()->addSuccess('Interest updated for Event');
+        }
+
+        // If they dropped out, see if we can promote someone from reserve
+        if ($currentStatus == 'yes' && $request->going == 'no') {
+            $nextInLine = $event->users()->wherePivot('status', 'reserve')->orderBy('members_events.date_added', 'asc')->first();
+            if ($nextInLine) {
+                $event->users()->updateExistingPivot($nextInLine->id, ['status' => 'yes']);
+                // Can optionally send a notification to $nextInLine->email here
+            }
+        }
+
         return back();
     }
 
