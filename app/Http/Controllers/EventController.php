@@ -90,7 +90,8 @@ class EventController extends Controller
                     'is_stem' => (int) $event->is_stem,
                     'is_full' => $event->isFull() ? 1 : 0,
                     'is_limited' => ($event->quantity != 0 && !$event->isFull()) ? 1 : 0,
-
+                    'is_private' => $event->isPublic() ? 0 : 1,
+                    'is_sw_only' => (int) $event->sw_only,
                 ]
             );
         }
@@ -106,6 +107,18 @@ class EventController extends Controller
                             let badge = document.createElement("span");
                             badge.className = "badge badge-info ml-1";
                             badge.innerText = "STEM";
+                            titleEl.appendChild(badge);
+                        }
+                        if (info.event.extendedProps.is_private == 1 || info.event.extendedProps.is_private === true) {
+                            let badge = document.createElement("span");
+                            badge.className = "badge badge-secondary ml-1";
+                            badge.innerText = "Private";
+                            titleEl.appendChild(badge);
+                        }
+                        if (info.event.extendedProps.is_sw_only == 1 || info.event.extendedProps.is_sw_only === true) {
+                            let badge = document.createElement("span");
+                            badge.className = "badge badge-primary ml-1";
+                            badge.innerText = "SW Only";
                             titleEl.appendChild(badge);
                         }
                         if (info.event.extendedProps.is_full == 1 || info.event.extendedProps.is_full === true) {
