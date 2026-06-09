@@ -78,6 +78,18 @@ class Event extends Model implements \DPoulson\LaravelCalendar\Event, Auditable
     }
 
     /**
+     * Get all who are on the waiting list
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany of App\User
+     */
+    public function reserve()
+    {
+        return $this->belongsToMany(User::class, 'members_events')
+            ->wherePivot('status', "reserve")
+            ->orderBy('members_events.date_added', 'asc');
+    }
+
+    /**
      * Get all who have said they are no longer going
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany of App\User

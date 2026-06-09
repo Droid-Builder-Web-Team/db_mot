@@ -279,6 +279,24 @@
           </li>
           @endforeach
         </ul>
+        @if($event->reserve()->count() > 0)
+        <i class="fas fa-clock"></i><strong> {{ __('Waiting List') }}</strong>
+        <ul>
+          @foreach($event->reserve as $user)
+          <li>
+            @canany(['Edit Events', 'Add MOT'])
+              <a href="{{ route('user.show', $user->id) }}">{{ $user->forename ?? "Deactivated"}}
+                {{ $user->surname ?? "User"}}</a>
+            @else
+            {{ $user->forename ?? "Deactivated"}} {{ $user->surname ?? "User"}}
+            @endcan
+            @if ($user->event($event->id)->spotter == 'yes')
+              <i class="fas fa-binoculars" title="No droid, just a spotter"></i>
+            @endif
+          </li>
+          @endforeach
+        </ul>
+        @endif
         @canany(['Edit Events', 'Add MOT'])
         <i class="far fa-question-circle"></i><strong> {{ __('Cancelled') }}:</strong>
         <ul>
@@ -304,23 +322,29 @@
       <div class="card">
         <div class="card-header">{{ __('Register Interest') }}</div>
         <div class="card-body">
-          @if($user_status == "no" && $event->isFull())
-            {{ __('Event is Full') }}
-          @else
-            <div class="form-group">
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="going" id="not_going" value="no" {{ $user_status == 'no' ? 'checked' : '' }}>
-                <label class="form-check-label" for="not_going">
-                  {{ __('Not Going') }}
-                </label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="going" id="is_going" value="yes" {{ $user_status == 'yes' ? 'checked' : '' }}>
-                <label class="form-check-label" for="is_going">
-                  {{ __('Going') }}
-                </label>
-              </div>
+          @if($event->isFull() && $user_status != "yes" && $user_status != "reserve")
+            <div class="alert alert-warning">
+              {{ __('This event is currently full. Registering will add you to the waiting list.') }}
             </div>
+          @endif
+          <div class="form-group">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="going" id="not_going" value="no" {{ $user_status == 'no' ? 'checked' : '' }}>
+              <label class="form-check-label" for="not_going">
+                {{ __('Not Going') }}
+              </label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="going" id="is_going" value="yes" {{ ($user_status == 'yes' || $user_status == 'reserve') ? 'checked' : '' }}>
+              <label class="form-check-label" for="is_going">
+                @if($user_status == 'reserve')
+                  {{ __('On Waiting List') }}
+                @else
+                  {{ __('Going') }}
+                @endif
+              </label>
+            </div>
+          </div>
             <div class="form-group">
               <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" name="spotter" id="with_droid" value="no" {{ $user_spotter == 'no' ? 'checked' : '' }}>
@@ -357,7 +381,6 @@
             <div class="form-group">
               <button type="submit" class="btn btn-mot">{{ __('Submit') }}</button>
             </div>
-          @endif
         </div>
       </div>
       {!! html()->form()->close() !!}
