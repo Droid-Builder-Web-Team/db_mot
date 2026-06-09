@@ -89,6 +89,7 @@ class EventController extends Controller
                     'borderColor' => $background,
                     'is_stem' => (int) $event->is_stem,
                     'is_full' => $event->isFull() ? 1 : 0,
+                    'is_limited' => ($event->quantity != 0 && !$event->isFull()) ? 1 : 0,
 
                 ]
             );
@@ -111,6 +112,11 @@ class EventController extends Controller
                             let badge = document.createElement("span");
                             badge.className = "badge badge-danger ml-1";
                             badge.innerText = "FULL";
+                            titleEl.appendChild(badge);
+                        } else if (info.event.extendedProps.is_limited == 1 || info.event.extendedProps.is_limited === true) {
+                            let badge = document.createElement("span");
+                            badge.className = "badge badge-warning ml-1";
+                            badge.innerText = "Limited Spaces";
                             titleEl.appendChild(badge);
                         }
                     }
