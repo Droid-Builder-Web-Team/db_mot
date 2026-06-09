@@ -33,8 +33,22 @@ class PayPalController extends Controller
      */
     public function payPLI(Request $request, $type = 'static')
     {
-        $type = $request->input('type', $type);
+        $type = strtolower($request->input('type', $type));
+        
+        $levelsJson = \App\Setting::where('name', 'pli_levels')->value('value');
+        $levels = $levelsJson ? json_decode($levelsJson, true) : ['Static' => 10, 'Driving' => 20];
+        
+        // Find the matching name and price, case-insensitively
+        $actualName = 'Static';
         $amount = '10.00';
+        foreach ($levels as $name => $price) {
+            if (strtolower($name) === $type) {
+                $actualName = $name;
+                $amount = number_format((float)$price, 2, '.', '');
+                break;
+            }
+        }
+
         if ($type === 'driving') {
             $has_mot = false;
             foreach (auth()->user()->droids as $droid) {
@@ -43,14 +57,12 @@ class PayPalController extends Controller
                     break;
                 }
             }
-            if ($has_mot) {
-                $amount = '20.00';
-            } else {
+            if (!$has_mot) {
                 return redirect()->route('user.show', auth()->user()->id)->with('error', 'You need an MOT\'d droid to purchase driving PLI.');
             }
         }
 
-        session(['pli_type_pending' => $type === 'driving' ? 'Driving' : 'Static']);
+        session(['pli_type_pending' => $actualName]);
 
         $provider = new PayPalClient;
         $provider->setApiCredentials(config('paypal'));

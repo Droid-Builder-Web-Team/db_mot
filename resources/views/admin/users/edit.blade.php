@@ -97,8 +97,13 @@
         <div class="col-md-4 mb-3">
           <label>PLI Class</label>
           <select name="pli_level" class="form-control">
-            <option value="Static" @if($user->pli_level == 'Static' || empty($user->pli_level)) selected @endif>Static</option>
-            <option value="Driving" @if($user->pli_level == 'Driving') selected @endif>Driving</option>
+            @php
+              $levelsJson = \App\Setting::where('name', 'pli_levels')->value('value');
+              $levels = $levelsJson ? json_decode($levelsJson, true) : ['Static' => 10, 'Driving' => 20];
+            @endphp
+            @foreach($levels as $name => $price)
+              <option value="{{ $name }}" @if($user->pli_level == $name || (empty($user->pli_level) && $loop->first)) selected @endif>{{ $name }}</option>
+            @endforeach
           </select>
         </div>
       </div>

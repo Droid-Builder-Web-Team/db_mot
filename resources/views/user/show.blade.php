@@ -43,19 +43,36 @@
                                 </span>
                             @endif
                             @if (!$user->validPLI() || $user->expiringPLI())
-                                <form action="{{ route('payPLI') }}" method="GET" class="form-inline ml-2 mb-0">
-                                    <div class="input-group input-group-sm">
-                                        <div class="input-group-prepend">
-                                            <button type="submit" class="btn btn-info" style="border-right: 1px solid rgba(255,255,255,0.2);">Pay PLI</button>
-                                        </div>
-                                        <select name="type" class="form-control bg-info text-white" style="border: none; outline: none;">
-                                            <option value="static" title="Covers static/WIP droids and spotting. Enables driving an MOT'd droid with owner permission.">Static / Spotter</option>
-                                            @if ($has_mot)
-                                            <option value="driving" title="Covers driving your own droids at events.">Driving Droid</option>
-                                            @endif
-                                        </select>
-                                    </div>
-                                </form>
+                                @php
+                                    $levelsJson = \App\Setting::where('name', 'pli_levels')->value('value');
+                                    $levels = $levelsJson ? json_decode($levelsJson, true) : ['Static' => 10, 'Driving' => 20];
+                                    $availableOptions = [];
+                                    foreach($levels as $name => $price) {
+                                        if(strtolower($name) != 'driving' || $has_mot) {
+                                            $availableOptions[strtolower($name)] = $name;
+                                        }
+                                    }
+                                @endphp
+                                @if(count($availableOptions) > 0)
+                                    <form action="{{ route('payPLI') }}" method="GET" class="form-inline ml-2 mb-0">
+                                        @if(count($availableOptions) > 1)
+                                            <div class="input-group input-group-sm">
+                                                <div class="input-group-prepend">
+                                                    <button type="submit" class="btn btn-info" style="border-right: 1px solid rgba(255,255,255,0.2);">Pay PLI</button>
+                                                </div>
+                                                <select name="type" class="form-control bg-info text-white" style="border: none; outline: none;">
+                                                    @foreach($availableOptions as $key => $name)
+                                                        <option value="{{ $key }}">{{ $name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        @else
+                                            @php $singleKey = array_key_first($availableOptions); @endphp
+                                            <input type="hidden" name="type" value="{{ $singleKey }}">
+                                            <button type="submit" class="btn btn-sm btn-info">Pay {{ $availableOptions[$singleKey] }} PLI</button>
+                                        @endif
+                                    </form>
+                                @endif
                             @endif
                         @elseif ($user->pli_type > 0)
                             <span class="badge badge-danger">

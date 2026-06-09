@@ -60,6 +60,8 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(
         Route::resource('/mot', 'MOTController', ['only' => ['store']]);
         Route::get('/covernote', 'CoverNoteSettingsController@edit')->name('covernote.edit');
         Route::put('/covernote', 'CoverNoteSettingsController@update')->name('covernote.update');
+        Route::get('/plilevels', 'PLILevelSettingsController@edit')->name('plilevels.edit');
+        Route::put('/plilevels', 'PLILevelSettingsController@update')->name('plilevels.update');
         Route::get('/settings', 'SettingsController@index')->name('settings.index');
         Route::resource('/motdesign', 'MOTDesignController', ['only' => ['edit', 'update']]);
         Route::get('audits', 'AuditController@index')->name('audits.index');

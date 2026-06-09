@@ -15,5 +15,14 @@
             </div>
         </div>
     </div>
+    <div class="col-md-4 mb-3">
+        <div class="card h-100 border-primary">
+            <div class="card-header text-center title">PLI Classes / Levels</div>
+            <div class="card-body text-center">
+                <p>Manage the available classes of PLI that members can hold (e.g. Static, Driving). These appear as options when editing a member.</p>
+                <a href="{{ route('admin.plilevels.edit') }}" class="btn btn-mot">Edit PLI Classes</a>
+            </div>
+        </div>
+    </div>
 </div>
 @endsection
