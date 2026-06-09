@@ -88,6 +88,7 @@ class EventController extends Controller
                     'title' => $title,
                     'borderColor' => $background,
                     'is_stem' => (int) $event->is_stem,
+                    'is_full' => $event->isFull() ? 1 : 0,
 
                 ]
             );
@@ -98,12 +99,18 @@ class EventController extends Controller
         $calendar->addEvents($calevents)
             ->setCallbacks([
                 'eventDidMount' => 'function(info) {
-                    if (info.event.extendedProps.is_stem == 1 || info.event.extendedProps.is_stem === true) {
-                        let badge = document.createElement("span");
-                        badge.className = "badge badge-info ml-1";
-                        badge.innerText = "STEM";
-                        let titleEl = info.el.querySelector(".fc-list-event-title") || info.el.querySelector(".fc-event-title");
-                        if (titleEl) {
+                    let titleEl = info.el.querySelector(".fc-list-event-title") || info.el.querySelector(".fc-event-title");
+                    if (titleEl) {
+                        if (info.event.extendedProps.is_stem == 1 || info.event.extendedProps.is_stem === true) {
+                            let badge = document.createElement("span");
+                            badge.className = "badge badge-info ml-1";
+                            badge.innerText = "STEM";
+                            titleEl.appendChild(badge);
+                        }
+                        if (info.event.extendedProps.is_full == 1 || info.event.extendedProps.is_full === true) {
+                            let badge = document.createElement("span");
+                            badge.className = "badge badge-danger ml-1";
+                            badge.innerText = "FULL";
                             titleEl.appendChild(badge);
                         }
                     }
