@@ -23,7 +23,7 @@ enum PLITypes: int
      */
     public function label(): string
     {
-        return match($this) {
+        return match ($this) {
             self::Club => 'Club',
             self::ThirdParty => 'Third Party',
         };

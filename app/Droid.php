@@ -107,10 +107,7 @@ class Droid extends Model implements Auditable
     {
         $valid = false;
         foreach ($this->mot as $mot) {
-            if (
-                (strtotime($mot->date) > strtotime('-1 year'))
-                && ($mot->approved == "Yes")
-            ) {
+            if ((strtotime($mot->date) > strtotime('-1 year')) && ($mot->approved == "Yes")) {
                 $valid = true;
             }
         }
@@ -126,10 +123,7 @@ class Droid extends Model implements Auditable
     {
         $valid = false;
         foreach ($this->mot as $mot) {
-            if (
-                (strtotime($mot->date) > strtotime('-1 year'))
-                && ($mot->approved == "Advisory")
-            ) {
+            if ((strtotime($mot->date) > strtotime('-1 year')) && ($mot->approved == "Advisory")) {
                 $valid = true;
             }
         }
@@ -145,10 +139,7 @@ class Droid extends Model implements Auditable
     {
         $valid = false;
         foreach ($this->mot as $mot) {
-            if (
-                (strtotime($mot->date) > strtotime('-1 year'))
-                && ($mot->approved == "WIP")
-            ) {
+            if ((strtotime($mot->date) > strtotime('-1 year')) && ($mot->approved == "WIP")) {
                 $valid = true;
             }
         }
@@ -164,10 +155,7 @@ class Droid extends Model implements Auditable
     {
         $expiring = false;
         foreach ($this->mot as $mot) {
-            if (
-                (strtotime($mot->date) < strtotime('-11 months'))
-                && (strtotime($mot->date) > strtotime('-1 year'))
-            ) {
+            if ((strtotime($mot->date) < strtotime('-11 months')) && (strtotime($mot->date) > strtotime('-1 year'))) {
                 $expiring = true;
             }
         }

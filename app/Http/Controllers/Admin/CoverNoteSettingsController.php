@@ -9,8 +9,8 @@ use App\Setting;
 /**
  * Class CoverNoteSettingsController
  *
- * Manages the configuration settings for the PLI (Public Liability Insurance) 
- * Cover Note PDFs. Allows administrators to update provider details, 
+ * Manages the configuration settings for the PLI (Public Liability Insurance)
+ * Cover Note PDFs. Allows administrators to update provider details,
  * policy numbers, and cover limits.
  */
 class CoverNoteSettingsController extends Controller
@@ -27,7 +27,7 @@ class CoverNoteSettingsController extends Controller
 
     /**
      * Display the form to edit the PLI Cover Note settings.
-     * Retrieves current values from the Setting model, falling back to 
+     * Retrieves current values from the Setting model, falling back to
      * sensible defaults if they are not yet configured.
      *
      * @return \Illuminate\Contracts\View\View
@@ -59,8 +59,8 @@ class CoverNoteSettingsController extends Controller
     public function update(Request $request)
     {
         $keys = [
-            'pli_provider', 'pli_policy_number', 'pli_wording', 'pli_people_covered', 
-            'pli_public_liability', 'pli_property_liability', 'pli_excess', 
+            'pli_provider', 'pli_policy_number', 'pli_wording', 'pli_people_covered',
+            'pli_public_liability', 'pli_property_liability', 'pli_excess',
             'pli_chairman', 'pli_admin'
         ];
 

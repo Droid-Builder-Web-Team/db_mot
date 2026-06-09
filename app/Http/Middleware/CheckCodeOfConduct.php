@@ -18,7 +18,7 @@ class CheckCodeOfConduct
     
         // 2. IMPORTANT: If they haven't accepted GDPR yet, let the GDPR middleware handle it.
         // Do NOT redirect to CoC yet.
-        if ($user->accepted_gdpr == NULL || !$user->hasVerifiedEmail()) {
+        if ($user->accepted_gdpr == null || !$user->hasVerifiedEmail()) {
             return $next($request);
         }
     

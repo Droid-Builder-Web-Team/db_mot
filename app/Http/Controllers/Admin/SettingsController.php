@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 /**
  * Class SettingsController
- * 
+ *
  * Handles the display of the global settings dashboard in the admin panel.
  */
 class SettingsController extends Controller

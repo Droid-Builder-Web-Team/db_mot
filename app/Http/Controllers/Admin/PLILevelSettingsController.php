@@ -8,7 +8,7 @@ use App\Setting;
 
 /**
  * Class PLILevelSettingsController
- * 
+ *
  * Manages the dynamic list of PLI Levels (Static, Driving, etc.)
  */
 class PLILevelSettingsController extends Controller
@@ -58,7 +58,9 @@ class PLILevelSettingsController extends Controller
         
         foreach ($lines as $line) {
             $line = trim($line);
-            if (empty($line)) continue;
+            if (empty($line)) {
+                continue;
+            }
             
             if (strpos($line, ':') !== false) {
                 list($name, $price) = explode(':', $line, 2);
