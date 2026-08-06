@@ -48,9 +48,7 @@
                                     $levels = $levelsJson ? json_decode($levelsJson, true) : ['Static' => 10, 'Driving' => 20];
                                     $availableOptions = [];
                                     foreach($levels as $name => $price) {
-                                        if(strtolower($name) != 'driving' || $has_mot) {
-                                            $availableOptions[strtolower($name)] = $name;
-                                        }
+                                        $availableOptions[strtolower($name)] = $name;
                                     }
                                 @endphp
                                 @if(count($availableOptions) > 0)

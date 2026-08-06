@@ -49,18 +49,6 @@ class PayPalController extends Controller
             }
         }
 
-        if ($type === 'driving') {
-            $has_mot = false;
-            foreach (auth()->user()->droids as $droid) {
-                if ($droid->club->hasOption('mot') && $droid->hasMOT() && !$droid->hasExpiringMOT()) {
-                    $has_mot = true;
-                    break;
-                }
-            }
-            if (!$has_mot) {
-                return redirect()->route('user.show', auth()->user()->id)->with('error', 'You need an MOT\'d droid to purchase driving PLI.');
-            }
-        }
 
         session(['pli_type_pending' => $actualName]);
 
