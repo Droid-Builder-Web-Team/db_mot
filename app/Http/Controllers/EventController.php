@@ -364,7 +364,9 @@ class EventController extends Controller
             'mot_required' => $request->mot_required
         ];
 
-        $currentStatus = $hasEntry ? $event->users()->where('user_id', $user->id)->first()->pivot->status : 'no';
+        // Use the event helper on the User model to safely fetch the current pivot status
+        $pivot = $user->event($event->id);
+        $currentStatus = $pivot ? $pivot->status : 'no';
 
         if ($request->going == 'yes' && $event->isFull() && $currentStatus != 'yes') {
             $attributes['status'] = 'reserve';
@@ -387,7 +389,8 @@ class EventController extends Controller
 
         // If they dropped out, see if we can promote someone from reserve
         if ($currentStatus == 'yes' && $request->going == 'no') {
-            $nextInLine = $event->users()->wherePivot('status', 'reserve')->orderBy('members_events.date_added', 'asc')->first();
+            // Use the reserve relationship defined on the Event model to get the first in line
+            $nextInLine = $event->reserve()->first();
             if ($nextInLine) {
                 $event->users()->updateExistingPivot($nextInLine->id, ['status' => 'yes']);
                 // Can optionally send a notification to $nextInLine->email here
