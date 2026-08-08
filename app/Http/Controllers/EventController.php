@@ -261,7 +261,7 @@ class EventController extends Controller
         $event['quantity'] = $request->quantity;
         $event['public'] = $request->public;
         $event['date'] = $request->date;
-        $event['wip_allowed'] = 0;
+        $event['wip_allowed'] = $request->wip_allowed;
         $event['mot'] = 0;
         $linkify = new \Misd\Linkify\Linkify();
         $event['description'] = $linkify->process($request->description);
