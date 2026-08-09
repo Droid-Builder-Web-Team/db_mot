@@ -30,7 +30,7 @@
         "@revolist/vue-datagrid": "^3.0.98",
         "@revolist/vue3-datagrid": "^3.0.97",
         "bootstrap-select": "^1.13.18",
-        "is-svg": ">=5.0.0",
+        "is-svg": ">=6.1.0",
         "laravel-mix": "^6.0.25",
         "tinymce": "^7.2.0",
         "vue-datasource": "^1.0.10",
