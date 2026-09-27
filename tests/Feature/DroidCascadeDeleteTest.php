@@ -26,6 +26,8 @@ class DroidCascadeDeleteTest extends TestCase
             $table->string('password');
             $table->string('active')->default('on');
             $table->boolean('accepted_gdpr')->default(1);
+            $table->boolean('accepted_coc')->default(1);
+            $table->timestamp('email_verified_at')->nullable();
             $table->timestamp('last_activity')->nullable();
             $table->timestamp('created_on')->nullable();
             $table->timestamp('last_updated')->nullable();
@@ -257,5 +259,100 @@ class DroidCascadeDeleteTest extends TestCase
         $this->assertDatabaseMissing('droids', ['id' => $droid->id]);
         $this->assertDatabaseMissing('mot', ['id' => $mot->id]);
         $this->assertDatabaseMissing('mot_details', ['mot_uid' => $mot->id]);
+    }
+
+    public function test_owner_can_delete_droid_via_droid_destroy_route()
+    {
+        $owner = User::create([
+            'forename' => 'Owner',
+            'surname' => 'Builder',
+            'email' => 'owner@example.com',
+            'password' => bcrypt('secret'),
+            'accepted_gdpr' => 1,
+            'accepted_coc' => 1,
+            'email_verified_at' => now(),
+        ]);
+
+        $droid = Droid::create([
+            'name' => 'BB-8',
+            'club_id' => 1,
+        ]);
+        $droid->users()->attach($owner->id);
+
+        $response = $this->actingAs($owner)
+            ->delete(route('droid.destroy', $droid->id));
+
+        $response->assertRedirect(route('user.show', $owner->id));
+        $this->assertDatabaseMissing('droids', ['id' => $droid->id]);
+    }
+
+    public function test_non_owner_admin_can_delete_droid_via_droid_destroy_route()
+    {
+        Gate::define('Edit Droids', fn() => true);
+
+        $owner = User::create([
+            'forename' => 'Owner',
+            'surname' => 'Builder',
+            'email' => 'owner2@example.com',
+            'password' => bcrypt('secret'),
+            'accepted_gdpr' => 1,
+            'accepted_coc' => 1,
+            'email_verified_at' => now(),
+        ]);
+        $admin = User::create([
+            'forename' => 'Admin',
+            'surname' => 'User',
+            'email' => 'admin2@example.com',
+            'password' => bcrypt('secret'),
+            'accepted_gdpr' => 1,
+            'accepted_coc' => 1,
+            'email_verified_at' => now(),
+        ]);
+
+        $droid = Droid::create([
+            'name' => 'K-2SO',
+            'club_id' => 1,
+        ]);
+        $droid->users()->attach($owner->id);
+
+        $response = $this->actingAs($admin)
+            ->delete(route('droid.destroy', $droid->id));
+
+        $response->assertRedirect(route('admin.droids.index'));
+        $this->assertDatabaseMissing('droids', ['id' => $droid->id]);
+    }
+
+    public function test_unauthorized_user_cannot_delete_droid()
+    {
+        $owner = User::create([
+            'forename' => 'Owner',
+            'surname' => 'Builder',
+            'email' => 'owner3@example.com',
+            'password' => bcrypt('secret'),
+            'accepted_gdpr' => 1,
+            'accepted_coc' => 1,
+            'email_verified_at' => now(),
+        ]);
+        $stranger = User::create([
+            'forename' => 'Stranger',
+            'surname' => 'User',
+            'email' => 'stranger@example.com',
+            'password' => bcrypt('secret'),
+            'accepted_gdpr' => 1,
+            'accepted_coc' => 1,
+            'email_verified_at' => now(),
+        ]);
+
+        $droid = Droid::create([
+            'name' => 'IG-11',
+            'club_id' => 1,
+        ]);
+        $droid->users()->attach($owner->id);
+
+        $response = $this->actingAs($stranger)
+            ->delete(route('droid.destroy', $droid->id));
+
+        $response->assertStatus(403);
+        $this->assertDatabaseHas('droids', ['id' => $droid->id]);
     }
 }

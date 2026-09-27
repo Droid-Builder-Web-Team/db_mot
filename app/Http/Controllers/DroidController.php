@@ -137,7 +137,9 @@ class DroidController extends Controller
      */
     public function destroy(Droid $droid)
     {
-        if (!$droid->users->contains(auth()->user()) && !auth()->user()->can('Edit Droids')) {
+        $isOwner = $droid->users->contains(auth()->user());
+
+        if (!$isOwner && !auth()->user()->can('Edit Droids')) {
             abort(403);
         }
 
@@ -148,6 +150,10 @@ class DroidController extends Controller
             flash()->addSuccess('Droid deleted successfully');
         } catch (\Exception $exception) {
             flash()->addError('Failed to delete Droid');
+        }
+
+        if (!$isOwner && auth()->user()->can('Edit Droids')) {
+            return redirect()->route('admin.droids.index');
         }
 
         return redirect()->route('user.show', auth()->user()->id);

@@ -170,6 +170,14 @@
                   <i class="fas fa-share-alt"></i> Share
                 @endif
               </button>
+              <form action="{{ route('droid.destroy', $droid->id) }}" method="POST" class="d-inline"
+                onsubmit="return confirm('Are you sure you want to delete {{ $droid->name }}? This will permanently delete the droid, its MOT history, and all associated data.');">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-kill ml-1 text-danger" style="width:auto; display:inline-block;">
+                  <i class="fas fa-trash-alt"></i> Delete
+                </button>
+              </form>
             @endif
           </span>
           <span class="float-right">
