@@ -182,8 +182,13 @@ class EventsController extends Controller
         $newevent = $request->all();
         $linkify = new \Misd\Linkify\Linkify();
         $newevent['description'] = $linkify->process($request->description);
+
+        $event->fill($newevent);
+        $dirty = $event->getDirty();
+        $changes = $event->getReadableChanges($dirty);
+
         try {
-            $event->update($newevent);
+            $event->save();
             if ($approved == 1) {
                 // Notify submitter that their event has been approved
                 $user = User::find($event['created_by']);
@@ -191,18 +196,18 @@ class EventsController extends Controller
                 flash()->addSuccess('User notified of event approval');
             }
             flash()->addSuccess('Event updated successfully');
+
+            if ($event->isFuture() && !empty($changes)) {
+                foreach ($event->users as $user) {
+                    $user->notify(new EventChanged($event, $changes));
+                }
+                // Only notify discord if its a future event.
+                $event->updatedEventNotification($event, $changes);
+            }
         } catch (\Illuminate\Database\QueryException $exception) {
             flash()->addError(
                 'Failed to update Event'
             );
-        }
-
-        if ($event->isFuture()) {
-            foreach ($event->users as $user) {
-                $user->notify(new EventChanged($event));
-            }
-            // Only notify discord if its a future event.
-            $event->updatedEventNotification($event);
         }
 
 

@@ -12,6 +12,7 @@ class EventChanged extends Notification
 {
     use Queueable;
     protected $event;
+    protected $changes;
     protected $title;
     protected $text;
     protected $link;
@@ -20,13 +21,18 @@ class EventChanged extends Notification
     /**
      * Create a new notification instance.
      *
+     * @param Event $event
+     * @param array $changes
      * @return void
      */
-    public function __construct(Event $event)
+    public function __construct(Event $event, array $changes = [])
     {
         $this->event = $event;
-        $this->title = "An event has been changed";
-        $this->text = "One of the events you are interested in has been changed.";
+        $this->changes = $changes;
+        $this->title = "Event Updated: " . $this->event->name;
+        $this->text = !empty($changes)
+            ? "The event \"" . $this->event->name . "\" has been updated: " . implode(', ', $changes)
+            : "One of the events you are interested in has been changed.";
         $this->link = route('event.show', $this->event->id);
         $this->icon = "calendar";
     }
@@ -50,10 +56,21 @@ class EventChanged extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage())
-            ->line($this->title)
-            ->action('View Event', $this->link)
-            ->line($this->text);
+        $mail = (new MailMessage())
+            ->subject('Event Updated: ' . $this->event->name)
+            ->line('The event **' . $this->event->name . '** has been updated.');
+
+        if (!empty($this->changes)) {
+            $mail->line('**The following changes were made:**');
+            foreach ($this->changes as $change) {
+                $mail->line('• ' . $change);
+            }
+        } else {
+            $mail->line($this->text);
+        }
+
+        return $mail->action('View Event', $this->link)
+            ->line('Please review the event details and update your attendance status if needed.');
     }
 
     /**
@@ -65,11 +82,12 @@ class EventChanged extends Notification
     public function toArray($notifiable)
     {
         return [
-          'id' => $this->event->id,
-          'title' => $this->title,
-          'link' => $this->link,
-          'text' => $this->text,
-          'icon' => $this->icon
+            'id' => $this->event->id,
+            'title' => $this->title,
+            'link' => $this->link,
+            'text' => $this->text,
+            'icon' => $this->icon,
+            'changes' => $this->changes,
         ];
     }
 }

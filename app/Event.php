@@ -17,6 +17,8 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Database\Eloquent\Model;
 use OwenIt\Auditing\Contracts\Auditable;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Carbon;
+use App\Location;
 
 /**
  * Event
@@ -317,10 +319,18 @@ class Event extends Model implements \DPoulson\LaravelCalendar\Event, Auditable
      *
      * @return \Illuminate\Http\Client\Response
      */
-    public function updatedEventNotification($event)
+    public function updatedEventNotification($event, array $changes = [])
     {
         $webHook = config('discord.eventhook');
         if ($webHook != 'none') {
+            $description = $event->location->name . ', '
+                . $event->location->county . ', '
+                . $event->location->postcode;
+
+            if (!empty($changes)) {
+                $description .= "\n\n**Changes:**\n• " . implode("\n• ", $changes);
+            }
+
             return Http::post(
                 $webHook,
                 [
@@ -330,9 +340,7 @@ class Event extends Model implements \DPoulson\LaravelCalendar\Event, Auditable
                     'embeds' => [
                         [
                             'title' => $event->name . ' - ' . $event->date,
-                            'description' => $event->location->name . ', '
-                                . $event->location->county . ', '
-                                . $event->location->postcode,
+                            'description' => $description,
                             'url' => route('event.show', $event->id),
                             'color' => '7506394',
                         ]
@@ -340,6 +348,108 @@ class Event extends Model implements \DPoulson\LaravelCalendar\Event, Auditable
                 ]
             );
         }
+    }
+
+    /**
+     * Build human-readable descriptions of changes made to the event
+     *
+     * @param array $dirty
+     * @return array
+     */
+    public function getReadableChanges(array $dirty): array
+    {
+        $changes = [];
+        $ignored = ['id', 'created_at', 'updated_at', 'created_by', 'approved', '_token', '_method'];
+
+        foreach ($dirty as $key => $newValue) {
+            if (in_array($key, $ignored, true)) {
+                continue;
+            }
+
+            $oldValue = $this->getOriginal($key);
+
+            if ($oldValue === $newValue || (is_numeric($oldValue) && is_numeric($newValue) && (string) $oldValue === (string) $newValue)) {
+                continue;
+            }
+
+            switch ($key) {
+                case 'name':
+                    $changes[] = "Name changed from '{$oldValue}' to '{$newValue}'";
+                    break;
+                case 'date':
+                    try {
+                        $oldFormatted = Carbon::parse($oldValue)->isoFormat('dddd Do MMMM YYYY');
+                        $newFormatted = Carbon::parse($newValue)->isoFormat('dddd Do MMMM YYYY');
+                        $changes[] = "Date changed from {$oldFormatted} to {$newFormatted}";
+                    } catch (\Exception $e) {
+                        $changes[] = "Date changed from '{$oldValue}' to '{$newValue}'";
+                    }
+                    break;
+                case 'location_id':
+                    $oldLoc = Location::find($oldValue);
+                    $newLoc = Location::find($newValue);
+                    $oldName = $oldLoc ? $oldLoc->name : ($oldValue ? "Location #{$oldValue}" : 'None');
+                    $newName = $newLoc ? $newLoc->name : ($newValue ? "Location #{$newValue}" : 'None');
+                    $changes[] = "Location changed from '{$oldName}' to '{$newName}'";
+                    break;
+                case 'description':
+                    if (trim(strip_tags((string) $oldValue)) !== trim(strip_tags((string) $newValue))) {
+                        $changes[] = "Event description was updated";
+                    }
+                    break;
+                case 'parking_details':
+                    $changes[] = "Parking details were updated";
+                    break;
+                case 'quantity':
+                    $changes[] = "Droid limit changed from {$oldValue} to {$newValue}";
+                    break;
+                case 'mot':
+                    if ((bool) $oldValue !== (bool) $newValue) {
+                        $changes[] = (bool) $newValue ? 'MOTs are now allowed at this event' : 'MOTs are no longer allowed at this event';
+                    }
+                    break;
+                case 'public':
+                    if ((bool) $oldValue !== (bool) $newValue) {
+                        $changes[] = (bool) $newValue ? 'Event is now public' : 'Event is now private';
+                    }
+                    break;
+                case 'wip_allowed':
+                    if ((bool) $oldValue !== (bool) $newValue) {
+                        $changes[] = (bool) $newValue ? 'WIP droids are now allowed' : 'WIP droids are no longer allowed';
+                    }
+                    break;
+                case 'sw_only':
+                    if ((bool) $oldValue !== (bool) $newValue) {
+                        $changes[] = (bool) $newValue ? 'Event is now Star Wars Only' : 'Event is no longer Star Wars Only';
+                    }
+                    break;
+                case 'is_stem':
+                    if ((bool) $oldValue !== (bool) $newValue) {
+                        $changes[] = (bool) $newValue ? 'Event is now designated as STEM/STEAM' : 'Event is no longer designated as STEM/STEAM';
+                    }
+                    break;
+                case 'url':
+                    $changes[] = "Event URL was updated";
+                    break;
+                case 'forum_link':
+                    $changes[] = "Forum link was updated";
+                    break;
+                case 'report_link':
+                    $changes[] = "Event report link was updated";
+                    break;
+                case 'charity_raised':
+                    if ((float) $oldValue !== (float) $newValue) {
+                        $changes[] = "Charity raised amount was updated to £{$newValue}";
+                    }
+                    break;
+                default:
+                    $field = ucwords(str_replace('_', ' ', $key));
+                    $changes[] = "{$field} was updated";
+                    break;
+            }
+        }
+
+        return $changes;
     }
 
     /**
