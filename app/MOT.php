@@ -18,6 +18,7 @@ use App\Club;
 use App\Droid;
 use App\User;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 use OwenIt\Auditing\Contracts\Auditable;
 
 /**
@@ -35,6 +36,24 @@ class MOT extends Model implements Auditable
     use \OwenIt\Auditing\Auditable;
 
     protected $table = 'mot';
+
+    /**
+     * The booted method of the model.
+     *
+     * @return void
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($mot) {
+            if (Schema::hasTable('mot_details')) {
+                DB::table('mot_details')->where('mot_uid', $mot->id)->delete();
+            }
+
+            $mot->comments()->delete();
+        });
+    }
 
     public $fillable = [
         'date',
@@ -150,7 +169,7 @@ class MOT extends Model implements Auditable
     public function officer()
     {
         $officer = User::where('id', $this->user)->first();
-        return $officer->forename." ".$officer->surname;
+        return $officer->forename . " " . $officer->surname;
     }
 
     /**

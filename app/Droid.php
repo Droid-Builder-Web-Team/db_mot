@@ -19,6 +19,9 @@ use App\User;
 use App\Club;
 use App\DroidInvite;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Storage;
 use OwenIt\Auditing\Contracts\Auditable;
 
 /**
@@ -38,6 +41,47 @@ class Droid extends Model implements Auditable
 
     protected $guarded = [
     ];
+
+    /**
+     * The booted method of the model.
+     *
+     * @return void
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($droid) {
+            // Delete MOTs (calling delete() on each model triggers MOT::deleting event for mot_details & comments)
+            foreach ($droid->mot as $mot) {
+                $mot->delete();
+            }
+
+            // Delete comments on the droid
+            $droid->comments()->delete();
+
+            // Delete pending invites
+            if (method_exists($droid, 'invites')) {
+                $droid->invites()->delete();
+            }
+
+            // Detach all users from pivot
+            $droid->users()->detach();
+
+            // Remove from ID badge queue if present
+            if (Schema::hasTable('id_list')) {
+                DB::table('id_list')->where('droid_id', $droid->id)->delete();
+            }
+
+            // Delete course runs if present
+            if (Schema::hasTable('course_runs')) {
+                DB::table('course_runs')->where('droid_id', $droid->id)->delete();
+            }
+
+            // Delete image directory
+            Storage::deleteDirectory('droids/' . $droid->id);
+        });
+    }
 
     /**
      * List users this droid belongs to

@@ -57,7 +57,7 @@ class DroidsController extends Controller
         }
         $request->validate(
             [
-            'name' => 'required'
+                'name' => 'required'
             ]
         );
 
@@ -70,7 +70,7 @@ class DroidsController extends Controller
 
         try {
             $droid->users()->attach($request->user_id);
-            flash()->addSuccess('Droid attached to user ID '.$request->user_id.' successfully');
+            flash()->addSuccess('Droid attached to user ID ' . $request->user_id . ' successfully');
         } catch (\Illuminate\Database\QueryException $exception) {
             flash()->addError('Failed to attach Droid');
         }
@@ -118,7 +118,7 @@ class DroidsController extends Controller
         }
         $request->validate(
             [
-            'name' => 'required',
+                'name' => 'required',
             ]
         );
 
@@ -142,20 +142,12 @@ class DroidsController extends Controller
      */
     public function destroy(Droid $droid)
     {
-        $users = $droid->users;
-        foreach ($users as $user) {
-            $droid->users()->detach($user->id);
-        }
-        $mots = $droid->mot;
-        foreach ($mots as $mot) {
-            $droid->mot()->delete();
-        }
-        $droid->delete();
-
         try {
-            $droid->delete();
+            \Illuminate\Support\Facades\DB::transaction(function () use ($droid) {
+                $droid->delete();
+            });
             flash()->addSuccess('Droid deleted successfully');
-        } catch (\Illuminate\Database\QueryException $exception) {
+        } catch (\Exception $exception) {
             flash()->addError('Failed to delete Droid');
         }
 

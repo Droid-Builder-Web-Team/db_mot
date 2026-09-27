@@ -137,25 +137,16 @@ class DroidController extends Controller
      */
     public function destroy(Droid $droid)
     {
-
-        if (!$droid->users->contains(auth()->user()) || !auth()->user()->can('Edit Droids')) {
+        if (!$droid->users->contains(auth()->user()) && !auth()->user()->can('Edit Droids')) {
             abort(403);
         }
 
-        $users = $droid->users;
-        foreach ($users as $user) {
-            $droid->users()->detach($user->id);
-        }
-        $mots = $droid->mot;
-        foreach ($mots as $mot) {
-            $droid->mot()->delete();
-        }
-        $droid->delete();
-
         try {
-            $droid->delete();
+            \Illuminate\Support\Facades\DB::transaction(function () use ($droid) {
+                $droid->delete();
+            });
             flash()->addSuccess('Droid deleted successfully');
-        } catch (\Illuminate\Database\QueryException $exception) {
+        } catch (\Exception $exception) {
             flash()->addError('Failed to delete Droid');
         }
 
