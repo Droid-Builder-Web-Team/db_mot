@@ -55,6 +55,11 @@ class Kernel extends ConsoleKernel
         $schedule->command('backup:clean')->dailyAt('04:00');
         $schedule->command('backup:run')->dailyAt('05:00');
         $schedule->command('stats:gather')->dailyAt('03:00');
+        $schedule->call(function () {
+            \Illuminate\Support\Facades\DB::table('event_views')
+                ->whereIn('event_id', \App\Event::whereDate('date', '<', \Illuminate\Support\Carbon::today()->subDays(7))->pluck('id'))
+                ->delete();
+        })->dailyAt('03:30');
     }
 
     /**
@@ -64,7 +69,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         include base_path('routes/console.php');
     }

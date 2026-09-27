@@ -28,6 +28,7 @@ use Spatie\CalendarLinks\Link;
 use DPoulson\LaravelCalendar\Calendar;
 use CountryState;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Flasher\Prime\FlasherInterface;
 
 /**
@@ -63,9 +64,25 @@ class EventController extends Controller
             return redirect('codeofconduct');
         }
 
-        $events = Event::whereDate('date', '>=', Carbon::today())
-            ->where('approved', '1')
-            ->orderBy('date', 'asc')->get();
+        $userId = Auth::id();
+        $events = Event::with('location')
+            ->whereDate('events.date', '>=', Carbon::today())
+            ->where('events.approved', '1')
+            ->leftJoin('event_views', function ($join) use ($userId) {
+                $join->on('events.id', '=', 'event_views.event_id')
+                    ->where('event_views.user_id', '=', $userId);
+            })
+            ->select('events.*')
+            ->selectSub(function ($query) use ($userId) {
+                $query->from('comments')
+                    ->selectRaw('count(*)')
+                    ->whereColumn('comments.commentable_id', 'events.id')
+                    ->where('comments.commentable_type', 'App\\Event')
+                    ->where('comments.user_id', '!=', $userId)
+                    ->whereNotNull('event_views.last_viewed_at')
+                    ->whereColumn('comments.created_at', '>', 'event_views.last_viewed_at');
+            }, 'new_comments_count')
+            ->orderBy('events.date', 'asc')->get();
 
         $calevents = [];
 
@@ -92,6 +109,8 @@ class EventController extends Controller
                     'is_limited' => ($event->quantity != 0 && !$event->isFull()) ? 1 : 0,
                     'is_private' => $event->isPublic() ? 0 : 1,
                     'is_sw_only' => (int) $event->sw_only,
+                    'has_new_comments' => $event->new_comments_count > 0 ? 1 : 0,
+                    'new_comments_count' => (int) $event->new_comments_count,
                 ]
             );
         }
@@ -130,6 +149,13 @@ class EventController extends Controller
                             let badge = document.createElement("span");
                             badge.className = "badge badge-warning ml-1";
                             badge.innerText = "Limited Spaces";
+                            titleEl.appendChild(badge);
+                        }
+                        if (info.event.extendedProps.has_new_comments == 1) {
+                            let badge = document.createElement("span");
+                            badge.className = "badge badge-success ml-1";
+                            let count = info.event.extendedProps.new_comments_count;
+                            badge.innerHTML = "<i class=\"fas fa-comment\"></i> " + (count > 1 ? count + " New" : "New Comment");
                             titleEl.appendChild(badge);
                         }
                     }
@@ -332,6 +358,13 @@ class EventController extends Controller
             flash()->addError('No such event');
             return redirect('/event');
         } else {
+            if (Auth::check()) {
+                DB::table('event_views')->updateOrInsert(
+                    ['user_id' => Auth::id(), 'event_id' => $event->id],
+                    ['last_viewed_at' => now()]
+                );
+            }
+
             $date = DateTime::createFromFormat('Y-m-d', $event->date);
             $link = Link::create(
                 $event->is_stem ? "[STEM] " . $event->name : $event->name,

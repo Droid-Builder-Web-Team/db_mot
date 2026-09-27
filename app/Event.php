@@ -36,6 +36,15 @@ class Event extends Model implements \DPoulson\LaravelCalendar\Event, Auditable
         'is_stem' => 'boolean',
     ];
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($event) {
+            \Illuminate\Support\Facades\DB::table('event_views')->where('event_id', $event->id)->delete();
+        });
+    }
+
     /**
      * Return event options
      *
