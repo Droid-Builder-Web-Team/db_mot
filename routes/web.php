@@ -34,52 +34,53 @@ Auth::routes(['verify' => true, 'login' => false, 'twofactor' => false]);
 
 
 Route::redirect('/id.php', '/user');
-Route::namespace('Admin')->prefix('admin')->name('admin.')->group(
-    function () {
-        Route::get(
-            '/',
-            function () {
-                return redirect('/admin/dashboard');
-            }
-        );
-        Route::resource('/users', 'UsersController', ['except' => ['show', 'create', 'store']]);
-        Route::get('/droids/{id}', 'DroidsController@create')->name('droids.create');
-        Route::resource('/droids', 'DroidsController', ['except' => ['show', 'create']]);
-        Route::get('events/attendance/confirm/{event_id}/{user_id}', 'EventsController@confirm')->name('events.attendance.confirm');
-        Route::get('events/attendance/deny/{event_id}/{user_id}', 'EventsController@deny')->name('events.attendance.deny');
-        Route::get('events/image/{event_id}', 'EventsController@addimage')->name('events.addimage');
-        Route::post('events/image', 'EventsController@storeimage')->name('events.storeimage');
-        Route::get('events/export/{id}', 'EventsController@export')->name('events.export');
-        Route::resource('/events', 'EventsController', ['except' => ['show']]);
-        Route::put('/achievements/award', 'AchievementsController@award')->name('achievements.award');
-        Route::resource('/achievements', 'AchievementsController', ['except' => ['show']]);
-        Route::resource('/clubs', 'ClubsController', ['except' => ['show']]);
-        Route::resource('/locations', 'LocationController', ['except' => ['show']]);
-        Route::resource('/dashboard', 'DashboardController', ['only' => ['index']]);
-        Route::get('mot/{droid_id}', 'MOTController@create')->name('mot.create');
-        Route::resource('/mot', 'MOTController', ['only' => ['store']]);
-        Route::get('/covernote', 'CoverNoteSettingsController@edit')->name('covernote.edit');
-        Route::put('/covernote', 'CoverNoteSettingsController@update')->name('covernote.update');
-        Route::get('/plilevels', 'PLILevelSettingsController@edit')->name('plilevels.edit');
-        Route::put('/plilevels', 'PLILevelSettingsController@update')->name('plilevels.update');
-        Route::get('/settings', 'SettingsController@index')->name('settings.index');
-        Route::resource('/motdesign', 'MOTDesignController', ['only' => ['edit', 'update']]);
-        Route::get('audits', 'AuditController@index')->name('audits.index');
-        Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index')->name('logs.index');
-        Route::resource('/contacts', 'ContactController');
-        Route::post('/contacts/link', 'ContactController@link')->name('contacts.link');
-        Route::post('/contacts/unlink', 'ContactController@unlink')->name('contacts.unlink');
-        Route::get('/api/bcreps/{club_id}', 'ApiController@list_bcreps');
-        Route::get('/stats', 'StatsController@index');
-        Route::get('/api/stats/{stat}', 'StatsController@getStat');
-        Route::resource('/map', 'MapsController', ['only' => ['index']]);
-        Route::get('/badges/{keep}', 'BadgeController@download')->name('badges.download');
-        Route::get('/ballots', [BallotController::class, 'index'])->name('ballots.index');
-        Route::get('/ballots/create', [BallotController::class, 'create'])->name('ballots.create');
-        Route::post('/ballots', [BallotController::class, 'store'])->name('ballots.store');
-        Route::delete('/ballots/{ballot}', [BallotController::class, 'destroy'])->name('ballots.destroy');
-    }
-);
+Route::
+        namespace('Admin')->prefix('admin')->name('admin.')->group(
+        function () {
+            Route::get(
+                '/',
+                function () {
+                    return redirect('/admin/dashboard');
+                }
+            );
+            Route::resource('/users', 'UsersController', ['except' => ['show', 'create', 'store']]);
+            Route::get('/droids/{id}', 'DroidsController@create')->name('droids.create');
+            Route::resource('/droids', 'DroidsController', ['except' => ['show', 'create']]);
+            Route::get('events/attendance/confirm/{event_id}/{user_id}', 'EventsController@confirm')->name('events.attendance.confirm');
+            Route::get('events/attendance/deny/{event_id}/{user_id}', 'EventsController@deny')->name('events.attendance.deny');
+            Route::get('events/image/{event_id}', 'EventsController@addimage')->name('events.addimage');
+            Route::post('events/image', 'EventsController@storeimage')->name('events.storeimage');
+            Route::get('events/export/{id}', 'EventsController@export')->name('events.export');
+            Route::resource('/events', 'EventsController', ['except' => ['show']]);
+            Route::put('/achievements/award', 'AchievementsController@award')->name('achievements.award');
+            Route::resource('/achievements', 'AchievementsController', ['except' => ['show']]);
+            Route::resource('/clubs', 'ClubsController', ['except' => ['show']]);
+            Route::resource('/locations', 'LocationController', ['except' => ['show']]);
+            Route::resource('/dashboard', 'DashboardController', ['only' => ['index']]);
+            Route::get('mot/{droid_id}', 'MOTController@create')->name('mot.create');
+            Route::resource('/mot', 'MOTController', ['only' => ['store']]);
+            Route::get('/covernote', 'CoverNoteSettingsController@edit')->name('covernote.edit');
+            Route::put('/covernote', 'CoverNoteSettingsController@update')->name('covernote.update');
+            Route::get('/plilevels', 'PLILevelSettingsController@edit')->name('plilevels.edit');
+            Route::put('/plilevels', 'PLILevelSettingsController@update')->name('plilevels.update');
+            Route::get('/settings', 'SettingsController@index')->name('settings.index');
+            Route::resource('/motdesign', 'MOTDesignController', ['only' => ['edit', 'update']]);
+            Route::get('audits', 'AuditController@index')->name('audits.index');
+            Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index')->name('logs.index');
+            Route::resource('/contacts', 'ContactController');
+            Route::post('/contacts/link', 'ContactController@link')->name('contacts.link');
+            Route::post('/contacts/unlink', 'ContactController@unlink')->name('contacts.unlink');
+            Route::get('/api/bcreps/{club_id}', 'ApiController@list_bcreps');
+            Route::get('/stats', 'StatsController@index');
+            Route::get('/api/stats/{stat}', 'StatsController@getStat');
+            Route::resource('/map', 'MapsController', ['only' => ['index']]);
+            Route::get('/badges/{keep}', 'BadgeController@download')->name('badges.download');
+            Route::get('/ballots', [BallotController::class, 'index'])->name('ballots.index');
+            Route::get('/ballots/create', [BallotController::class, 'create'])->name('ballots.create');
+            Route::post('/ballots', [BallotController::class, 'store'])->name('ballots.store');
+            Route::delete('/ballots/{ballot}', [BallotController::class, 'destroy'])->name('ballots.destroy');
+        }
+    );
 
 Route::get(
     '/',
@@ -88,6 +89,9 @@ Route::get(
     }
 );
 
+Route::get('/droid/invite/{token}', 'DroidInviteController@showAccept')->name('droid.invite.accept');
+Route::post('/droid/invite/{token}/decline', 'DroidInviteController@decline')->name('droid.invite.decline');
+
 Route::group(
     ['middleware' => ['auth', 'gdpr.terms']],
     function () {
@@ -95,6 +99,11 @@ Route::group(
         Route::put('user/{user}/settings', 'UserController@update_settings')->name('settings.update');
         Route::resource('user', 'UserController');
         Route::post('droid/togglePublic', 'DroidController@togglePublic')->name('droid.togglePublic');
+        Route::get('droid/{droid}/users/search', 'DroidInviteController@searchUsers')->name('droid.invite.search_users');
+        Route::post('droid/{droid}/invite', 'DroidInviteController@store')->name('droid.invite.send');
+        Route::delete('droid/invite/{invite}', 'DroidInviteController@destroy')->name('droid.invite.destroy');
+        Route::post('droid/invite/{token}/accept', 'DroidInviteController@confirmAccept')->name('droid.invite.confirm');
+        Route::delete('droid/{droid}/users/{user}', 'DroidInviteController@removeUser')->name('droid.user.remove');
         Route::resource('droid', 'DroidController');
         Route::resource('database', 'DroidDatabase');
         Route::resource('mot', 'MOTController', ['only' => ['index', 'show']]);
@@ -138,7 +147,7 @@ Route::group(
         )->name('about');
 
         // Parts Runs Extension
-
+    
         Route::resource('/parts-run', 'PartsRunDataController');
         Route::get('parts-run/image/{run_id}/{number?}/{size?}', 'PartsRunImageController@show')
             ->name('image.displayPartsRunImage');
@@ -198,7 +207,7 @@ Route::get('events/image/show/{event_id}', 'EventApiController@showimage')
 Route::get('droid_image/{uid}/{view}/{size?}', 'DroidController@displayDroidImage')
     ->name('image.displayDroidImage');
 
-    
+
 Route::get('/chart', 'QrCodeController@show')->name('chart');
 
 Route::get('create-transaction', [PayPalController::class, 'createTransaction'])->name('createTransaction');

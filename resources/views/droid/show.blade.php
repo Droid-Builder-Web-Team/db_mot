@@ -26,22 +26,51 @@
         <div class="card-body">
           <table class="table table-striped table-sm table-hover table-dark">
             <tr>
-              <th>Owner</th>
+              <th>Owner(s)</th>
               <td>
-                @foreach ($droid->users as $users)
-                  <a href="{{ route('user.show', $users->id) }}">{{ $users->forename }} {{ $users->surname }}</a><br>
+                @foreach ($droid->users as $user)
+                  <a href="{{ route('user.show', $user->id) }}">{{ $user->forename }} {{ $user->surname }}</a>
+                  @if((Auth::user()->can('Edit Droids') || $droid->users->contains(Auth::user())) && $droid->users->count() > 1)
+                    <form action="{{ route('droid.user.remove', [$droid->id, $user->id]) }}" method="POST" class="d-inline"
+                      onsubmit="return confirm('Are you sure you want to remove {{ $user->forename }} as an owner of this droid?');">
+                      @csrf
+                      @method('DELETE')
+                      <button type="submit" class="btn btn-link text-danger p-0 ml-1 border-0" title="Remove owner"
+                        style="vertical-align: baseline;"><i class="fas fa-user-minus"></i></button>
+                    </form>
+                  @endif
+                  <br>
                 @endforeach
+                @if(Auth::user()->can('Edit Droids') || $droid->users->contains(Auth::user()))
+                  @if($droid->invites->count() > 0)
+                    <div class="mt-2 text-muted small border-top border-secondary pt-2">
+                      <strong>Pending Invites:</strong><br>
+                      @foreach ($droid->invites as $invite)
+                        <span
+                          class="text-info">{{ $invite->recipient ? ($invite->recipient->forename . ' ' . $invite->recipient->surname . ' (' . $invite->email . ')') : $invite->email }}</span>
+                        <form action="{{ route('droid.invite.destroy', $invite->id) }}" method="POST" class="d-inline"
+                          onsubmit="return confirm('Cancel invitation for {{ $invite->recipient ? ($invite->recipient->forename . ' ' . $invite->recipient->surname) : $invite->email }}?');">
+                          @csrf
+                          @method('DELETE')
+                          <button type="submit" class="btn btn-link text-warning p-0 ml-1 border-0" title="Cancel invitation"
+                            style="vertical-align: baseline;"><i class="fas fa-times-circle"></i></button>
+                        </form>
+                        <br>
+                      @endforeach
+                    </div>
+                  @endif
+                @endif
               </td>
             </tr>
             @if ($droid->public == 'Yes')
-                <tr>
-                    <th>Scan Count</th>
-                    <td>{{ $droid->scan_count ?? 0 }}</td>
-                </tr>
-                <tr>
-                    <th>Commendations</th>
-                    <td>★ {{ $droid->commendations ?? 0 }}</td>
-                </tr>
+              <tr>
+                <th>Scan Count</th>
+                <td>{{ $droid->scan_count ?? 0 }}</td>
+              </tr>
+              <tr>
+                <th>Commendations</th>
+                <td>★ {{ $droid->commendations ?? 0 }}</td>
+              </tr>
             @endif
             <tr>
               <th>Type</th>
@@ -126,9 +155,21 @@
           </table>
           <span class="float-left">
             @if(Auth::user()->isAdminOf($droid->club) && Auth::user()->can('Edit Droids'))
-              <a class="btn btn-edit" style="width:auto;" href="{{ route('admin.droids.edit', $droid->id) }}">Edit</a>
+              <a class="btn btn-edit" style="width:auto; display:inline-block;"
+                href="{{ route('admin.droids.edit', $droid->id) }}">Edit</a>
             @else
-              <a class="btn btn-edit" href="{{ route('droid.edit', $droid->id) }}">Edit</a>
+              <a class="btn btn-edit" style="width:auto; display:inline-block;"
+                href="{{ route('droid.edit', $droid->id) }}">Edit</a>
+            @endif
+            @if(Auth::user()->can('Edit Droids') || $droid->users->contains(Auth::user()))
+              <button type="button" class="btn btn-edit ml-1" style="width:auto; display:inline-block;" data-toggle="modal"
+                data-target="#shareDroidModal">
+                @if(Auth::user()->can('Edit Droids') || Auth::user()->hasRole(['Super Admin', 'Org Admin']))
+                  <i class="fas fa-user-plus"></i> Add Owner
+                @else
+                  <i class="fas fa-share-alt"></i> Share
+                @endif
+              </button>
             @endif
           </span>
           <span class="float-right">
@@ -294,7 +335,223 @@
     </div>
   </div>
 
+  @if(Auth::user()->can('Edit Droids') || $droid->users->contains(Auth::user()))
+    <div class="modal fade" id="shareDroidModal" role="dialog" aria-labelledby="shareDroidModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content bg-dark text-white">
+          <form action="{{ route('droid.invite.send', $droid->id) }}" method="POST">
+            @csrf
+            <div class="modal-header">
+              <h5 class="modal-title" id="shareDroidModalLabel">
+                @if(Auth::user()->can('Edit Droids') || Auth::user()->hasRole(['Super Admin', 'Org Admin']))
+                  <i class="fas fa-user-plus"></i> Add Co-Owner to {{ $droid->name }}
+                @else
+                  <i class="fas fa-share-alt"></i> Share {{ $droid->name }}
+                @endif
+              </h5>
+              <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              @if(Auth::user()->can('Edit Droids') || Auth::user()->hasRole(['Super Admin', 'Org Admin']))
+                <p>As an administrator, selecting a member will directly add them as a co-owner immediately without requiring
+                  an email invitation.</p>
+              @else
+                <p>Invite another member (e.g. family member, spouse, or co-builder) to share ownership of this droid.</p>
+                <p class="text-muted small">They will receive an email with an invite link. Once they accept, this droid will
+                  appear on their profile and they can co-manage it.</p>
+              @endif
+
+              <div class="form-group position-relative">
+                <label for="member-search-input">Search Member</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text bg-secondary text-white border-secondary"><i
+                        class="fas fa-search"></i></span>
+                  </div>
+                  <input type="text" id="member-search-input" class="form-control bg-secondary text-white border-secondary"
+                    placeholder="Type at least 3 characters to search..." autocomplete="off">
+                </div>
+                <input type="hidden" name="user_id" id="selected-user-id" required>
+
+                <div id="search-status-text" class="small text-muted mt-1"></div>
+
+                <!-- Dropdown search results -->
+                <div id="member-search-results" class="list-group position-absolute w-100 shadow mt-1"
+                  style="display: none; z-index: 1060; max-height: 220px; overflow-y: auto;">
+                </div>
+
+                <!-- Selected member preview -->
+                <div id="selected-member-card" class="card bg-secondary text-white mt-2 p-2"
+                  style="display: none !important;">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                      <div class="font-weight-bold text-success"><i class="fas fa-check-circle"></i> <span
+                          id="selected-member-name"></span></div>
+                      <div class="small text-light" id="selected-member-email"></div>
+                    </div>
+                    <button type="button" class="btn btn-sm btn-outline-danger" id="clear-selected-member"
+                      title="Choose a different member">
+                      <i class="fas fa-times"></i> Change
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+              <button type="submit" id="share-submit-btn" class="btn btn-primary" disabled>
+                @if(Auth::user()->can('Edit Droids') || Auth::user()->hasRole(['Super Admin', 'Org Admin']))
+                  <i class="fas fa-user-plus"></i> Add Co-Owner
+                @else
+                  <i class="fas fa-paper-plane"></i> Send Invite
+                @endif
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  @endif
+
   <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var modal = $('#shareDroidModal');
+      var searchInput = document.getElementById('member-search-input');
+      var resultsContainer = document.getElementById('member-search-results');
+      var statusText = document.getElementById('search-status-text');
+      var hiddenUserId = document.getElementById('selected-user-id');
+      var submitBtn = document.getElementById('share-submit-btn');
+      var selectedCard = document.getElementById('selected-member-card');
+      var selectedName = document.getElementById('selected-member-name');
+      var selectedEmail = document.getElementById('selected-member-email');
+      var clearBtn = document.getElementById('clear-selected-member');
+
+      var debounceTimer = null;
+
+      function resetSearch() {
+        if (searchInput) searchInput.value = '';
+        if (resultsContainer) {
+          resultsContainer.innerHTML = '';
+          resultsContainer.style.display = 'none';
+        }
+        if (statusText) statusText.textContent = '';
+        if (hiddenUserId) hiddenUserId.value = '';
+        if (selectedCard) selectedCard.setAttribute('style', 'display: none !important;');
+        if (submitBtn) submitBtn.disabled = true;
+      }
+
+      modal.on('shown.bs.modal', function () {
+        if (searchInput && !hiddenUserId.value) {
+          searchInput.focus();
+        }
+      });
+
+      modal.on('hidden.bs.modal', function () {
+        resetSearch();
+      });
+
+      if (clearBtn) {
+        clearBtn.addEventListener('click', function () {
+          resetSearch();
+          if (searchInput) searchInput.focus();
+        });
+      }
+
+      if (searchInput) {
+        searchInput.addEventListener('input', function () {
+          var query = this.value.trim();
+
+          clearTimeout(debounceTimer);
+          hiddenUserId.value = '';
+          if (submitBtn) submitBtn.disabled = true;
+          if (selectedCard) selectedCard.setAttribute('style', 'display: none !important;');
+
+          if (query.length === 0) {
+            statusText.textContent = '';
+            resultsContainer.style.display = 'none';
+            resultsContainer.innerHTML = '';
+            return;
+          }
+
+          if (query.length < 3) {
+            statusText.textContent = 'Please enter at least 3 characters...';
+            resultsContainer.style.display = 'none';
+            resultsContainer.innerHTML = '';
+            return;
+          }
+
+          statusText.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Searching members...';
+
+          debounceTimer = setTimeout(function () {
+            fetch("{{ route('droid.invite.search_users', $droid->id) }}?q=" + encodeURIComponent(query), {
+              headers: {
+                'Accept': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest'
+              }
+            })
+              .then(function (res) { return res.json(); })
+              .then(function (data) {
+                resultsContainer.innerHTML = '';
+                var results = (data && data.results) ? data.results : [];
+
+                if (results.length === 0) {
+                  statusText.textContent = 'No members found matching "' + query + '".';
+                  resultsContainer.style.display = 'none';
+                  return;
+                }
+
+                statusText.textContent = 'Found ' + results.length + ' member' + (results.length > 1 ? 's' : '') + ':';
+                resultsContainer.style.display = 'block';
+
+                results.forEach(function (item) {
+                  var btn = document.createElement('button');
+                  btn.type = 'button';
+                  btn.className = 'list-group-item list-group-item-action bg-dark text-white border-secondary d-flex justify-content-between align-items-center py-2';
+
+                  var nameDiv = document.createElement('div');
+                  var nameEl = document.createElement('div');
+                  nameEl.className = 'font-weight-bold';
+                  nameEl.textContent = item.forename + ' ' + item.surname;
+                  var emailEl = document.createElement('div');
+                  emailEl.className = 'small text-muted';
+                  emailEl.textContent = item.email;
+                  nameDiv.appendChild(nameEl);
+                  nameDiv.appendChild(emailEl);
+
+                  var badge = document.createElement('span');
+                  badge.className = 'badge badge-primary px-2 py-1 font-weight-normal text-nowrap ml-2';
+                  badge.style.fontSize = '0.75rem';
+                  badge.innerHTML = '<i class="fas fa-plus fa-xs" style="font-size: 0.65rem; width: 0.65rem; height: 0.65rem; vertical-align: -0.05em; margin-right: 3px;"></i> Select';
+
+                  btn.appendChild(nameDiv);
+                  btn.appendChild(badge);
+
+                  btn.addEventListener('click', function () {
+                    hiddenUserId.value = item.id;
+                    if (submitBtn) submitBtn.disabled = false;
+                    resultsContainer.style.display = 'none';
+                    statusText.textContent = '';
+                    searchInput.value = '';
+
+                    selectedName.textContent = item.forename + ' ' + item.surname;
+                    selectedEmail.textContent = item.email;
+                    selectedCard.removeAttribute('style');
+                  });
+
+                  resultsContainer.appendChild(btn);
+                });
+              })
+              .catch(function (err) {
+                statusText.textContent = 'Error searching members. Please try again.';
+                resultsContainer.style.display = 'none';
+              });
+          }, 250);
+        });
+      }
+    });
+
     $('#publicToggle').change(function () {
       var mode = $(this).prop('checked');
       if (mode) {

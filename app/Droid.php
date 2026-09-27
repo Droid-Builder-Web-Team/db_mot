@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\MOT;
 use App\User;
 use App\Club;
+use App\DroidInvite;
 use Carbon\Carbon;
 use OwenIt\Auditing\Contracts\Auditable;
 
@@ -46,6 +47,16 @@ class Droid extends Model implements Auditable
     public function users()
     {
         return $this->belongsToMany(User::class, 'droid_members');
+    }
+
+    /**
+     * Pending sharing invitations for this droid
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany of App\DroidInvite
+     */
+    public function invites()
+    {
+        return $this->hasMany(DroidInvite::class, 'droid_id');
     }
 
     /**

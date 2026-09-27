@@ -165,11 +165,11 @@ class DroidController extends Controller
     public function displayDroidImage(Request $request, $uid, $view, $size = '')
     {
         $droid = Droid::find($uid);
-        
+
         if (!$droid) {
             abort(404);
         }
-        
+
         // Secret Access for Hunter App
         $hunterSecret = $request->header('X-Hunter-Secret');
         $isHunter = $hunterSecret && $hunterSecret === config('services.hunter_pwa.secret');
