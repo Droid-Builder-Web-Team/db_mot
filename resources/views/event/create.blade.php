@@ -31,7 +31,7 @@
                 </div>
             </div>
 
-            {!! html()->form('POST', route('event.store'))->open() !!}
+            {!! html()->form('POST', route('event.store'))->id('event-create-form')->open() !!}
             @csrf
 
             <div class="form-group row d-flex justify-content-center align-items-center">
@@ -233,7 +233,7 @@
             </div>
 
             <div class="text-center form-group">
-                <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
+                <button type="submit" class="btn btn-primary" id="submit-btn">{{ __('Submit') }}</button>
             </div>
             {!! html()->form()->close() !!}
         </div>
@@ -261,6 +261,34 @@
                 $("#location_id option[value='new']").attr("selected", true);
                 $("#location_id option[value='new']").prop("selected", "selected");
                 $("#new-location").toggle();
+            });
+
+            $('#event-create-form').on('submit', function (e) {
+                var form = this;
+                var $btn = $(form).find('#submit-btn');
+
+                if ($(form).data('submitting')) {
+                    e.preventDefault();
+                    return false;
+                }
+
+                $(form).data('submitting', true);
+                $btn.addClass('disabled').css('pointer-events', 'none');
+                $btn.html('<i class="fas fa-spinner fa-spin mr-1"></i> {{ __('Submitting...') }}');
+
+                setTimeout(function () {
+                    $btn.prop('disabled', true);
+                }, 0);
+            });
+
+            window.addEventListener('pageshow', function (event) {
+                if (event.persisted) {
+                    var $form = $('#event-create-form');
+                    $form.data('submitting', false);
+                    var $btn = $form.find('#submit-btn');
+                    $btn.removeClass('disabled').css('pointer-events', '').prop('disabled', false);
+                    $btn.html('{{ __('Submit') }}');
+                }
             });
         });
     </script>
